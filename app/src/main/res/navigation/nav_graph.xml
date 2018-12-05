@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/navigation_home">
+
+    <fragment android:id="@+id/navigation_home"
+              android:name="com.rafaelfelipeac.readmore.ui.fragments.HomeFragment"
+              android:label="fragment_home"
+              tools:layout="@layout/fragment_home">
+
+        <action android:id="@+id/action_homeFragment_to_notificationFragment"
+                app:destination="@id/navigation_metas"/>
+        <action android:id="@+id/action_navigation_home_to_metricasFragment" app:destination="@id/navigation_metricas"/>
+        <action android:id="@+id/action_navigation_home_to_searchFragment" app:destination="@id/navigation_search"/>
+        <action android:id="@+id/action_navigation_home_to_settingsFragment" app:destination="@id/navigation_settings"/>
+
+    </fragment>
+
+    <fragment android:id="@+id/navigation_metas"
+              android:name="com.rafaelfelipeac.readmore.ui.fragments.MetasFragment"
+              android:label="fragment_notification"
+              tools:layout="@layout/fragment_metas"/>
+    <fragment android:id="@+id/navigation_metricas"
+              android:name="com.rafaelfelipeac.readmore.ui.fragments.MetricasFragment" android:label="fragment_metricas"
+              tools:layout="@layout/fragment_metricas"/>
+    <fragment android:id="@+id/navigation_search" android:name="com.rafaelfelipeac.readmore.ui.fragments.SearchFragment"
+              android:label="fragment_search" tools:layout="@layout/fragment_search"/>
+    <fragment android:id="@+id/navigation_settings"
+              android:name="com.rafaelfelipeac.readmore.ui.fragments.SettingsFragment" android:label="fragment_settings"
+              tools:layout="@layout/fragment_settings"/>
+
+</navigation>
