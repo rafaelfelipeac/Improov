@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'io.gitlab.arturbosch.detekt'
 
 android {
     compileSdkVersion 28
@@ -22,6 +21,14 @@ android {
     }
 }
 
+repositories {
+    jcenter()
+}
+
+configurations {
+    ktlint
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -37,4 +44,21 @@ dependencies {
     // Navigation
     implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07'
     implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha07'
+
+    // Ktlint
+    ktlint "com.github.shyiko:ktlint:0.29.0"
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    main = "com.github.shyiko.ktlint.Main"
+    classpath = configurations.ktlint
+    args "src/**/*.kt"
+}
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    main = "com.github.shyiko.ktlint.Main"
+    classpath = configurations.ktlint
+    args "-F", "src/**/*.kt"
 }

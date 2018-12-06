@@ -9,7 +9,6 @@
         android:background="@color/colorPrimaryDark"
         tools:context=".ui.activities.MainActivity">
 
-
     <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottom_nav"
             android:layout_width="0dp"
@@ -35,6 +34,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/nav_graph" />
-
 
 </android.support.constraint.ConstraintLayout>
