@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.readmore.ui.fragments
+package com.rafaelfelipeac.readmore.ui.fragments.home
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,10 +8,10 @@ import android.view.ViewGroup
 
 import com.rafaelfelipeac.readmore.R
 
-class MetasFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_metas, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 }

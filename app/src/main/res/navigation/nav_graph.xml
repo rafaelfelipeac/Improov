@@ -5,7 +5,7 @@
             app:startDestination="@id/navigation_home">
 
     <fragment android:id="@+id/navigation_home"
-              android:name="com.rafaelfelipeac.readmore.ui.fragments.HomeFragment"
+              android:name="com.rafaelfelipeac.readmore.ui.fragments.home.HomeFragment"
               android:label="fragment_home"
               tools:layout="@layout/fragment_home">
 
@@ -18,9 +18,9 @@
     </fragment>
 
     <fragment android:id="@+id/navigation_metas"
-              android:name="com.rafaelfelipeac.readmore.ui.fragments.MetasFragment"
+              android:name="com.rafaelfelipeac.readmore.ui.fragments.GoalsFragment"
               android:label="fragment_notification"
-              tools:layout="@layout/fragment_metas"/>
+              tools:layout="@layout/fragment_goals"/>
     <fragment android:id="@+id/navigation_metricas"
               android:name="com.rafaelfelipeac.readmore.ui.fragments.MetricasFragment" android:label="fragment_metricas"
               tools:layout="@layout/fragment_metricas"/>
