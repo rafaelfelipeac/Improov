@@ -20,7 +20,10 @@
     <fragment android:id="@+id/navigation_metas"
               android:name="com.rafaelfelipeac.readmore.ui.fragments.GoalsFragment"
               android:label="fragment_notification"
-              tools:layout="@layout/fragment_goals"/>
+              tools:layout="@layout/fragment_goals">
+        <action android:id="@+id/action_navigation_metas_to_goalFormFragment" app:destination="@id/goalFormFragment"/>
+        <action android:id="@+id/action_navigation_metas_to_goalFragment" app:destination="@id/goalFragment"/>
+    </fragment>
     <fragment android:id="@+id/navigation_metricas"
               android:name="com.rafaelfelipeac.readmore.ui.fragments.MetricasFragment" android:label="fragment_metricas"
               tools:layout="@layout/fragment_metricas"/>
@@ -29,5 +32,10 @@
     <fragment android:id="@+id/navigation_settings"
               android:name="com.rafaelfelipeac.readmore.ui.fragments.SettingsFragment" android:label="fragment_settings"
               tools:layout="@layout/fragment_settings"/>
+    <fragment android:id="@+id/goalFormFragment"
+              android:name="com.rafaelfelipeac.readmore.ui.fragments.GoalFormFragment"
+              android:label="fragment_goal_form" tools:layout="@layout/fragment_goal_form"/>
+    <fragment android:id="@+id/goalFragment" android:name="com.rafaelfelipeac.readmore.ui.fragments.GoalFragment"
+              android:label="fragment_goal" tools:layout="@layout/fragment_goal"/>
 
 </navigation>

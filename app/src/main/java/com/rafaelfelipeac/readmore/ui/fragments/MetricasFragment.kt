@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rafaelfelipeac.readmore.R
+import com.rafaelfelipeac.readmore.ui.activities.MainActivity
 
 class MetricasFragment : Fragment() {
 
@@ -13,7 +14,8 @@ class MetricasFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        (activity as MainActivity).supportActionBar?.title = "Metricas"
+
         return inflater.inflate(R.layout.fragment_metricas, container, false)
     }
 }

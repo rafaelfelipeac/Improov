@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.rafaelfelipeac.readmore.R
+import com.rafaelfelipeac.readmore.ui.activities.MainActivity
 
 
 class SearchFragment : Fragment() {
@@ -15,7 +16,8 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        (activity as MainActivity).supportActionBar?.title = "Search"
+
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
