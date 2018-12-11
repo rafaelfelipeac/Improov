@@ -2,14 +2,11 @@ package com.rafaelfelipeac.readmore.ui.activities
 
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.rafaelfelipeac.readmore.R
 import com.rafaelfelipeac.readmore.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
