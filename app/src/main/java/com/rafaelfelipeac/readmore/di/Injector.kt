@@ -11,6 +11,8 @@ interface Injector {
 
     fun inject(goalsFragment: GoalsFragment)
 
+    fun inject(goalFragment: GoalFragment)
+
     fun inject(metricasFragment: MetricasFragment)
 
     fun inject(searchFragment: SearchFragment)
