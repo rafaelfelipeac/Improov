@@ -3,6 +3,7 @@ package com.rafaelfelipeac.readmore.ui.fragments
 import android.app.Activity
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -41,14 +42,19 @@ class SearchFragment : Fragment() {
         }
 
         search_imageview.setOnClickListener {
-            open = !open
-
-            if (open) {
-                search_edittext.requestFocus()
+            if (search_edittext.text?.isEmpty()!! && !open) {
                 open = !open
-            }
 
-            verifyOpenOrClose()
+                if (open) {
+                    search_edittext.requestFocus()
+                    open = !open
+                }
+
+                verifyOpenOrClose()
+            } else {
+                hideSoftKeyboard(activity!!)
+                Snackbar.make(view, "Pesquisa.", Snackbar.LENGTH_SHORT).show()
+            }
         }
 
         frame_layout_search.setOnClickListener {
@@ -80,12 +86,7 @@ class SearchFragment : Fragment() {
         view.layoutParams = params
     }
 
-    private fun verifyOpenOrClose() {
-        if (open)
-            openSearch()
-        else
-            closeSearch()
-    }
+    private fun verifyOpenOrClose() = if (open) openSearch() else closeSearch()
 
     private fun showSoftKeyboard(activity: Activity) {
         val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
@@ -96,5 +97,4 @@ class SearchFragment : Fragment() {
         val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
         inputMethodManager!!.hideSoftInputFromWindow(view?.windowToken, 0)
     }
-
 }
