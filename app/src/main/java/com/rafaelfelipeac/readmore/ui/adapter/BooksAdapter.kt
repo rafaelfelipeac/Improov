@@ -32,6 +32,8 @@ class BooksAdapter @Inject constructor() : BaseAdapter<Goal>(), SwipeAndDragHelp
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
 
+        holder.setIsRecyclable(false)
+
         val itemDrag = holder.itemView.findViewById<ImageView>(R.id.book_image_view)
             itemDrag.setOnTouchListener { _, _ ->
                 touchHelper?.startDrag(holder)
