@@ -18,20 +18,13 @@ class SwipeAndDragHelper(private val contract: ActionCompletionContract) : ItemT
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
                         target: RecyclerView.ViewHolder): Boolean {
+
         contract.onViewMoved(viewHolder.adapterPosition, target.adapterPosition)
         return true
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         contract.onViewSwiped(viewHolder.adapterPosition, viewHolder)
-    }
-
-    override fun isLongPressDragEnabled(): Boolean {
-        return false
-    }
-
-    override fun isItemViewSwipeEnabled(): Boolean {
-        return true
     }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
@@ -45,9 +38,8 @@ class SwipeAndDragHelper(private val contract: ActionCompletionContract) : ItemT
 
         val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.books_normal_view)
 
-        ItemTouchHelper.Callback.getDefaultUIUtil().onDrawOver(
-            c, recyclerView, foregroundView, dX, dY,
-            actionState, isCurrentlyActive)
+        ItemTouchHelper.Callback.getDefaultUIUtil()
+            .onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive)
     }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
@@ -65,13 +57,15 @@ class SwipeAndDragHelper(private val contract: ActionCompletionContract) : ItemT
 
         val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.books_normal_view)
 
-        ItemTouchHelper.Callback.getDefaultUIUtil().onDraw(
-            c, recyclerView, foregroundView, dX, 0f,
-            actionState, isCurrentlyActive
-        )
+        ItemTouchHelper.Callback.getDefaultUIUtil()
+            .onDraw(c, recyclerView, foregroundView, dX, 0f, actionState, isCurrentlyActive)
 
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
+
+    override fun isLongPressDragEnabled() = false
+
+    override fun isItemViewSwipeEnabled() = true
 
     interface ActionCompletionContract {
         fun onViewMoved(oldPosition: Int, newPosition: Int)

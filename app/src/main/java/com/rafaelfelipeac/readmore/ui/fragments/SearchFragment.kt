@@ -12,17 +12,15 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.rafaelfelipeac.readmore.R
 import com.rafaelfelipeac.readmore.ui.activities.MainActivity
+import com.rafaelfelipeac.readmore.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_search.*
 
 
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment() {
 
     private var open: Boolean = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity).supportActionBar?.title = "Search"
 
         return inflater.inflate(R.layout.fragment_search, container, false)
@@ -66,6 +64,8 @@ class SearchFragment : Fragment() {
         }
     }
 
+    private fun verifyOpenOrClose() = if (open) openSearch() else closeSearch()
+
     private fun openSearch() {
         setVerticalBias(search_edittext, 0f)
         setVerticalBias(search_imageview, 0f)
@@ -84,17 +84,5 @@ class SearchFragment : Fragment() {
         val params = view.layoutParams as ConstraintLayout.LayoutParams
         params.verticalBias = value
         view.layoutParams = params
-    }
-
-    private fun verifyOpenOrClose() = if (open) openSearch() else closeSearch()
-
-    private fun showSoftKeyboard(activity: Activity) {
-        val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
-        inputMethodManager!!.toggleSoftInputFromWindow(view?.windowToken, InputMethodManager.SHOW_FORCED, 0)
-    }
-
-    private fun hideSoftKeyboard(activity: Activity) {
-        val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
-        inputMethodManager!!.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 }

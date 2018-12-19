@@ -29,9 +29,7 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>(
 
     abstract fun View.bindView(item: T, viewHolder: ViewHolder)
 
-    inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        parent.inflate(getLayoutRes())
-    ) {
+    inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(getLayoutRes())) {
         fun bind(item: T) = itemView.bindView(item, this)
     }
 }

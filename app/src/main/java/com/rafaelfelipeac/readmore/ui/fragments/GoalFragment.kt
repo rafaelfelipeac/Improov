@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rafaelfelipeac.readmore.R
+import com.rafaelfelipeac.readmore.models.Book
 import com.rafaelfelipeac.readmore.models.Goal
 import com.rafaelfelipeac.readmore.ui.activities.MainActivity
 import com.rafaelfelipeac.readmore.ui.adapter.BooksAdapter
@@ -30,10 +31,7 @@ class GoalFragment : BaseFragment() {
         injector.inject(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = "Goal"
@@ -45,16 +43,16 @@ class GoalFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter.setItems(listOf(
-            Goal("g1"),
-            Goal("g2"),
-            Goal("g3"),
-            Goal("g4"),
-            Goal("g5"),
-            Goal("g6"),
-            Goal("g7"),
-            Goal("g8"),
-            Goal("g9"),
-            Goal("g10")
+            Book("g1", "", ""),
+            Book("g2",  "", ""),
+            Book("g3",  "", ""),
+            Book("g4",  "", ""),
+            Book("g5",  "", ""),
+            Book("g6",  "", ""),
+            Book("g7",  "", ""),
+            Book("g8",  "", ""),
+            Book("g9",  "", ""),
+            Book("g10",  "", "")
         ))
 
 //        adapter.clickListener = {
@@ -62,7 +60,6 @@ class GoalFragment : BaseFragment() {
 //        }
 
         goal_books_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
 
         val swipeAndDragHelper = SwipeAndDragHelper(adapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)

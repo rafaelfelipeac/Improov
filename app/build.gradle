@@ -76,8 +76,8 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
 
     // Navigation
-    implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07'
-    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha07'
+    implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha09'
+    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha09'
 
     // Ktlint
     ktlint "com.github.shyiko:ktlint:0.29.0"

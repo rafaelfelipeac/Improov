@@ -25,8 +25,7 @@ class GoalsFragment : BaseFragment() {
         injector.inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         (activity as MainActivity).supportActionBar?.title = "Goals"
@@ -42,17 +41,17 @@ class GoalsFragment : BaseFragment() {
         }
 
         adapter.setItems(listOf(
-            Goal("g1"),
-            Goal("g2"),
-            Goal("g3"),
-            Goal("g4"),
-            Goal("g5"),
-            Goal("g6"),
-            Goal("g7"),
-            Goal("g8"),
-            Goal("g9"),
-            Goal("g10"),
-            Goal("g11")))
+            Goal("g1", 0, 0,  "", ""),
+            Goal("g2", 0, 0,  "", ""),
+            Goal("g3", 0, 0,  "", ""),
+            Goal("g4", 0, 0,  "", ""),
+            Goal("g5", 0, 0,  "", ""),
+            Goal("g6", 0, 0,  "", ""),
+            Goal("g7", 0, 0,  "", ""),
+            Goal("g8", 0, 0,  "", ""),
+            Goal("g9", 0, 0,  "", ""),
+            Goal("g10", 0, 0,  "", "")
+        ))
 
         adapter.clickListener = {
             navController.navigate(R.id.action_navigation_metas_to_goalFragment)

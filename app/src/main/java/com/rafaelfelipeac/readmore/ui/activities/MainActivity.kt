@@ -3,6 +3,7 @@ package com.rafaelfelipeac.readmore.ui.activities
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -31,11 +32,17 @@ class MainActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
-            R.id.menu_goal_save -> onBackPressed()
-            android.R.id.home -> onBackPressed()
+            R.id.menu_goal_save -> {
+                //onBackPressed()
+                return false
+            }
+            android.R.id.home -> {
+                //onBackPressed()
+                return false
+            }
         }
 
-        return super.onOptionsItemSelected(item)
+        return false
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()

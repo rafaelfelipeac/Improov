@@ -11,10 +11,7 @@ import com.rafaelfelipeac.readmore.ui.activities.MainActivity
 
 class SettingsFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity).supportActionBar?.title = "Settings"
 
         return inflater.inflate(R.layout.fragment_settings, container, false)

@@ -3,29 +3,31 @@ package com.rafaelfelipeac.readmore.ui.adapter
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.rafaelfelipeac.readmore.R
+import com.rafaelfelipeac.readmore.models.Book
 import com.rafaelfelipeac.readmore.models.Goal
 import com.rafaelfelipeac.readmore.ui.base.BaseAdapter
 import com.rafaelfelipeac.readmore.ui.helper.SwipeAndDragHelper
 import javax.inject.Inject
 
+class BooksAdapter @Inject constructor() : BaseAdapter<Book>(), SwipeAndDragHelper.ActionCompletionContract {
 
-class BooksAdapter @Inject constructor() : BaseAdapter<Goal>(), SwipeAndDragHelper.ActionCompletionContract {
-    var clickListener: (goal: Goal) -> Unit = { }
+    var clickListener: (book: Book) -> Unit = { }
     private var touchHelper: ItemTouchHelper? = null
 
     override fun getLayoutRes(): Int = R.layout.list_item_book
 
-    override fun View.bindView(item: Goal, viewHolder: ViewHolder) {
+    override fun View.bindView(item: Book, viewHolder: ViewHolder) {
         setOnClickListener { clickListener(item) }
 
         val title = viewHolder.itemView.findViewById<TextView>(R.id.book_title)
-        title.text = item.message
+        title.text = item.title
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -43,7 +45,7 @@ class BooksAdapter @Inject constructor() : BaseAdapter<Goal>(), SwipeAndDragHelp
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int) {
         val targetBook = this.items[oldPosition]
-        val book = Goal(targetBook.message)
+        val book = Book(targetBook.title, "", "")
 
         this.items.removeAt(oldPosition)
         this.items.add(newPosition, book)
@@ -59,13 +61,13 @@ class BooksAdapter @Inject constructor() : BaseAdapter<Goal>(), SwipeAndDragHelp
         notifyItemRemoved(position)
 
         Snackbar
-            .make(holder.itemView, "removido", Snackbar.LENGTH_LONG)
+            .make(holder.itemView, "Deletado.", Snackbar.LENGTH_LONG)
             .setAction("UNDO") {
                 this.items.add(position, item)
-                //notifyItemInserted(position)
-                notifyDataSetChanged()
+
+                notifyItemInserted(position)
             }
-            .setActionTextColor(Color.YELLOW)
+            .setActionTextColor(Color.WHITE)
             .show()
     }
 

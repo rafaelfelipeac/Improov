@@ -10,10 +10,7 @@ import com.rafaelfelipeac.readmore.ui.activities.MainActivity
 
 class MetricasFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity).supportActionBar?.title = "Metricas"
 
         return inflater.inflate(R.layout.fragment_metricas, container, false)
