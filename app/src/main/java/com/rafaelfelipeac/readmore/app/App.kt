@@ -27,6 +27,7 @@ class App : Application() {
         prefs = Prefs(applicationContext)
 
         database = Room.databaseBuilder(this, AppDatabase::class.java, "rm-db")
+            .allowMainThreadQueries()
             .build()
 
         super.onCreate()

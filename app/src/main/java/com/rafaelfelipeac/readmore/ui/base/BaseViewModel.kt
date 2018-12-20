@@ -9,7 +9,7 @@ import com.rafaelfelipeac.readmore.di.module.NetworkModule
 
 abstract class BaseViewModel : ViewModel() {
 
-    private val result: MutableLiveData<Result> = MutableLiveData()
+    val result: MutableLiveData<Result> = MutableLiveData()
 
     var loadingVisibility: MutableLiveData<Int> = MutableLiveData()
 

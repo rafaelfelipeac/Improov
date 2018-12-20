@@ -4,6 +4,7 @@ import android.view.View
 import com.rafaelfelipeac.readmore.R
 import com.rafaelfelipeac.readmore.models.Goal
 import com.rafaelfelipeac.readmore.ui.base.BaseAdapter
+import kotlinx.android.synthetic.main.list_item_goal.view.*
 import javax.inject.Inject
 
 class GoalsAdapter @Inject constructor() : BaseAdapter<Goal>() {
@@ -14,5 +15,7 @@ class GoalsAdapter @Inject constructor() : BaseAdapter<Goal>() {
 
     override fun View.bindView(item: Goal, viewHolder: ViewHolder) {
         setOnClickListener { clickListener(item) }
+
+        goal_title.text = item.name
     }
 }

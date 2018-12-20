@@ -3,7 +3,7 @@
              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".ui.fragments.GoalFormFragment"
+             tools:context=".ui.fragments.goalform.GoalFormFragment"
              android:background="@color/colorPrimaryDark">
 
     <android.support.constraint.ConstraintLayout
@@ -16,6 +16,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="goal"
+                android:text="abc"
                 android:textColorHint="@color/colorPrimary"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginStart="8dp"
@@ -28,6 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="0"
+                android:text="123"
+                android:inputType="number"
                 android:textColorHint="@color/colorPrimary"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginTop="8dp"

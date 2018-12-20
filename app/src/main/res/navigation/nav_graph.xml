@@ -33,7 +33,7 @@
               android:name="com.rafaelfelipeac.readmore.ui.fragments.SettingsFragment" android:label="fragment_settings"
               tools:layout="@layout/fragment_settings"/>
     <fragment android:id="@+id/goalFormFragment"
-              android:name="com.rafaelfelipeac.readmore.ui.fragments.GoalFormFragment"
+              android:name="com.rafaelfelipeac.readmore.ui.fragments.goalform.GoalFormFragment"
               android:label="fragment_goal_form" tools:layout="@layout/fragment_goal_form"/>
     <fragment android:id="@+id/goalFragment" android:name="com.rafaelfelipeac.readmore.ui.fragments.GoalFragment"
               android:label="fragment_goal" tools:layout="@layout/fragment_goal"/>
