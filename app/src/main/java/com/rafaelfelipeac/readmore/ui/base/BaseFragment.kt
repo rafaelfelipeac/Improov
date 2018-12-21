@@ -19,8 +19,6 @@ open class BaseFragment : Fragment() {
 
     var goalDAO = App.database?.goalDAO()
 
-    var viewModel: BaseViewModel? = null
-
     fun showSnackBar(message: String) {
         Snackbar.make(view!!, message, Snackbar.LENGTH_SHORT).show()
     }

@@ -2,6 +2,7 @@ package com.rafaelfelipeac.readmore.di
 
 import com.rafaelfelipeac.readmore.ui.base.BaseActivity
 import com.rafaelfelipeac.readmore.ui.fragments.*
+import com.rafaelfelipeac.readmore.ui.fragments.goals.GoalsFragment
 import com.rafaelfelipeac.readmore.ui.fragments.home.HomeFragment
 
 interface Injector {

@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.readmore.database
+package com.rafaelfelipeac.readmore.database.goal
 
 import android.arch.persistence.room.*
 import com.rafaelfelipeac.readmore.models.Goal

@@ -5,7 +5,7 @@ import com.rafaelfelipeac.readmore.ui.base.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class HomeViewModel(private val rmAPI: RMApi) : BaseViewModel() {
+class HomeViewModel() : BaseViewModel() {
 
     fun home(domain: String, email: String, password: String) {
 //        val userRequest = UserRequest()

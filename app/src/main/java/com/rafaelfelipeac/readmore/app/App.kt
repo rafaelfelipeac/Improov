@@ -26,7 +26,8 @@ class App : Application() {
     override fun onCreate() {
         prefs = Prefs(applicationContext)
 
-        database = Room.databaseBuilder(this, AppDatabase::class.java, "rm-db")
+        database = Room
+            .databaseBuilder(this, AppDatabase::class.java, "rm-db")
             .allowMainThreadQueries()
             .build()
 

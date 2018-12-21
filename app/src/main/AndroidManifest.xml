@@ -3,8 +3,6 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.rafaelfelipeac.readmore">
 
-    <!--<uses-permission android:name="android.permission.INTERNET" />-->
-
     <application
             android:name=".app.App"
             android:allowBackup="true"

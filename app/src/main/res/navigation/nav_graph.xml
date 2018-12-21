@@ -18,7 +18,7 @@
     </fragment>
 
     <fragment android:id="@+id/navigation_metas"
-              android:name="com.rafaelfelipeac.readmore.ui.fragments.GoalsFragment"
+              android:name="com.rafaelfelipeac.readmore.ui.fragments.goals.GoalsFragment"
               android:label="fragment_notification"
               tools:layout="@layout/fragment_goals">
         <action android:id="@+id/action_navigation_metas_to_goalFormFragment" app:destination="@id/goalFormFragment"/>
