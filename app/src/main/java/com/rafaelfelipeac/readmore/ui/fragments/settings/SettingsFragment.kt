@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.readmore.ui.fragments
+package com.rafaelfelipeac.readmore.ui.fragments.settings
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

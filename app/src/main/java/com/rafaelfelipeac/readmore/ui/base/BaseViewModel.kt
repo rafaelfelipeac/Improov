@@ -23,9 +23,7 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     private fun inject() {
-        when (this) {
-            //is WelcomeViewModel -> injector.inject(this)
-        }
+        injector.inject(this)
     }
 
     fun onStart() {

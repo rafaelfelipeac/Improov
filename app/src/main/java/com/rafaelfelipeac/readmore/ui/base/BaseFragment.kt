@@ -12,9 +12,6 @@ import com.rafaelfelipeac.readmore.ui.activities.MainActivity
 
 open class BaseFragment : Fragment() {
 
-    val success = "success"
-    val error = "error"
-
     protected val injector by lazy { (activity as BaseActivity).injector }
 
     var goalDAO = App.database?.goalDAO()

@@ -61,8 +61,8 @@ class BooksAdapter @Inject constructor() : BaseAdapter<Book>(), SwipeAndDragHelp
         notifyItemRemoved(position)
 
         Snackbar
-            .make(holder.itemView, "Deletado.", Snackbar.LENGTH_LONG)
-            .setAction("UNDO") {
+            .make(holder.itemView, "Excluído.", Snackbar.LENGTH_LONG)
+            .setAction("DESFAZER") {
                 this.items.add(position, item)
 
                 notifyItemInserted(position)

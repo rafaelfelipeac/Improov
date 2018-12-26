@@ -3,28 +3,28 @@
 
     <item
             android:id="@+id/navigation_search"
-            android:icon="@drawable/ic_dashboard_black_24dp"
-            android:title="Search"/>
+            android:icon="@drawable/baseline_search_24"
+            android:title="Pesquisar"/>
 
-    <item
-            android:id="@+id/navigation_metricas"
-            android:icon="@drawable/ic_notifications_black_24dp"
-            android:title="Metricas"/>
+    <!--<item-->
+            <!--android:id="@+id/navigation_metricas"-->
+            <!--android:icon="@drawable/ic_notifications_black_24dp"-->
+            <!--android:title="Metricas"/>-->
 
-    <item
-            android:id="@+id/navigation_home"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/title_home"/>
+    <!--<item-->
+            <!--android:id="@+id/navigation_home"-->
+            <!--android:icon="@drawable/ic_home_black_24dp"-->
+            <!--android:title="@string/title_home"/>-->
 
 
     <item
             android:id="@+id/navigation_metas"
-            android:icon="@drawable/ic_notifications_black_24dp"
+            android:icon="@drawable/round_view_list_24"
             android:title="Metas"/>
 
-    <item
-            android:id="@+id/navigation_settings"
-            android:icon="@drawable/ic_notifications_black_24dp"
-            android:title="Settings"/>
+    <!--<item-->
+            <!--android:id="@+id/navigation_settings"-->
+            <!--android:icon="@drawable/ic_notifications_black_24dp"-->
+            <!--android:title="Settings"/>-->
 
 </menu>

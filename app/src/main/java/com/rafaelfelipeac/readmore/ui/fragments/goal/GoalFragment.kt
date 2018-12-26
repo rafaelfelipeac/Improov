@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.readmore.ui.fragments
+package com.rafaelfelipeac.readmore.ui.fragments.goal
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -34,7 +34,7 @@ class GoalFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = "Goal"
+        (activity as MainActivity).supportActionBar?.title = "Meta"
 
         return inflater.inflate(R.layout.fragment_goal, container, false)
     }
@@ -55,9 +55,9 @@ class GoalFragment : BaseFragment() {
             Book("g10",  "", "")
         ))
 
-//        adapter.clickListener = {
-//            navController.navigate(R.id.action_navigation_metas_to_goalFragment)
-//        }
+        adapter.clickListener = {
+            navController.navigate(R.id.action_goalFragment_to_bookFragment)
+        }
 
         goal_books_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 

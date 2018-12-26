@@ -25,17 +25,21 @@
         <action android:id="@+id/action_navigation_metas_to_goalFragment" app:destination="@id/goalFragment"/>
     </fragment>
     <fragment android:id="@+id/navigation_metricas"
-              android:name="com.rafaelfelipeac.readmore.ui.fragments.MetricasFragment" android:label="fragment_metricas"
+              android:name="com.rafaelfelipeac.readmore.ui.fragments.metrics.MetricsFragment" android:label="fragment_metricas"
               tools:layout="@layout/fragment_metricas"/>
-    <fragment android:id="@+id/navigation_search" android:name="com.rafaelfelipeac.readmore.ui.fragments.SearchFragment"
+    <fragment android:id="@+id/navigation_search" android:name="com.rafaelfelipeac.readmore.ui.fragments.search.SearchFragment"
               android:label="fragment_search" tools:layout="@layout/fragment_search"/>
     <fragment android:id="@+id/navigation_settings"
-              android:name="com.rafaelfelipeac.readmore.ui.fragments.SettingsFragment" android:label="fragment_settings"
+              android:name="com.rafaelfelipeac.readmore.ui.fragments.settings.SettingsFragment" android:label="fragment_settings"
               tools:layout="@layout/fragment_settings"/>
     <fragment android:id="@+id/goalFormFragment"
               android:name="com.rafaelfelipeac.readmore.ui.fragments.goalform.GoalFormFragment"
               android:label="fragment_goal_form" tools:layout="@layout/fragment_goal_form"/>
-    <fragment android:id="@+id/goalFragment" android:name="com.rafaelfelipeac.readmore.ui.fragments.GoalFragment"
-              android:label="fragment_goal" tools:layout="@layout/fragment_goal"/>
+    <fragment android:id="@+id/goalFragment" android:name="com.rafaelfelipeac.readmore.ui.fragments.goal.GoalFragment"
+              android:label="fragment_goal" tools:layout="@layout/fragment_goal">
+        <action android:id="@+id/action_goalFragment_to_bookFragment" app:destination="@id/bookFragment"/>
+    </fragment>
+    <fragment android:id="@+id/bookFragment" android:name="com.rafaelfelipeac.readmore.ui.fragments.book.BookFragment"
+              android:label="fragment_book" tools:layout="@layout/fragment_book"/>
 
 </navigation>

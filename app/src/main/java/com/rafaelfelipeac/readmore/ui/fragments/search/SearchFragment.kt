@@ -1,15 +1,12 @@
-package com.rafaelfelipeac.readmore.ui.fragments
+package com.rafaelfelipeac.readmore.ui.fragments.search
 
-import android.app.Activity
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import com.rafaelfelipeac.readmore.R
 import com.rafaelfelipeac.readmore.ui.activities.MainActivity
 import com.rafaelfelipeac.readmore.ui.base.BaseFragment
@@ -21,7 +18,7 @@ class SearchFragment : BaseFragment() {
     private var open: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        (activity as MainActivity).supportActionBar?.title = "Search"
+        (activity as MainActivity).supportActionBar?.title = "Pesquisar"
 
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
