@@ -9,12 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rafaelfelipeac.readmore.R
+import com.rafaelfelipeac.readmore.models.Goal
 import com.rafaelfelipeac.readmore.ui.activities.MainActivity
 import com.rafaelfelipeac.readmore.ui.adapter.GoalsAdapter
 import com.rafaelfelipeac.readmore.ui.base.BaseFragment
+import com.rafaelfelipeac.readmore.ui.fragments.goalform.GoalFormFragmentDirections
 import kotlinx.android.synthetic.main.fragment_goals.*
 import javax.inject.Inject
-
 
 class GoalsFragment : BaseFragment() {
 
@@ -53,7 +54,9 @@ class GoalsFragment : BaseFragment() {
         adapter.setItems(viewModel?.getGoals()!!)
 
         adapter.clickListener = {
-            navController.navigate(R.id.action_navigation_metas_to_goalFragment)
+            val action =
+                GoalsFragmentDirections.actionNavigationMetasToGoalFragment(it)
+            navController.navigate(action)
         }
 
         goals_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

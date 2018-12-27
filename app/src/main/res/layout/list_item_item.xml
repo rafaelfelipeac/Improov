@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
-        android:id="@+id/goal_cardview"
+        android:id="@+id/item_cardview"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         card_view:cardUseCompatPadding="true"
@@ -13,12 +13,12 @@
         android:focusable="true">
 
     <android.support.constraint.ConstraintLayout
-            android:id="@+id/books_delete_view"
+            android:id="@+id/item_delete_view"
             android:layout_width="match_parent"
             android:layout_height="85dp"
             android:background="@color/colorRed">
 
-        <ImageView android:id="@+id/book_delete_image_left"
+        <ImageView android:id="@+id/item_delete_image_left"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:background="@drawable/ic_delete"
@@ -30,7 +30,7 @@
                    android:layout_marginTop="8dp"
                    card_view:layout_constraintTop_toTopOf="parent"/>
 
-        <ImageView android:id="@+id/book_delete_image_right"
+        <ImageView android:id="@+id/item_delete_image_right"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:background="@drawable/ic_delete"
@@ -46,7 +46,7 @@
 
     <android.support.constraint.ConstraintLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/books_normal_view"
+            android:id="@+id/item_normal_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout_editor_absoluteY="4dp"
@@ -54,7 +54,7 @@
             android:background="@color/colorWhite">
 
         <ImageView
-                android:id="@+id/book_progress"
+                android:id="@+id/item_progress"
                 android:layout_width="55dp"
                 android:layout_height="70dp"
                 android:src="@color/colorPrimary"
@@ -66,19 +66,19 @@
                 card_view:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-                android:id="@+id/book_title"
+                android:id="@+id/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:text="Nova meta cadastrada"
                 android:layout_marginTop="4dp"
                 card_view:layout_constraintTop_toTopOf="parent"
-                card_view:layout_constraintStart_toEndOf="@+id/book_progress"
+                card_view:layout_constraintStart_toEndOf="@+id/item_progress"
                 android:layout_marginStart="8dp"/>
 
 
         <ImageView
-                android:id="@+id/book_image_view"
+                android:id="@+id/item_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 card_view:srcCompat="@drawable/ic_drag_indicator"

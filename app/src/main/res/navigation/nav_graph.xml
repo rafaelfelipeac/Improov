@@ -34,12 +34,18 @@
               tools:layout="@layout/fragment_settings"/>
     <fragment android:id="@+id/goalFormFragment"
               android:name="com.rafaelfelipeac.readmore.ui.fragments.goalform.GoalFormFragment"
-              android:label="fragment_goal_form" tools:layout="@layout/fragment_goal_form"/>
+              android:label="fragment_goal_form" tools:layout="@layout/fragment_goal_form">
+        <action android:id="@+id/action_goalFormFragment_to_goalFragment" app:destination="@id/goalFragment"/>
+        <argument android:name="goalArgument"/>
+    </fragment>
     <fragment android:id="@+id/goalFragment" android:name="com.rafaelfelipeac.readmore.ui.fragments.goal.GoalFragment"
               android:label="fragment_goal" tools:layout="@layout/fragment_goal">
         <action android:id="@+id/action_goalFragment_to_bookFragment" app:destination="@id/bookFragment"/>
+        <argument
+                android:name="goalArgument"
+                app:argType="com.rafaelfelipeac.readmore.models.Goal"/>
     </fragment>
-    <fragment android:id="@+id/bookFragment" android:name="com.rafaelfelipeac.readmore.ui.fragments.book.BookFragment"
-              android:label="fragment_book" tools:layout="@layout/fragment_book"/>
+    <fragment android:id="@+id/bookFragment" android:name="com.rafaelfelipeac.readmore.ui.fragments.Item.ItemFragment"
+              android:label="fragment_book" tools:layout="@layout/fragment_item"/>
 
 </navigation>

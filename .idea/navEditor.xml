@@ -13,8 +13,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="896" />
-                            <option name="y" value="533" />
+                            <option name="x" value="1024" />
+                            <option name="y" value="575" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -25,9 +25,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="671" />
+                            <option name="x" value="646" />
                             <option name="y" value="218" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_goalFormFragment_to_goalFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -37,8 +46,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="667" />
-                            <option name="y" value="529" />
+                            <option name="x" value="779" />
+                            <option name="y" value="577" />
                           </Point>
                         </option>
                         <option name="myPositions">

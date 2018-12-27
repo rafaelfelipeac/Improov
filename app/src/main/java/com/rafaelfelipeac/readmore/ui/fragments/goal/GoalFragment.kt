@@ -1,7 +1,6 @@
 package com.rafaelfelipeac.readmore.ui.fragments.goal
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.helper.ItemTouchHelper
@@ -9,21 +8,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rafaelfelipeac.readmore.R
-import com.rafaelfelipeac.readmore.models.Book
 import com.rafaelfelipeac.readmore.models.Goal
+import com.rafaelfelipeac.readmore.models.Item
 import com.rafaelfelipeac.readmore.ui.activities.MainActivity
-import com.rafaelfelipeac.readmore.ui.adapter.BooksAdapter
-import com.rafaelfelipeac.readmore.ui.adapter.GoalsAdapter
+import com.rafaelfelipeac.readmore.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.readmore.ui.base.BaseFragment
 import com.rafaelfelipeac.readmore.ui.helper.SwipeAndDragHelper
 import kotlinx.android.synthetic.main.fragment_goal.*
-import kotlinx.android.synthetic.main.fragment_goals.*
 import javax.inject.Inject
 
 class GoalFragment : BaseFragment() {
 
     @Inject
-    lateinit var adapter: BooksAdapter
+    lateinit var adapter: ItemsAdapter
+
+    var goal: Goal? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,35 +38,49 @@ class GoalFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_goal, container, false)
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        goal = GoalFragmentArgs.fromBundle(arguments!!).goalArgument
+
+        when(goal?.type) {
+            1 -> {goal_items_list.visibility = View.VISIBLE}
+            2 -> {goal_btn_dec_inc.visibility = View.VISIBLE}
+            3 -> {goal_btn_total.visibility = View.VISIBLE}
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        hideSoftKeyboard(activity!!)
+
         adapter.setItems(listOf(
-            Book("g1", "", ""),
-            Book("g2",  "", ""),
-            Book("g3",  "", ""),
-            Book("g4",  "", ""),
-            Book("g5",  "", ""),
-            Book("g6",  "", ""),
-            Book("g7",  "", ""),
-            Book("g8",  "", ""),
-            Book("g9",  "", ""),
-            Book("g10",  "", "")
+            Item(goalId =  1, title =  "g1", desc =  "", author = ""),
+            Item(goalId =  1, title =  "g2", desc =  "", author = ""),
+            Item(goalId =  1, title =  "g3", desc =  "", author = ""),
+            Item(goalId =  1, title =  "g4", desc =  "", author = ""),
+            Item(goalId =  1, title =  "g5", desc =  "", author = ""),
+            Item(goalId =  1, title =  "g6", desc =  "", author = ""),
+            Item(goalId =  1, title =  "g7", desc =  "", author = ""),
+            Item(goalId =  1, title =  "g8", desc =  "", author = ""),
+            Item(goalId =  1, title =  "g9", desc =  "", author = ""),
+            Item(goalId =  1, title =  "g10", desc =  "", author = "")
         ))
 
         adapter.clickListener = {
             navController.navigate(R.id.action_goalFragment_to_bookFragment)
         }
 
-        goal_books_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        goal_items_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         val swipeAndDragHelper = SwipeAndDragHelper(adapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
         adapter.setTouchHelper(touchHelper)
 
-        goal_books_list.adapter = adapter
+        goal_items_list.adapter = adapter
 
-        touchHelper.attachToRecyclerView(goal_books_list)
+        touchHelper.attachToRecyclerView(goal_items_list)
     }
 }
