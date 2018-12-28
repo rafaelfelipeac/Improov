@@ -5,15 +5,16 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rafaelfelipeac.readmore.R
-import com.rafaelfelipeac.readmore.models.Goal
 import com.rafaelfelipeac.readmore.ui.activities.MainActivity
 import com.rafaelfelipeac.readmore.ui.adapter.GoalsAdapter
 import com.rafaelfelipeac.readmore.ui.base.BaseFragment
-import com.rafaelfelipeac.readmore.ui.fragments.goalform.GoalFormFragmentDirections
+import com.rafaelfelipeac.readmore.ui.helper.SwipeAndDragHelperGoal
+import kotlinx.android.synthetic.main.fragment_goal.*
 import kotlinx.android.synthetic.main.fragment_goals.*
 import javax.inject.Inject
 
@@ -60,7 +61,15 @@ class GoalsFragment : BaseFragment() {
         }
 
         goals_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        val swipeAndDragHelper = SwipeAndDragHelperGoal(adapter)
+        val touchHelper = ItemTouchHelper(swipeAndDragHelper)
+
+        adapter.setTouchHelper(touchHelper)
+
         goals_list.adapter = adapter
+
+        touchHelper.attachToRecyclerView(goals_list)
     }
 
     private fun fabScrollListener() {

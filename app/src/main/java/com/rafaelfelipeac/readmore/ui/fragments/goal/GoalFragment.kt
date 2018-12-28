@@ -13,7 +13,7 @@ import com.rafaelfelipeac.readmore.models.Item
 import com.rafaelfelipeac.readmore.ui.activities.MainActivity
 import com.rafaelfelipeac.readmore.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.readmore.ui.base.BaseFragment
-import com.rafaelfelipeac.readmore.ui.helper.SwipeAndDragHelper
+import com.rafaelfelipeac.readmore.ui.helper.SwipeAndDragHelperItem
 import kotlinx.android.synthetic.main.fragment_goal.*
 import javax.inject.Inject
 
@@ -43,11 +43,7 @@ class GoalFragment : BaseFragment() {
 
         goal = GoalFragmentArgs.fromBundle(arguments!!).goalArgument
 
-        when(goal?.type) {
-            1 -> {goal_items_list.visibility = View.VISIBLE}
-            2 -> {goal_btn_dec_inc.visibility = View.VISIBLE}
-            3 -> {goal_btn_total.visibility = View.VISIBLE}
-        }
+        setupGoal()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,7 +70,7 @@ class GoalFragment : BaseFragment() {
 
         goal_items_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        val swipeAndDragHelper = SwipeAndDragHelper(adapter)
+        val swipeAndDragHelper = SwipeAndDragHelperItem(adapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
         adapter.setTouchHelper(touchHelper)
@@ -82,5 +78,16 @@ class GoalFragment : BaseFragment() {
         goal_items_list.adapter = adapter
 
         touchHelper.attachToRecyclerView(goal_items_list)
+    }
+
+    private fun setupGoal() {
+
+        goal_title.text = goal?.name
+
+        when(goal?.type) {
+            1 -> {goal_items_list.visibility = View.VISIBLE}
+            2 -> {goal_cl_dec_inc.visibility = View.VISIBLE}
+            3 -> {goal_cl_total.visibility = View.VISIBLE}
+        }
     }
 }

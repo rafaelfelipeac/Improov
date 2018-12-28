@@ -11,10 +11,10 @@ import android.widget.TextView
 import com.rafaelfelipeac.readmore.R
 import com.rafaelfelipeac.readmore.models.Item
 import com.rafaelfelipeac.readmore.ui.base.BaseAdapter
-import com.rafaelfelipeac.readmore.ui.helper.SwipeAndDragHelper
+import com.rafaelfelipeac.readmore.ui.helper.SwipeAndDragHelperItem
 import javax.inject.Inject
 
-class ItemsAdapter @Inject constructor() : BaseAdapter<Item>(), SwipeAndDragHelper.ActionCompletionContract {
+class ItemsAdapter @Inject constructor() : BaseAdapter<Item>(), SwipeAndDragHelperItem.ActionCompletionContract {
 
     var clickListener: (book: Item) -> Unit = { }
     private var touchHelper: ItemTouchHelper? = null
@@ -43,10 +43,10 @@ class ItemsAdapter @Inject constructor() : BaseAdapter<Item>(), SwipeAndDragHelp
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int) {
         val targetBook = this.items[oldPosition]
-        val book = Item(1, 1, targetBook.title, "", "")
+        //val book = Item(1, 1, targetBook.title, "", "")
 
         this.items.removeAt(oldPosition)
-        this.items.add(newPosition, book)
+        this.items.add(newPosition, targetBook)
 
         notifyItemMoved(oldPosition, newPosition)
     }
