@@ -82,12 +82,19 @@ class GoalFormFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.menu_goal_save -> {
+                var order = 0
+
+                order =
+                        if (goalDAO?.getAll()!!.isEmpty()) { 1 }
+                        else { goalDAO?.getAll()!![goalDAO!!.getAll().size-1].order + 1 }
+
                 val goal = Goal(name = goalForm_goal_name.text.toString(),
-                    totalRead = goalForm_goal_total.text.toString().toInt(),
-                    actualRead = 0,
+                    actualValue = goalForm_goal_total.text.toString().toInt(),
+                    totalValue = 0,
                     initialDate = "",
                     finalDate = "",
-                    type = goalType)
+                    type = goalType,
+                    order = order)
 
                 viewModel?.saveGoal(goal)
 

@@ -5,7 +5,7 @@ import android.arch.persistence.room.RoomDatabase
 import com.rafaelfelipeac.domore.database.goal.GoalDAO
 import com.rafaelfelipeac.domore.models.Goal
 
-@Database(entities = [Goal::class], version = 3)
+@Database(entities = [Goal::class], version = 5)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun goalDAO(): GoalDAO
 }

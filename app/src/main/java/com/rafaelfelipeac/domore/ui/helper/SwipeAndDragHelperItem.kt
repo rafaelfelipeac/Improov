@@ -23,6 +23,8 @@ class SwipeAndDragHelperItem(private val contract: ActionCompletionContract) : I
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        // direction for left or right
+
         contract.onViewSwiped(viewHolder.adapterPosition, viewHolder)
     }
 

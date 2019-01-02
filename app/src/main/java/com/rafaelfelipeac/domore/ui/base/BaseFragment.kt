@@ -1,9 +1,12 @@
 package com.rafaelfelipeac.domore.ui.base
 
 import android.app.Activity
+import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.app.App
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 
@@ -12,6 +15,10 @@ open class BaseFragment : Fragment() {
     protected val injector by lazy { (activity as BaseActivity).injector }
 
     var goalDAO = App.database?.goalDAO()
+
+    val navController get() = (activity as MainActivity).navController
+
+    val navigation: BottomNavigationView get() = (activity as MainActivity).findViewById(R.id.bottom_nav)
 
     fun showSnackBar(message: String) {
         Snackbar.make(view!!, message, Snackbar.LENGTH_SHORT).show()
@@ -31,15 +38,21 @@ open class BaseFragment : Fragment() {
 //        }
 //    }
 
-    val navController get() = (activity as MainActivity).navController
-
     fun showSoftKeyboard(activity: Activity) {
-        val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+        val inputMethodManager = activity.
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+
         inputMethodManager!!.toggleSoftInputFromWindow(view?.windowToken, InputMethodManager.SHOW_FORCED, 0)
     }
 
     fun hideSoftKeyboard(activity: Activity) {
-        val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+        val inputMethodManager = activity.
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+
         inputMethodManager!!.hideSoftInputFromWindow(view?.windowToken, 0)
     }
-}
+
+    fun showNavigation() { navigation.visibility = View.VISIBLE }
+
+    fun hideNavigation() { navigation.visibility = View.GONE }
+ }

@@ -6,8 +6,8 @@ import android.arch.persistence.room.PrimaryKey
 @Entity(tableName = "item")
 data class Item(
     @PrimaryKey(autoGenerate = true)
-    val itemId: Long? = 0,
-    val goalId: Long? = 0,
-    val title: String,
-    val desc: String,
-    val author: String)
+    var itemId: Long? = 0,
+    var goalId: Long? = 0,
+    var title: String,
+    var desc: String,
+    var author: String)

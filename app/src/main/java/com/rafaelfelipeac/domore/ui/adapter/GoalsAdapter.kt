@@ -42,6 +42,19 @@ class GoalsAdapter @Inject constructor() : BaseAdapter<Goal>(), SwipeAndDragHelp
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int) {
         val targetGoal = this.items[oldPosition]
+        val otherGoal = this.items[newPosition]
+
+        targetGoal.order = oldPosition
+        otherGoal.order = newPosition
+
+//        if (oldPosition > newPosition) {
+//            targetGoal.order = targetGoal.order - (oldPosition - newPosition)
+//            var otherGoal = this.items[oldPosition]
+//        } else {
+//            targetGoal.order = targetGoal.order + (newPosition - oldPosition)
+//            var otherGoal = this.items[newPosition]
+//            otherGoal.order = targetGoal.order
+//        }
 
         this.items.removeAt(oldPosition)
         this.items.add(newPosition, targetGoal)

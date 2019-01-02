@@ -44,6 +44,7 @@ class GoalsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         hideSoftKeyboard(activity!!)
+        showNavigation()
 
         fabScrollListener()
 
