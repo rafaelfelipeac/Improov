@@ -8,6 +8,7 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import android.widget.ImageView
 import com.rafaelfelipeac.domore.R
+import com.rafaelfelipeac.domore.app.App
 import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.ui.base.BaseAdapter
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperGoal
@@ -44,17 +45,11 @@ class GoalsAdapter @Inject constructor() : BaseAdapter<Goal>(), SwipeAndDragHelp
         val targetGoal = this.items[oldPosition]
         val otherGoal = this.items[newPosition]
 
-        targetGoal.order = oldPosition
-        otherGoal.order = newPosition
+        targetGoal.order = newPosition
+        otherGoal.order = oldPosition
 
-//        if (oldPosition > newPosition) {
-//            targetGoal.order = targetGoal.order - (oldPosition - newPosition)
-//            var otherGoal = this.items[oldPosition]
-//        } else {
-//            targetGoal.order = targetGoal.order + (newPosition - oldPosition)
-//            var otherGoal = this.items[newPosition]
-//            otherGoal.order = targetGoal.order
-//        }
+        App.database?.goalDAO()?.update(targetGoal)
+        App.database?.goalDAO()?.update(otherGoal)
 
         this.items.removeAt(oldPosition)
         this.items.add(newPosition, targetGoal)

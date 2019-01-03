@@ -32,6 +32,7 @@ class MainActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.menu_goal_save -> { return false }
+            R.id.menu_goal_add -> {return false }
             android.R.id.home -> { return false }
         }
 

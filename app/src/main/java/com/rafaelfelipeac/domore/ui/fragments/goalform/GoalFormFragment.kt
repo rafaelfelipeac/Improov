@@ -79,27 +79,27 @@ class GoalFormFragment : BaseFragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.menu_goal_save -> {
-                var order = 0
-
-                order =
+                val order =
                         if (goalDAO?.getAll()!!.isEmpty()) { 1 }
                         else { goalDAO?.getAll()!![goalDAO!!.getAll().size-1].order + 1 }
 
-                val goal = Goal(name = goalForm_goal_name.text.toString(),
-                    actualValue = goalForm_goal_total.text.toString().toInt(),
-                    totalValue = 0,
-                    initialDate = "",
-                    finalDate = "",
-                    type = goalType,
-                    order = order)
+                viewModel?.saveGoal(
+                    Goal(name = goalForm_goal_name.text.toString(),
+                        actualValue = goalForm_goal_total.text.toString().toInt(),
+                        totalValue = 0,
+                        initialDate = "",
+                        finalDate = "",
+                        type = goalType,
+                        order = order))
 
-                viewModel?.saveGoal(goal)
+                val goal = goalDAO?.getAll()?.last()
 
                 val action =
-                    GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal)
+                    GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal!!)
                 navController.navigate(action)
 
                 return true

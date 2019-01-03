@@ -4,20 +4,18 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.helper.ItemTouchHelper
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.*
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.models.Goal
-import com.rafaelfelipeac.domore.models.Item
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_goal.*
 import javax.inject.Inject
-import android.text.Editable
-import android.text.TextWatcher
 
 class GoalFragment : BaseFragment() {
 
@@ -30,6 +28,10 @@ class GoalFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         injector.inject(this)
+
+        goal = GoalFragmentArgs.fromBundle(arguments!!).goalArgument
+
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,8 +46,6 @@ class GoalFragment : BaseFragment() {
         super.onStart()
 
         hideNavigation()
-
-        goal = GoalFragmentArgs.fromBundle(arguments!!).goalArgument
 
         setupGoal()
     }
@@ -81,20 +81,10 @@ class GoalFragment : BaseFragment() {
             }
         })
 
-        adapter.setItems(
-            listOf(
-                Item(goalId = 1, title = "g1", desc = "", author = ""),
-                Item(goalId = 1, title = "g2", desc = "", author = ""),
-                Item(goalId = 1, title = "g3", desc = "", author = ""),
-                Item(goalId = 1, title = "g4", desc = "", author = ""),
-                Item(goalId = 1, title = "g5", desc = "", author = ""),
-                Item(goalId = 1, title = "g6", desc = "", author = ""),
-                Item(goalId = 1, title = "g7", desc = "", author = ""),
-                Item(goalId = 1, title = "g8", desc = "", author = ""),
-                Item(goalId = 1, title = "g9", desc = "", author = ""),
-                Item(goalId = 1, title = "g10", desc = "", author = "")
-            )
-        )
+        val list = itemDAO?.getAll()
+        val orderList = list?.filter { it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
+
+        adapter.setItems(orderList!!)
 
         adapter.clickListener = {
             navController.navigate(R.id.action_goalFragment_to_bookFragment)
@@ -112,6 +102,35 @@ class GoalFragment : BaseFragment() {
         touchHelper.attachToRecyclerView(goal_items_list)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+
+        if (goal?.type == 1) {
+            inflater?.inflate(R.menu.menu_add, menu)
+        }
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.menu_goal_add -> {
+
+                val action =
+                    GoalFragmentDirections.actionGoalFragmentToItemFormFragment(goal!!)
+                navController.navigate(action)
+
+                return true
+            }
+            android.R.id.home -> {
+                val action =
+                    GoalFragmentDirections.actionGoalFragmentToNavigationMetas()
+                navController.navigate(action)
+            }
+        }
+
+        return false
+    }
+
     private fun setupGoal() {
 
         goal_title.text = goal?.name
@@ -121,13 +140,10 @@ class GoalFragment : BaseFragment() {
         when (goal?.type) {
             1 -> {
                 goal_items_list.visibility = View.VISIBLE
+                (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
             }
-            2 -> {
-                goal_cl_dec_inc.visibility = View.VISIBLE
-            }
-            3 -> {
-                goal_cl_total.visibility = View.VISIBLE
-            }
+            2 -> { goal_cl_dec_inc.visibility = View.VISIBLE }
+            3 -> { goal_cl_total.visibility = View.VISIBLE }
         }
     }
 }

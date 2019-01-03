@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.rafaelfelipeac.domore.R
+import com.rafaelfelipeac.domore.app.App
 import com.rafaelfelipeac.domore.models.Item
 import com.rafaelfelipeac.domore.ui.base.BaseAdapter
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
@@ -42,11 +43,17 @@ class ItemsAdapter @Inject constructor() : BaseAdapter<Item>(), SwipeAndDragHelp
     }
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int) {
-        val targetBook = this.items[oldPosition]
-        //val book = Item(1, 1, targetBook.title, "", "")
+        val targetItem = this.items[oldPosition]
+        val otherItem = this.items[newPosition]
+
+        targetItem.order = newPosition
+        otherItem.order = oldPosition
+
+        App.database?.itemDAO()?.update(targetItem)
+        App.database?.itemDAO()?.update(otherItem)
 
         this.items.removeAt(oldPosition)
-        this.items.add(newPosition, targetBook)
+        this.items.add(newPosition, targetItem)
 
         notifyItemMoved(oldPosition, newPosition)
     }

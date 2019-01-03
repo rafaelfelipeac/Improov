@@ -28,6 +28,8 @@ class GoalsFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         injector.inject(this)
+
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -52,7 +54,7 @@ class GoalsFragment : BaseFragment() {
             navController.navigate(R.id.action_navigation_metas_to_goalFormFragment)
         }
 
-        adapter.setItems(viewModel?.getGoals()!!)
+        adapter.setItems(viewModel?.getGoals()!!.sortedBy { it.order })
 
         adapter.clickListener = {
             val action =

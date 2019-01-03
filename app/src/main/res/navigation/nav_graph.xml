@@ -9,8 +9,7 @@
               android:label="fragment_home"
               tools:layout="@layout/fragment_home">
 
-        <action android:id="@+id/action_homeFragment_to_notificationFragment"
-                app:destination="@id/navigation_metas"/>
+        <action android:id="@+id/action_homeFragment_to_notificationFragment" app:destination="@id/navigation_metas"/>
         <action android:id="@+id/action_navigation_home_to_metricasFragment" app:destination="@id/navigation_metricas"/>
         <action android:id="@+id/action_navigation_home_to_searchFragment" app:destination="@id/navigation_search"/>
         <action android:id="@+id/action_navigation_home_to_settingsFragment" app:destination="@id/navigation_settings"/>
@@ -21,31 +20,52 @@
               android:name="com.rafaelfelipeac.domore.ui.fragments.goals.GoalsFragment"
               android:label="fragment_notification"
               tools:layout="@layout/fragment_goals">
+
         <action android:id="@+id/action_navigation_metas_to_goalFormFragment" app:destination="@id/goalFormFragment"/>
         <action android:id="@+id/action_navigation_metas_to_goalFragment" app:destination="@id/goalFragment"/>
+
     </fragment>
+
     <fragment android:id="@+id/navigation_metricas"
               android:name="com.rafaelfelipeac.domore.ui.fragments.metrics.MetricsFragment" android:label="fragment_metricas"
               tools:layout="@layout/fragment_metricas"/>
+
     <fragment android:id="@+id/navigation_search" android:name="com.rafaelfelipeac.domore.ui.fragments.search.SearchFragment"
               android:label="fragment_search" tools:layout="@layout/fragment_search"/>
+
     <fragment android:id="@+id/navigation_settings"
               android:name="com.rafaelfelipeac.domore.ui.fragments.settings.SettingsFragment" android:label="fragment_settings"
               tools:layout="@layout/fragment_settings"/>
+
     <fragment android:id="@+id/goalFormFragment"
               android:name="com.rafaelfelipeac.domore.ui.fragments.goalform.GoalFormFragment"
               android:label="fragment_goal_form" tools:layout="@layout/fragment_goal_form">
         <action android:id="@+id/action_goalFormFragment_to_goalFragment" app:destination="@id/goalFragment"/>
         <argument android:name="goalArgument"/>
     </fragment>
+
     <fragment android:id="@+id/goalFragment" android:name="com.rafaelfelipeac.domore.ui.fragments.goal.GoalFragment"
               android:label="fragment_goal" tools:layout="@layout/fragment_goal">
-        <action android:id="@+id/action_goalFragment_to_bookFragment" app:destination="@id/bookFragment"/>
+
         <argument
                 android:name="goalArgument"
                 app:argType="com.rafaelfelipeac.domore.models.Goal"/>
+
+        <action android:id="@+id/action_goalFragment_to_bookFragment" app:destination="@id/bookFragment"/>
+        <action android:id="@+id/action_goalFragment_to_itemFormFragment" app:destination="@id/itemFormFragment"/>
+        <action android:id="@+id/action_goalFragment_to_goalFormFragment" app:destination="@id/goalFormFragment"/>
+        <action android:id="@+id/action_goalFragment_to_navigation_metas" app:destination="@id/navigation_metas"/>
     </fragment>
+
     <fragment android:id="@+id/bookFragment" android:name="com.rafaelfelipeac.domore.ui.fragments.Item.ItemFragment"
               android:label="fragment_book" tools:layout="@layout/fragment_item"/>
+
+    <fragment android:id="@+id/itemFormFragment"
+              android:name="com.rafaelfelipeac.domore.ui.fragments.itemform.ItemFormFragment"
+              android:label="fragment_item_form" tools:layout="@layout/fragment_item_form">
+        <action android:id="@+id/action_itemFormFragment_to_goalFragment" app:destination="@id/goalFragment"/>
+        <argument android:name="itemGoalArgument"
+        app:argType="com.rafaelfelipeac.domore.models.Goal"/>
+    </fragment>
 
 </navigation>
