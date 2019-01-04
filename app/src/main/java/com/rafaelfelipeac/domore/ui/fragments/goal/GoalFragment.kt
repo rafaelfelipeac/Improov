@@ -1,11 +1,10 @@
 package com.rafaelfelipeac.domore.ui.fragments.goal
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.helper.ItemTouchHelper
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.models.Goal
@@ -67,19 +66,16 @@ class GoalFragment : BaseFragment() {
             goalDAO?.update(goal!!)
         }
 
-        goal_total_total.addTextChangedListener(object : TextWatcher {
+        goal_btn_save.setOnClickListener {
+            if (goal_total_total.text.isNotEmpty()) {
+                goal?.actualValue = goal_total_total.text.toString().toInt()
+                goalDAO?.update(goal!!)
 
-            override fun afterTextChanged(s: Editable) {}
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (s.isNotEmpty()) {
-                    goal?.actualValue = s.toString().toInt()
-                    goalDAO?.update(goal!!)
-                }
+                Snackbar
+                    .make(view, "Valor atualizado.", Snackbar.LENGTH_LONG)
+                    .show()
             }
-        })
+        }
 
         val list = itemDAO?.getAll()
         val orderList = list?.filter { it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }

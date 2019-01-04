@@ -3,6 +3,7 @@ package com.rafaelfelipeac.domore.ui.adapter
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
@@ -65,7 +66,7 @@ class GoalsAdapter @Inject constructor() : BaseAdapter<Goal>(), SwipeAndDragHelp
         notifyItemRemoved(position)
 
         Snackbar
-            .make(holder.itemView, "Excluído.", Snackbar.LENGTH_LONG)
+            .make(holder.itemView, "Meta removida.", Snackbar.LENGTH_LONG)
             .setAction("DESFAZER") {
                 this.items.add(position, goal)
                 goalDAO?.insert(goal)

@@ -66,7 +66,7 @@ class ItemsAdapter @Inject constructor() : BaseAdapter<Item>(), SwipeAndDragHelp
         notifyItemRemoved(position)
 
         Snackbar
-            .make(holder.itemView, "Excluído.", Snackbar.LENGTH_LONG)
+            .make(holder.itemView, "Item removido.", Snackbar.LENGTH_LONG)
             .setAction("DESFAZER") {
                 this.items.add(position, item)
                 itemDAO?.insert(item)

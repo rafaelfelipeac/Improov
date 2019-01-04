@@ -105,7 +105,7 @@
 
             <EditText
                     android:id="@+id/goal_total_total"
-                    android:layout_width="50dp"
+                    android:layout_width="75dp"
                     android:layout_height="50dp"
                     android:text="0"
                     android:gravity="center"
@@ -135,6 +135,14 @@
                       app:layout_constraintHorizontal_bias="0.0"
                       app:layout_constraintStart_toEndOf="@+id/goal_total_total"
                       app:layout_constraintVertical_bias="0.44"/>
+
+            <Button android:id="@+id/goal_btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salvar" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/goal_textview_total"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
 
         </android.support.constraint.ConstraintLayout>
 
