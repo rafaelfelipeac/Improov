@@ -18,15 +18,15 @@ class ItemFormFragment : BaseFragment() {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
+        (activity as MainActivity).supportActionBar?.title = "GoalsForm"
 
         return inflater.inflate(R.layout.fragment_item_form, container, false)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        goal = ItemFormFragmentArgs.fromBundle(arguments!!).itemGoalArgument
+        goal = ItemFormFragmentArgs.fromBundle(arguments!!).itemGoal
 
         setHasOptionsMenu(true)
     }
@@ -42,7 +42,11 @@ class ItemFormFragment : BaseFragment() {
             R.id.menu_goal_save -> {
                 val order =
                     if (itemDAO?.getAll()?.none { it.goalId == goal?.goalId && it.goalId != 0L }!!) { 1 }
-                    else { itemDAO?.getAll()?.filter { it.goalId == goal?.goalId && it.goalId != 0L }!![itemDAO!!.getAll().filter { it.goalId == goal?.goalId && it.goalId != 0L }.size-1].order + 1 }
+                    else {
+                        itemDAO?.getAll()
+                            ?.filter { it.goalId == goal?.goalId && it.goalId != 0L }!![itemDAO!!.getAll()
+                             .filter { it.goalId == goal?.goalId && it.goalId != 0L }.size-1].order + 1
+                    }
 
                 val item = Item(
                     goalId = goal?.goalId!!,

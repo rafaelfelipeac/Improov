@@ -62,14 +62,14 @@ class ItemsAdapter @Inject constructor() : BaseAdapter<Item>(), SwipeAndDragHelp
         val item = this.items[position]
 
         this.items.removeAt(position)
-
+        itemDAO?.delete(item)
         notifyItemRemoved(position)
 
         Snackbar
             .make(holder.itemView, "Excluído.", Snackbar.LENGTH_LONG)
             .setAction("DESFAZER") {
                 this.items.add(position, item)
-
+                itemDAO?.insert(item)
                 notifyItemInserted(position)
             }
             .setActionTextColor(Color.WHITE)

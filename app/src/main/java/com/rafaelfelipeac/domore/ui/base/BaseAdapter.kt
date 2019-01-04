@@ -5,10 +5,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.rafaelfelipeac.domore.app.App
 
 abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>() {
 
     protected val items: MutableList<T> = mutableListOf()
+
+    var goalDAO = App.database?.goalDAO()
+    var itemDAO = App.database?.itemDAO()
 
     override fun getItemCount(): Int = items.size
 

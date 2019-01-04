@@ -8,18 +8,6 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="bookFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="937" />
-                            <option name="y" value="1438" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="goalFormFragment">
                     <value>
                       <LayoutPositions>
@@ -46,23 +34,28 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="762" />
-                            <option name="y" value="1078" />
+                            <option name="x" value="756" />
+                            <option name="y" value="1081" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_goalFragment_to_bookFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="action_goalFragment_to_goalFormFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                             <entry key="action_goalFragment_to_itemFormFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_goalFragment_to_itemFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_goalFragment_to_navigation_goals">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -93,6 +86,44 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="itemFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="937" />
+                            <option name="y" value="1438" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navigation_goals">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="265" />
+                            <option name="y" value="1080" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_navigation_goals_to_goalFormFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_goals_to_goalFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="navigation_home">
                     <value>
                       <LayoutPositions>
@@ -104,12 +135,12 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_homeFragment_to_notificationFragment">
+                            <entry key="action_navigation_home_to_goalsFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_home_to_metricasFragment">
+                            <entry key="action_navigation_home_to_metricsFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -129,33 +160,7 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigation_metas">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="265" />
-                            <option name="y" value="1080" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_navigation_metas_to_goalFormFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_navigation_metas_to_goalFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="navigation_metricas">
+                  <entry key="navigation_metrics">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">

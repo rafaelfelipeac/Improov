@@ -51,14 +51,14 @@ class GoalsFragment : BaseFragment() {
         fabScrollListener()
 
         fab_goals.setOnClickListener {
-            navController.navigate(R.id.action_navigation_metas_to_goalFormFragment)
+            navController.navigate(R.id.action_navigation_goals_to_goalFormFragment)
         }
 
         adapter.setItems(viewModel?.getGoals()!!.sortedBy { it.order })
 
         adapter.clickListener = {
             val action =
-                GoalsFragmentDirections.actionNavigationMetasToGoalFragment(it)
+                GoalsFragmentDirections.actionNavigationGoalsToGoalFragment(it)
             navController.navigate(action)
         }
 

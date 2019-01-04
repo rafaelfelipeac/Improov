@@ -58,17 +58,17 @@ class GoalsAdapter @Inject constructor() : BaseAdapter<Goal>(), SwipeAndDragHelp
     }
 
     override fun onViewSwiped(position: Int, holder: RecyclerView.ViewHolder) {
-        val book = this.items[position]
+        val goal = this.items[position]
 
         this.items.removeAt(position)
-
+        goalDAO?.delete(goal)
         notifyItemRemoved(position)
 
         Snackbar
             .make(holder.itemView, "Excluído.", Snackbar.LENGTH_LONG)
             .setAction("DESFAZER") {
-                this.items.add(position, book)
-
+                this.items.add(position, goal)
+                goalDAO?.insert(goal)
                 notifyItemInserted(position)
             }
             .setActionTextColor(Color.WHITE)

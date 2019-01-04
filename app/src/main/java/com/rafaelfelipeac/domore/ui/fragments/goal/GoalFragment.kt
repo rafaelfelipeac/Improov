@@ -29,7 +29,7 @@ class GoalFragment : BaseFragment() {
 
         injector.inject(this)
 
-        goal = GoalFragmentArgs.fromBundle(arguments!!).goalArgument
+        goal = GoalFragmentArgs.fromBundle(arguments!!).goal
 
         setHasOptionsMenu(true)
     }
@@ -87,7 +87,7 @@ class GoalFragment : BaseFragment() {
         adapter.setItems(orderList!!)
 
         adapter.clickListener = {
-            navController.navigate(R.id.action_goalFragment_to_bookFragment)
+            navController.navigate(R.id.action_goalFragment_to_itemFragment)
         }
 
         goal_items_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -120,11 +120,6 @@ class GoalFragment : BaseFragment() {
                 navController.navigate(action)
 
                 return true
-            }
-            android.R.id.home -> {
-                val action =
-                    GoalFragmentDirections.actionGoalFragmentToNavigationMetas()
-                navController.navigate(action)
             }
         }
 
