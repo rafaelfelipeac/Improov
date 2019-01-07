@@ -14,4 +14,5 @@ data class Goal(
     var initialDate: String,
     var finalDate: String,
     var type: Int,
+    var done: Boolean,
     var order: Int): Serializable

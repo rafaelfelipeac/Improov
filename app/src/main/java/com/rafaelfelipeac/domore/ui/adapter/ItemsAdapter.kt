@@ -58,22 +58,42 @@ class ItemsAdapter @Inject constructor() : BaseAdapter<Item>(), SwipeAndDragHelp
         notifyItemMoved(oldPosition, newPosition)
     }
 
-    override fun onViewSwiped(position: Int, holder: RecyclerView.ViewHolder) {
+    override fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder) {
         val item = this.items[position]
 
         this.items.removeAt(position)
-        itemDAO?.delete(item)
         notifyItemRemoved(position)
 
-        Snackbar
-            .make(holder.itemView, "Item removido.", Snackbar.LENGTH_LONG)
-            .setAction("DESFAZER") {
-                this.items.add(position, item)
-                itemDAO?.insert(item)
-                notifyItemInserted(position)
+        when(direction) {
+            ItemTouchHelper.RIGHT -> { // done
+                item.done = true
+                itemDAO?.update(item)
+
+                Snackbar
+                    .make(holder.itemView, "Item resolvido.", Snackbar.LENGTH_LONG)
+                    .setAction("DESFAZER") {
+                        this.items.add(position, item)
+                        item.done = false
+                        itemDAO?.update(item)
+                        notifyItemInserted(position)
+                    }
+                    .setActionTextColor(Color.WHITE)
+                    .show()
             }
-            .setActionTextColor(Color.WHITE)
-            .show()
+            ItemTouchHelper.LEFT -> { // delete
+                itemDAO?.delete(item)
+
+                Snackbar
+                    .make(holder.itemView, "Item removido.", Snackbar.LENGTH_LONG)
+                    .setAction("DESFAZER") {
+                        this.items.add(position, item)
+                        itemDAO?.insert(item)
+                        notifyItemInserted(position)
+                    }
+                    .setActionTextColor(Color.WHITE)
+                    .show()
+            }
+        }
     }
 
     fun setTouchHelper(touchHelper: ItemTouchHelper) {

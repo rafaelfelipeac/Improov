@@ -44,8 +44,8 @@ class ItemFormFragment : BaseFragment() {
                     if (itemDAO?.getAll()?.none { it.goalId == goal?.goalId && it.goalId != 0L }!!) { 1 }
                     else {
                         itemDAO?.getAll()
-                            ?.filter { it.goalId == goal?.goalId && it.goalId != 0L }!![itemDAO!!.getAll()
-                             .filter { it.goalId == goal?.goalId && it.goalId != 0L }.size-1].order + 1
+                            ?.filter { it.goalId == goal?.goalId && it.goalId != 0L }
+                            ?.size!! + 1
                     }
 
                 val item = Item(
@@ -53,6 +53,7 @@ class ItemFormFragment : BaseFragment() {
                     title = "a$order",
                     desc = "",
                     author = "",
+                    done = false,
                     order = order)
 
                 itemDAO?.insert(item)

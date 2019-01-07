@@ -94,6 +94,7 @@ class GoalFormFragment : BaseFragment() {
                         initialDate = "",
                         finalDate = "",
                         type = goalType,
+                        done = false,
                         order = order))
 
                 val goal = goalDAO?.getAll()?.last()

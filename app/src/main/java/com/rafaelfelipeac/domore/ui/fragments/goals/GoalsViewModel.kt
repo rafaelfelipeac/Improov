@@ -12,6 +12,6 @@ class GoalsViewModel : BaseViewModel() {
     private val goalRepository: GoalRepository = GoalRepository(goalDAO)
 
     fun getGoals(): List<Goal> {
-        return goalRepository.getGoals()
+        return goalRepository.getGoals().filter { !it.done }
     }
 }

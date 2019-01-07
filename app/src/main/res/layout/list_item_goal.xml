@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:foreground="?android:attr/selectableItemBackground"
+        xmlns:tools="http://schemas.android.com/tools" android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:layout_marginBottom="10dp"
         android:id="@+id/item_cardview"
@@ -13,32 +13,65 @@
         android:focusable="true">
 
     <android.support.constraint.ConstraintLayout
-            android:id="@+id/goal_delete_view"
+            android:id="@+id/goal_done_delete_view"
             android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:background="@color/colorRed">
+            android:layout_height="85dp">
 
-        <ImageView android:id="@+id/item_delete_image_left"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:background="@drawable/ic_delete"
-                   android:layout_centerVertical="true"
-                   android:layout_marginBottom="14dp"
-                   card_view:layout_constraintBottom_toBottomOf="parent"
-                   card_view:layout_constraintStart_toStartOf="parent"
-                   android:layout_marginStart="32dp"
-                   card_view:layout_constraintTop_toTopOf="parent"/>
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/goal_done_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintVertical_bias="0.0"
+                android:background="@color/colorGreen"
+                card_view:layout_constraintEnd_toStartOf="@+id/view">
 
-        <ImageView android:id="@+id/item_delete_image_right"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:background="@drawable/ic_delete"
-                   android:layout_centerVertical="true"
-                   card_view:layout_constraintTop_toTopOf="parent"
-                   android:layout_marginBottom="14dp"
-                   card_view:layout_constraintBottom_toBottomOf="parent"
-                   android:layout_marginEnd="32dp"
-                   card_view:layout_constraintEnd_toEndOf="parent"/>
+            <ImageView android:id="@+id/goal_done_image"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:background="@drawable/ic_done"
+                       android:layout_centerVertical="true"
+                       android:layout_marginBottom="14dp"
+                       card_view:layout_constraintBottom_toBottomOf="parent"
+                       card_view:layout_constraintStart_toStartOf="parent"
+                       android:layout_marginStart="32dp"
+                       card_view:layout_constraintTop_toTopOf="parent"/>
+        </android.support.constraint.ConstraintLayout>
+
+        <View android:layout_width="1dp"
+              android:layout_height="1dp"
+              android:layout_marginBottom="8dp"
+              card_view:layout_constraintBottom_toBottomOf="parent"
+              android:layout_marginTop="8dp"
+              card_view:layout_constraintTop_toTopOf="parent"
+              android:id="@+id/view"
+              card_view:layout_constraintVertical_bias="0.491"
+              card_view:layout_constraintStart_toEndOf="@+id/goal_done_view"
+              card_view:layout_constraintEnd_toStartOf="@+id/goal_delete_view"/>
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/goal_delete_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/colorRed"
+                card_view:layout_constraintStart_toEndOf="@+id/view">
+
+            <ImageView android:id="@+id/goal_delete_image"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:background="@drawable/ic_delete"
+                       android:layout_centerVertical="true"
+                       card_view:layout_constraintTop_toTopOf="parent"
+                       android:layout_marginBottom="14dp"
+                       card_view:layout_constraintBottom_toBottomOf="parent"
+                       android:layout_marginEnd="32dp"
+                       card_view:layout_constraintEnd_toEndOf="parent"/>
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
 
@@ -47,7 +80,8 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite">
+            android:background="@color/colorWhite"
+            tools:visibility="invisible">
 
         <TextView
                 android:id="@+id/goal_item_title"

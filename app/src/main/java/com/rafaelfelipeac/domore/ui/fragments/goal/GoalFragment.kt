@@ -78,7 +78,7 @@ class GoalFragment : BaseFragment() {
         }
 
         val list = itemDAO?.getAll()
-        val orderList = list?.filter { it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
+        val orderList = list?.filter { !it.done && it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
 
         adapter.setItems(orderList!!)
 

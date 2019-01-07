@@ -23,7 +23,7 @@ class SwipeAndDragHelperGoal(private val contract: ActionCompletionContract) : I
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        contract.onViewSwiped(viewHolder.adapterPosition, viewHolder)
+        contract.onViewSwiped(viewHolder.adapterPosition, direction, viewHolder)
     }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
@@ -69,6 +69,6 @@ class SwipeAndDragHelperGoal(private val contract: ActionCompletionContract) : I
     interface ActionCompletionContract {
         fun onViewMoved(oldPosition: Int, newPosition: Int)
 
-        fun onViewSwiped(position: Int, holder: RecyclerView.ViewHolder)
+        fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder)
     }
 }
