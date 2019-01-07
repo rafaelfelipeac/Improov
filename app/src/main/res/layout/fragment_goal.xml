@@ -24,6 +24,60 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"/>
 
+        <TextView
+                android:id="@+id/goal_final_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="@+id/goal_cl_total" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"/>
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/goal_medal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                    android:id="@+id/goal_medal_image"
+                    android:layout_width="75dp"
+                    android:layout_height="150dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                    android:id="@+id/goal_medal_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/goal_medal_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    android:text="medal"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/goal_trophies_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent">
+
+
+        </android.support.v7.widget.RecyclerView>
+
         <android.support.constraint.ConstraintLayout
                 android:id="@+id/goal_cl_dec_inc"
                 android:layout_width="500dp"
