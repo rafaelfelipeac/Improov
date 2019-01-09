@@ -19,7 +19,7 @@ import javax.inject.Inject
 class GoalFragment : BaseFragment() {
 
     @Inject
-    lateinit var adapter: ItemsAdapter
+    lateinit var itemsAdapter: ItemsAdapter
 
     var goal: Goal? = null
 
@@ -77,23 +77,38 @@ class GoalFragment : BaseFragment() {
             }
         }
 
-        val list = itemDAO?.getAll()
-        val orderList = list?.filter { !it.done && it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
+        goal_switch_medal.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) goal_medal.visibility = View.VISIBLE
+            else goal_medal.visibility = View.GONE
+        }
 
-        adapter.setItems(orderList!!)
+        goal_switch_trophies.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) goal_trophies.visibility = View.VISIBLE
+            else goal_trophies.visibility = View.GONE
+        }
 
-        adapter.clickListener = {
+        setItemsAdapter()
+    }
+
+    private fun setItemsAdapter() {
+        val itemsList = itemDAO?.getAll()
+        val orderItemsList =
+            itemsList?.filter { !it.done && it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
+
+        itemsAdapter.setItems(orderItemsList!!)
+
+        itemsAdapter.clickListener = {
             navController.navigate(R.id.action_goalFragment_to_itemFragment)
         }
 
         goal_items_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        val swipeAndDragHelper = SwipeAndDragHelperItem(adapter)
+        val swipeAndDragHelper = SwipeAndDragHelperItem(itemsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        adapter.setTouchHelper(touchHelper)
+        itemsAdapter.setTouchHelper(touchHelper)
 
-        goal_items_list.adapter = adapter
+        goal_items_list.adapter = itemsAdapter
 
         touchHelper.attachToRecyclerView(goal_items_list)
     }
@@ -108,7 +123,7 @@ class GoalFragment : BaseFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
+        when (item?.itemId) {
             R.id.menu_goal_add -> {
 
                 val action =
@@ -133,8 +148,12 @@ class GoalFragment : BaseFragment() {
                 goal_items_list.visibility = View.VISIBLE
                 (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
             }
-            2 -> { goal_cl_dec_inc.visibility = View.VISIBLE }
-            3 -> { goal_cl_total.visibility = View.VISIBLE }
+            2 -> {
+                goal_cl_dec_inc.visibility = View.VISIBLE
+            }
+            3 -> {
+                goal_cl_total.visibility = View.VISIBLE
+            }
         }
     }
 }
