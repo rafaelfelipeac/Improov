@@ -55,36 +55,26 @@ class GoalFragment : BaseFragment() {
         hideSoftKeyboard(activity!!)
 
         goal_btn_inc.setOnClickListener {
-            goal_inc_dec_total.text = (goal_inc_dec_total.text.toString().toInt() + 1).toString()
-            goal?.actualValue = goal_inc_dec_total.text.toString().toInt()
+            goal_inc_dec_total.text = (goal_inc_dec_total.text.toString().toFloat() + 1F).toString()
+            goal?.medalValue = goal_inc_dec_total.text.toString().toFloat()
             goalDAO?.update(goal!!)
         }
 
         goal_btn_dec.setOnClickListener {
-            goal_inc_dec_total.text = (goal_inc_dec_total.text.toString().toInt() - 1).toString()
-            goal?.actualValue = goal_inc_dec_total.text.toString().toInt()
+            goal_inc_dec_total.text = (goal_inc_dec_total.text.toString().toFloat() - 1F).toString()
+            goal?.medalValue = goal_inc_dec_total.text.toString().toFloat()
             goalDAO?.update(goal!!)
         }
 
         goal_btn_save.setOnClickListener {
             if (goal_total_total.text.isNotEmpty()) {
-                goal?.actualValue = goal_total_total.text.toString().toInt()
+                goal?.medalValue = goal_total_total.text.toString().toFloat()
                 goalDAO?.update(goal!!)
 
                 Snackbar
                     .make(view, "Valor atualizado.", Snackbar.LENGTH_LONG)
                     .show()
             }
-        }
-
-        goal_switch_medal.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) goal_medal.visibility = View.VISIBLE
-            else goal_medal.visibility = View.GONE
-        }
-
-        goal_switch_trophies.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) goal_trophies.visibility = View.VISIBLE
-            else goal_trophies.visibility = View.GONE
         }
 
         setItemsAdapter()
@@ -119,6 +109,8 @@ class GoalFragment : BaseFragment() {
             inflater?.inflate(R.menu.menu_add, menu)
         }
 
+        inflater?.inflate(R.menu.menu_edit, menu)
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -132,6 +124,11 @@ class GoalFragment : BaseFragment() {
 
                 return true
             }
+            R.id.menu_goal_edit -> {
+                val action =
+                    GoalFragmentDirections.actionGoalFragmentToGoalFormFragment(goal!!)
+                navController.navigate(action)
+            }
         }
 
         return false
@@ -140,8 +137,13 @@ class GoalFragment : BaseFragment() {
     private fun setupGoal() {
 
         goal_title.text = goal?.name
-        goal_inc_dec_total.text = goal?.actualValue.toString()
-        goal_total_total.setText(goal?.actualValue.toString())
+        goal_inc_dec_total.text = goal?.medalValue.toString()
+        goal_total_total.setText(goal?.medalValue.toString())
+
+        if (goal?.trophies!!) {
+            goal_medal.visibility = View.INVISIBLE
+            goal_trophies.visibility = View.VISIBLE
+        }
 
         when (goal?.type) {
             1 -> {

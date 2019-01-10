@@ -10,12 +10,15 @@ import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_goal.*
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 
 class GoalFormFragment : BaseFragment() {
 
     private var viewModel: GoalFormViewModel?= null
     private var goalType = 0
+
+    private var goal: Goal? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -30,6 +33,12 @@ class GoalFormFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        goal = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goal }
+
+        if (goal != null) {
+            setupGoal()
+        }
 
         setHasOptionsMenu(true)
     }
@@ -47,6 +56,20 @@ class GoalFormFragment : BaseFragment() {
 
         switchTotalValor.setOnCheckedChangeListener { _, _ -> // option 3
             isCheckedInSwitch(switchTotalValor)
+        }
+
+        form_goal_switch_trophies.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                goal?.trophies = true
+
+                form_goal_trophies.visibility = View.VISIBLE
+                form_goal_medal.visibility = View.INVISIBLE
+            } else {
+                goal?.trophies = false
+
+                form_goal_trophies.visibility = View.INVISIBLE
+                form_goal_medal.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -79,7 +102,6 @@ class GoalFormFragment : BaseFragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.menu_goal_save -> {
@@ -88,14 +110,29 @@ class GoalFormFragment : BaseFragment() {
                         else { goalDAO?.getAll()!![goalDAO!!.getAll().size-1].order + 1 }
 
                 viewModel?.saveGoal(
-                    Goal(name = goalForm_goal_name.text.toString(),
-                        actualValue = goalForm_goal_total.text.toString().toInt(),
-                        totalValue = 0,
+                    Goal(name =
+                            if (goalForm_goal_name.text!!.isNotEmpty()) goalForm_goal_name.text.toString()
+                            else "abc" ,
+                        medalValue =
+                            if (form_goal_editText_medal.text!!.isNotEmpty()) form_goal_editText_medal.text.toString().toFloat()
+                            else 100F,
+                        actualValue = 0F,
                         initialDate = "",
                         finalDate = "",
                         type = goalType,
                         done = false,
-                        order = order))
+                        order = order,
+                        trophies = form_goal_switch_trophies.isChecked,
+                        bronzeValue =
+                            if (form_goal_editText_bronze.text!!.isNotEmpty()) form_goal_editText_bronze.text.toString().toFloat()
+                            else 100F,
+                        silverValue =
+                            if (form_goal_editText_silver.text!!.isNotEmpty()) form_goal_editText_silver.text.toString().toFloat()
+                            else 100F,
+                        goldValue =
+                            if (form_goal_editText_gold.text!!.isNotEmpty()) form_goal_editText_gold.text.toString().toFloat()
+                            else 100F)
+                )
 
                 val goal = goalDAO?.getAll()?.last()
 
@@ -108,5 +145,9 @@ class GoalFormFragment : BaseFragment() {
         }
 
         return false
+    }
+
+    private fun setupGoal() {
+
     }
 }
