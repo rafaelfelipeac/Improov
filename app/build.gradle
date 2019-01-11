@@ -81,6 +81,9 @@ dependencies {
 
     // Ktlint
     ktlint "com.github.shyiko:ktlint:0.29.0"
+
+    // Chart
+    implementation 'com.github.bmarrdev:android-DecoView-charting:v1.2'
 }
 
 task ktlint(type: JavaExec, group: "verification") {

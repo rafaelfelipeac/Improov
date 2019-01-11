@@ -11,7 +11,7 @@
               tools:layout="@layout/fragment_home">
 
         <action android:id="@+id/action_navigation_home_to_goalsFragment" app:destination="@id/navigation_goals"/>
-        <action android:id="@+id/action_navigation_home_to_metricsFragment" app:destination="@id/navigation_metrics"/>
+        <action android:id="@+id/action_navigation_home_to_metricsFragment" app:destination="@+id/navigation_metrics"/>
         <action android:id="@+id/action_navigation_home_to_searchFragment" app:destination="@id/navigation_search"/>
         <action android:id="@+id/action_navigation_home_to_settingsFragment" app:destination="@id/navigation_settings"/>
 
