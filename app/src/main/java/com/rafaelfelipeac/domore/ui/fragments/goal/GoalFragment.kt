@@ -49,6 +49,12 @@ class GoalFragment : BaseFragment() {
         setupGoal()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        setupGoal()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -143,6 +149,10 @@ class GoalFragment : BaseFragment() {
         if (goal?.trophies!!) {
             goal_medal.visibility = View.INVISIBLE
             goal_trophies.visibility = View.VISIBLE
+
+            goal_trophy_bronze_text.text = goal?.bronzeValue.toString()
+            goal_trophy_silver_text.text = goal?.silverValue.toString()
+            goal_trophy_gold_text.text = goal?.goldValue.toString()
         }
 
         when (goal?.type) {

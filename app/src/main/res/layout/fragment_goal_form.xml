@@ -332,11 +332,11 @@
                 android:layout_marginEnd="8dp"/>
 
         <Switch
+                android:id="@+id/switchLista"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
-                android:id="@+id/switchLista"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/goalForm_goal_type_text"/>
 
@@ -356,11 +356,11 @@
                 app:layout_constraintBottom_toBottomOf="@+id/switchLista"/>
 
         <Switch
+                android:id="@+id/switchTotalIncDec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/switchLista"
-                android:id="@+id/switchTotalIncDec"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"/>
 
@@ -379,13 +379,14 @@
                 app:layout_constraintBottom_toBottomOf="@+id/switchTotalIncDec"/>
 
         <Switch
+                android:id="@+id/switchTotalValor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/switchTotalIncDec"
-                android:id="@+id/switchTotalValor" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="16dp"/>
 
 

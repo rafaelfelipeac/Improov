@@ -15,4 +15,8 @@ class GoalFormViewModel : BaseViewModel() {
     fun saveGoal(goal: Goal) {
         goalRepository.insert(goal)
     }
+
+    fun updateGoal(goal: Goal) {
+        goalRepository.update(goal)
+    }
 }

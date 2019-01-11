@@ -10,7 +10,6 @@ import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_goal.*
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 
 class GoalFormFragment : BaseFragment() {
@@ -36,15 +35,15 @@ class GoalFormFragment : BaseFragment() {
 
         goal = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goal }
 
-        if (goal != null) {
-            setupGoal()
-        }
-
         setHasOptionsMenu(true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (goal != null) {
+            setupGoal()
+        }
 
         switchLista.setOnCheckedChangeListener { _, _ -> // option 1
             isCheckedInSwitch(switchLista)
@@ -105,49 +104,106 @@ class GoalFormFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.menu_goal_save -> {
-                val order =
-                        if (goalDAO?.getAll()!!.isEmpty()) { 1 }
-                        else { goalDAO?.getAll()!![goalDAO!!.getAll().size-1].order + 1 }
+                if (goal == null) {
 
-                viewModel?.saveGoal(
-                    Goal(name =
-                            if (goalForm_goal_name.text!!.isNotEmpty()) goalForm_goal_name.text.toString()
-                            else "abc" ,
-                        medalValue =
-                            if (form_goal_editText_medal.text!!.isNotEmpty()) form_goal_editText_medal.text.toString().toFloat()
-                            else 100F,
-                        actualValue = 0F,
-                        initialDate = "",
-                        finalDate = "",
-                        type = goalType,
-                        done = false,
-                        order = order,
-                        trophies = form_goal_switch_trophies.isChecked,
-                        bronzeValue =
-                            if (form_goal_editText_bronze.text!!.isNotEmpty()) form_goal_editText_bronze.text.toString().toFloat()
-                            else 100F,
-                        silverValue =
-                            if (form_goal_editText_silver.text!!.isNotEmpty()) form_goal_editText_silver.text.toString().toFloat()
-                            else 100F,
-                        goldValue =
-                            if (form_goal_editText_gold.text!!.isNotEmpty()) form_goal_editText_gold.text.toString().toFloat()
-                            else 100F)
-                )
+                    val goalToSave = getNewGoal()
+                    viewModel?.saveGoal(goalToSave)
 
-                val goal = goalDAO?.getAll()?.last()
+                    val goal = goalDAO?.getAll()?.last() // with ID now
 
-                val action =
-                    GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal!!)
-                navController.navigate(action)
+                    val action =
+                        GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal!!)
+                    navController.navigate(action)
 
-                return true
+                    return true
+                } else {
+
+                    val goalToUpdate = getUpdateGoal()
+
+                    viewModel?.updateGoal(goalToUpdate)
+
+                    val action =
+                        GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goalToUpdate)
+                    navController.navigate(action)
+
+                    return true
+                }
             }
         }
 
         return false
     }
 
-    private fun setupGoal() {
+    private fun getNewGoal(): Goal {
+        return Goal(
+            name =
+                if (goalForm_goal_name.text!!.isNotEmpty()) goalForm_goal_name.text.toString()
+                else "abc" ,
+            medalValue =
+                if (form_goal_editText_medal.text!!.isNotEmpty()) form_goal_editText_medal.text.toString().toFloat()
+                else 100F,
+            actualValue = 0F,
+            initialDate = "",
+            finalDate = "",
+            type = goalType,
+            done = false,
+            order =
+                if (goalDAO?.getAll()!!.isEmpty()) { 1 }
+                else { goalDAO?.getAll()!![goalDAO!!.getAll().size-1].order + 1 },
+            trophies = form_goal_switch_trophies.isChecked,
+            bronzeValue =
+                if (form_goal_editText_bronze.text!!.isNotEmpty()) form_goal_editText_bronze.text.toString().toFloat()
+                else 100F,
+            silverValue =
+                if (form_goal_editText_silver.text!!.isNotEmpty()) form_goal_editText_silver.text.toString().toFloat()
+                else 100F,
+            goldValue =
+                if (form_goal_editText_gold.text!!.isNotEmpty()) form_goal_editText_gold.text.toString().toFloat()
+                else 100F)
+    }
 
+    private fun getUpdateGoal() : Goal {
+        goal?.name = goalForm_goal_name.text.toString()
+        goal?.trophies = form_goal_switch_trophies.isChecked
+        goal?.type = getType()
+
+        if (goal?.trophies!!) {
+            goal?.bronzeValue = form_goal_editText_bronze.text.toString().toFloat()
+            goal?.silverValue = form_goal_editText_silver.text.toString().toFloat()
+            goal?.goldValue = form_goal_editText_gold.text.toString().toFloat()
+        } else {
+            goal?.medalValue = form_goal_medal_text.toString().toFloat()
+        }
+
+        return goal!!
+    }
+
+    private fun getType(): Int {
+        if (switchLista.isChecked)          return 1
+        if (switchTotalIncDec.isChecked)    return 2
+        if (switchTotalValor.isChecked)     return 3
+
+        return -1
+    }
+
+    private fun setupGoal() {
+        if (goal?.trophies!!) {
+            form_goal_trophies.visibility = View.VISIBLE
+            form_goal_medal.visibility = View.INVISIBLE
+
+            form_goal_editText_bronze.setText(goal?.bronzeValue.toString())
+            form_goal_editText_silver.setText(goal?.silverValue.toString())
+            form_goal_editText_gold.setText(goal?.goldValue.toString())
+
+            form_goal_switch_trophies.isChecked = true
+        }
+
+        goalForm_goal_name.setText(goal?.name)
+
+        when(goal?.type) {
+            1 -> {switchLista.isChecked = true}
+            2 -> {switchTotalIncDec.isChecked = true}
+            3 -> {switchTotalValor.isChecked = true}
+        }
     }
 }
