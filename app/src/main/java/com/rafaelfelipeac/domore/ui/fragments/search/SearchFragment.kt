@@ -2,22 +2,15 @@ package com.rafaelfelipeac.domore.ui.fragments.search
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
-import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_metrics.*
-import kotlinx.android.synthetic.main.fragment_search.*
 import com.hookedonplay.decoviewlib.events.DecoEvent
-import com.rafaelfelipeac.domore.R.id.arcView
-
-
 
 class SearchFragment : BaseFragment() {
 
