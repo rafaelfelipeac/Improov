@@ -17,7 +17,6 @@ import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_goal.*
-import kotlinx.android.synthetic.main.fragment_metrics.*
 import javax.inject.Inject
 
 class GoalFragment : BaseFragment() {
@@ -27,7 +26,12 @@ class GoalFragment : BaseFragment() {
 
     var goal: Goal? = null
 
-    var cont: Float = 0F
+    private var cont: Float = 0F
+
+    private var series1IndexBronze: Int = 0
+    private var series1IndexSilver: Int = 0
+    private var series1IndexGold: Int = 0
+    private var series1IndexMedal: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,25 +70,41 @@ class GoalFragment : BaseFragment() {
 
         hideSoftKeyboard(activity!!)
 
-        setupMedal()
-        /////
-        setupBronze()
-        /////
-        setupSilver()
-        /////
-        setupGold()
+        if (!goal?.trophies!!) {
+            setupMedal()
+        } else {
+            setupTrophyBronze()
+            setupTrophySilver()
+            setupTrophyGold()
+        }
 
-//        goal_btn_inc.setOnClickListener {
-//            goal_inc_dec_total.text = (goal_inc_dec_total.text.toString().toFloat() + 1F).toString()
-//            goal?.medalValue = goal_inc_dec_total.text.toString().toFloat()
-//            goalDAO?.update(goal!!)
-//        }
-//
-//        goal_btn_dec.setOnClickListener {
-//            goal_inc_dec_total.text = (goal_inc_dec_total.text.toString().toFloat() - 1F).toString()
-//            goal?.medalValue = goal_inc_dec_total.text.toString().toFloat()
-//            goalDAO?.update(goal!!)
-//        }
+        goal_btn_inc.setOnClickListener {
+            cont += 10
+
+            goal_inc_dec_total.text = cont.toString()
+            goal?.actualValue = cont
+            goalDAO?.update(goal!!)
+
+            if (goal_trophies.visibility == View.INVISIBLE) {
+                setMedalValue()
+            } else {
+                setTrophiesValueInc()
+            }
+        }
+
+        goal_btn_dec.setOnClickListener {
+            cont -= 10
+
+            goal_inc_dec_total.text = cont.toString()
+            goal?.actualValue = cont
+            goalDAO?.update(goal!!)
+
+            if (goal_trophies.visibility == View.INVISIBLE) {
+                setMedalValue()
+            } else {
+                setTrophiesValueDec()
+            }
+        }
 
         goal_btn_save.setOnClickListener {
             if (goal_total_total.text.isNotEmpty()) {
@@ -100,87 +120,8 @@ class GoalFragment : BaseFragment() {
         setItemsAdapter()
     }
 
-    private fun setupGold() {
-        arcViewGold.configureAngles(300, 0) // formato e orientacão
-
-        arcViewGold.addSeries(
-            SeriesItem.Builder(Color.argb(255, 218, 218, 218))
-                .setRange(0f, 100f, 100f)
-                .setInitialVisibility(true)
-                .setLineWidth(32f)
-                .build()
-        )
-        // linha cinza
-        // caminho total
-
-        val seriesItem1Gold =
-            SeriesItem.Builder(Color.argb(255, 64, 196, 0))
-                .setRange(0f, 100f, 0f)
-                .setLineWidth(32f)
-                .build()
-        // linha verde
-        // progresso feito
-
-        val series1IndexGold = arcViewGold.addSeries(seriesItem1Gold)
-        arcViewGold.addEvent(DecoEvent.Builder(0F).setIndex(series1IndexGold).setDelay(10).build())
-        arcViewGold.addEvent(DecoEvent.Builder(75F).setIndex(series1IndexGold).setDelay(10).build())
-    }
-
-    private fun setupSilver() {
-        arcViewSilver.configureAngles(300, 0) // formato e orientacão
-
-        arcViewSilver.addSeries(
-            SeriesItem.Builder(Color.argb(255, 218, 218, 218))
-                .setRange(0f, 100f, 100f)
-                .setInitialVisibility(true)
-                .setLineWidth(32f)
-                .build()
-        )
-        // linha cinza
-        // caminho total
-
-
-        val seriesItem1Silver =
-            SeriesItem.Builder(Color.argb(255, 64, 196, 0))
-                .setRange(0f, 100f, 0f)
-                .setLineWidth(32f)
-                .build()
-        // linha verde
-        // progresso feito
-
-        val series1IndexSilver = arcViewSilver.addSeries(seriesItem1Silver)
-        arcViewSilver.addEvent(DecoEvent.Builder(0F).setIndex(series1IndexSilver).setDelay(10).build())
-        arcViewSilver.addEvent(DecoEvent.Builder(75F).setIndex(series1IndexSilver).setDelay(10).build())
-    }
-
-    private fun setupBronze() {
-        arcViewBronze.configureAngles(300, 0) // formato e orientacão
-
-        arcViewBronze.addSeries(
-            SeriesItem.Builder(Color.argb(255, 218, 218, 218))
-                .setRange(0f, 100f, 100f)
-                .setInitialVisibility(true)
-                .setLineWidth(32f)
-                .build()
-        )
-        // linha cinza
-        // caminho total
-
-        val seriesItem1Bronze =
-            SeriesItem.Builder(Color.argb(255, 64, 196, 0))
-                .setRange(0f, 100f, 0f)
-                .setLineWidth(32f)
-                .build()
-        // linha verde
-        // progresso feito
-
-        val series1IndexBronze = arcViewBronze.addSeries(seriesItem1Bronze)
-        arcViewBronze.addEvent(DecoEvent.Builder(0F).setIndex(series1IndexBronze).setDelay(10).build())
-        arcViewBronze.addEvent(DecoEvent.Builder(75F).setIndex(series1IndexBronze).setDelay(10).build())
-    }
-
     private fun setupMedal() {
-        arcViewMedal.configureAngles(300, 0) // formato e orientacão
+        arcViewMedal.configureAngles(300, 0)
 
         arcViewMedal.addSeries(
             SeriesItem.Builder(Color.argb(255, 218, 218, 218))
@@ -189,32 +130,110 @@ class GoalFragment : BaseFragment() {
                 .setLineWidth(32f)
                 .build()
         )
-        // linha cinza
-        // caminho total
 
         val seriesItem1 =
             SeriesItem.Builder(Color.argb(255, 64, 196, 0))
-                .setRange(0f, 100f, 0f)
+                .setRange(0f, goal?.medalValue!!, 0f)
                 .setLineWidth(32f)
                 .build()
-        // linha verde
-        // progresso feito
 
-        val series1Index = arcViewMedal.addSeries(seriesItem1)
-//        arcViewMedal.addEvent(DecoEvent.Builder(0F).setIndex(series1Index).setDelay(10).build())
-//        arcViewMedal.addEvent(DecoEvent.Builder(75F).setIndex(series1Index).setDelay(10).build())
+        series1IndexMedal = arcViewMedal.addSeries(seriesItem1)
+    }
 
-        goal_btn_inc.setOnClickListener {
-            cont += 10
+    private fun setupTrophyBronze() {
+        arcViewBronze.configureAngles(300, 0)
 
-            arcViewMedal.addEvent(DecoEvent.Builder(cont).setIndex(series1Index).setDelay(0).build())
+        arcViewBronze.addSeries(
+            SeriesItem.Builder(Color.argb(255, 218, 218, 218))
+                .setRange(0f, 100f, 100f)
+                .setInitialVisibility(true)
+                .setLineWidth(32f)
+                .build()
+        )
+
+        val seriesItem1Bronze =
+            SeriesItem.Builder(Color.argb(255, 64, 196, 0))
+                .setRange(0f, goal?.bronzeValue!!, 0f)
+                .setLineWidth(32f)
+                .build()
+
+        series1IndexBronze = arcViewBronze.addSeries(seriesItem1Bronze)
+    }
+
+    private fun setupTrophySilver() {
+        arcViewSilver.configureAngles(300, 0)
+
+        arcViewSilver.addSeries(
+            SeriesItem.Builder(Color.argb(255, 218, 218, 218))
+                .setRange(0f, 100f, 100f)
+                .setInitialVisibility(true)
+                .setLineWidth(32f)
+                .build()
+        )
+
+        val seriesItem1Silver =
+            SeriesItem.Builder(Color.argb(255, 64, 196, 0))
+                .setRange(goal?.bronzeValue!!, goal?.silverValue!!, goal?.bronzeValue!!)
+                .setLineWidth(32f)
+                .build()
+
+        series1IndexSilver = arcViewSilver.addSeries(seriesItem1Silver)
+    }
+
+    private fun setupTrophyGold() {
+        arcViewGold.configureAngles(300, 0)
+
+        arcViewGold.addSeries(
+            SeriesItem.Builder(Color.argb(255, 218, 218, 218))
+                .setRange(0f, 100f, 100f)
+                .setInitialVisibility(true)
+                .setLineWidth(32f)
+                .build()
+        )
+
+        val seriesItem1Gold =
+            SeriesItem.Builder(Color.argb(255, 64, 196, 0))
+                .setRange(goal?.silverValue!!, goal?.goldValue!!, goal?.silverValue!!)
+                .setLineWidth(32f)
+                .build()
+
+        series1IndexGold = arcViewGold.addSeries(seriesItem1Gold)
+    }
+
+    private fun setTrophiesValueInc() {
+        if (cont >= 0) {
+            when {
+                cont <= goal_trophy_bronze_text.text.toString().toFloat() -> setTrophyBronzeValue()
+                cont <= goal_trophy_silver_text.text.toString().toFloat() -> setTrophySilverValue()
+                cont <= goal_trophy_gold_text.text.toString().toFloat() -> setTrophyGoldValue()
+            }
         }
+    }
 
-        goal_btn_dec.setOnClickListener {
-            cont -= 10
-
-            arcViewMedal.addEvent(DecoEvent.Builder(cont).setIndex(series1Index).setDelay(0).build())
+    private fun setTrophiesValueDec() {
+        if (cont >= 0) {
+            when {
+                cont < goal_trophy_bronze_text.text.toString().toFloat() -> setTrophyBronzeValue()
+                cont < goal_trophy_silver_text.text.toString().toFloat() -> setTrophySilverValue()
+                cont < goal_trophy_gold_text.text.toString().toFloat() -> setTrophyGoldValue()
+            }
         }
+    }
+
+    private fun setTrophyBronzeValue() {
+        arcViewBronze.addEvent(DecoEvent.Builder(cont).setIndex(series1IndexBronze).build())
+    }
+
+    private fun setTrophySilverValue() {
+        arcViewSilver.addEvent(DecoEvent.Builder(cont).setIndex(series1IndexSilver).build())
+    }
+
+    private fun setTrophyGoldValue() {
+        arcViewGold.addEvent(DecoEvent.Builder(cont).setIndex(series1IndexGold).build())
+    }
+
+    private fun setMedalValue() {
+        arcViewMedal.addEvent(DecoEvent.Builder(cont).setIndex(series1IndexMedal).build())
     }
 
     private fun setItemsAdapter() {
@@ -273,8 +292,10 @@ class GoalFragment : BaseFragment() {
 
     private fun setupGoal() {
 
+        cont = goal?.actualValue!!
+
         goal_title.text = goal?.name
-        goal_inc_dec_total.text = goal?.medalValue.toString()
+        goal_inc_dec_total.text = cont.toString()//goal?.medalValue.toString()
         goal_total_total.setText(goal?.medalValue.toString())
 
         if (goal?.trophies!!) {
@@ -297,6 +318,29 @@ class GoalFragment : BaseFragment() {
             3 -> {
                 goal_cl_total.visibility = View.VISIBLE
             }
+        }
+
+        setupPreMedalOrTrophies()
+    }
+
+    private fun setupPreMedalOrTrophies() {
+        if (goal?.trophies!!) {
+            when {
+                goal?.actualValue!! <= goal?.bronzeValue!! -> {
+                    arcViewBronze.addEvent(DecoEvent.Builder(goal?.actualValue!!).setIndex(series1IndexBronze).build())
+                }
+                goal?.actualValue!! <= goal?.silverValue!! -> {
+                    arcViewBronze.addEvent(DecoEvent.Builder(100F).setIndex(series1IndexBronze).build())
+                    arcViewSilver.addEvent(DecoEvent.Builder(goal?.actualValue!!).setIndex(series1IndexSilver).build())
+                }
+                goal?.actualValue!! <= goal?.goldValue!! -> {
+                    arcViewBronze.addEvent(DecoEvent.Builder(100F).setIndex(series1IndexBronze).build())
+                    arcViewSilver.addEvent(DecoEvent.Builder(200F).setIndex(series1IndexSilver).build())
+                    arcViewGold.addEvent(DecoEvent.Builder(goal?.actualValue!!).setIndex(series1IndexGold).build())
+                }
+            }
+        } else {
+            arcViewMedal.addEvent(DecoEvent.Builder(goal?.actualValue!!).setIndex(series1IndexMedal).build())
         }
     }
 }
