@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.*
+import com.hookedonplay.decoviewlib.DecoView
 import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
 import com.rafaelfelipeac.domore.R
@@ -28,10 +29,18 @@ class GoalFragment : BaseFragment() {
 
     private var cont: Float = 0F
 
-    private var series1IndexBronze: Int = 0
-    private var series1IndexSilver: Int = 0
-    private var series1IndexGold: Int = 0
-    private var series1IndexMedal: Int = 0
+    private var seriesMedal: Int = 0
+    private var seriesBronze: Int = 0
+    private var seriesSilver: Int = 0
+    private var seriesGold: Int = 0
+
+    private var seriesItemMedal: SeriesItem? = null
+    private var seriesItemBronze: SeriesItem? = null
+    private var seriesItemSilver: SeriesItem? = null
+    private var seriesItemGold: SeriesItem? = null
+
+    private var durationAnimation = 75L
+    private var lineWidth = 32F
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,8 +94,8 @@ class GoalFragment : BaseFragment() {
             goal?.actualValue = cont
             goalDAO?.update(goal!!)
 
-            if (goal_trophies.visibility == View.INVISIBLE) {
-                setMedalValue()
+            if (!goal?.trophies!!) {
+                setMedalValueIncDec()
             } else {
                 setTrophiesValueInc()
             }
@@ -99,8 +108,8 @@ class GoalFragment : BaseFragment() {
             goal?.actualValue = cont
             goalDAO?.update(goal!!)
 
-            if (goal_trophies.visibility == View.INVISIBLE) {
-                setMedalValue()
+            if (!goal?.trophies!!) {
+                setMedalValueIncDec()
             } else {
                 setTrophiesValueDec()
             }
@@ -120,147 +129,7 @@ class GoalFragment : BaseFragment() {
         setItemsAdapter()
     }
 
-    private fun setupMedal() {
-        arcViewMedal.configureAngles(300, 0)
-
-        arcViewMedal.addSeries(
-            SeriesItem.Builder(Color.argb(255, 218, 218, 218))
-                .setRange(0f, 100f, 100f)
-                .setInitialVisibility(true)
-                .setLineWidth(32f)
-                .build()
-        )
-
-        val seriesItem1 =
-            SeriesItem.Builder(Color.argb(255, 64, 196, 0))
-                .setRange(0f, goal?.medalValue!!, 0f)
-                .setLineWidth(32f)
-                .build()
-
-        series1IndexMedal = arcViewMedal.addSeries(seriesItem1)
-    }
-
-    private fun setupTrophyBronze() {
-        arcViewBronze.configureAngles(300, 0)
-
-        arcViewBronze.addSeries(
-            SeriesItem.Builder(Color.argb(255, 218, 218, 218))
-                .setRange(0f, 100f, 100f)
-                .setInitialVisibility(true)
-                .setLineWidth(32f)
-                .build()
-        )
-
-        val seriesItem1Bronze =
-            SeriesItem.Builder(Color.argb(255, 64, 196, 0))
-                .setRange(0f, goal?.bronzeValue!!, 0f)
-                .setLineWidth(32f)
-                .build()
-
-        series1IndexBronze = arcViewBronze.addSeries(seriesItem1Bronze)
-    }
-
-    private fun setupTrophySilver() {
-        arcViewSilver.configureAngles(300, 0)
-
-        arcViewSilver.addSeries(
-            SeriesItem.Builder(Color.argb(255, 218, 218, 218))
-                .setRange(0f, 100f, 100f)
-                .setInitialVisibility(true)
-                .setLineWidth(32f)
-                .build()
-        )
-
-        val seriesItem1Silver =
-            SeriesItem.Builder(Color.argb(255, 64, 196, 0))
-                .setRange(goal?.bronzeValue!!, goal?.silverValue!!, goal?.bronzeValue!!)
-                .setLineWidth(32f)
-                .build()
-
-        series1IndexSilver = arcViewSilver.addSeries(seriesItem1Silver)
-    }
-
-    private fun setupTrophyGold() {
-        arcViewGold.configureAngles(300, 0)
-
-        arcViewGold.addSeries(
-            SeriesItem.Builder(Color.argb(255, 218, 218, 218))
-                .setRange(0f, 100f, 100f)
-                .setInitialVisibility(true)
-                .setLineWidth(32f)
-                .build()
-        )
-
-        val seriesItem1Gold =
-            SeriesItem.Builder(Color.argb(255, 64, 196, 0))
-                .setRange(goal?.silverValue!!, goal?.goldValue!!, goal?.silverValue!!)
-                .setLineWidth(32f)
-                .build()
-
-        series1IndexGold = arcViewGold.addSeries(seriesItem1Gold)
-    }
-
-    private fun setTrophiesValueInc() {
-        if (cont >= 0) {
-            when {
-                cont <= goal_trophy_bronze_text.text.toString().toFloat() -> setTrophyBronzeValue()
-                cont <= goal_trophy_silver_text.text.toString().toFloat() -> setTrophySilverValue()
-                cont <= goal_trophy_gold_text.text.toString().toFloat() -> setTrophyGoldValue()
-            }
-        }
-    }
-
-    private fun setTrophiesValueDec() {
-        if (cont >= 0) {
-            when {
-                cont < goal_trophy_bronze_text.text.toString().toFloat() -> setTrophyBronzeValue()
-                cont < goal_trophy_silver_text.text.toString().toFloat() -> setTrophySilverValue()
-                cont < goal_trophy_gold_text.text.toString().toFloat() -> setTrophyGoldValue()
-            }
-        }
-    }
-
-    private fun setTrophyBronzeValue() {
-        arcViewBronze.addEvent(DecoEvent.Builder(cont).setIndex(series1IndexBronze).build())
-    }
-
-    private fun setTrophySilverValue() {
-        arcViewSilver.addEvent(DecoEvent.Builder(cont).setIndex(series1IndexSilver).build())
-    }
-
-    private fun setTrophyGoldValue() {
-        arcViewGold.addEvent(DecoEvent.Builder(cont).setIndex(series1IndexGold).build())
-    }
-
-    private fun setMedalValue() {
-        arcViewMedal.addEvent(DecoEvent.Builder(cont).setIndex(series1IndexMedal).build())
-    }
-
-    private fun setItemsAdapter() {
-        val itemsList = itemDAO?.getAll()
-        val orderItemsList =
-            itemsList?.filter { !it.done && it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
-
-        itemsAdapter.setItems(orderItemsList!!)
-
-        itemsAdapter.clickListener = {
-            navController.navigate(R.id.action_goalFragment_to_itemFragment)
-        }
-
-        goal_items_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-        val swipeAndDragHelper = SwipeAndDragHelperItem(itemsAdapter)
-        val touchHelper = ItemTouchHelper(swipeAndDragHelper)
-
-        itemsAdapter.setTouchHelper(touchHelper)
-
-        goal_items_list.adapter = itemsAdapter
-
-        touchHelper.attachToRecyclerView(goal_items_list)
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-
         if (goal?.type == 1) {
             inflater?.inflate(R.menu.menu_add, menu)
         }
@@ -291,7 +160,6 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun setupGoal() {
-
         cont = goal?.actualValue!!
 
         goal_title.text = goal?.name
@@ -305,6 +173,8 @@ class GoalFragment : BaseFragment() {
             goal_trophy_bronze_text.text = goal?.bronzeValue.toString()
             goal_trophy_silver_text.text = goal?.silverValue.toString()
             goal_trophy_gold_text.text = goal?.goldValue.toString()
+        } else {
+            goal_medal_text.text = goal?.medalValue.toString()
         }
 
         when (goal?.type) {
@@ -323,24 +193,181 @@ class GoalFragment : BaseFragment() {
         setupPreMedalOrTrophies()
     }
 
+    private fun setItemsAdapter() {
+        val itemsList = itemDAO?.getAll()
+        val orderItemsList =
+            itemsList?.filter { !it.done && it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
+
+        itemsAdapter.setItems(orderItemsList!!)
+
+        itemsAdapter.clickListener = {
+            navController.navigate(R.id.action_goalFragment_to_itemFragment)
+        }
+
+        goal_items_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        val swipeAndDragHelper = SwipeAndDragHelperItem(itemsAdapter)
+        val touchHelper = ItemTouchHelper(swipeAndDragHelper)
+
+        itemsAdapter.setTouchHelper(touchHelper)
+
+        goal_items_list.adapter = itemsAdapter
+
+        touchHelper.attachToRecyclerView(goal_items_list)
+    }
+
     private fun setupPreMedalOrTrophies() {
         if (goal?.trophies!!) {
             when {
+                goal?.actualValue!! == 0F -> {
+                    setupTrophyBronze()
+                }
                 goal?.actualValue!! <= goal?.bronzeValue!! -> {
-                    arcViewBronze.addEvent(DecoEvent.Builder(goal?.actualValue!!).setIndex(series1IndexBronze).build())
+                    setupArcView(arcViewBronze, goal?.actualValue!!, seriesBronze)
                 }
                 goal?.actualValue!! <= goal?.silverValue!! -> {
-                    arcViewBronze.addEvent(DecoEvent.Builder(100F).setIndex(series1IndexBronze).build())
-                    arcViewSilver.addEvent(DecoEvent.Builder(goal?.actualValue!!).setIndex(series1IndexSilver).build())
+                    setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
+                    setupArcView(arcViewSilver, goal?.actualValue!!, seriesSilver)
                 }
                 goal?.actualValue!! <= goal?.goldValue!! -> {
-                    arcViewBronze.addEvent(DecoEvent.Builder(100F).setIndex(series1IndexBronze).build())
-                    arcViewSilver.addEvent(DecoEvent.Builder(200F).setIndex(series1IndexSilver).build())
-                    arcViewGold.addEvent(DecoEvent.Builder(goal?.actualValue!!).setIndex(series1IndexGold).build())
+                    setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
+                    setupArcView(arcViewSilver, goal?.silverValue!!, seriesSilver)
+                    setupArcView(arcViewGold, goal?.actualValue!!, seriesGold)
+                }
+                else -> {
+                    setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
+                    setupArcView(arcViewSilver, goal?.silverValue!!, seriesSilver)
+                    setupArcView(arcViewGold, goal?.goldValue!!, seriesGold)
                 }
             }
         } else {
-            arcViewMedal.addEvent(DecoEvent.Builder(goal?.actualValue!!).setIndex(series1IndexMedal).build())
+            when {
+                goal?.actualValue!! == 0F -> {
+                    setupMedal()
+                }
+                goal?.actualValue!! <= goal?.medalValue!! -> {
+                    setupArcView(arcViewMedal, goal?.actualValue!!, seriesMedal)
+                }
+                else -> {
+                    setupArcView(arcViewMedal, goal?.medalValue!!, seriesMedal)
+                }
+            }
         }
+    }
+
+    private fun setupMedal() {
+        arcViewMedal.configureAngles(300, 0)
+
+        setupArcViewBuilder(arcViewMedal)
+
+        seriesItemMedal = setupSeriesItemBuilder(0F, goal?.medalValue!!, 0F, false)
+
+        seriesMedal = arcViewMedal.addSeries(seriesItemMedal!!)
+    }
+
+    private fun setupTrophyBronze() {
+        arcViewBronze.configureAngles(300, 0)
+
+        setupArcViewBuilder(arcViewBronze)
+
+        seriesItemBronze = setupSeriesItemBuilder(0F, goal?.bronzeValue!!, 0F, false)
+
+        seriesBronze = arcViewBronze.addSeries(seriesItemBronze!!)
+    }
+
+    private fun setupTrophySilver() {
+        arcViewSilver.configureAngles(300, 0)
+
+        setupArcViewBuilder(arcViewSilver)
+
+        seriesItemSilver = setupSeriesItemBuilder(goal?.bronzeValue!!, goal?.silverValue!!, goal?.bronzeValue!!, false)
+
+        seriesSilver = arcViewSilver.addSeries(seriesItemSilver!!)
+    }
+
+    private fun setupTrophyGold() {
+        arcViewGold.configureAngles(300, 0)
+
+        setupArcViewBuilder(arcViewGold)
+
+        seriesItemGold = setupSeriesItemBuilder(goal?.silverValue!!, goal?.goldValue!!, goal?.silverValue!!, false)
+
+        seriesGold = arcViewGold.addSeries(seriesItemGold!!)
+    }
+
+    private fun setMedalValueIncDec() {
+        if (cont > 0 && cont <= goal?.medalValue!!) {
+            setMedalValue()
+        } else if (cont == 0F) {
+            setupMedal()
+        }
+    }
+
+    private fun setTrophiesValueInc() {
+        if (cont > 0) {
+            when {
+                cont <= goal_trophy_bronze_text.text.toString().toFloat() -> setTrophyBronzeValue()
+                cont <= goal_trophy_silver_text.text.toString().toFloat() -> setTrophySilverValue()
+                cont <= goal_trophy_gold_text.text.toString().toFloat() -> setTrophyGoldValue()
+            }
+        } else if (cont == 0F) {
+            setupTrophyBronze()
+        }
+    }
+
+    private fun setTrophiesValueDec() {
+        if (cont > 0) {
+            when {
+                cont <= goal_trophy_bronze_text.text.toString().toFloat() -> {
+                    setTrophyBronzeValue()
+
+                    setupTrophySilver()
+                }
+                cont <= goal_trophy_silver_text.text.toString().toFloat() -> {
+                    setTrophySilverValue()
+
+                    setupTrophyGold()
+                }
+                cont <= goal_trophy_gold_text.text.toString().toFloat() -> setTrophyGoldValue()
+            }
+        } else if (cont == 0F) {
+            setupTrophyBronze()
+        }
+    }
+
+    private fun setTrophyBronzeValue() = setupArcView(arcViewBronze, cont, seriesBronze)
+
+    private fun setTrophySilverValue() = setupArcView(arcViewSilver, cont, seriesSilver)
+
+    private fun setTrophyGoldValue() = setupArcView(arcViewGold, cont, seriesGold)
+
+    private fun setMedalValue() = setupArcView(arcViewMedal, cont, seriesMedal)
+
+    private fun setupArcViewBuilder(arcView: DecoView) {
+        arcView.addSeries(
+            SeriesItem.Builder(Color.argb(255, 218, 218, 218))
+                .setRange(0F, 100F, 100F)
+                .setInitialVisibility(true)
+                .setLineWidth(lineWidth)
+                .build()
+        )
+    }
+
+    private fun setupSeriesItemBuilder(minValue: Float, maxValue: Float, initialValue: Float, visibility: Boolean): SeriesItem {
+        return SeriesItem.Builder(Color.argb(255, 64, 196, 0))
+            .setRange(minValue, maxValue, initialValue)
+            .setInitialVisibility(visibility)
+            .setLineWidth(lineWidth)
+            .build()
+
+    }
+
+    private fun setupArcView(arcView: DecoView, value: Float, index: Int) {
+        arcView.addEvent(
+            DecoEvent.Builder(value)
+                .setIndex(index)
+                .setDuration(durationAnimation)
+                .build()
+        )
     }
 }

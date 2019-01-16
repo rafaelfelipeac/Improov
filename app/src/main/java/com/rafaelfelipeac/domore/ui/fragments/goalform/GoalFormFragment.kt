@@ -172,7 +172,7 @@ class GoalFormFragment : BaseFragment() {
             goal?.silverValue = form_goal_editText_silver.text.toString().toFloat()
             goal?.goldValue = form_goal_editText_gold.text.toString().toFloat()
         } else {
-            goal?.medalValue = form_goal_medal_text.toString().toFloat()
+            goal?.medalValue = form_goal_editText_medal.text.toString().toFloat()
         }
 
         return goal!!
