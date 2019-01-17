@@ -196,6 +196,8 @@ class GoalFormFragment : BaseFragment() {
             form_goal_editText_gold.setText(goal?.goldValue.toString())
 
             form_goal_switch_trophies.isChecked = true
+        } else {
+            form_goal_editText_medal.setText(goal?.medalValue.toString())
         }
 
         goalForm_goal_name.setText(goal?.name)
