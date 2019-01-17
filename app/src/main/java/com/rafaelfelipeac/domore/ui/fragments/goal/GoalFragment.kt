@@ -1,12 +1,13 @@
 package com.rafaelfelipeac.domore.ui.fragments.goal
 
-import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.*
+import android.widget.ImageView
 import com.hookedonplay.decoviewlib.DecoView
 import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
@@ -91,34 +92,23 @@ class GoalFragment : BaseFragment() {
             cont += 10
 
             goal_inc_dec_total.text = cont.toString()
-            goal?.actualValue = cont
-            goalDAO?.update(goal!!)
 
-            if (!goal?.trophies!!) {
-                setMedalValueIncDec()
-            } else {
-                setTrophiesValueInc()
-            }
+            saveAndUpdateGoal()
         }
 
         goal_btn_dec.setOnClickListener {
             cont -= 10
 
             goal_inc_dec_total.text = cont.toString()
-            goal?.actualValue = cont
-            goalDAO?.update(goal!!)
 
-            if (!goal?.trophies!!) {
-                setMedalValueIncDec()
-            } else {
-                setTrophiesValueDec()
-            }
+            saveAndUpdateGoal()
         }
 
         goal_btn_save.setOnClickListener {
             if (goal_total_total.text.isNotEmpty()) {
-                goal?.medalValue = goal_total_total.text.toString().toFloat()
-                goalDAO?.update(goal!!)
+                cont = goal_total_total.text.toString().toFloat()
+
+                saveAndUpdateGoal()
 
                 Snackbar
                     .make(view, "Valor atualizado.", Snackbar.LENGTH_LONG)
@@ -163,7 +153,7 @@ class GoalFragment : BaseFragment() {
         cont = goal?.actualValue!!
 
         goal_title.text = goal?.name
-        goal_inc_dec_total.text = cont.toString()//goal?.medalValue.toString()
+        goal_inc_dec_total.text = cont.toString()
         goal_total_total.setText(goal?.medalValue.toString())
 
         if (goal?.trophies!!) {
@@ -216,7 +206,20 @@ class GoalFragment : BaseFragment() {
         touchHelper.attachToRecyclerView(goal_items_list)
     }
 
+    private fun saveAndUpdateGoal() {
+        goal?.actualValue = cont
+        goalDAO?.update(goal!!)
+
+        if (!goal?.trophies!!) {
+            setMedalValueF()
+        } else {
+            setTrophiesValue()
+        }
+    }
+
     private fun setupPreMedalOrTrophies() {
+        if (cont < 0) return
+
         if (goal?.trophies!!) {
             when {
                 goal?.actualValue!! == 0F -> {
@@ -228,16 +231,25 @@ class GoalFragment : BaseFragment() {
                 goal?.actualValue!! <= goal?.silverValue!! -> {
                     setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
                     setupArcView(arcViewSilver, goal?.actualValue!!, seriesSilver)
+
+                    changeIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
                 }
                 goal?.actualValue!! <= goal?.goldValue!! -> {
                     setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
                     setupArcView(arcViewSilver, goal?.silverValue!!, seriesSilver)
                     setupArcView(arcViewGold, goal?.actualValue!!, seriesGold)
+
+                    changeIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
+                    changeIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
                 }
                 else -> {
                     setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
                     setupArcView(arcViewSilver, goal?.silverValue!!, seriesSilver)
                     setupArcView(arcViewGold, goal?.goldValue!!, seriesGold)
+
+                    changeIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
+                    changeIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
+                    changeIcon(goal_trophy_gold_image, R.mipmap.ic_trophy_gold, R.mipmap.ic_trophy_gold_dark)
                 }
             }
         } else {
@@ -295,43 +307,65 @@ class GoalFragment : BaseFragment() {
         seriesGold = arcViewGold.addSeries(seriesItemGold!!)
     }
 
-    private fun setMedalValueIncDec() {
+    private fun setMedalValueF() {
         if (cont > 0 && cont <= goal?.medalValue!!) {
             setMedalValue()
+        } else if (cont > goal?.medalValue!!) {
+            setupPreMedalOrTrophies()
         } else if (cont == 0F) {
             setupMedal()
         }
     }
 
-    private fun setTrophiesValueInc() {
+    private fun setTrophiesValue() {
         if (cont > 0) {
-            when {
-                cont <= goal_trophy_bronze_text.text.toString().toFloat() -> setTrophyBronzeValue()
-                cont <= goal_trophy_silver_text.text.toString().toFloat() -> setTrophySilverValue()
-                cont <= goal_trophy_gold_text.text.toString().toFloat() -> setTrophyGoldValue()
+            if (cont < goal?.bronzeValue!!) {
+                changeIconDark(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark, true)
             }
-        } else if (cont == 0F) {
-            setupTrophyBronze()
-        }
-    }
+            if (cont < goal?.silverValue!!) {
+                changeIconDark(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark, true)
+            }
+            if (cont < goal?.goldValue!!) {
+                changeIconDark(goal_trophy_gold_image, R.mipmap.ic_trophy_gold, R.mipmap.ic_trophy_gold_dark, true)
+            }
 
-    private fun setTrophiesValueDec() {
-        if (cont > 0) {
             when {
-                cont <= goal_trophy_bronze_text.text.toString().toFloat() -> {
+                cont <= goal?.bronzeValue!! -> {
                     setTrophyBronzeValue()
 
-                    setupTrophySilver()
+                    if (cont == goal?.bronzeValue!!)
+                        changeIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
+
+                    if (cont < goal?.silverValue!!)
+                        setupTrophySilver()
                 }
-                cont <= goal_trophy_silver_text.text.toString().toFloat() -> {
+                cont <= goal?.silverValue!! -> {
                     setTrophySilverValue()
 
-                    setupTrophyGold()
+                    if (cont == goal?.silverValue!!)
+                        changeIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
+
+                    if (cont < goal?.goldValue!!)
+                        setupTrophyGold()
                 }
-                cont <= goal_trophy_gold_text.text.toString().toFloat() -> setTrophyGoldValue()
+                cont <= goal?.goldValue!! -> {
+                    setTrophyGoldValue()
+
+                    if (cont == goal?.goldValue!!)
+                        changeIcon(goal_trophy_gold_image, R.mipmap.ic_trophy_gold, R.mipmap.ic_trophy_gold_dark)
+                }
+                cont >= goal?.goldValue!! -> {
+                    setupPreMedalOrTrophies()
+
+                    changeIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
+                    changeIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
+                    changeIcon(goal_trophy_gold_image, R.mipmap.ic_trophy_gold, R.mipmap.ic_trophy_gold_dark)
+                }
             }
         } else if (cont == 0F) {
             setupTrophyBronze()
+            setupTrophySilver()
+            setupTrophyGold()
         }
     }
 
@@ -345,21 +379,20 @@ class GoalFragment : BaseFragment() {
 
     private fun setupArcViewBuilder(arcView: DecoView) {
         arcView.addSeries(
-            SeriesItem.Builder(Color.argb(255, 218, 218, 218))
+            SeriesItem.Builder(ContextCompat.getColor(context!!, R.color.colorPrimaryAnother))
                 .setRange(0F, 100F, 100F)
                 .setInitialVisibility(true)
-                .setLineWidth(lineWidth)
+                .setLineWidth(lineWidth + 4F)
                 .build()
         )
     }
 
     private fun setupSeriesItemBuilder(minValue: Float, maxValue: Float, initialValue: Float, visibility: Boolean): SeriesItem {
-        return SeriesItem.Builder(Color.argb(255, 64, 196, 0))
+        return SeriesItem.Builder(ContextCompat.getColor(context!!, R.color.colorPrimary))
             .setRange(minValue, maxValue, initialValue)
             .setInitialVisibility(visibility)
             .setLineWidth(lineWidth)
             .build()
-
     }
 
     private fun setupArcView(arcView: DecoView, value: Float, index: Int) {
@@ -369,5 +402,19 @@ class GoalFragment : BaseFragment() {
                 .setDuration(durationAnimation)
                 .build()
         )
+    }
+
+    private fun changeIconDark(image: ImageView, iconNormal: Int, iconDark: Int, dark: Boolean) {
+        if (dark)
+            image.background = ContextCompat.getDrawable(context!!, iconDark)
+        else
+            image.background = ContextCompat.getDrawable(context!!, iconNormal)
+    }
+
+    private fun changeIcon(image: ImageView, iconNormal: Int, iconDark: Int) {
+        if (image.background == ContextCompat.getDrawable(context!!, iconNormal))
+            image.background = ContextCompat.getDrawable(context!!, iconDark)
+        else
+            image.background = ContextCompat.getDrawable(context!!, iconNormal)
     }
 }
