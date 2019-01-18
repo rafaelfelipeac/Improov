@@ -153,8 +153,6 @@ class GoalFragment : BaseFragment() {
         cont = goal?.actualValue!!
 
         goal_title.text = goal?.name
-        goal_inc_dec_total.text = cont.toString()
-        goal_total_total.setText(goal?.medalValue.toString())
 
         if (goal?.trophies!!) {
             goal_medal.visibility = View.INVISIBLE
@@ -174,9 +172,11 @@ class GoalFragment : BaseFragment() {
             }
             2 -> {
                 goal_cl_dec_inc.visibility = View.VISIBLE
+                goal_inc_dec_total.text = cont.toString()
             }
             3 -> {
                 goal_cl_total.visibility = View.VISIBLE
+                goal_total_total.setText(goal?.actualValue.toString())
             }
         }
 
@@ -234,9 +234,14 @@ class GoalFragment : BaseFragment() {
             }
             goal?.actualValue!! <= goal?.medalValue!! -> {
                 setupArcView(arcViewMedal, goal?.actualValue!!, seriesMedal)
+
+                if (goal?.actualValue!! == goal?.medalValue!!)
+                    changeMedalOrTrophyIcon(goal_medal_image, R.mipmap.ic_medal, R.mipmap.ic_medal_dark)
             }
             else -> {
                 setupArcView(arcViewMedal, goal?.medalValue!!, seriesMedal)
+
+                changeMedalOrTrophyIconDark(goal_medal_image, R.mipmap.ic_medal, R.mipmap.ic_medal_dark, false)
             }
         }
     }
@@ -253,24 +258,24 @@ class GoalFragment : BaseFragment() {
                 setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
                 setupArcView(arcViewSilver, goal?.actualValue!!, seriesSilver)
 
-                changeTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
+                changeMedalOrTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
             }
             goal?.actualValue!! <= goal?.goldValue!! -> {
                 setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
                 setupArcView(arcViewSilver, goal?.silverValue!!, seriesSilver)
                 setupArcView(arcViewGold, goal?.actualValue!!, seriesGold)
 
-                changeTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
-                changeTrophyIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
+                changeMedalOrTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
+                changeMedalOrTrophyIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
             }
             else -> {
                 setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
                 setupArcView(arcViewSilver, goal?.silverValue!!, seriesSilver)
                 setupArcView(arcViewGold, goal?.goldValue!!, seriesGold)
 
-                changeTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
-                changeTrophyIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
-                changeTrophyIcon(goal_trophy_gold_image, R.mipmap.ic_trophy_gold, R.mipmap.ic_trophy_gold_dark)
+                changeMedalOrTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
+                changeMedalOrTrophyIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
+                changeMedalOrTrophyIcon(goal_trophy_gold_image, R.mipmap.ic_trophy_gold, R.mipmap.ic_trophy_gold_dark)
             }
         }
     }
@@ -288,6 +293,11 @@ class GoalFragment : BaseFragment() {
     private fun medalSituations() {
         if (cont > 0 && cont <= goal?.medalValue!!) {
             setMedalValue()
+
+            if (cont == goal?.medalValue!!)
+                changeMedalOrTrophyIcon(goal_medal_image, R.mipmap.ic_medal, R.mipmap.ic_medal_dark)
+            else
+                changeMedalOrTrophyIconDark(goal_medal_image, R.mipmap.ic_medal, R.mipmap.ic_medal_dark, true)
         } else if (cont > goal?.medalValue!!) {
             medalOrTrophies()
         } else if (cont == 0F) {
@@ -305,7 +315,7 @@ class GoalFragment : BaseFragment() {
                 setTrophyBronzeValue()
 
                 if (cont == goal?.bronzeValue!!)
-                    changeTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
+                    changeMedalOrTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
 
                 if (cont < goal?.silverValue!!)
                     resetTrophySilver()
@@ -313,7 +323,7 @@ class GoalFragment : BaseFragment() {
                 setTrophySilverValue()
 
                 if (cont == goal?.silverValue!!)
-                    changeTrophyIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
+                    changeMedalOrTrophyIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
 
                 if (cont < goal?.goldValue!!)
                     resetTrophyGold()
@@ -321,7 +331,7 @@ class GoalFragment : BaseFragment() {
                 setTrophyGoldValue()
 
                 if (cont == goal?.goldValue!!)
-                    changeTrophyIcon(goal_trophy_gold_image, R.mipmap.ic_trophy_gold, R.mipmap.ic_trophy_gold_dark)
+                    changeMedalOrTrophyIcon(goal_trophy_gold_image, R.mipmap.ic_trophy_gold, R.mipmap.ic_trophy_gold_dark)
             }
         }
     }
@@ -398,33 +408,33 @@ class GoalFragment : BaseFragment() {
 
     private fun changeIconsDark() {
         if (cont < goal?.bronzeValue!!)
-            changeTrophyIconDark(
+            changeMedalOrTrophyIconDark(
                 goal_trophy_bronze_image,
                 R.mipmap.ic_trophy_bronze,
                 R.mipmap.ic_trophy_bronze_dark,
                 true)
         if (cont < goal?.silverValue!!)
-            changeTrophyIconDark(
+            changeMedalOrTrophyIconDark(
                 goal_trophy_silver_image,
                 R.mipmap.ic_trophy_silver,
                 R.mipmap.ic_trophy_silver_dark,
                 true)
         if (cont < goal?.goldValue!!)
-            changeTrophyIconDark(
+            changeMedalOrTrophyIconDark(
                 goal_trophy_gold_image,
                 R.mipmap.ic_trophy_gold,
                 R.mipmap.ic_trophy_gold_dark,
                 true)
     }
 
-    private fun changeTrophyIconDark(image: ImageView, iconNormal: Int, iconDark: Int, dark: Boolean) {
+    private fun changeMedalOrTrophyIconDark(image: ImageView, iconNormal: Int, iconDark: Int, dark: Boolean) {
         if (dark)
             image.background = ContextCompat.getDrawable(context!!, iconDark)
         else
             image.background = ContextCompat.getDrawable(context!!, iconNormal)
     }
 
-    private fun changeTrophyIcon(image: ImageView, iconNormal: Int, iconDark: Int) {
+    private fun changeMedalOrTrophyIcon(image: ImageView, iconNormal: Int, iconDark: Int) {
         if (image.background == ContextCompat.getDrawable(context!!, iconNormal))
             image.background = ContextCompat.getDrawable(context!!, iconDark)
         else
