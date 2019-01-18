@@ -26,6 +26,9 @@ class GoalFragment : BaseFragment() {
     @Inject
     lateinit var itemsAdapter: ItemsAdapter
 
+    @Inject
+    lateinit var itemsAdapterDone: ItemsAdapter
+
     var goal: Goal? = null
 
     private var cont: Float = 0F
@@ -188,22 +191,37 @@ class GoalFragment : BaseFragment() {
         val orderItemsList =
             itemsList?.filter { !it.done && it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
 
+        val orderItemsListDone =
+            itemsList?.filter { it.done && it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
+
         itemsAdapter.setItems(orderItemsList!!)
+        itemsAdapterDone.setItems(orderItemsListDone!!)
+
+        if (orderItemsListDone.isNotEmpty()) {
+            goal_items_list_done.visibility = View.VISIBLE
+        }
 
         itemsAdapter.clickListener = {
             navController.navigate(R.id.action_goalFragment_to_itemFragment)
         }
 
         goal_items_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        goal_items_list_done.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         val swipeAndDragHelper = SwipeAndDragHelperItem(itemsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
+        val swipeAndDragHelperDone = SwipeAndDragHelperItem(itemsAdapterDone)
+        val touchHelperDone = ItemTouchHelper(swipeAndDragHelperDone)
+
         itemsAdapter.setTouchHelper(touchHelper)
+        itemsAdapterDone.setTouchHelper(touchHelperDone)
 
         goal_items_list.adapter = itemsAdapter
+        goal_items_list_done.adapter = itemsAdapterDone
 
         touchHelper.attachToRecyclerView(goal_items_list)
+        touchHelperDone.attachToRecyclerView(goal_items_list_done)
     }
 
     private fun saveAndUpdateGoal() {
