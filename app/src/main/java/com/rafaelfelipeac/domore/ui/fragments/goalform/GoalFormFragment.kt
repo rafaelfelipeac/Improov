@@ -78,17 +78,23 @@ class GoalFormFragment : BaseFragment() {
                 switchTotalIncDec.isChecked = false
                 switchTotalValor.isChecked = false
 
+                goalForm_goal_inc_dev.visibility = View.GONE
+
                 goalType = 1
             }
             switchTotalIncDec -> {
                 switchLista.isChecked = false
                 switchTotalValor.isChecked = false
 
+                goalForm_goal_inc_dev.visibility = View.VISIBLE
+
                 goalType = 2
             }
             switchTotalValor -> {
                 switchLista.isChecked = false
                 switchTotalIncDec.isChecked = false
+
+                goalForm_goal_inc_dev.visibility = View.GONE
 
                 goalType = 3
             }
@@ -142,7 +148,8 @@ class GoalFormFragment : BaseFragment() {
             medalValue =
                 if (form_goal_editText_medal.text!!.isNotEmpty()) form_goal_editText_medal.text.toString().toFloat()
                 else 100F,
-            actualValue = 0F,
+            finalValue = goalForm_goal_final_value.text.toString().toFloat(),
+            value = 0F,
             initialDate = "",
             finalDate = "",
             type = goalType,
@@ -159,13 +166,25 @@ class GoalFormFragment : BaseFragment() {
                 else 100F,
             goldValue =
                 if (form_goal_editText_gold.text!!.isNotEmpty()) form_goal_editText_gold.text.toString().toFloat()
-                else 100F)
+                else 100F,
+            incrementValue =
+                if (goalForm_goal_inc_value!!.text!!.isNotEmpty()) goalForm_goal_inc_value.text.toString().toFloat()
+                else 0F,
+            decrementValue =
+                if (goalForm_goal_dec_value!!.text!!.isNotEmpty()) goalForm_goal_dec_value.text.toString().toFloat()
+                else 0F)
     }
 
     private fun getUpdateGoal() : Goal {
         goal?.name = goalForm_goal_name.text.toString()
         goal?.trophies = form_goal_switch_trophies.isChecked
         goal?.type = getType()
+        goal?.finalValue = goalForm_goal_final_value.text.toString().toFloat()
+
+        if (getType() == 2) {
+            goal?.incrementValue = goalForm_goal_inc_value.text.toString().toFloat()
+            goal?.decrementValue = goalForm_goal_dec_value.text.toString().toFloat()
+        }
 
         if (goal?.trophies!!) {
             goal?.bronzeValue = form_goal_editText_bronze.text.toString().toFloat()
@@ -201,10 +220,18 @@ class GoalFormFragment : BaseFragment() {
         }
 
         goalForm_goal_name.setText(goal?.name)
+        goalForm_goal_final_value.setText(goal?.finalValue.toString())
 
         when(goal?.type) {
             1 -> {switchLista.isChecked = true}
-            2 -> {switchTotalIncDec.isChecked = true}
+            2 -> {
+                switchTotalIncDec.isChecked = true
+
+                goalForm_goal_inc_dev.visibility = View.VISIBLE
+
+                goalForm_goal_inc_value.setText(goal?.incrementValue!!.toString())
+                goalForm_goal_dec_value.setText(goal?.decrementValue!!.toString())
+            }
             3 -> {switchTotalValor.isChecked = true}
         }
     }

@@ -3,6 +3,7 @@ package com.rafaelfelipeac.domore.ui.adapter
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
@@ -12,10 +13,10 @@ import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.app.App
 import com.rafaelfelipeac.domore.models.Item
 import com.rafaelfelipeac.domore.ui.base.BaseAdapter
+import com.rafaelfelipeac.domore.ui.fragments.goal.GoalFragment
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
-import javax.inject.Inject
 
-class ItemsAdapter @Inject constructor() : BaseAdapter<Item>(), SwipeAndDragHelperItem.ActionCompletionContract {
+class ItemsAdapter(val fragment: Fragment) : BaseAdapter<Item>(), SwipeAndDragHelperItem.ActionCompletionContract {
 
     var clickListener: (book: Item) -> Unit = { }
     private var touchHelper: ItemTouchHelper? = null
@@ -65,20 +66,44 @@ class ItemsAdapter @Inject constructor() : BaseAdapter<Item>(), SwipeAndDragHelp
         notifyItemRemoved(position)
 
         when(direction) {
-            ItemTouchHelper.RIGHT -> { // done
-                item.done = true
-                itemDAO?.update(item)
+            ItemTouchHelper.RIGHT -> { // done/undone
+                if (!item.done) { // done
+                    item.done = true
+                    itemDAO?.update(item)
 
-                Snackbar
-                    .make(holder.itemView, "Item resolvido.", Snackbar.LENGTH_LONG)
-                    .setAction("DESFAZER") {
-                        this.items.add(position, item)
-                        item.done = false
-                        itemDAO?.update(item)
-                        notifyItemInserted(position)
-                    }
-                    .setActionTextColor(Color.WHITE)
-                    .show()
+                    (fragment as GoalFragment).scoreFromList(true)
+
+                    Snackbar
+                        .make(holder.itemView, "Item voltou.", Snackbar.LENGTH_LONG)
+                        .setAction("DESFAZER") {
+                            this.items.add(position, item)
+                            item.done = false
+                            itemDAO?.update(item)
+                            notifyItemInserted(position)
+
+                            fragment.scoreFromList(false)
+                        }
+                        .setActionTextColor(Color.WHITE)
+                        .show()
+                } else { // undone
+                    item.done = false
+                    itemDAO?.update(item)
+
+                    (fragment as GoalFragment).scoreFromList(false)
+
+                    Snackbar
+                        .make(holder.itemView, "Item resolvido.", Snackbar.LENGTH_LONG)
+                        .setAction("DESFAZER") {
+                            this.items.add(position, item)
+                            item.done = true
+                            itemDAO?.update(item)
+                            notifyItemInserted(position)
+
+                            fragment.scoreFromList(true)
+                        }
+                        .setActionTextColor(Color.WHITE)
+                        .show()
+                }
             }
             ItemTouchHelper.LEFT -> { // delete
                 itemDAO?.delete(item)

@@ -19,19 +19,16 @@ import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_goal.*
-import javax.inject.Inject
 
 class GoalFragment : BaseFragment() {
 
-    @Inject
-    lateinit var itemsAdapter: ItemsAdapter
 
-    @Inject
-    lateinit var itemsAdapterDone: ItemsAdapter
+    private var itemsAdapter = ItemsAdapter(this)
+    private var itemsAdapterDone = ItemsAdapter(this)
 
     var goal: Goal? = null
 
-    private var cont: Float = 0F
+    private var count: Float = 0F
 
     private var seriesMedal: Int = 0
     private var seriesBronze: Int = 0
@@ -92,34 +89,55 @@ class GoalFragment : BaseFragment() {
         }
 
         goal_btn_inc.setOnClickListener {
-            cont += 10
+            count += goal?.incrementValue!!
 
-            goal_inc_dec_total.text = cont.toString()
+            goal_count.text = String.format("%.2f", count)
 
             saveAndUpdateGoal()
         }
 
         goal_btn_dec.setOnClickListener {
-            cont -= 10
+            count -= goal?.decrementValue!!
 
-            goal_inc_dec_total.text = cont.toString()
+            goal_count.text = String.format("%.2f", count)
 
             saveAndUpdateGoal()
         }
 
         goal_btn_save.setOnClickListener {
             if (goal_total_total.text.isNotEmpty()) {
-                cont = goal_total_total.text.toString().toFloat()
+                count = goal?.value!! + goal_total_total.text.toString().toFloat()
+                goal_count.text = String.format("%.2f", count)
+                goal_total_total.setText("")
 
                 saveAndUpdateGoal()
 
                 Snackbar
-                    .make(view, "Valor atualizado.", Snackbar.LENGTH_LONG)
+                    .make(view, "Valor atualizado.", Snackbar.LENGTH_SHORT)
+                    .show()
+            } else {
+                Snackbar
+                    .make(view, "Valor inválido.", Snackbar.LENGTH_SHORT)
                     .show()
             }
         }
 
+        setItems()
+    }
+
+    private fun setItems() {
         setItemsAdapter()
+        setItemsDoneAdapter()
+    }
+
+    fun scoreFromList(done: Boolean) {
+        setItems()
+
+        if (done) count++ else count--
+
+        goal_count.text = String.format("%.2f", count)
+
+        saveAndUpdateGoal()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -153,9 +171,10 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun setupGoal() {
-        cont = goal?.actualValue!!
+        count = goal?.value!!
 
         goal_title.text = goal?.name
+        goal_count.text = String.format("%.2f", count)
 
         if (goal?.trophies!!) {
             goal_medal.visibility = View.INVISIBLE
@@ -171,15 +190,17 @@ class GoalFragment : BaseFragment() {
         when (goal?.type) {
             1 -> {
                 goal_items_list.visibility = View.VISIBLE
+                goal_textview_todo.visibility = View.VISIBLE
                 (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
             }
             2 -> {
                 goal_cl_dec_inc.visibility = View.VISIBLE
-                goal_inc_dec_total.text = cont.toString()
+                goal_inc_dec_total.text = count.toString()
             }
             3 -> {
                 goal_cl_total.visibility = View.VISIBLE
-                goal_total_total.setText(goal?.actualValue.toString())
+                //goal_count.text = goal?.value.toString()
+                goal_total_total.setText("")
             }
         }
 
@@ -188,44 +209,59 @@ class GoalFragment : BaseFragment() {
 
     private fun setItemsAdapter() {
         val itemsList = itemDAO?.getAll()
+
         val orderItemsList =
             itemsList?.filter { !it.done && it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
 
-        val orderItemsListDone =
-            itemsList?.filter { it.done && it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
-
         itemsAdapter.setItems(orderItemsList!!)
-        itemsAdapterDone.setItems(orderItemsListDone!!)
-
-        if (orderItemsListDone.isNotEmpty()) {
-            goal_items_list_done.visibility = View.VISIBLE
-        }
 
         itemsAdapter.clickListener = {
             navController.navigate(R.id.action_goalFragment_to_itemFragment)
         }
 
         goal_items_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        goal_items_list_done.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         val swipeAndDragHelper = SwipeAndDragHelperItem(itemsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
+        itemsAdapter.setTouchHelper(touchHelper)
+
+        goal_items_list.adapter = itemsAdapter
+
+        touchHelper.attachToRecyclerView(goal_items_list)
+    }
+
+    private fun setItemsDoneAdapter() {
+        val itemsList = itemDAO?.getAll()
+
+        val orderItemsListDone =
+            itemsList?.filter { it.done && it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
+
+        itemsAdapterDone.setItems(orderItemsListDone!!)
+
+        itemsAdapterDone.clickListener = {
+            navController.navigate(R.id.action_goalFragment_to_itemFragment)
+        }
+
+        if (orderItemsListDone.isNotEmpty()) {
+            goal_items_list_done.visibility = View.VISIBLE
+            goal_textview_done.visibility = View.VISIBLE
+        }
+
+        goal_items_list_done.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
         val swipeAndDragHelperDone = SwipeAndDragHelperItem(itemsAdapterDone)
         val touchHelperDone = ItemTouchHelper(swipeAndDragHelperDone)
 
-        itemsAdapter.setTouchHelper(touchHelper)
         itemsAdapterDone.setTouchHelper(touchHelperDone)
 
-        goal_items_list.adapter = itemsAdapter
         goal_items_list_done.adapter = itemsAdapterDone
 
-        touchHelper.attachToRecyclerView(goal_items_list)
         touchHelperDone.attachToRecyclerView(goal_items_list_done)
     }
 
     private fun saveAndUpdateGoal() {
-        goal?.actualValue = cont
+        goal?.value = count
         goalDAO?.update(goal!!)
 
         if (goal?.trophies!!) {
@@ -236,7 +272,7 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun medalOrTrophies() {
-        if (cont < 0) return
+        if (count < 0) return
 
         if (goal?.trophies!!) {
             setupTrophies()
@@ -247,13 +283,13 @@ class GoalFragment : BaseFragment() {
 
     private fun setupMedal() {
         when {
-            goal?.actualValue!! == 0F -> {
+            goal?.value!! == 0F -> {
                 resetMedal()
             }
-            goal?.actualValue!! <= goal?.medalValue!! -> {
-                setupArcView(arcViewMedal, goal?.actualValue!!, seriesMedal)
+            goal?.value!! <= goal?.medalValue!! -> {
+                setupArcView(arcViewMedal, goal?.value!!, seriesMedal)
 
-                if (goal?.actualValue!! == goal?.medalValue!!)
+                if (goal?.value!! == goal?.medalValue!!)
                     changeMedalOrTrophyIcon(goal_medal_image, R.mipmap.ic_medal, R.mipmap.ic_medal_dark)
             }
             else -> {
@@ -266,22 +302,22 @@ class GoalFragment : BaseFragment() {
 
     private fun setupTrophies() {
         when {
-            goal?.actualValue!! == 0F -> {
+            goal?.value!! == 0F -> {
                 resetTrophyBronze()
             }
-            goal?.actualValue!! <= goal?.bronzeValue!! -> {
-                setupArcView(arcViewBronze, goal?.actualValue!!, seriesBronze)
+            goal?.value!! <= goal?.bronzeValue!! -> {
+                setupArcView(arcViewBronze, goal?.value!!, seriesBronze)
             }
-            goal?.actualValue!! <= goal?.silverValue!! -> {
+            goal?.value!! <= goal?.silverValue!! -> {
                 setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
-                setupArcView(arcViewSilver, goal?.actualValue!!, seriesSilver)
+                setupArcView(arcViewSilver, goal?.value!!, seriesSilver)
 
                 changeMedalOrTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
             }
-            goal?.actualValue!! <= goal?.goldValue!! -> {
+            goal?.value!! <= goal?.goldValue!! -> {
                 setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
                 setupArcView(arcViewSilver, goal?.silverValue!!, seriesSilver)
-                setupArcView(arcViewGold, goal?.actualValue!!, seriesGold)
+                setupArcView(arcViewGold, goal?.value!!, seriesGold)
 
                 changeMedalOrTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
                 changeMedalOrTrophyIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
@@ -309,46 +345,46 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun medalSituations() {
-        if (cont > 0 && cont <= goal?.medalValue!!) {
+        if (count > 0 && count <= goal?.medalValue!!) {
             setMedalValue()
 
-            if (cont == goal?.medalValue!!)
+            if (count == goal?.medalValue!!)
                 changeMedalOrTrophyIcon(goal_medal_image, R.mipmap.ic_medal, R.mipmap.ic_medal_dark)
             else
                 changeMedalOrTrophyIconDark(goal_medal_image, R.mipmap.ic_medal, R.mipmap.ic_medal_dark, true)
-        } else if (cont > goal?.medalValue!!) {
+        } else if (count > goal?.medalValue!!) {
             medalOrTrophies()
-        } else if (cont == 0F) {
+        } else if (count == 0F) {
             resetMedal()
         }
     }
 
     private fun trophiesSituations() {
-        if (cont == 0F) {
+        if (count == 0F) {
             resetTrophyBronze()
             resetTrophySilver()
             resetTrophyGold()
-        } else if (cont > 0) {
-            if (cont <= goal?.bronzeValue!!) {
+        } else if (count > 0) {
+            if (count <= goal?.bronzeValue!!) {
                 setTrophyBronzeValue()
 
-                if (cont == goal?.bronzeValue!!)
+                if (count == goal?.bronzeValue!!)
                     changeMedalOrTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
 
-                if (cont < goal?.silverValue!!)
+                if (count < goal?.silverValue!!)
                     resetTrophySilver()
-            } else if (cont <= goal?.silverValue!!) {
+            } else if (count <= goal?.silverValue!!) {
                 setTrophySilverValue()
 
-                if (cont == goal?.silverValue!!)
+                if (count == goal?.silverValue!!)
                     changeMedalOrTrophyIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
 
-                if (cont < goal?.goldValue!!)
+                if (count < goal?.goldValue!!)
                     resetTrophyGold()
-            } else if (cont <= goal?.goldValue!!) {
+            } else if (count <= goal?.goldValue!!) {
                 setTrophyGoldValue()
 
-                if (cont == goal?.goldValue!!)
+                if (count == goal?.goldValue!!)
                     changeMedalOrTrophyIcon(goal_trophy_gold_image, R.mipmap.ic_trophy_gold, R.mipmap.ic_trophy_gold_dark)
             }
         }
@@ -391,13 +427,13 @@ class GoalFragment : BaseFragment() {
     }
 
 
-    private fun setTrophyBronzeValue() = setupArcView(arcViewBronze, cont, seriesBronze)
+    private fun setTrophyBronzeValue() = setupArcView(arcViewBronze, count, seriesBronze)
 
-    private fun setTrophySilverValue() = setupArcView(arcViewSilver, cont, seriesSilver)
+    private fun setTrophySilverValue() = setupArcView(arcViewSilver, count, seriesSilver)
 
-    private fun setTrophyGoldValue() = setupArcView(arcViewGold, cont, seriesGold)
+    private fun setTrophyGoldValue() = setupArcView(arcViewGold, count, seriesGold)
 
-    private fun setMedalValue() = setupArcView(arcViewMedal, cont, seriesMedal)
+    private fun setMedalValue() = setupArcView(arcViewMedal, count, seriesMedal)
 
     private fun setupArcViewAndSeriesItem(arcView: DecoView, minValue: Float, maxValue: Float, initialValue: Float, visibility: Boolean): SeriesItem {
         arcView.addSeries(
@@ -425,19 +461,19 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun changeIconsDark() {
-        if (cont < goal?.bronzeValue!!)
+        if (count < goal?.bronzeValue!!)
             changeMedalOrTrophyIconDark(
                 goal_trophy_bronze_image,
                 R.mipmap.ic_trophy_bronze,
                 R.mipmap.ic_trophy_bronze_dark,
                 true)
-        if (cont < goal?.silverValue!!)
+        if (count < goal?.silverValue!!)
             changeMedalOrTrophyIconDark(
                 goal_trophy_silver_image,
                 R.mipmap.ic_trophy_silver,
                 R.mipmap.ic_trophy_silver_dark,
                 true)
-        if (cont < goal?.goldValue!!)
+        if (count < goal?.goldValue!!)
             changeMedalOrTrophyIconDark(
                 goal_trophy_gold_image,
                 R.mipmap.ic_trophy_gold,

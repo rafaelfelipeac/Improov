@@ -7,7 +7,7 @@ import com.rafaelfelipeac.domore.database.item.ItemDAO
 import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.models.Item
 
-@Database(entities = [Goal::class, Item::class], version = 15)
+@Database(entities = [Goal::class, Item::class], version = 18)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun goalDAO(): GoalDAO
