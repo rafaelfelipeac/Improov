@@ -10,7 +10,6 @@ data class Goal(
     var goalId: Long = 0,
     var name: String,
     var medalValue: Float,
-    var finalValue: Float,
     var value: Float,
     var trophies: Boolean,
     var bronzeValue: Float,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -9,482 +9,420 @@
         android:background="@color/colorPrimaryDark">
 
     <android.support.constraint.ConstraintLayout
+            android:id="@+id/goal_medal_or_trophies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         <android.support.constraint.ConstraintLayout
-                android:id="@+id/goal_medal_or_trophies"
+                android:id="@+id/goal_medal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="invisible">
 
-            <android.support.constraint.ConstraintLayout
-                    android:id="@+id/goal_medal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+            <ImageView
+                    android:id="@+id/goal_medal_image"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="24dp"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:visibility="visible">
+                    android:background="@mipmap/ic_medal_dark"
+                    app:layout_constraintHorizontal_bias="0.501"
+                    app:layout_constraintBottom_toTopOf="@+id/goal_medal_text"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintVertical_bias="0.51"/>
+
+            <TextView
+                    android:id="@+id/goal_medal_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/goal_medal_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    android:text="223"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <com.hookedonplay.decoviewlib.DecoView
+                    android:id="@+id/arcViewMedal"
+                    android:layout_width="108dp"
+                    android:layout_height="108dp"
+                    app:layout_constraintEnd_toEndOf="@+id/goal_medal_image"
+                    app:layout_constraintStart_toStartOf="@+id/goal_medal_image"
+                    app:layout_constraintBottom_toTopOf="@+id/goal_medal_text"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="1.0"
+                    android:layout_marginTop="16dp"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/goal_trophies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintHorizontal_bias="1.0"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.constraint.ConstraintLayout
+                    android:id="@+id/goal_trophy_bronze"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/goal_trophy_silver"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp">
 
                 <ImageView
-                        android:id="@+id/goal_medal_image"
+                        android:id="@+id/goal_trophy_bronze_image"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="24dp"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginTop="32dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:background="@mipmap/ic_medal_dark"
-                        app:layout_constraintHorizontal_bias="0.501"
-                        app:layout_constraintBottom_toTopOf="@+id/goal_medal_text"
-                        android:layout_marginBottom="8dp"
-                        app:layout_constraintVertical_bias="0.51"/>
+                        android:background="@mipmap/ic_trophy_bronze_dark"
+                        app:layout_constraintBottom_toTopOf="@+id/goal_trophy_bronze_text"
+                        android:layout_marginBottom="8dp"/>
 
                 <TextView
-                        android:id="@+id/goal_medal_text"
+                        android:id="@+id/goal_trophy_bronze_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/goal_medal_image"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="8dp"
-                        android:text="223"
+                        app:layout_constraintTop_toBottomOf="@+id/goal_trophy_bronze_image"
+                        android:text="100"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:layout_marginBottom="24dp"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:layout_constraintEnd_toEndOf="@+id/goal_trophy_bronze_image"
+                        app:layout_constraintStart_toStartOf="@+id/goal_trophy_bronze_image"/>
 
                 <com.hookedonplay.decoviewlib.DecoView
-                        android:id="@+id/arcViewMedal"
+                        android:id="@+id/arcViewBronze"
                         android:layout_width="108dp"
                         android:layout_height="108dp"
-                        app:layout_constraintEnd_toEndOf="@+id/goal_medal_image"
-                        app:layout_constraintStart_toStartOf="@+id/goal_medal_image"
-                        app:layout_constraintBottom_toTopOf="@+id/goal_medal_text"
-                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="1.0"
-                        android:layout_marginTop="40dp" android:layout_marginBottom="16dp"/>
+                        app:layout_constraintEnd_toEndOf="@+id/goal_trophy_bronze_image"
+                        app:layout_constraintStart_toStartOf="@+id/goal_trophy_bronze_image"
+                        app:layout_constraintBottom_toTopOf="@+id/goal_trophy_bronze_text"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0"
+                        android:layout_marginTop="16dp"/>
 
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
-                    android:id="@+id/goal_trophies"
-                    android:layout_width="match_parent"
+                    android:id="@+id/goal_trophy_silver"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    android:background="@color/colorPrimaryDark"
+                    app:layout_constraintStart_toEndOf="@+id/goal_trophy_bronze"
+                    app:layout_constraintEnd_toStartOf="@+id/goal_trophy_gold"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent">
 
-                <android.support.constraint.ConstraintLayout
-                        android:id="@+id/goal_trophy_bronze"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryDark"
+                <ImageView
+                        android:id="@+id/goal_trophy_silver_image"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="8dp"
-                        app:layout_constraintEnd_toStartOf="@+id/goal_trophy_silver"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp">
-
-                    <ImageView
-                            android:id="@+id/goal_trophy_bronze_image"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="24dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginEnd="8dp"
-                            android:background="@mipmap/ic_trophy_bronze_dark"
-                            app:layout_constraintBottom_toTopOf="@+id/goal_trophy_bronze_text"
-                            android:layout_marginBottom="8dp"/>
-
-                    <TextView
-                            android:id="@+id/goal_trophy_bronze_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@+id/goal_trophy_bronze_image"
-                            android:text="100"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18sp"
-                            android:layout_marginBottom="24dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            app:layout_constraintEnd_toEndOf="@+id/goal_trophy_bronze_image"
-                            app:layout_constraintStart_toStartOf="@+id/goal_trophy_bronze_image"/>
-
-                    <com.hookedonplay.decoviewlib.DecoView
-                            android:id="@+id/arcViewBronze"
-                            android:layout_width="108dp"
-                            android:layout_height="108dp"
-                            app:layout_constraintEnd_toEndOf="@+id/goal_trophy_bronze_image"
-                            app:layout_constraintStart_toStartOf="@+id/goal_trophy_bronze_image"
-                            android:layout_marginBottom="16dp"
-                            app:layout_constraintBottom_toTopOf="@+id/goal_trophy_bronze_text"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="1.0"
-                            android:layout_marginTop="32dp"/>
-
-                </android.support.constraint.ConstraintLayout>
-
-                <android.support.constraint.ConstraintLayout
-                        android:id="@+id/goal_trophy_silver"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryDark"
-                        app:layout_constraintStart_toEndOf="@+id/goal_trophy_bronze"
-                        app:layout_constraintEnd_toStartOf="@+id/goal_trophy_gold"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="24dp"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginBottom="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent">
-
-                    <ImageView
-                            android:id="@+id/goal_trophy_silver_image"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="24dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginEnd="8dp"
-                            android:background="@mipmap/ic_trophy_silver_dark"
-                            app:layout_constraintBottom_toTopOf="@+id/goal_trophy_silver_text"
-                            android:layout_marginBottom="8dp"/>
-
-                    <TextView
-                            android:id="@+id/goal_trophy_silver_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@+id/goal_trophy_silver_image"
-                            android:text="200"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18sp"
-                            android:layout_marginBottom="24dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            app:layout_constraintEnd_toEndOf="@+id/goal_trophy_silver_image"
-                            app:layout_constraintStart_toStartOf="@+id/goal_trophy_silver_image"/>
-
-                    <com.hookedonplay.decoviewlib.DecoView
-                            android:id="@+id/arcViewSilver"
-                            android:layout_width="108dp"
-                            android:layout_height="108dp"
-                            app:layout_constraintEnd_toEndOf="@+id/goal_trophy_silver_image"
-                            app:layout_constraintStart_toStartOf="@+id/goal_trophy_silver_image"
-                            android:layout_marginBottom="16dp"
-                            app:layout_constraintBottom_toTopOf="@+id/goal_trophy_silver_text"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="1.0"
-                            android:layout_marginTop="32dp"/>
-
-                </android.support.constraint.ConstraintLayout>
-
-                <android.support.constraint.ConstraintLayout
-                        android:id="@+id/goal_trophy_gold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryDark"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp"
-                        app:layout_constraintStart_toEndOf="@+id/goal_trophy_silver"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="8dp">
+                        android:background="@mipmap/ic_trophy_silver_dark"
+                        app:layout_constraintBottom_toTopOf="@+id/goal_trophy_silver_text"
+                        android:layout_marginBottom="8dp"/>
 
-                    <ImageView
-                            android:id="@+id/goal_trophy_gold_image"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginStart="8dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginEnd="8dp"
-                            android:background="@mipmap/ic_trophy_gold_dark"
-                            app:layout_constraintHorizontal_bias="1.0"
-                            android:layout_marginTop="24dp"
-                            app:layout_constraintBottom_toTopOf="@+id/goal_trophy_gold_text"
-                            android:layout_marginBottom="8dp"/>
+                <TextView
+                        android:id="@+id/goal_trophy_silver_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/goal_trophy_silver_image"
+                        android:text="200"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:layout_constraintEnd_toEndOf="@+id/goal_trophy_silver_image"
+                        app:layout_constraintStart_toStartOf="@+id/goal_trophy_silver_image"/>
 
-                    <TextView
-                            android:id="@+id/goal_trophy_gold_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@+id/goal_trophy_gold_image"
-                            android:text="300"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18sp"
-                            android:layout_marginBottom="24dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            app:layout_constraintEnd_toEndOf="@+id/goal_trophy_gold_image"
-                            app:layout_constraintStart_toStartOf="@+id/goal_trophy_gold_image"/>
+                <com.hookedonplay.decoviewlib.DecoView
+                        android:id="@+id/arcViewSilver"
+                        android:layout_width="108dp"
+                        android:layout_height="108dp"
+                        app:layout_constraintEnd_toEndOf="@+id/goal_trophy_silver_image"
+                        app:layout_constraintStart_toStartOf="@+id/goal_trophy_silver_image"
+                        app:layout_constraintBottom_toTopOf="@+id/goal_trophy_silver_text"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0"
+                        android:layout_marginTop="16dp"/>
 
-                    <com.hookedonplay.decoviewlib.DecoView
-                            android:id="@+id/arcViewGold"
-                            android:layout_width="108dp"
-                            android:layout_height="108dp"
-                            app:layout_constraintEnd_toEndOf="@+id/goal_trophy_gold_image"
-                            app:layout_constraintStart_toStartOf="@+id/goal_trophy_gold_image"
-                            android:layout_marginBottom="16dp"
-                            app:layout_constraintBottom_toTopOf="@+id/goal_trophy_gold_text"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="1.0"
-                            android:layout_marginTop="32dp"/>
+            </android.support.constraint.ConstraintLayout>
 
-                </android.support.constraint.ConstraintLayout>
+            <android.support.constraint.ConstraintLayout
+                    android:id="@+id/goal_trophy_gold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toEndOf="@+id/goal_trophy_silver"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="8dp">
+
+                <ImageView
+                        android:id="@+id/goal_trophy_gold_image"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp"
+                        android:background="@mipmap/ic_trophy_gold_dark"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        android:layout_marginTop="24dp"
+                        app:layout_constraintBottom_toTopOf="@+id/goal_trophy_gold_text"
+                        android:layout_marginBottom="8dp"/>
+
+                <TextView
+                        android:id="@+id/goal_trophy_gold_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/goal_trophy_gold_image"
+                        android:text="300"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:layout_constraintEnd_toEndOf="@+id/goal_trophy_gold_image"
+                        app:layout_constraintStart_toStartOf="@+id/goal_trophy_gold_image"
+                        android:visibility="visible"/>
+
+                <com.hookedonplay.decoviewlib.DecoView
+                        android:id="@+id/arcViewGold"
+                        android:layout_width="108dp"
+                        android:layout_height="108dp"
+                        app:layout_constraintEnd_toEndOf="@+id/goal_trophy_gold_image"
+                        app:layout_constraintStart_toStartOf="@+id/goal_trophy_gold_image"
+                        app:layout_constraintBottom_toTopOf="@+id/goal_trophy_gold_text"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0"
+                        android:layout_marginTop="16dp"/>
 
             </android.support.constraint.ConstraintLayout>
 
         </android.support.constraint.ConstraintLayout>
 
-        <TextView
-                android:id="@+id/goal_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintHorizontal_bias="0.0"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/goal_medal_or_trophies"
-                tools:text="title"/>
+    </android.support.constraint.ConstraintLayout>
 
-        <TextView
-                android:id="@+id/goal_final_value"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/goal_title"
-                tools:text="value"/>
+    <TextView
+            android:id="@+id/goal_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/goal_medal_or_trophies"
+            tools:text="title"/>
 
-        <TextView
-                android:id="@+id/goal_count"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="count"
-                android:textColor="@color/colorPrimary"
-                app:layout_constraintTop_toBottomOf="@+id/goal_final_value"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintHorizontal_bias="1.0"
-                android:layout_marginTop="8dp"/>
+    <TextView
+            android:id="@+id/goal_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="count"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@+id/goal_title"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintHorizontal_bias="1.0"
+            android:layout_marginTop="8dp"/>
+
+    <android.support.constraint.ConstraintLayout
+            android:id="@+id/goal_special"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/goal_count"
+            android:visibility="visible"
+            android:layout_marginTop="8dp" app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp">
 
         <android.support.constraint.ConstraintLayout
-                android:id="@+id/goal_special"
+                android:id="@+id/goal_cl_dec_inc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/goal_count"
-                android:visibility="visible"
-                android:layout_marginTop="8dp" app:layout_constraintVertical_bias="0.84000003"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp">
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0.0">
 
-            <android.support.constraint.ConstraintLayout
-                    android:id="@+id/goal_cl_dec_inc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginBottom="8dp"
+            <Button
+                    android:id="@+id/goal_btn_dec"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:text="DEC"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintVertical_bias="1.0"
-                    android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0">
-
-                <Button
-                        android:id="@+id/goal_btn_dec"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:text="DEC"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintEnd_toStartOf="@+id/goal_inc_dec_total"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintVertical_bias="0.3"/>
-
-                <TextView
-                        android:id="@+id/goal_inc_dec_total"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:text="0"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorPrimary"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintVertical_bias="0.3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="8dp"/>
-
-                <Button
-                        android:id="@+id/goal_btn_inc"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:text="INC"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintStart_toEndOf="@+id/goal_inc_dec_total"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintVertical_bias="0.3"/>
-
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                    android:id="@+id/goal_cl_total"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/goal_inc_dec_total"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintVertical_bias="0.3"/>
+
+            <TextView
+                    android:id="@+id/goal_inc_dec_total"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:text="0"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintVertical_bias="0.3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"/>
+
+            <Button
+                    android:id="@+id/goal_btn_inc"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:text="INC"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toEndOf="@+id/goal_inc_dec_total"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintVertical_bias="0.3"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/goal_cl_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                    android:id="@+id/goal_total_total"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:text="0"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintVertical_bias="0.0"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <Button android:id="@+id/goal_btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salvar"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                <EditText
-                        android:id="@+id/goal_total_total"
-                        android:layout_width="75dp"
-                        android:layout_height="50dp"
-                        android:text="0"
-                        android:inputType="numberDecimal|numberSigned"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorPrimary"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintVertical_bias="0.0"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"/>
-
-                <Button android:id="@+id/goal_btn_save"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Salvar"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/goal_total_total"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintHorizontal_bias="0.0"/>
-
-            </android.support.constraint.ConstraintLayout>
-
-            <TextView
-                    android:id="@+id/goal_textview_todo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="To do"
-                    android:visibility="invisible"
-                    android:textSize="18sp"
-                    android:textColor="@color/colorPrimary"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/goal_total_total"
                     android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintHorizontal_bias="0.0"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/goal_cl_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintTop_toTopOf="parent">
 
             <android.support.v7.widget.RecyclerView
                     android:id="@+id/goal_items_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="32dp"
+                    android:layout_height="match_parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:visibility="invisible"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="32dp"
-                    app:layout_constraintBottom_toTopOf="@+id/goal_items_list_done"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintTop_toBottomOf="@+id/goal_textview_todo"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintVertical_bias="0.0">
-            </android.support.v7.widget.RecyclerView>
-
-            <TextView
-                    android:id="@+id/goal_textview_done"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Done"
-                    android:visibility="invisible"
-                    android:textSize="18sp"
-                    android:textColor="@color/colorPrimary"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/goal_items_list"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    android:layout_marginTop="8dp"/>
-
-            <android.support.v7.widget.RecyclerView
-                    android:id="@+id/goal_items_list_done"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginStart="32dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintTop_toBottomOf="@+id/goal_textview_done"
+                    android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"/>
 
         </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
 
-</ScrollView>
+</android.support.constraint.ConstraintLayout>

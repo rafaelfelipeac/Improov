@@ -22,9 +22,7 @@ import kotlinx.android.synthetic.main.fragment_goal.*
 
 class GoalFragment : BaseFragment() {
 
-
     private var itemsAdapter = ItemsAdapter(this)
-    private var itemsAdapterDone = ItemsAdapter(this)
 
     var goal: Goal? = null
 
@@ -92,6 +90,7 @@ class GoalFragment : BaseFragment() {
             count += goal?.incrementValue!!
 
             goal_count.text = String.format("%.2f", count)
+            goal_inc_dec_total.text = String.format("%.2f", count)
 
             saveAndUpdateGoal()
         }
@@ -100,6 +99,7 @@ class GoalFragment : BaseFragment() {
             count -= goal?.decrementValue!!
 
             goal_count.text = String.format("%.2f", count)
+            goal_inc_dec_total.text = String.format("%.2f", count)
 
             saveAndUpdateGoal()
         }
@@ -123,11 +123,6 @@ class GoalFragment : BaseFragment() {
         }
 
         setItems()
-    }
-
-    private fun setItems() {
-        setItemsAdapter()
-        setItemsDoneAdapter()
     }
 
     fun scoreFromList(done: Boolean) {
@@ -189,17 +184,24 @@ class GoalFragment : BaseFragment() {
 
         when (goal?.type) {
             1 -> {
-                goal_items_list.visibility = View.VISIBLE
-                goal_textview_todo.visibility = View.VISIBLE
+                goal_cl_list.visibility = View.VISIBLE
+                goal_cl_dec_inc.visibility = View.GONE
+                goal_cl_total.visibility = View.GONE
+
                 (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
             }
             2 -> {
+                goal_cl_list.visibility = View.GONE
                 goal_cl_dec_inc.visibility = View.VISIBLE
+                goal_cl_total.visibility = View.GONE
+
                 goal_inc_dec_total.text = count.toString()
             }
             3 -> {
+                goal_cl_list.visibility = View.GONE
+                goal_cl_dec_inc.visibility = View.GONE
                 goal_cl_total.visibility = View.VISIBLE
-                //goal_count.text = goal?.value.toString()
+
                 goal_total_total.setText("")
             }
         }
@@ -207,11 +209,11 @@ class GoalFragment : BaseFragment() {
         medalOrTrophies()
     }
 
-    private fun setItemsAdapter() {
+    private fun setItems() {
         val itemsList = itemDAO?.getAll()
 
         val orderItemsList =
-            itemsList?.filter { !it.done && it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
+            itemsList?.filter { it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
 
         itemsAdapter.setItems(orderItemsList!!)
 
@@ -229,35 +231,6 @@ class GoalFragment : BaseFragment() {
         goal_items_list.adapter = itemsAdapter
 
         touchHelper.attachToRecyclerView(goal_items_list)
-    }
-
-    private fun setItemsDoneAdapter() {
-        val itemsList = itemDAO?.getAll()
-
-        val orderItemsListDone =
-            itemsList?.filter { it.done && it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
-
-        itemsAdapterDone.setItems(orderItemsListDone!!)
-
-        itemsAdapterDone.clickListener = {
-            navController.navigate(R.id.action_goalFragment_to_itemFragment)
-        }
-
-        if (orderItemsListDone.isNotEmpty()) {
-            goal_items_list_done.visibility = View.VISIBLE
-            goal_textview_done.visibility = View.VISIBLE
-        }
-
-        goal_items_list_done.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-        val swipeAndDragHelperDone = SwipeAndDragHelperItem(itemsAdapterDone)
-        val touchHelperDone = ItemTouchHelper(swipeAndDragHelperDone)
-
-        itemsAdapterDone.setTouchHelper(touchHelperDone)
-
-        goal_items_list_done.adapter = itemsAdapterDone
-
-        touchHelperDone.attachToRecyclerView(goal_items_list_done)
     }
 
     private fun saveAndUpdateGoal() {

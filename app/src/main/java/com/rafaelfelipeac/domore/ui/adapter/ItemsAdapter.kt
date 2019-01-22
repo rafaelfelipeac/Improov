@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
@@ -27,7 +28,17 @@ class ItemsAdapter(val fragment: Fragment) : BaseAdapter<Item>(), SwipeAndDragHe
         setOnClickListener { clickListener(item) }
 
         val title = viewHolder.itemView.findViewById<TextView>(R.id.item_title)
-        title.text = item.title
+        val image = viewHolder.itemView.findViewById<ImageView>(R.id.item_progress)
+
+        if (item.done)
+            title.text = item.title + "feito"
+        else
+            title.text = item.title
+
+        if (item.done)
+            image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
+        else
+            image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -62,8 +73,8 @@ class ItemsAdapter(val fragment: Fragment) : BaseAdapter<Item>(), SwipeAndDragHe
     override fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder) {
         val item = this.items[position]
 
-        this.items.removeAt(position)
-        notifyItemRemoved(position)
+        //this.items.removeAt(position)
+        //notifyItemRemoved(position)
 
         when(direction) {
             ItemTouchHelper.RIGHT -> { // done/undone
@@ -79,7 +90,7 @@ class ItemsAdapter(val fragment: Fragment) : BaseAdapter<Item>(), SwipeAndDragHe
                             this.items.add(position, item)
                             item.done = false
                             itemDAO?.update(item)
-                            notifyItemInserted(position)
+                            //notifyItemInserted(position)
 
                             fragment.scoreFromList(false)
                         }

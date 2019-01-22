@@ -148,7 +148,6 @@ class GoalFormFragment : BaseFragment() {
             medalValue =
                 if (form_goal_editText_medal.text!!.isNotEmpty()) form_goal_editText_medal.text.toString().toFloat()
                 else 100F,
-            finalValue = goalForm_goal_final_value.text.toString().toFloat(),
             value = 0F,
             initialDate = "",
             finalDate = "",
@@ -179,7 +178,6 @@ class GoalFormFragment : BaseFragment() {
         goal?.name = goalForm_goal_name.text.toString()
         goal?.trophies = form_goal_switch_trophies.isChecked
         goal?.type = getType()
-        goal?.finalValue = goalForm_goal_final_value.text.toString().toFloat()
 
         if (getType() == 2) {
             goal?.incrementValue = goalForm_goal_inc_value.text.toString().toFloat()
@@ -220,7 +218,6 @@ class GoalFormFragment : BaseFragment() {
         }
 
         goalForm_goal_name.setText(goal?.name)
-        goalForm_goal_final_value.setText(goal?.finalValue.toString())
 
         when(goal?.type) {
             1 -> {switchLista.isChecked = true}
