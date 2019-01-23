@@ -31,8 +31,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp"
-                app:srcCompat="@drawable/ic_add_24dp"
-                android:tint="@color/colorPrimaryDark"/>
+                app:srcCompat="@mipmap/ic_plus"
+                android:tint="@color/colorPrimaryDark"
+                app:backgroundTint="@color/colorPrimary"/>
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
