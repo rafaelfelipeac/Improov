@@ -31,20 +31,20 @@
             <ImageView android:id="@+id/goal_done_image"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:background="@drawable/ic_done"
+                       card_view:srcCompat="@drawable/ic_done"
+                       android:tint="@color/colorPrimaryDark"
                        android:layout_centerVertical="true"
                        android:layout_marginBottom="14dp"
                        card_view:layout_constraintBottom_toBottomOf="parent"
                        card_view:layout_constraintStart_toStartOf="parent"
-                       android:layout_marginStart="32dp"
+                       android:layout_marginStart="16dp"
                        card_view:layout_constraintTop_toTopOf="parent"/>
         </android.support.constraint.ConstraintLayout>
 
         <View android:layout_width="1dp"
-              android:layout_height="1dp"
-              android:layout_marginBottom="8dp"
+              android:layout_height="match_parent"
+              android:background="@color/colorPrimary"
               card_view:layout_constraintBottom_toBottomOf="parent"
-              android:layout_marginTop="8dp"
               card_view:layout_constraintTop_toTopOf="parent"
               android:id="@+id/view"
               card_view:layout_constraintVertical_bias="0.491"
@@ -64,12 +64,13 @@
             <ImageView android:id="@+id/goal_delete_image"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:background="@drawable/ic_delete"
+                       card_view:srcCompat="@drawable/ic_delete"
+                       android:tint="@color/colorPrimaryDark"
                        android:layout_centerVertical="true"
                        card_view:layout_constraintTop_toTopOf="parent"
                        android:layout_marginBottom="14dp"
                        card_view:layout_constraintBottom_toBottomOf="parent"
-                       android:layout_marginEnd="32dp"
+                       android:layout_marginEnd="16dp"
                        card_view:layout_constraintEnd_toEndOf="parent"/>
         </android.support.constraint.ConstraintLayout>
 
@@ -80,7 +81,11 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite"
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="@color/colorPrimaryDark"
             tools:visibility="invisible">
 
         <TextView
@@ -89,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:text="Nova meta cadastrada"
+                android:textColor="@color/colorPrimary"
                 android:maxLines="1"
                 android:layout_marginStart="8dp"
                 card_view:layout_constraintStart_toStartOf="parent"
@@ -112,6 +118,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:text="00/00/00"
+                android:textColor="@color/colorPrimary"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="72dp"
                 card_view:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"/>

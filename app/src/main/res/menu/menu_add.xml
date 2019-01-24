@@ -3,8 +3,7 @@
 
     <item
             android:id="@+id/menu_goal_add"
-            android:icon="@mipmap/ic_plus"
-            android:iconTint="@color/colorPrimary"
+            android:icon="@mipmap/ic_add"
             app:showAsAction="always"
             android:title="Add"/>
 
