@@ -11,7 +11,8 @@
     <android.support.constraint.ConstraintLayout
             android:id="@+id/goal_medal_or_trophies"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp">
 
         <android.support.constraint.ConstraintLayout
                 android:id="@+id/goal_medal"
@@ -22,9 +23,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintHorizontal_bias="0.0"
-                android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent"
-                android:visibility="invisible">
+                android:visibility="visible">
 
             <ImageView
                     android:id="@+id/goal_medal_image"
@@ -34,13 +34,11 @@
                     android:layout_marginStart="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="28dp"
                     app:layout_constraintTop_toTopOf="parent"
                     android:background="@mipmap/ic_medal_dark"
                     app:layout_constraintHorizontal_bias="0.501"
-                    app:layout_constraintBottom_toTopOf="@+id/goal_medal_text"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintVertical_bias="0.51"/>
+            />
 
             <TextView
                     android:id="@+id/goal_medal_text"
@@ -54,7 +52,7 @@
                     android:text="223"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    android:layout_marginTop="16dp"/>
 
             <com.hookedonplay.decoviewlib.DecoView
                     android:id="@+id/arcViewMedal"
@@ -62,9 +60,8 @@
                     android:layout_height="108dp"
                     app:layout_constraintEnd_toEndOf="@+id/goal_medal_image"
                     app:layout_constraintStart_toStartOf="@+id/goal_medal_image"
-                    app:layout_constraintBottom_toTopOf="@+id/goal_medal_text"
-                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="1.0"
-                    android:layout_marginTop="16dp"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="8dp"/>
 
         </android.support.constraint.ConstraintLayout>
 
@@ -72,13 +69,13 @@
                 android:id="@+id/goal_trophies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintHorizontal_bias="1.0"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="0dp"
                 app:layout_constraintTop_toTopOf="parent">
 
             <android.support.constraint.ConstraintLayout
@@ -89,7 +86,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp"
                     app:layout_constraintEnd_toStartOf="@+id/goal_trophy_silver"
-                    android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp">
 
                 <ImageView
@@ -98,13 +94,11 @@
                         android:layout_height="70dp"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="28dp"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp"
-                        android:background="@mipmap/ic_trophy_bronze_dark"
-                        app:layout_constraintBottom_toTopOf="@+id/goal_trophy_bronze_text"
-                        android:layout_marginBottom="8dp"/>
+                        android:background="@mipmap/ic_trophy_bronze_dark"/>
 
                 <TextView
                         android:id="@+id/goal_trophy_bronze_text"
@@ -114,10 +108,9 @@
                         android:text="100"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintVertical_bias="0.0"
                         app:layout_constraintEnd_toEndOf="@+id/goal_trophy_bronze_image"
-                        app:layout_constraintStart_toStartOf="@+id/goal_trophy_bronze_image"/>
+                        app:layout_constraintStart_toStartOf="@+id/goal_trophy_bronze_image"
+                        android:layout_marginTop="16dp"/>
 
                 <com.hookedonplay.decoviewlib.DecoView
                         android:id="@+id/arcViewBronze"
@@ -125,10 +118,8 @@
                         android:layout_height="108dp"
                         app:layout_constraintEnd_toEndOf="@+id/goal_trophy_bronze_image"
                         app:layout_constraintStart_toStartOf="@+id/goal_trophy_bronze_image"
-                        app:layout_constraintBottom_toTopOf="@+id/goal_trophy_bronze_text"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="1.0"
-                        android:layout_marginTop="16dp"/>
+                        android:layout_marginTop="8dp"/>
 
             </android.support.constraint.ConstraintLayout>
 
@@ -139,7 +130,6 @@
                     android:background="@color/colorPrimaryDark"
                     app:layout_constraintStart_toEndOf="@+id/goal_trophy_bronze"
                     app:layout_constraintEnd_toStartOf="@+id/goal_trophy_gold"
-                    android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent">
@@ -150,13 +140,12 @@
                         android:layout_height="70dp"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="28dp"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp"
                         android:background="@mipmap/ic_trophy_silver_dark"
-                        app:layout_constraintBottom_toTopOf="@+id/goal_trophy_silver_text"
-                        android:layout_marginBottom="8dp"/>
+                />
 
                 <TextView
                         android:id="@+id/goal_trophy_silver_text"
@@ -166,10 +155,9 @@
                         android:text="200"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintVertical_bias="0.0"
                         app:layout_constraintEnd_toEndOf="@+id/goal_trophy_silver_image"
-                        app:layout_constraintStart_toStartOf="@+id/goal_trophy_silver_image"/>
+                        app:layout_constraintStart_toStartOf="@+id/goal_trophy_silver_image"
+                        android:layout_marginTop="16dp"/>
 
                 <com.hookedonplay.decoviewlib.DecoView
                         android:id="@+id/arcViewSilver"
@@ -177,10 +165,8 @@
                         android:layout_height="108dp"
                         app:layout_constraintEnd_toEndOf="@+id/goal_trophy_silver_image"
                         app:layout_constraintStart_toStartOf="@+id/goal_trophy_silver_image"
-                        app:layout_constraintBottom_toTopOf="@+id/goal_trophy_silver_text"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="1.0"
-                        android:layout_marginTop="16dp"/>
+                        android:layout_marginTop="8dp"/>
 
             </android.support.constraint.ConstraintLayout>
 
@@ -192,7 +178,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintStart_toEndOf="@+id/goal_trophy_silver"
-                    android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="8dp">
 
@@ -207,9 +192,8 @@
                         android:layout_marginEnd="8dp"
                         android:background="@mipmap/ic_trophy_gold_dark"
                         app:layout_constraintHorizontal_bias="1.0"
-                        android:layout_marginTop="24dp"
-                        app:layout_constraintBottom_toTopOf="@+id/goal_trophy_gold_text"
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_marginTop="28dp"
+                />
 
                 <TextView
                         android:id="@+id/goal_trophy_gold_text"
@@ -219,11 +203,9 @@
                         android:text="300"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintVertical_bias="0.0"
                         app:layout_constraintEnd_toEndOf="@+id/goal_trophy_gold_image"
                         app:layout_constraintStart_toStartOf="@+id/goal_trophy_gold_image"
-                        android:visibility="visible"/>
+                        android:visibility="visible" android:layout_marginTop="16dp"/>
 
                 <com.hookedonplay.decoviewlib.DecoView
                         android:id="@+id/arcViewGold"
@@ -231,10 +213,8 @@
                         android:layout_height="108dp"
                         app:layout_constraintEnd_toEndOf="@+id/goal_trophy_gold_image"
                         app:layout_constraintStart_toStartOf="@+id/goal_trophy_gold_image"
-                        app:layout_constraintBottom_toTopOf="@+id/goal_trophy_gold_text"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="1.0"
-                        android:layout_marginTop="16dp"/>
+                        android:layout_marginTop="8dp"/>
 
             </android.support.constraint.ConstraintLayout>
 
@@ -248,14 +228,14 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintHorizontal_bias="0.0"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
-            android:layout_marginTop="8dp"
+
             app:layout_constraintTop_toBottomOf="@+id/goal_medal_or_trophies"
-            tools:text="title"/>
+            tools:text="title" android:layout_marginTop="8dp"/>
 
     <TextView
             android:id="@+id/goal_count"
@@ -266,9 +246,9 @@
             app:layout_constraintTop_toBottomOf="@+id/goal_title"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintHorizontal_bias="1.0"
             android:layout_marginTop="8dp"/>
 
@@ -298,7 +278,7 @@
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                android:layout_marginTop="32dp">
+                android:layout_marginTop="16dp">
 
             <android.support.design.widget.FloatingActionButton
                     android:id="@+id/goal_btn_dec"
@@ -365,13 +345,14 @@
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="32dp">
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp">
 
             <EditText
                     android:id="@+id/goal_total_total"
-                    android:layout_width="75dp"
-                    android:layout_height="50dp"
+                    android:layout_width="100dp"
+                    android:layout_height="@dimen/edittext_height"
                     android:text="0"
+                    android:background="@drawable/rounded_edittext"
                     android:inputType="numberDecimal|numberSigned"
                     android:gravity="center"
                     android:textSize="18sp"
@@ -413,7 +394,7 @@
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp">
 
             <android.support.v7.widget.RecyclerView
                     android:id="@+id/goal_items_list"
@@ -423,8 +404,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"/>
 

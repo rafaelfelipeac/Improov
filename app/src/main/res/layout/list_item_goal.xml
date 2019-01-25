@@ -4,18 +4,19 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools" android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="-8dp"
+        android:layout_marginBottom="-8dp"
         android:id="@+id/item_cardview"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="80dp"
         card_view:cardUseCompatPadding="true"
-        card_view:cardCornerRadius="2dp"
+        card_view:cardCornerRadius="30dp"
         android:focusable="true">
 
     <android.support.constraint.ConstraintLayout
             android:id="@+id/goal_done_delete_view"
             android:layout_width="match_parent"
-            android:layout_height="85dp">
+            android:layout_height="70dp">
 
         <android.support.constraint.ConstraintLayout
                 android:id="@+id/goal_done_view"
@@ -77,16 +78,15 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-            android:id="@+id/goal_normal_view"
             xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/goal_normal_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_marginRight="4dp"
             android:layout_marginLeft="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@color/colorPrimaryDark"
-            tools:visibility="invisible">
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/rounded_cardview"
+            tools:visibility="visible">
 
         <TextView
                 android:id="@+id/goal_item_title"
@@ -96,21 +96,21 @@
                 android:text="Nova meta cadastrada"
                 android:textColor="@color/colorPrimary"
                 android:maxLines="1"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="56dp"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="12dp"/>
 
         <ImageView
-                android:id="@+id/goal_item_progress"
-                android:layout_width="250dp"
-                android:layout_height="10dp"
-                android:layout_marginStart="8dp"
-                android:src="@color/colorPrimary"
+                android:id="@+id/item_progress"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@mipmap/ic_item_undone"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="24dp"
-                card_view:layout_constraintTop_toTopOf="parent"/>
+                card_view:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="4dp" android:layout_marginBottom="8dp"/>
 
         <TextView
                 android:id="@+id/goal_item_date"
@@ -120,8 +120,9 @@
                 android:text="00/00/00"
                 android:textColor="@color/colorPrimary"
                 card_view:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="72dp"
-                card_view:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"/>
+                android:layout_marginEnd="48dp"
+                card_view:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="4dp"/>
 
         <ImageView
                 android:id="@+id/goal_image_view"
@@ -132,7 +133,8 @@
                 android:layout_marginTop="8dp"
                 card_view:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="8dp"
-                card_view:layout_constraintBottom_toBottomOf="parent"/>
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"/>
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

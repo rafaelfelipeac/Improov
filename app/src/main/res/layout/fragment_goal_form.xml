@@ -15,7 +15,8 @@
         <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/form_goal_metal_trophies">
+                android:id="@+id/form_goal_metal_trophies" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent">
 
             <android.support.constraint.ConstraintLayout
                     android:id="@+id/form_goal_medal"
@@ -38,7 +39,6 @@
                         android:layout_marginStart="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginTop="32dp"
                         app:layout_constraintTop_toTopOf="parent"
                         android:background="@mipmap/ic_medal"
                         app:layout_constraintHorizontal_bias="0.501"/>
@@ -62,10 +62,12 @@
 
                 <EditText
                         android:id="@+id/form_goal_editText_medal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="75dp"
+                        android:layout_height="@dimen/edittext_height"
                         android:inputType="number"
                         android:text="10"
+                        android:gravity="center"
+                        android:background="@drawable/rounded_edittext"
                         android:textColor="@color/colorPrimary"
                         android:layout_marginStart="8dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +110,6 @@
                             android:layout_height="70dp"
                             app:layout_constraintStart_toStartOf="parent"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="24dp"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginEnd="8dp"
@@ -130,10 +131,12 @@
 
                     <EditText
                             android:id="@+id/form_goal_editText_bronze"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="75dp"
+                            android:layout_height="@dimen/edittext_height"
                             android:text="10"
                             android:inputType="number"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_edittext"
                             android:textColor="@color/colorPrimary"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -165,8 +168,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginEnd="8dp"
-                            android:background="@mipmap/ic_trophy_silver"
-                            android:layout_marginTop="24dp"/>
+                            android:background="@mipmap/ic_trophy_silver"/>
 
                     <TextView
                             android:id="@+id/form_goal_trophy_silver_text"
@@ -186,10 +188,12 @@
 
                     <EditText
                             android:id="@+id/form_goal_editText_silver"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="75dp"
+                            android:layout_height="@dimen/edittext_height"
                             android:text="20"
                             android:inputType="number"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_edittext"
                             android:textColor="@color/colorPrimary"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -224,7 +228,7 @@
                             android:layout_marginEnd="8dp"
                             android:background="@mipmap/ic_trophy_gold"
                             app:layout_constraintHorizontal_bias="1.0"
-                            android:layout_marginTop="24dp"/>
+                    />
 
                     <TextView
                             android:id="@+id/form_goal_trophy_gold_text"
@@ -242,10 +246,12 @@
 
                     <EditText
                             android:id="@+id/form_goal_editText_gold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="75dp"
+                            android:layout_height="@dimen/edittext_height"
                             android:text="30"
                             android:inputType="number"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_edittext"
                             android:textColor="@color/colorPrimary"
                             android:layout_marginTop="8dp"
                             app:layout_constraintTop_toBottomOf="@+id/form_goal_trophy_gold_text"
@@ -265,14 +271,16 @@
         <android.support.design.widget.TextInputEditText
                 android:id="@+id/goalForm_goal_name"
                 android:layout_width="match_parent"
-                android:layout_height="41dp"
+                android:layout_height="@dimen/edittext_height"
+                android:gravity="center"
+                android:background="@drawable/rounded_edittext"
                 android:hint="título"
                 android:textColorHint="@color/colorPrimary"
                 android:textColor="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="32dp"
                 app:layout_constraintTop_toBottomOf="@+id/form_goal_metal_trophies"
                 android:layout_marginTop="8dp"/>
 
@@ -282,7 +290,7 @@
                 android:text="trophies"
                 android:id="@+id/form_goal_trophies_enabled"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginTop="8dp"
@@ -315,31 +323,35 @@
                 android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/goalForm_goal_type_text"
                 android:visibility="gone">
 
-
             <android.support.design.widget.TextInputEditText
                     android:id="@+id/goalForm_goal_inc_value"
                     android:layout_width="match_parent"
-                    android:layout_height="41dp"
+                    android:layout_height="@dimen/edittext_height"
                     android:hint="incrementar"
+                    android:gravity="center"
+                    android:background="@drawable/rounded_edittext"
                     android:textColorHint="@color/colorPrimary"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-            />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             <android.support.design.widget.TextInputEditText
                     android:id="@+id/goalForm_goal_dec_value"
                     android:layout_width="match_parent"
-                    android:layout_height="41dp"
+                    android:layout_height="@dimen/edittext_height"
                     android:hint="decrementar"
+                    android:gravity="center"
+                    android:background="@drawable/rounded_edittext"
                     android:textColorHint="@color/colorPrimary"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintTop_toBottomOf="@+id/goalForm_goal_inc_value"/>
+                    app:layout_constraintTop_toBottomOf="@+id/goalForm_goal_inc_value" android:layout_marginTop="8dp"/>
         </android.support.constraint.ConstraintLayout>
+
         <TextView
                 android:id="@+id/goalForm_goal_type_text"
                 android:layout_width="match_parent"
@@ -348,7 +360,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -359,7 +371,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/goalForm_goal_type_text"/>
 
@@ -385,7 +397,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/switchLista"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"/>
+                android:layout_marginStart="24dp"/>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -406,7 +418,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/switchTotalIncDec"
                 app:layout_constraintBottom_toBottomOf="parent"
