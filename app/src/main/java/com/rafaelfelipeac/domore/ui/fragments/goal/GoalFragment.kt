@@ -125,16 +125,6 @@ class GoalFragment : BaseFragment() {
         setItems()
     }
 
-    fun scoreFromList(done: Boolean) {
-        setItems()
-
-        if (done) count++ else count--
-
-        goal_count.text = String.format("%.2f", count)
-
-        saveAndUpdateGoal()
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         if (goal?.type == 1) {
             inflater?.inflate(R.menu.menu_add, menu)
@@ -165,6 +155,16 @@ class GoalFragment : BaseFragment() {
         return false
     }
 
+    fun scoreFromList(done: Boolean) {
+        setItems()
+
+        if (done) count++ else count--
+
+        goal_count.text = String.format("%.2f", count)
+
+        saveAndUpdateGoal()
+    }
+
     private fun setupGoal() {
         count = goal?.value!!
 
@@ -188,7 +188,8 @@ class GoalFragment : BaseFragment() {
                 goal_cl_dec_inc.visibility = View.GONE
                 goal_cl_total.visibility = View.GONE
 
-                (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
+                if ((activity as MainActivity).toolbar.menu.findItem(R.id.menu_goal_add) == null)
+                    (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
             }
             2 -> {
                 goal_cl_list.visibility = View.GONE
