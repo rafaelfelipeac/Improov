@@ -1,9 +1,9 @@
 package com.rafaelfelipeac.domore.ui.base
 
 import android.app.Activity
-import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.rafaelfelipeac.domore.R

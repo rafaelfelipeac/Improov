@@ -7,11 +7,11 @@
              tools:context=".ui.fragments.goals.GoalsFragment"
              android:background="@color/colorPrimaryDark">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/goals_list"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -23,7 +23,7 @@
                 android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_goals"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -35,5 +35,5 @@
                 android:tint="@color/colorPrimaryDark"
                 app:backgroundTint="@color/colorPrimary"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

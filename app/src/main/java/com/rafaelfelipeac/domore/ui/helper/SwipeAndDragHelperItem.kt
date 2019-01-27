@@ -1,9 +1,9 @@
 package com.rafaelfelipeac.domore.ui.helper
 
 import android.graphics.Canvas
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.rafaelfelipeac.domore.R
 
 class SwipeAndDragHelperItem(private val contract: ActionCompletionContract) : ItemTouchHelper.Callback() {
@@ -32,8 +32,8 @@ class SwipeAndDragHelperItem(private val contract: ActionCompletionContract) : I
     }
 
     override fun onChildDrawOver(c: Canvas, recyclerView: RecyclerView,
-        viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float,
-        actionState: Int, isCurrentlyActive: Boolean) {
+                                 viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float,
+                                 actionState: Int, isCurrentlyActive: Boolean) {
 
         val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.item_normal_view)
 
@@ -47,7 +47,7 @@ class SwipeAndDragHelperItem(private val contract: ActionCompletionContract) : I
     }
 
     override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
-        dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+                             dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
 
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             val alpha = 1 - Math.abs(dX) / recyclerView.width

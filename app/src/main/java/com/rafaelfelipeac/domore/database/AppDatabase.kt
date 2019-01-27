@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.domore.database
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import com.rafaelfelipeac.domore.database.goal.GoalDAO
 import com.rafaelfelipeac.domore.database.item.ItemDAO
 import com.rafaelfelipeac.domore.models.Goal

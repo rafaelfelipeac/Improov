@@ -1,11 +1,11 @@
 package com.rafaelfelipeac.domore.ui.fragments.goal
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.helper.ItemTouchHelper
+import com.google.android.material.snackbar.Snackbar
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.*
 import android.widget.ImageView
 import com.hookedonplay.decoviewlib.DecoView
@@ -105,38 +105,38 @@ class GoalFragment : BaseFragment() {
         }
 
         goal_btn_save.setOnClickListener {
-            if (goal_total_total.text.isNotEmpty()) {
-                count = goal?.value!! + goal_total_total.text.toString().toFloat()
-                goal_count.text = String.format("%.2f", count)
-                goal_total_total.setText("")
-
-                saveAndUpdateGoal()
-
-                Snackbar
-                    .make(view, "Valor atualizado.", Snackbar.LENGTH_SHORT)
-                    .show()
-            } else {
-                Snackbar
-                    .make(view, "Valor inválido.", Snackbar.LENGTH_SHORT)
-                    .show()
-            }
+//            if (goal_total_total.tex.isNotEmpty()) {
+//                count = goal?.value!! + goal_total_total.text.toString().toFloat()
+//                goal_count.text = String.format("%.2f", count)
+//                goal_total_total.setText("")
+//
+//                saveAndUpdateGoal()
+//
+//                Snackbar
+//                    .make(view, "Valor atualizado.", Snackbar.LENGTH_SHORT)
+//                    .show()
+//            } else {
+//                Snackbar
+//                    .make(view, "Valor inválido.", Snackbar.LENGTH_SHORT)
+//                    .show()
+//            }
         }
 
         setItems()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         if (goal?.type == 1) {
-            inflater?.inflate(R.menu.menu_add, menu)
+            inflater.inflate(R.menu.menu_add, menu)
         }
 
-        inflater?.inflate(R.menu.menu_edit, menu)
+        inflater.inflate(R.menu.menu_edit, menu)
 
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.menu_goal_add -> {
 
                 val action =
@@ -203,7 +203,7 @@ class GoalFragment : BaseFragment() {
                 goal_cl_dec_inc.visibility = View.GONE
                 goal_cl_total.visibility = View.VISIBLE
 
-                goal_total_total.setText("")
+                //goal_total_total.setText("")
             }
         }
 
@@ -222,7 +222,11 @@ class GoalFragment : BaseFragment() {
             navController.navigate(R.id.action_goalFragment_to_itemFragment)
         }
 
-        goal_items_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        goal_items_list.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
 
         val swipeAndDragHelper = SwipeAndDragHelperItem(itemsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)

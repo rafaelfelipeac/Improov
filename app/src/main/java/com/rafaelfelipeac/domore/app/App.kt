@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.domore.app
 
 import android.app.Application
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import com.rafaelfelipeac.domore.database.AppDatabase
 import com.rafaelfelipeac.domore.di.AppComponent
 import com.rafaelfelipeac.domore.di.DaggerAppComponent

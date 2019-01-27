@@ -2,7 +2,7 @@ package com.rafaelfelipeac.domore.ui.activities
 
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.findNavController

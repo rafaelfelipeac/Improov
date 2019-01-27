@@ -1,11 +1,11 @@
 package com.rafaelfelipeac.domore.ui.fragments.goals
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,7 +62,11 @@ class GoalsFragment : BaseFragment() {
             navController.navigate(action)
         }
 
-        goals_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        goals_list.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
 
         val swipeAndDragHelper = SwipeAndDragHelperGoal(adapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)

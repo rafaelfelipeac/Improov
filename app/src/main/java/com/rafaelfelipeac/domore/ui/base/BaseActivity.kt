@@ -3,7 +3,7 @@ package com.rafaelfelipeac.domore.ui.base
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.rafaelfelipeac.domore.app.App
 
 @SuppressLint("Registered")

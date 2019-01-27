@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.domore.ui.base
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import android.view.View
 import com.rafaelfelipeac.domore.di.component.DaggerViewModelInjector
 import com.rafaelfelipeac.domore.di.component.ViewModelInjector

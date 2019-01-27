@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.domore.database.goal
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.rafaelfelipeac.domore.models.Goal
 
 @Dao

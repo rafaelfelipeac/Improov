@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.domore.database.item
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.rafaelfelipeac.domore.models.Item
 
 @Dao
