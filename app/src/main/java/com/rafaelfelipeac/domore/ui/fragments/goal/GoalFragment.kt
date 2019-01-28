@@ -404,7 +404,6 @@ class GoalFragment : BaseFragment() {
         seriesGold = arcViewGold.addSeries(seriesItemGold!!)
     }
 
-
     private fun setTrophyBronzeValue() = setupArcView(arcViewBronze, count, seriesBronze)
 
     private fun setTrophySilverValue() = setupArcView(arcViewSilver, count, seriesSilver)
