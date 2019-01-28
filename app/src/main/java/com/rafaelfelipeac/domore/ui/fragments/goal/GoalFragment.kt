@@ -105,21 +105,21 @@ class GoalFragment : BaseFragment() {
         }
 
         goal_btn_save.setOnClickListener {
-//            if (goal_total_total.tex.isNotEmpty()) {
-//                count = goal?.value!! + goal_total_total.text.toString().toFloat()
-//                goal_count.text = String.format("%.2f", count)
-//                goal_total_total.setText("")
-//
-//                saveAndUpdateGoal()
-//
-//                Snackbar
-//                    .make(view, "Valor atualizado.", Snackbar.LENGTH_SHORT)
-//                    .show()
-//            } else {
-//                Snackbar
-//                    .make(view, "Valor inválido.", Snackbar.LENGTH_SHORT)
-//                    .show()
-//            }
+            if (goal_total_total.text?.isNotEmpty()!!) {
+                count = goal?.value!! + goal_total_total.text.toString().toFloat()
+                goal_count.text = String.format("%.2f", count)
+                goal_total_total.setText("")
+
+                saveAndUpdateGoal()
+
+                Snackbar
+                    .make(view, "Valor atualizado.", Snackbar.LENGTH_SHORT)
+                    .show()
+            } else {
+                Snackbar
+                    .make(view, "Valor inválido.", Snackbar.LENGTH_SHORT)
+                    .show()
+            }
         }
 
         setItems()

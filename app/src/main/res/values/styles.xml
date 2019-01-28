@@ -1,12 +1,17 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimaryDark</item>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="titleTextColor">@color/colorPrimary</item>
         <item name="subtitleTextColor">@color/colorPrimary</item>
 
         <item name="android:textColorSecondary">@color/colorPrimary</item>
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>>
+        <item name="colorOnSurface">@color/colorPrimary</item>>
+        <item name="colorOnBackground">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

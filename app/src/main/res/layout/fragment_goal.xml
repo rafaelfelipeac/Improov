@@ -346,39 +346,13 @@
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp">
 
-            <!--<com.google.android.material.textfield.TextInputLayout-->
-                    <!--android:id="@+id/goal_total_total"-->
-                    <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-                    <!--android:layout_width="100dp"-->
-                    <!--android:layout_height="@dimen/edittext_height"-->
-                    <!--android:inputType="numberDecimal|numberSigned"-->
-                    <!--android:gravity="center"-->
-                    <!--android:textSize="18sp"-->
-                    <!--android:textColor="@color/colorPrimary"-->
-                    <!--app:layout_constraintTop_toTopOf="parent"-->
-                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--android:layout_marginTop="16dp"-->
-                    <!--app:layout_constraintStart_toStartOf="parent"-->
-                    <!--android:layout_marginStart="8dp"-->
-                    <!--app:layout_constraintVertical_bias="0.0"-->
-                    <!--android:layout_marginBottom="16dp"-->
-                    <!--android:layout_marginEnd="8dp"-->
-                    <!--app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--android:hint="Outlined Box Text Field">-->
-
-                <!--<android.support.design.widget.TextInputEditText-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:hint="tome " />-->
-
-            <!--</com.google.android.material.textfield.TextInputLayout>-->
-
-            <EditText
-                    android:id="@+id/goal_total_total"
-                    android:layout_width="100dp"
-                    android:layout_height="@dimen/edittext_height"
-                    android:text="0"
-                    android:background="@drawable/rounded_edittext"
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/goal_total_total_til"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:hint="Value"
                     android:inputType="numberDecimal|numberSigned"
                     android:gravity="center"
                     android:textSize="18sp"
@@ -386,12 +360,18 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp"
                     app:layout_constraintVertical_bias="0.0"
                     android:layout_marginBottom="16dp"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/goal_total_total"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/colorPrimary"
+                        android:text="0"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/goal_btn_save"
@@ -407,7 +387,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/goal_total_total"
+                    app:layout_constraintStart_toEndOf="@+id/goal_total_total_til"
                     android:layout_marginStart="8dp"
                     app:layout_constraintHorizontal_bias="0.0"/>
 
