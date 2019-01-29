@@ -46,9 +46,10 @@
                 <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/form_goal_editText_medal_til"
                         android:layout_width="75dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:hint="Medal"
+                        android:gravity="start"
                         android:inputType="numberDecimal|numberSigned"
                         android:textColor="@color/colorPrimary"
                         android:layout_marginStart="8dp"
@@ -56,15 +57,22 @@
                         android:layout_marginEnd="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginBottom="8dp" android:layout_marginTop="16dp"
-                        app:layout_constraintTop_toBottomOf="@+id/form_goal_medal_image">
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@+id/form_goal_medal_image"
+                        app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                        app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                        app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
+                        app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/form_goal_editText_medal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textColor="@color/colorPrimary"
-                            android:text="0"/>
+                            android:text="0"
+                            android:textSize="18sp"
+                            android:textAlignment="center"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,7 +116,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/form_goal_editText_bronze_til"
                             android:layout_width="75dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="60dp"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:hint="Bronze"
                             android:inputType="numberDecimal|numberSigned"
@@ -118,15 +126,22 @@
                             android:layout_marginBottom="8dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp" android:layout_marginTop="16dp"
-                            app:layout_constraintTop_toBottomOf="@+id/form_goal_trophy_bronze_image">
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintTop_toBottomOf="@+id/form_goal_trophy_bronze_image"
+                            app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                            app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                            app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
+                            app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline">
 
                         <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/form_goal_editText_bronze"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/colorPrimary"
-                                android:text="0"/>
+                                android:text="0"
+                                android:textSize="18sp"
+                                android:textAlignment="center"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,7 +171,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/form_goal_editText_silver_til"
                             android:layout_width="75dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="60dp"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:hint="Silver"
                             android:inputType="numberDecimal|numberSigned"
@@ -166,15 +181,22 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             android:layout_marginBottom="8dp"
                             android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp" android:layout_marginTop="16dp"
-                            app:layout_constraintTop_toBottomOf="@+id/form_goal_trophy_silver_image">
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintTop_toBottomOf="@+id/form_goal_trophy_silver_image"
+                            app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                            app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                            app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
+                            app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline">
 
                         <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/form_goal_editText_silver"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/colorPrimary"
-                                android:text="0"/>
+                                android:text="0"
+                                android:textSize="18sp"
+                                android:textAlignment="center"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -206,7 +228,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/form_goal_editText_gold_til"
                             android:layout_width="75dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="60dp"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:hint="Gold"
                             android:inputType="numberDecimal|numberSigned"
@@ -219,14 +241,20 @@
                             android:layout_marginBottom="8dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/form_goal_trophy_gold_image"
-                            android:layout_marginTop="16dp">
+                            android:layout_marginTop="16dp"
+                            app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                            app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                            app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
+                            app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline">
 
                         <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/form_goal_editText_gold"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/colorPrimary"
-                                android:text="0"/>
+                                android:text="0"
+                                android:textSize="18sp"
+                                android:textAlignment="center"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -239,26 +267,33 @@
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/goalForm_goal_name_til"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:inputType="numberDecimal|numberSigned"
                 android:textColor="@color/colorPrimary"
-                android:gravity="center"
                 android:hint="Title"
+                android:gravity="center"
                 android:textColorHint="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintTop_toBottomOf="@+id/form_goal_metal_trophies"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
+                app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/goalForm_goal_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/colorPrimary"
-                    android:text="0"/>
+                    android:text="0"
+                    android:textSize="18sp"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -303,8 +338,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/goalForm_goal_inc_value_til"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:inputType="numberDecimal|numberSigned"
                     android:textColor="@color/colorPrimary"
@@ -313,22 +348,27 @@
                     android:textColorHint="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline">
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/goalForm_goal_inc_value"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/colorPrimary"
-                        android:text="0"/>
+                        android:text="0"
+                        android:textSize="18sp"
+                        android:textAlignment="center"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/goalForm_goal_dec_value_til"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:inputType="numberDecimal|numberSigned"
                     android:textColor="@color/colorPrimary"
@@ -337,16 +377,21 @@
                     android:textColorHint="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintTop_toBottomOf="@+id/goalForm_goal_inc_value_til"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="8dp"
+                    app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline">
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/goalForm_goal_dec_value"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/colorPrimary"
-                        android:text="0"/>
+                        android:text="0"
+                        android:textSize="18sp"
+                        android:textAlignment="center"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -95,7 +95,7 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             tools:layout_editor_absoluteX="11dp"
-            tools:visibility="invisible"
+            tools:visibility="vs"
             android:background="@drawable/rounded_cardview"
             card_view:layout_constraintTop_toTopOf="parent">
 

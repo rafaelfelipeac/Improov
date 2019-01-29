@@ -38,6 +38,12 @@ class GoalFormFragment : BaseFragment() {
         setHasOptionsMenu(true)
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        hideNavigation()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

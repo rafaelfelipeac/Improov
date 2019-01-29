@@ -191,8 +191,7 @@
                         android:layout_marginEnd="8dp"
                         android:background="@mipmap/ic_trophy_gold_dark"
                         app:layout_constraintHorizontal_bias="1.0"
-                        android:layout_marginTop="28dp"
-                />
+                        android:layout_marginTop="28dp"/>
 
                 <TextView
                         android:id="@+id/goal_trophy_gold_text"
@@ -349,7 +348,7 @@
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/goal_total_total_til"
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:layout_constraintStart_toStartOf="parent"
                     android:hint="Value"
@@ -362,14 +361,22 @@
                     android:layout_marginTop="16dp"
                     app:layout_constraintVertical_bias="0.0"
                     android:layout_marginBottom="16dp"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
+                    app:layout_constraintHorizontal_bias="0.24" android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/goal_total_total"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/colorPrimary"
-                        android:text="0"/>
+                        android:textAlignment="center"
+                        android:text="0"
+                        android:textSize="18sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
