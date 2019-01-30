@@ -55,8 +55,8 @@ class GoalFormFragment : BaseFragment() {
             isCheckedInSwitch(switchLista)
         }
 
-        switchTotalIncDec.setOnCheckedChangeListener { _, _ -> // option 2
-            isCheckedInSwitch(switchTotalIncDec)
+        switchTotalIncDec.setOnCheckedChangeListener { _, isChecked -> // option 2
+            isCheckedInSwitch(switchTotalIncDec, isChecked)
         }
 
         switchTotalValor.setOnCheckedChangeListener { _, _ -> // option 3
@@ -78,7 +78,7 @@ class GoalFormFragment : BaseFragment() {
         }
     }
 
-    private fun isCheckedInSwitch(switch: Switch) {
+    private fun isCheckedInSwitch(switch: Switch, isChecked: Boolean = false) {
         when(switch) {
             switchLista -> {
                 switchTotalIncDec.isChecked = false
@@ -92,7 +92,8 @@ class GoalFormFragment : BaseFragment() {
                 switchLista.isChecked = false
                 switchTotalValor.isChecked = false
 
-                goalForm_goal_inc_dev.visibility = View.VISIBLE
+                if (isChecked) goalForm_goal_inc_dev.visibility = View.VISIBLE
+                else goalForm_goal_inc_dev.visibility = View.GONE
 
                 goalType = 2
             }

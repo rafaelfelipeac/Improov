@@ -2,7 +2,7 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
 
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkOne</item>
         <item name="titleTextColor">@color/colorPrimary</item>
         <item name="subtitleTextColor">@color/colorPrimary</item>
         <item name="android:textColorSecondary">@color/colorPrimary</item>
@@ -21,7 +21,4 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Widget.Design.TextInputLayout" parent="AppTheme">
-        <item name="android:lineHeight">18sp</item>
-    </style>
 </resources>

@@ -6,7 +6,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimaryDarkOne"
         tools:context=".ui.activities.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:elevation="0dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/colorPrimaryDarkOne"
                 app:titleTextColor="@color/colorPrimary"/>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -28,7 +28,7 @@
             android:id="@+id/bottom_nav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:itemBackground="@color/colorPrimaryDark"
+            app:itemBackground="@color/colorPrimaryDarkOne"
             app:itemTextColor="@color/colorPrimary"
             app:itemIconTint="@color/colorPrimary"
             android:background="?android:attr/windowBackground"

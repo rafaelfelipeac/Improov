@@ -7,7 +7,7 @@
              android:layout_height="match_parent"
              xmlns:app="http://schemas.android.com/apk/res-auto"
              tools:context=".ui.fragments.search.SearchFragment"
-             android:background="@color/colorPrimaryDark"
+             android:background="@color/colorPrimaryDarkOne"
              android:clickable="true"
              android:focusable="true"
              android:focusableInTouchMode="true">

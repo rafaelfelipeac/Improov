@@ -5,11 +5,13 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".ui.fragments.goals.GoalsFragment"
-             android:background="@color/colorPrimaryDark">
+             android:background="@color/colorPrimaryDarkOne">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_background"
+            android:layout_margin="8dp">
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/goals_list"
@@ -32,7 +34,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp"
                 app:srcCompat="@mipmap/ic_plus"
-                android:tint="@color/colorPrimaryDark"
+                android:tint="@color/colorPrimaryDarkOne"
                 app:backgroundTint="@color/colorPrimary"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
