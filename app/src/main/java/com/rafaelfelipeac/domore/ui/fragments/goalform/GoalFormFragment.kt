@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.*
 import android.widget.Switch
+import com.google.android.material.snackbar.Snackbar
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
@@ -67,11 +68,15 @@ class GoalFormFragment : BaseFragment() {
             if (isChecked) {
                 goal?.trophies = true
 
+                form_goal_editText_medal.setText("")
                 form_goal_trophies.visibility = View.VISIBLE
                 form_goal_medal.visibility = View.INVISIBLE
             } else {
                 goal?.trophies = false
 
+                form_goal_editText_bronze.setText("")
+                form_goal_editText_silver.setText("")
+                form_goal_editText_gold.setText("")
                 form_goal_trophies.visibility = View.INVISIBLE
                 form_goal_medal.visibility = View.VISIBLE
             }
@@ -118,32 +123,73 @@ class GoalFormFragment : BaseFragment() {
         when(item.itemId) {
             R.id.menu_goal_save -> {
                 if (goal == null) {
+                    if (emptyFields()) {
+                        Snackbar
+                            .make(view!!, "Algum valor inválido.", Snackbar.LENGTH_SHORT)
+                            .show()
+                    } else if (!validateTrophiesValues()) {
+                        Snackbar
+                            .make(view!!, "Gold > Silver > Bronze", Snackbar.LENGTH_SHORT)
+                            .show()
+                    } else {
+                        val goalToSave = getNewGoal()
 
-                    val goalToSave = getNewGoal()
-                    viewModel?.saveGoal(goalToSave)
+                        viewModel?.saveGoal(goalToSave)
 
-                    val goal = goalDAO?.getAll()?.last() // with ID now
+                        val goal = goalDAO?.getAll()?.last() // with ID now
 
-                    val action =
-                        GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal!!)
-                    navController.navigate(action)
+                        val action =
+                            GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal!!)
+                        navController.navigate(action)
 
-                    return true
+                        return true
+                    }
                 } else {
+                    if (emptyFields()) {
+                        Snackbar
+                            .make(view!!, "Algum valor inválido.", Snackbar.LENGTH_SHORT)
+                            .show()
+                    } else if (!validateTrophiesValues()) {
+                        Snackbar
+                            .make(view!!, "Gold > Silver > Bronze", Snackbar.LENGTH_SHORT)
+                            .show()
+                    } else {
+                        val goalToUpdate = getUpdateGoal()
 
-                    val goalToUpdate = getUpdateGoal()
 
-                    viewModel?.updateGoal(goalToUpdate)
+                        viewModel?.updateGoal(goalToUpdate)
 
-                    val action =
-                        GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goalToUpdate)
-                    navController.navigate(action)
-
-                    return true
+                        val action =
+                            GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goalToUpdate)
+                        navController.navigate(action)
+2
+                        return true
+                    }
                 }
             }
         }
 
+        return false
+    }
+
+    private fun validateTrophiesValues() : Boolean {
+        val gold = form_goal_editText_gold.text!!.toString().toFloat()
+        val silver = form_goal_editText_silver.text!!.toString().toFloat()
+        val bronze = form_goal_editText_bronze.text!!.toString().toFloat()
+
+        return ((gold > silver) && (silver > bronze))
+    }
+
+    private fun emptyFields(): Boolean {
+        val nameEmpty = goalForm_goal_name.text!!.toString().isEmpty()
+        val medalEmpty = form_goal_editText_medal.text!!.toString().isEmpty()
+        val trophiesEmpty =
+                    form_goal_editText_bronze.text!!.toString().isEmpty() ||
+                    form_goal_editText_silver.text!!.toString().isEmpty() ||
+                    form_goal_editText_gold.text!!.toString().isEmpty()
+
+        if ((medalEmpty && trophiesEmpty) || nameEmpty)
+            return true
         return false
     }
 

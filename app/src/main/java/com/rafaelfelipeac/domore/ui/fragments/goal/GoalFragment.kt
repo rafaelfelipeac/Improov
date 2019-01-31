@@ -1,14 +1,13 @@
 package com.rafaelfelipeac.domore.ui.fragments.goal
 
-import android.app.ActionBar
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.*
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.hookedonplay.decoviewlib.DecoView
 import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
@@ -203,8 +202,6 @@ class GoalFragment : BaseFragment() {
                 goal_cl_list.visibility = View.GONE
                 goal_cl_dec_inc.visibility = View.GONE
                 goal_cl_total.visibility = View.VISIBLE
-
-                //goal_total_total.setText("")
             }
         }
 
