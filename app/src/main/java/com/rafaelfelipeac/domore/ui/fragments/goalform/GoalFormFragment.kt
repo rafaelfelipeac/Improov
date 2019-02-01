@@ -69,6 +69,7 @@ class GoalFormFragment : BaseFragment() {
                 goal?.trophies = true
 
                 form_goal_editText_medal.setText("")
+
                 form_goal_trophies.visibility = View.VISIBLE
                 form_goal_medal.visibility = View.INVISIBLE
             } else {
@@ -77,6 +78,7 @@ class GoalFormFragment : BaseFragment() {
                 form_goal_editText_bronze.setText("")
                 form_goal_editText_silver.setText("")
                 form_goal_editText_gold.setText("")
+
                 form_goal_trophies.visibility = View.INVISIBLE
                 form_goal_medal.visibility = View.VISIBLE
             }
@@ -122,48 +124,44 @@ class GoalFormFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.menu_goal_save -> {
-                if (goal == null) {
-                    if (emptyFields()) {
-                        Snackbar
-                            .make(view!!, "Algum valor inválido.", Snackbar.LENGTH_SHORT)
-                            .show()
-                    } else if (!validateTrophiesValues()) {
-                        Snackbar
-                            .make(view!!, "Gold > Silver > Bronze", Snackbar.LENGTH_SHORT)
-                            .show()
-                    } else {
-                        val goalToSave = getNewGoal()
-
-                        viewModel?.saveGoal(goalToSave)
-
-                        val goal = goalDAO?.getAll()?.last() // with ID now
-
-                        val action =
-                            GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal!!)
-                        navController.navigate(action)
-
-                        return true
-                    }
+                if (emptyFields()) {
+                    Snackbar
+                        .make(view!!, "Algum valor vazio.", Snackbar.LENGTH_SHORT)
+                        .show()
+                } else if (!validateTrophiesValues()) {
+                    Snackbar
+                        .make(view!!, "Gold > Silver > Bronze", Snackbar.LENGTH_SHORT)
+                        .show()
                 } else {
-                    if (emptyFields()) {
+                    if (getType() == 2 &&
+                        (goalForm_goal_inc_value.text.toString().isEmpty() || goalForm_goal_dec_value.text.toString().isEmpty())) {
                         Snackbar
-                            .make(view!!, "Algum valor inválido.", Snackbar.LENGTH_SHORT)
-                            .show()
-                    } else if (!validateTrophiesValues()) {
-                        Snackbar
-                            .make(view!!, "Gold > Silver > Bronze", Snackbar.LENGTH_SHORT)
+                            .make(view!!, "Inc/Dec vazios.", Snackbar.LENGTH_SHORT)
                             .show()
                     } else {
-                        val goalToUpdate = getUpdateGoal()
+                        if (goal == null) {
+                            val goalToSave = getNewGoal()
 
+                            viewModel?.saveGoal(goalToSave)
 
-                        viewModel?.updateGoal(goalToUpdate)
+                            val goal = goalDAO?.getAll()?.last() // with ID now
 
-                        val action =
-                            GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goalToUpdate)
-                        navController.navigate(action)
-2
-                        return true
+                            val action =
+                                GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal!!)
+                            navController.navigate(action)
+
+                            return true
+                        } else {
+                            val goalToUpdate = getUpdateGoal()
+
+                            viewModel?.updateGoal(goalToUpdate)
+
+                            val action =
+                                GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goalToUpdate)
+                            navController.navigate(action)
+
+                            return true
+                        }
                     }
                 }
             }
@@ -173,11 +171,17 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun validateTrophiesValues() : Boolean {
-        val gold = form_goal_editText_gold.text!!.toString().toFloat()
-        val silver = form_goal_editText_silver.text!!.toString().toFloat()
-        val bronze = form_goal_editText_bronze.text!!.toString().toFloat()
+        return try {
+            val gold = form_goal_editText_gold.text!!.toString().toFloat()
+            val silver = form_goal_editText_silver.text!!.toString().toFloat()
+            val bronze = form_goal_editText_bronze.text!!.toString().toFloat()
 
-        return ((gold > silver) && (silver > bronze))
+            ((gold > silver) && (silver > bronze))
+        } catch (e: Exception) {
+            if (form_goal_editText_medal.text!!.toString().isNotEmpty())
+                return true
+            false
+        }
     }
 
     private fun emptyFields(): Boolean {
