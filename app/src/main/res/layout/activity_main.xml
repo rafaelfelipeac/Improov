@@ -12,7 +12,9 @@
     <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:elevation="0dp" android:id="@+id/appBarLayout">
+            app:elevation="0dp" android:id="@+id/appBarLayout"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -26,12 +28,12 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:itemBackground="@color/colorPrimaryDarkOne"
             app:itemTextColor="@color/colorPrimary"
             app:itemIconTint="@color/colorPrimary"
-            android:background="?android:attr/windowBackground"
+            android:background="@color/colorPrimaryDarkOne"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
