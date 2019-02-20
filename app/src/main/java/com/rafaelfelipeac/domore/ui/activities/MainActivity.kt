@@ -24,7 +24,8 @@ class MainActivity : BaseActivity() {
 
     var sheetBehavior: BottomSheetBehavior<*>? = null
 
-    var botao_close: ImageView? = null
+    var item_close: ImageView? = null
+    var item_save: Button? = null
 
     var toolbar: Toolbar? = null
 
@@ -42,7 +43,8 @@ class MainActivity : BaseActivity() {
         NavigationUI.setupWithNavController(bottom_nav, navController)
 
         bottom_navigation = bottom_nav
-        botao_close = botao_fechar
+        item_close = bottom_sheet_item_close
+        item_save = bottom_sheet_button_save
 
         supportActionBar?.elevation = 0F
 

@@ -15,11 +15,11 @@ import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.models.Goal
+import com.rafaelfelipeac.domore.models.Item
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
-import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.*
 import kotlinx.android.synthetic.main.fragment_goal.*
 
 class GoalFragment : BaseFragment() {
@@ -44,7 +44,8 @@ class GoalFragment : BaseFragment() {
     private var lineWidth = 32F
 
     private var sheetBehavior: BottomSheetBehavior<*>? = null
-    private var botao_close: ImageView? = null
+    private var item_close: ImageView? = null
+    private var item_save: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +56,8 @@ class GoalFragment : BaseFragment() {
 
         sheetBehavior = (activity as MainActivity).sheetBehavior
 
-        botao_close = (activity as MainActivity).botao_close
+        item_close = (activity as MainActivity).item_close
+        item_save = (activity as MainActivity).item_save
 
         sheetBehavior?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(p0: View, status: Int) {
@@ -84,7 +86,31 @@ class GoalFragment : BaseFragment() {
             override fun onSlide(view: View, statusSlide: Float) {}
         })
 
-        botao_close?.setOnClickListener {
+        item_close?.setOnClickListener {
+            (activity as MainActivity).closeBottomSheet()
+        }
+
+        item_save?.setOnClickListener {
+            val order =
+                if (itemDAO?.getAll()?.none { it.goalId == goal?.goalId && it.goalId != 0L }!!) { 1 }
+                else {
+                    itemDAO?.getAll()
+                        ?.filter { it.goalId == goal?.goalId && it.goalId != 0L }
+                        ?.size!! + 1
+                }
+
+            val item = Item(
+                goalId = goal?.goalId!!,
+                title = "a$order",
+                desc = "",
+                author = "",
+                done = false,
+                order = order)
+
+            itemDAO?.insert(item)
+
+            setItems()
+
             (activity as MainActivity).closeBottomSheet()
         }
 
