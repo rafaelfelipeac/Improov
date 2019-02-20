@@ -10,7 +10,6 @@ import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 
 class GoalFormFragment : BaseFragment() {
@@ -24,7 +23,7 @@ class GoalFormFragment : BaseFragment() {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = "Nova meta"
-        (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
+        (activity as MainActivity).toolbar!!.inflateMenu(R.menu.menu_save)
 
         viewModel = ViewModelProviders.of(this).get(GoalFormViewModel::class.java)
 

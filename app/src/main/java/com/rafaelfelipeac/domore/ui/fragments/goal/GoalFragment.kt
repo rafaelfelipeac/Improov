@@ -2,11 +2,13 @@ package com.rafaelfelipeac.domore.ui.fragments.goal
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import com.hookedonplay.decoviewlib.DecoView
 import com.hookedonplay.decoviewlib.charts.SeriesItem
@@ -17,7 +19,7 @@ import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.*
 import kotlinx.android.synthetic.main.fragment_goal.*
 
 class GoalFragment : BaseFragment() {
@@ -41,6 +43,9 @@ class GoalFragment : BaseFragment() {
     private var durationAnimation = 75L
     private var lineWidth = 32F
 
+    private var sheetBehavior: BottomSheetBehavior<*>? = null
+    private var botao_close: ImageView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,7 +53,44 @@ class GoalFragment : BaseFragment() {
 
         goal = GoalFragmentArgs.fromBundle(arguments!!).goal
 
+        sheetBehavior = (activity as MainActivity).sheetBehavior
+
+        botao_close = (activity as MainActivity).botao_close
+
+        sheetBehavior?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(p0: View, status: Int) {
+                when (status) {
+                    BottomSheetBehavior.STATE_HIDDEN -> {
+                    }
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+//                        if (add_company_btnAdd_ll != null) {
+                            viewVisibilityOpen()
+//                        }
+                    }
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> {
+                    }
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+//                        if (add_company_btnAdd_ll != null) {
+                            viewVisibilityClose()
+//                        }
+                    }
+                    BottomSheetBehavior.STATE_DRAGGING -> {
+                    }
+                    BottomSheetBehavior.STATE_SETTLING -> {
+                    }
+                }
+            }
+
+            override fun onSlide(view: View, statusSlide: Float) {}
+        })
+
+        botao_close?.setOnClickListener {
+            (activity as MainActivity).closeBottomSheet()
+        }
+
         setHasOptionsMenu(true)
+
+        (activity as MainActivity).bottom_navigation?.visibility = View.GONE
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -139,9 +181,11 @@ class GoalFragment : BaseFragment() {
         when (item.itemId) {
             R.id.menu_goal_add -> {
 
-                val action =
-                    GoalFragmentDirections.actionGoalFragmentToItemFormFragment(goal!!)
-                navController.navigate(action)
+//                val action =
+//                    GoalFragmentDirections.actionGoalFragmentToItemFormFragment(goal!!)
+//                navController.navigate(action)
+
+                (activity as MainActivity).openBottomSheet()
 
                 return true
             }
@@ -153,6 +197,24 @@ class GoalFragment : BaseFragment() {
         }
 
         return false
+    }
+
+    private fun verifyOpen() {
+        if ((activity as MainActivity).openOrCloseBottomSheet()) {
+            (activity as MainActivity).openBottomSheet()
+
+            viewVisibilityOpen()
+        }
+    }
+
+    private fun viewVisibilityOpen() {
+//        add_company_btnAdd_ll.visibility = View.GONE
+//        add_company_name_close.visibility = View.VISIBLE
+    }
+
+    private fun viewVisibilityClose() {
+//        add_company_btnAdd_ll.visibility = View.VISIBLE
+//        add_company_name_close.visibility = View.GONE
     }
 
     fun scoreFromList(done: Boolean) {
@@ -188,8 +250,8 @@ class GoalFragment : BaseFragment() {
                 goal_cl_dec_inc.visibility = View.GONE
                 goal_cl_total.visibility = View.GONE
 
-                if ((activity as MainActivity).toolbar.menu.findItem(R.id.menu_goal_add) == null)
-                    (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
+                if ((activity as MainActivity).toolbar!!.menu.findItem(R.id.menu_goal_add) == null)
+                    (activity as MainActivity).toolbar!!.inflateMenu(R.menu.menu_add)
             }
             2 -> {
                 goal_cl_list.visibility = View.GONE

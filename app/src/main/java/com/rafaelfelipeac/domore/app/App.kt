@@ -27,7 +27,7 @@ class App : Application() {
         prefs = Prefs(applicationContext)
 
         database = Room
-            .databaseBuilder(this, AppDatabase::class.java, "rm-db")
+            .databaseBuilder(this, AppDatabase::class.java, "dm-db")
             .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
             .build()

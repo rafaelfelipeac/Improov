@@ -5,7 +5,7 @@ import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
-@Component()
+@Component
 @Singleton
 interface AppComponent : Injector {
 

@@ -30,6 +30,8 @@ class GoalsFragment : BaseFragment() {
         injector.inject(this)
 
         setHasOptionsMenu(true)
+
+        (activity as MainActivity).bottom_navigation?.visibility = View.VISIBLE
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

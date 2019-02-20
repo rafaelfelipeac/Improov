@@ -1,7 +1,6 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-
         <item name="colorPrimaryDark">@color/colorPrimaryDarkOne</item>
         <item name="titleTextColor">@color/colorPrimary</item>
         <item name="subtitleTextColor">@color/colorPrimary</item>
@@ -20,5 +19,9 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
+    </style>
 
 </resources>

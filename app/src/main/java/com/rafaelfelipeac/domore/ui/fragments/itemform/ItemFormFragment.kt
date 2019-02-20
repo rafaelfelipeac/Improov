@@ -17,10 +17,10 @@ class ItemFormFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
+        (activity as MainActivity).toolbar!!.inflateMenu(R.menu.menu_save)
         (activity as MainActivity).supportActionBar?.title = "GoalsForm"
 
-        return inflater.inflate(R.layout.fragment_item_form, container, false)
+        return inflater.inflate(R.layout.bottom_sheet, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -83,7 +83,7 @@
     <fragment android:id="@+id/itemFormFragment"
               android:name="com.rafaelfelipeac.domore.ui.fragments.itemform.ItemFormFragment"
               android:label="fragment_item_form"
-              tools:layout="@layout/fragment_item_form">
+              tools:layout="@layout/bottom_sheet">
 
         <argument android:name="itemGoal" app:argType="com.rafaelfelipeac.domore.models.Goal"/>
 
