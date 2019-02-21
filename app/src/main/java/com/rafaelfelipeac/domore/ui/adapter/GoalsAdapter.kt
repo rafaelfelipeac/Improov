@@ -3,7 +3,6 @@ package com.rafaelfelipeac.domore.ui.adapter
 import android.annotation.SuppressLint
 import android.graphics.Color
 import com.google.android.material.snackbar.Snackbar
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.View
@@ -36,6 +35,7 @@ class GoalsAdapter @Inject constructor() : BaseAdapter<Goal>(), SwipeAndDragHelp
         holder.setIsRecyclable(false)
 
         val itemDrag = holder.itemView.findViewById<ImageView>(R.id.goal_image_view)
+
         itemDrag.setOnTouchListener { _, _ ->
             touchHelper?.startDrag(holder)
             false
@@ -67,34 +67,30 @@ class GoalsAdapter @Inject constructor() : BaseAdapter<Goal>(), SwipeAndDragHelp
         when(direction) {
             ItemTouchHelper.RIGHT -> { // done
                 goal.done = true
+
                 goalDAO?.update(goal)
 
-                Snackbar
-                    .make(holder.itemView, "Meta resolvida.", Snackbar.LENGTH_LONG)
-                    .setAction("DESFAZER") {
-                        this.items.add(position, goal)
-                        goal.done = false
-                        goalDAO?.update(goal)
-                        notifyItemInserted(position)
-                    }
-                    .setActionTextColor(Color.WHITE)
-                    .show()
+                showSnackBarWithAction(holder.itemView, "Meta resolvida.", position, goal, ::doneGoal)
             }
             ItemTouchHelper.LEFT -> {  // delete
-
                 goalDAO?.delete(goal)
 
-                Snackbar
-                    .make(holder.itemView, "Meta removida.", Snackbar.LENGTH_LONG)
-                    .setAction("DESFAZER") {
-                        this.items.add(position, goal)
-                        goalDAO?.insert(goal)
-                        notifyItemInserted(position)
-                    }
-                    .setActionTextColor(Color.WHITE)
-                    .show()
+                showSnackBarWithAction(holder.itemView, "Meta removida.", position, goal, ::deleteGoal)
             }
         }
+    }
+
+    private fun doneGoal(position: Int, goal: Goal) {
+        this.items.add(position, goal)
+        goal.done = false
+        goalDAO?.update(goal)
+        notifyItemInserted(position)
+    }
+
+    private fun deleteGoal(position: Int, goal: Goal) {
+        this.items.add(position, goal)
+        goalDAO?.insert(goal)
+        notifyItemInserted(position)
     }
 
     fun setTouchHelper(touchHelper: ItemTouchHelper) {

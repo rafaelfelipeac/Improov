@@ -5,7 +5,7 @@ import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.rafaelfelipeac.domore.app.App
 
-open class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
     val injector get() = (application as App).appComponent
 

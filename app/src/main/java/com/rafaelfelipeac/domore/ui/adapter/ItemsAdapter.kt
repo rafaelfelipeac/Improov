@@ -17,7 +17,7 @@ import com.rafaelfelipeac.domore.ui.base.BaseAdapter
 import com.rafaelfelipeac.domore.ui.fragments.goal.GoalFragment
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
 
-class ItemsAdapter(val fragment: Fragment) : BaseAdapter<Item>(), SwipeAndDragHelperItem.ActionCompletionContract {
+class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), SwipeAndDragHelperItem.ActionCompletionContract {
 
     var clickListener: (book: Item) -> Unit = { }
     private var touchHelper: ItemTouchHelper? = null

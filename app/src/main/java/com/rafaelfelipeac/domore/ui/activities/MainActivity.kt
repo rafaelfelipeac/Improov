@@ -4,6 +4,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -22,81 +23,61 @@ class MainActivity : BaseActivity() {
 
     lateinit var navController: NavController
 
-    var sheetBehavior: BottomSheetBehavior<*>? = null
-
-    var item_close: ImageView? = null
-    var item_save: Button? = null
-
     var toolbar: Toolbar? = null
-
-    var bottom_navigation: BottomNavigationView? = null
+    var sheetBehavior: BottomSheetBehavior<*>? = null
+    var bottomNavigation: BottomNavigationView? = null
+    var itemClose: ImageView? = null
+    var itemSave: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar = findViewById(R.id.toolbar)!!
+        initElements()
 
         setSupportActionBar(toolbar)
 
-        navController = findNavController(R.id.nav_host_fragment)
         NavigationUI.setupWithNavController(bottom_nav, navController)
 
-        bottom_navigation = bottom_nav
-        item_close = bottom_sheet_item_close
-        item_save = bottom_sheet_button_save
+//        supportActionBar?.elevation = 0F
 
-        supportActionBar?.elevation = 0F
-
-        sheetBehavior = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_id))
-
-        toolbar!!.navigationIcon?.setColorFilter(ContextCompat.getColor(
+        toolbar?.navigationIcon?.setColorFilter(ContextCompat.getColor(
             this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
-            R.id.menu_goal_save -> { return false }
-            R.id.menu_goal_add -> {return false }
-            android.R.id.home -> { return false }
+        return when {
+            item?.itemId == R.id.menu_goal_save -> false
+            item?.itemId == R.id.menu_goal_add -> false
+            item?.itemId == android.R.id.home -> false
+            else -> false
         }
-
-        return false
-    }
-
-    override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
-
-//    fun showBottomSheet() {
-//        sheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
-//    }
-
-//    fun hideBottomSheet() {
-//        sheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
-//    }
-//
-//    fun setupBottomSheet() {
-//        val height = 200
-//        sheetBehavior?.peekHeight = height
-//
-//        showBottomSheet()
-//    }
-
-    fun openBottomSheet() {
-        sheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
-    }
-
-    fun closeBottomSheet() {
-        sheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
-    }
-
-    fun openOrCloseBottomSheet(): Boolean {
-        return sheetBehavior?.state != BottomSheetBehavior.STATE_EXPANDED
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
+
         clearToolbarMenu()
     }
+
+    override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
+
+    fun bottomNavigationVisible(visible: Boolean) {
+        bottomNavigation?.visibility = if (visible) View.VISIBLE else View.GONE
+    }
+
+    private fun initElements() {
+        toolbar = findViewById(R.id.toolbar)!!
+        navController = findNavController(R.id.nav_host_fragment)
+        bottomNavigation = bottom_nav
+        itemClose = bottom_sheet_item_close
+        itemSave = bottom_sheet_button_save
+        sheetBehavior = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_id))
+    }
+
+    fun openBottomSheet() { sheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED }
+
+    fun closeBottomSheet() { sheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED }
 
     private fun clearToolbarMenu() = toolbar?.menu!!.clear()
 }

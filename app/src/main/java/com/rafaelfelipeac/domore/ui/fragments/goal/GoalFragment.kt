@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.snackbar.Snackbar
 import com.hookedonplay.decoviewlib.DecoView
 import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
@@ -35,17 +35,12 @@ class GoalFragment : BaseFragment() {
     private var seriesSilver: Int = 0
     private var seriesGold: Int = 0
 
-    private var seriesItemMedal: SeriesItem? = null
-    private var seriesItemBronze: SeriesItem? = null
-    private var seriesItemSilver: SeriesItem? = null
-    private var seriesItemGold: SeriesItem? = null
-
     private var durationAnimation = 75L
     private var lineWidth = 32F
 
     private var sheetBehavior: BottomSheetBehavior<*>? = null
-    private var item_close: ImageView? = null
-    private var item_save: Button? = null
+    private var itemClose: ImageView? = null
+    private var itemSave: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,69 +49,12 @@ class GoalFragment : BaseFragment() {
 
         goal = GoalFragmentArgs.fromBundle(arguments!!).goal
 
-        sheetBehavior = (activity as MainActivity).sheetBehavior
-
-        item_close = (activity as MainActivity).item_close
-        item_save = (activity as MainActivity).item_save
-
-        sheetBehavior?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(p0: View, status: Int) {
-                when (status) {
-                    BottomSheetBehavior.STATE_HIDDEN -> {
-                    }
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-//                        if (add_company_btnAdd_ll != null) {
-                            viewVisibilityOpen()
-//                        }
-                    }
-                    BottomSheetBehavior.STATE_HALF_EXPANDED -> {
-                    }
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-//                        if (add_company_btnAdd_ll != null) {
-                            viewVisibilityClose()
-//                        }
-                    }
-                    BottomSheetBehavior.STATE_DRAGGING -> {
-                    }
-                    BottomSheetBehavior.STATE_SETTLING -> {
-                    }
-                }
-            }
-
-            override fun onSlide(view: View, statusSlide: Float) {}
-        })
-
-        item_close?.setOnClickListener {
-            (activity as MainActivity).closeBottomSheet()
-        }
-
-        item_save?.setOnClickListener {
-            val order =
-                if (itemDAO?.getAll()?.none { it.goalId == goal?.goalId && it.goalId != 0L }!!) { 1 }
-                else {
-                    itemDAO?.getAll()
-                        ?.filter { it.goalId == goal?.goalId && it.goalId != 0L }
-                        ?.size!! + 1
-                }
-
-            val item = Item(
-                goalId = goal?.goalId!!,
-                title = "a$order",
-                desc = "",
-                author = "",
-                done = false,
-                order = order)
-
-            itemDAO?.insert(item)
-
-            setItems()
-
-            (activity as MainActivity).closeBottomSheet()
-        }
-
         setHasOptionsMenu(true)
 
-        (activity as MainActivity).bottom_navigation?.visibility = View.GONE
+        initElements()
+        setBottomSheet()
+
+        (activity as MainActivity).bottomNavigationVisible(false)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -131,7 +69,6 @@ class GoalFragment : BaseFragment() {
         super.onStart()
 
         hideNavigation()
-
         setupGoal()
     }
 
@@ -147,56 +84,42 @@ class GoalFragment : BaseFragment() {
         hideSoftKeyboard(activity!!)
 
         if (goal?.trophies!!) {
-            resetTrophyBronze()
-            resetTrophySilver()
-            resetTrophyGold()
+            resetTrophies()
         } else {
             resetMedal()
         }
 
+        setButtons()
+        setItems()
+    }
+
+    private fun setButtons() {
         goal_btn_inc.setOnClickListener {
             count += goal?.incrementValue!!
-
-            goal_count.text = String.format("%.2f", count)
-            goal_inc_dec_total.text = String.format("%.2f", count)
-
-            saveAndUpdateGoal()
+            updateTextAndGoal(goal_inc_dec_total)
         }
 
         goal_btn_dec.setOnClickListener {
             count -= goal?.decrementValue!!
-
-            goal_count.text = String.format("%.2f", count)
-            goal_inc_dec_total.text = String.format("%.2f", count)
-
-            saveAndUpdateGoal()
+            updateTextAndGoal(goal_inc_dec_total)
         }
 
         goal_btn_save.setOnClickListener {
             if (goal_total_total.text?.isNotEmpty()!!) {
                 count = goal?.value!! + goal_total_total.text.toString().toFloat()
-                goal_count.text = String.format("%.2f", count)
+                updateTextAndGoal(goal_count)
+
                 goal_total_total.setText("")
 
-                saveAndUpdateGoal()
-
-                Snackbar
-                    .make(view, "Valor atualizado.", Snackbar.LENGTH_SHORT)
-                    .show()
+                showSnackBar("Valor atualizado.")
             } else {
-                Snackbar
-                    .make(view, "Valor inválido.", Snackbar.LENGTH_SHORT)
-                    .show()
+                showSnackBar("Valor inválido.")
             }
         }
-
-        setItems()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (goal?.type == 1) {
-            inflater.inflate(R.menu.menu_add, menu)
-        }
+        if (goal?.type == 1) { inflater.inflate(R.menu.menu_add, menu) }
 
         inflater.inflate(R.menu.menu_edit, menu)
 
@@ -206,11 +129,6 @@ class GoalFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_goal_add -> {
-
-//                val action =
-//                    GoalFragmentDirections.actionGoalFragmentToItemFormFragment(goal!!)
-//                navController.navigate(action)
-
                 (activity as MainActivity).openBottomSheet()
 
                 return true
@@ -225,22 +143,62 @@ class GoalFragment : BaseFragment() {
         return false
     }
 
-    private fun verifyOpen() {
-        if ((activity as MainActivity).openOrCloseBottomSheet()) {
-            (activity as MainActivity).openBottomSheet()
+    private fun updateTextAndGoal(textView: TextView) {
+        goal_count.text = String.format("%.2f", count)
+        textView.text = String.format("%.2f", count)
 
-            viewVisibilityOpen()
+        updateGoal()
+    }
+
+    private fun setBottomSheet() {
+        sheetBehavior?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(p0: View, status: Int) {
+                when (status) {
+                    BottomSheetBehavior.STATE_HIDDEN -> { }
+                    BottomSheetBehavior.STATE_EXPANDED -> { }
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> { }
+                    BottomSheetBehavior.STATE_COLLAPSED -> { }
+                    BottomSheetBehavior.STATE_DRAGGING -> { }
+                    BottomSheetBehavior.STATE_SETTLING -> { }
+                }
+            }
+
+            override fun onSlide(view: View, statusSlide: Float) {}
+        })
+
+        itemClose?.setOnClickListener { (activity as MainActivity).closeBottomSheet() }
+
+        itemSave?.setOnClickListener {
+            val order =
+                if (itemDAO?.getAll()?.none { it.goalId == goal?.goalId && it.goalId != 0L }!!) {
+                    1
+                } else {
+                    itemDAO?.getAll()
+                        ?.filter { it.goalId == goal?.goalId && it.goalId != 0L }
+                        ?.size!! + 1
+                }
+
+            val item = Item(
+                goalId = goal?.goalId!!,
+                title = "a$order",
+                desc = "",
+                author = "",
+                done = false,
+                order = order
+            )
+
+            itemDAO?.insert(item)
+
+            setItems()
+
+            (activity as MainActivity).closeBottomSheet()
         }
     }
 
-    private fun viewVisibilityOpen() {
-//        add_company_btnAdd_ll.visibility = View.GONE
-//        add_company_name_close.visibility = View.VISIBLE
-    }
-
-    private fun viewVisibilityClose() {
-//        add_company_btnAdd_ll.visibility = View.VISIBLE
-//        add_company_name_close.visibility = View.GONE
+    private fun initElements() {
+        sheetBehavior = (activity as MainActivity).sheetBehavior
+        itemClose = (activity as MainActivity).itemClose
+        itemSave = (activity as MainActivity).itemSave
     }
 
     fun scoreFromList(done: Boolean) {
@@ -250,7 +208,7 @@ class GoalFragment : BaseFragment() {
 
         goal_count.text = String.format("%.2f", count)
 
-        saveAndUpdateGoal()
+        updateGoal()
     }
 
     private fun setupGoal() {
@@ -324,7 +282,7 @@ class GoalFragment : BaseFragment() {
         touchHelper.attachToRecyclerView(goal_items_list)
     }
 
-    private fun saveAndUpdateGoal() {
+    private fun updateGoal() {
         goal?.value = count
         goalDAO?.update(goal!!)
 
@@ -425,9 +383,7 @@ class GoalFragment : BaseFragment() {
 
     private fun trophiesSituations() {
         if (count == 0F) {
-            resetTrophyBronze()
-            resetTrophySilver()
-            resetTrophyGold()
+            resetTrophies()
         } else if (count > 0) {
             if (count <= goal?.bronzeValue!!) {
                 setTrophyBronzeValue()
@@ -454,40 +410,44 @@ class GoalFragment : BaseFragment() {
         }
     }
 
-    private fun resetMedal() {
-        arcViewMedal.configureAngles(300, 0)
-
-        seriesItemMedal = setupArcViewAndSeriesItem(arcViewMedal, 0F,
-            goal?.medalValue!!, 0F, false)
-
-        seriesMedal = arcViewMedal.addSeries(seriesItemMedal!!)
+    private fun resetTrophies() {
+        resetTrophyBronze()
+        resetTrophySilver()
+        resetTrophyGold()
     }
 
     private fun resetTrophyBronze() {
-        arcViewBronze.configureAngles(300, 0)
-
-        seriesItemBronze = setupArcViewAndSeriesItem(arcViewBronze, 0F,
-            goal?.bronzeValue!!, 0F, false)
-
-        seriesBronze = arcViewBronze.addSeries(seriesItemBronze!!)
+        seriesBronze = resetMedalOrTrophy(
+            arcViewBronze, 0F,
+            goal?.bronzeValue!!, 0F
+        )
     }
 
     private fun resetTrophySilver() {
-        arcViewSilver.configureAngles(300, 0)
-
-        seriesItemSilver = setupArcViewAndSeriesItem(arcViewSilver, goal?.bronzeValue!!,
-            goal?.silverValue!!, goal?.bronzeValue!!, false)
-
-        seriesSilver = arcViewSilver.addSeries(seriesItemSilver!!)
+        seriesSilver = resetMedalOrTrophy(
+            arcViewSilver, goal?.bronzeValue!!,
+            goal?.silverValue!!, goal?.bronzeValue!!
+        )
     }
 
     private fun resetTrophyGold() {
-        arcViewGold.configureAngles(300, 0)
+        seriesGold = resetMedalOrTrophy(
+            arcViewGold, goal?.silverValue!!,
+            goal?.goldValue!!, goal?.silverValue!!
+        )
+    }
 
-        seriesItemGold = setupArcViewAndSeriesItem(arcViewGold, goal?.silverValue!!,
-            goal?.goldValue!!, goal?.silverValue!!, false)
+    private fun resetMedal() {
+        seriesMedal = resetMedalOrTrophy(
+            arcViewMedal, 0F,
+            goal?.medalValue!!, 0F
+        )
+    }
 
-        seriesGold = arcViewGold.addSeries(seriesItemGold!!)
+    private fun resetMedalOrTrophy(arcView: DecoView, minValue: Float, maxValue: Float, initialValue: Float) : Int {
+        arcView.configureAngles(300, 0)
+
+        return arcView.addSeries(setupArcViewAndSeriesItem(arcView, minValue, maxValue, initialValue, false))
     }
 
     private fun setTrophyBronzeValue() = setupArcView(arcViewBronze, count, seriesBronze)
@@ -545,16 +505,14 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun changeMedalOrTrophyIconDark(image: ImageView, iconNormal: Int, iconDark: Int, dark: Boolean) {
-        if (dark)
-            image.background = ContextCompat.getDrawable(context!!, iconDark)
-        else
-            image.background = ContextCompat.getDrawable(context!!, iconNormal)
+        image.background =
+            if (dark) ContextCompat.getDrawable(context!!, iconDark)
+            else ContextCompat.getDrawable(context!!, iconNormal)
     }
 
     private fun changeMedalOrTrophyIcon(image: ImageView, iconNormal: Int, iconDark: Int) {
-        if (image.background == ContextCompat.getDrawable(context!!, iconNormal))
-            image.background = ContextCompat.getDrawable(context!!, iconDark)
-        else
-            image.background = ContextCompat.getDrawable(context!!, iconNormal)
+        image.background =
+            if (image.background == ContextCompat.getDrawable(context!!, iconNormal)) ContextCompat.getDrawable(context!!, iconDark)
+            else ContextCompat.getDrawable(context!!, iconNormal)
     }
 }

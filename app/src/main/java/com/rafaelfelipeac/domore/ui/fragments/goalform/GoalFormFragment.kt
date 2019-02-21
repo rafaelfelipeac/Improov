@@ -7,6 +7,7 @@ import android.view.*
 import android.widget.Switch
 import com.google.android.material.snackbar.Snackbar
 import com.rafaelfelipeac.domore.R
+import com.rafaelfelipeac.domore.extension.ifNotEmptyReturnValue
 import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
@@ -51,6 +52,60 @@ class GoalFormFragment : BaseFragment() {
             setupGoal()
         }
 
+        setSwitchs()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_save, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_goal_save -> {
+                if (emptyFields()) {
+                    showSnackBar("Algum valor vazio.")
+                } else if (!validateTrophiesValues()) {
+                    showSnackBar("Gold > Silver > Bronze")
+                } else if (emptyIncOrDec()) {
+                    showSnackBar("Inc/Dec vazios.")
+                } else {
+                    if (goal == null) {
+                        val goalToSave = getNewGoal()
+
+                        viewModel?.saveGoal(goalToSave)
+
+                        val goal = goalDAO?.getAll()?.last() // with ID now
+
+                        val action =
+                            GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal!!)
+                        navController.navigate(action)
+
+                        return true
+                    } else {
+                        val goalToUpdate = getUpdateGoal()
+
+                        viewModel?.updateGoal(goalToUpdate)
+
+                        val action =
+                            GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goalToUpdate)
+                        navController.navigate(action)
+
+                        return true
+                    }
+                }
+            }
+        }
+
+        return false
+    }
+
+    private fun emptyIncOrDec() =
+        getType() == 2 && (goalForm_goal_inc_value.text.toString().isEmpty() ||
+                goalForm_goal_dec_value.text.toString().isEmpty())
+
+    private fun setSwitchs() {
         switchLista.setOnCheckedChangeListener { _, _ -> // option 1
             isCheckedInSwitch(switchLista)
         }
@@ -64,23 +119,25 @@ class GoalFormFragment : BaseFragment() {
         }
 
         form_goal_switch_trophies.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                goal?.trophies = true
+            if (isChecked) { isTrophies(true) } else { isTrophies(false) }
+        }
+    }
 
-                form_goal_editText_medal.setText("")
+    private fun isTrophies(isTrophy: Boolean) {
+        goal?.trophies = isTrophy
 
-                form_goal_trophies.visibility = View.VISIBLE
-                form_goal_medal.visibility = View.INVISIBLE
-            } else {
-                goal?.trophies = false
+        if (isTrophy) {
+            form_goal_editText_medal.setText("")
 
-                form_goal_editText_bronze.setText("")
-                form_goal_editText_silver.setText("")
-                form_goal_editText_gold.setText("")
+            form_goal_trophies.visibility = View.VISIBLE
+            form_goal_medal.visibility = View.INVISIBLE
+        } else {
+            form_goal_editText_bronze.setText("")
+            form_goal_editText_silver.setText("")
+            form_goal_editText_gold.setText("")
 
-                form_goal_trophies.visibility = View.INVISIBLE
-                form_goal_medal.visibility = View.VISIBLE
-            }
+            form_goal_trophies.visibility = View.INVISIBLE
+            form_goal_medal.visibility = View.VISIBLE
         }
     }
 
@@ -114,61 +171,6 @@ class GoalFormFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_save, menu)
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.menu_goal_save -> {
-                if (emptyFields()) {
-                    Snackbar
-                        .make(view!!, "Algum valor vazio.", Snackbar.LENGTH_SHORT)
-                        .show()
-                } else if (!validateTrophiesValues()) {
-                    Snackbar
-                        .make(view!!, "Gold > Silver > Bronze", Snackbar.LENGTH_SHORT)
-                        .show()
-                } else {
-                    if (getType() == 2 &&
-                        (goalForm_goal_inc_value.text.toString().isEmpty() || goalForm_goal_dec_value.text.toString().isEmpty())) {
-                        Snackbar
-                            .make(view!!, "Inc/Dec vazios.", Snackbar.LENGTH_SHORT)
-                            .show()
-                    } else {
-                        if (goal == null) {
-                            val goalToSave = getNewGoal()
-
-                            viewModel?.saveGoal(goalToSave)
-
-                            val goal = goalDAO?.getAll()?.last() // with ID now
-
-                            val action =
-                                GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal!!)
-                            navController.navigate(action)
-
-                            return true
-                        } else {
-                            val goalToUpdate = getUpdateGoal()
-
-                            viewModel?.updateGoal(goalToUpdate)
-
-                            val action =
-                                GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goalToUpdate)
-                            navController.navigate(action)
-
-                            return true
-                        }
-                    }
-                }
-            }
-        }
-
-        return false
-    }
-
     private fun validateTrophiesValues() : Boolean {
         return try {
             val gold = form_goal_editText_gold.text!!.toString().toFloat()
@@ -198,9 +200,7 @@ class GoalFormFragment : BaseFragment() {
 
     private fun getNewGoal(): Goal {
         return Goal(
-            name =
-                if (goalForm_goal_name.text!!.isNotEmpty()) goalForm_goal_name.text.toString()
-                else "abc" ,
+            name =  goalForm_goal_name.ifNotEmptyReturnValue(),
             medalValue =
                 if (form_goal_editText_medal.text!!.isNotEmpty()) form_goal_editText_medal.text.toString().toFloat()
                 else 100F,
