@@ -5,9 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.*
 import android.widget.Switch
-import com.google.android.material.snackbar.Snackbar
 import com.rafaelfelipeac.domore.R
-import com.rafaelfelipeac.domore.extension.ifNotEmptyReturnValue
+import com.rafaelfelipeac.domore.extension.ifNotEmptyReturnValueElseReturnOtherValue
 import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
@@ -200,7 +199,7 @@ class GoalFormFragment : BaseFragment() {
 
     private fun getNewGoal(): Goal {
         return Goal(
-            name =  goalForm_goal_name.ifNotEmptyReturnValue(),
+            name =  goalForm_goal_name.ifNotEmptyReturnValueElseReturnOtherValue("ABC"),
             medalValue =
                 if (form_goal_editText_medal.text!!.isNotEmpty()) form_goal_editText_medal.text.toString().toFloat()
                 else 100F,
