@@ -65,10 +65,4 @@ class SwipeAndDragHelperItem(private val contract: ActionCompletionContract) : I
     override fun isLongPressDragEnabled() = false
 
     override fun isItemViewSwipeEnabled() = true
-
-    interface ActionCompletionContract {
-        fun onViewMoved(oldPosition: Int, newPosition: Int)
-
-        fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder)
-    }
 }

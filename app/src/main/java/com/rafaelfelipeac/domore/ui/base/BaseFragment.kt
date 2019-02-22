@@ -21,23 +21,13 @@ open class BaseFragment : Fragment() {
 
     val navigation: BottomNavigationView get() = (activity as MainActivity).findViewById(R.id.bottom_nav)
 
+    fun showNavigation() { navigation.visibility = View.VISIBLE }
+
+    fun hideNavigation() { navigation.visibility = View.GONE }
+
     fun showSnackBar(message: String) {
         Snackbar.make(view!!, message, Snackbar.LENGTH_SHORT).show()
     }
-
-    fun showError(message: String) {
-        Snackbar.make(view!!, message, Snackbar.LENGTH_SHORT).show()
-    }
-
-//    fun progressBarVisibility(visible: Boolean) {
-//        val progressBar = activity?.findViewById<ProgressBar>(R.id.main_progressBar)!!
-//
-//        if (visible) {
-//            progressBar.visibility = View.VISIBLE
-//        } else {
-//            progressBar.visibility = View.GONE
-//        }
-//    }
 
     fun showSoftKeyboard(activity: Activity) {
         val inputMethodManager = activity.
@@ -52,8 +42,4 @@ open class BaseFragment : Fragment() {
 
         inputMethodManager!!.hideSoftInputFromWindow(view?.windowToken, 0)
     }
-
-    fun showNavigation() { navigation.visibility = View.VISIBLE }
-
-    fun hideNavigation() { navigation.visibility = View.GONE }
  }

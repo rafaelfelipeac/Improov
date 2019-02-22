@@ -1,21 +1,19 @@
 package com.rafaelfelipeac.domore.ui.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import com.google.android.material.snackbar.Snackbar
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.View
 import android.widget.ImageView
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.app.App
 import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.ui.base.BaseAdapter
-import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperGoal
+import com.rafaelfelipeac.domore.ui.helper.ActionCompletionContract
 import kotlinx.android.synthetic.main.list_item_goal.view.*
 import javax.inject.Inject
 
-class GoalsAdapter @Inject constructor() : BaseAdapter<Goal>(), SwipeAndDragHelperGoal.ActionCompletionContract {
+class GoalsAdapter @Inject constructor() : BaseAdapter<Goal>(), ActionCompletionContract {
 
     var clickListener: (goal: Goal) -> Unit = { }
     private var touchHelper: ItemTouchHelper? = null

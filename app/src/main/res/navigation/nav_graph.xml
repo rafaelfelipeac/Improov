@@ -5,18 +5,6 @@
             android:id="@+id/nav_graph"
             app:startDestination="@id/navigation_goals">
 
-    <fragment android:id="@+id/navigation_home"
-              android:name="com.rafaelfelipeac.domore.ui.fragments.home.HomeFragment"
-              android:label="fragment_home"
-              tools:layout="@layout/fragment_home">
-
-        <action android:id="@+id/action_navigation_home_to_goalsFragment" app:destination="@id/navigation_goals"/>
-        <action android:id="@+id/action_navigation_home_to_metricsFragment" app:destination="@+id/navigation_metrics"/>
-        <action android:id="@+id/action_navigation_home_to_searchFragment" app:destination="@id/navigation_search"/>
-        <action android:id="@+id/action_navigation_home_to_settingsFragment" app:destination="@id/navigation_settings"/>
-
-    </fragment>
-
     <fragment android:id="@+id/navigation_goals"
               android:name="com.rafaelfelipeac.domore.ui.fragments.goals.GoalsFragment"
               android:label="fragment_goals"
@@ -66,28 +54,8 @@
 
         <argument android:name="goal" app:argType="com.rafaelfelipeac.domore.models.Goal"/>
 
-        <action android:id="@+id/action_goalFragment_to_itemFragment" app:destination="@id/itemFragment"/>
-        <action android:id="@+id/action_goalFragment_to_itemFormFragment" app:destination="@id/itemFormFragment"/>
         <action android:id="@+id/action_goalFragment_to_goalFormFragment" app:destination="@id/goalFormFragment"/>
         <action android:id="@+id/action_goalFragment_to_navigation_goals" app:destination="@id/navigation_goals"/>
-
-    </fragment>
-
-    <fragment android:id="@+id/itemFragment"
-              android:name="com.rafaelfelipeac.domore.ui.fragments.Item.ItemFragment"
-              android:label="fragment_book"
-              tools:layout="@layout/fragment_item">
-
-    </fragment>
-
-    <fragment android:id="@+id/itemFormFragment"
-              android:name="com.rafaelfelipeac.domore.ui.fragments.itemform.ItemFormFragment"
-              android:label="fragment_item_form"
-              tools:layout="@layout/bottom_sheet">
-
-        <argument android:name="itemGoal" app:argType="com.rafaelfelipeac.domore.models.Goal"/>
-
-        <action android:id="@+id/action_itemFormFragment_to_goalFragment" app:destination="@id/goalFragment"/>
 
     </fragment>
 

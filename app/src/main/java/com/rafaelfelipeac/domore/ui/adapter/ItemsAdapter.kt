@@ -2,22 +2,22 @@ package com.rafaelfelipeac.domore.ui.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import com.google.android.material.snackbar.Snackbar
-import androidx.fragment.app.Fragment
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.app.App
 import com.rafaelfelipeac.domore.models.Item
 import com.rafaelfelipeac.domore.ui.base.BaseAdapter
 import com.rafaelfelipeac.domore.ui.fragments.goal.GoalFragment
-import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
+import com.rafaelfelipeac.domore.ui.helper.ActionCompletionContract
 
-class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), SwipeAndDragHelperItem.ActionCompletionContract {
+class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), ActionCompletionContract {
 
     var clickListener: (book: Item) -> Unit = { }
     private var touchHelper: ItemTouchHelper? = null

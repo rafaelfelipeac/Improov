@@ -10,7 +10,6 @@
         app:behavior_hideable="true"
         app:behavior_peekHeight="0dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        tools:context=".ui.fragments.itemform.ItemFormFragment"
         android:background="@color/colorPrimaryDarkOne">
 
     <ImageView
@@ -31,13 +30,14 @@
             <!--android:layout_marginTop="4dp"/>-->
 
     <TextView
+            android:id="@+id/bottom_sheet_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ItemForm"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"/>
 
@@ -45,10 +45,10 @@
             android:id="@+id/bottom_sheet_item_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@mipmap/ic_add"
+            android:background="@drawable/ic_close"
             android:layout_marginEnd="8dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,7 +67,6 @@
                 android:layout_height="63dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="Item name"
-                android:inputType="numberDecimal|numberSigned"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toTopOf="parent"
@@ -84,8 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
-                    android:inputType="numberDecimal"/>
+                    android:textSize="16sp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

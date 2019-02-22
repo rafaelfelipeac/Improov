@@ -3,4 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="message_empty_inc_dec">Inc/Dec vazios.</string>
+    <string name="message_gold_silver_bronze_order"><![CDATA[Gold > Silver > Bronze]]></string>
+    <string name="message_some_empty_value">Algum valor vazio.</string>
 </resources>

@@ -25,12 +25,6 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>(
         holder.bind(items[position])
     }
 
-    fun setItems(items: List<T>) {
-        this.items.clear()
-        this.items.addAll(items)
-        notifyDataSetChanged()
-    }
-
     @LayoutRes
     abstract fun getLayoutRes(): Int
 
@@ -38,6 +32,12 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>(
 
     inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(getLayoutRes())) {
         fun bind(item: T) = itemView.bindView(item, this)
+    }
+
+    fun setItems(items: List<T>) {
+        this.items.clear()
+        this.items.addAll(items)
+        notifyDataSetChanged()
     }
 
     fun showSnackBarWithAction(view: View, message: String, position: Int, goal: Goal, function: (position: Int, goal: Goal) -> Unit) {

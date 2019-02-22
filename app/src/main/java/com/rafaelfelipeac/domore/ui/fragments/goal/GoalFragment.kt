@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.hookedonplay.decoviewlib.DecoView
 import com.hookedonplay.decoviewlib.charts.SeriesItem
@@ -108,7 +109,6 @@ class GoalFragment : BaseFragment() {
             if (goal_total_total.text?.isNotEmpty()!!) {
                 count = goal?.value!! + goal_total_total.text.toString().toFloat()
                 updateTextAndGoal(goal_count)
-
                 goal_total_total.setText("")
 
                 showSnackBar("Valor atualizado.")
@@ -129,7 +129,7 @@ class GoalFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_goal_add -> {
-                (activity as MainActivity).openBottomSheet()
+                (activity as MainActivity).openBottomSheet(null)
 
                 return true
             }
@@ -139,7 +139,6 @@ class GoalFragment : BaseFragment() {
                 navController.navigate(action)
             }
         }
-
         return false
     }
 
@@ -157,7 +156,9 @@ class GoalFragment : BaseFragment() {
                     BottomSheetBehavior.STATE_HIDDEN -> { }
                     BottomSheetBehavior.STATE_EXPANDED -> { }
                     BottomSheetBehavior.STATE_HALF_EXPANDED -> { }
-                    BottomSheetBehavior.STATE_COLLAPSED -> { }
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                        hideSoftKeyboard(activity!!)
+                    }
                     BottomSheetBehavior.STATE_DRAGGING -> { }
                     BottomSheetBehavior.STATE_SETTLING -> { }
                 }
@@ -166,31 +167,37 @@ class GoalFragment : BaseFragment() {
             override fun onSlide(view: View, statusSlide: Float) {}
         })
 
-        itemClose?.setOnClickListener { (activity as MainActivity).closeBottomSheet() }
+        itemClose?.setOnClickListener {
+            (activity as MainActivity).itemValue?.setText("")
+            (activity as MainActivity).closeBottomSheet()
+        }
 
         itemSave?.setOnClickListener {
             val order =
-                if (itemDAO?.getAll()?.none { it.goalId == goal?.goalId && it.goalId != 0L }!!) {
-                    1
-                } else {
-                    itemDAO?.getAll()
-                        ?.filter { it.goalId == goal?.goalId && it.goalId != 0L }
-                        ?.size!! + 1
-                }
+                if (itemDAO?.getAll()?.none { it.goalId != 0L }!!) { 1 }
+                else { itemDAO?.getAll()?.filter { it.goalId == goal?.goalId }?.size!! + 1 }
 
-            val item = Item(
-                goalId = goal?.goalId!!,
-                title = "a$order",
-                desc = "",
-                author = "",
-                done = false,
-                order = order
-            )
+            val item: Item?
 
-            itemDAO?.insert(item)
+            if ((activity as MainActivity).item != null) {
+                item = (activity as MainActivity).item
+                item?.title = (activity as MainActivity).itemValue?.text.toString()
+
+                itemDAO?.update(item!!)
+            } else {
+                item = Item( goalId = goal?.goalId!!,
+                    title = "a$order",
+                    desc = "",
+                    author = "",
+                    done = false,
+                    order = order)
+
+                itemDAO?.insert(item)
+            }
 
             setItems()
 
+            (activity as MainActivity).itemValue?.setText("")
             (activity as MainActivity).closeBottomSheet()
         }
     }
@@ -217,15 +224,16 @@ class GoalFragment : BaseFragment() {
         goal_title.text = goal?.name
         goal_count.text = String.format("%.2f", count)
 
-        if (goal?.trophies!!) {
-            goal_medal.visibility = View.INVISIBLE
-            goal_trophies.visibility = View.VISIBLE
+        when {
+            goal?.trophies!! -> {
+                goal_medal.visibility = View.INVISIBLE
+                goal_trophies.visibility = View.VISIBLE
 
-            goal_trophy_bronze_text.text = goal?.bronzeValue.toString()
-            goal_trophy_silver_text.text = goal?.silverValue.toString()
-            goal_trophy_gold_text.text = goal?.goldValue.toString()
-        } else {
-            goal_medal_text.text = goal?.medalValue.toString()
+                goal_trophy_bronze_text.text = goal?.bronzeValue.toString()
+                goal_trophy_silver_text.text = goal?.silverValue.toString()
+                goal_trophy_gold_text.text = goal?.goldValue.toString()
+            }
+            else -> goal_medal_text.text = goal?.medalValue.toString()
         }
 
         when (goal?.type) {
@@ -257,26 +265,18 @@ class GoalFragment : BaseFragment() {
     private fun setItems() {
         val itemsList = itemDAO?.getAll()
 
-        val orderItemsList =
-            itemsList?.filter { it.goalId == goal?.goalId && it.goalId != 0L }?.sortedBy { it.order }
+        itemsAdapter.setItems(itemsList
+            ?.filter { it.goalId == goal?.goalId && it.goalId != 0L }
+            ?.sortedBy { it.order }!!)
 
-        itemsAdapter.setItems(orderItemsList!!)
-
-        itemsAdapter.clickListener = {
-            navController.navigate(R.id.action_goalFragment_to_itemFragment)
-        }
-
-        goal_items_list.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.VERTICAL,
-            false
-        )
+        itemsAdapter.clickListener = { (activity as MainActivity).openBottomSheet(it) }
 
         val swipeAndDragHelper = SwipeAndDragHelperItem(itemsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
         itemsAdapter.setTouchHelper(touchHelper)
 
+        goal_items_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         goal_items_list.adapter = itemsAdapter
 
         touchHelper.attachToRecyclerView(goal_items_list)
@@ -374,11 +374,8 @@ class GoalFragment : BaseFragment() {
                 changeMedalOrTrophyIcon(goal_medal_image, R.mipmap.ic_medal, R.mipmap.ic_medal_dark)
             else
                 changeMedalOrTrophyIconDark(goal_medal_image, R.mipmap.ic_medal, R.mipmap.ic_medal_dark, true)
-        } else if (count > goal?.medalValue!!) {
-            medalOrTrophies()
-        } else if (count == 0F) {
-            resetMedal()
-        }
+        } else if (count > goal?.medalValue!!) { medalOrTrophies()
+        } else if (count == 0F) { resetMedal() }
     }
 
     private fun trophiesSituations() {
@@ -419,34 +416,29 @@ class GoalFragment : BaseFragment() {
     private fun resetTrophyBronze() {
         seriesBronze = resetMedalOrTrophy(
             arcViewBronze, 0F,
-            goal?.bronzeValue!!, 0F
-        )
+            goal?.bronzeValue!!, 0F)
     }
 
     private fun resetTrophySilver() {
         seriesSilver = resetMedalOrTrophy(
             arcViewSilver, goal?.bronzeValue!!,
-            goal?.silverValue!!, goal?.bronzeValue!!
-        )
+            goal?.silverValue!!, goal?.bronzeValue!!)
     }
 
     private fun resetTrophyGold() {
         seriesGold = resetMedalOrTrophy(
             arcViewGold, goal?.silverValue!!,
-            goal?.goldValue!!, goal?.silverValue!!
-        )
+            goal?.goldValue!!, goal?.silverValue!!)
     }
 
     private fun resetMedal() {
         seriesMedal = resetMedalOrTrophy(
             arcViewMedal, 0F,
-            goal?.medalValue!!, 0F
-        )
+            goal?.medalValue!!, 0F)
     }
 
     private fun resetMedalOrTrophy(arcView: DecoView, minValue: Float, maxValue: Float, initialValue: Float) : Int {
         arcView.configureAngles(300, 0)
-
         return arcView.addSeries(setupArcViewAndSeriesItem(arcView, minValue, maxValue, initialValue, false))
     }
 

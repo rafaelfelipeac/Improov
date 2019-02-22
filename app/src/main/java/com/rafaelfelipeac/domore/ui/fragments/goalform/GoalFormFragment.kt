@@ -63,11 +63,11 @@ class GoalFormFragment : BaseFragment() {
         when (item.itemId) {
             R.id.menu_goal_save -> {
                 if (emptyFields()) {
-                    showSnackBar("Algum valor vazio.")
+                    showSnackBar(getString(R.string.message_some_empty_value))
                 } else if (!validateTrophiesValues()) {
-                    showSnackBar("Gold > Silver > Bronze")
+                    showSnackBar(getString(R.string.message_gold_silver_bronze_order))
                 } else if (emptyIncOrDec()) {
-                    showSnackBar("Inc/Dec vazios.")
+                    showSnackBar(getString(R.string.message_empty_inc_dec))
                 } else {
                     if (goal == null) {
                         val goalToSave = getNewGoal()
