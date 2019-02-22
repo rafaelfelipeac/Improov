@@ -56,6 +56,10 @@ class GoalsFragment : BaseFragment() {
             navController.navigate(R.id.action_navigation_goals_to_goalFormFragment)
         }
 
+        setupListAndAdapter()
+    }
+
+    private fun setupListAndAdapter() {
         adapter.setItems(viewModel?.getGoals()!!.sortedBy { it.order })
 
         adapter.clickListener = {
@@ -66,7 +70,7 @@ class GoalsFragment : BaseFragment() {
 
         goals_list.layoutManager = LinearLayoutManager(
             context,
-            LinearLayoutManager.VERTICAL,
+            RecyclerView.VERTICAL,
             false
         )
 

@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.*
 import android.widget.Switch
 import com.rafaelfelipeac.domore.R
-import com.rafaelfelipeac.domore.extension.ifNotEmptyReturnValueElseReturnOtherValue
 import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
@@ -118,7 +117,11 @@ class GoalFormFragment : BaseFragment() {
         }
 
         form_goal_switch_trophies.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) { isTrophies(true) } else { isTrophies(false) }
+            if (isChecked) {
+                isTrophies(true)
+            } else {
+                isTrophies(false)
+            }
         }
     }
 
@@ -198,35 +201,31 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun getNewGoal(): Goal {
-        return Goal(
-            name =  goalForm_goal_name.ifNotEmptyReturnValueElseReturnOtherValue("ABC"),
-            medalValue =
-                if (form_goal_editText_medal.text!!.isNotEmpty()) form_goal_editText_medal.text.toString().toFloat()
-                else 100F,
+        val goal = Goal(
+            name =  goalForm_goal_name.text.toString(),
             value = 0F,
             initialDate = "",
             finalDate = "",
             type = goalType,
             done = false,
-            order =
-                if (goalDAO?.getAll()!!.isEmpty()) { 1 }
-                else { goalDAO?.getAll()!![goalDAO!!.getAll().size-1].order + 1 },
-            trophies = form_goal_switch_trophies.isChecked,
-            bronzeValue =
-                if (form_goal_editText_bronze.text!!.isNotEmpty()) form_goal_editText_bronze.text.toString().toFloat()
-                else 100F,
-            silverValue =
-                if (form_goal_editText_silver.text!!.isNotEmpty()) form_goal_editText_silver.text.toString().toFloat()
-                else 100F,
-            goldValue =
-                if (form_goal_editText_gold.text!!.isNotEmpty()) form_goal_editText_gold.text.toString().toFloat()
-                else 100F,
-            incrementValue =
-                if (goalForm_goal_inc_value!!.text!!.isNotEmpty()) goalForm_goal_inc_value.text.toString().toFloat()
-                else 0F,
-            decrementValue =
-                if (goalForm_goal_dec_value!!.text!!.isNotEmpty()) goalForm_goal_dec_value.text.toString().toFloat()
-                else 0F)
+            order = goalDAO?.getAll()!![goalDAO!!.getAll().size-1].order + 1 ,
+            trophies = form_goal_switch_trophies.isChecked
+        )
+
+        if (goal.trophies) {
+            goal.bronzeValue = form_goal_editText_bronze.text.toString().toFloat()
+            goal.silverValue = form_goal_editText_silver.text.toString().toFloat()
+            goal.goldValue = form_goal_editText_gold.text.toString().toFloat()
+        } else {
+            goal.medalValue = form_goal_editText_medal.text.toString().toFloat()
+        }
+
+        if (goal.type == 2) {
+            goal.incrementValue = goalForm_goal_inc_value.text.toString().toFloat()
+            goal.decrementValue = goalForm_goal_dec_value.text.toString().toFloat()
+        }
+
+        return goal
     }
 
     private fun getUpdateGoal() : Goal {
