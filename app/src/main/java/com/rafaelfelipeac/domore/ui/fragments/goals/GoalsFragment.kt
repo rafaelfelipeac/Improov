@@ -12,15 +12,16 @@ import android.view.ViewGroup
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.adapter.GoalsAdapter
+import com.rafaelfelipeac.domore.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperGoal
+import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
+import kotlinx.android.synthetic.main.fragment_goal.*
 import kotlinx.android.synthetic.main.fragment_goals.*
-import javax.inject.Inject
 
 class GoalsFragment : BaseFragment() {
 
-    @Inject
-    lateinit var adapter: GoalsAdapter
+    private var goalsAdapter = GoalsAdapter(this)
 
     private var viewModel: GoalsViewModel?= null
 
@@ -59,10 +60,10 @@ class GoalsFragment : BaseFragment() {
         setupListAndAdapter()
     }
 
-    private fun setupListAndAdapter() {
-        adapter.setItems(viewModel?.getGoals()!!.sortedBy { it.order })
+    fun setupListAndAdapter() {
+        goalsAdapter.setItems(viewModel?.getGoals()!!.sortedBy { it.order })
 
-        adapter.clickListener = {
+        goalsAdapter.clickListener = {
             val action =
                 GoalsFragmentDirections.actionNavigationGoalsToGoalFragment(it)
             navController.navigate(action)
@@ -74,12 +75,29 @@ class GoalsFragment : BaseFragment() {
             false
         )
 
-        val swipeAndDragHelper = SwipeAndDragHelperGoal(adapter)
+        val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        adapter.setTouchHelper(touchHelper)
+        goalsAdapter.setTouchHelper(touchHelper)
 
-        goals_list.adapter = adapter
+        goals_list.adapter = goalsAdapter
+
+        touchHelper.attachToRecyclerView(goals_list)
+    }
+
+    fun setItems() {
+        val goalsList = goalDAO?.getAll()
+
+        goalsAdapter.setItems(goalsList
+            ?.sortedBy { it.order }!!)
+
+        val swipeAndDragHelper = SwipeAndDragHelperItem(goalsAdapter)
+        val touchHelper = ItemTouchHelper(swipeAndDragHelper)
+
+        goalsAdapter.setTouchHelper(touchHelper)
+
+        goals_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        goals_list.adapter = goalsAdapter
 
         touchHelper.attachToRecyclerView(goals_list)
     }

@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import com.google.android.material.snackbar.Snackbar
 import com.rafaelfelipeac.domore.app.App
 import com.rafaelfelipeac.domore.models.Goal
+import com.rafaelfelipeac.domore.models.Item
+import java.util.*
 
 abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>() {
 
@@ -40,13 +42,23 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>(
         notifyDataSetChanged()
     }
 
-    fun showSnackBarWithAction(view: View, message: String, position: Int, goal: Goal, function: (position: Int, goal: Goal) -> Unit) {
+    fun showSnackBarWithActionGoal(view: View, message: String, position: Int, goal: Goal, function: (position: Int, goal: Goal) -> Unit) {
         Snackbar
             .make(view, message, Snackbar.LENGTH_LONG)
             .setAction("DESFAZER") { function(position, goal) }
             .setActionTextColor(Color.WHITE)
             .show()
     }
+
+    fun showSnackBarWithActionItem(view: View, message: String, position: Int, item: Item, function: (position: Int, item: Item) -> Unit) {
+        Snackbar
+            .make(view, message, Snackbar.LENGTH_LONG)
+            .setAction("DESFAZER") { function(position, item) }
+            .setActionTextColor(Color.WHITE)
+            .show()
+    }
+
+    fun getCurrentTime() = Calendar.getInstance().time!!
 }
 
 @JvmOverloads

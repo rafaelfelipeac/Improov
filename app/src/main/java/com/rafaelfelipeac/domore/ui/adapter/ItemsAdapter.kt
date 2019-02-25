@@ -1,7 +1,6 @@
 package com.rafaelfelipeac.domore.ui.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -9,9 +8,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.app.App
+import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.models.Item
 import com.rafaelfelipeac.domore.ui.base.BaseAdapter
 import com.rafaelfelipeac.domore.ui.fragments.goal.GoalFragment
@@ -73,63 +72,55 @@ class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), Action
     override fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder) {
         val item = this.items[position]
 
-        //this.items.removeAt(position)
-        //notifyItemRemoved(position)
-
         when(direction) {
-            ItemTouchHelper.RIGHT -> { // done/undone
-                if (!item.done) { // done
+            ItemTouchHelper.RIGHT -> {
+                // done/undone
+
+                if (!item.done) {
+                    // done
+
                     item.done = true
+                    item.doneDate = getCurrentTime()
+
                     itemDAO?.update(item)
 
                     (fragment as GoalFragment).scoreFromList(true)
+                } else {
+                    // undone
 
-                    Snackbar
-                        .make(holder.itemView, "Item voltou.", Snackbar.LENGTH_LONG)
-                        .setAction("DESFAZER") {
-                            this.items.add(position, item)
-                            item.done = false
-                            itemDAO?.update(item)
-                            //notifyItemInserted(position)
-
-                            fragment.scoreFromList(false)
-                        }
-                        .setActionTextColor(Color.WHITE)
-                        .show()
-                } else { // undone
                     item.done = false
+                    item.undoneDate = getCurrentTime()
+
                     itemDAO?.update(item)
 
                     (fragment as GoalFragment).scoreFromList(false)
-
-                    Snackbar
-                        .make(holder.itemView, "Item resolvido.", Snackbar.LENGTH_LONG)
-                        .setAction("DESFAZER") {
-                            this.items.add(position, item)
-                            item.done = true
-                            itemDAO?.update(item)
-                            notifyItemInserted(position)
-
-                            fragment.scoreFromList(true)
-                        }
-                        .setActionTextColor(Color.WHITE)
-                        .show()
                 }
             }
-            ItemTouchHelper.LEFT -> { // delete
+            ItemTouchHelper.LEFT -> {
+                // delete
+
+                item.deleteDate = getCurrentTime()
+
                 itemDAO?.delete(item)
 
-                Snackbar
-                    .make(holder.itemView, "Item removido.", Snackbar.LENGTH_LONG)
-                    .setAction("DESFAZER") {
-                        this.items.add(position, item)
-                        itemDAO?.insert(item)
-                        notifyItemInserted(position)
-                    }
-                    .setActionTextColor(Color.WHITE)
-                    .show()
+                showSnackBarWithActionItem(holder.itemView, "Item removido.", position, item, ::deleteItem)
             }
         }
+    }
+
+//    private fun doneItem(position: Int, item: Item) {
+//        //this.items.add(position, item)
+//        item.done = false
+//        itemDAO?.update(item)
+//        this.items[position] = item
+//        //notifyItemInserted(position)
+//        notifyDataSetChanged()
+//    }
+
+    private fun deleteItem(position: Int, item: Item) {
+        this.items.add(position, item)
+        itemDAO?.insert(item)
+        notifyItemInserted(position)
     }
 
     fun setTouchHelper(touchHelper: ItemTouchHelper) {

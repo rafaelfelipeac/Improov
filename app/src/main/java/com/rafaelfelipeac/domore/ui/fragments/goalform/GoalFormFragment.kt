@@ -10,6 +10,8 @@ import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_goal_form.*
+import java.time.LocalDateTime
+import java.util.*
 
 class GoalFormFragment : BaseFragment() {
 
@@ -201,15 +203,18 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun getNewGoal(): Goal {
+        val order =
+            if (goalDAO?.getAll()?.size == 0) 0
+            else goalDAO?.getAll()!![goalDAO!!.getAll().size-1].order + 1
+
         val goal = Goal(
             name =  goalForm_goal_name.text.toString(),
             value = 0F,
-            initialDate = "",
-            finalDate = "",
             type = goalType,
             done = false,
-            order = goalDAO?.getAll()!![goalDAO!!.getAll().size-1].order + 1 ,
-            trophies = form_goal_switch_trophies.isChecked
+            order = order,
+            trophies = form_goal_switch_trophies.isChecked,
+            createdDate = getCurrentTime()
         )
 
         if (goal.trophies) {
@@ -232,6 +237,7 @@ class GoalFormFragment : BaseFragment() {
         goal?.name = goalForm_goal_name.text.toString()
         goal?.trophies = form_goal_switch_trophies.isChecked
         goal?.type = getType()
+        goal?.updatedDate = getCurrentTime()
 
         if (getType() == 2) {
             goal?.incrementValue = goalForm_goal_inc_value.text.toString().toFloat()

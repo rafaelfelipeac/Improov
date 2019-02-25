@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.app.App
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
+import java.util.*
 
 open class BaseFragment : Fragment() {
 
@@ -42,4 +43,6 @@ open class BaseFragment : Fragment() {
 
         inputMethodManager!!.hideSoftInputFromWindow(view?.windowToken, 0)
     }
+
+    fun getCurrentTime() = Calendar.getInstance().time!!
  }

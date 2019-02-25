@@ -106,7 +106,7 @@
                 card_view:layout_constraintEnd_toEndOf="parent" card_view:layout_constraintHorizontal_bias="0.0"/>
 
         <ImageView
-                android:id="@+id/item_progress"
+                android:id="@+id/goal_progress"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:background="@mipmap/ic_item_undone"

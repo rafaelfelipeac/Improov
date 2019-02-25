@@ -179,20 +179,21 @@ class GoalFragment : BaseFragment() {
 
             val item: Item?
 
-            if ((activity as MainActivity).item != null) {
-                item = (activity as MainActivity).item
-                item?.title = (activity as MainActivity).itemValue?.text.toString()
-
-                itemDAO?.update(item!!)
-            } else {
+            if ((activity as MainActivity).item == null) {
                 item = Item( goalId = goal?.goalId!!,
-                    title = "a$order",
-                    desc = "",
-                    author = "",
+                    title = (activity as MainActivity).itemValue?.text.toString(),
                     done = false,
-                    order = order)
+                    order = order,
+                    createdDate = getCurrentTime()
+                )
 
                 itemDAO?.insert(item)
+            } else {
+                item = (activity as MainActivity).item
+                item?.title = (activity as MainActivity).itemValue?.text.toString()
+                item?.updatedDate = getCurrentTime()
+
+                itemDAO?.update(item!!)
             }
 
             setItems()
