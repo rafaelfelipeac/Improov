@@ -78,7 +78,7 @@ class GoalsFragment : BaseFragment() {
         val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        goalsAdapter.setTouchHelper(touchHelper)
+        goalsAdapter.touchHelper = touchHelper
 
         goals_list.adapter = goalsAdapter
 
@@ -94,7 +94,7 @@ class GoalsFragment : BaseFragment() {
         val swipeAndDragHelper = SwipeAndDragHelperItem(goalsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        goalsAdapter.setTouchHelper(touchHelper)
+        goalsAdapter.touchHelper = touchHelper
 
         goals_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         goals_list.adapter = goalsAdapter

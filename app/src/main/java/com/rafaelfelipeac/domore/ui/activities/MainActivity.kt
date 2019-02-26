@@ -14,9 +14,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.domore.R
+import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.models.Item
 import com.rafaelfelipeac.domore.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.bottom_sheet_goal_done.*
 import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.*
 
 class MainActivity : BaseActivity() {
@@ -24,12 +26,15 @@ class MainActivity : BaseActivity() {
     lateinit var navController: NavController
 
     var toolbar: Toolbar? = null
-    var sheetBehavior: BottomSheetBehavior<*>? = null
+    var bottomSheetAddItem: BottomSheetBehavior<*>? = null
+    var bottomSheetDoneGoal: BottomSheetBehavior<*>? = null
     var bottomNavigation: BottomNavigationView? = null
     var itemClose: ImageView? = null
     var itemSave: Button? = null
     var itemTitle: TextView? = null
     var itemValue: TextInputEditText? = null
+    var bottomSheetDoneGoalYes: Button? = null
+    var bottomSheetDoneGoalNo: Button? = null
     var item: Item? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,19 +68,22 @@ class MainActivity : BaseActivity() {
         toolbar = findViewById(R.id.toolbar)!!
         navController = findNavController(R.id.nav_host_fragment)
         bottomNavigation = bottom_nav
-        sheetBehavior = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_id))
+        bottomSheetAddItem = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_add_item))
+        bottomSheetDoneGoal =  BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_done_goal))
         itemClose = bottom_sheet_item_close
         itemSave = bottom_sheet_button_save
         itemTitle = bottom_sheet_title
         itemValue = bottom_sheet_item_name
+        bottomSheetDoneGoalYes = bottom_sheet_button_yes
+        bottomSheetDoneGoalNo = bottom_sheet_button_no
     }
 
     fun bottomNavigationVisible(visible: Boolean) {
         bottomNavigation?.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
-    fun openBottomSheet(item: Item?) {
-        sheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
+    fun openBottomSheetAddItem(item: Item?) {
+        bottomSheetAddItem?.state = BottomSheetBehavior.STATE_EXPANDED
 
         this.item = item
         if (item == null) {
@@ -86,7 +94,22 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun closeBottomSheet() { sheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED }
+    fun closeBottomSheetAddItem() { bottomSheetAddItem?.state = BottomSheetBehavior.STATE_COLLAPSED }
+
+    fun openBottomSheetDoneGoal(goal: Goal, function: (goal: Goal, done: Boolean) -> Unit) {
+        bottomSheetDoneGoal?.state = BottomSheetBehavior.STATE_EXPANDED
+
+        bottomSheetDoneGoalYes?.setOnClickListener {
+            function(goal, true)
+            closeBottomSheetDoneGoal()
+        }
+
+        bottomSheetDoneGoalNo?.setOnClickListener {
+            closeBottomSheetDoneGoal()
+        }
+    }
+
+    fun closeBottomSheetDoneGoal() { bottomSheetDoneGoal?.state = BottomSheetBehavior.STATE_COLLAPSED }
 
     private fun setToolbar() {
         setSupportActionBar(toolbar)

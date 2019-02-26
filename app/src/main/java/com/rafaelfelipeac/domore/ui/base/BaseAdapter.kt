@@ -1,20 +1,21 @@
 package com.rafaelfelipeac.domore.ui.base
 
 import android.graphics.Color
-import androidx.annotation.LayoutRes
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.rafaelfelipeac.domore.app.App
-import com.rafaelfelipeac.domore.models.Goal
-import com.rafaelfelipeac.domore.models.Item
 import java.util.*
 
 abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>() {
 
     protected val items: MutableList<T> = mutableListOf()
+
+    var touchHelper: ItemTouchHelper? = null
 
     var goalDAO = App.database?.goalDAO()
     var itemDAO = App.database?.itemDAO()
@@ -42,18 +43,10 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>(
         notifyDataSetChanged()
     }
 
-    fun showSnackBarWithActionGoal(view: View, message: String, position: Int, goal: Goal, function: (position: Int, goal: Goal) -> Unit) {
+    fun showSnackBarWithAction(view: View, message: String, obj: T, function: (t: T) -> Unit) {
         Snackbar
             .make(view, message, Snackbar.LENGTH_LONG)
-            .setAction("DESFAZER") { function(position, goal) }
-            .setActionTextColor(Color.WHITE)
-            .show()
-    }
-
-    fun showSnackBarWithActionItem(view: View, message: String, position: Int, item: Item, function: (position: Int, item: Item) -> Unit) {
-        Snackbar
-            .make(view, message, Snackbar.LENGTH_LONG)
-            .setAction("DESFAZER") { function(position, item) }
+            .setAction("DESFAZER") { function(obj) }
             .setActionTextColor(Color.WHITE)
             .show()
     }

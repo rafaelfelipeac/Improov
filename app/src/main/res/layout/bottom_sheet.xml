@@ -10,4 +10,6 @@
 
     <include layout="@layout/bottom_sheet_item_fragment" />
 
+    <include layout="@layout/bottom_sheet_goal_done" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -19,7 +19,6 @@ import com.rafaelfelipeac.domore.ui.helper.ActionCompletionContract
 class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), ActionCompletionContract {
 
     var clickListener: (book: Item) -> Unit = { }
-    private var touchHelper: ItemTouchHelper? = null
 
     override fun getLayoutRes(): Int = R.layout.list_item_item
 
@@ -74,11 +73,7 @@ class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), Action
 
         when(direction) {
             ItemTouchHelper.RIGHT -> {
-                // done/undone
-
                 if (!item.done) {
-                    // done
-
                     item.done = true
                     item.doneDate = getCurrentTime()
 
@@ -86,8 +81,6 @@ class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), Action
 
                     (fragment as GoalFragment).scoreFromList(true)
                 } else {
-                    // undone
-
                     item.done = false
                     item.undoneDate = getCurrentTime()
 
@@ -97,33 +90,19 @@ class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), Action
                 }
             }
             ItemTouchHelper.LEFT -> {
-                // delete
-
                 item.deleteDate = getCurrentTime()
 
                 itemDAO?.delete(item)
 
-                showSnackBarWithActionItem(holder.itemView, "Item removido.", position, item, ::deleteItem)
+                showSnackBarWithAction(holder.itemView, "Item removido.", item, ::deleteItem)
+
+                (fragment as GoalFragment).setItems()
             }
         }
     }
 
-//    private fun doneItem(position: Int, item: Item) {
-//        //this.items.add(position, item)
-//        item.done = false
-//        itemDAO?.update(item)
-//        this.items[position] = item
-//        //notifyItemInserted(position)
-//        notifyDataSetChanged()
-//    }
-
-    private fun deleteItem(position: Int, item: Item) {
-        this.items.add(position, item)
+    private fun deleteItem(item: Item) {
         itemDAO?.insert(item)
-        notifyItemInserted(position)
-    }
-
-    fun setTouchHelper(touchHelper: ItemTouchHelper) {
-        this.touchHelper = touchHelper
+        (fragment as GoalFragment).setItems()
     }
 }

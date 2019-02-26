@@ -11,16 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.app.App
 import com.rafaelfelipeac.domore.models.Goal
+import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.base.BaseAdapter
 import com.rafaelfelipeac.domore.ui.fragments.goals.GoalsFragment
 import com.rafaelfelipeac.domore.ui.helper.ActionCompletionContract
-import kotlinx.android.synthetic.main.list_item_goal.view.*
-import org.w3c.dom.Text
 
 class GoalsAdapter(private val fragment: Fragment) : BaseAdapter<Goal>(), ActionCompletionContract {
 
     var clickListener: (goal: Goal) -> Unit = { }
-    private var touchHelper: ItemTouchHelper? = null
 
     override fun getLayoutRes(): Int = R.layout.list_item_goal
 
@@ -30,10 +28,7 @@ class GoalsAdapter(private val fragment: Fragment) : BaseAdapter<Goal>(), Action
         val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_item_title)
         val image = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress)
 
-        if (goal.done)
-            title.text = goal.name + "feito"
-        else
-            title.text = goal.name
+        title.text = goal.name
 
         if (goal.done)
             image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
@@ -76,58 +71,42 @@ class GoalsAdapter(private val fragment: Fragment) : BaseAdapter<Goal>(), Action
 
         when(direction) {
             ItemTouchHelper.RIGHT -> {
-                // done/undone
-
                 if (!goal.done) {
-                    // done
-
-                    goal.done = true
-                    goal.doneDate = getCurrentTime()
-
-                    goalDAO?.update(goal)
-
-                    //showSnackBarWithActionGoal(holder.itemView, "Meta - Done.", position, goal, ::doneGoal)
-
                     (fragment as GoalsFragment).setItems()
-                } else {
-                    // undone
 
+                    (fragment.activity as MainActivity).openBottomSheetDoneGoal(goal, ::doneGoal)
+                } else {
                     goal.done = false
                     goal.undoneDate = getCurrentTime()
 
                     goalDAO?.update(goal)
 
-                    //showSnackBarWithActionGoal(holder.itemView, "Meta - Undone.", position, goal, ::doneGoal)
-
                     (fragment as GoalsFragment).setItems()
                 }
             }
             ItemTouchHelper.LEFT -> {
-                // delete
-
                 goal.deleteDate = getCurrentTime()
 
                 goalDAO?.delete(goal)
 
-                showSnackBarWithActionGoal(holder.itemView, "Meta removida.", position, goal, ::deleteGoal)
+                showSnackBarWithAction(holder.itemView, "Meta removida.", goal, ::deleteGoal)
+
+                (fragment as GoalsFragment).setItems()
             }
         }
     }
 
-//    private fun doneGoal(position: Int, goal: Goal) {
-//        this.items.add(position, goal)
-//        goal.done = false
-//        goalDAO?.update(goal)
-//        notifyItemInserted(position)
-//    }
+    private fun doneGoal(goal: Goal, done: Boolean) {
+        goal.done = done
+        goal.undoneDate = getCurrentTime()
 
-    private fun deleteGoal(position: Int, goal: Goal) {
-        this.items.add(position, goal)
-        goalDAO?.insert(goal)
-        notifyItemInserted(position)
+        goalDAO?.update(goal)
+
+        (fragment as GoalsFragment).setItems()
     }
 
-    fun setTouchHelper(touchHelper: ItemTouchHelper) {
-        this.touchHelper = touchHelper
+    private fun deleteGoal(goal: Goal) {
+        goalDAO?.insert(goal)
+        (fragment as GoalsFragment).setItems()
     }
 }

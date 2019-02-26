@@ -129,7 +129,7 @@ class GoalFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_goal_add -> {
-                (activity as MainActivity).openBottomSheet(null)
+                (activity as MainActivity).openBottomSheetAddItem(null)
 
                 return true
             }
@@ -169,7 +169,7 @@ class GoalFragment : BaseFragment() {
 
         itemClose?.setOnClickListener {
             (activity as MainActivity).itemValue?.setText("")
-            (activity as MainActivity).closeBottomSheet()
+            (activity as MainActivity).closeBottomSheetAddItem()
         }
 
         itemSave?.setOnClickListener {
@@ -199,12 +199,12 @@ class GoalFragment : BaseFragment() {
             setItems()
 
             (activity as MainActivity).itemValue?.setText("")
-            (activity as MainActivity).closeBottomSheet()
+            (activity as MainActivity).closeBottomSheetAddItem()
         }
     }
 
     private fun initElements() {
-        sheetBehavior = (activity as MainActivity).sheetBehavior
+        sheetBehavior = (activity as MainActivity).bottomSheetAddItem
         itemClose = (activity as MainActivity).itemClose
         itemSave = (activity as MainActivity).itemSave
     }
@@ -263,19 +263,19 @@ class GoalFragment : BaseFragment() {
         medalOrTrophies()
     }
 
-    private fun setItems() {
+    fun setItems() {
         val itemsList = itemDAO?.getAll()
 
         itemsAdapter.setItems(itemsList
             ?.filter { it.goalId == goal?.goalId && it.goalId != 0L }
             ?.sortedBy { it.order }!!)
 
-        itemsAdapter.clickListener = { (activity as MainActivity).openBottomSheet(it) }
+        itemsAdapter.clickListener = { (activity as MainActivity).openBottomSheetAddItem(it) }
 
         val swipeAndDragHelper = SwipeAndDragHelperItem(itemsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        itemsAdapter.setTouchHelper(touchHelper)
+        itemsAdapter.touchHelper = touchHelper
 
         goal_items_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         goal_items_list.adapter = itemsAdapter
