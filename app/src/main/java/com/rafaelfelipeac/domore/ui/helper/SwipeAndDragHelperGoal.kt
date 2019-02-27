@@ -56,10 +56,12 @@ class SwipeAndDragHelperGoal(private val contract: ActionCompletionContract) : I
 
         val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.goal_normal_view)
 
-        ItemTouchHelper.Callback.getDefaultUIUtil()
-            .onDraw(c, recyclerView, foregroundView, dX, 0f, actionState, isCurrentlyActive)
+        if (foregroundView != null) {
+            ItemTouchHelper.Callback.getDefaultUIUtil()
+                .onDraw(c, recyclerView, foregroundView, dX, 0f, actionState, isCurrentlyActive)
 
-        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+        }
     }
 
     override fun isLongPressDragEnabled() = false

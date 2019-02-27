@@ -21,6 +21,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Há itens pendentes nesse objetivo. \n\n Deseja dar como concluído?"
@@ -28,39 +29,47 @@
             android:textColor="@color/colorPrimary"
             android:gravity="center_horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="64dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="64dp"
-            android:layout_marginTop="16dp" app:layout_constraintTop_toTopOf="parent" android:id="@+id/textView"/>
+            android:layout_marginStart="64dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="64dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     <android.widget.Button
             android:id="@+id/bottom_sheet_button_yes"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="SIM"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"
             android:layout_marginTop="24dp"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/view2"
-    />
+            app:layout_constraintEnd_toStartOf="@+id/view"/>
 
     <View
+            android:id="@+id/view"
             android:layout_width="1dp"
-            android:layout_height="0dp" android:id="@+id/view2"
+            android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"/>
+
     <android.widget.Button
             android:id="@+id/bottom_sheet_button_no"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="NÃO"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"
             android:layout_marginTop="24dp"
             app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:layout_constraintStart_toEndOf="@+id/view2" android:layout_marginStart="16dp"
-    />
+            app:layout_constraintStart_toEndOf="@+id/view"
+            android:layout_marginStart="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

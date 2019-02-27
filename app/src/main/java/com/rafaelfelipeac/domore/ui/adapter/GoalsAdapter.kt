@@ -27,13 +27,30 @@ class GoalsAdapter(private val fragment: Fragment) : BaseAdapter<Goal>(), Action
 
         val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_item_title)
         val image = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress)
+        val porcentage = viewHolder.itemView.findViewById<TextView>(R.id.goal_porcentage)
 
         title.text = goal.name
 
         if (goal.done)
             image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
-        else
+        else {
             image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
+
+            val porcent =
+                if (goal.trophies) {
+                    (goal.value / goal.goldValue) * 100
+                } else {
+                    (goal.value / goal.medalValue) * 100
+                }
+
+            if (porcent >= 100) {
+                image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
+                porcentage.text = ""
+            } else {
+                porcentage.text = String.format("%.2f %s", porcent, "%")
+            }
+        }
+
     }
 
     @SuppressLint("ClickableViewAccessibility")

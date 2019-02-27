@@ -117,6 +117,21 @@
                 android:layout_marginStart="4dp" android:layout_marginBottom="8dp"/>
 
         <TextView
+                android:id="@+id/goal_porcentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="99.00 %"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDarkTwo"
+                android:layout_marginStart="10dp"
+                card_view:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp"
+                card_view:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="8dp"
+                card_view:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
                 android:id="@+id/goal_item_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
