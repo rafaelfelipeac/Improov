@@ -31,8 +31,10 @@ class GoalsAdapter(private val fragment: Fragment) : BaseAdapter<Goal>(), Action
 
         title.text = goal.name
 
-        if (goal.done)
+        if (goal.done) {
             image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
+            porcentage.text = ""
+        }
         else {
             image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
 

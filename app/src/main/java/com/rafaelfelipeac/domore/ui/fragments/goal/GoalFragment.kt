@@ -150,6 +150,8 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun setBottomSheet() {
+        (activity as MainActivity).closeBottomSheetDoneGoal()
+
         sheetBehavior?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(p0: View, status: Int) {
                 when (status) {

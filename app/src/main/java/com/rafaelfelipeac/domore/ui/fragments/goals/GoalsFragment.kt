@@ -48,6 +48,8 @@ class GoalsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as MainActivity).closeBottomSheetDoneGoal()
+
         hideSoftKeyboard(activity!!)
         showNavigation()
 

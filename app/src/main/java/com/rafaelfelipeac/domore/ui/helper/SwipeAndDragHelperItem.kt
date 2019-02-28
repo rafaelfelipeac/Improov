@@ -27,8 +27,12 @@ class SwipeAndDragHelperItem(private val contract: ActionCompletionContract) : I
     }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-        ItemTouchHelper.Callback.getDefaultUIUtil()
-            .onSelected(viewHolder?.itemView?.findViewById<ConstraintLayout>(R.id.item_normal_view))
+        val foregroundView = viewHolder?.itemView?.findViewById<ConstraintLayout>(R.id.item_normal_view)
+
+        if (foregroundView != null) {
+            ItemTouchHelper.Callback.getDefaultUIUtil()
+                .onSelected(foregroundView)
+        }
     }
 
     override fun onChildDrawOver(c: Canvas, recyclerView: RecyclerView,
@@ -37,13 +41,19 @@ class SwipeAndDragHelperItem(private val contract: ActionCompletionContract) : I
 
         val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.item_normal_view)
 
-        ItemTouchHelper.Callback.getDefaultUIUtil()
-            .onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive)
+        if (foregroundView != null) {
+            ItemTouchHelper.Callback.getDefaultUIUtil()
+                .onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive)
+        }
     }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
-        ItemTouchHelper.Callback.getDefaultUIUtil()
-            .clearView(viewHolder.itemView.findViewById<ConstraintLayout>(R.id.item_normal_view))
+        val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.item_normal_view)
+
+        if (foregroundView != null) {
+            ItemTouchHelper.Callback.getDefaultUIUtil()
+                .clearView(foregroundView)
+        }
     }
 
     override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,

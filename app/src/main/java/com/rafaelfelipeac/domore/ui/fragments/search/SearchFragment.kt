@@ -24,6 +24,8 @@ class SearchFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as MainActivity).closeBottomSheetDoneGoal()
+
         search_edittext.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             open = !open
 
