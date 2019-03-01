@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.rafaelfelipeac.domore.R
+import com.rafaelfelipeac.domore.extension.getValueWithSymbol
 import com.rafaelfelipeac.domore.models.Historic
 import com.rafaelfelipeac.domore.ui.base.BaseAdapter
 import java.text.SimpleDateFormat
@@ -21,11 +22,11 @@ class HistoricAdapter(private val fragment: Fragment) : BaseAdapter<Historic>() 
         val date = viewHolder.itemView.findViewById<TextView>(R.id.historic_date)
         val value = viewHolder.itemView.findViewById<TextView>(R.id.historic_value)
 
-        val sdf = SimpleDateFormat("dd/M/yyyy")
+        val sdf = SimpleDateFormat("dd/M/yyyy - HH:mm:ss")
         val currentDate = sdf.format(historic.date)
 
         date.text = currentDate
-        value.text = historic.value.toString()
+        value.text = historic.value.getValueWithSymbol()
     }
 
     @SuppressLint("ClickableViewAccessibility")

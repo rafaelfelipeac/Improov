@@ -10,7 +10,7 @@ android:background="@color/colorPrimaryDarkTwo">
             android:id="@+id/historic_date"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="10/10/2019 - 14h58"
+            android:text="10/10/2019 - 14:58:11"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp"
             android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +22,7 @@ android:background="@color/colorPrimaryDarkTwo">
           android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
           app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
           app:layout_constraintTop_toTopOf="parent" android:id="@+id/view2"
-          app:layout_constraintHorizontal_bias="0.57"/>
+          app:layout_constraintHorizontal_bias="0.6"/>
 
     <TextView
             android:id="@+id/historic_value"

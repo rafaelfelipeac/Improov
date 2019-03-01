@@ -293,9 +293,9 @@ class GoalFragment : BaseFragment() {
 
     fun setHistoricItems() {
         val historicItems = listOf(
-            Historic(name = "abc", date = Date()),
-            Historic(name = "def", date = Date()),
-            Historic(name = "ghi", date = Date()))
+            Historic(date = Date(), value = 5F),
+            Historic(date = Date(), value = 3F),
+            Historic(date = Date(), value = -4F))
 
         historicAdapter.setItems(historicItems)
 
