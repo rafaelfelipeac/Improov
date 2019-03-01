@@ -17,16 +17,20 @@ import com.hookedonplay.decoviewlib.events.DecoEvent
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.extension.getNumberInRightFormat
 import com.rafaelfelipeac.domore.models.Goal
+import com.rafaelfelipeac.domore.models.Historic
 import com.rafaelfelipeac.domore.models.Item
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
+import com.rafaelfelipeac.domore.ui.adapter.HistoricAdapter
 import com.rafaelfelipeac.domore.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
 import kotlinx.android.synthetic.main.fragment_goal.*
+import java.util.*
 
 class GoalFragment : BaseFragment() {
 
     private var itemsAdapter = ItemsAdapter(this)
+    private var historicAdapter = HistoricAdapter(this)
 
     var goal: Goal? = null
 
@@ -93,6 +97,7 @@ class GoalFragment : BaseFragment() {
 
         setButtons()
         setItems()
+        setHistoricItems()
     }
 
     private fun setButtons() {
@@ -243,22 +248,22 @@ class GoalFragment : BaseFragment() {
         when (goal?.type) {
             1 -> {
                 goal_cl_list.visibility = View.VISIBLE
-                goal_cl_dec_inc.visibility = View.GONE
-                goal_cl_total.visibility = View.GONE
+                goal_cl_dec_inc.visibility = View.INVISIBLE
+                goal_cl_total.visibility = View.INVISIBLE
 
                 if ((activity as MainActivity).toolbar!!.menu.findItem(R.id.menu_goal_add) == null)
                     (activity as MainActivity).toolbar!!.inflateMenu(R.menu.menu_add)
             }
             2 -> {
-                goal_cl_list.visibility = View.GONE
+                goal_cl_list.visibility = View.INVISIBLE
                 goal_cl_dec_inc.visibility = View.VISIBLE
-                goal_cl_total.visibility = View.GONE
+                goal_cl_total.visibility = View.INVISIBLE
 
                 goal_inc_dec_total.text = count.getNumberInRightFormat()
             }
             3 -> {
-                goal_cl_list.visibility = View.GONE
-                goal_cl_dec_inc.visibility = View.GONE
+                goal_cl_list.visibility = View.INVISIBLE
+                goal_cl_dec_inc.visibility = View.INVISIBLE
                 goal_cl_total.visibility = View.VISIBLE
             }
         }
@@ -284,6 +289,18 @@ class GoalFragment : BaseFragment() {
         goal_items_list.adapter = itemsAdapter
 
         touchHelper.attachToRecyclerView(goal_items_list)
+    }
+
+    fun setHistoricItems() {
+        val historicItems = listOf(
+            Historic(name = "abc", date = Date()),
+            Historic(name = "def", date = Date()),
+            Historic(name = "ghi", date = Date()))
+
+        historicAdapter.setItems(historicItems)
+
+        historic_items_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        historic_items_list.adapter = historicAdapter
     }
 
     private fun updateGoal() {
