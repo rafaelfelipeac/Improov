@@ -15,6 +15,7 @@ import com.hookedonplay.decoviewlib.DecoView
 import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
 import com.rafaelfelipeac.domore.R
+import com.rafaelfelipeac.domore.extension.getNumberInRightFormat
 import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.models.Item
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
@@ -143,8 +144,8 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun updateTextAndGoal(textView: TextView) {
-        goal_count.text = String.format("%.2f", count)
-        textView.text = String.format("%.2f", count)
+        goal_count.text = count.getNumberInRightFormat()
+        textView.text = count.getNumberInRightFormat()
 
         updateGoal()
     }
@@ -216,7 +217,7 @@ class GoalFragment : BaseFragment() {
 
         if (done) count++ else count--
 
-        goal_count.text = String.format("%.2f", count)
+        goal_count.text = count.getNumberInRightFormat()
 
         updateGoal()
     }
@@ -225,18 +226,18 @@ class GoalFragment : BaseFragment() {
         count = goal?.value!!
 
         goal_title.text = goal?.name
-        goal_count.text = String.format("%.2f", count)
+        goal_count.text = count.getNumberInRightFormat()
 
         when {
             goal?.trophies!! -> {
                 goal_medal.visibility = View.INVISIBLE
                 goal_trophies.visibility = View.VISIBLE
 
-                goal_trophy_bronze_text.text = goal?.bronzeValue.toString()
-                goal_trophy_silver_text.text = goal?.silverValue.toString()
-                goal_trophy_gold_text.text = goal?.goldValue.toString()
+                goal_trophy_bronze_text.text = goal?.bronzeValue?.getNumberInRightFormat()
+                goal_trophy_silver_text.text = goal?.silverValue?.getNumberInRightFormat()
+                goal_trophy_gold_text.text = goal?.goldValue?.getNumberInRightFormat()
             }
-            else -> goal_medal_text.text = goal?.medalValue.toString()
+            else -> goal_medal_text.text = goal?.medalValue?.getNumberInRightFormat()
         }
 
         when (goal?.type) {
@@ -253,7 +254,7 @@ class GoalFragment : BaseFragment() {
                 goal_cl_dec_inc.visibility = View.VISIBLE
                 goal_cl_total.visibility = View.GONE
 
-                goal_inc_dec_total.text = count.toString()
+                goal_inc_dec_total.text = count.getNumberInRightFormat()
             }
             3 -> {
                 goal_cl_list.visibility = View.GONE

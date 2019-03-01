@@ -6,12 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.*
 import android.widget.Switch
 import com.rafaelfelipeac.domore.R
+import com.rafaelfelipeac.domore.extension.getNumberInRightFormat
 import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_goal_form.*
-import java.time.LocalDateTime
-import java.util.*
 
 class GoalFormFragment : BaseFragment() {
 
@@ -178,8 +177,8 @@ class GoalFormFragment : BaseFragment() {
     private fun validateTrophiesValues() : Boolean {
         return try {
             val gold = form_goal_editText_gold.text!!.toString().toFloat()
-            val silver = form_goal_editText_silver.text!!.toString().toFloat()
-            val bronze = form_goal_editText_bronze.text!!.toString().toFloat()
+            val silver = form_goal_editText_silver.text.toString().toFloat()
+            val bronze = form_goal_editText_bronze.text.toString().toFloat()
 
             ((gold > silver) && (silver > bronze))
         } catch (e: Exception) {
@@ -268,13 +267,13 @@ class GoalFormFragment : BaseFragment() {
             form_goal_trophies.visibility = View.VISIBLE
             form_goal_medal.visibility = View.INVISIBLE
 
-            form_goal_editText_bronze.setText(goal?.bronzeValue.toString())
-            form_goal_editText_silver.setText(goal?.silverValue.toString())
-            form_goal_editText_gold.setText(goal?.goldValue.toString())
+            form_goal_editText_bronze.setText(goal?.bronzeValue?.getNumberInRightFormat())
+            form_goal_editText_silver.setText(goal?.silverValue?.getNumberInRightFormat())
+            form_goal_editText_gold.setText(goal?.goldValue?.getNumberInRightFormat())
 
             form_goal_switch_trophies.isChecked = true
         } else {
-            form_goal_editText_medal.setText(goal?.medalValue.toString())
+            form_goal_editText_medal.setText(goal?.medalValue?.getNumberInRightFormat())
         }
 
         goalForm_goal_name.setText(goal?.name)
@@ -286,8 +285,8 @@ class GoalFormFragment : BaseFragment() {
 
                 goalForm_goal_inc_dev.visibility = View.VISIBLE
 
-                goalForm_goal_inc_value.setText(goal?.incrementValue!!.toString())
-                goalForm_goal_dec_value.setText(goal?.decrementValue!!.toString())
+                goalForm_goal_inc_value.setText(goal?.incrementValue?.getNumberInRightFormat())
+                goalForm_goal_dec_value.setText(goal?.decrementValue?.getNumberInRightFormat())
             }
             3 -> {switchTotalValor.isChecked = true}
         }
