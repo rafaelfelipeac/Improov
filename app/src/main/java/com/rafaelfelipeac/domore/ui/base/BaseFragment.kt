@@ -17,6 +17,7 @@ open class BaseFragment : Fragment() {
 
     var goalDAO = App.database?.goalDAO()
     var itemDAO = App.database?.itemDAO()
+    var historicDAO = App.database?.historicDAO()
 
     val navController get() = (activity as MainActivity).navController
 

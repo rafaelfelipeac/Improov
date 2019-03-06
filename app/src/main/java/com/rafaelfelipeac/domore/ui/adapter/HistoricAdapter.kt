@@ -22,7 +22,7 @@ class HistoricAdapter(private val fragment: Fragment) : BaseAdapter<Historic>() 
         val date = viewHolder.itemView.findViewById<TextView>(R.id.historic_date)
         val value = viewHolder.itemView.findViewById<TextView>(R.id.historic_value)
 
-        val sdf = SimpleDateFormat("dd/M/yyyy - HH:mm:ss")
+        val sdf = SimpleDateFormat("dd/MM/yy - HH:mm:ss")
         val currentDate = sdf.format(historic.date)
 
         date.text = currentDate

@@ -97,24 +97,35 @@ class GoalFragment : BaseFragment() {
 
         setButtons()
         setItems()
-        setHistoricItems()
+
+        if (goal?.type != 1) {
+            setHistoricItems()
+        }
     }
 
     private fun setButtons() {
         goal_btn_inc.setOnClickListener {
             count += goal?.incrementValue!!
             updateTextAndGoal(goal_inc_dec_total)
+
+            historicDAO?.insert(Historic(value = goal?.incrementValue!!, date = Date(), goalId = goal?.goalId!!))
         }
 
         goal_btn_dec.setOnClickListener {
             count -= goal?.decrementValue!!
             updateTextAndGoal(goal_inc_dec_total)
+
+            historicDAO?.insert(Historic(value = goal?.decrementValue!! * -1, date = Date(), goalId = goal?.goalId!!))
         }
 
         goal_btn_save.setOnClickListener {
             if (goal_total_total.text?.isNotEmpty()!!) {
                 count = goal?.value!! + goal_total_total.text.toString().toFloat()
                 updateTextAndGoal(goal_count)
+
+                historicDAO?.insert(Historic(value = goal_total_total.text.toString().toFloat(),
+                    date = Date(), goalId = goal?.goalId!!))
+
                 goal_total_total.setText("")
 
                 showSnackBar("Valor atualizado.")
@@ -292,12 +303,9 @@ class GoalFragment : BaseFragment() {
     }
 
     fun setHistoricItems() {
-        val historicItems = listOf(
-            Historic(date = Date(), value = 5F),
-            Historic(date = Date(), value = 3F),
-            Historic(date = Date(), value = -4F))
+        val historicItems = historicDAO?.getAll()
 
-        historicAdapter.setItems(historicItems)
+        historicAdapter.setItems(historicItems!!.filter { it.goalId == goal?.goalId }. reversed())
 
         historic_items_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         historic_items_list.adapter = historicAdapter

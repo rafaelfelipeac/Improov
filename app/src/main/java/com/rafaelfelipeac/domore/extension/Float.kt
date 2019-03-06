@@ -13,5 +13,5 @@ fun Float.getValueWithSymbol(): String {
         return String.format("%s%s", "+", this.getNumberInRightFormat())
     }
 
-    return this.getNumberInRightFormat()
+    return String.format(" %s", this.getNumberInRightFormat())
 }
