@@ -15,6 +15,7 @@ import com.rafaelfelipeac.domore.models.Item
 import com.rafaelfelipeac.domore.ui.base.BaseAdapter
 import com.rafaelfelipeac.domore.ui.fragments.goal.GoalFragment
 import com.rafaelfelipeac.domore.ui.helper.ActionCompletionContract
+import kotlinx.android.synthetic.main.list_item_goal.view.*
 
 class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), ActionCompletionContract {
 
@@ -25,18 +26,12 @@ class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), Action
     override fun View.bindView(item: Item, viewHolder: ViewHolder) {
         setOnClickListener { clickListener(item) }
 
-        val title = viewHolder.itemView.findViewById<TextView>(R.id.item_title)
         val image = viewHolder.itemView.findViewById<ImageView>(R.id.item_progress)
+        val title = viewHolder.itemView.findViewById<TextView>(R.id.item_title)
 
-        if (item.done)
-            title.text = item.title + "feito"
-        else
-            title.text = item.title
-
-        if (item.done)
-            image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
-        else
-            image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
+        title.text = item.title
+        image.background = if (item.done) ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
+                           else           ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
     }
 
     @SuppressLint("ClickableViewAccessibility")

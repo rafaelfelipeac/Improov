@@ -128,9 +128,16 @@ class GoalFragment : BaseFragment() {
 
                 goal_total_total.setText("")
 
-                showSnackBar("Valor atualizado.")
+                val oldDone = goal!!.done
+                goal!!.done = verifyIfIsDone()
+                goalDAO?.update(goal!!)
+
+                if (!oldDone && goal!!.done)
+                    showSnackBar(getString(R.string.message_goal_done))
+                else
+                    showSnackBar(getString(R.string.message_goal_value_updated))
             } else {
-                showSnackBar("Valor inválido.")
+                showSnackBar(getString(R.string.message_goal_value_invalid))
             }
         }
     }
@@ -158,6 +165,8 @@ class GoalFragment : BaseFragment() {
         }
         return false
     }
+
+    private fun verifyIfIsDone() = ((goal!!.trophies && goal!!.value >= goal!!.goldValue) || (goal!!.value >= goal!!.medalValue))
 
     private fun updateTextAndGoal(textView: TextView) {
         goal_count.text = count.getNumberInRightFormat()
@@ -192,33 +201,37 @@ class GoalFragment : BaseFragment() {
         }
 
         itemSave?.setOnClickListener {
-            val order =
-                if (itemDAO?.getAll()?.none { it.goalId != 0L }!!) { 1 }
-                else { itemDAO?.getAll()?.filter { it.goalId == goal?.goalId }?.size!! + 1 }
+            if ((activity as MainActivity).itemValue?.text.toString().isEmpty())
+                showSnackBar("Nome do item está vazio.")
+            else {
+                val order =
+                    if (itemDAO?.getAll()?.none { it.goalId != 0L }!!) { 1 }
+                    else { itemDAO?.getAll()?.filter { it.goalId == goal?.goalId }?.size!! + 1 }
 
-            val item: Item?
+                val item: Item?
 
-            if ((activity as MainActivity).item == null) {
-                item = Item( goalId = goal?.goalId!!,
-                    title = (activity as MainActivity).itemValue?.text.toString(),
-                    done = false,
-                    order = order,
-                    createdDate = getCurrentTime()
-                )
+                if ((activity as MainActivity).item == null) {
+                    item = Item( goalId = goal?.goalId!!,
+                        title = (activity as MainActivity).itemValue?.text.toString(),
+                        done = false,
+                        order = order,
+                        createdDate = getCurrentTime()
+                    )
 
-                itemDAO?.insert(item)
-            } else {
-                item = (activity as MainActivity).item
-                item?.title = (activity as MainActivity).itemValue?.text.toString()
-                item?.updatedDate = getCurrentTime()
+                    itemDAO?.insert(item)
+                } else {
+                    item = (activity as MainActivity).item
+                    item?.title = (activity as MainActivity).itemValue?.text.toString()
+                    item?.updatedDate = getCurrentTime()
 
-                itemDAO?.update(item!!)
+                    itemDAO?.update(item!!)
+                }
+
+                setItems()
+
+                (activity as MainActivity).itemValue?.setText("")
+                (activity as MainActivity).closeBottomSheetAddItem()
             }
-
-            setItems()
-
-            (activity as MainActivity).itemValue?.setText("")
-            (activity as MainActivity).closeBottomSheetAddItem()
         }
     }
 

@@ -2,9 +2,8 @@ package com.rafaelfelipeac.domore.ui.fragments.goalform
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.*
-import android.widget.Switch
+import androidx.appcompat.app.AppCompatActivity
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.extension.getNumberInRightFormat
 import com.rafaelfelipeac.domore.models.Goal
@@ -104,17 +103,39 @@ class GoalFormFragment : BaseFragment() {
         getType() == 2 && (goalForm_goal_inc_value.text.toString().isEmpty() ||
                 goalForm_goal_dec_value.text.toString().isEmpty())
 
-    private fun setSwitchs() {
-        switchLista.setOnCheckedChangeListener { _, _ -> // option 1
-            isCheckedInSwitch(switchLista)
+    fun setSwitchs() {
+        radioButtonLista.setOnClickListener {
+            if (radioButtonLista.isChecked) {
+                radioButtonIncDec.isChecked = false
+                radioButtonTotal.isChecked = false
+
+                goalForm_goal_inc_dev.visibility = View.GONE
+
+                goalType = 1
+            }
         }
 
-        switchTotalIncDec.setOnCheckedChangeListener { _, isChecked -> // option 2
-            isCheckedInSwitch(switchTotalIncDec, isChecked)
+        radioButtonIncDec.setOnClickListener {
+            if (radioButtonIncDec.isChecked) {
+                radioButtonLista.isChecked = false
+                radioButtonTotal.isChecked = false
+
+                goalForm_goal_inc_dev.visibility = View.VISIBLE
+
+                goalType = 2
+            } else
+                goalForm_goal_inc_dev.visibility = View.GONE
         }
 
-        switchTotalValor.setOnCheckedChangeListener { _, _ -> // option 3
-            isCheckedInSwitch(switchTotalValor)
+        radioButtonTotal.setOnClickListener {
+            if (radioButtonTotal.isChecked) {
+                radioButtonIncDec.isChecked = false
+                radioButtonLista.isChecked = false
+
+                goalForm_goal_inc_dev.visibility = View.GONE
+
+                goalType = 3
+            }
         }
 
         form_goal_switch_trophies.setOnCheckedChangeListener { _, isChecked ->
@@ -144,35 +165,35 @@ class GoalFormFragment : BaseFragment() {
         }
     }
 
-    private fun isCheckedInSwitch(switch: Switch, isChecked: Boolean = false) {
-        when(switch) {
-            switchLista -> {
-                switchTotalIncDec.isChecked = false
-                switchTotalValor.isChecked = false
-
-                goalForm_goal_inc_dev.visibility = View.GONE
-
-                goalType = 1
-            }
-            switchTotalIncDec -> {
-                switchLista.isChecked = false
-                switchTotalValor.isChecked = false
-
-                if (isChecked) goalForm_goal_inc_dev.visibility = View.VISIBLE
-                else goalForm_goal_inc_dev.visibility = View.GONE
-
-                goalType = 2
-            }
-            switchTotalValor -> {
-                switchLista.isChecked = false
-                switchTotalIncDec.isChecked = false
-
-                goalForm_goal_inc_dev.visibility = View.GONE
-
-                goalType = 3
-            }
-        }
-    }
+//    private fun isCheckedInSwitch(switch: Switch, isChecked: Boolean = false) {
+//        when(switch) {
+//            switchLista -> {
+//                switchTotalIncDec.isChecked = false
+//                switchTotalValor.isChecked = false
+//
+//                goalForm_goal_inc_dev.visibility = View.GONE
+//
+//                goalType = 1
+//            }
+//            switchTotalIncDec -> {
+//                switchLista.isChecked = false
+//                switchTotalValor.isChecked = false
+//
+//                if (isChecked) goalForm_goal_inc_dev.visibility = View.VISIBLE
+//                else goalForm_goal_inc_dev.visibility = View.GONE
+//
+//                goalType = 2
+//            }
+//            switchTotalValor -> {
+//                switchLista.isChecked = false
+//                switchTotalIncDec.isChecked = false
+//
+//                goalForm_goal_inc_dev.visibility = View.GONE
+//
+//                goalType = 3
+//            }
+//        }
+//    }
 
     private fun validateTrophiesValues() : Boolean {
         return try {
@@ -255,9 +276,9 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun getType(): Int {
-        if (switchLista.isChecked)          return 1
-        if (switchTotalIncDec.isChecked)    return 2
-        if (switchTotalValor.isChecked)     return 3
+        if (radioButtonLista.isChecked)     return 1
+        if (radioButtonIncDec.isChecked)    return 2
+        if (radioButtonTotal.isChecked)     return 3
 
         return -1
     }
@@ -279,16 +300,16 @@ class GoalFormFragment : BaseFragment() {
         goalForm_goal_name.setText(goal?.name)
 
         when(goal?.type) {
-            1 -> {switchLista.isChecked = true}
+            1 -> {radioButtonLista.isChecked = true}
             2 -> {
-                switchTotalIncDec.isChecked = true
+                radioButtonIncDec.isChecked = true
 
                 goalForm_goal_inc_dev.visibility = View.VISIBLE
 
                 goalForm_goal_inc_value.setText(goal?.incrementValue?.getNumberInRightFormat())
                 goalForm_goal_dec_value.setText(goal?.decrementValue?.getNumberInRightFormat())
             }
-            3 -> {switchTotalValor.isChecked = true}
+            3 -> {radioButtonTotal.isChecked = true}
         }
     }
 }
