@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-            android:id="@+id/navigation_search"
-            android:icon="@drawable/baseline_search_24"
-            android:title="Pesquisar"/>
-
     <!--<item-->
-            <!--android:id="@+id/navigation_metricas"-->
-            <!--android:icon="@drawable/ic_notifications_black_24dp"-->
-            <!--android:title="Metricas"/>-->
+            <!--android:id="@+id/navigation_search"-->
+            <!--android:icon="@drawable/baseline_search_24"-->
+            <!--android:title="Pesquisar"/>-->
+
+    <item
+            android:id="@+id/navigation_stats"
+            android:icon="@drawable/ic_chart"
+            android:title="Estatísticas"/>
 
     <!--<item-->
             <!--android:id="@+id/navigation_home"-->
@@ -19,7 +19,7 @@
 
     <item
             android:id="@+id/navigation_goals"
-            android:icon="@drawable/round_view_list_24"
+            android:icon="@drawable/ic_list"
             android:title="Metas"/>
 
     <!--<item-->

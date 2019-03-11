@@ -15,9 +15,12 @@
             app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/rounded_background"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toTopOf="@+id/goal_info"
-            app:layout_constraintVertical_bias="0.0" android:layout_marginTop="8dp">
+            app:layout_constraintVertical_bias="0.0"
+            android:layout_marginTop="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/goal_medal"
@@ -29,7 +32,8 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintTop_toTopOf="parent"
-                android:visibility="visible" android:layout_marginTop="8dp">
+                android:visibility="visible"
+                android:layout_marginTop="8dp">
 
             <ImageView
                     android:id="@+id/goal_medal_image"
@@ -133,7 +137,8 @@
                     app:layout_constraintEnd_toStartOf="@+id/goal_trophy_gold"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp">
 
                 <ImageView
@@ -177,7 +182,8 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/goal_trophy_silver"
-                    app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent">
 
                 <ImageView
@@ -203,7 +209,8 @@
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="@+id/goal_trophy_gold_image"
                         app:layout_constraintStart_toStartOf="@+id/goal_trophy_gold_image"
-                        android:visibility="visible" android:layout_marginTop="16dp"/>
+                        android:visibility="visible"
+                        android:layout_marginTop="16dp"/>
 
                 <com.hookedonplay.decoviewlib.DecoView
                         android:id="@+id/arcViewGold"
@@ -246,7 +253,9 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="26sp"
                 android:gravity="center"
-                tools:text="Title" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
+                tools:text="Title"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
                 android:id="@+id/goal_count"
@@ -262,7 +271,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="24dp"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintVertical_bias="0.0"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -293,7 +303,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 android:layout_marginTop="16dp"
-                app:layout_constraintVertical_bias="0.0" app:layout_constraintTop_toTopOf="@+id/goal_cl_total">
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintTop_toTopOf="@+id/goal_cl_total">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/goal_btn_dec"
@@ -360,7 +371,8 @@
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp">
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="16dp">
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/goal_total_total_til"
@@ -382,7 +394,8 @@
                     app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
                     app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
                     app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-                    app:layout_constraintHorizontal_bias="0.24" android:layout_marginStart="8dp"
+                    app:layout_constraintHorizontal_bias="0.24"
+                    android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp">
 
                 <com.google.android.material.textfield.TextInputEditText

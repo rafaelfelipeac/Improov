@@ -331,6 +331,7 @@
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
+                android:paddingBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
@@ -353,6 +354,8 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Lista"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/goalForm_goal_type_text"
                     app:layout_constraintStart_toStartOf="parent"
@@ -364,7 +367,9 @@
                     android:id="@+id/radioButtonIncDec"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Total \n(inc/dec)"
+                    android:text="Contador"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/goalForm_goal_type_text"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -375,7 +380,9 @@
                     android:id="@+id/radioButtonTotal"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Total \n(valor)"
+                    android:text="Valor final"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/goalForm_goal_type_text"
                     app:layout_constraintStart_toEndOf="@+id/radioButtonIncDec"
