@@ -29,11 +29,12 @@ class StatsFragment : BaseFragment() {
         val doneWithMedals = goals?.filter { !it.trophies }
         val doneWithTrophies = goals?.filter { it.trophies }
 
-        val quantityMedal = doneWithMedals?.size
+        val quantityMedal = doneWithMedals?.filter { it.value >= it.medalValue }?.size
         val quantityBronze = doneWithTrophies?.filter { it.value >= it.bronzeValue }?.size
         val quantitySilver = doneWithTrophies?.filter { it.value >= it.silverValue }?.size
         val quantityGold = doneWithTrophies?.filter { it.value >= it.goldValue }?.size
 
+        stats_message.text = String.format("Você já atingiu %d objetivos!", goals?.filter { it.done }?.size)
         stats_medal_value.text = String.format("%dx", quantityMedal)
         stats_trophy_bronze_value.text = String.format("%dx", quantityBronze)
         stats_trophy_silver_value.text = String.format("%dx", quantitySilver)

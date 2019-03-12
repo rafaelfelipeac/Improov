@@ -20,6 +20,7 @@ import com.rafaelfelipeac.domore.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_sheet_goal_done.*
 import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.*
+import java.text.SimpleDateFormat
 
 class MainActivity : BaseActivity() {
 
@@ -91,6 +92,18 @@ class MainActivity : BaseActivity() {
         } else {
             itemTitle?.text = "Editar item"
             itemValue?.setText(item.title)
+        }
+
+        if (item != null) {
+            if (item.done) {
+                val sdf = SimpleDateFormat("dd/MM/yy - HH:mm:ss")
+                val currentDate = sdf.format(item.doneDate)
+
+                bottom_sheet_date.visibility = View.VISIBLE
+                bottom_sheet_date.text = String.format("Concluído em %s", currentDate)
+            } else {
+                bottom_sheet_date.visibility = View.GONE
+            }
         }
     }
 

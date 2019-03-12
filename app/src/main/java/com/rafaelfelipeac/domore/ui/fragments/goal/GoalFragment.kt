@@ -109,6 +109,8 @@ class GoalFragment : BaseFragment() {
             updateTextAndGoal(goal_inc_dec_total)
 
             historicDAO?.insert(Historic(value = goal?.incrementValue!!, date = Date(), goalId = goal?.goalId!!))
+
+            setHistoricItems()
         }
 
         goal_btn_dec.setOnClickListener {
@@ -116,6 +118,8 @@ class GoalFragment : BaseFragment() {
             updateTextAndGoal(goal_inc_dec_total)
 
             historicDAO?.insert(Historic(value = goal?.decrementValue!! * -1, date = Date(), goalId = goal?.goalId!!))
+
+            setHistoricItems()
         }
 
         goal_btn_save.setOnClickListener {
@@ -136,6 +140,8 @@ class GoalFragment : BaseFragment() {
                     showSnackBar(getString(R.string.message_goal_done))
                 else
                     showSnackBar(getString(R.string.message_goal_value_updated))
+
+                setHistoricItems()
             } else {
                 showSnackBar(getString(R.string.message_goal_value_invalid))
             }
@@ -166,7 +172,9 @@ class GoalFragment : BaseFragment() {
         return false
     }
 
-    private fun verifyIfIsDone() = ((goal!!.trophies && goal!!.value >= goal!!.goldValue) || (goal!!.value >= goal!!.medalValue))
+    private fun verifyIfIsDone() =
+        ((goal!!.trophies && goal!!.value >= goal!!.goldValue) ||
+                (!goal!!.trophies && goal!!.value >= goal!!.medalValue))
 
     private fun updateTextAndGoal(textView: TextView) {
         goal_count.text = count.getNumberInRightFormat()
@@ -315,7 +323,7 @@ class GoalFragment : BaseFragment() {
         touchHelper.attachToRecyclerView(goal_items_list)
     }
 
-    fun setHistoricItems() {
+    private fun setHistoricItems() {
         val historicItems = historicDAO?.getAll()
 
         historicAdapter.setItems(historicItems!!.filter { it.goalId == goal?.goalId }. reversed())
@@ -326,6 +334,8 @@ class GoalFragment : BaseFragment() {
 
     private fun updateGoal() {
         goal?.value = count
+        goal?.done = verifyIfIsDone()
+
         goalDAO?.update(goal!!)
 
         if (goal?.trophies!!) {

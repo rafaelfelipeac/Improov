@@ -38,21 +38,22 @@ class GoalsAdapter(private val fragment: Fragment) : BaseAdapter<Goal>(), Action
         else {
             image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
 
-            val porcent =
-                if (goal.trophies) {
-                    (goal.value / goal.goldValue) * 100
-                } else {
-                    (goal.value / goal.medalValue) * 100
-                }
+            val porcent = getPorcentage(goal)
 
             if (porcent >= 100) {
-                image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
-                porcentage.text = ""
+                porcentage.text = String.format("100.00%s", "%")
             } else {
                 porcentage.text = String.format("%.2f %s", porcent, "%")
             }
         }
+    }
 
+    private fun getPorcentage(goal: Goal): Float {
+        return if (goal.trophies) {
+            (goal.value / goal.goldValue) * 100
+        } else {
+            (goal.value / goal.medalValue) * 100
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -91,9 +92,13 @@ class GoalsAdapter(private val fragment: Fragment) : BaseAdapter<Goal>(), Action
         when(direction) {
             ItemTouchHelper.RIGHT -> {
                 if (!goal.done) {
-                    (fragment as GoalsFragment).setItems()
+                    if (getPorcentage(goal) >= 100) {
+                        doneGoal(goal, true)
+                    } else {
+                        (fragment as GoalsFragment).setItems()
 
-                    (fragment.activity as MainActivity).openBottomSheetDoneGoal(goal, ::doneGoal)
+                        (fragment.activity as MainActivity).openBottomSheetDoneGoal(goal, ::doneGoal)
+                    }
                 } else {
                     goal.done = false
                     goal.undoneDate = getCurrentTime()
