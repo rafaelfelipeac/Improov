@@ -13,8 +13,39 @@
             android:background="@drawable/rounded_background"
             android:layout_margin="8dp">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/goals_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
+            <ImageView
+                    android:id="@+id/goals_placeholder_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@mipmap/ic_trophy_silver" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.35000002"/>
+
+            <TextView
+                    android:id="@+id/goals_placeholder_message"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/message_empty_goals"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/goals_placeholder_image"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/goals_list"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginEnd="8dp"

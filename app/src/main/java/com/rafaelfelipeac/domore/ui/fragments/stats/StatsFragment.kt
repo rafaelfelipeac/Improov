@@ -20,10 +20,23 @@ class StatsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         setupStats()
     }
 
     private fun setupStats() {
+        if (goalDAO?.getAll()?.isNotEmpty()!!) {
+            setStats()
+
+            cl_stats_on.visibility = View.VISIBLE
+            cl_stats_off.visibility = View.INVISIBLE
+        } else {
+            cl_stats_on.visibility = View.INVISIBLE
+            cl_stats_off.visibility = View.VISIBLE
+        }
+    }
+
+    private fun setStats() {
         val goals = goalDAO?.getAll()
 
         val doneWithMedals = goals?.filter { !it.trophies }

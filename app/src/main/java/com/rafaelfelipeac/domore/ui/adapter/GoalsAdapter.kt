@@ -95,8 +95,7 @@ class GoalsAdapter(private val fragment: Fragment) : BaseAdapter<Goal>(), Action
                     if (getPorcentage(goal) >= 100) {
                         doneGoal(goal, true)
                     } else {
-                        (fragment as GoalsFragment).setItems()
-
+                        (fragment as GoalsFragment).setupItems()
                         (fragment.activity as MainActivity).openBottomSheetDoneGoal(goal, ::doneGoal)
                     }
                 } else {
@@ -105,7 +104,7 @@ class GoalsAdapter(private val fragment: Fragment) : BaseAdapter<Goal>(), Action
 
                     goalDAO?.update(goal)
 
-                    (fragment as GoalsFragment).setItems()
+                    (fragment as GoalsFragment).setupItems()
                 }
             }
             ItemTouchHelper.LEFT -> {
@@ -115,7 +114,7 @@ class GoalsAdapter(private val fragment: Fragment) : BaseAdapter<Goal>(), Action
 
                 showSnackBarWithAction(holder.itemView, "Meta removida.", goal, ::deleteGoal)
 
-                (fragment as GoalsFragment).setItems()
+                (fragment as GoalsFragment).setupItems()
             }
         }
     }
@@ -126,11 +125,11 @@ class GoalsAdapter(private val fragment: Fragment) : BaseAdapter<Goal>(), Action
 
         goalDAO?.update(goal)
 
-        (fragment as GoalsFragment).setItems()
+        (fragment as GoalsFragment).setupItems()
     }
 
     private fun deleteGoal(goal: Goal) {
         goalDAO?.insert(goal)
-        (fragment as GoalsFragment).setItems()
+        (fragment as GoalsFragment).setupItems()
     }
 }

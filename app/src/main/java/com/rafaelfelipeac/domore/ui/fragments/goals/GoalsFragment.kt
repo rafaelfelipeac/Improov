@@ -12,11 +12,8 @@ import android.view.ViewGroup
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.adapter.GoalsAdapter
-import com.rafaelfelipeac.domore.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperGoal
-import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
-import kotlinx.android.synthetic.main.fragment_goal.*
 import kotlinx.android.synthetic.main.fragment_goals.*
 
 class GoalsFragment : BaseFragment() {
@@ -59,15 +56,26 @@ class GoalsFragment : BaseFragment() {
             navController.navigate(R.id.action_navigation_goals_to_goalFormFragment)
         }
 
-        setupListAndAdapter()
+        setupItems()
     }
 
-    fun setupListAndAdapter() {
+    fun setupItems() {
+        if (viewModel?.getGoals()!!.isNotEmpty()) {
+            setItems()
+
+            goals_list.visibility = View.VISIBLE
+            goals_placeholder.visibility = View.INVISIBLE
+        } else {
+            goals_list.visibility = View.INVISIBLE
+            goals_placeholder.visibility = View.VISIBLE
+        }
+    }
+
+    private fun setItems() {
         goalsAdapter.setItems(viewModel?.getGoals()!!.sortedBy { it.order })
 
         goalsAdapter.clickListener = {
-            val action =
-                GoalsFragmentDirections.actionNavigationGoalsToGoalFragment(it)
+            val action = GoalsFragmentDirections.actionNavigationGoalsToGoalFragment(it)
             navController.navigate(action)
         }
 
@@ -78,22 +86,6 @@ class GoalsFragment : BaseFragment() {
         )
 
         val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsAdapter)
-        val touchHelper = ItemTouchHelper(swipeAndDragHelper)
-
-        goalsAdapter.touchHelper = touchHelper
-
-        goals_list.adapter = goalsAdapter
-
-        touchHelper.attachToRecyclerView(goals_list)
-    }
-
-    fun setItems() {
-        val goalsList = goalDAO?.getAll()
-
-        goalsAdapter.setItems(goalsList
-            ?.sortedBy { it.order }!!)
-
-        val swipeAndDragHelper = SwipeAndDragHelperItem(goalsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
         goalsAdapter.touchHelper = touchHelper

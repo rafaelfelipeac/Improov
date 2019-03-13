@@ -25,6 +25,7 @@ import com.rafaelfelipeac.domore.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
 import kotlinx.android.synthetic.main.fragment_goal.*
+import kotlinx.android.synthetic.main.fragment_goals.*
 import java.util.*
 
 class GoalFragment : BaseFragment() {
@@ -96,7 +97,7 @@ class GoalFragment : BaseFragment() {
         }
 
         setButtons()
-        setItems()
+        setupItems()
 
         if (goal?.type != 1) {
             setHistoricItems()
@@ -235,7 +236,7 @@ class GoalFragment : BaseFragment() {
                     itemDAO?.update(item!!)
                 }
 
-                setItems()
+                setupItems()
 
                 (activity as MainActivity).itemValue?.setText("")
                 (activity as MainActivity).closeBottomSheetAddItem()
@@ -250,7 +251,7 @@ class GoalFragment : BaseFragment() {
     }
 
     fun scoreFromList(done: Boolean) {
-        setItems()
+        setupItems()
 
         if (done) count++ else count--
 
@@ -303,7 +304,19 @@ class GoalFragment : BaseFragment() {
         medalOrTrophies()
     }
 
-    fun setItems() {
+    fun setupItems() {
+        if (itemDAO?.getAll()?.any { it.goalId == goal?.goalId && it.goalId != 0L }!!) {
+            setItems()
+
+            goal_cl_list.visibility = View.VISIBLE
+            items_placeholder.visibility = View.INVISIBLE
+        } else {
+            goal_cl_list.visibility = View.INVISIBLE
+            items_placeholder.visibility = View.VISIBLE
+        }
+    }
+
+    private fun setItems() {
         val itemsList = itemDAO?.getAll()
 
         itemsAdapter.setItems(itemsList

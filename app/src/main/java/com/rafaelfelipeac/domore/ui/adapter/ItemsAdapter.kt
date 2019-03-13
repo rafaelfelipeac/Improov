@@ -91,13 +91,13 @@ class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), Action
 
                 showSnackBarWithAction(holder.itemView, "Item removido.", item, ::deleteItem)
 
-                (fragment as GoalFragment).setItems()
+                (fragment as GoalFragment).setupItems()
             }
         }
     }
 
     private fun deleteItem(item: Item) {
         itemDAO?.insert(item)
-        (fragment as GoalFragment).setItems()
+        (fragment as GoalFragment).setupItems()
     }
 }

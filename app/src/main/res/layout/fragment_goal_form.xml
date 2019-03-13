@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -10,7 +10,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/form_goal_metal_trophies"
@@ -23,8 +25,7 @@
                 android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/form_goal_medal_trophies_">
+        >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/form_goal_medal"
@@ -53,15 +54,11 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/form_goal_editText_medal_til"
-                        android:layout_width="100dp"
+                        android:layout_width="@dimen/edit_text_medal_trophy"
                         android:layout_height="60dp"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:hint="Medal"
                         android:inputType="numberDecimal|numberSigned"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginBottom="8dp"
                         android:layout_marginTop="16dp"
@@ -69,7 +66,9 @@
                         app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
-                        app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline">
+                        app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
+                        app:layout_constraintStart_toStartOf="@+id/form_goal_medal_image"
+                        app:layout_constraintEnd_toEndOf="@+id/form_goal_medal_image">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/form_goal_editText_medal"
@@ -119,23 +118,21 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/form_goal_editText_bronze_til"
-                            android:layout_width="100dp"
+                            android:layout_width="@dimen/edit_text_medal_trophy"
                             android:layout_height="60dp"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:hint="Bronze"
                             android:inputType="numberDecimal|numberSigned"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginBottom="8dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
                             android:layout_marginTop="16dp"
                             app:layout_constraintTop_toBottomOf="@+id/form_goal_trophy_bronze_image"
                             app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
                             app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
                             app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
-                            app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline">
+                            app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
+                            app:layout_constraintStart_toStartOf="@+id/form_goal_trophy_bronze_image"
+                            app:layout_constraintEnd_toEndOf="@+id/form_goal_trophy_bronze_image">
 
                         <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/form_goal_editText_bronze"
@@ -153,10 +150,10 @@
                         android:id="@+id/form_goal_trophy_silver"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@+id/form_goal_trophy_bronze"
-                        app:layout_constraintEnd_toStartOf="@+id/form_goal_trophy_gold"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp">
 
                     <ImageView
                             android:id="@+id/form_goal_trophy_silver_image"
@@ -171,23 +168,21 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/form_goal_editText_silver_til"
-                            android:layout_width="100dp"
+                            android:layout_width="@dimen/edit_text_medal_trophy"
                             android:layout_height="60dp"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:hint="Silver"
                             android:inputType="numberDecimal|numberSigned"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             android:layout_marginBottom="8dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
                             android:layout_marginTop="16dp"
                             app:layout_constraintTop_toBottomOf="@+id/form_goal_trophy_silver_image"
                             app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
                             app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
                             app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
-                            app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline">
+                            app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
+                            app:layout_constraintStart_toStartOf="@+id/form_goal_trophy_silver_image"
+                            app:layout_constraintEnd_toEndOf="@+id/form_goal_trophy_silver_image">
 
                         <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/form_goal_editText_silver"
@@ -223,15 +218,11 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/form_goal_editText_gold_til"
-                            android:layout_width="100dp"
+                            android:layout_width="@dimen/edit_text_medal_trophy"
                             android:layout_height="60dp"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:hint="Gold"
                             android:inputType="numberDecimal|numberSigned"
-                            android:layout_marginStart="8dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginEnd="8dp"
-                            app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginBottom="8dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/form_goal_trophy_gold_image"
@@ -239,7 +230,9 @@
                             app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
                             app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
                             app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
-                            app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline">
+                            app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
+                            app:layout_constraintStart_toStartOf="@+id/form_goal_trophy_gold_image"
+                            app:layout_constraintEnd_toEndOf="@+id/form_goal_trophy_gold_image">
 
                         <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/form_goal_editText_gold"
@@ -264,7 +257,7 @@
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintTop_toBottomOf="@+id/form_goal_medal"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="40dp"
                     app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"/>
 
@@ -287,15 +280,13 @@
                 android:background="@drawable/rounded_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="228dp"
-                android:layout_marginStart="8dp" android:layout_marginEnd="8dp">
+                android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/form_goal_metal_trophies">
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/goalForm_goal_name_til"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:inputType="numberDecimal|numberSigned"
                     android:textColor="@color/colorPrimary"
@@ -324,7 +315,6 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/goalForm_goal_type_text_dois"
                 android:background="@drawable/rounded_background"
                 app:layout_constraintTop_toBottomOf="@+id/form_goal_medal_trophies_"
@@ -332,7 +322,8 @@
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
                 android:paddingBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_height="0dp"
+                app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.0">
 
             <TextView
                     android:id="@+id/goalForm_goal_type_text"
@@ -390,75 +381,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"/>
 
-            <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Lista"-->
-                    <!--android:textSize="18sp"-->
-                    <!--android:textColor="@color/colorPrimary"-->
-                    <!--android:id="@+id/textView2"-->
-                    <!--app:layout_constraintStart_toEndOf="@+id/switchLista"-->
-                    <!--android:layout_marginStart="8dp"-->
-                    <!--android:layout_marginEnd="8dp"-->
-                    <!--app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--app:layout_constraintHorizontal_bias="0.0"-->
-                    <!--app:layout_constraintTop_toTopOf="@+id/switchLista"-->
-                    <!--app:layout_constraintBottom_toBottomOf="@+id/switchLista"/>-->
-
-            <!--<Switch-->
-                    <!--android:id="@+id/switchLista"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--app:layout_constraintStart_toStartOf="parent"-->
-                    <!--android:layout_marginStart="24dp"-->
-                    <!--android:layout_marginTop="8dp"-->
-                    <!--app:layout_constraintTop_toBottomOf="@+id/goalForm_goal_type_text"/>-->
-
-            <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Total (inc/dec)"-->
-                    <!--android:textColor="@color/colorPrimary"-->
-                    <!--android:textSize="18sp"-->
-                    <!--app:layout_constraintStart_toEndOf="@+id/switchTotalIncDec"-->
-                    <!--android:layout_marginStart="8dp"-->
-                    <!--app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--android:layout_marginEnd="8dp"-->
-                    <!--app:layout_constraintHorizontal_bias="0.0"-->
-                    <!--app:layout_constraintTop_toTopOf="@+id/switchTotalIncDec"-->
-                    <!--app:layout_constraintBottom_toBottomOf="@+id/switchTotalIncDec"/>-->
-
-            <!--<Switch-->
-                    <!--android:id="@+id/switchTotalIncDec"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginTop="8dp"-->
-                    <!--app:layout_constraintTop_toBottomOf="@+id/switchLista"-->
-                    <!--app:layout_constraintStart_toStartOf="parent"-->
-                    <!--android:layout_marginStart="24dp"/>-->
-
-            <!--<Switch-->
-                    <!--android:id="@+id/switchTotalValor"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--app:layout_constraintStart_toStartOf="parent"-->
-                    <!--android:layout_marginStart="24dp"-->
-                    <!--android:layout_marginTop="8dp"-->
-                    <!--app:layout_constraintTop_toBottomOf="@+id/switchTotalIncDec"-->
-                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--android:layout_marginBottom="16dp" app:layout_constraintVertical_bias="0.0"/>-->
-
-            <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Total (valor)"-->
-                    <!--android:textSize="18sp"-->
-                    <!--android:textColor="@color/colorPrimary"-->
-                    <!--app:layout_constraintStart_toEndOf="@+id/switchTotalValor"-->
-                    <!--android:layout_marginStart="8dp"-->
-                    <!--app:layout_constraintTop_toTopOf="@+id/switchTotalValor"-->
-                    <!--app:layout_constraintBottom_toBottomOf="@+id/switchTotalValor"/>-->
-
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/goalForm_goal_inc_dev"
                     android:layout_width="match_parent"
@@ -466,26 +388,39 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="32dp" android:layout_marginTop="16dp"
+                    android:layout_marginStart="32dp" android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/radioButtonIncDec"
-                    android:visibility="gone" app:layout_constraintHorizontal_bias="0.0"
-                    android:layout_marginBottom="24dp"
-                    app:layout_constraintBottom_toBottomOf="parent">
+                    android:visibility="invisible" app:layout_constraintHorizontal_bias="0.0"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.0">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Defina os valores:"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/textView2"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/goalForm_goal_inc_value_til"
-                        android:layout_width="200dp"
+                        android:layout_width="120dp"
                         android:layout_height="60dp"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:inputType="numberDecimal|numberSigned"
                         android:hint="Incrementar"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
-                        app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline">
+                        app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
+                        android:layout_marginEnd="8dp" app:layout_constraintEnd_toStartOf="@+id/view3"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="8dp" app:layout_constraintTop_toBottomOf="@+id/textView2"
+                        android:layout_marginTop="8dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/goalForm_goal_inc_value"
@@ -497,21 +432,28 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <View android:layout_width="1dp" android:layout_height="1dp"
+                      app:layout_constraintStart_toStartOf="parent"
+                      android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                      android:layout_marginEnd="8dp" android:id="@+id/view3" app:layout_constraintTop_toTopOf="parent"
+                      android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
+                      app:layout_constraintBottom_toBottomOf="parent"/>
+
                 <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/goalForm_goal_dec_value_til"
-                        android:layout_width="200dp"
+                        android:layout_width="120dp"
                         android:layout_height="60dp"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:inputType="numberDecimal|numberSigned"
                         android:hint="Decrementar"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/goalForm_goal_inc_value_til"
-                        android:layout_marginTop="8dp"
                         app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
-                        app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline">
+                        app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
+                        app:layout_constraintStart_toEndOf="@+id/view3" android:layout_marginStart="8dp"
+                        android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView2" android:layout_marginTop="8dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/goalForm_goal_dec_value"
@@ -529,4 +471,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
