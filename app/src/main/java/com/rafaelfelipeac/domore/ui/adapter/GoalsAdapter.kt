@@ -22,23 +22,23 @@ class GoalsAdapter(private val fragment: Fragment) : BaseAdapter<Goal>(), Action
 
     override fun getLayoutRes(): Int = R.layout.list_item_goal
 
-    override fun View.bindView(goal: Goal, viewHolder: ViewHolder) {
-        setOnClickListener { clickListener(goal) }
+    override fun View.bindView(item: Goal, viewHolder: ViewHolder) {
+        setOnClickListener { clickListener(item) }
 
         val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_item_title)
         val image = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress)
         val porcentage = viewHolder.itemView.findViewById<TextView>(R.id.goal_porcentage)
 
-        title.text = goal.name
+        title.text = item.name
 
-        if (goal.done) {
+        if (item.done) {
             image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
             porcentage.text = ""
         }
         else {
             image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
 
-            val porcent = getPorcentage(goal)
+            val porcent = getPorcentage(item)
 
             if (porcent >= 100) {
                 porcentage.text = String.format("100.00%s", "%")

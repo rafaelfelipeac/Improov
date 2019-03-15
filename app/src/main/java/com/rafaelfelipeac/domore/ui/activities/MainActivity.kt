@@ -27,17 +27,19 @@ class MainActivity : BaseActivity() {
     lateinit var navController: NavController
 
     var toolbar: Toolbar? = null
-    var bottomSheetItem: BottomSheetBehavior<*>? = null
-    var bottomSheetDoneGoal: BottomSheetBehavior<*>? = null
     var bottomNavigation: BottomNavigationView? = null
     var item: Item? = null
 
-    var bottomSheetDoneGoalYes: Button? = null
-    var bottomSheetDoneGoalNo: Button? = null
+    lateinit var bottomSheetItem: BottomSheetBehavior<*>
+    lateinit var bottomSheetItemClose: ImageView
+    lateinit var bottomSheetItemSave: Button
+    lateinit var bottomSheetItemName: TextInputEditText
 
-    var bottomSheetItemClose: ImageView? = null
-    var bottomSheetItemSave: Button? = null
-    var bottomSheetItemName: TextInputEditText? = null
+    lateinit var bottomSheetDoneGoal: BottomSheetBehavior<*>
+    lateinit var bottomSheetDoneGoalYes: Button
+    lateinit var bottomSheetDoneGoalNo: Button
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,56 +88,54 @@ class MainActivity : BaseActivity() {
     }
 
     fun openBottomSheetAddItem(item: Item?) {
-        bottomSheetItem?.state = BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetItem.state = BottomSheetBehavior.STATE_EXPANDED
 
         this.item = item
-        if (item == null) {
-            bottom_sheet_item_title?.text = getString(R.string.bottom_sheet_item_title_add)
-            bottom_sheet_item_name?.setText("")
-            bottom_sheet_item_date.text = ""
-            bottom_sheet_item_date.visibility = View.GONE
-        } else {
-            bottom_sheet_item_title?.text = getString(R.string.bottom_sheet_item_title_edit)
-            bottom_sheet_item_name?.setText(item.name)
-        }
 
         if (item != null) {
+            bottom_sheet_item_title?.text = getString(R.string.bottom_sheet_item_title_edit)
+            bottom_sheet_item_name?.setText(item.name)
+
             if (item.done) {
+                bottom_sheet_item_date.visibility = View.VISIBLE
+
                 val sdf = SimpleDateFormat("dd/MM/yy - HH:mm:ss")
                 val currentDate = sdf.format(item.doneDate)
 
-                bottom_sheet_item_date.visibility = View.VISIBLE
                 bottom_sheet_item_date.text = String.format("Concluído em %s", currentDate)
             } else {
                 bottom_sheet_item_date.visibility = View.GONE
             }
+        } else {
+            bottom_sheet_item_title?.text = getString(R.string.bottom_sheet_item_title_add)
+            bottom_sheet_item_name?.setText("")
+            bottom_sheet_item_date.text = ""
+            bottom_sheet_item_date.visibility = View.GONE
         }
     }
 
-    fun closeBottomSheetAddItem() { bottomSheetItem?.state = BottomSheetBehavior.STATE_COLLAPSED }
+    fun closeBottomSheetAddItem() { bottomSheetItem.state = BottomSheetBehavior.STATE_COLLAPSED }
 
     fun openBottomSheetDoneGoal(goal: Goal, function: (goal: Goal, done: Boolean) -> Unit) {
-        bottomSheetDoneGoal?.state = BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetDoneGoal.state = BottomSheetBehavior.STATE_EXPANDED
 
-        bottomSheetDoneGoalYes?.setOnClickListener {
+        bottomSheetDoneGoalYes.setOnClickListener {
             function(goal, true)
             closeBottomSheetDoneGoal()
         }
 
-        bottomSheetDoneGoalNo?.setOnClickListener {
+        bottomSheetDoneGoalNo.setOnClickListener {
             closeBottomSheetDoneGoal()
         }
     }
 
-    fun closeBottomSheetDoneGoal() { bottomSheetDoneGoal?.state = BottomSheetBehavior.STATE_COLLAPSED }
+    fun closeBottomSheetDoneGoal() { bottomSheetDoneGoal.state = BottomSheetBehavior.STATE_COLLAPSED }
 
     private fun setToolbar() {
         setSupportActionBar(toolbar)
 
         toolbar?.navigationIcon?.setColorFilter(
-            ContextCompat.getColor(
-                this, R.color.colorPrimary
-            ), PorterDuff.Mode.SRC_ATOP
+            ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP
         )
     }
 
