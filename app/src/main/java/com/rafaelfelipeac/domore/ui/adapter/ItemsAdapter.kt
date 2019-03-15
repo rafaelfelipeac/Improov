@@ -10,12 +10,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.domore.R
 import com.rafaelfelipeac.domore.app.App
-import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.models.Item
 import com.rafaelfelipeac.domore.ui.base.BaseAdapter
 import com.rafaelfelipeac.domore.ui.fragments.goal.GoalFragment
 import com.rafaelfelipeac.domore.ui.helper.ActionCompletionContract
-import kotlinx.android.synthetic.main.list_item_goal.view.*
 
 class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), ActionCompletionContract {
 
@@ -29,7 +27,7 @@ class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), Action
         val image = viewHolder.itemView.findViewById<ImageView>(R.id.item_progress)
         val title = viewHolder.itemView.findViewById<TextView>(R.id.item_title)
 
-        title.text = item.title
+        title.text = item.name
         image.background = if (item.done) ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
                            else           ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
     }

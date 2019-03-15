@@ -3,6 +3,7 @@ package com.rafaelfelipeac.domore.ui.fragments.goal
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.textfield.TextInputEditText
 import com.hookedonplay.decoviewlib.DecoView
 import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
@@ -24,8 +26,8 @@ import com.rafaelfelipeac.domore.ui.adapter.HistoricAdapter
 import com.rafaelfelipeac.domore.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
+import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.*
 import kotlinx.android.synthetic.main.fragment_goal.*
-import kotlinx.android.synthetic.main.fragment_goals.*
 import java.util.*
 
 class GoalFragment : BaseFragment() {
@@ -46,8 +48,9 @@ class GoalFragment : BaseFragment() {
     private var lineWidth = 32F
 
     private var sheetBehavior: BottomSheetBehavior<*>? = null
-    private var itemClose: ImageView? = null
-    private var itemSave: Button? = null
+    private var bottomSheetItemButtonClose: ImageView? = null
+    private var bottomSheetItemButtomSave: Button? = null
+    private var bottomSheetItemName: TextInputEditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,8 +90,6 @@ class GoalFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        hideSoftKeyboard(activity!!)
 
         if (goal?.trophies!!) {
             resetTrophies()
@@ -187,14 +188,16 @@ class GoalFragment : BaseFragment() {
     private fun setBottomSheet() {
         (activity as MainActivity).closeBottomSheetDoneGoal()
 
+        val act = activity
+
         sheetBehavior?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(p0: View, status: Int) {
+            override fun onStateChanged(view: View, status: Int) {
                 when (status) {
                     BottomSheetBehavior.STATE_HIDDEN -> { }
                     BottomSheetBehavior.STATE_EXPANDED -> { }
                     BottomSheetBehavior.STATE_HALF_EXPANDED -> { }
                     BottomSheetBehavior.STATE_COLLAPSED -> {
-                        hideSoftKeyboard(activity!!)
+                        hideSoftKeyboard(view, act)
                     }
                     BottomSheetBehavior.STATE_DRAGGING -> { }
                     BottomSheetBehavior.STATE_SETTLING -> { }
@@ -204,13 +207,13 @@ class GoalFragment : BaseFragment() {
             override fun onSlide(view: View, statusSlide: Float) {}
         })
 
-        itemClose?.setOnClickListener {
-            (activity as MainActivity).itemValue?.setText("")
+        bottomSheetItemButtonClose?.setOnClickListener {
+            bottomSheetItemName?.setText("")
             (activity as MainActivity).closeBottomSheetAddItem()
         }
 
-        itemSave?.setOnClickListener {
-            if ((activity as MainActivity).itemValue?.text.toString().isEmpty())
+        bottomSheetItemButtomSave?.setOnClickListener {
+            if (bottomSheetItemName?.text.toString().isEmpty())
                 showSnackBar("Nome do item está vazio.")
             else {
                 val order =
@@ -221,7 +224,7 @@ class GoalFragment : BaseFragment() {
 
                 if ((activity as MainActivity).item == null) {
                     item = Item( goalId = goal?.goalId!!,
-                        title = (activity as MainActivity).itemValue?.text.toString(),
+                        name = bottomSheetItemName?.text.toString(),
                         done = false,
                         order = order,
                         createdDate = getCurrentTime()
@@ -230,7 +233,7 @@ class GoalFragment : BaseFragment() {
                     itemDAO?.insert(item)
                 } else {
                     item = (activity as MainActivity).item
-                    item?.title = (activity as MainActivity).itemValue?.text.toString()
+                    item?.name = bottomSheetItemName?.text.toString()
                     item?.updatedDate = getCurrentTime()
 
                     itemDAO?.update(item!!)
@@ -238,16 +241,17 @@ class GoalFragment : BaseFragment() {
 
                 setupItems()
 
-                (activity as MainActivity).itemValue?.setText("")
+                bottomSheetItemName?.setText("")
                 (activity as MainActivity).closeBottomSheetAddItem()
             }
         }
     }
 
     private fun initElements() {
-        sheetBehavior = (activity as MainActivity).bottomSheetAddItem
-        itemClose = (activity as MainActivity).itemClose
-        itemSave = (activity as MainActivity).itemSave
+        sheetBehavior = (activity as MainActivity).bottomSheetItem
+        bottomSheetItemButtonClose = (activity as MainActivity).bottomSheetItemClose
+        bottomSheetItemButtomSave = (activity as MainActivity).bottomSheetItemSave
+        bottomSheetItemName = (activity as MainActivity).bottomSheetItemName
     }
 
     fun scoreFromList(done: Boolean) {

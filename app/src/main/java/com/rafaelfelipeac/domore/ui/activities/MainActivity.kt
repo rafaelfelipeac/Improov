@@ -27,16 +27,17 @@ class MainActivity : BaseActivity() {
     lateinit var navController: NavController
 
     var toolbar: Toolbar? = null
-    var bottomSheetAddItem: BottomSheetBehavior<*>? = null
+    var bottomSheetItem: BottomSheetBehavior<*>? = null
     var bottomSheetDoneGoal: BottomSheetBehavior<*>? = null
     var bottomNavigation: BottomNavigationView? = null
-    var itemClose: ImageView? = null
-    var itemSave: Button? = null
-    var itemTitle: TextView? = null
-    var itemValue: TextInputEditText? = null
+    var item: Item? = null
+
     var bottomSheetDoneGoalYes: Button? = null
     var bottomSheetDoneGoalNo: Button? = null
-    var item: Item? = null
+
+    var bottomSheetItemClose: ImageView? = null
+    var bottomSheetItemSave: Button? = null
+    var bottomSheetItemName: TextInputEditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,12 +70,13 @@ class MainActivity : BaseActivity() {
         toolbar = findViewById(R.id.toolbar)!!
         navController = findNavController(R.id.nav_host_fragment)
         bottomNavigation = bottom_nav
-        bottomSheetAddItem = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_add_item))
+
+        bottomSheetItem = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_add_item))
+        bottomSheetItemClose = bottom_sheet_item_button_close
+        bottomSheetItemSave = bottom_sheet_item_button_save
+        bottomSheetItemName = bottom_sheet_item_name
+
         bottomSheetDoneGoal =  BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_done_goal))
-        itemClose = bottom_sheet_item_close
-        itemSave = bottom_sheet_button_save
-        itemTitle = bottom_sheet_title
-        itemValue = bottom_sheet_item_name
         bottomSheetDoneGoalYes = bottom_sheet_button_yes
         bottomSheetDoneGoalNo = bottom_sheet_button_no
     }
@@ -84,14 +86,17 @@ class MainActivity : BaseActivity() {
     }
 
     fun openBottomSheetAddItem(item: Item?) {
-        bottomSheetAddItem?.state = BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetItem?.state = BottomSheetBehavior.STATE_EXPANDED
 
         this.item = item
         if (item == null) {
-            itemTitle?.text = "Novo item"
+            bottom_sheet_item_title?.text = getString(R.string.bottom_sheet_item_title_add)
+            bottom_sheet_item_name?.setText("")
+            bottom_sheet_item_date.text = ""
+            bottom_sheet_item_date.visibility = View.GONE
         } else {
-            itemTitle?.text = "Editar item"
-            itemValue?.setText(item.title)
+            bottom_sheet_item_title?.text = getString(R.string.bottom_sheet_item_title_edit)
+            bottom_sheet_item_name?.setText(item.name)
         }
 
         if (item != null) {
@@ -99,15 +104,15 @@ class MainActivity : BaseActivity() {
                 val sdf = SimpleDateFormat("dd/MM/yy - HH:mm:ss")
                 val currentDate = sdf.format(item.doneDate)
 
-                bottom_sheet_date.visibility = View.VISIBLE
-                bottom_sheet_date.text = String.format("Concluído em %s", currentDate)
+                bottom_sheet_item_date.visibility = View.VISIBLE
+                bottom_sheet_item_date.text = String.format("Concluído em %s", currentDate)
             } else {
-                bottom_sheet_date.visibility = View.GONE
+                bottom_sheet_item_date.visibility = View.GONE
             }
         }
     }
 
-    fun closeBottomSheetAddItem() { bottomSheetAddItem?.state = BottomSheetBehavior.STATE_COLLAPSED }
+    fun closeBottomSheetAddItem() { bottomSheetItem?.state = BottomSheetBehavior.STATE_COLLAPSED }
 
     fun openBottomSheetDoneGoal(goal: Goal, function: (goal: Goal, done: Boolean) -> Unit) {
         bottomSheetDoneGoal?.state = BottomSheetBehavior.STATE_EXPANDED

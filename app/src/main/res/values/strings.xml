@@ -11,4 +11,6 @@
     <string name="message_empty_items">Você não tem itens adicionados.</string>
     <string name="message_empty_goals">Você não tem nenhum objetivo em andamento. \n\n Comece agora mesmo!</string>
     <string name="message_empty_stats">Crie objetivos para poder acompanhar as estatistícas e seu progresso.</string>
+    <string name="bottom_sheet_item_title_add">Novo item</string>
+    <string name="bottom_sheet_item_title_edit">Editar item</string>
 </resources>

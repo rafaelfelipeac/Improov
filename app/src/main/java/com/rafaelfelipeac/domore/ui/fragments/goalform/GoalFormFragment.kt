@@ -99,6 +99,12 @@ class GoalFormFragment : BaseFragment() {
         return false
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        (activity as MainActivity).closeBottomSheetAddItem()
+    }
+
     private fun emptyIncOrDec() =
         getType() == 2 && (goalForm_goal_inc_value.text.toString().isEmpty() ||
                 goalForm_goal_dec_value.text.toString().isEmpty())

@@ -10,7 +10,7 @@ data class Item(
     @PrimaryKey(autoGenerate = true)
     var itemId: Long = 0,
     var goalId: Long = 0,
-    var title: String = "",
+    var name: String = "",
     var order: Int = 0,
     var done: Boolean = false,
     var createdDate: Date? = null,

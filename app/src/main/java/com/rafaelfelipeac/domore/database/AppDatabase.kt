@@ -11,7 +11,7 @@ import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.models.Historic
 import com.rafaelfelipeac.domore.models.Item
 
-@Database(entities = [Goal::class, Item::class, Historic::class], version = 22)
+@Database(entities = [Goal::class, Item::class, Historic::class], version = 23)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

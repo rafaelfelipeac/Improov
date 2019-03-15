@@ -38,11 +38,10 @@ open class BaseFragment : Fragment() {
         inputMethodManager!!.toggleSoftInputFromWindow(view?.windowToken, InputMethodManager.SHOW_FORCED, 0)
     }
 
-    fun hideSoftKeyboard(activity: Activity) {
-        val inputMethodManager = activity.
-            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+    fun hideSoftKeyboard(view: View, activity: Activity?) {
+        val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
 
-        inputMethodManager!!.hideSoftInputFromWindow(view?.windowToken, 0)
+        inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     fun getCurrentTime() = Calendar.getInstance().time!!

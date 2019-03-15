@@ -30,7 +30,7 @@ class SearchFragment : BaseFragment() {
             open = !open
 
             if (!hasFocus) {
-                hideSoftKeyboard(activity!!)
+                hideSoftKeyboard(view, activity!!)
             }
 
             verifyOpenOrClose()
@@ -47,7 +47,7 @@ class SearchFragment : BaseFragment() {
 
                 verifyOpenOrClose()
             } else {
-                hideSoftKeyboard(activity!!)
+                hideSoftKeyboard(view, activity!!)
                 Snackbar.make(view, "Pesquisa.", Snackbar.LENGTH_SHORT).show()
             }
         }
@@ -74,7 +74,7 @@ class SearchFragment : BaseFragment() {
         setVerticalBias(search_edittext, 0.5f)
         setVerticalBias(search_imageview, 0.5f)
 
-        hideSoftKeyboard(activity!!)
+        hideSoftKeyboard(view!!, activity!!)
     }
 
     private fun setVerticalBias(view: View, value: Float) {
