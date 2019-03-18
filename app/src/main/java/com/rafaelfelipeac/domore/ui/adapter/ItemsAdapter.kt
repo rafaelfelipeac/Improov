@@ -5,17 +5,14 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.domore.R
-import com.rafaelfelipeac.domore.app.App
 import com.rafaelfelipeac.domore.models.Item
 import com.rafaelfelipeac.domore.ui.base.BaseAdapter
 import com.rafaelfelipeac.domore.ui.fragments.goal.GoalFragment
 import com.rafaelfelipeac.domore.ui.helper.ActionCompletionContract
 
-class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), ActionCompletionContract {
+class ItemsAdapter(private val fragment: GoalFragment) : BaseAdapter<Item>(), ActionCompletionContract {
 
     var clickListener: (book: Item) -> Unit = { }
 
@@ -28,8 +25,9 @@ class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), Action
         val title = viewHolder.itemView.findViewById<TextView>(R.id.item_title)
 
         title.text = item.name
-        image.background = if (item.done) ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
-                           else           ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
+        image.background =
+            if (item.done) ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
+            else           ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -46,56 +44,10 @@ class ItemsAdapter(private val fragment: Fragment) : BaseAdapter<Item>(), Action
     }
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int) {
-        val targetItem = this.items[oldPosition]
-        val otherItem = this.items[newPosition]
-
-        targetItem.order = newPosition
-        otherItem.order = oldPosition
-
-        App.database?.itemDAO()?.update(targetItem)
-        App.database?.itemDAO()?.update(otherItem)
-
-        this.items.removeAt(oldPosition)
-        this.items.add(newPosition, targetItem)
-
-        notifyItemMoved(oldPosition, newPosition)
+        fragment.onViewMoved(oldPosition, newPosition, items, ::notifyItemMoved)
     }
 
     override fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder) {
-        val item = this.items[position]
-
-        when(direction) {
-            ItemTouchHelper.RIGHT -> {
-                if (!item.done) {
-                    item.done = true
-                    item.doneDate = getCurrentTime()
-
-                    itemDAO?.update(item)
-
-                    (fragment as GoalFragment).scoreFromList(true)
-                } else {
-                    item.done = false
-                    item.undoneDate = getCurrentTime()
-
-                    itemDAO?.update(item)
-
-                    (fragment as GoalFragment).scoreFromList(false)
-                }
-            }
-            ItemTouchHelper.LEFT -> {
-                item.deleteDate = getCurrentTime()
-
-                itemDAO?.delete(item)
-
-                showSnackBarWithAction(holder.itemView, "Item removido.", item, ::deleteItem)
-
-                (fragment as GoalFragment).setupItems()
-            }
-        }
-    }
-
-    private fun deleteItem(item: Item) {
-        itemDAO?.insert(item)
-        (fragment as GoalFragment).setupItems()
+        fragment.onViewSwiped(position, direction, holder, items)
     }
 }

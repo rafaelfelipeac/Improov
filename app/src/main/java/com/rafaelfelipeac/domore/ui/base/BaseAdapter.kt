@@ -1,13 +1,11 @@
 package com.rafaelfelipeac.domore.ui.base
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.rafaelfelipeac.domore.app.App
 import java.util.*
 
@@ -41,14 +39,6 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>(
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
-    }
-
-    fun showSnackBarWithAction(view: View, message: String, obj: T, function: (t: T) -> Unit) {
-        Snackbar
-            .make(view, message, Snackbar.LENGTH_LONG)
-            .setAction("DESFAZER") { function(obj) }
-            .setActionTextColor(Color.WHITE)
-            .show()
     }
 
     fun getCurrentTime() = Calendar.getInstance().time!!

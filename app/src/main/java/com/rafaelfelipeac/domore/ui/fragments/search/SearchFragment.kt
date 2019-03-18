@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rafaelfelipeac.domore.R
+import com.rafaelfelipeac.domore.extension.setMessageColor
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -48,7 +49,7 @@ class SearchFragment : BaseFragment() {
                 verifyOpenOrClose()
             } else {
                 hideSoftKeyboard(view, activity!!)
-                Snackbar.make(view, "Pesquisa.", Snackbar.LENGTH_SHORT).show()
+                showSnackBar("Pesquisa.")
             }
         }
 

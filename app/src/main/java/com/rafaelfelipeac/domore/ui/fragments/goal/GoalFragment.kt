@@ -3,7 +3,6 @@ package com.rafaelfelipeac.domore.ui.fragments.goal
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +16,7 @@ import com.hookedonplay.decoviewlib.DecoView
 import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
 import com.rafaelfelipeac.domore.R
+import com.rafaelfelipeac.domore.app.App
 import com.rafaelfelipeac.domore.extension.getNumberInRightFormat
 import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.models.Historic
@@ -26,7 +26,6 @@ import com.rafaelfelipeac.domore.ui.adapter.HistoricAdapter
 import com.rafaelfelipeac.domore.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
 import com.rafaelfelipeac.domore.ui.helper.SwipeAndDragHelperItem
-import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.*
 import kotlinx.android.synthetic.main.fragment_goal.*
 import java.util.*
 
@@ -49,7 +48,7 @@ class GoalFragment : BaseFragment() {
 
     private var sheetBehavior: BottomSheetBehavior<*>? = null
     private var bottomSheetItemButtonClose: ImageView? = null
-    private var bottomSheetItemButtomSave: Button? = null
+    private var bottomSheetItemButtonSave: Button? = null
     private var bottomSheetItemName: TextInputEditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -212,7 +211,7 @@ class GoalFragment : BaseFragment() {
             (activity as MainActivity).closeBottomSheetAddItem()
         }
 
-        bottomSheetItemButtomSave?.setOnClickListener {
+        bottomSheetItemButtonSave?.setOnClickListener {
             if (bottomSheetItemName?.text.toString().isEmpty())
                 showSnackBar("Nome do item está vazio.")
             else {
@@ -250,7 +249,7 @@ class GoalFragment : BaseFragment() {
     private fun initElements() {
         sheetBehavior = (activity as MainActivity).bottomSheetItem
         bottomSheetItemButtonClose = (activity as MainActivity).bottomSheetItemClose
-        bottomSheetItemButtomSave = (activity as MainActivity).bottomSheetItemSave
+        bottomSheetItemButtonSave = (activity as MainActivity).bottomSheetItemSave
         bottomSheetItemName = (activity as MainActivity).bottomSheetItemName
     }
 
@@ -288,8 +287,8 @@ class GoalFragment : BaseFragment() {
                 goal_cl_dec_inc.visibility = View.INVISIBLE
                 goal_cl_total.visibility = View.INVISIBLE
 
-                if ((activity as MainActivity).toolbar!!.menu.findItem(R.id.menu_goal_add) == null)
-                    (activity as MainActivity).toolbar!!.inflateMenu(R.menu.menu_add)
+                if ((activity as MainActivity).toolbar.menu.findItem(R.id.menu_goal_add) == null)
+                    (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
             }
             2 -> {
                 goal_cl_list.visibility = View.INVISIBLE
@@ -309,14 +308,16 @@ class GoalFragment : BaseFragment() {
     }
 
     fun setupItems() {
-        if (itemDAO?.getAll()?.any { it.goalId == goal?.goalId && it.goalId != 0L }!!) {
-            setItems()
+        if (goal?.type == 1) {
+            if (itemDAO?.getAll()?.any { it.goalId == goal?.goalId && it.goalId != 0L }!!) {
+                setItems()
 
-            goal_cl_list.visibility = View.VISIBLE
-            items_placeholder.visibility = View.INVISIBLE
-        } else {
-            goal_cl_list.visibility = View.INVISIBLE
-            items_placeholder.visibility = View.VISIBLE
+                goal_cl_list.visibility = View.VISIBLE
+                items_placeholder.visibility = View.INVISIBLE
+            } else {
+                goal_cl_list.visibility = View.INVISIBLE
+                items_placeholder.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -575,5 +576,60 @@ class GoalFragment : BaseFragment() {
         image.background =
             if (image.background == ContextCompat.getDrawable(context!!, iconNormal)) ContextCompat.getDrawable(context!!, iconDark)
             else ContextCompat.getDrawable(context!!, iconNormal)
+    }
+
+    fun onViewMoved(oldPosition: Int, newPosition: Int, items: MutableList<Item>,
+                    function: (oldPosition: Int, newPosition: Int) -> Unit) {
+        val targetItem = items[oldPosition]
+        val otherItem = items[newPosition]
+
+        targetItem.order = newPosition
+        otherItem.order = oldPosition
+
+        App.database?.itemDAO()?.update(targetItem)
+        App.database?.itemDAO()?.update(otherItem)
+
+        items.removeAt(oldPosition)
+        items.add(newPosition, targetItem)
+
+        function(oldPosition, newPosition)
+    }
+
+    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: MutableList<Item>) {
+        val item = items[position]
+
+        when(direction) {
+            ItemTouchHelper.RIGHT -> {
+                if (item.done) {
+                    item.done = false
+                    item.undoneDate = getCurrentTime()
+
+                    itemDAO?.update(item)
+
+                    scoreFromList(false)
+                } else {
+                    item.done = true
+                    item.doneDate = getCurrentTime()
+
+                    itemDAO?.update(item)
+
+                    scoreFromList(true)
+                }
+            }
+            ItemTouchHelper.LEFT -> {
+                item.deleteDate = getCurrentTime()
+
+                itemDAO?.delete(item)
+
+                showSnackBarWithAction(holder.itemView, "Item removido.", item, ::deleteItem)
+
+                setupItems()
+            }
+        }
+    }
+
+    private fun deleteItem(item: Any) {
+        itemDAO?.insert(item as Item)
+        setupItems()
     }
 }

@@ -25,12 +25,11 @@ import java.text.SimpleDateFormat
 class MainActivity : BaseActivity() {
 
     lateinit var navController: NavController
-
-    var toolbar: Toolbar? = null
-    var bottomNavigation: BottomNavigationView? = null
-    var item: Item? = null
+    lateinit var toolbar: Toolbar
+    lateinit var bottomNavigation: BottomNavigationView
 
     lateinit var bottomSheetItem: BottomSheetBehavior<*>
+
     lateinit var bottomSheetItemClose: ImageView
     lateinit var bottomSheetItemSave: Button
     lateinit var bottomSheetItemName: TextInputEditText
@@ -39,7 +38,7 @@ class MainActivity : BaseActivity() {
     lateinit var bottomSheetDoneGoalYes: Button
     lateinit var bottomSheetDoneGoalNo: Button
 
-
+    var item: Item? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +83,7 @@ class MainActivity : BaseActivity() {
     }
 
     fun bottomNavigationVisible(visible: Boolean) {
-        bottomNavigation?.visibility = if (visible) View.VISIBLE else View.GONE
+        bottomNavigation.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     fun openBottomSheetAddItem(item: Item?) {
@@ -116,11 +115,11 @@ class MainActivity : BaseActivity() {
 
     fun closeBottomSheetAddItem() { bottomSheetItem.state = BottomSheetBehavior.STATE_COLLAPSED }
 
-    fun openBottomSheetDoneGoal(goal: Goal, function: (goal: Goal, done: Boolean) -> Unit) {
+    fun openBottomSheetDoneGoal(goal: Goal, function: (goal: Goal) -> Unit) {
         bottomSheetDoneGoal.state = BottomSheetBehavior.STATE_EXPANDED
 
         bottomSheetDoneGoalYes.setOnClickListener {
-            function(goal, true)
+            function(goal)
             closeBottomSheetDoneGoal()
         }
 
@@ -134,10 +133,10 @@ class MainActivity : BaseActivity() {
     private fun setToolbar() {
         setSupportActionBar(toolbar)
 
-        toolbar?.navigationIcon?.setColorFilter(
+        toolbar.navigationIcon?.setColorFilter(
             ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP
         )
     }
 
-    private fun clearToolbarMenu() = toolbar?.menu!!.clear()
+    private fun clearToolbarMenu() = toolbar.menu!!.clear()
 }

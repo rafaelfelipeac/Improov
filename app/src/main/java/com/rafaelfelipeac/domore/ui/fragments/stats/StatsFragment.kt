@@ -20,6 +20,7 @@ class StatsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as MainActivity).closeBottomSheetDoneGoal()
 
         setupStats()
     }

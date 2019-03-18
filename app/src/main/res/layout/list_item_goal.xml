@@ -117,7 +117,7 @@
                 android:layout_marginStart="4dp" android:layout_marginBottom="8dp"/>
 
         <TextView
-                android:id="@+id/goal_porcentage"
+                android:id="@+id/goal_percentage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="99.00 %"
@@ -130,19 +130,7 @@
                 card_view:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="8dp"
                 card_view:layout_constraintBottom_toBottomOf="parent"/>
-
-        <!--<TextView-->
-                <!--android:id="@+id/goal_item_date"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textSize="10sp"-->
-                <!--android:text="00/00/00"-->
-                <!--android:textColor="@color/colorPrimary"-->
-                <!--card_view:layout_constraintEnd_toEndOf="parent"-->
-                <!--android:layout_marginEnd="48dp"-->
-                <!--card_view:layout_constraintTop_toTopOf="parent"-->
-                <!--android:layout_marginTop="2dp"/>-->
-
+        
         <ImageView
                 android:id="@+id/goal_image_view"
                 android:layout_width="wrap_content"

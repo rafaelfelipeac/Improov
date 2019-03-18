@@ -10,6 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rafaelfelipeac.domore.R
+import com.rafaelfelipeac.domore.app.App
+import com.rafaelfelipeac.domore.extension.getPercentage
+import com.rafaelfelipeac.domore.models.Goal
 import com.rafaelfelipeac.domore.ui.activities.MainActivity
 import com.rafaelfelipeac.domore.ui.adapter.GoalsAdapter
 import com.rafaelfelipeac.domore.ui.base.BaseFragment
@@ -20,7 +23,7 @@ class GoalsFragment : BaseFragment() {
 
     private var goalsAdapter = GoalsAdapter(this)
 
-    private var viewModel: GoalsViewModel?= null
+    private lateinit var viewModel: GoalsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,6 @@ class GoalsFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         (activity as MainActivity).supportActionBar?.title = "Metas"
 
@@ -47,8 +49,6 @@ class GoalsFragment : BaseFragment() {
 
         (activity as MainActivity).closeBottomSheetDoneGoal()
         (activity as MainActivity).closeBottomSheetAddItem()
-
-        //hideSoftKeyboard(activity!!)
 
         showNavigation()
 
@@ -67,31 +67,30 @@ class GoalsFragment : BaseFragment() {
         (activity as MainActivity).closeBottomSheetAddItem()
     }
 
-    fun setupItems() {
-        if (viewModel?.getGoals()!!.isNotEmpty()) {
+    private fun setupItems() {
+        if (viewModel.getGoals().isNotEmpty()) {
             setItems()
 
-            goals_list.visibility = View.VISIBLE
-            goals_placeholder.visibility = View.INVISIBLE
+            goalListVisible(true)
         } else {
-            goals_list.visibility = View.INVISIBLE
-            goals_placeholder.visibility = View.VISIBLE
+            goalListVisible(false)
         }
     }
 
+    private fun goalListVisible(visible: Boolean) {
+        goals_list.visibility = if (visible) View.VISIBLE else View.INVISIBLE
+        goals_placeholder.visibility = if (visible) View.INVISIBLE else View.VISIBLE
+    }
+
     private fun setItems() {
-        goalsAdapter.setItems(viewModel?.getGoals()!!.sortedBy { it.order })
+        goalsAdapter.setItems(viewModel.getGoals().sortedBy { it.order })
 
         goalsAdapter.clickListener = {
             val action = GoalsFragmentDirections.actionNavigationGoalsToGoalFragment(it)
             navController.navigate(action)
         }
 
-        goals_list.layoutManager = LinearLayoutManager(
-            context,
-            RecyclerView.VERTICAL,
-            false
-        )
+        //goals_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
@@ -116,5 +115,61 @@ class GoalsFragment : BaseFragment() {
                 super.onScrollStateChanged(recyclerView, newState)
             }
         })
+    }
+
+    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: MutableList<Goal>) {
+        val goal = items[position]
+
+        when(direction) {
+            ItemTouchHelper.RIGHT -> {
+                if (goal.done || goal.getPercentage() >= 100) {
+                    doneOrUndoneGoal(goal)
+                } else {
+                    setupItems()
+                    (activity as MainActivity).openBottomSheetDoneGoal(goal, ::doneOrUndoneGoal)
+                }
+            }
+            ItemTouchHelper.LEFT -> {
+                goal.deleteDate = getCurrentTime()
+
+                goalDAO?.delete(goal)
+
+                showSnackBarWithAction(holder.itemView, "Meta removida.", goal as Any, ::deleteGoal)
+
+                setupItems()
+            }
+        }
+    }
+
+    fun onViewMoved(oldPosition: Int, newPosition: Int, items: MutableList<Goal>,
+                    function: (oldPosition: Int, newPosition: Int) -> Unit) {
+        val targetGoal = items[oldPosition]
+        val otherGoal = items[newPosition]
+
+        targetGoal.order = newPosition
+        otherGoal.order = oldPosition
+
+        App.database?.goalDAO()?.update(targetGoal)
+        App.database?.goalDAO()?.update(otherGoal)
+
+        items.removeAt(oldPosition)
+        items.add(newPosition, targetGoal)
+
+        function(oldPosition, newPosition)
+    }
+
+    private fun doneOrUndoneGoal(goal: Goal) {
+        goal.done = !goal.done
+        goal.undoneDate = getCurrentTime()
+
+        goalDAO?.update(goal)
+
+        setupItems()
+    }
+
+    private fun deleteGoal(goal: Any) {
+        goalDAO?.insert(goal as Goal)
+
+        setupItems()
     }
 }

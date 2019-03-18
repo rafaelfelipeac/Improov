@@ -22,7 +22,7 @@ class GoalFormFragment : BaseFragment() {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = "Nova meta"
-        (activity as MainActivity).toolbar!!.inflateMenu(R.menu.menu_save)
+        (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
 
         viewModel = ViewModelProviders.of(this).get(GoalFormViewModel::class.java)
 

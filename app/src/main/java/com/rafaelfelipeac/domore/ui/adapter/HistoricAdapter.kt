@@ -16,17 +16,17 @@ class HistoricAdapter(private val fragment: Fragment) : BaseAdapter<Historic>() 
 
     override fun getLayoutRes(): Int = R.layout.list_item_historic
 
-    override fun View.bindView(historic: Historic, viewHolder: ViewHolder) {
-        setOnClickListener { clickListener(historic) }
+    override fun View.bindView(item: Historic, viewHolder: ViewHolder) {
+        setOnClickListener { clickListener(item) }
 
         val date = viewHolder.itemView.findViewById<TextView>(R.id.historic_date)
         val value = viewHolder.itemView.findViewById<TextView>(R.id.historic_value)
 
         val sdf = SimpleDateFormat("dd/MM/yy - HH:mm:ss")
-        val currentDate = sdf.format(historic.date)
+        val currentDate = sdf.format(item.date)
 
         date.text = currentDate
-        value.text = historic.value.getValueWithSymbol()
+        value.text = item.value.getValueWithSymbol()
     }
 
     @SuppressLint("ClickableViewAccessibility")
