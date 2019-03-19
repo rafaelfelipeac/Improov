@@ -3,15 +3,15 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/nav_graph"
-            app:startDestination="@id/navigation_goals">
+            app:startDestination="@id/nav_goals">
 
-    <fragment android:id="@+id/navigation_goals"
+    <fragment android:id="@+id/nav_goals"
               android:name="com.rafaelfelipeac.domore.ui.fragments.goals.GoalsFragment"
               android:label="fragment_goals"
               tools:layout="@layout/fragment_goals">
 
-        <action android:id="@+id/action_navigation_goals_to_goalFormFragment" app:destination="@id/goalFormFragment"/>
-        <action android:id="@+id/action_navigation_goals_to_goalFragment" app:destination="@id/goalFragment"/>
+        <action android:id="@+id/action_nav_goals_to_goalFormFragment" app:destination="@id/goalFormFragment"/>
+        <action android:id="@+id/action_nav_goals_to_goalFragment" app:destination="@id/goalFragment"/>
 
     </fragment>
 
@@ -55,7 +55,7 @@
         <argument android:name="goal" app:argType="com.rafaelfelipeac.domore.models.Goal"/>
 
         <action android:id="@+id/action_goalFragment_to_goalFormFragment" app:destination="@id/goalFormFragment"/>
-        <action android:id="@+id/action_goalFragment_to_navigation_goals" app:destination="@id/navigation_goals"/>
+        <action android:id="@+id/action_goalFragment_to_nav_goals" app:destination="@id/nav_goals"/>
 
     </fragment>
 

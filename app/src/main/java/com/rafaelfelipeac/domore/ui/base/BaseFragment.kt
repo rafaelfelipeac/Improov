@@ -40,6 +40,15 @@ abstract class BaseFragment : Fragment() {
             .show()
     }
 
+    fun showSnackBarWithAction(view: View, message: String, obj: Any, function: (obj: Any) -> Unit) {
+        Snackbar
+            .make(view, message, Snackbar.LENGTH_LONG)
+            .setMessageColor(R.color.colorPrimaryDarkOne)
+            .setAction("DESFAZER") { function(obj) }
+            .setActionTextColor(ContextCompat.getColor(context!!, R.color.colorPrimaryDarkOne))
+            .show()
+    }
+
     fun showSoftKeyboard(activity: Activity) {
         val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
 
@@ -53,13 +62,4 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun getCurrentTime() = Calendar.getInstance().time!!
-
-    fun showSnackBarWithAction(view: View, message: String, obj: Any, function: (obj: Any) -> Unit) {
-        Snackbar
-            .make(view, message, Snackbar.LENGTH_LONG)
-            .setMessageColor(R.color.colorPrimaryDarkOne)
-            .setAction("DESFAZER") { function(obj) }
-            .setActionTextColor(ContextCompat.getColor(context!!, R.color.colorPrimaryDarkOne))
-            .show()
-    }
 }

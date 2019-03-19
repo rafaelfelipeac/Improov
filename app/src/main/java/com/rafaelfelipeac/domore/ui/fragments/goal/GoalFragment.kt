@@ -104,6 +104,33 @@ class GoalFragment : BaseFragment() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        if (goal?.type == 1) { inflater.inflate(R.menu.menu_add, menu) }
+
+        inflater.inflate(R.menu.menu_edit, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_goal_add -> {
+                (activity as MainActivity).openBottomSheetAddItem(null)
+
+                return true
+            }
+            R.id.menu_goal_edit -> {
+                val action =
+                    GoalFragmentDirections.actionGoalFragmentToGoalFormFragment(goal!!)
+                navController.navigate(action)
+            }
+            android.R.id.home -> {
+                navController.navigateUp()
+            }
+        }
+        return false
+    }
+
     private fun setButtons() {
         goal_btn_inc.setOnClickListener {
             count += goal?.incrementValue!!
@@ -147,30 +174,6 @@ class GoalFragment : BaseFragment() {
                 showSnackBar(getString(R.string.message_goal_value_invalid))
             }
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (goal?.type == 1) { inflater.inflate(R.menu.menu_add, menu) }
-
-        inflater.inflate(R.menu.menu_edit, menu)
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_goal_add -> {
-                (activity as MainActivity).openBottomSheetAddItem(null)
-
-                return true
-            }
-            R.id.menu_goal_edit -> {
-                val action =
-                    GoalFragmentDirections.actionGoalFragmentToGoalFormFragment(goal!!)
-                navController.navigate(action)
-            }
-        }
-        return false
     }
 
     private fun verifyIfIsDone() =

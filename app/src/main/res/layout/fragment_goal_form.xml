@@ -24,8 +24,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-        >
+                android:layout_marginEnd="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/form_goal_medal"
@@ -306,6 +305,7 @@
                         android:id="@+id/goalForm_goal_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:inputType="text"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp"/>
 
