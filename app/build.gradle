@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'io.gitlab.arturbosch.detekt'
+apply plugin: 'io.fabric'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -27,6 +29,7 @@ android {
 
 repositories {
     jcenter()
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 configurations {
@@ -84,6 +87,14 @@ dependencies {
 
     // Chart
     implementation 'com.github.bmarrdev:android-DecoView-charting:v1.2'
+
+    // Crashlytics
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
+        transitive = true
+    }
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.1'
 }
 
 task ktlint(type: JavaExec, group: "verification") {

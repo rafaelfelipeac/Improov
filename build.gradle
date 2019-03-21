@@ -4,15 +4,19 @@ buildscript {
         google()
         jcenter()
         mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
         maven {
             url = uri("https://plugins.gradle.org/m2/")
         }
     }
     dependencies {
+
         classpath 'com.android.tools.build:gradle:3.3.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0-rc02"
         classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.0.0-RC11")
+        classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'com.google.gms:google-services:4.0.1'
     }
 }
 

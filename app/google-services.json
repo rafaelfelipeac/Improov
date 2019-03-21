@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "214120983116",
+    "firebase_url": "https://do-app-d6675.firebaseio.com",
+    "project_id": "do-app-d6675",
+    "storage_bucket": "do-app-d6675.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214120983116:android:0de49a3fd8fd6c52",
+        "android_client_info": {
+          "package_name": "com.rafaelfelipeac.domore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214120983116-rarpjp4i2rhq431ra4l2gvgdoijl0f4i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcNxM6L6Vj7qCey81p7RtQScj6cbGyKXc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
