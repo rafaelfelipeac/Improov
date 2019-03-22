@@ -6,7 +6,7 @@
             app:startDestination="@id/nav_goals">
 
     <fragment android:id="@+id/nav_goals"
-              android:name="com.rafaelfelipeac.domore.ui.fragments.goals.GoalsFragment"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.goals.GoalsFragment"
               android:label="fragment_goals"
               tools:layout="@layout/fragment_goals">
 
@@ -16,43 +16,43 @@
     </fragment>
 
     <fragment android:id="@+id/navigation_stats"
-              android:name="com.rafaelfelipeac.domore.ui.fragments.stats.StatsFragment"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.stats.StatsFragment"
               android:label="fragment_stats"
               tools:layout="@layout/fragment_stats">
 
     </fragment>
 
     <fragment android:id="@+id/navigation_search"
-              android:name="com.rafaelfelipeac.domore.ui.fragments.search.SearchFragment"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.search.SearchFragment"
               android:label="fragment_search"
               tools:layout="@layout/fragment_search">
 
     </fragment>
 
     <fragment android:id="@+id/navigation_settings"
-              android:name="com.rafaelfelipeac.domore.ui.fragments.settings.SettingsFragment"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.settings.SettingsFragment"
               android:label="fragment_settings"
               tools:layout="@layout/fragment_settings">
 
     </fragment>
 
     <fragment android:id="@+id/goalFormFragment"
-              android:name="com.rafaelfelipeac.domore.ui.fragments.goalform.GoalFormFragment"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.goalform.GoalFormFragment"
               android:label="fragment_goal_form"
               tools:layout="@layout/fragment_goal_form">
 
-        <argument android:name="goal" app:argType="com.rafaelfelipeac.domore.models.Goal"/>
+        <argument android:name="goal" app:argType="com.rafaelfelipeac.mountains.models.Goal"/>
 
         <action android:id="@+id/action_goalFormFragment_to_goalFragment" app:destination="@id/goalFragment"/>
 
     </fragment>
 
     <fragment android:id="@+id/goalFragment"
-              android:name="com.rafaelfelipeac.domore.ui.fragments.goal.GoalFragment"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.goal.GoalFragment"
               android:label="fragment_goal"
               tools:layout="@layout/fragment_goal">
 
-        <argument android:name="goal" app:argType="com.rafaelfelipeac.domore.models.Goal"/>
+        <argument android:name="goal" app:argType="com.rafaelfelipeac.mountains.models.Goal"/>
 
         <action android:id="@+id/action_goalFragment_to_goalFormFragment" app:destination="@id/goalFormFragment"/>
         <action android:id="@+id/action_goalFragment_to_nav_goals" app:destination="@id/nav_goals"/>

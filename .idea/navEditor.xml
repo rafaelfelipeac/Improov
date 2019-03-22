@@ -45,7 +45,7 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_goalFragment_to_navigation_goals">
+                            <entry key="action_goalFragment_to_nav_goals">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -55,23 +55,23 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigation_goals">
+                  <entry key="nav_goals">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="256" />
+                            <option name="x" value="12" />
                             <option name="y" value="12" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_navigation_goals_to_goalFormFragment">
+                            <entry key="action_nav_goals_to_goalFormFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_goals_to_goalFragment">
+                            <entry key="action_nav_goals_to_goalFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
