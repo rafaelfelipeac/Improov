@@ -45,10 +45,10 @@
                          android:layout_marginTop="16dp"
                          app:layout_constraintTop_toTopOf="parent"/>
 
-               <ImageView android:id="@+id/stats_medal_image"
+               <ImageView android:id="@+id/stats_single_image"
                           android:layout_width="60dp"
                           android:layout_height="60dp"
-                          android:background="@mipmap/ic_medal_dark"
+                          android:background="@mipmap/ic_single_dark"
                           app:layout_constraintStart_toStartOf="parent"
                           android:layout_marginStart="8dp"
                           app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
                           android:layout_marginTop="48dp"
                           app:layout_constraintTop_toBottomOf="@+id/stats_message"/>
 
-               <TextView android:id="@+id/stats_medal_value"
+               <TextView android:id="@+id/stats_single_value"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:text="13x"
@@ -67,76 +67,76 @@
                          android:layout_marginTop="8dp"
                          android:textSize="18sp"
                          android:textColor="@color/colorPrimary"
-                         app:layout_constraintTop_toBottomOf="@+id/stats_medal_image"/>
+                         app:layout_constraintTop_toBottomOf="@+id/stats_single_image"/>
 
-               <ImageView android:id="@+id/stats_trophy_bronze"
+               <ImageView android:id="@+id/stats_mountain_bronze"
                           android:layout_width="60dp"
                           android:layout_height="60dp"
-                          android:background="@mipmap/ic_trophy_bronze_dark"
-                          app:layout_constraintEnd_toStartOf="@+id/stats_trophy_silver"
+                          android:background="@mipmap/ic_mountain_bronze_dark"
+                          app:layout_constraintEnd_toStartOf="@+id/stats_mountain_silver"
                           android:layout_marginEnd="8dp"
                           app:layout_constraintStart_toStartOf="parent"
                           android:layout_marginStart="8dp"
-                          app:layout_constraintTop_toTopOf="@+id/stats_trophy_silver"/>
+                          app:layout_constraintTop_toTopOf="@+id/stats_mountain_silver"/>
 
-               <TextView android:id="@+id/stats_trophy_bronze_value"
+               <TextView android:id="@+id/stats_mountain_bronze_value"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:text="12x"
                          android:layout_marginTop="8dp"
-                         app:layout_constraintTop_toBottomOf="@+id/stats_trophy_bronze"
-                         app:layout_constraintStart_toStartOf="@+id/stats_trophy_bronze"
-                         app:layout_constraintEnd_toEndOf="@+id/stats_trophy_bronze"
+                         app:layout_constraintTop_toBottomOf="@+id/stats_mountain_bronze"
+                         app:layout_constraintStart_toStartOf="@+id/stats_mountain_bronze"
+                         app:layout_constraintEnd_toEndOf="@+id/stats_mountain_bronze"
                          android:textSize="18sp"
                          android:textColor="@color/colorPrimary"/>
 
-               <ImageView android:id="@+id/stats_trophy_silver"
+               <ImageView android:id="@+id/stats_mountain_silver"
                           android:layout_width="60dp"
                           android:layout_height="60dp"
-                          android:background="@mipmap/ic_trophy_silver_dark"
+                          android:background="@mipmap/ic_mountain_silver_dark"
                           app:layout_constraintStart_toStartOf="parent"
                           android:layout_marginStart="8dp"
                           app:layout_constraintEnd_toEndOf="parent"
                           android:layout_marginEnd="8dp"
                           android:layout_marginTop="32dp"
-                          app:layout_constraintTop_toBottomOf="@+id/stats_medal_value"/>
+                          app:layout_constraintTop_toBottomOf="@+id/stats_single_value"/>
 
-               <TextView android:id="@+id/stats_trophy_silver_value"
+               <TextView android:id="@+id/stats_mountain_silver_value"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:text="12x"
-                         app:layout_constraintStart_toStartOf="@+id/stats_trophy_silver"
-                         app:layout_constraintEnd_toEndOf="@+id/stats_trophy_silver"
+                         app:layout_constraintStart_toStartOf="@+id/stats_mountain_silver"
+                         app:layout_constraintEnd_toEndOf="@+id/stats_mountain_silver"
                          android:layout_marginTop="8dp"
-                         app:layout_constraintTop_toBottomOf="@+id/stats_trophy_silver"
+                         app:layout_constraintTop_toBottomOf="@+id/stats_mountain_silver"
                          android:textSize="18sp"
                          android:textColor="@color/colorPrimary"/>
 
-               <ImageView android:id="@+id/stats_trophy_gold"
+               <ImageView android:id="@+id/stats_mountain_gold"
                           android:layout_width="60dp"
                           android:layout_height="60dp"
-                          android:background="@mipmap/ic_trophy_gold_dark"
+                          android:background="@mipmap/ic_mountain_gold_dark"
                           app:layout_constraintEnd_toEndOf="parent"
                           android:layout_marginEnd="8dp"
                           android:layout_marginStart="8dp"
-                          app:layout_constraintStart_toEndOf="@+id/stats_trophy_silver"
-                          app:layout_constraintTop_toTopOf="@+id/stats_trophy_silver"/>
+                          app:layout_constraintStart_toEndOf="@+id/stats_mountain_silver"
+                          app:layout_constraintTop_toTopOf="@+id/stats_mountain_silver"/>
 
-               <TextView android:id="@+id/stats_trophy_gold_value"
+               <TextView android:id="@+id/stats_mountain_gold_value"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:text="12x"
-                         app:layout_constraintStart_toStartOf="@+id/stats_trophy_gold"
-                         app:layout_constraintEnd_toEndOf="@+id/stats_trophy_gold"
+                         app:layout_constraintStart_toStartOf="@+id/stats_mountain_gold"
+                         app:layout_constraintEnd_toEndOf="@+id/stats_mountain_gold"
                          android:layout_marginTop="8dp"
-                         app:layout_constraintTop_toBottomOf="@+id/stats_trophy_gold"
+                         app:layout_constraintTop_toBottomOf="@+id/stats_mountain_gold"
                          android:textSize="18sp"
                          android:textColor="@color/colorPrimary"/>
 
                <TextView android:id="@+id/stats_message_2"
                          android:layout_width="0dp"
                          android:layout_height="wrap_content"
-                         android:text="Continue trabalhando em seus objetivos! \n\n Sua sala de troféus e medalhas nunca estará cheia o bastante."
+                         android:text="Continue trabalhando em seus objetivos! \n\n Sua sala de troféus e FFhas nunca estará cheia o bastante."
                          android:textColor="@color/colorPrimary"
                          android:textSize="18sp"
                          android:textAlignment="center"
@@ -145,7 +145,7 @@
                          app:layout_constraintEnd_toEndOf="parent"
                          android:layout_marginEnd="32dp"
                          android:layout_marginTop="48dp"
-                         app:layout_constraintTop_toBottomOf="@+id/stats_trophy_silver_value"/>
+                         app:layout_constraintTop_toBottomOf="@+id/stats_mountain_silver_value"/>
 
            </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -158,7 +158,7 @@
                         android:id="@+id/goals_placeholder_image"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:background="@mipmap/ic_trophy_silver" app:layout_constraintStart_toStartOf="parent"
+                        android:background="@mipmap/ic_mountain_silver" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
                         app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"

@@ -37,7 +37,7 @@
     </fragment>
 
     <fragment android:id="@+id/goalFormFragment"
-              android:name="com.rafaelfelipeac.mountains.ui.fragments.goalform.GoalFormFragment"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.goalForm.GoalFormFragment"
               android:label="fragment_goal_form"
               tools:layout="@layout/fragment_goal_form">
 

@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.ui.fragments.goalform
+package com.rafaelfelipeac.mountains.ui.fragments.goalForm
 
 import com.rafaelfelipeac.mountains.app.App
 import com.rafaelfelipeac.mountains.database.goal.GoalDAO

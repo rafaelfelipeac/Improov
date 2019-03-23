@@ -4,5 +4,5 @@
     <dimen name="edittext_height">40dp</dimen>
     <dimen name="dimens_radius_outline">30dp</dimen>
 
-    <dimen name="edit_text_medal_trophy">80dp</dimen>
+    <dimen name="edit_text_single_mountains">80dp</dimen>
 </resources>

@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.ui.fragments.goalform
+package com.rafaelfelipeac.mountains.ui.fragments.goalForm
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -64,7 +64,7 @@ class GoalFormFragment : BaseFragment() {
             R.id.menu_goal_save -> {
                 if (emptyFields()) {
                     showSnackBar(getString(R.string.message_some_empty_value))
-                } else if (!validateTrophiesValues()) {
+                } else if (!validateMountainsValues()) {
                     showSnackBar(getString(R.string.message_gold_silver_bronze_order))
                 } else if (emptyIncOrDec()) {
                     showSnackBar(getString(R.string.message_empty_inc_dec))
@@ -144,30 +144,30 @@ class GoalFormFragment : BaseFragment() {
             }
         }
 
-        form_goal_switch_trophies.setOnCheckedChangeListener { _, isChecked ->
+        form_goal_switch_mountains.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                isTrophies(true)
+                isMountains(true)
             } else {
-                isTrophies(false)
+                isMountains(false)
             }
         }
     }
 
-    private fun isTrophies(isTrophy: Boolean) {
-        goal?.trophies = isTrophy
+    private fun isMountains(isMountain: Boolean) {
+        goal?.mountains = isMountain
 
-        if (isTrophy) {
-            form_goal_editText_medal.setText("")
+        if (isMountain) {
+            form_goal_editText_single.setText("")
 
-            form_goal_trophies.visibility = View.VISIBLE
-            form_goal_medal.visibility = View.INVISIBLE
+            form_goal_mountains.visibility = View.VISIBLE
+            form_goal_single.visibility = View.INVISIBLE
         } else {
             form_goal_editText_bronze.setText("")
             form_goal_editText_silver.setText("")
             form_goal_editText_gold.setText("")
 
-            form_goal_trophies.visibility = View.INVISIBLE
-            form_goal_medal.visibility = View.VISIBLE
+            form_goal_mountains.visibility = View.INVISIBLE
+            form_goal_single.visibility = View.VISIBLE
         }
     }
 
@@ -201,7 +201,7 @@ class GoalFormFragment : BaseFragment() {
 //        }
 //    }
 
-    private fun validateTrophiesValues() : Boolean {
+    private fun validateMountainsValues() : Boolean {
         return try {
             val gold = form_goal_editText_gold.text!!.toString().toFloat()
             val silver = form_goal_editText_silver.text.toString().toFloat()
@@ -209,7 +209,7 @@ class GoalFormFragment : BaseFragment() {
 
             ((gold > silver) && (silver > bronze))
         } catch (e: Exception) {
-            if (form_goal_editText_medal.text!!.toString().isNotEmpty())
+            if (form_goal_editText_single.text!!.toString().isNotEmpty())
                 return true
             false
         }
@@ -217,13 +217,13 @@ class GoalFormFragment : BaseFragment() {
 
     private fun emptyFields(): Boolean {
         val nameEmpty = goalForm_goal_name.text!!.toString().isEmpty()
-        val medalEmpty = form_goal_editText_medal.text!!.toString().isEmpty()
-        val trophiesEmpty =
+        val singleEmpty = form_goal_editText_single.text!!.toString().isEmpty()
+        val mountainsEmpty =
                     form_goal_editText_bronze.text!!.toString().isEmpty() ||
                     form_goal_editText_silver.text!!.toString().isEmpty() ||
                     form_goal_editText_gold.text!!.toString().isEmpty()
 
-        if ((medalEmpty && trophiesEmpty) || nameEmpty)
+        if ((singleEmpty && mountainsEmpty) || nameEmpty)
             return true
         return false
     }
@@ -239,16 +239,16 @@ class GoalFormFragment : BaseFragment() {
             type = goalType,
             done = false,
             order = order,
-            trophies = form_goal_switch_trophies.isChecked,
+            mountains = form_goal_switch_mountains.isChecked,
             createdDate = getCurrentTime()
         )
 
-        if (goal.trophies) {
+        if (goal.mountains) {
             goal.bronzeValue = form_goal_editText_bronze.text.toString().toFloat()
             goal.silverValue = form_goal_editText_silver.text.toString().toFloat()
             goal.goldValue = form_goal_editText_gold.text.toString().toFloat()
         } else {
-            goal.medalValue = form_goal_editText_medal.text.toString().toFloat()
+            goal.singleValue = form_goal_editText_single.text.toString().toFloat()
         }
 
         if (goal.type == 2) {
@@ -261,7 +261,7 @@ class GoalFormFragment : BaseFragment() {
 
     private fun getUpdateGoal() : Goal {
         goal?.name = goalForm_goal_name.text.toString()
-        goal?.trophies = form_goal_switch_trophies.isChecked
+        goal?.mountains = form_goal_switch_mountains.isChecked
         goal?.type = getType()
         goal?.updatedDate = getCurrentTime()
 
@@ -270,12 +270,12 @@ class GoalFormFragment : BaseFragment() {
             goal?.decrementValue = goalForm_goal_dec_value.text.toString().toFloat()
         }
 
-        if (goal?.trophies!!) {
+        if (goal?.mountains!!) {
             goal?.bronzeValue = form_goal_editText_bronze.text.toString().toFloat()
             goal?.silverValue = form_goal_editText_silver.text.toString().toFloat()
             goal?.goldValue = form_goal_editText_gold.text.toString().toFloat()
         } else {
-            goal?.medalValue = form_goal_editText_medal.text.toString().toFloat()
+            goal?.singleValue = form_goal_editText_single.text.toString().toFloat()
         }
 
         return goal!!
@@ -290,17 +290,17 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setupGoal() {
-        if (goal?.trophies!!) {
-            form_goal_trophies.visibility = View.VISIBLE
-            form_goal_medal.visibility = View.INVISIBLE
+        if (goal?.mountains!!) {
+            form_goal_mountains.visibility = View.VISIBLE
+            form_goal_single.visibility = View.INVISIBLE
 
             form_goal_editText_bronze.setText(goal?.bronzeValue?.getNumberInRightFormat())
             form_goal_editText_silver.setText(goal?.silverValue?.getNumberInRightFormat())
             form_goal_editText_gold.setText(goal?.goldValue?.getNumberInRightFormat())
 
-            form_goal_switch_trophies.isChecked = true
+            form_goal_switch_mountains.isChecked = true
         } else {
-            form_goal_editText_medal.setText(goal?.medalValue?.getNumberInRightFormat())
+            form_goal_editText_single.setText(goal?.singleValue?.getNumberInRightFormat())
         }
 
         goalForm_goal_name.setText(goal?.name)

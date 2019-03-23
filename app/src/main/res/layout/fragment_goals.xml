@@ -23,7 +23,7 @@
                     android:id="@+id/goals_placeholder_image"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@mipmap/ic_trophy_silver" app:layout_constraintStart_toStartOf="parent"
+                    android:background="@mipmap/ic_mountain_silver" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"

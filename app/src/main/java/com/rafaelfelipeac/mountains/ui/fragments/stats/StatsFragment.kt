@@ -40,19 +40,19 @@ class StatsFragment : BaseFragment() {
     private fun setStats() {
         val goals = goalDAO?.getAll()
 
-        val doneWithMedals = goals?.filter { !it.trophies }
-        val doneWithTrophies = goals?.filter { it.trophies }
+        val doneWithSingles = goals?.filter { !it.mountains }
+        val doneWithMountains = goals?.filter { it.mountains }
 
-        val quantityMedal = doneWithMedals?.filter { it.value >= it.medalValue }?.size
-        val quantityBronze = doneWithTrophies?.filter { it.value >= it.bronzeValue }?.size
-        val quantitySilver = doneWithTrophies?.filter { it.value >= it.silverValue }?.size
-        val quantityGold = doneWithTrophies?.filter { it.value >= it.goldValue }?.size
+        val quantitySingles = doneWithSingles?.filter { it.value >= it.singleValue }?.size
+        val quantityBronze = doneWithMountains?.filter { it.value >= it.bronzeValue }?.size
+        val quantitySilver = doneWithMountains?.filter { it.value >= it.silverValue }?.size
+        val quantityGold = doneWithMountains?.filter { it.value >= it.goldValue }?.size
 
         stats_message.text = String.format("Você já atingiu %d objetivos!", goals?.filter { it.done }?.size)
-        stats_medal_value.text = String.format("%dx", quantityMedal)
-        stats_trophy_bronze_value.text = String.format("%dx", quantityBronze)
-        stats_trophy_silver_value.text = String.format("%dx", quantitySilver)
-        stats_trophy_gold_value.text = String.format("%dx", quantityGold)
+        stats_single_value.text = String.format("%dx", quantitySingles)
+        stats_mountain_bronze_value.text = String.format("%dx", quantityBronze)
+        stats_mountain_silver_value.text = String.format("%dx", quantitySilver)
+        stats_mountain_gold_value.text = String.format("%dx", quantityGold)
     }
 }
 

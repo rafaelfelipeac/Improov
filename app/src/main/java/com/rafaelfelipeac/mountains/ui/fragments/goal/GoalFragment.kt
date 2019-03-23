@@ -38,7 +38,7 @@ class GoalFragment : BaseFragment() {
 
     private var count: Float = 0F
 
-    private var seriesMedal: Int = 0
+    private var seriesSingle: Int = 0
     private var seriesBronze: Int = 0
     private var seriesSilver: Int = 0
     private var seriesGold: Int = 0
@@ -90,10 +90,10 @@ class GoalFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (goal?.trophies!!) {
-            resetTrophies()
+        if (goal?.mountains!!) {
+            resetMountains()
         } else {
-            resetMedal()
+            resetSingle()
         }
 
         setButtons()
@@ -177,8 +177,8 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun verifyIfIsDone() =
-        ((goal!!.trophies && goal!!.value >= goal!!.goldValue) ||
-                (!goal!!.trophies && goal!!.value >= goal!!.medalValue))
+        ((goal!!.mountains && goal!!.value >= goal!!.goldValue) ||
+                (!goal!!.mountains && goal!!.value >= goal!!.singleValue))
 
     private fun updateTextAndGoal(textView: TextView) {
         goal_count.text = count.getNumberInRightFormat()
@@ -273,15 +273,15 @@ class GoalFragment : BaseFragment() {
         goal_count.text = count.getNumberInRightFormat()
 
         when {
-            goal?.trophies!! -> {
-                goal_medal.visibility = View.INVISIBLE
-                goal_trophies.visibility = View.VISIBLE
+            goal?.mountains!! -> {
+                goal_single.visibility = View.INVISIBLE
+                goal_mountains.visibility = View.VISIBLE
 
-                goal_trophy_bronze_text.text = goal?.bronzeValue?.getNumberInRightFormat()
-                goal_trophy_silver_text.text = goal?.silverValue?.getNumberInRightFormat()
-                goal_trophy_gold_text.text = goal?.goldValue?.getNumberInRightFormat()
+                goal_mountain_bronze_text.text = goal?.bronzeValue?.getNumberInRightFormat()
+                goal_mountain_silver_text.text = goal?.silverValue?.getNumberInRightFormat()
+                goal_mountain_gold_text.text = goal?.goldValue?.getNumberInRightFormat()
             }
-            else -> goal_medal_text.text = goal?.medalValue?.getNumberInRightFormat()
+            else -> goal_single_text.text = goal?.singleValue?.getNumberInRightFormat()
         }
 
         when (goal?.type) {
@@ -307,7 +307,7 @@ class GoalFragment : BaseFragment() {
             }
         }
 
-        medalOrTrophies()
+        singleOrMountains()
     }
 
     fun setupItems() {
@@ -359,46 +359,46 @@ class GoalFragment : BaseFragment() {
 
         goalDAO?.update(goal!!)
 
-        if (goal?.trophies!!) {
-            setTrophies()
+        if (goal?.mountains!!) {
+            setMountains()
         } else {
-            setMedal()
+            setSingle()
         }
     }
 
-    private fun medalOrTrophies() {
+    private fun singleOrMountains() {
         if (count < 0) return
 
-        if (goal?.trophies!!) {
-            setupTrophies()
+        if (goal?.mountains!!) {
+            setupMountains()
         } else {
-            setupMedal()
+            setupSingle()
         }
     }
 
-    private fun setupMedal() {
+    private fun setupSingle() {
         when {
             goal?.value!! == 0F -> {
-                resetMedal()
+                resetSingle()
             }
-            goal?.value!! <= goal?.medalValue!! -> {
-                setupArcView(arcViewMedal, goal?.value!!, seriesMedal)
+            goal?.value!! <= goal?.singleValue!! -> {
+                setupArcView(arcViewSingle, goal?.value!!, seriesSingle)
 
-                if (goal?.value!! == goal?.medalValue!!)
-                    changeMedalOrTrophyIcon(goal_medal_image, R.mipmap.ic_medal, R.mipmap.ic_medal_dark)
+                if (goal?.value!! == goal?.singleValue!!)
+                    changeSingleOrMountainsIcon(goal_single_image, R.mipmap.ic_single, R.mipmap.ic_single_dark)
             }
             else -> {
-                setupArcView(arcViewMedal, goal?.medalValue!!, seriesMedal)
+                setupArcView(arcViewSingle, goal?.singleValue!!, seriesSingle)
 
-                changeMedalOrTrophyIconDark(goal_medal_image, R.mipmap.ic_medal, R.mipmap.ic_medal_dark, false)
+                changeSingleOrMountainsIconDark(goal_single_image, R.mipmap.ic_single, R.mipmap.ic_single_dark, false)
             }
         }
     }
 
-    private fun setupTrophies() {
+    private fun setupMountains() {
         when {
             goal?.value!! == 0F -> {
-                resetTrophyBronze()
+                resetMountainBronze()
             }
             goal?.value!! <= goal?.bronzeValue!! -> {
                 setupArcView(arcViewBronze, goal?.value!!, seriesBronze)
@@ -407,121 +407,121 @@ class GoalFragment : BaseFragment() {
                 setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
                 setupArcView(arcViewSilver, goal?.value!!, seriesSilver)
 
-                changeMedalOrTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
+                changeSingleOrMountainsIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze, R.mipmap.ic_mountain_bronze_dark)
             }
             goal?.value!! <= goal?.goldValue!! -> {
                 setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
                 setupArcView(arcViewSilver, goal?.silverValue!!, seriesSilver)
                 setupArcView(arcViewGold, goal?.value!!, seriesGold)
 
-                changeMedalOrTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
-                changeMedalOrTrophyIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
+                changeSingleOrMountainsIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze, R.mipmap.ic_mountain_bronze_dark)
+                changeSingleOrMountainsIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver, R.mipmap.ic_mountain_silver_dark)
             }
             else -> {
                 setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
                 setupArcView(arcViewSilver, goal?.silverValue!!, seriesSilver)
                 setupArcView(arcViewGold, goal?.goldValue!!, seriesGold)
 
-                changeMedalOrTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
-                changeMedalOrTrophyIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
-                changeMedalOrTrophyIcon(goal_trophy_gold_image, R.mipmap.ic_trophy_gold, R.mipmap.ic_trophy_gold_dark)
+                changeSingleOrMountainsIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze, R.mipmap.ic_mountain_bronze_dark)
+                changeSingleOrMountainsIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver, R.mipmap.ic_mountain_silver_dark)
+                changeSingleOrMountainsIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold, R.mipmap.ic_mountain_gold_dark)
             }
         }
     }
 
-    private fun setMedal() {
-        medalSituations()
+    private fun setSingle() {
+        singleSituations()
     }
 
-    private fun setTrophies() {
+    private fun setMountains() {
         changeIconsDark()
 
-        trophiesSituations()
+        mountainsSituations()
     }
 
-    private fun medalSituations() {
-        if (count > 0 && count <= goal?.medalValue!!) {
-            setMedalValue()
+    private fun singleSituations() {
+        if (count > 0 && count <= goal?.singleValue!!) {
+            setSingleValue()
 
-            if (count == goal?.medalValue!!)
-                changeMedalOrTrophyIcon(goal_medal_image, R.mipmap.ic_medal, R.mipmap.ic_medal_dark)
+            if (count == goal?.singleValue!!)
+                changeSingleOrMountainsIcon(goal_single_image, R.mipmap.ic_single, R.mipmap.ic_single_dark)
             else
-                changeMedalOrTrophyIconDark(goal_medal_image, R.mipmap.ic_medal, R.mipmap.ic_medal_dark, true)
-        } else if (count > goal?.medalValue!!) { medalOrTrophies()
-        } else if (count == 0F) { resetMedal() }
+                changeSingleOrMountainsIconDark(goal_single_image, R.mipmap.ic_single, R.mipmap.ic_single_dark, true)
+        } else if (count > goal?.singleValue!!) { singleOrMountains()
+        } else if (count == 0F) { resetSingle() }
     }
 
-    private fun trophiesSituations() {
+    private fun mountainsSituations() {
         if (count == 0F) {
-            resetTrophies()
+            resetMountains()
         } else if (count > 0) {
             if (count <= goal?.bronzeValue!!) {
-                setTrophyBronzeValue()
+                setMountainBronzeValue()
 
                 if (count == goal?.bronzeValue!!)
-                    changeMedalOrTrophyIcon(goal_trophy_bronze_image, R.mipmap.ic_trophy_bronze, R.mipmap.ic_trophy_bronze_dark)
+                    changeSingleOrMountainsIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze, R.mipmap.ic_mountain_bronze_dark)
 
                 if (count < goal?.silverValue!!)
-                    resetTrophySilver()
+                    resetMountainSilver()
             } else if (count <= goal?.silverValue!!) {
-                setTrophySilverValue()
+                setMountainSilverValue()
 
                 if (count == goal?.silverValue!!)
-                    changeMedalOrTrophyIcon(goal_trophy_silver_image, R.mipmap.ic_trophy_silver, R.mipmap.ic_trophy_silver_dark)
+                    changeSingleOrMountainsIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver, R.mipmap.ic_mountain_silver_dark)
 
                 if (count < goal?.goldValue!!)
-                    resetTrophyGold()
+                    resetMountainGold()
             } else if (count <= goal?.goldValue!!) {
-                setTrophyGoldValue()
+                setMountainGoldValue()
 
                 if (count == goal?.goldValue!!)
-                    changeMedalOrTrophyIcon(goal_trophy_gold_image, R.mipmap.ic_trophy_gold, R.mipmap.ic_trophy_gold_dark)
+                    changeSingleOrMountainsIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold, R.mipmap.ic_mountain_gold_dark)
             }
         }
     }
 
-    private fun resetTrophies() {
-        resetTrophyBronze()
-        resetTrophySilver()
-        resetTrophyGold()
+    private fun resetMountains() {
+        resetMountainBronze()
+        resetMountainSilver()
+        resetMountainGold()
     }
 
-    private fun resetTrophyBronze() {
-        seriesBronze = resetMedalOrTrophy(
+    private fun resetMountainBronze() {
+        seriesBronze = resetSingleOrMountain(
             arcViewBronze, 0F,
             goal?.bronzeValue!!, 0F)
     }
 
-    private fun resetTrophySilver() {
-        seriesSilver = resetMedalOrTrophy(
+    private fun resetMountainSilver() {
+        seriesSilver = resetSingleOrMountain(
             arcViewSilver, goal?.bronzeValue!!,
             goal?.silverValue!!, goal?.bronzeValue!!)
     }
 
-    private fun resetTrophyGold() {
-        seriesGold = resetMedalOrTrophy(
+    private fun resetMountainGold() {
+        seriesGold = resetSingleOrMountain(
             arcViewGold, goal?.silverValue!!,
             goal?.goldValue!!, goal?.silverValue!!)
     }
 
-    private fun resetMedal() {
-        seriesMedal = resetMedalOrTrophy(
-            arcViewMedal, 0F,
-            goal?.medalValue!!, 0F)
+    private fun resetSingle() {
+        seriesSingle = resetSingleOrMountain(
+            arcViewSingle, 0F,
+            goal?.singleValue!!, 0F)
     }
 
-    private fun resetMedalOrTrophy(arcView: DecoView, minValue: Float, maxValue: Float, initialValue: Float) : Int {
+    private fun resetSingleOrMountain(arcView: DecoView, minValue: Float, maxValue: Float, initialValue: Float) : Int {
         arcView.configureAngles(300, 0)
         return arcView.addSeries(setupArcViewAndSeriesItem(arcView, minValue, maxValue, initialValue, false))
     }
 
-    private fun setTrophyBronzeValue() = setupArcView(arcViewBronze, count, seriesBronze)
+    private fun setMountainBronzeValue() = setupArcView(arcViewBronze, count, seriesBronze)
 
-    private fun setTrophySilverValue() = setupArcView(arcViewSilver, count, seriesSilver)
+    private fun setMountainSilverValue() = setupArcView(arcViewSilver, count, seriesSilver)
 
-    private fun setTrophyGoldValue() = setupArcView(arcViewGold, count, seriesGold)
+    private fun setMountainGoldValue() = setupArcView(arcViewGold, count, seriesGold)
 
-    private fun setMedalValue() = setupArcView(arcViewMedal, count, seriesMedal)
+    private fun setSingleValue() = setupArcView(arcViewSingle, count, seriesSingle)
 
     private fun setupArcViewAndSeriesItem(arcView: DecoView, minValue: Float, maxValue: Float, initialValue: Float, visibility: Boolean): SeriesItem {
         arcView.addSeries(
@@ -550,32 +550,32 @@ class GoalFragment : BaseFragment() {
 
     private fun changeIconsDark() {
         if (count < goal?.bronzeValue!!)
-            changeMedalOrTrophyIconDark(
-                goal_trophy_bronze_image,
-                R.mipmap.ic_trophy_bronze,
-                R.mipmap.ic_trophy_bronze_dark,
+            changeSingleOrMountainsIconDark(
+                goal_mountain_bronze_image,
+                R.mipmap.ic_mountain_bronze,
+                R.mipmap.ic_mountain_bronze_dark,
                 true)
         if (count < goal?.silverValue!!)
-            changeMedalOrTrophyIconDark(
-                goal_trophy_silver_image,
-                R.mipmap.ic_trophy_silver,
-                R.mipmap.ic_trophy_silver_dark,
+            changeSingleOrMountainsIconDark(
+                goal_mountain_silver_image,
+                R.mipmap.ic_mountain_silver,
+                R.mipmap.ic_mountain_silver_dark,
                 true)
         if (count < goal?.goldValue!!)
-            changeMedalOrTrophyIconDark(
-                goal_trophy_gold_image,
-                R.mipmap.ic_trophy_gold,
-                R.mipmap.ic_trophy_gold_dark,
+            changeSingleOrMountainsIconDark(
+                goal_mountain_gold_image,
+                R.mipmap.ic_mountain_gold,
+                R.mipmap.ic_mountain_gold_dark,
                 true)
     }
 
-    private fun changeMedalOrTrophyIconDark(image: ImageView, iconNormal: Int, iconDark: Int, dark: Boolean) {
+    private fun changeSingleOrMountainsIconDark(image: ImageView, iconNormal: Int, iconDark: Int, dark: Boolean) {
         image.background =
             if (dark) ContextCompat.getDrawable(context!!, iconDark)
             else ContextCompat.getDrawable(context!!, iconNormal)
     }
 
-    private fun changeMedalOrTrophyIcon(image: ImageView, iconNormal: Int, iconDark: Int) {
+    private fun changeSingleOrMountainsIcon(image: ImageView, iconNormal: Int, iconDark: Int) {
         image.background =
             if (image.background == ContextCompat.getDrawable(context!!, iconNormal)) ContextCompat.getDrawable(context!!, iconDark)
             else ContextCompat.getDrawable(context!!, iconNormal)
