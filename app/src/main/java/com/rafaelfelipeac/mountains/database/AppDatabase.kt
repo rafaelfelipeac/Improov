@@ -11,7 +11,7 @@ import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.Historic
 import com.rafaelfelipeac.mountains.models.Item
 
-@Database(entities = [Goal::class, Item::class, Historic::class], version = 24)
+@Database(entities = [Goal::class, Item::class, Historic::class], version = 23)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
