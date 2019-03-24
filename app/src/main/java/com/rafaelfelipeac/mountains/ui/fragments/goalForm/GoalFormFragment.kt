@@ -3,6 +3,7 @@ package com.rafaelfelipeac.mountains.ui.fragments.goalForm
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.getNumberInRightFormat
@@ -115,6 +116,8 @@ class GoalFormFragment : BaseFragment() {
                 radioButtonIncDec.isChecked = false
                 radioButtonTotal.isChecked = false
 
+                goalForm_goal_name.imeOptions = EditorInfo.IME_ACTION_DONE
+
                 goalForm_goal_inc_dev.visibility = View.GONE
 
                 goalType = 1
@@ -128,15 +131,22 @@ class GoalFormFragment : BaseFragment() {
 
                 goalForm_goal_inc_dev.visibility = View.VISIBLE
 
+                goalForm_goal_name.imeOptions = EditorInfo.IME_ACTION_NEXT
+
                 goalType = 2
-            } else
+            } else {
                 goalForm_goal_inc_dev.visibility = View.GONE
+
+                goalForm_goal_name.imeOptions = EditorInfo.IME_ACTION_DONE
+            }
         }
 
         radioButtonTotal.setOnClickListener {
             if (radioButtonTotal.isChecked) {
                 radioButtonIncDec.isChecked = false
                 radioButtonLista.isChecked = false
+
+                goalForm_goal_name.imeOptions = EditorInfo.IME_ACTION_DONE
 
                 goalForm_goal_inc_dev.visibility = View.GONE
 
