@@ -48,7 +48,7 @@ class GoalsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         (activity as MainActivity).closeBottomSheetDoneGoal()
-        (activity as MainActivity).closeBottomSheetAddItem()
+        (activity as MainActivity).closeBottomSheetItem()
 
         showNavigation()
 
@@ -64,7 +64,7 @@ class GoalsFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
 
-        (activity as MainActivity).closeBottomSheetAddItem()
+        (activity as MainActivity).closeBottomSheetItem()
     }
 
     private fun setupItems() {
