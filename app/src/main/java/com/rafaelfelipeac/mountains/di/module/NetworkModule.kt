@@ -16,7 +16,7 @@ object NetworkModule {
     @Provides
     @Reusable
     @JvmStatic
-    fun provideHuntzApi(retrofit: Retrofit): RMApi {
+    fun provideMountainsApi(retrofit: Retrofit): RMApi {
         return retrofit.create(RMApi::class.java)
     }
 
