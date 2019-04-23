@@ -22,17 +22,17 @@
 
     </fragment>
 
+    <fragment android:id="@+id/navigation_profile"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.profile.ProfileFragment"
+              android:label="fragment_profile"
+              tools:layout="@layout/fragment_profile">
+
+    </fragment>
+
     <fragment android:id="@+id/navigation_search"
               android:name="com.rafaelfelipeac.mountains.ui.fragments.search.SearchFragment"
               android:label="fragment_search"
               tools:layout="@layout/fragment_search">
-
-    </fragment>
-
-    <fragment android:id="@+id/navigation_settings"
-              android:name="com.rafaelfelipeac.mountains.ui.fragments.settings.SettingsFragment"
-              android:label="fragment_settings"
-              tools:layout="@layout/fragment_settings">
 
     </fragment>
 

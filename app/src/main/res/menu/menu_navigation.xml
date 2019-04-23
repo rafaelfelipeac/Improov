@@ -1,30 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--<item-->
-            <!--android:id="@+id/navigation_search"-->
-            <!--android:icon="@drawable/baseline_search_24"-->
-            <!--android:name="Pesquisar"/>-->
-
     <item
             android:id="@+id/navigation_stats"
             android:icon="@drawable/ic_chart"
             android:title="Estatísticas"/>
-
-    <!--<item-->
-            <!--android:id="@+id/navigation_home"-->
-            <!--android:icon="@drawable/ic_home_black_24dp"-->
-            <!--android:name="@string/title_home"/>-->
-
 
     <item
             android:id="@+id/navigation_goals"
             android:icon="@drawable/ic_list"
             android:title="Metas"/>
 
-    <!--<item-->
-            <!--android:id="@+id/navigation_settings"-->
-            <!--android:icon="@drawable/ic_notifications_black_24dp"-->
-            <!--android:name="Settings"/>-->
+    <item
+            android:id="@+id/navigation_profile"
+            android:icon="@drawable/ic_list"
+            android:title="Perfil"/>
 
 </menu>
