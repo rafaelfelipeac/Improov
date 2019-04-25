@@ -2,6 +2,7 @@ package com.rafaelfelipeac.mountains.app
 
 import android.app.Application
 import androidx.room.Room
+import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.database.AppDatabase
 import com.rafaelfelipeac.mountains.di.AppComponent
 import com.rafaelfelipeac.mountains.di.DaggerAppComponent
@@ -27,7 +28,7 @@ class App : Application() {
         prefs = Prefs(applicationContext)
 
         database = Room
-            .databaseBuilder(this, AppDatabase::class.java, "dm-db")
+            .databaseBuilder(this, AppDatabase::class.java, getString(R.string.database_name))
             .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
             .build()
