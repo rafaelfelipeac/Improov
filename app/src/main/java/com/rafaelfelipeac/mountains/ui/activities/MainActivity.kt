@@ -31,7 +31,6 @@ class MainActivity : BaseActivity() {
     lateinit var bottomNavigation: BottomNavigationView
 
     lateinit var bottomSheetItem: BottomSheetBehavior<*>
-
     lateinit var bottomSheetItemClose: ImageView
     lateinit var bottomSheetItemSave: Button
     lateinit var bottomSheetItemName: TextInputEditText
@@ -90,7 +89,7 @@ class MainActivity : BaseActivity() {
         bottomNavigation.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
-    fun openBottomSheetAddItem(item: Item?) {
+    fun openBottomSheetItem(item: Item?) {
         bottomSheetItem.state = BottomSheetBehavior.STATE_EXPANDED
 
         this.item = item
@@ -117,7 +116,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun closeBottomSheetAddItem() { bottomSheetItem.state = BottomSheetBehavior.STATE_COLLAPSED }
+    fun closeBottomSheetItem() { bottomSheetItem.state = BottomSheetBehavior.STATE_COLLAPSED }
 
     fun openBottomSheetDoneGoal(goal: Goal, function: (goal: Goal) -> Unit) {
         bottomSheetDoneGoal.state = BottomSheetBehavior.STATE_EXPANDED

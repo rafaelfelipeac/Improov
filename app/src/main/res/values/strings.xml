@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Mountains</string>
-    <string name="title_home">Home</string>
+    <string name="database_name">mountains-db</string>
 
+    <string name="title_home">Home</string>
     <string name="message_empty_inc_dec">Inc/Dec vazios.</string>
     <string name="message_gold_silver_bronze_order"><![CDATA[Gold > Silver > Bronze]]></string>
     <string name="message_some_empty_value">Algum valor vazio.</string>
@@ -13,4 +14,8 @@
     <string name="message_empty_stats">Crie objetivos para poder acompanhar as estatistícas e seu progresso.</string>
     <string name="bottom_sheet_item_title_add">Novo item</string>
     <string name="bottom_sheet_item_title_edit">Editar item</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

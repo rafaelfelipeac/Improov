@@ -102,7 +102,7 @@ class GoalFormFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
 
-        (activity as MainActivity).closeBottomSheetAddItem()
+        (activity as MainActivity).closeBottomSheetItem()
     }
 
     private fun emptyIncOrDec() =

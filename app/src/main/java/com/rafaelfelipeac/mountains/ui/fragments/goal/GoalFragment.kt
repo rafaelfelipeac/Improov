@@ -115,7 +115,7 @@ class GoalFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_goal_add -> {
-                (activity as MainActivity).openBottomSheetAddItem(null)
+                (activity as MainActivity).openBottomSheetItem(null)
 
                 return true
             }
@@ -211,7 +211,7 @@ class GoalFragment : BaseFragment() {
 
         bottomSheetItemButtonClose?.setOnClickListener {
             bottomSheetItemName?.setText("")
-            (activity as MainActivity).closeBottomSheetAddItem()
+            (activity as MainActivity).closeBottomSheetItem()
         }
 
         bottomSheetItemButtonSave?.setOnClickListener {
@@ -244,7 +244,7 @@ class GoalFragment : BaseFragment() {
                 setupItems()
 
                 bottomSheetItemName?.setText("")
-                (activity as MainActivity).closeBottomSheetAddItem()
+                (activity as MainActivity).closeBottomSheetItem()
             }
         }
     }
@@ -331,7 +331,7 @@ class GoalFragment : BaseFragment() {
             ?.filter { it.goalId == goal?.goalId && it.goalId != 0L }
             ?.sortedBy { it.order }!!)
 
-        itemsAdapter.clickListener = { (activity as MainActivity).openBottomSheetAddItem(it) }
+        itemsAdapter.clickListener = { (activity as MainActivity).openBottomSheetItem(it) }
 
         val swipeAndDragHelper = SwipeAndDragHelperItem(itemsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
