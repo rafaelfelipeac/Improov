@@ -18,6 +18,7 @@ import com.hookedonplay.decoviewlib.events.DecoEvent
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.App
 import com.rafaelfelipeac.mountains.extension.getNumberInRightFormat
+import com.rafaelfelipeac.mountains.extension.resetValue
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.Historic
 import com.rafaelfelipeac.mountains.models.Item
@@ -43,13 +44,14 @@ class GoalFragment : BaseFragment() {
     private var seriesSilver: Int = 0
     private var seriesGold: Int = 0
 
-    private var durationAnimation = 75L
-    private var lineWidth = 32F
-
     private var bottomSheetItem: BottomSheetBehavior<*>? = null
     private var bottomSheetItemClose: ImageView? = null
     private var bottomSheetItemSave: Button? = null
     private var bottomSheetItemName: TextInputEditText? = null
+
+    private var durationAnimation = 75L
+    private var lineWidth = 32F
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +69,7 @@ class GoalFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = "Meta"
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_goal)
 
         return inflater.inflate(R.layout.fragment_goal, container, false)
     }
@@ -94,7 +96,7 @@ class GoalFragment : BaseFragment() {
             resetSingle()
         }
 
-        setButtons()
+        setupButtons()
         setupItems()
 
         if (goal?.type != 1) {
@@ -129,7 +131,7 @@ class GoalFragment : BaseFragment() {
         return false
     }
 
-    private fun setButtons() {
+    private fun setupButtons() {
         goal_btn_inc.setOnClickListener {
             count += goal?.incrementValue!!
             updateTextAndGoal(goal_inc_dec_total)
@@ -394,12 +396,20 @@ class GoalFragment : BaseFragment() {
             }
             goal?.value!! <= goal?.bronzeValue!! -> {
                 setupArcView(arcViewBronze, goal?.value!!, seriesBronze)
+
+                if (goal?.value!! == goal?.bronzeValue!!) {
+                    changeSingleOrMountainsIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze, R.mipmap.ic_mountain_bronze_dark)
+                }
             }
             goal?.value!! <= goal?.silverValue!! -> {
                 setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
                 setupArcView(arcViewSilver, goal?.value!!, seriesSilver)
 
                 changeSingleOrMountainsIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze, R.mipmap.ic_mountain_bronze_dark)
+
+                if (goal?.value!! == goal?.silverValue!!) {
+                    changeSingleOrMountainsIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver, R.mipmap.ic_mountain_silver_dark)
+                }
             }
             goal?.value!! <= goal?.goldValue!! -> {
                 setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
@@ -408,6 +418,10 @@ class GoalFragment : BaseFragment() {
 
                 changeSingleOrMountainsIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze, R.mipmap.ic_mountain_bronze_dark)
                 changeSingleOrMountainsIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver, R.mipmap.ic_mountain_silver_dark)
+
+                if (goal?.value!! == goal?.goldValue!!) {
+                    changeSingleOrMountainsIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold, R.mipmap.ic_mountain_gold_dark)
+                }
             }
             else -> {
                 setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
@@ -479,32 +493,19 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun resetMountainBronze() {
-        seriesBronze = resetSingleOrMountain(
-            arcViewBronze, 0F,
-            goal?.bronzeValue!!, 0F)
+        seriesBronze = arcViewBronze.resetValue(0F, goal?.bronzeValue!!, 0F)
     }
 
     private fun resetMountainSilver() {
-        seriesSilver = resetSingleOrMountain(
-            arcViewSilver, goal?.bronzeValue!!,
-            goal?.silverValue!!, goal?.bronzeValue!!)
+        seriesSilver = arcViewSilver.resetValue(goal?.bronzeValue!!, goal?.silverValue!!, goal?.bronzeValue!!)
     }
 
     private fun resetMountainGold() {
-        seriesGold = resetSingleOrMountain(
-            arcViewGold, goal?.silverValue!!,
-            goal?.goldValue!!, goal?.silverValue!!)
+        seriesGold = arcViewGold.resetValue(goal?.silverValue!!, goal?.goldValue!!, goal?.silverValue!!)
     }
 
     private fun resetSingle() {
-        seriesSingle = resetSingleOrMountain(
-            arcViewSingle, 0F,
-            goal?.singleValue!!, 0F)
-    }
-
-    private fun resetSingleOrMountain(arcView: DecoView, minValue: Float, maxValue: Float, initialValue: Float) : Int {
-        arcView.configureAngles(300, 0)
-        return arcView.addSeries(setupArcViewAndSeriesItem(arcView, minValue, maxValue, initialValue, false))
+        seriesSingle = arcViewSingle.resetValue(0F, goal?.singleValue!!, 0F)
     }
 
     private fun setMountainBronzeValue() = setupArcView(arcViewBronze, count, seriesBronze)
@@ -514,22 +515,6 @@ class GoalFragment : BaseFragment() {
     private fun setMountainGoldValue() = setupArcView(arcViewGold, count, seriesGold)
 
     private fun setSingleValue() = setupArcView(arcViewSingle, count, seriesSingle)
-
-    private fun setupArcViewAndSeriesItem(arcView: DecoView, minValue: Float, maxValue: Float, initialValue: Float, visibility: Boolean): SeriesItem {
-        arcView.addSeries(
-            SeriesItem.Builder(ContextCompat.getColor(context!!, R.color.colorPrimaryAnother))
-                .setRange(0F, 100F, 100F)
-                .setInitialVisibility(true)
-                .setLineWidth(lineWidth + 4F)
-                .build()
-        )
-
-        return SeriesItem.Builder(ContextCompat.getColor(context!!, R.color.colorPrimary))
-            .setRange(minValue, maxValue, initialValue)
-            .setInitialVisibility(visibility)
-            .setLineWidth(lineWidth)
-            .build()
-    }
 
     private fun setupArcView(arcView: DecoView, value: Float, index: Int) {
         arcView.addEvent(
