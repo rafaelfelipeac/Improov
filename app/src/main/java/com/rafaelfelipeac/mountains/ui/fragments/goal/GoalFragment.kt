@@ -46,9 +46,9 @@ class GoalFragment : BaseFragment() {
     private var durationAnimation = 75L
     private var lineWidth = 32F
 
-    private var sheetBehavior: BottomSheetBehavior<*>? = null
-    private var bottomSheetItemButtonClose: ImageView? = null
-    private var bottomSheetItemButtonSave: Button? = null
+    private var bottomSheetItem: BottomSheetBehavior<*>? = null
+    private var bottomSheetItemClose: ImageView? = null
+    private var bottomSheetItemSave: Button? = null
     private var bottomSheetItemName: TextInputEditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,14 +60,12 @@ class GoalFragment : BaseFragment() {
 
         setHasOptionsMenu(true)
 
-        initElements()
-        setBottomSheet()
+        setupBottomSheet()
 
         (activity as MainActivity).bottomNavigationVisible(View.GONE)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = "Meta"
 
@@ -187,20 +185,21 @@ class GoalFragment : BaseFragment() {
         updateGoal()
     }
 
-    private fun setBottomSheet() {
+    private fun setupBottomSheet() {
         (activity as MainActivity).closeBottomSheetDoneGoal()
 
-        val act = activity
+        bottomSheetItem = (activity as MainActivity).bottomSheetItem
+        bottomSheetItemClose = (activity as MainActivity).bottomSheetItemClose
+        bottomSheetItemSave = (activity as MainActivity).bottomSheetItemSave
+        bottomSheetItemName = (activity as MainActivity).bottomSheetItemName
 
-        sheetBehavior?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetItem?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(view: View, status: Int) {
                 when (status) {
                     BottomSheetBehavior.STATE_HIDDEN -> { }
                     BottomSheetBehavior.STATE_EXPANDED -> { }
                     BottomSheetBehavior.STATE_HALF_EXPANDED -> { }
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        hideSoftKeyboard(view, act)
-                    }
+                    BottomSheetBehavior.STATE_COLLAPSED -> { hideSoftKeyboard(view, activity) }
                     BottomSheetBehavior.STATE_DRAGGING -> { }
                     BottomSheetBehavior.STATE_SETTLING -> { }
                 }
@@ -209,14 +208,14 @@ class GoalFragment : BaseFragment() {
             override fun onSlide(view: View, statusSlide: Float) {}
         })
 
-        bottomSheetItemButtonClose?.setOnClickListener {
+        bottomSheetItemClose?.setOnClickListener {
             bottomSheetItemName?.setText("")
             (activity as MainActivity).closeBottomSheetItem()
         }
 
-        bottomSheetItemButtonSave?.setOnClickListener {
+        bottomSheetItemSave?.setOnClickListener {
             if (bottomSheetItemName?.text.toString().isEmpty())
-                showSnackBar("Nome do item está vazio.")
+                showSnackBar(getString(R.string.bottom_sheet_empty_item_name))
             else {
                 val order =
                     if (itemDAO?.getAll()?.none { it.goalId != 0L }!!) { 1 }
@@ -249,14 +248,7 @@ class GoalFragment : BaseFragment() {
         }
     }
 
-    private fun initElements() {
-        sheetBehavior = (activity as MainActivity).bottomSheetItem
-        bottomSheetItemButtonClose = (activity as MainActivity).bottomSheetItemClose
-        bottomSheetItemButtonSave = (activity as MainActivity).bottomSheetItemSave
-        bottomSheetItemName = (activity as MainActivity).bottomSheetItemName
-    }
-
-    fun scoreFromList(done: Boolean) {
+    private fun scoreFromList(done: Boolean) {
         setupItems()
 
         if (done) count++ else count--
@@ -310,7 +302,7 @@ class GoalFragment : BaseFragment() {
         singleOrMountains()
     }
 
-    fun setupItems() {
+    private fun setupItems() {
         if (goal?.type == 1) {
             if (itemDAO?.getAll()?.any { it.goalId == goal?.goalId && it.goalId != 0L }!!) {
                 setItems()
