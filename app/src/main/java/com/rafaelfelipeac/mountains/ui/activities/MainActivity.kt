@@ -47,8 +47,8 @@ class MainActivity : BaseActivity() {
         setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
 
-        initElements()
-        setToolbar()
+        setupElements()
+        setupToolbar()
 
         NavigationUI.setupWithNavController(bottom_nav, navController)
     }
@@ -70,23 +70,30 @@ class MainActivity : BaseActivity() {
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
 
-    private fun initElements() {
+    private fun setupElements() {
         toolbar = findViewById(R.id.toolbar)!!
         navController = findNavController(R.id.nav_host_fragment)
         bottomNavigation = bottom_nav
 
+        setupBottomSheetItem()
+        setupBottomSheetDoneGoal()
+    }
+
+    private fun setupBottomSheetItem() {
         bottomSheetItem = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_add_item))
         bottomSheetItemClose = bottom_sheet_item_button_close
         bottomSheetItemSave = bottom_sheet_item_button_save
         bottomSheetItemName = bottom_sheet_item_name
+    }
 
-        bottomSheetDoneGoal =  BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_done_goal))
+    private fun setupBottomSheetDoneGoal() {
+        bottomSheetDoneGoal = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_done_goal))
         bottomSheetDoneGoalYes = bottom_sheet_button_yes
         bottomSheetDoneGoalNo = bottom_sheet_button_no
     }
 
-    fun bottomNavigationVisible(visible: Boolean) {
-        bottomNavigation.visibility = if (visible) View.VISIBLE else View.GONE
+    fun bottomNavigationVisible(visibility: Int) {
+        bottomNavigation.visibility = visibility
     }
 
     fun openBottomSheetItem(item: Item?) {
@@ -133,7 +140,7 @@ class MainActivity : BaseActivity() {
 
     fun closeBottomSheetDoneGoal() { bottomSheetDoneGoal.state = BottomSheetBehavior.STATE_COLLAPSED }
 
-    private fun setToolbar() {
+    private fun setupToolbar() {
         setSupportActionBar(toolbar)
 
         toolbar.navigationIcon?.setColorFilter(

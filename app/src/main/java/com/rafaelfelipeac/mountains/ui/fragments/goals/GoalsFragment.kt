@@ -32,7 +32,7 @@ class GoalsFragment : BaseFragment() {
 
         setHasOptionsMenu(true)
 
-        (activity as MainActivity).bottomNavigationVisible(true)
+        (activity as MainActivity).bottomNavigationVisible(View.VISIBLE)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

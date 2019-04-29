@@ -63,7 +63,7 @@ class GoalFragment : BaseFragment() {
         initElements()
         setBottomSheet()
 
-        (activity as MainActivity).bottomNavigationVisible(false)
+        (activity as MainActivity).bottomNavigationVisible(View.GONE)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
