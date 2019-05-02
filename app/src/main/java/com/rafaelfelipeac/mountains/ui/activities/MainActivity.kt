@@ -2,48 +2,54 @@ package com.rafaelfelipeac.mountains.ui.activities
 
 import android.graphics.PorterDuff
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import android.view.MenuItem
-import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.crashlytics.android.Crashlytics
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.extension.convertDateToString
+import com.rafaelfelipeac.mountains.extension.gone
+import com.rafaelfelipeac.mountains.extension.resetValue
+import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.Item
 import com.rafaelfelipeac.mountains.ui.base.BaseActivity
+import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_sheet_goal_done.*
 import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.*
-import java.text.SimpleDateFormat
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
 
 class MainActivity : BaseActivity() {
 
-    lateinit var navController: NavController
     lateinit var toolbar: Toolbar
+    lateinit var navController: NavController
     lateinit var bottomNavigation: BottomNavigationView
 
-    lateinit var bottomSheetItem: BottomSheetBehavior<*>
-    lateinit var bottomSheetItemClose: ImageView
     lateinit var bottomSheetItemSave: Button
+    lateinit var bottomSheetItemClose: ImageView
     lateinit var bottomSheetItemName: TextInputEditText
+    lateinit var bottomSheetItem: BottomSheetBehavior<*>
 
-    lateinit var bottomSheetDoneGoal: BottomSheetBehavior<*>
-    lateinit var bottomSheetDoneGoalYes: Button
     lateinit var bottomSheetDoneGoalNo: Button
+    lateinit var bottomSheetDoneGoalYes: Button
+    lateinit var bottomSheetDoneGoal: BottomSheetBehavior<*>
 
     var item: Item? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         Fabric.with(this, Crashlytics())
+
         setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
 
@@ -53,6 +59,12 @@ class MainActivity : BaseActivity() {
         NavigationUI.setupWithNavController(bottom_nav, navController)
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        clearToolbarMenu()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when {
             item?.itemId == R.id.menu_goal_save -> false
@@ -60,12 +72,6 @@ class MainActivity : BaseActivity() {
             item?.itemId == android.R.id.home   -> false
             else                                -> false
         }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-
-        clearToolbarMenu()
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
@@ -106,20 +112,16 @@ class MainActivity : BaseActivity() {
             bottom_sheet_item_name?.setText(item.name)
 
             if (item.done) {
-                bottom_sheet_item_date.visibility = View.VISIBLE
-
-                val sdf = SimpleDateFormat("dd/MM/yy - HH:mm:ss")
-                val currentDate = sdf.format(item.doneDate)
-
-                bottom_sheet_item_date.text = String.format("Concluído em %s", currentDate)
+                bottom_sheet_item_date.text = String.format(getString(R.string.bottom_sheet_item_date_format), item.doneDate?.convertDateToString())
+                bottom_sheet_item_date.visible()
             } else {
-                bottom_sheet_item_date.visibility = View.GONE
+                bottom_sheet_item_date.gone()
             }
         } else {
             bottom_sheet_item_title?.text = getString(R.string.bottom_sheet_item_title_add)
-            bottom_sheet_item_name?.setText("")
-            bottom_sheet_item_date.text = ""
-            bottom_sheet_item_date.visibility = View.GONE
+            bottom_sheet_item_name?.resetValue()
+            bottom_sheet_item_date?.resetValue()
+            bottom_sheet_item_date.gone()
         }
     }
 

@@ -7,6 +7,7 @@ import com.rafaelfelipeac.mountains.ui.fragments.stats.StatsFragment
 import com.rafaelfelipeac.mountains.ui.fragments.search.SearchFragment
 
 interface Injector {
+
     fun inject(baseActivity: BaseActivity)
 
     fun inject(goalsFragment: GoalsFragment)

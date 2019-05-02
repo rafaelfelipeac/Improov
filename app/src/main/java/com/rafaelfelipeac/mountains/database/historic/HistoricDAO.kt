@@ -10,7 +10,7 @@ interface HistoricDAO {
     fun getAll(): List<Historic>
 
     @Insert
-    fun insertAll(historics: List<Historic>)
+    fun insertAll(historical: List<Historic>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(historic: Historic)

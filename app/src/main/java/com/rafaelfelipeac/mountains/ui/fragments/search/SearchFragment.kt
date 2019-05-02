@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.extension.isEmpty
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -15,7 +16,7 @@ class SearchFragment : BaseFragment() {
     private var open: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        (activity as MainActivity).supportActionBar?.title = "Pesquisar"
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_search)
 
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
@@ -36,7 +37,7 @@ class SearchFragment : BaseFragment() {
         }
 
         search_imageview.setOnClickListener {
-            if (search_edittext.text?.isEmpty()!! && !open) {
+            if (search_edittext.isEmpty() && !open) {
                 open = !open
 
                 if (open) {
@@ -47,7 +48,7 @@ class SearchFragment : BaseFragment() {
                 verifyOpenOrClose()
             } else {
                 hideSoftKeyboard(view, activity!!)
-                showSnackBar("Pesquisa.")
+                showSnackBar(getString(R.string.fragment_search_search_message))
             }
         }
 

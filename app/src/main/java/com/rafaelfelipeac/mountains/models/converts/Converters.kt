@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.models.Converts
+package com.rafaelfelipeac.mountains.models.converts
 
 import androidx.room.TypeConverter
 import java.util.*

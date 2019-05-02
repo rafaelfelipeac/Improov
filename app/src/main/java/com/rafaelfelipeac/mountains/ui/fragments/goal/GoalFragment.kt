@@ -6,19 +6,15 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputEditText
-import com.hookedonplay.decoviewlib.DecoView
-import com.hookedonplay.decoviewlib.charts.SeriesItem
-import com.hookedonplay.decoviewlib.events.DecoEvent
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.App
-import com.rafaelfelipeac.mountains.extension.getNumberInRightFormat
-import com.rafaelfelipeac.mountains.extension.resetValue
+import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.Historic
 import com.rafaelfelipeac.mountains.models.Item
@@ -33,11 +29,7 @@ import java.util.*
 class GoalFragment : BaseFragment() {
 
     private var itemsAdapter = ItemsAdapter(this)
-    private var historicAdapter = HistoricAdapter(this)
-
-    var goal: Goal? = null
-
-    private var count: Float = 0F
+    private var historicAdapter = HistoricAdapter()
 
     private var seriesSingle: Int = 0
     private var seriesBronze: Int = 0
@@ -49,42 +41,33 @@ class GoalFragment : BaseFragment() {
     private var bottomSheetItemSave: Button? = null
     private var bottomSheetItemName: TextInputEditText? = null
 
-    private var durationAnimation = 75L
-    private var lineWidth = 32F
+    var goal: Goal? = null
 
+    private var viewModel: GoalViewModel?= null
+
+    private var count: Float = 0F
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         injector.inject(this)
 
-        goal = GoalFragmentArgs.fromBundle(arguments!!).goal
-
         setHasOptionsMenu(true)
 
         setupBottomSheet()
 
         (activity as MainActivity).bottomNavigationVisible(View.GONE)
+
+        goal = GoalFragmentArgs.fromBundle(arguments!!).goal
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_goal)
 
+        viewModel = ViewModelProviders.of(this).get(GoalViewModel::class.java)
+
         return inflater.inflate(R.layout.fragment_goal, container, false)
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        hideNavigation()
-        setupGoal()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        setupGoal()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -104,8 +87,23 @@ class GoalFragment : BaseFragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        hideNavigation()
+        setupGoal()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setupGoal()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (goal?.type == 1) { inflater.inflate(R.menu.menu_add, menu) }
+        if (goal?.type == 1) {
+            inflater.inflate(R.menu.menu_add, menu)
+        }
 
         inflater.inflate(R.menu.menu_edit, menu)
 
@@ -120,14 +118,13 @@ class GoalFragment : BaseFragment() {
                 return true
             }
             R.id.menu_goal_edit -> {
-                val action =
-                    GoalFragmentDirections.actionGoalFragmentToGoalFormFragment(goal!!)
-                navController.navigate(action)
+                navController.navigate(GoalFragmentDirections.actionGoalFragmentToGoalFormFragment(goal!!))
             }
             android.R.id.home -> {
                 navController.navigateUp()
             }
         }
+
         return false
     }
 
@@ -151,40 +148,28 @@ class GoalFragment : BaseFragment() {
         }
 
         goal_btn_save.setOnClickListener {
-            if (goal_total_total.text?.isNotEmpty()!!) {
-                count = goal?.value!! + goal_total_total.text.toString().toFloat()
+            if (goal_total_total.isNotEmpty()) {
+                count = goal?.value!! + goal_total_total.toFloat()
                 updateTextAndGoal(goal_count)
 
-                historicDAO?.insert(Historic(value = goal_total_total.text.toString().toFloat(),
-                    date = Date(), goalId = goal?.goalId!!))
+                historicDAO?.insert(Historic(value = goal_total_total.toFloat(), date = Date(), goalId = goal?.goalId!!))
 
-                goal_total_total.setText("")
+                setHistoricItems()
+
+                goal_total_total.resetValue()
 
                 val oldDone = goal!!.done
-                goal!!.done = verifyIfIsDone()
+                goal?.done = verifyIfGoalIsDone()
                 goalDAO?.update(goal!!)
 
                 if (!oldDone && goal!!.done)
                     showSnackBar(getString(R.string.message_goal_done))
                 else
                     showSnackBar(getString(R.string.message_goal_value_updated))
-
-                setHistoricItems()
             } else {
                 showSnackBar(getString(R.string.message_goal_value_invalid))
             }
         }
-    }
-
-    private fun verifyIfIsDone() =
-        ((goal!!.mountains && goal!!.value >= goal!!.goldValue) ||
-                (!goal!!.mountains && goal!!.value >= goal!!.singleValue))
-
-    private fun updateTextAndGoal(textView: TextView) {
-        goal_count.text = count.getNumberInRightFormat()
-        textView.text = count.getNumberInRightFormat()
-
-        updateGoal()
     }
 
     private fun setupBottomSheet() {
@@ -211,7 +196,7 @@ class GoalFragment : BaseFragment() {
         })
 
         bottomSheetItemClose?.setOnClickListener {
-            bottomSheetItemName?.setText("")
+            bottomSheetItemName?.resetValue()
             (activity as MainActivity).closeBottomSheetItem()
         }
 
@@ -219,19 +204,17 @@ class GoalFragment : BaseFragment() {
             if (bottomSheetItemName?.text.toString().isEmpty())
                 showSnackBar(getString(R.string.bottom_sheet_empty_item_name))
             else {
-                val order =
-                    if (itemDAO?.getAll()?.none { it.goalId != 0L }!!) { 1 }
-                    else { itemDAO?.getAll()?.filter { it.goalId == goal?.goalId }?.size!! + 1 }
+                val order = itemDAO?.getAll()?.filter { it.goalId == goal?.goalId }?.size!! + 1
 
                 val item: Item?
 
                 if ((activity as MainActivity).item == null) {
-                    item = Item( goalId = goal?.goalId!!,
+                    item = Item(
+                        goalId = goal?.goalId!!,
                         name = bottomSheetItemName?.text.toString(),
                         done = false,
                         order = order,
-                        createdDate = getCurrentTime()
-                    )
+                        createdDate = getCurrentTime())
 
                     itemDAO?.insert(item)
                 } else {
@@ -244,20 +227,10 @@ class GoalFragment : BaseFragment() {
 
                 setupItems()
 
-                bottomSheetItemName?.setText("")
+                bottomSheetItemName?.resetValue()
                 (activity as MainActivity).closeBottomSheetItem()
             }
         }
-    }
-
-    private fun scoreFromList(done: Boolean) {
-        setupItems()
-
-        if (done) count++ else count--
-
-        goal_count.text = count.getNumberInRightFormat()
-
-        updateGoal()
     }
 
     private fun setupGoal() {
@@ -268,8 +241,8 @@ class GoalFragment : BaseFragment() {
 
         when {
             goal?.mountains!! -> {
-                goal_single.visibility = View.INVISIBLE
-                goal_mountains.visibility = View.VISIBLE
+                goal_single.invisible()
+                goal_mountains.visible()
 
                 goal_mountain_bronze_text.text = goal?.bronzeValue?.getNumberInRightFormat()
                 goal_mountain_silver_text.text = goal?.silverValue?.getNumberInRightFormat()
@@ -280,40 +253,56 @@ class GoalFragment : BaseFragment() {
 
         when (goal?.type) {
             1 -> {
-                goal_cl_list.visibility = View.VISIBLE
-                goal_cl_dec_inc.visibility = View.INVISIBLE
-                goal_cl_total.visibility = View.INVISIBLE
+                goal_cl_list.visible()
+                goal_cl_dec_inc.invisible()
+                goal_cl_total.invisible()
 
                 if ((activity as MainActivity).toolbar.menu.findItem(R.id.menu_goal_add) == null)
                     (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
             }
             2 -> {
-                goal_cl_list.visibility = View.INVISIBLE
-                goal_cl_dec_inc.visibility = View.VISIBLE
-                goal_cl_total.visibility = View.INVISIBLE
+                goal_cl_list.invisible()
+                goal_cl_dec_inc.visible()
+                goal_cl_total.invisible()
 
                 goal_inc_dec_total.text = count.getNumberInRightFormat()
             }
             3 -> {
-                goal_cl_list.visibility = View.INVISIBLE
-                goal_cl_dec_inc.visibility = View.INVISIBLE
-                goal_cl_total.visibility = View.VISIBLE
+                goal_cl_list.invisible()
+                goal_cl_dec_inc.invisible()
+                goal_cl_total.visible()
             }
         }
 
-        singleOrMountains()
+        updateSingleOrMountains()
+    }
+
+    private fun updateTextAndGoal(textView: TextView) {
+        goal_count.text = count.getNumberInRightFormat()
+        textView.text = count.getNumberInRightFormat()
+
+        updateGoal()
+    }
+
+    private fun updateGoal() {
+        goal?.value = count
+        goal?.done = verifyIfGoalIsDone()
+
+        goalDAO?.update(goal!!)
+
+        updateSingleOrMountains()
     }
 
     private fun setupItems() {
         if (goal?.type == 1) {
-            if (itemDAO?.getAll()?.any { it.goalId == goal?.goalId && it.goalId != 0L }!!) {
+            if (itemDAO?.getAll()?.any { it.goalId == goal?.goalId }!!) {
                 setItems()
 
-                goal_cl_list.visibility = View.VISIBLE
-                items_placeholder.visibility = View.INVISIBLE
+                goal_cl_list.visible()
+                items_placeholder.invisible()
             } else {
-                goal_cl_list.visibility = View.INVISIBLE
-                items_placeholder.visibility = View.VISIBLE
+                goal_cl_list.invisible()
+                items_placeholder.visible()
             }
         }
     }
@@ -322,7 +311,7 @@ class GoalFragment : BaseFragment() {
         val itemsList = itemDAO?.getAll()
 
         itemsAdapter.setItems(itemsList
-            ?.filter { it.goalId == goal?.goalId && it.goalId != 0L }
+            ?.filter { it.goalId == goal?.goalId }
             ?.sortedBy { it.order }!!)
 
         itemsAdapter.clickListener = { (activity as MainActivity).openBottomSheetItem(it) }
@@ -341,147 +330,95 @@ class GoalFragment : BaseFragment() {
     private fun setHistoricItems() {
         val historicItems = historicDAO?.getAll()
 
-        historicAdapter.setItems(historicItems!!.filter { it.goalId == goal?.goalId }. reversed())
+        historicAdapter.setItems(historicItems
+            ?.filter { it.goalId == goal?.goalId }
+            ?.reversed()!!)
 
         historic_items_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         historic_items_list.adapter = historicAdapter
     }
 
-    private fun updateGoal() {
-        goal?.value = count
-        goal?.done = verifyIfIsDone()
+    private fun scoreFromList(done: Boolean) {
+        setupItems()
 
-        goalDAO?.update(goal!!)
+        if (done) count++ else count--
 
+        goal_count.text = count.getNumberInRightFormat()
+
+        updateGoal()
+    }
+
+    private fun verifyIfGoalIsDone() =
+        ((goal!!.mountains && goal!!.value >= goal!!.goldValue) ||
+                (!goal!!.mountains && goal!!.value >= goal!!.singleValue))
+
+    private fun updateSingleOrMountains() {
         if (goal?.mountains!!) {
-            setMountains()
+            updateMountains()
         } else {
-            setSingle()
+            updateSingle()
         }
     }
 
-    private fun singleOrMountains() {
-        if (count < 0) return
-
-        if (goal?.mountains!!) {
-            setupMountains()
-        } else {
-            setupSingle()
-        }
-    }
-
-    private fun setupSingle() {
+    private fun updateSingle() {
         when {
             goal?.value!! == 0F -> {
                 resetSingle()
             }
-            goal?.value!! <= goal?.singleValue!! -> {
-                setupArcView(arcViewSingle, goal?.value!!, seriesSingle)
-
-                if (goal?.value!! == goal?.singleValue!!)
-                    changeSingleOrMountainsIcon(goal_single_image, R.mipmap.ic_single, R.mipmap.ic_single_dark)
+            goal?.value!! > 0 && goal?.value!! < goal?.singleValue!! -> {
+                setSingleValue(goal?.value!!)
+                disableIcon(goal_single_image, R.mipmap.ic_single_dark)
             }
-            else -> {
-                setupArcView(arcViewSingle, goal?.singleValue!!, seriesSingle)
-
-                changeSingleOrMountainsIconDark(goal_single_image, R.mipmap.ic_single, R.mipmap.ic_single_dark, false)
+            goal?.value!! > 0 && goal?.value!! >= goal?.singleValue!! -> {
+                setSingleValue(goal?.singleValue!!)
+                enableIcon(goal_single_image, R.mipmap.ic_single)
             }
         }
     }
 
-    private fun setupMountains() {
+    private fun updateMountains() {
         when {
             goal?.value!! == 0F -> {
-                resetMountainBronze()
+                resetMountains()
             }
-            goal?.value!! <= goal?.bronzeValue!! -> {
-                setupArcView(arcViewBronze, goal?.value!!, seriesBronze)
+            goal?.value!! > 0 && goal?.value!! <= goal?.bronzeValue!! -> {
+                setMountainBronzeValue(goal?.value!!)
 
-                if (goal?.value!! == goal?.bronzeValue!!) {
-                    changeSingleOrMountainsIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze, R.mipmap.ic_mountain_bronze_dark)
-                }
+                if (goal?.value == goal?.bronzeValue!!) enableIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze)
+                else disableIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze_dark)
+
+                resetMountainSilver()
             }
-            goal?.value!! <= goal?.silverValue!! -> {
-                setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
-                setupArcView(arcViewSilver, goal?.value!!, seriesSilver)
+            goal?.value!! > 0 && goal?.value!! <= goal?.silverValue!! -> {
+                setMountainBronzeValue(goal?.bronzeValue!!)
+                setMountainSilverValue(goal?.value!!)
 
-                changeSingleOrMountainsIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze, R.mipmap.ic_mountain_bronze_dark)
+                enableIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze)
 
-                if (goal?.value!! == goal?.silverValue!!) {
-                    changeSingleOrMountainsIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver, R.mipmap.ic_mountain_silver_dark)
-                }
+                if (goal?.value == goal?.silverValue!!) enableIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver)
+                else disableIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver_dark)
+
+                resetMountainGold()
             }
-            goal?.value!! <= goal?.goldValue!! -> {
-                setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
-                setupArcView(arcViewSilver, goal?.silverValue!!, seriesSilver)
-                setupArcView(arcViewGold, goal?.value!!, seriesGold)
+            goal?.value!! > 0 && goal?.value!! <= goal?.goldValue!! -> {
+                setMountainBronzeValue(goal?.bronzeValue!!)
+                setMountainSilverValue(goal?.silverValue!!)
+                setMountainGoldValue(goal?.value!!)
 
-                changeSingleOrMountainsIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze, R.mipmap.ic_mountain_bronze_dark)
-                changeSingleOrMountainsIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver, R.mipmap.ic_mountain_silver_dark)
+                enableIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze)
+                enableIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver)
 
-                if (goal?.value!! == goal?.goldValue!!) {
-                    changeSingleOrMountainsIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold, R.mipmap.ic_mountain_gold_dark)
-                }
+                if (goal?.value == goal?.goldValue!!) enableIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold)
+                else disableIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold_dark)
             }
             else -> {
-                setupArcView(arcViewBronze, goal?.bronzeValue!!, seriesBronze)
-                setupArcView(arcViewSilver, goal?.silverValue!!, seriesSilver)
-                setupArcView(arcViewGold, goal?.goldValue!!, seriesGold)
+                setMountainBronzeValue(goal?.bronzeValue!!)
+                setMountainSilverValue(goal?.silverValue!!)
+                setMountainGoldValue(goal?.goldValue!!)
 
-                changeSingleOrMountainsIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze, R.mipmap.ic_mountain_bronze_dark)
-                changeSingleOrMountainsIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver, R.mipmap.ic_mountain_silver_dark)
-                changeSingleOrMountainsIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold, R.mipmap.ic_mountain_gold_dark)
-            }
-        }
-    }
-
-    private fun setSingle() {
-        singleSituations()
-    }
-
-    private fun setMountains() {
-        changeIconsDark()
-
-        mountainsSituations()
-    }
-
-    private fun singleSituations() {
-        if (count > 0 && count <= goal?.singleValue!!) {
-            setSingleValue()
-
-            if (count == goal?.singleValue!!)
-                changeSingleOrMountainsIcon(goal_single_image, R.mipmap.ic_single, R.mipmap.ic_single_dark)
-            else
-                changeSingleOrMountainsIconDark(goal_single_image, R.mipmap.ic_single, R.mipmap.ic_single_dark, true)
-        } else if (count > goal?.singleValue!!) { singleOrMountains()
-        } else if (count == 0F) { resetSingle() }
-    }
-
-    private fun mountainsSituations() {
-        if (count == 0F) {
-            resetMountains()
-        } else if (count > 0) {
-            if (count <= goal?.bronzeValue!!) {
-                setMountainBronzeValue()
-
-                if (count == goal?.bronzeValue!!)
-                    changeSingleOrMountainsIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze, R.mipmap.ic_mountain_bronze_dark)
-
-                if (count < goal?.silverValue!!)
-                    resetMountainSilver()
-            } else if (count <= goal?.silverValue!!) {
-                setMountainSilverValue()
-
-                if (count == goal?.silverValue!!)
-                    changeSingleOrMountainsIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver, R.mipmap.ic_mountain_silver_dark)
-
-                if (count < goal?.goldValue!!)
-                    resetMountainGold()
-            } else if (count <= goal?.goldValue!!) {
-                setMountainGoldValue()
-
-                if (count == goal?.goldValue!!)
-                    changeSingleOrMountainsIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold, R.mipmap.ic_mountain_gold_dark)
+                enableIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze)
+                enableIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver)
+                enableIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold)
             }
         }
     }
@@ -508,54 +445,20 @@ class GoalFragment : BaseFragment() {
         seriesSingle = arcViewSingle.resetValue(0F, goal?.singleValue!!, 0F)
     }
 
-    private fun setMountainBronzeValue() = setupArcView(arcViewBronze, count, seriesBronze)
+    private fun setMountainBronzeValue(value: Float) = arcViewBronze.setup(value, seriesBronze)
 
-    private fun setMountainSilverValue() = setupArcView(arcViewSilver, count, seriesSilver)
+    private fun setMountainSilverValue(value: Float) = arcViewSilver.setup(value, seriesSilver)
 
-    private fun setMountainGoldValue() = setupArcView(arcViewGold, count, seriesGold)
+    private fun setMountainGoldValue(value: Float) = arcViewGold.setup(value, seriesGold)
 
-    private fun setSingleValue() = setupArcView(arcViewSingle, count, seriesSingle)
+    private fun setSingleValue(value: Float) = arcViewSingle.setup(value, seriesSingle)
 
-    private fun setupArcView(arcView: DecoView, value: Float, index: Int) {
-        arcView.addEvent(
-            DecoEvent.Builder(value)
-                .setIndex(index)
-                .setDuration(durationAnimation)
-                .build()
-        )
+    private fun enableIcon(image: ImageView, iconNormal: Int) {
+        image.enableIcon(iconNormal, context!!)
     }
 
-    private fun changeIconsDark() {
-        if (count < goal?.bronzeValue!!)
-            changeSingleOrMountainsIconDark(
-                goal_mountain_bronze_image,
-                R.mipmap.ic_mountain_bronze,
-                R.mipmap.ic_mountain_bronze_dark,
-                true)
-        if (count < goal?.silverValue!!)
-            changeSingleOrMountainsIconDark(
-                goal_mountain_silver_image,
-                R.mipmap.ic_mountain_silver,
-                R.mipmap.ic_mountain_silver_dark,
-                true)
-        if (count < goal?.goldValue!!)
-            changeSingleOrMountainsIconDark(
-                goal_mountain_gold_image,
-                R.mipmap.ic_mountain_gold,
-                R.mipmap.ic_mountain_gold_dark,
-                true)
-    }
-
-    private fun changeSingleOrMountainsIconDark(image: ImageView, iconNormal: Int, iconDark: Int, dark: Boolean) {
-        image.background =
-            if (dark) ContextCompat.getDrawable(context!!, iconDark)
-            else ContextCompat.getDrawable(context!!, iconNormal)
-    }
-
-    private fun changeSingleOrMountainsIcon(image: ImageView, iconNormal: Int, iconDark: Int) {
-        image.background =
-            if (image.background == ContextCompat.getDrawable(context!!, iconNormal)) ContextCompat.getDrawable(context!!, iconDark)
-            else ContextCompat.getDrawable(context!!, iconNormal)
+    private fun disableIcon(image: ImageView, iconDark: Int) {
+        image.disableIcon( iconDark, context!!)
     }
 
     fun onViewMoved(oldPosition: Int, newPosition: Int, items: MutableList<Item>,
@@ -601,7 +504,7 @@ class GoalFragment : BaseFragment() {
 
                 itemDAO?.delete(item)
 
-                showSnackBarWithAction(holder.itemView, "Item removido.", item, ::deleteItem)
+                showSnackBarWithAction(holder.itemView, getString(R.string.item_swiped_deleted), item, ::deleteItem)
 
                 setupItems()
             }

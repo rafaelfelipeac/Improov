@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.App
 import com.rafaelfelipeac.mountains.extension.getPercentage
+import com.rafaelfelipeac.mountains.extension.invisible
+import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.GoalsAdapter
@@ -37,7 +39,7 @@ class GoalsFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        (activity as MainActivity).supportActionBar?.title = "Metas"
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_goals)
 
         viewModel = ViewModelProviders.of(this).get(GoalsViewModel::class.java)
 
@@ -52,8 +54,6 @@ class GoalsFragment : BaseFragment() {
 
         showNavigation()
 
-        fabScrollListener()
-
         fab_goals.setOnClickListener {
             navController.navigate(R.id.action_nav_goals_to_goalFormFragment)
         }
@@ -61,8 +61,16 @@ class GoalsFragment : BaseFragment() {
         setupItems()
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        fabScrollListener()
+    }
+
     override fun onResume() {
         super.onResume()
+
+        fabScrollListener()
 
         (activity as MainActivity).closeBottomSheetItem()
     }
@@ -71,15 +79,12 @@ class GoalsFragment : BaseFragment() {
         if (viewModel.getGoals().isNotEmpty()) {
             setItems()
 
-            goalListVisible(true)
+            goals_list.visible()
+            goals_placeholder.invisible()
         } else {
-            goalListVisible(false)
+            goals_list.invisible()
+            goals_placeholder.visible()
         }
-    }
-
-    private fun goalListVisible(visible: Boolean) {
-        goals_list.visibility = if (visible) View.VISIBLE else View.INVISIBLE
-        goals_placeholder.visibility = if (visible) View.INVISIBLE else View.VISIBLE
     }
 
     private fun setItems() {
@@ -89,8 +94,6 @@ class GoalsFragment : BaseFragment() {
             val action = GoalsFragmentDirections.actionNavGoalsToGoalFragment(it)
             navController.navigate(action)
         }
-
-        //goals_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
@@ -103,7 +106,7 @@ class GoalsFragment : BaseFragment() {
         touchHelper.attachToRecyclerView(goals_list)
     }
 
-    private fun fabScrollListener() { // ?
+    private fun fabScrollListener() {
         goals_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (dy > 0 || dy < 0 && fab_goals.isShown) fab_goals.hide()
@@ -134,7 +137,7 @@ class GoalsFragment : BaseFragment() {
 
                 goalDAO?.delete(goal)
 
-                showSnackBarWithAction(holder.itemView, "Meta removida.", goal as Any, ::deleteGoal)
+                showSnackBarWithAction(holder.itemView, getString(R.string.goals_fragment_resolved_goal_message), goal as Any, ::deleteGoal)
 
                 setupItems()
             }

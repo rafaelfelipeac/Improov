@@ -44,7 +44,7 @@ abstract class BaseFragment : Fragment() {
         Snackbar
             .make(view, message, Snackbar.LENGTH_LONG)
             .setMessageColor(R.color.colorPrimaryDarkOne)
-            .setAction("DESFAZER") { function(obj) }
+            .setAction(getString(R.string.snackbar_action_undo)) { function(obj) }
             .setActionTextColor(ContextCompat.getColor(context!!, R.color.colorPrimaryDarkOne))
             .show()
     }

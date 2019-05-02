@@ -1,4 +1,6 @@
 package com.rafaelfelipeac.mountains.ui.fragments.stats
 
-class StatsViewModel {
+import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
+
+class StatsViewModel: BaseViewModel() {
 }

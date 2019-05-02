@@ -3,26 +3,45 @@ package com.rafaelfelipeac.mountains.extension
 import androidx.core.content.ContextCompat
 import com.hookedonplay.decoviewlib.DecoView
 import com.hookedonplay.decoviewlib.charts.SeriesItem
+import com.hookedonplay.decoviewlib.events.DecoEvent
 import com.rafaelfelipeac.mountains.R
 
-fun DecoView.resetValue(minValue: Float, maxValue: Float, initialValue: Float): Int {
-    configureAngles(300, 0)
+private var durationAnimation = 75L
+private var lineWidth = 32F
+private var lineWidthBorder = 4F
+private var totalAngle = 300
+private var rotateAngle = 0
+private var minValueDefault = 0F
+private var maxValueDefault = 100F
+private var initialValueDefault = 100F
 
-    return addSeries(setupArcViewAndSeriesItem(minValue, maxValue, initialValue, false))
+fun DecoView.resetValue(minValue: Float, maxValue: Float, initialValue: Float): Int {
+    configureAngles(totalAngle, rotateAngle)
+
+    return addSeries(setupArcViewAndSeriesItem(minValue, maxValue, initialValue))
 }
 
-fun DecoView.setupArcViewAndSeriesItem(minValue: Float, maxValue: Float, initialValue: Float, visibility: Boolean): SeriesItem {
+fun DecoView.setupArcViewAndSeriesItem(minValue: Float, maxValue: Float, initialValue: Float): SeriesItem {
     addSeries(
         SeriesItem.Builder(ContextCompat.getColor(context!!, R.color.colorPrimaryAnother))
-            .setRange(0F, 100F, 100F)
+            .setRange(minValueDefault, maxValueDefault, initialValueDefault)
             .setInitialVisibility(true)
-            .setLineWidth(32F + 4F)
+            .setLineWidth(lineWidth + lineWidthBorder)
             .build()
     )
 
     return SeriesItem.Builder(ContextCompat.getColor(context!!, R.color.colorPrimary))
         .setRange(minValue, maxValue, initialValue)
-        .setInitialVisibility(visibility)
-        .setLineWidth(32F)
+        .setInitialVisibility(false)
+        .setLineWidth(lineWidth)
         .build()
+}
+
+fun DecoView.setup(value: Float, index: Int) {
+    addEvent(
+        DecoEvent.Builder(value)
+            .setIndex(index)
+            .setDuration(durationAnimation)
+            .build()
+    )
 }

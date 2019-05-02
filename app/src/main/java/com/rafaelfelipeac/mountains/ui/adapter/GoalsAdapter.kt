@@ -30,15 +30,15 @@ class GoalsAdapter(private val fragment: GoalsFragment) : BaseAdapter<Goal>(), A
 
         if (item.done) {
             image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
-            percentage.text = ""
+            percentage.text = context.getString(R.string.empty_string)
         }
         else {
             image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
 
             percentage.text = if (item.getPercentage() >= 100) {
-                String.format("100.00%s", "%")
+                String.format(context.getString(R.string.percentage_100), context.getString(R.string.percentage_symbol))
             } else {
-                String.format("%.2f %s", item.getPercentage(), "%")
+                String.format(context.getString(R.string.percentage_others), item.getPercentage(), context.getString(R.string.percentage_symbol))
             }
         }
     }

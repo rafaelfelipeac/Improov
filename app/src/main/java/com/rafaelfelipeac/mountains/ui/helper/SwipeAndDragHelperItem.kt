@@ -19,6 +19,7 @@ class SwipeAndDragHelperItem(private val contract: ActionCompletionContract) : I
                         target: RecyclerView.ViewHolder): Boolean {
 
         contract.onViewMoved(viewHolder.adapterPosition, target.adapterPosition)
+
         return true
     }
 
