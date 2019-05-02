@@ -192,7 +192,7 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun updateOrCreateGoal(new: Boolean): Goal {
-        goal = Goal()
+        if (new) goal = Goal()
 
         goal?.name = goalForm_goal_name.text.toString()
         goal?.mountains = form_goal_switch_mountains.isChecked
