@@ -17,9 +17,9 @@ abstract class BaseFragment : Fragment() {
 
     protected val injector by lazy { (activity as BaseActivity).injector }
 
-    var goalDAO = App.database?.goalDAO()
-    var itemDAO = App.database?.itemDAO()
-    var historicDAO = App.database?.historicDAO()
+//    var goalDAO = App.database?.goalDAO()
+//    var itemDAO = App.database?.itemDAO()
+//    var historicDAO = App.database?.historicDAO()
 
     val navController get() = (activity as MainActivity).navController
 

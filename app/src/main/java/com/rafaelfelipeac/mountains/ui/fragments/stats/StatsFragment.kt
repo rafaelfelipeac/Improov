@@ -45,7 +45,7 @@ class StatsFragment : BaseFragment() {
     }
 
     private fun setupStats() {
-        if (goalDAO?.getAll()?.isNotEmpty()!!) {
+        if (viewModel.getGoals().isNotEmpty()) {
             setStats()
 
             cl_stats_on.visible()
@@ -57,17 +57,17 @@ class StatsFragment : BaseFragment() {
     }
 
     private fun setStats() {
-        val goals = goalDAO?.getAll()
+        val goals = viewModel.getGoals()
 
-        val doneWithSingles = goals?.filter { !it.mountains }
-        val doneWithMountains = goals?.filter { it.mountains }
+        val doneWithSingles = goals.filter { !it.mountains }
+        val doneWithMountains = goals.filter { it.mountains }
 
-        val quantitySingles = doneWithSingles?.filter { it.value >= it.singleValue }?.size
-        val quantityBronze = doneWithMountains?.filter { it.value >= it.bronzeValue }?.size
-        val quantitySilver = doneWithMountains?.filter { it.value >= it.silverValue }?.size
-        val quantityGold = doneWithMountains?.filter { it.value >= it.goldValue }?.size
+        val quantitySingles = doneWithSingles.filter { it.value >= it.singleValue }.size
+        val quantityBronze = doneWithMountains.filter { it.value >= it.bronzeValue }.size
+        val quantitySilver = doneWithMountains.filter { it.value >= it.silverValue }.size
+        val quantityGold = doneWithMountains.filter { it.value >= it.goldValue }.size
 
-        stats_message.text = String.format(getString(R.string.stats_goals_completed_message), goals?.filter { it.done }?.size)
+        stats_message.text = String.format(getString(R.string.stats_goals_completed_message), goals.filter { it.done }.size)
         stats_single_value.text = String.format(getString(R.string.stats_single_value), quantitySingles)
         stats_mountain_bronze_value.text = String.format(getString(R.string.stats_bronze_value), quantityBronze)
         stats_mountain_silver_value.text = String.format(getString(R.string.stats_silver_value), quantitySilver)

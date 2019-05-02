@@ -12,4 +12,12 @@ class HistoricRepository @Inject constructor(private val historicDAO: HistoricDA
     fun insert(historic: Historic) {
         return historicDAO.insert(historic)
     }
+
+    fun update(historic: Historic) {
+        return historicDAO.update(historic)
+    }
+
+    fun delete(historic: Historic) {
+        return historicDAO.delete(historic)
+    }
 }

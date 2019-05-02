@@ -16,4 +16,8 @@ class GoalRepository @Inject constructor(private val goalDAO: GoalDAO) {
     fun update(goal: Goal) {
         return goalDAO.update(goal)
     }
+
+    fun delete(goal: Goal) {
+        return goalDAO.delete(goal)
+    }
 }

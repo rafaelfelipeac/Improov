@@ -12,4 +12,12 @@ class ItemRepository @Inject constructor(private val itemDAO: ItemDAO) {
     fun insert(item: Item) {
         return itemDAO.insert(item)
     }
+
+    fun update(item: Item) {
+        return itemDAO.update(item)
+    }
+
+    fun delete(item: Item) {
+        return itemDAO.delete(item)
+    }
 }

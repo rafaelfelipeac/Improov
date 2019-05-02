@@ -135,7 +135,7 @@ class GoalsFragment : BaseFragment() {
             ItemTouchHelper.LEFT -> {
                 goal.deleteDate = getCurrentTime()
 
-                goalDAO?.delete(goal)
+                viewModel.deleteGoal(goal)
 
                 showSnackBarWithAction(holder.itemView, getString(R.string.goals_fragment_resolved_goal_message), goal as Any, ::deleteGoal)
 
@@ -165,13 +165,13 @@ class GoalsFragment : BaseFragment() {
         goal.done = !goal.done
         goal.undoneDate = getCurrentTime()
 
-        goalDAO?.update(goal)
+        viewModel.updateGoal(goal)
 
         setupItems()
     }
 
     private fun deleteGoal(goal: Any) {
-        goalDAO?.insert(goal as Goal)
+        viewModel.insertGoal(goal as Goal)
 
         setupItems()
     }

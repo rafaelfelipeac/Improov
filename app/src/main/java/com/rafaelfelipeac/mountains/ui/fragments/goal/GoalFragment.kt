@@ -25,6 +25,9 @@ import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperItem
 import kotlinx.android.synthetic.main.fragment_goal.*
 import java.util.*
+import androidx.lifecycle.Observer
+
+
 
 class GoalFragment : BaseFragment() {
 
@@ -43,7 +46,7 @@ class GoalFragment : BaseFragment() {
 
     var goal: Goal? = null
 
-    private var viewModel: GoalViewModel?= null
+    private lateinit var viewModel: GoalViewModel
 
     private var count: Float = 0F
 
@@ -66,12 +69,17 @@ class GoalFragment : BaseFragment() {
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_goal)
 
         viewModel = ViewModelProviders.of(this).get(GoalViewModel::class.java)
+        viewModel.init("1")
 
         return inflater.inflate(R.layout.fragment_goal, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getGoal()?.observe(this, Observer { goal ->
+
+        })
 
         if (goal?.mountains!!) {
             resetMountains()
@@ -133,7 +141,7 @@ class GoalFragment : BaseFragment() {
             count += goal?.incrementValue!!
             updateTextAndGoal(goal_inc_dec_total)
 
-            historicDAO?.insert(Historic(value = goal?.incrementValue!!, date = Date(), goalId = goal?.goalId!!))
+            viewModel.insertHistoric(Historic(value = goal?.incrementValue!!, date = Date(), goalId = goal?.goalId!!))
 
             setHistoricItems()
         }
@@ -142,7 +150,7 @@ class GoalFragment : BaseFragment() {
             count -= goal?.decrementValue!!
             updateTextAndGoal(goal_inc_dec_total)
 
-            historicDAO?.insert(Historic(value = goal?.decrementValue!! * -1, date = Date(), goalId = goal?.goalId!!))
+            viewModel.insertHistoric(Historic(value = goal?.decrementValue!! * -1, date = Date(), goalId = goal?.goalId!!))
 
             setHistoricItems()
         }
@@ -152,7 +160,7 @@ class GoalFragment : BaseFragment() {
                 count = goal?.value!! + goal_total_total.toFloat()
                 updateTextAndGoal(goal_count)
 
-                historicDAO?.insert(Historic(value = goal_total_total.toFloat(), date = Date(), goalId = goal?.goalId!!))
+                viewModel.insertHistoric(Historic(value = goal_total_total.toFloat(), date = Date(), goalId = goal?.goalId!!))
 
                 setHistoricItems()
 
@@ -160,7 +168,7 @@ class GoalFragment : BaseFragment() {
 
                 val oldDone = goal!!.done
                 goal?.done = verifyIfGoalIsDone()
-                goalDAO?.update(goal!!)
+                viewModel.updateGoal(goal!!)
 
                 if (!oldDone && goal!!.done)
                     showSnackBar(getString(R.string.message_goal_done))
@@ -204,7 +212,7 @@ class GoalFragment : BaseFragment() {
             if (bottomSheetItemName?.text.toString().isEmpty())
                 showSnackBar(getString(R.string.bottom_sheet_empty_item_name))
             else {
-                val order = itemDAO?.getAll()?.filter { it.goalId == goal?.goalId }?.size!! + 1
+                val order = viewModel.getItems().filter { it.goalId == goal?.goalId }.size + 1
 
                 val item: Item?
 
@@ -216,13 +224,13 @@ class GoalFragment : BaseFragment() {
                         order = order,
                         createdDate = getCurrentTime())
 
-                    itemDAO?.insert(item)
+                    viewModel.insertItem(item)
                 } else {
                     item = (activity as MainActivity).item
                     item?.name = bottomSheetItemName?.text.toString()
                     item?.updatedDate = getCurrentTime()
 
-                    itemDAO?.update(item!!)
+                    viewModel.updateItem(item!!)
                 }
 
                 setupItems()
@@ -288,14 +296,14 @@ class GoalFragment : BaseFragment() {
         goal?.value = count
         goal?.done = verifyIfGoalIsDone()
 
-        goalDAO?.update(goal!!)
+        viewModel.updateGoal(goal!!)
 
         updateSingleOrMountains()
     }
 
     private fun setupItems() {
         if (goal?.type == 1) {
-            if (itemDAO?.getAll()?.any { it.goalId == goal?.goalId }!!) {
+            if (viewModel.getGoals().any { it.goalId == goal?.goalId }) {
                 setItems()
 
                 goal_cl_list.visible()
@@ -308,11 +316,11 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun setItems() {
-        val itemsList = itemDAO?.getAll()
+        val itemsList = viewModel.getItems()
 
         itemsAdapter.setItems(itemsList
-            ?.filter { it.goalId == goal?.goalId }
-            ?.sortedBy { it.order }!!)
+            .filter { it.goalId == goal?.goalId }
+            .sortedBy { it.order })
 
         itemsAdapter.clickListener = { (activity as MainActivity).openBottomSheetItem(it) }
 
@@ -328,11 +336,11 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun setHistoricItems() {
-        val historicItems = historicDAO?.getAll()
+        val historicItems = viewModel.getHistorical()
 
         historicAdapter.setItems(historicItems
-            ?.filter { it.goalId == goal?.goalId }
-            ?.reversed()!!)
+            .filter { it.goalId == goal?.goalId }
+            .reversed())
 
         historic_items_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         historic_items_list.adapter = historicAdapter
@@ -487,14 +495,14 @@ class GoalFragment : BaseFragment() {
                     item.done = false
                     item.undoneDate = getCurrentTime()
 
-                    itemDAO?.update(item)
+                    viewModel.updateItem(item)
 
                     scoreFromList(false)
                 } else {
                     item.done = true
                     item.doneDate = getCurrentTime()
 
-                    itemDAO?.update(item)
+                    viewModel.updateItem(item)
 
                     scoreFromList(true)
                 }
@@ -502,7 +510,7 @@ class GoalFragment : BaseFragment() {
             ItemTouchHelper.LEFT -> {
                 item.deleteDate = getCurrentTime()
 
-                itemDAO?.delete(item)
+                viewModel.deleteItem(item)
 
                 showSnackBarWithAction(holder.itemView, getString(R.string.item_swiped_deleted), item, ::deleteItem)
 
@@ -512,7 +520,7 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun deleteItem(item: Any) {
-        itemDAO?.insert(item as Item)
+        viewModel.insertItem(item as Item)
         setupItems()
     }
 }

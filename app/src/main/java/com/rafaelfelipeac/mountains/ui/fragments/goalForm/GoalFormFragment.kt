@@ -9,11 +9,12 @@ import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
+import com.rafaelfelipeac.mountains.ui.fragments.goals.GoalsViewModel
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 
 class GoalFormFragment : BaseFragment() {
 
-    private var viewModel: GoalFormViewModel?= null
+    private lateinit var viewModel: GoalFormViewModel
 
     private var goal: Goal? = null
 
@@ -78,18 +79,18 @@ class GoalFormFragment : BaseFragment() {
                     if (goal == null) {
                         val goalToSave = updateOrCreateGoal(true)
 
-                        viewModel?.saveGoal(goalToSave)
+                        viewModel.insertGoal(goalToSave)
 
-                        val goal = goalDAO?.getAll()?.last() // with ID now
+                        val goal = viewModel.getGoals().last() // with ID now
 
-                        val action = GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal!!)
+                        val action = GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal)
                         navController.navigate(action)
 
                         return true
                     } else {
                         val goalToUpdate = updateOrCreateGoal(false)
 
-                        viewModel?.updateGoal(goalToUpdate)
+                        viewModel.updateGoal(goalToUpdate)
 
                         val action = GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goalToUpdate)
                         navController.navigate(action)
@@ -204,8 +205,8 @@ class GoalFormFragment : BaseFragment() {
             goal?.done = false
 
             val order =
-                if (goalDAO?.getAll()?.size == 0) 0
-                else goalDAO?.getAll()!![goalDAO!!.getAll().size-1].order + 1
+                if (viewModel.getGoals().isEmpty()) 0
+                else viewModel.getGoals()[viewModel.getGoals().size-1].order + 1
 
             goal?.order = order
         }
