@@ -1,17 +1,16 @@
 package com.rafaelfelipeac.mountains.ui.fragments.goals
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
-import com.rafaelfelipeac.mountains.app.App
 import com.rafaelfelipeac.mountains.extension.getPercentage
 import com.rafaelfelipeac.mountains.extension.invisible
 import com.rafaelfelipeac.mountains.extension.visible
@@ -52,6 +51,8 @@ class GoalsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeViewModel()
+
         (activity as MainActivity).closeBottomSheetDoneGoal()
         (activity as MainActivity).closeBottomSheetItem()
 
@@ -60,7 +61,9 @@ class GoalsFragment : BaseFragment() {
         fab_goals.setOnClickListener {
             navController.navigate(R.id.action_nav_goals_to_goalFormFragment)
         }
+    }
 
+    private fun observeViewModel() {
         viewModel.getGoals()?.observe(this, Observer { goals ->
             this.goals = goals
             setupItems()
@@ -158,8 +161,8 @@ class GoalsFragment : BaseFragment() {
         targetGoal.order = newPosition
         otherGoal.order = oldPosition
 
-        App.database?.goalDAO()?.save(targetGoal)
-        App.database?.goalDAO()?.save(otherGoal)
+        viewModel.saveGoal(targetGoal)
+        viewModel.saveGoal(otherGoal)
 
         items.removeAt(oldPosition)
         items.add(newPosition, targetGoal)
@@ -177,7 +180,7 @@ class GoalsFragment : BaseFragment() {
     }
 
     private fun deleteGoal(goal: Any) {
-        viewModel.insertGoal(goal as Goal)
+        viewModel.saveGoal(goal as Goal)
 
         setupItems()
     }

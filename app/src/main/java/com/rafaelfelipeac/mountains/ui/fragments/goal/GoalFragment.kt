@@ -98,7 +98,7 @@ class GoalFragment : BaseFragment() {
             this.items = items
         })
 
-        viewModel.getHistorical()?.observe(this, Observer {  historical ->
+        viewModel.getHistory()?.observe(this, Observer { historical ->
             this.historical = historical
         })
     }
@@ -503,8 +503,6 @@ class GoalFragment : BaseFragment() {
 
         viewModel.saveItem(targetItem)
         viewModel.saveItem(otherItem)
-        //App.database?.itemDAO()?.update(targetItem)
-        //App.database?.itemDAO()?.update(otherItem)
 
         items.removeAt(oldPosition)
         items.add(newPosition, targetItem)

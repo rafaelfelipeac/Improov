@@ -6,8 +6,12 @@ import javax.inject.Inject
 
 class HistoricRepository @Inject constructor(private val historicDAO: HistoricDAO) {
 
-    fun getHistorical(): LiveData<List<Historic>> {
+    fun getHistory(): LiveData<List<Historic>> {
         return historicDAO.getAll()
+    }
+
+    fun getHistoric(historicId: Long): LiveData<Historic> {
+        return historicDAO.get(historicId)
     }
 
     fun save(historic: Historic): Long {

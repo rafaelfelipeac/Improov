@@ -4,18 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.invisible
 import com.rafaelfelipeac.mountains.extension.visible
+import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
-import com.rafaelfelipeac.mountains.ui.fragments.goals.GoalsViewModel
 import kotlinx.android.synthetic.main.fragment_stats.*
 
 class StatsFragment : BaseFragment() {
 
     private lateinit var viewModel: StatsViewModel
+
+    var goals: List<Goal>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +29,6 @@ class StatsFragment : BaseFragment() {
 
         (activity as MainActivity).bottomNavigationVisible(View.VISIBLE)
     }
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_stats)
@@ -39,13 +41,20 @@ class StatsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).closeBottomSheetDoneGoal()
+        observeViewModel()
 
-        setupStats()
+        (activity as MainActivity).closeBottomSheetDoneGoal()
+    }
+
+    private fun observeViewModel() {
+        viewModel.getGoals().observe(this, Observer { goals ->
+            this.goals = goals
+            setupStats()
+        })
     }
 
     private fun setupStats() {
-        if (viewModel.getGoals().value?.isNotEmpty()!!) {
+        if (goals?.isNotEmpty()!!) {
             setStats()
 
             cl_stats_on.visible()
@@ -57,7 +66,7 @@ class StatsFragment : BaseFragment() {
     }
 
     private fun setStats() {
-        val goals = viewModel.getGoals().value!!
+        val goals = goals!!
 
         val doneWithSingles = goals.filter { !it.mountains }
         val doneWithMountains = goals.filter { it.mountains }

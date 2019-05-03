@@ -15,10 +15,6 @@ class GoalsViewModel : BaseViewModel() {
         return goals
     }
 
-    fun insertGoal(goal: Goal) {
-        goalRepository.save(goal)
-    }
-
     fun saveGoal(goal: Goal) {
         goalRepository.save(goal)
     }

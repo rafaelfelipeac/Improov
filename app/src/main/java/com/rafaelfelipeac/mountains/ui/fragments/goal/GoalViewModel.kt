@@ -14,12 +14,12 @@ class GoalViewModel: BaseViewModel() {
 
     private var items: LiveData<List<Item>>? = null
 
-    private var historical: LiveData<List<Historic>>? = null
+    private var history: LiveData<List<Historic>>? = null
 
     init {
         goals = goalRepository.getGoals()
         items = itemRepository.getItems()
-        historical = historicRepository.getHistorical()
+        history = historicRepository.getHistory()
     }
 
     fun init(goalId: Long) {
@@ -46,19 +46,10 @@ class GoalViewModel: BaseViewModel() {
         historicRepository.save(historic)
     }
 
-    fun getHistorical(): LiveData<List<Historic>>? {
-        return historical
+    fun getHistory(): LiveData<List<Historic>>? {
+        return history
     }
-//
-//    // Item
-//    fun insertItem(item: Item) {
-//        itemRepository.save(item)
-//    }
-//
-//    fun updateItem(item: Item) {
-//        itemRepository.update(item)
-//    }
-//
+
     // Item
     fun getItems(): LiveData<List<Item>>? {
         return items

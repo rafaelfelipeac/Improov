@@ -3,7 +3,6 @@ package com.rafaelfelipeac.mountains.database.goal
 import androidx.lifecycle.LiveData
 import com.rafaelfelipeac.mountains.models.Goal
 import javax.inject.Inject
-import androidx.lifecycle.MutableLiveData
 
 class GoalRepository @Inject constructor(private val goalDAO: GoalDAO) {
 
