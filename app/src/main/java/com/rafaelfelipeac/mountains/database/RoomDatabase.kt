@@ -11,9 +11,9 @@ import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.Historic
 import com.rafaelfelipeac.mountains.models.Item
 
-@Database(entities = [Goal::class, Item::class, Historic::class], version = 24)
+@Database(entities = [Goal::class, Item::class, Historic::class], version = 25)
 @TypeConverters(Converters::class)
-abstract class AppDatabase : RoomDatabase() {
+abstract class RoomDatabase : RoomDatabase() {
 
     abstract fun goalDAO(): GoalDAO
     abstract fun itemDAO(): ItemDAO

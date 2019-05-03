@@ -1,5 +1,6 @@
 package com.rafaelfelipeac.mountains.ui.base
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.mountains.app.App
 import com.rafaelfelipeac.mountains.database.goal.GoalRepository
@@ -14,7 +15,7 @@ import com.rafaelfelipeac.mountains.models.Item
 
 abstract class BaseViewModel : ViewModel() {
 
-    private val goalRepository: GoalRepository = GoalRepository(App.database?.goalDAO()!!)
+    val goalRepository: GoalRepository = GoalRepository(App.database?.goalDAO()!!)
     private val itemRepository: ItemRepository = ItemRepository(App.database?.itemDAO()!!)
     private val historicRepository: HistoricRepository = HistoricRepository(App.database?.historicDAO()!!)
 
@@ -66,19 +67,23 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     // Goal
-    fun insertGoal(goal: Goal) {
-        goalRepository.insert(goal)
-    }
-
-    fun updateGoal(goal: Goal) {
-        goalRepository.update(goal)
-    }
-
-    fun getGoals(): List<Goal> {
-        return goalRepository.getGoals()
-    }
-
-    fun deleteGoal(goal: Goal) {
-        goalRepository.delete(goal)
-    }
+//    fun insertGoal(goal: Goal) {
+//        goalRepository.insert(goal)
+//    }
+//
+//    fun updateGoal(goal: Goal) {
+//        goalRepository.update(goal)
+//    }
+//
+//    fun getGoals(): List<Goal> {
+//        return goalRepository.getGoals()
+//    }
+//
+//    fun getGoals2(): LiveData<List<Goal>> {
+//        return goalRepository.getGoals2()
+//    }
+//
+//    fun deleteGoal(goal: Goal) {
+//        goalRepository.delete(goal)
+//    }
 }

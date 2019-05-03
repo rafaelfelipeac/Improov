@@ -52,7 +52,7 @@
               android:label="fragment_goal"
               tools:layout="@layout/fragment_goal">
 
-        <argument android:name="goal" app:argType="com.rafaelfelipeac.mountains.models.Goal"/>
+        <argument android:name="goalId" app:argType="long"/>
 
         <action android:id="@+id/action_goalFragment_to_goalFormFragment" app:destination="@id/goalFormFragment"/>
         <action android:id="@+id/action_goalFragment_to_nav_goals" app:destination="@id/navigation_goals"/>

@@ -15,12 +15,12 @@ import com.rafaelfelipeac.mountains.ui.helper.ActionCompletionContract
 
 class GoalsAdapter(private val fragment: GoalsFragment) : BaseAdapter<Goal>(), ActionCompletionContract {
 
-    var clickListener: (goal: Goal) -> Unit = { }
+    var clickListener: (goalId: Long) -> Unit = { }
 
     override fun getLayoutRes(): Int = R.layout.list_item_goal
 
     override fun View.bindView(item: Goal, viewHolder: ViewHolder) {
-        setOnClickListener { clickListener(item) }
+        setOnClickListener { clickListener(item.goalId) }
 
         val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_item_title)
         val image = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress)

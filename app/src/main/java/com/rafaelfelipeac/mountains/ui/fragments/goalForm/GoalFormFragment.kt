@@ -81,9 +81,9 @@ class GoalFormFragment : BaseFragment() {
 
                         viewModel.insertGoal(goalToSave)
 
-                        val goal = viewModel.getGoals().last() // with ID now
+                        val goal = viewModel.getGoals().value?.last() // with ID now
 
-                        val action = GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal)
+                        val action = GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal?.goalId!!)
                         navController.navigate(action)
 
                         return true
@@ -92,7 +92,7 @@ class GoalFormFragment : BaseFragment() {
 
                         viewModel.updateGoal(goalToUpdate)
 
-                        val action = GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goalToUpdate)
+                        val action = GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goalToUpdate.goalId)
                         navController.navigate(action)
 
                         return true
@@ -205,8 +205,8 @@ class GoalFormFragment : BaseFragment() {
             goal?.done = false
 
             val order =
-                if (viewModel.getGoals().isEmpty()) 0
-                else viewModel.getGoals()[viewModel.getGoals().size-1].order + 1
+                if (viewModel.getGoals().value?.isEmpty()!!) 0
+                else viewModel.getGoals().value!![viewModel.getGoals().value!!.size-1].order + 1
 
             goal?.order = order
         }

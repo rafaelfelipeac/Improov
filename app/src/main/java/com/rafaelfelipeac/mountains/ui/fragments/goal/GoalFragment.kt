@@ -27,8 +27,6 @@ import kotlinx.android.synthetic.main.fragment_goal.*
 import java.util.*
 import androidx.lifecycle.Observer
 
-
-
 class GoalFragment : BaseFragment() {
 
     private var itemsAdapter = ItemsAdapter(this)
@@ -44,6 +42,7 @@ class GoalFragment : BaseFragment() {
     private var bottomSheetItemSave: Button? = null
     private var bottomSheetItemName: TextInputEditText? = null
 
+    var goalId: Long? = null
     var goal: Goal? = null
 
     private lateinit var viewModel: GoalViewModel
@@ -61,7 +60,7 @@ class GoalFragment : BaseFragment() {
 
         (activity as MainActivity).bottomNavigationVisible(View.GONE)
 
-        goal = GoalFragmentArgs.fromBundle(arguments!!).goal
+        goalId = GoalFragmentArgs.fromBundle(arguments!!).goalId
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -69,7 +68,7 @@ class GoalFragment : BaseFragment() {
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_goal)
 
         viewModel = ViewModelProviders.of(this).get(GoalViewModel::class.java)
-        viewModel.init("1")
+        viewModel.init(goalId!!)
 
         return inflater.inflate(R.layout.fragment_goal, container, false)
     }
@@ -78,40 +77,29 @@ class GoalFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getGoal()?.observe(this, Observer { goal ->
-
+            this.goal = goal
+            setupGoal()
+            setupBottomSheet()
         })
-
-        if (goal?.mountains!!) {
-            resetMountains()
-        } else {
-            resetSingle()
-        }
-
-        setupButtons()
-        setupItems()
-
-        if (goal?.type != 1) {
-            setHistoricItems()
-        }
     }
 
     override fun onStart() {
         super.onStart()
 
         hideNavigation()
-        setupGoal()
+        //setupGoal()
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        setupGoal()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//
+//        setupGoal()
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (goal?.type == 1) {
-            inflater.inflate(R.menu.menu_add, menu)
-        }
+//        if (goal?.type == 1) {
+//            inflater.inflate(R.menu.menu_add, menu)
+//        }
 
         inflater.inflate(R.menu.menu_edit, menu)
 
@@ -125,9 +113,9 @@ class GoalFragment : BaseFragment() {
 
                 return true
             }
-            R.id.menu_goal_edit -> {
-                navController.navigate(GoalFragmentDirections.actionGoalFragmentToGoalFormFragment(goal!!))
-            }
+//            R.id.menu_goal_edit -> {
+//                navController.navigate(GoalFragmentDirections.actionGoalFragmentToGoalFormFragment(goal!!))
+//            }
             android.R.id.home -> {
                 navController.navigateUp()
             }
@@ -283,6 +271,19 @@ class GoalFragment : BaseFragment() {
         }
 
         updateSingleOrMountains()
+
+        if (goal?.mountains!!) {
+            resetMountains()
+        } else {
+            resetSingle()
+        }
+
+        setupButtons()
+        setupItems()
+
+        if (goal?.type != 1) {
+            setHistoricItems()
+        }
     }
 
     private fun updateTextAndGoal(textView: TextView) {
@@ -303,7 +304,7 @@ class GoalFragment : BaseFragment() {
 
     private fun setupItems() {
         if (goal?.type == 1) {
-            if (viewModel.getGoals().any { it.goalId == goal?.goalId }) {
+            if (viewModel.getGoals().value?.any { it.goalId == goal?.goalId }!!) {
                 setItems()
 
                 goal_cl_list.visible()

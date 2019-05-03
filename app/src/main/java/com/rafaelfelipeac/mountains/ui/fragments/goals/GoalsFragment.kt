@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.App
 import com.rafaelfelipeac.mountains.extension.getPercentage
@@ -26,6 +27,8 @@ class GoalsFragment : BaseFragment() {
     private var goalsAdapter = GoalsAdapter(this)
 
     private lateinit var viewModel: GoalsViewModel
+
+    var goals: List<Goal>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +61,10 @@ class GoalsFragment : BaseFragment() {
             navController.navigate(R.id.action_nav_goals_to_goalFormFragment)
         }
 
-        setupItems()
+        viewModel.getGoals()?.observe(this, Observer { goals ->
+            this.goals = goals
+            setupItems()
+        })
     }
 
     override fun onStart() {
@@ -76,7 +82,7 @@ class GoalsFragment : BaseFragment() {
     }
 
     private fun setupItems() {
-        if (viewModel.getGoals().isNotEmpty()) {
+        if (goals?.isNotEmpty()!!) {
             setItems()
 
             goals_list.visible()
@@ -88,7 +94,7 @@ class GoalsFragment : BaseFragment() {
     }
 
     private fun setItems() {
-        goalsAdapter.setItems(viewModel.getGoals().sortedBy { it.order })
+        goalsAdapter.setItems(goals?.sortedBy { it.order }!!)
 
         goalsAdapter.clickListener = {
             val action = GoalsFragmentDirections.actionNavGoalsToGoalFragment(it)

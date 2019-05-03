@@ -1,6 +1,5 @@
 package com.rafaelfelipeac.mountains.models
 
-import androidx.lifecycle.Observer
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
@@ -27,4 +26,4 @@ data class Goal(
     var doneDate: Date? = null,
     var undoneDate: Date? = null,
     var deleteDate: Date? = null,
-    var finalDate: Date? = null): Serializable, Observer<in Goal>
+    var finalDate: Date? = null): Serializable

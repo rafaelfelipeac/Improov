@@ -4,18 +4,33 @@ import androidx.lifecycle.LiveData
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 
-
 class GoalViewModel: BaseViewModel() {
-    private var goalId: String? = null
+    private var goalId: Long? = null
+    private var goal: LiveData<Goal>? = null
 
-    private val goal: LiveData<Goal>? = null
+    fun init(goalId: Long) {
+        this.goalId = goalId
+
+        goal = goalRepository.getGoal(goalId)
+    }
 
     fun getGoal(): LiveData<Goal>? {
-        return this.goal
+        return goal
     }
 
-    fun init(goalId: String) {
-        this.goalId = goalId
+    fun insertGoal(goal: Goal) {
+        goalRepository.insert(goal)
     }
 
+    fun updateGoal(goal: Goal) {
+        goalRepository.update(goal)
+    }
+
+    fun getGoals(): LiveData<List<Goal>> {
+        return goalRepository.getGoals()
+    }
+
+    fun deleteGoal(goal: Goal) {
+        goalRepository.delete(goal)
+    }
 }

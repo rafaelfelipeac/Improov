@@ -45,7 +45,7 @@ class StatsFragment : BaseFragment() {
     }
 
     private fun setupStats() {
-        if (viewModel.getGoals().isNotEmpty()) {
+        if (viewModel.getGoals().value?.isNotEmpty()!!) {
             setStats()
 
             cl_stats_on.visible()
@@ -57,7 +57,7 @@ class StatsFragment : BaseFragment() {
     }
 
     private fun setStats() {
-        val goals = viewModel.getGoals()
+        val goals = viewModel.getGoals().value!!
 
         val doneWithSingles = goals.filter { !it.mountains }
         val doneWithMountains = goals.filter { it.mountains }

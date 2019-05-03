@@ -1,5 +1,6 @@
 package com.rafaelfelipeac.mountains.database.goal
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.rafaelfelipeac.mountains.models.Goal
 
@@ -7,7 +8,10 @@ import com.rafaelfelipeac.mountains.models.Goal
 interface GoalDAO {
 
     @Query("SELECT * FROM goal")
-    fun getAll(): List<Goal>
+    fun getAll(): LiveData<List<Goal>>
+
+    @Query("SELECT * FROM goal WHERE goalId = :goalId")
+    fun get(goalId: Long): LiveData<Goal>
 
     @Insert
     fun insertAll(goals: List<Goal>)
