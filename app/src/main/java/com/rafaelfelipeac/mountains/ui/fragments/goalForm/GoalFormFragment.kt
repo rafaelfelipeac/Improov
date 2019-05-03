@@ -4,12 +4,12 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
-import com.rafaelfelipeac.mountains.ui.fragments.goals.GoalsViewModel
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 
 class GoalFormFragment : BaseFragment() {
@@ -17,11 +17,13 @@ class GoalFormFragment : BaseFragment() {
     private lateinit var viewModel: GoalFormViewModel
 
     private var goal: Goal? = null
+    private var goalId: Long? = null
+    private var goals: List<Goal>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        goal = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goal }
+        goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goalId }
 
         setHasOptionsMenu(true)
     }
@@ -34,18 +36,36 @@ class GoalFormFragment : BaseFragment() {
 
         viewModel = ViewModelProviders.of(this).get(GoalFormViewModel::class.java)
 
+        if (goalId != null) {
+            viewModel.init(goalId!!)
+        }
+
         return inflater.inflate(R.layout.fragment_goal_form, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (goal != null) {
-            setupGoal()
-        }
+        observeViewModel()
 
         setRadioButtonType()
         setSwitchMountains()
+    }
+
+    private fun observeViewModel() {
+        viewModel.getGoal()?.observe(this, Observer { goal ->
+            this.goal = goal
+            setupGoal()
+        })
+
+        viewModel.getGoals()?.observe(this, Observer { goals ->
+            this.goals = goals
+        })
+
+        viewModel.goalIdInserted.observe(this, Observer { goalIdForm ->
+            val action = GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goalIdForm)
+            navController.navigate(action)
+        })
     }
 
     override fun onStart() {
@@ -76,27 +96,11 @@ class GoalFormFragment : BaseFragment() {
                 } else if (verifyIfIncOrDecValuesAreEmpty()) {
                     showSnackBar(getString(R.string.message_empty_inc_dec))
                 } else {
-                    if (goal == null) {
-                        val goalToSave = updateOrCreateGoal(true)
+                    val goalToSave = updateOrCreateGoal(true)
 
-                        viewModel.insertGoal(goalToSave)
+                    viewModel.saveGoal(goalToSave)
 
-                        val goal = viewModel.getGoals().value?.last() // with ID now
-
-                        val action = GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goal?.goalId!!)
-                        navController.navigate(action)
-
-                        return true
-                    } else {
-                        val goalToUpdate = updateOrCreateGoal(false)
-
-                        viewModel.updateGoal(goalToUpdate)
-
-                        val action = GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goalToUpdate.goalId)
-                        navController.navigate(action)
-
-                        return true
-                    }
+                    return true
                 }
             }
         }
@@ -205,8 +209,8 @@ class GoalFormFragment : BaseFragment() {
             goal?.done = false
 
             val order =
-                if (viewModel.getGoals().value?.isEmpty()!!) 0
-                else viewModel.getGoals().value!![viewModel.getGoals().value!!.size-1].order + 1
+                if (goals?.isEmpty()!!) 0
+                else goals!![goals!!.size-1].order + 1
 
             goal?.order = order
         }

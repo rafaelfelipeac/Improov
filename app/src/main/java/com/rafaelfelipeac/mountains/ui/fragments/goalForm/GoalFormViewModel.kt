@@ -1,23 +1,39 @@
 package com.rafaelfelipeac.mountains.ui.fragments.goalForm
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 
 class GoalFormViewModel : BaseViewModel() {
-    fun insertGoal(goal: Goal) {
-        goalRepository.insert(goal)
+    private var goalId: Long? = null
+
+    private var goal: LiveData<Goal>? = null
+    private var goals: LiveData<List<Goal>>? = null
+
+    var goalIdInserted: MutableLiveData<Long> = MutableLiveData()
+
+    init {
+        goals = goalRepository.getGoals()
     }
 
-    fun updateGoal(goal: Goal) {
-        goalRepository.update(goal)
+    fun init(goalId: Long) {
+        this.goalId = goalId
+
+        goal = goalRepository.getGoal(goalId)
     }
 
-    fun getGoals(): LiveData<List<Goal>> {
-        return goalRepository.getGoals()
+    fun getGoals(): LiveData<List<Goal>>? {
+        return goals
     }
 
-    fun deleteGoal(goal: Goal) {
-        goalRepository.delete(goal)
+    fun getGoal(): LiveData<Goal>? {
+        return goal
+    }
+
+    fun saveGoal(goal: Goal) {
+        val goalId = goalRepository.save(goal)
+
+        goalIdInserted.value = goalId
     }
 }

@@ -1,22 +1,18 @@
 package com.rafaelfelipeac.mountains.database.item
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
+import androidx.room.OnConflictStrategy.REPLACE
 import com.rafaelfelipeac.mountains.models.Item
 
 @Dao
 interface ItemDAO {
 
     @Query("SELECT * FROM item")
-    fun getAll(): List<Item>
+    fun getAll(): LiveData<List<Item>>
 
-    @Insert
-    fun insertAll(items: List<Item>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(item: Item)
-
-    @Update
-    fun update(item: Item)
+    @Insert(onConflict = REPLACE)
+    fun save(item: Item): Long
 
     @Delete
     fun delete(item: Item)

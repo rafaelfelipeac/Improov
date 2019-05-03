@@ -15,12 +15,8 @@ class GoalRepository @Inject constructor(private val goalDAO: GoalDAO) {
         return goalDAO.get(goalId)
     }
 
-    fun insert(goal: Goal) {
-        return goalDAO.insert(goal)
-    }
-
-    fun update(goal: Goal) {
-        return goalDAO.update(goal)
+    fun save(goal: Goal): Long {
+        return goalDAO.save(goal)
     }
 
     fun delete(goal: Goal) {

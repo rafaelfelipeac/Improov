@@ -5,13 +5,13 @@ import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 
 class StatsViewModel: BaseViewModel() {
-    fun insertGoal(goal: Goal) {
-        goalRepository.insert(goal)
+    fun saveGoal(goal: Goal) {
+        goalRepository.save(goal)
     }
 
-    fun updateGoal(goal: Goal) {
-        goalRepository.update(goal)
-    }
+//    fun saveGoal(goal: Goal) {
+//        goalRepository.update(goal)
+//    }
 
     fun getGoals(): LiveData<List<Goal>> {
         return goalRepository.getGoals()

@@ -158,8 +158,8 @@ class GoalsFragment : BaseFragment() {
         targetGoal.order = newPosition
         otherGoal.order = oldPosition
 
-        App.database?.goalDAO()?.update(targetGoal)
-        App.database?.goalDAO()?.update(otherGoal)
+        App.database?.goalDAO()?.save(targetGoal)
+        App.database?.goalDAO()?.save(otherGoal)
 
         items.removeAt(oldPosition)
         items.add(newPosition, targetGoal)
@@ -171,7 +171,7 @@ class GoalsFragment : BaseFragment() {
         goal.done = !goal.done
         goal.undoneDate = getCurrentTime()
 
-        viewModel.updateGoal(goal)
+        viewModel.saveGoal(goal)
 
         setupItems()
     }

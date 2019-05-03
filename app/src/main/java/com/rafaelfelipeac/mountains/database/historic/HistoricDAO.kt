@@ -1,22 +1,18 @@
 package com.rafaelfelipeac.mountains.database.historic
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
+import androidx.room.OnConflictStrategy.REPLACE
 import com.rafaelfelipeac.mountains.models.Historic
 
 @Dao
 interface HistoricDAO {
 
     @Query("SELECT * FROM historic")
-    fun getAll(): List<Historic>
+    fun getAll(): LiveData<List<Historic>>
 
-    @Insert
-    fun insertAll(historical: List<Historic>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(historic: Historic)
-
-    @Update
-    fun update(historic: Historic)
+    @Insert(onConflict = REPLACE)
+    fun save(historic: Historic): Long
 
     @Delete
     fun delete(historic: Historic)

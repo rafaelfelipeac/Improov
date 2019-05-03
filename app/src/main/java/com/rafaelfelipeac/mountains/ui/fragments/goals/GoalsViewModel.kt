@@ -16,11 +16,11 @@ class GoalsViewModel : BaseViewModel() {
     }
 
     fun insertGoal(goal: Goal) {
-        goalRepository.insert(goal)
+        goalRepository.save(goal)
     }
 
-    fun updateGoal(goal: Goal) {
-        goalRepository.update(goal)
+    fun saveGoal(goal: Goal) {
+        goalRepository.save(goal)
     }
 
     fun deleteGoal(goal: Goal) {
