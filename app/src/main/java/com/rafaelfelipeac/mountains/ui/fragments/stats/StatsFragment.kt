@@ -16,9 +16,9 @@ import kotlinx.android.synthetic.main.fragment_stats.*
 
 class StatsFragment : BaseFragment() {
 
-    private lateinit var viewModel: StatsViewModel
-
     var goals: List<Goal>? = null
+
+    private lateinit var viewModel: StatsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +47,9 @@ class StatsFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.getGoals().observe(this, Observer { goals ->
+        viewModel.getGoals()?.observe(this, Observer { goals ->
             this.goals = goals
+
             setupStats()
         })
     }

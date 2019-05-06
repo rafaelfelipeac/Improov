@@ -22,6 +22,7 @@ import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.HistoricAdapter
 import com.rafaelfelipeac.mountains.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
+import com.rafaelfelipeac.mountains.ui.fragments.goalForm.GoalFormFragmentArgs
 import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperItem
 import kotlinx.android.synthetic.main.fragment_goal.*
 import java.util.*
@@ -44,14 +45,12 @@ class GoalFragment : BaseFragment() {
     var goalId: Long? = null
     var goal: Goal? = null
     var goals: List<Goal>? = null
-
     var items: List<Item>? = null
-
-    var historical: List<Historic>? = null
-
-    private lateinit var viewModel: GoalViewModel
+    var history: List<Historic>? = null
 
     private var count: Float = 0F
+
+    private lateinit var viewModel: GoalViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,11 +59,9 @@ class GoalFragment : BaseFragment() {
 
         setHasOptionsMenu(true)
 
-        setupBottomSheet()
-
         (activity as MainActivity).bottomNavigationVisible(View.GONE)
 
-        goalId = GoalFragmentArgs.fromBundle(arguments!!).goalId
+        goalId = arguments?.let { GoalFragmentArgs.fromBundle(it).goalId }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -86,6 +83,7 @@ class GoalFragment : BaseFragment() {
     private fun observeViewModel() {
         viewModel.getGoal()?.observe(this, Observer { goal ->
             this.goal = goal
+
             setupGoal()
             setupBottomSheet()
         })
@@ -96,10 +94,14 @@ class GoalFragment : BaseFragment() {
 
         viewModel.getItems()?.observe(this, Observer { items ->
             this.items = items
+
+            setupItems()
         })
 
-        viewModel.getHistory()?.observe(this, Observer { historical ->
-            this.historical = historical
+        viewModel.getHistory()?.observe(this, Observer { history ->
+            this.history = history
+
+            setHistory()
         })
     }
 
@@ -107,14 +109,7 @@ class GoalFragment : BaseFragment() {
         super.onStart()
 
         hideNavigation()
-        //setupGoal()
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//
-//        setupGoal()
-//    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         if (goal?.type == 1) {
@@ -150,8 +145,6 @@ class GoalFragment : BaseFragment() {
             updateTextAndGoal(goal_inc_dec_total)
 
             viewModel.saveHistoric(Historic(value = goal?.incrementValue!!, date = Date(), goalId = goal?.goalId!!))
-
-            setHistoricItems()
         }
 
         goal_btn_dec.setOnClickListener {
@@ -159,25 +152,20 @@ class GoalFragment : BaseFragment() {
             updateTextAndGoal(goal_inc_dec_total)
 
             viewModel.saveHistoric(Historic(value = goal?.decrementValue!! * -1, date = Date(), goalId = goal?.goalId!!))
-
-            setHistoricItems()
         }
 
         goal_btn_save.setOnClickListener {
             if (goal_total_total.isNotEmpty()) {
                 count = goal?.value!! + goal_total_total.toFloat()
-                updateTextAndGoal(goal_count)
-
-                viewModel.saveHistoric(Historic(value = goal_total_total.toFloat(), date = Date(), goalId = goal?.goalId!!))
-
-                setHistoricItems()
 
                 goal_total_total.resetValue()
 
                 val oldDone = goal!!.done
                 goal?.done = verifyIfGoalIsDone()
 
-                viewModel.saveGoal(goal!!)
+                updateTextAndGoal(goal_count)
+
+                viewModel.saveHistoric(Historic(value = goal_total_total.toFloat(), date = Date(), goalId = goal?.goalId!!))
 
                 if (!oldDone && goal!!.done)
                     showSnackBar(getString(R.string.message_goal_done))
@@ -187,6 +175,11 @@ class GoalFragment : BaseFragment() {
                 showSnackBar(getString(R.string.message_goal_value_invalid))
             }
         }
+    }
+
+    private fun onScoreFromList(done: Boolean) {
+        if (done) count++ else count--
+        updateTextAndGoal(goal_count)
     }
 
     private fun setupBottomSheet() {
@@ -218,31 +211,24 @@ class GoalFragment : BaseFragment() {
         }
 
         bottomSheetItemSave?.setOnClickListener {
-            if (bottomSheetItemName?.text.toString().isEmpty())
+            if (bottomSheetItemName?.isEmpty()!!) {
                 showSnackBar(getString(R.string.bottom_sheet_empty_item_name))
-            else {
-                val order = items?.filter { it.goalId == goal?.goalId }!!.size + 1
-
-                val item: Item?
+            } else {
+                var item = Item()
 
                 if ((activity as MainActivity).item == null) {
-                    item = Item(
-                        goalId = goal?.goalId!!,
-                        name = bottomSheetItemName?.text.toString(),
-                        done = false,
-                        order = order,
-                        createdDate = getCurrentTime())
-
-                    viewModel.saveItem(item)
+                    item.goalId = goal?.goalId!!
+                    item.name = bottomSheetItemName?.text.toString()
+                    item.done = false
+                    item.order = items?.filter { it.goalId == goal?.goalId }!!.size + 1
+                    item.createdDate = getCurrentTime()
                 } else {
-                    item = (activity as MainActivity).item
-                    item?.name = bottomSheetItemName?.text.toString()
-                    item?.updatedDate = getCurrentTime()
-
-                    viewModel.saveItem(item!!)
+                    item = (activity as MainActivity).item!!
+                    item.name = bottomSheetItemName?.text.toString()
+                    item.updatedDate = getCurrentTime()
                 }
 
-                setupItems()
+                viewModel.saveItem(item)
 
                 bottomSheetItemName?.resetValue()
                 (activity as MainActivity).closeBottomSheetItem()
@@ -256,16 +242,15 @@ class GoalFragment : BaseFragment() {
         goal_title.text = goal?.name
         goal_count.text = count.getNumberInRightFormat()
 
-        when {
-            goal?.mountains!! -> {
-                goal_single.invisible()
-                goal_mountains.visible()
+        if (goal?.mountains!!) {
+            goal_single.invisible()
+            goal_mountains.visible()
 
-                goal_mountain_bronze_text.text = goal?.bronzeValue?.getNumberInRightFormat()
-                goal_mountain_silver_text.text = goal?.silverValue?.getNumberInRightFormat()
-                goal_mountain_gold_text.text = goal?.goldValue?.getNumberInRightFormat()
-            }
-            else -> goal_single_text.text = goal?.singleValue?.getNumberInRightFormat()
+            goal_mountain_bronze_text.text = goal?.bronzeValue?.getNumberInRightFormat()
+            goal_mountain_silver_text.text = goal?.silverValue?.getNumberInRightFormat()
+            goal_mountain_gold_text.text = goal?.goldValue?.getNumberInRightFormat()
+        } else {
+            goal_single_text.text = goal?.singleValue?.getNumberInRightFormat()
         }
 
         when (goal?.type) {
@@ -291,41 +276,39 @@ class GoalFragment : BaseFragment() {
             }
         }
 
+        if (isTheFirstTime()) {
+            resetSingleOrMountains()
+        }
+
         updateSingleOrMountains()
 
-        if (goal?.mountains!!) {
-            resetMountains()
-        } else {
-            resetSingle()
-        }
-
         setupButtons()
-        setupItems()
-
-        if (goal?.type != 1) {
-            setHistoricItems()
-        }
     }
 
+    private fun isTheFirstTime() = seriesSingle == 0 && (seriesBronze == 0 || seriesSilver == 0 || seriesGold == 0)
+
     private fun updateTextAndGoal(textView: TextView) {
+        updateText(textView)
+        updateGoal()
+
+        viewModel.saveGoal(goal!!)
+    }
+
+    private fun updateText(textView: TextView) {
         goal_count.text = count.getNumberInRightFormat()
         textView.text = count.getNumberInRightFormat()
-
-        updateGoal()
     }
 
     private fun updateGoal() {
         goal?.value = count
         goal?.done = verifyIfGoalIsDone()
 
-        viewModel.saveGoal(goal!!)
-
         updateSingleOrMountains()
     }
 
     private fun setupItems() {
         if (goal?.type == 1) {
-            if (goals?.any { it.goalId == goal?.goalId }!!) {
+            if (items?.any { it.goalId == goal?.goalId }!!) {
                 setItems()
 
                 goal_cl_list.visible()
@@ -338,9 +321,7 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun setItems() {
-        val itemsList = items
-
-        itemsList
+        items
             ?.filter { it.goalId == goal?.goalId }
             ?.sortedBy { it.order }
             ?.let { itemsAdapter.setItems(it) }
@@ -358,26 +339,14 @@ class GoalFragment : BaseFragment() {
         touchHelper.attachToRecyclerView(goal_items_list)
     }
 
-    private fun setHistoricItems() {
-        val historicItems = historical
-
-        historicItems
+    private fun setHistory() {
+        history
             ?.filter { it.goalId == goal?.goalId }
             ?.reversed()
             ?.let { historicAdapter.setItems(it) }
 
         historic_items_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         historic_items_list.adapter = historicAdapter
-    }
-
-    private fun scoreFromList(done: Boolean) {
-        setupItems()
-
-        if (done) count++ else count--
-
-        goal_count.text = count.getNumberInRightFormat()
-
-        updateGoal()
     }
 
     private fun verifyIfGoalIsDone() =
@@ -389,6 +358,14 @@ class GoalFragment : BaseFragment() {
             updateMountains()
         } else {
             updateSingle()
+        }
+    }
+
+    private fun resetSingleOrMountains() {
+        if (goal?.mountains!!) {
+            resetMountains()
+        } else {
+            resetSingle()
         }
     }
 
@@ -521,14 +498,14 @@ class GoalFragment : BaseFragment() {
 
                     viewModel.saveItem(item)
 
-                    scoreFromList(false)
+                    onScoreFromList(false)
                 } else {
                     item.done = true
                     item.doneDate = getCurrentTime()
 
                     viewModel.saveItem(item)
 
-                    scoreFromList(true)
+                    onScoreFromList(true)
                 }
             }
             ItemTouchHelper.LEFT -> {
@@ -537,14 +514,11 @@ class GoalFragment : BaseFragment() {
                 viewModel.deleteItem(item)
 
                 showSnackBarWithAction(holder.itemView, getString(R.string.item_swiped_deleted), item, ::deleteItem)
-
-                setupItems()
             }
         }
     }
 
     private fun deleteItem(item: Any) {
         viewModel.saveItem(item as Item)
-        setupItems()
     }
 }

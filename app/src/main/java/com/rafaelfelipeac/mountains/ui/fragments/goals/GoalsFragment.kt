@@ -25,9 +25,9 @@ class GoalsFragment : BaseFragment() {
 
     private var goalsAdapter = GoalsAdapter(this)
 
-    private lateinit var viewModel: GoalsViewModel
-
     var goals: List<Goal>? = null
+
+    private lateinit var viewModel: GoalsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +66,7 @@ class GoalsFragment : BaseFragment() {
     private fun observeViewModel() {
         viewModel.getGoals()?.observe(this, Observer { goals ->
             this.goals = goals
+
             setupItems()
         })
     }
@@ -97,7 +98,9 @@ class GoalsFragment : BaseFragment() {
     }
 
     private fun setItems() {
-        goalsAdapter.setItems(goals?.sortedBy { it.order }!!)
+        goals
+            ?.sortedBy { it.order }
+            ?.let { goalsAdapter.setItems(it) }
 
         goalsAdapter.clickListener = {
             val action = GoalsFragmentDirections.actionNavGoalsToGoalFragment(it)
@@ -147,8 +150,6 @@ class GoalsFragment : BaseFragment() {
                 viewModel.deleteGoal(goal)
 
                 showSnackBarWithAction(holder.itemView, getString(R.string.goals_fragment_resolved_goal_message), goal as Any, ::deleteGoal)
-
-                setupItems()
             }
         }
     }
@@ -175,13 +176,9 @@ class GoalsFragment : BaseFragment() {
         goal.undoneDate = getCurrentTime()
 
         viewModel.saveGoal(goal)
-
-        setupItems()
     }
 
     private fun deleteGoal(goal: Any) {
         viewModel.saveGoal(goal as Goal)
-
-        setupItems()
     }
 }

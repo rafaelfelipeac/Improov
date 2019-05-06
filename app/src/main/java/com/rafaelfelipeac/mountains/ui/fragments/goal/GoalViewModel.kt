@@ -7,13 +7,10 @@ import com.rafaelfelipeac.mountains.models.Item
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 
 class GoalViewModel: BaseViewModel() {
-    private var goalId: Long? = null
 
     private var goal: LiveData<Goal>? = null
     private var goals: LiveData<List<Goal>>? = null
-
     private var items: LiveData<List<Item>>? = null
-
     private var history: LiveData<List<Historic>>? = null
 
     init {
@@ -23,8 +20,6 @@ class GoalViewModel: BaseViewModel() {
     }
 
     fun init(goalId: Long) {
-        this.goalId = goalId
-
         goal = goalRepository.getGoal(goalId)
     }
 
@@ -42,12 +37,14 @@ class GoalViewModel: BaseViewModel() {
     }
 
     // Historic
-    fun saveHistoric(historic: Historic) {
-        historicRepository.save(historic)
-    }
-
     fun getHistory(): LiveData<List<Historic>>? {
         return history
+    }
+
+    fun saveHistoric(historic: Historic) {
+        historicRepository.save(historic)
+
+        history = historicRepository.getHistory()
     }
 
     // Item
@@ -57,9 +54,13 @@ class GoalViewModel: BaseViewModel() {
 
     fun saveItem(item: Item) {
         itemRepository.save(item)
+
+        items = itemRepository.getItems()
     }
 
     fun deleteItem(item: Item) {
         itemRepository.delete(item)
+
+        items = itemRepository.getItems()
     }
 }

@@ -1,14 +1,13 @@
 package com.rafaelfelipeac.mountains.ui.base
 
 import android.app.Activity
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.rafaelfelipeac.mountains.R
-import com.rafaelfelipeac.mountains.app.App
 import com.rafaelfelipeac.mountains.extension.setMessageColor
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import java.util.*
@@ -16,10 +15,6 @@ import java.util.*
 abstract class BaseFragment : Fragment() {
 
     protected val injector by lazy { (activity as BaseActivity).injector }
-
-//    var goalDAO = App.database?.goalDAO()
-//    var itemDAO = App.database?.itemDAO()
-//    var historicDAO = App.database?.historicDAO()
 
     val navController get() = (activity as MainActivity).navController
 

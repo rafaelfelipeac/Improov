@@ -6,7 +6,14 @@ import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 
 class StatsViewModel: BaseViewModel() {
 
-    fun getGoals(): LiveData<List<Goal>> {
-        return goalRepository.getGoals()
+    private var goals: LiveData<List<Goal>>? = null
+
+    init {
+        goals = goalRepository.getGoals()
+    }
+
+    // Goal
+    fun getGoals(): LiveData<List<Goal>>? {
+        return goals
     }
 }

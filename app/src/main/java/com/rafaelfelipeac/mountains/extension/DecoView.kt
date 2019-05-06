@@ -6,7 +6,7 @@ import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
 import com.rafaelfelipeac.mountains.R
 
-private var durationAnimation = 75L
+private var durationAnimation = 100L
 private var lineWidth = 32F
 private var lineWidthBorder = 4F
 private var totalAngle = 300

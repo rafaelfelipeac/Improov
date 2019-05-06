@@ -14,11 +14,11 @@ import kotlinx.android.synthetic.main.fragment_goal_form.*
 
 class GoalFormFragment : BaseFragment() {
 
-    private lateinit var viewModel: GoalFormViewModel
-
     private var goal: Goal? = null
     private var goalId: Long? = null
     private var goals: List<Goal>? = null
+
+    private lateinit var viewModel: GoalFormViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +36,11 @@ class GoalFormFragment : BaseFragment() {
 
         viewModel = ViewModelProviders.of(this).get(GoalFormViewModel::class.java)
 
-        if (goalId != null) {
-            viewModel.init(goalId!!)
-        }
+        goalId?.let { viewModel.init(it) }
+
+//        if (goalId != null) {
+//            viewModel.init(goalId!!)
+//        }
 
         return inflater.inflate(R.layout.fragment_goal_form, container, false)
     }
@@ -55,6 +57,7 @@ class GoalFormFragment : BaseFragment() {
     private fun observeViewModel() {
         viewModel.getGoal()?.observe(this, Observer { goal ->
             this.goal = goal
+
             setupGoal()
         })
 
@@ -96,7 +99,7 @@ class GoalFormFragment : BaseFragment() {
                 } else if (verifyIfIncOrDecValuesAreEmpty()) {
                     showSnackBar(getString(R.string.message_empty_inc_dec))
                 } else {
-                    val goalToSave = updateOrCreateGoal(true)
+                    val goalToSave = updateOrCreateGoal()
 
                     viewModel.saveGoal(goalToSave)
 
@@ -137,8 +140,7 @@ class GoalFormFragment : BaseFragment() {
                 radioButtonTotal.isChecked = false
 
                 goalForm_goal_inc_dev.visible()
-            } else
-                goalForm_goal_inc_dev.gone()
+            }
         }
 
         radioButtonTotal.setOnClickListener {
@@ -196,14 +198,12 @@ class GoalFormFragment : BaseFragment() {
         return false
     }
 
-    private fun updateOrCreateGoal(new: Boolean): Goal {
-        if (new) goal = Goal()
-
+    private fun updateOrCreateGoal(): Goal {
         goal?.name = goalForm_goal_name.text.toString()
         goal?.mountains = form_goal_switch_mountains.isChecked
         goal?.type = getTypeSelected()
 
-        if (new) {
+        if (goal?.goalId == null) {
             goal?.createdDate = getCurrentTime()
             goal?.value = 0F
             goal?.done = false
@@ -218,16 +218,16 @@ class GoalFormFragment : BaseFragment() {
             goal?.updatedDate = getCurrentTime()
 
         if (getTypeSelected() == 2) {
-            goal?.incrementValue = goalForm_goal_inc_value.text.toString().toFloat()
-            goal?.decrementValue = goalForm_goal_dec_value.text.toString().toFloat()
+            goal?.incrementValue = goalForm_goal_inc_value.toFloat()
+            goal?.decrementValue = goalForm_goal_dec_value.toFloat()
         }
 
         if (goal?.mountains!!) {
-            goal?.bronzeValue = form_goal_editText_bronze.text.toString().toFloat()
-            goal?.silverValue = form_goal_editText_silver.text.toString().toFloat()
-            goal?.goldValue = form_goal_editText_gold.text.toString().toFloat()
+            goal?.bronzeValue = form_goal_editText_bronze.toFloat()
+            goal?.silverValue = form_goal_editText_silver.toFloat()
+            goal?.goldValue = form_goal_editText_gold.toFloat()
         } else {
-            goal?.singleValue = form_goal_editText_single.text.toString().toFloat()
+            goal?.singleValue = form_goal_editText_single.toFloat()
         }
 
         return goal!!
