@@ -94,7 +94,9 @@ android {
         }
 
         // Firebase
-        implementation 'com.google.firebase:firebase-core:16.0.8'
+        implementation 'com.google.firebase:firebase-core:16.0.9'
+        implementation 'com.google.firebase:firebase-auth:17.0.0'
+        implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
         implementation 'com.android.support:multidex:1.0.3'
     }
@@ -112,4 +114,8 @@ android {
         classpath = configurations.ktlint
         args "-F", "src/**/*.kt"
     }
+}
+
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:+'
 }

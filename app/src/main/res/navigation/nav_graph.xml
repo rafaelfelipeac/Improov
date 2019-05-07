@@ -23,9 +23,9 @@
     </fragment>
 
     <fragment android:id="@+id/navigation_profile"
-              android:name="com.rafaelfelipeac.mountains.ui.fragments.profile.ProfileFragment"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.login.LoginFragment"
               android:label="fragment_profile"
-              tools:layout="@layout/fragment_profile">
+              tools:layout="@layout/fragment_login">
 
     </fragment>
 
