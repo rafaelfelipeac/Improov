@@ -16,6 +16,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseFragment() {
@@ -39,7 +41,11 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(com.rafaelfelipeac.mountains.R.layout.fragment_login, container, false)
+        (activity as MainActivity).supportActionBar?.title = ""
+
+        hideNavigation()
+
+        return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

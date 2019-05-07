@@ -56,8 +56,8 @@ android {
         implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha04'
 
         // Room
-        kapt 'androidx.room:room-compiler:2.1.0-alpha06'
-        implementation 'androidx.room:room-runtime:2.1.0-alpha06'
+        kapt 'androidx.room:room-compiler:2.1.0-alpha07'
+        implementation 'androidx.room:room-runtime:2.1.0-alpha07'
 
         // Retrofit
         implementation "com.squareup.retrofit2:retrofit:2.4.0"
@@ -94,6 +94,8 @@ android {
         }
 
         // Firebase
+        implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
+
         implementation 'com.google.firebase:firebase-core:16.0.9'
         implementation 'com.google.firebase:firebase-auth:17.0.0'
         implementation 'com.google.android.gms:play-services-auth:16.0.1'
@@ -118,4 +120,5 @@ android {
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:+'
+    implementation 'com.google.android.material:material:1.0.0'
 }
