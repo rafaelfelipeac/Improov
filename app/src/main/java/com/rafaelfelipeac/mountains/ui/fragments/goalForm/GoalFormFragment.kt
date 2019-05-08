@@ -66,7 +66,7 @@ class GoalFormFragment : BaseFragment() {
         })
 
         viewModel.goalIdInserted.observe(this, Observer { goalIdForm ->
-            val action = GoalFormFragmentDirections.actionGoalFormFragmentToGoalFragment(goalIdForm)
+            val action = GoalFormFragmentDirections.actionNavigationGoalFormToNavigationGoal(goalIdForm)
             navController.navigate(action)
         })
     }

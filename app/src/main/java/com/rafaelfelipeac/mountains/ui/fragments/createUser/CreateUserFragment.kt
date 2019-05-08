@@ -7,13 +7,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_create_user.*
 
 class CreateUserFragment : BaseFragment() {
 
@@ -26,7 +28,18 @@ class CreateUserFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).supportActionBar?.title = "Create User"
+
         return inflater.inflate(R.layout.fragment_create_user, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        create_create.setOnClickListener {
+            navController.navigate(CreateUserFragmentDirections.actionNavigationCreateUserToNavigationGoals())
+        }
     }
 
     private fun createUserWithEmailAndPassword() {

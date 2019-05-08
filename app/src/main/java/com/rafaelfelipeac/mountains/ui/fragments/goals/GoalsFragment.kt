@@ -59,7 +59,7 @@ class GoalsFragment : BaseFragment() {
         showNavigation()
 
         fab_goals.setOnClickListener {
-            navController.navigate(R.id.action_nav_goals_to_goalFormFragment)
+            navController.navigate(R.id.action_navigation_goals_to_navigation_goalForm)
         }
     }
 
@@ -103,7 +103,7 @@ class GoalsFragment : BaseFragment() {
             ?.let { goalsAdapter.setItems(it) }
 
         goalsAdapter.clickListener = {
-            val action = GoalsFragmentDirections.actionNavGoalsToGoalFragment(it)
+            val action = GoalsFragmentDirections.actionNavigationGoalsToNavigationGoal(it)
             navController.navigate(action)
         }
 

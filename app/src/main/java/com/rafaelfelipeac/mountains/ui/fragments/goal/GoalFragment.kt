@@ -129,11 +129,11 @@ class GoalFragment : BaseFragment() {
                 return true
             }
             R.id.menu_goal_edit -> {
-                navController.navigate(GoalFragmentDirections.actionGoalFragmentToGoalFormFragment(goal?.goalId!!))
+                navController.navigate(GoalFragmentDirections.actionNavigationGoalToNavigationGoalForm(goal?.goalId!!))
             }
-            android.R.id.home -> {
-                navController.navigateUp()
-            }
+//            android.R.id.home -> {
+//                navController.navigateUp()
+//            }
         }
 
         return false

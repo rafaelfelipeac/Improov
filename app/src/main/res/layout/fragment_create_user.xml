@@ -15,7 +15,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:inputType="numberDecimal|numberSigned"
             android:textColor="@color/colorPrimary"
-            android:hint="Password"
+            android:hint="Nome"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
@@ -24,7 +24,8 @@
             app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginTop="32dp" app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/create_name"
@@ -43,7 +44,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:inputType="numberDecimal|numberSigned"
             android:textColor="@color/colorPrimary"
-            android:hint="Password"
+            android:hint="Email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
@@ -52,7 +53,8 @@
             app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/create_name_til">
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/create_name_til">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/create_email"
@@ -80,7 +82,8 @@
             app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/create_email_til">
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/create_email_til">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/create_password"
@@ -99,7 +102,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:inputType="numberDecimal|numberSigned"
             android:textColor="@color/colorPrimary"
-            android:hint="Password"
+            android:hint="Confirm Password"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
@@ -108,7 +111,8 @@
             app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/create_password_til">
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/create_password_til">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/create_confirm_password"
@@ -120,4 +124,16 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Button
+            android:id="@+id/create_create"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Criar conta"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/create_confirm_password_til"
+            app:layout_constraintVertical_bias="0.0"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

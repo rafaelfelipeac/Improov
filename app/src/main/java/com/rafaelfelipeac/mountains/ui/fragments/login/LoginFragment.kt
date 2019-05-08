@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -41,9 +42,8 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        (activity as MainActivity).supportActionBar?.title = ""
-
-        hideNavigation()
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).supportActionBar?.title = "Login"
 
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
@@ -52,7 +52,16 @@ class LoginFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         sign_in_button_google.setOnClickListener {
-            signInGoogle()
+            navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationGoals())
+            //signInGoogle()
+        }
+
+        login_button.setOnClickListener {
+            navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationGoals())
+        }
+
+        login_forget_password.setOnClickListener {
+            navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationGoals())
         }
     }
 
