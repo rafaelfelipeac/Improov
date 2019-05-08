@@ -22,8 +22,15 @@
             tools:layout="@layout/fragment_login">
 
         <action android:id="@+id/action_navigation_login_to_navigation_goals" app:destination="@id/navigation_goals"/>
+        <action android:id="@+id/action_navigation_login_to_forgotPasswordFragment"
+                app:destination="@id/navigation_forgotPassword"/>
 
     </fragment>
+
+    <fragment android:id="@+id/navigation_forgotPassword"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.forgotPassword.ForgotPasswordFragment"
+              android:label="fragment_forgot_password"
+              tools:layout="@layout/fragment_forgot_password"/>
 
     <fragment
             android:id="@+id/navigation_createUser"

@@ -34,7 +34,7 @@ class LoginFragment : BaseFragment() {
         auth = FirebaseAuth.getInstance()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(com.rafaelfelipeac.mountains.R.string.default_web_client_id))
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
@@ -45,23 +45,25 @@ class LoginFragment : BaseFragment() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = "Login"
 
+        hideNavigation()
+
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sign_in_button_google.setOnClickListener {
+        login_sign_in_google_button.setOnClickListener {
             navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationGoals())
             //signInGoogle()
         }
 
-        login_button.setOnClickListener {
+        login_sign_in_button.setOnClickListener {
             navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationGoals())
         }
 
-        login_forget_password.setOnClickListener {
-            navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationGoals())
+        login_forgot_password.setOnClickListener {
+            navController.navigate(LoginFragmentDirections.actionNavigationLoginToForgotPasswordFragment())
         }
     }
 

@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_goal_form.*
 
 class GoalFormFragment : BaseFragment() {
 
-    private var goal: Goal? = null
+    private var goal: Goal = Goal()
     private var goalId: Long? = null
     private var goals: List<Goal>? = null
 

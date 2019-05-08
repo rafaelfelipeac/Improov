@@ -12,21 +12,21 @@ import kotlinx.android.synthetic.main.fragment_welcome.*
 class WelcomeFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        (activity as MainActivity).supportActionBar?.title = ""
+
+        hideNavigation()
+
         return inflater.inflate(R.layout.fragment_welcome, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).supportActionBar?.title = ""
-
-        hideNavigation()
-
-        welcome_login.setOnClickListener {
+        welcome_sign_in.setOnClickListener {
             navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationLogin())
         }
 
-        welcome_create.setOnClickListener {
+        welcome_create_account.setOnClickListener {
             navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationCreateUser())
         }
     }

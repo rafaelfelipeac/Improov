@@ -15,7 +15,6 @@
     <string name="bottom_sheet_item_title_add">Novo item</string>
     <string name="bottom_sheet_item_title_edit">Editar item</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bottom_sheet_empty_item_name">Nome do item está vazio.</string>
     <string name="fragment_title_goal">Meta</string>
@@ -35,8 +34,28 @@
     <string name="stats_silver_value">%dx</string>
     <string name="stats_gold_value">%dx</string>
     <string name="empty_string"/>
+
     <string name="fragment_title_profile">Perfil</string>
     <string name="fragment_title_search">Pesquisar</string>
+
     <string name="fragment_search_search_message">Pesquisa.</string>
+
+    <string name="fragment_create_user_name_til_hint">Nome</string>
+    <string name="fragment_create_user_email_til_hint">Email</string>
+    <string name="fragment_create_user_password_til_hint">Password</string>
+    <string name="fragment_create_user_confirm_password_til_hint">Confirm Password</string>
+    <string name="fragment_create_user_create_button_message">Criar conta</string>
+
+    <string name="fragment_forgot_password_email_til_hint">Email</string>
+    <string name="fragment_forgot_password_send_button_message">Enviar email de recuperação</string>
+
+    <string name="fragment_login_or_message">ou</string>
+    <string name="fragment_login_email_til_hint">Email</string>
+    <string name="fragment_login_password_til_hint">Password</string>
+    <string name="fragment_login_sign_in_button_message">Login</string>
+    <string name="fragment_login_forgot_password_message">Esqueci minha senha</string>
+
+    <string name="fragment_welcome_sign_in_message">Entrar</string>
+    <string name="fragment_welcome_create_account_message">Criar conta</string>
 
 </resources>

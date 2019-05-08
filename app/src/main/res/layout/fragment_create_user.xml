@@ -9,26 +9,29 @@
         android:background="@color/colorPrimaryDarkOne">
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/create_name_til"
+            android:id="@+id/create_user_name_til"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:inputType="numberDecimal|numberSigned"
             android:textColor="@color/colorPrimary"
-            android:hint="Nome"
+            android:hint="@string/fragment_create_user_name_til_hint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
             app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
             app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
             app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginTop="32dp"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/create_user_email_til"
+            app:layout_constraintVertical_bias="1.0">
 
         <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/create_name"
+                android:id="@+id/create_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
@@ -38,26 +41,26 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/create_email_til"
+            android:id="@+id/create_user_email_til"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:inputType="numberDecimal|numberSigned"
             android:textColor="@color/colorPrimary"
-            android:hint="Email"
+            android:hint="@string/fragment_create_user_email_til_hint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
             app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
             app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
             app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/create_name_til">
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/create_user_password_til">
 
         <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/create_email"
+                android:id="@+id/create_user_email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
@@ -67,26 +70,26 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/create_password_til"
+            android:id="@+id/create_user_password_til"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:inputType="numberDecimal|numberSigned"
             android:textColor="@color/colorPrimary"
-            android:hint="Password"
+            android:hint="@string/fragment_create_user_password_til_hint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
             app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
             app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
             app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/create_email_til">
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/create_user_confirm_password_til">
 
         <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/create_password"
+                android:id="@+id/create_user_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
@@ -96,26 +99,26 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/create_confirm_password_til"
+            android:id="@+id/create_user_confirm_password_til"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:inputType="numberDecimal|numberSigned"
             android:textColor="@color/colorPrimary"
-            android:hint="Confirm Password"
+            android:hint="@string/fragment_create_user_confirm_password_til_hint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
             app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
             app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
             app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/create_password_til">
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/create_user_create_button">
 
         <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/create_confirm_password"
+                android:id="@+id/create_user_confirm_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
@@ -124,16 +127,18 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-            android:id="@+id/create_create"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Criar conta"
-            android:layout_marginBottom="16dp"
+    <android.widget.Button
+            android:id="@+id/create_user_create_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/fragment_create_user_create_button_message"
+            android:textColor="@color/colorPrimaryDarkOne"
+            android:background="@drawable/rounded_button"
+            android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="32dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/create_confirm_password_til"
-            app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="32dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

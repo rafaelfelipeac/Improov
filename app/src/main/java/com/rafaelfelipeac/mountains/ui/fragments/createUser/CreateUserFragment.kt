@@ -31,13 +31,15 @@ class CreateUserFragment : BaseFragment() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = "Create User"
 
+        hideNavigation()
+
         return inflater.inflate(R.layout.fragment_create_user, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        create_create.setOnClickListener {
+        create_user_create_button.setOnClickListener {
             navController.navigate(CreateUserFragmentDirections.actionNavigationCreateUserToNavigationGoals())
         }
     }
