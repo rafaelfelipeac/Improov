@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -21,15 +22,21 @@ class CreateUserFragment : BaseFragment() {
 
     private var auth: FirebaseAuth? = null
 
+    private lateinit var viewModel: CreateUserViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //injector.inject(this)
 
         auth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = "Create User"
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_create_user_title)
+
+        viewModel = ViewModelProviders.of(this).get(CreateUserViewModel::class.java)
 
         hideNavigation()
 
@@ -39,9 +46,15 @@ class CreateUserFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeViewModel()
+
         create_user_create_button.setOnClickListener {
             navController.navigate(CreateUserFragmentDirections.actionNavigationCreateUserToNavigationGoals())
         }
+    }
+
+    private fun observeViewModel() {
+
     }
 
     private fun createUserWithEmailAndPassword() {

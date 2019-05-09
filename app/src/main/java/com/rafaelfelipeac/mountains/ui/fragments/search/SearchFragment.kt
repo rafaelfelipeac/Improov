@@ -16,7 +16,7 @@ class SearchFragment : BaseFragment() {
     private var open: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_search)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_search_title)
 
         return inflater.inflate(R.layout.fragment_search, container, false)
     }

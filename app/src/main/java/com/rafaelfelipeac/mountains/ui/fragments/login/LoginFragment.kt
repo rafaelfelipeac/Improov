@@ -8,17 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.rafaelfelipeac.mountains.ui.base.BaseFragment
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
+import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseFragment() {
@@ -28,8 +29,12 @@ class LoginFragment : BaseFragment() {
 
     private val RC_SIGN_IN = 100
 
+    private lateinit var viewModel: LoginViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //injector.inject(this)
 
         auth = FirebaseAuth.getInstance()
 
@@ -43,7 +48,9 @@ class LoginFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = "Login"
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_login_title)
+
+        viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
         hideNavigation()
 
@@ -52,6 +59,8 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        observeViewModel()
 
         login_sign_in_google_button.setOnClickListener {
             navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationGoals())
@@ -65,6 +74,10 @@ class LoginFragment : BaseFragment() {
         login_forgot_password.setOnClickListener {
             navController.navigate(LoginFragmentDirections.actionNavigationLoginToForgotPasswordFragment())
         }
+    }
+
+    private fun observeViewModel() {
+
     }
 
     override fun onStart() {

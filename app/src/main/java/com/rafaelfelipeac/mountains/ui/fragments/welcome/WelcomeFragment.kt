@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
@@ -11,8 +13,19 @@ import kotlinx.android.synthetic.main.fragment_welcome.*
 
 class WelcomeFragment : BaseFragment() {
 
+    private lateinit var viewModel: WelcomeViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        //injector.inject(this)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        (activity as MainActivity).supportActionBar?.title = ""
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_welcome_title)
+
+        viewModel = ViewModelProviders.of(this).get(WelcomeViewModel::class.java)
 
         hideNavigation()
 

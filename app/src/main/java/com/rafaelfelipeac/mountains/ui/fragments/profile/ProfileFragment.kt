@@ -13,7 +13,7 @@ class ProfileFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_profile)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_profile_title)
 
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }

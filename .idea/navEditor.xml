@@ -8,18 +8,6 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="forgotPasswordFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-286" />
-                            <option name="y" value="-267" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="navigation_createUser">
                     <value>
                       <LayoutPositions>
@@ -37,6 +25,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navigation_forgotPassword">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -135,6 +135,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_navigation_login_to_forgotPasswordFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_navigation_login_to_navigation_goals">
                               <value>
                                 <LayoutPositions />

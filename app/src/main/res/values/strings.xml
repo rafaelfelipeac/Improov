@@ -35,8 +35,12 @@
     <string name="stats_gold_value">%dx</string>
     <string name="empty_string"/>
 
-    <string name="fragment_title_profile">Perfil</string>
-    <string name="fragment_title_search">Pesquisar</string>
+    <string name="fragment_profile_title">Perfil</string>
+    <string name="fragment_search_title">Pesquisar</string>
+    <string name="fragment_create_user_title">Criar usuário</string>
+    <string name="fragment_forgot_password_title">Esqueci a senha</string>
+    <string name="fragment_login_title">Login</string>
+    <string name="fragment_welcome_title"> </string>
 
     <string name="fragment_search_search_message">Pesquisa.</string>
 
