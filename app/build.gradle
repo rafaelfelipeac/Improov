@@ -27,6 +27,17 @@ android {
         }
     }
 
+    buildTypes {
+        release {
+
+        }
+
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+    }
+
     repositories {
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
@@ -122,4 +133,5 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:+'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.firebase:firebase-auth:17.0.0'
+    implementation 'com.google.firebase:firebase-core:16.0.9'
 }

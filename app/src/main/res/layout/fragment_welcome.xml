@@ -30,7 +30,7 @@
     <android.widget.Button
             android:id="@+id/welcome_sign_in"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:text="@string/fragment_welcome_sign_in_message"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"
@@ -56,7 +56,7 @@
     <android.widget.Button
             android:id="@+id/welcome_create_account"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:text="@string/fragment_welcome_create_account_message"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"

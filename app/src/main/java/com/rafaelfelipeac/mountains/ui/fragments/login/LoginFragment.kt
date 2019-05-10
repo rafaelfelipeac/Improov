@@ -8,15 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
@@ -24,26 +21,16 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseFragment() {
 
-    private var auth: FirebaseAuth? = null
     private var mGoogleSignInClient: GoogleSignInClient? = null
 
-    private val RC_SIGN_IN = 100
+    private val GOOGLE_SIGN_IN = 100
 
     private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //injector.inject(this)
-
-        auth = FirebaseAuth.getInstance()
-
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        mGoogleSignInClient = GoogleSignIn.getClient(context!!, gso)
+        setupGoogleClient()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -63,12 +50,14 @@ class LoginFragment : BaseFragment() {
         observeViewModel()
 
         login_sign_in_google_button.setOnClickListener {
-            navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationGoals())
-            //signInGoogle()
+            signInGoogle()
         }
 
         login_sign_in_button.setOnClickListener {
-            navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationGoals())
+            // verificar email
+            // verificar se email existe
+            // verificar senha (min)
+            viewModel.signIn(login_email.text.toString(), login_password.text.toString())
         }
 
         login_forgot_password.setOnClickListener {
@@ -77,68 +66,42 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        val currentUser = auth?.currentUser
-        updateUI(currentUser)
-    }
-
-    private fun updateUI(currentUser: FirebaseUser?) {
-        if (currentUser != null) {
-            // goals
-        } else {
-            // error
-        }
-    }
-
-    private fun signInGoogle() {
-        val signInIntent = mGoogleSignInClient?.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
-
-    private fun signOut() {
-        FirebaseAuth.getInstance().signOut()
+        viewModel.loginSuccess.observe(this, Observer { loginResult ->
+            if (loginResult) {
+                navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationGoals())
+            } else {
+                showSnackBar("loginError")
+            }
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == GOOGLE_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+
             try {
-                // Google Sign In was successful, authenticate with Firebase
-                val account = task.getResult(ApiException::class.java)
-                firebaseAuthWithGoogle(account!!)
+                val account = task.getResult(ApiException::class.java)!!
+
+                viewModel.signInGoogle(account)
             } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)
             }
         }
     }
 
-    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
+    private fun setupGoogleClient() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
 
-        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+        mGoogleSignInClient = GoogleSignIn.getClient(context!!, gso)
+    }
 
-        auth?.signInWithCredential(credential)?.addOnCompleteListener { task -> run {
-                if (task.isComplete) {
-                    //Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
-                    val user = auth?.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    showSnackBar("Authentication Failed.")
-                    updateUI(null)
-                }
-            }
-        }
+    private fun signInGoogle() {
+        val signInIntent = mGoogleSignInClient?.signInIntent
+        startActivityForResult(signInIntent, GOOGLE_SIGN_IN)
     }
 }

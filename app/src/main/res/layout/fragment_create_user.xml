@@ -11,7 +11,7 @@
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/create_user_name_til"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:inputType="numberDecimal|numberSigned"
             android:textColor="@color/colorPrimary"
@@ -43,7 +43,7 @@
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/create_user_email_til"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:inputType="numberDecimal|numberSigned"
             android:textColor="@color/colorPrimary"
@@ -63,7 +63,7 @@
                 android:id="@+id/create_user_email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"/>
 
@@ -72,7 +72,7 @@
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/create_user_password_til"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:inputType="numberDecimal|numberSigned"
             android:textColor="@color/colorPrimary"
@@ -92,7 +92,7 @@
                 android:id="@+id/create_user_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"/>
 
@@ -101,7 +101,7 @@
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/create_user_confirm_password_til"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:inputType="numberDecimal|numberSigned"
             android:textColor="@color/colorPrimary"
@@ -114,23 +114,36 @@
             app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="60dp"
             app:layout_constraintBottom_toTopOf="@+id/create_user_create_button">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/create_user_confirm_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+            android:id="@+id/create_user_error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Error message."
+            android:textSize="12sp"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@+id/create_user_confirm_password_til"
+            app:layout_constraintEnd_toEndOf="@+id/create_user_confirm_password_til"
+            app:layout_constraintStart_toStartOf="@+id/create_user_confirm_password_til"
+            app:layout_constraintHorizontal_bias="0.9"
+            android:layout_marginTop="4dp"/>
+
     <android.widget.Button
             android:id="@+id/create_user_create_button"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:text="@string/fragment_create_user_create_button_message"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"
