@@ -18,3 +18,6 @@ fun TextInputEditText.isEmpty(): Boolean {
     return text?.isEmpty()!!
 }
 
+fun TextInputEditText.emailIsInvalid(): Boolean {
+    return !android.util.Patterns.EMAIL_ADDRESS.matcher(this.toString()).matches()
+}

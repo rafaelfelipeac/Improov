@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_create_user.*
@@ -37,8 +38,21 @@ class CreateUserFragment : BaseFragment() {
             // verificar se email existe
             // verificar senha (min)
             // verificar se senha coincide
-            viewModel.createUser(create_user_email.text.toString(), create_user_password.text.toString())
+
+            if (verifyElements()) {
+                viewModel.createUser(create_user_email.text.toString(), create_user_password.text.toString())
+            } else {
+                create_user_error_message.text = ""
+                create_user_error_message.visible()
+            }
         }
+    }
+
+    private fun verifyElements(): Boolean {
+        return create_user_name.text.toString().isNotEmpty() &&
+                create_user_email.text.toString().isNotEmpty() &&
+                create_user_password.text.toString().isNotEmpty() &&
+                create_user_confirm_password.text.toString().isNotEmpty()
     }
 
     private fun observeViewModel() {

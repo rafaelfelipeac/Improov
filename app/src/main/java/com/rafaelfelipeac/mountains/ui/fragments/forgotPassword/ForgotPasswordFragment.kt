@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.extension.emailIsInvalid
+import com.rafaelfelipeac.mountains.extension.isEmpty
+import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_forgot_password.*
@@ -35,8 +38,40 @@ class ForgotPasswordFragment : BaseFragment() {
         forgot_password_send_button.setOnClickListener {
             // verificar email
             // verificar se email existe
-            viewModel.resetPassword(forgot_password_email.text.toString())
+
+            if (verifyElements()) {
+                viewModel.resetPassword(forgot_password_email.text.toString())
+            } else {
+                forgot_password_error_message.visible()
+            }
         }
+    }
+
+    private fun verifyElements(): Boolean {
+        // email nao é vazio
+        // email é valido
+        // email existe no sistema
+
+        when {
+            forgot_password_email.isEmpty() -> {
+                forgot_password_error_message.text = "email vazio"
+                return false
+            }
+            forgot_password_email.emailIsInvalid()  -> {
+                forgot_password_error_message.text =  "email invalido"
+                return false
+            }
+            emailExists() -> {
+                forgot_password_error_message.text = "email nao existe"
+                return false
+            }
+        }
+
+        return true
+    }
+
+    private fun emailExists(): Boolean {
+        return false
     }
 
     private fun observeViewModel() {
