@@ -12,6 +12,7 @@
 
         <action android:id="@+id/action_navigation_welcome_to_navigation_login" app:destination="@id/navigation_login"/>
         <action android:id="@+id/action_navigation_welcome_to_navigation_createUser" app:destination="@id/navigation_createUser"/>
+        <action android:id="@+id/action_navigation_welcome_to_navigation_goals" app:destination="@id/navigation_goals"/>
 
     </fragment>
 
@@ -96,6 +97,8 @@
               android:label="fragment_profile"
               tools:layout="@layout/fragment_profile">
 
+        <action android:id="@+id/action_navigation_profile_to_navigation_welcome"
+                app:destination="@id/navigation_welcome"/>
     </fragment>
 
 </navigation>

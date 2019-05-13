@@ -11,11 +11,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.rafaelfelipeac.mountains.R
-import com.rafaelfelipeac.mountains.extension.visible
+import com.rafaelfelipeac.mountains.app.prefs
+import com.rafaelfelipeac.mountains.extension.emailIsInvalid
+import com.rafaelfelipeac.mountains.extension.isEmpty
+import com.rafaelfelipeac.mountains.models.FirebaseResult
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -55,35 +61,14 @@ class LoginFragment : BaseFragment() {
         }
 
         login_sign_in_button.setOnClickListener {
-            // verificar email
-            // verificar se email existe
-            // verificar senha (min)
-
-            if (verifyEmailAndPassword()) {
+            if (verifyElements()) {
                 viewModel.signIn(login_email.text.toString(), login_password.text.toString())
-            } else {
-                login_sign_in_error_message.visible()
             }
         }
 
         login_forgot_password.setOnClickListener {
             navController.navigate(LoginFragmentDirections.actionNavigationLoginToForgotPasswordFragment())
         }
-    }
-
-    private fun verifyEmailAndPassword(): Boolean {
-        return login_email.text.toString().isNotEmpty() && login_password.text.toString().isNotEmpty()
-    }
-
-    private fun observeViewModel() {
-        viewModel.loginSuccess.observe(this, Observer { loginResult ->
-            if (loginResult) {
-                navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationGoals())
-            } else {
-                login_sign_in_error_message.visible()
-                showSnackBar("loginError")
-            }
-        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -102,6 +87,46 @@ class LoginFragment : BaseFragment() {
         }
     }
 
+    private fun observeViewModel() {
+        viewModel.loginResult.observe(this, Observer { loginResult ->
+            when {
+                loginResult.isSuccessful -> {
+                    prefs.login = true
+                    navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationGoals())
+                }
+                loginResult.message.contains(getString(R.string.result_error_message_invalid_password)) -> {
+                    setErrorMessage(getString(R.string.error_message_wrong_password))
+                }
+                loginResult.message.contains(getString(R.string.result_error_message_no_user)) -> {
+                    setErrorMessage(getString(R.string.error_message_user_not_registered))
+                }
+                else -> {
+                    setErrorMessage(getString(R.string.empty_string))
+                    showSnackBar(getString(R.string.snackbar_error_login))
+                }
+            }
+        })
+    }
+
+    private fun verifyElements(): Boolean {
+        when {
+            login_email.isEmpty() || login_password.isEmpty() -> {
+                setErrorMessage(getString(R.string.error_message_email_password))
+                return false
+            }
+            login_email.emailIsInvalid() -> {
+                setErrorMessage(getString(R.string.error_message_invalid_email))
+                return false
+            }
+            login_password.text.toString().length < 6 -> {
+                setErrorMessage(getString(R.string.error_message_min_characters))
+                return false
+            }
+        }
+
+        return true
+    }
+
     private fun setupGoogleClient() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -114,5 +139,9 @@ class LoginFragment : BaseFragment() {
     private fun signInGoogle() {
         val signInIntent = mGoogleSignInClient?.signInIntent
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN)
+    }
+
+    private fun setErrorMessage(message: String) {
+        login_sign_in_error_message.text = message
     }
 }

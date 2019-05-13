@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.emailIsInvalid
 import com.rafaelfelipeac.mountains.extension.isEmpty
-import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_forgot_password.*
@@ -36,33 +35,38 @@ class ForgotPasswordFragment : BaseFragment() {
         observeViewModel()
 
         forgot_password_send_button.setOnClickListener {
-            // verificar email
-            // verificar se email existe
-
             if (verifyElements()) {
                 viewModel.resetPassword(forgot_password_email.text.toString())
-            } else {
-                forgot_password_error_message.visible()
             }
         }
     }
 
-    private fun verifyElements(): Boolean {
-        // email nao é vazio
-        // email é valido
-        // email existe no sistema
+    private fun observeViewModel() {
+        viewModel.forgotResult.observe(this, Observer { sendResult ->
+            when {
+                sendResult.isSuccessful -> {
+                    setErrorMessage(getString(R.string.empty_string))
+                    showSnackBar(getString(R.string.snackbar_success_send_email))
+                }
+                sendResult.message.contains(getString(R.string.result_error_message_no_user)) -> {
+                    setErrorMessage(getString(R.string.error_message_email_not_registered))
+                }
+                else -> {
+                    setErrorMessage(getString(R.string.empty_string))
+                    showSnackBar(getString(R.string.snackbar_error_send_email))
+                }
+            }
+        })
+    }
 
+    private fun verifyElements(): Boolean {
         when {
             forgot_password_email.isEmpty() -> {
-                forgot_password_error_message.text = "email vazio"
+                setErrorMessage(getString(R.string.error_message_email))
                 return false
             }
-            forgot_password_email.emailIsInvalid()  -> {
-                forgot_password_error_message.text =  "email invalido"
-                return false
-            }
-            emailExists() -> {
-                forgot_password_error_message.text = "email nao existe"
+            forgot_password_email.emailIsInvalid() -> {
+                setErrorMessage(getString(R.string.error_message_invalid_email))
                 return false
             }
         }
@@ -70,17 +74,7 @@ class ForgotPasswordFragment : BaseFragment() {
         return true
     }
 
-    private fun emailExists(): Boolean {
-        return false
-    }
-
-    private fun observeViewModel() {
-        viewModel.emailSent.observe(this, Observer { emailSent ->
-            if(emailSent) {
-                showSnackBar("Email enviado.")
-            } else {
-                showSnackBar("sent error")
-            }
-        })
+    private fun setErrorMessage(message: String) {
+        forgot_password_error_message.text = message
     }
 }

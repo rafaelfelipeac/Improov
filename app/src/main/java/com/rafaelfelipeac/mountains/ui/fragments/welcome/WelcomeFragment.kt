@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_welcome.*
@@ -22,6 +23,10 @@ class WelcomeFragment : BaseFragment() {
         viewModel = ViewModelProviders.of(this).get(WelcomeViewModel::class.java)
 
         hideNavigation()
+
+        if (prefs.login) {
+            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationGoals())
+        }
 
         return inflater.inflate(R.layout.fragment_welcome, container, false)
     }

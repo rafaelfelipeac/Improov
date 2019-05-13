@@ -62,4 +62,25 @@
     <string name="fragment_welcome_sign_in_message">Entrar</string>
     <string name="fragment_welcome_create_account_message">Criar conta</string>
 
+    <string name="error_message_min_characters">A senha deve ter no mínimo 6 caracteres.</string>
+    <string name="error_message_different_passwords">Senhas não coincidem.</string>
+    <string name="error_message_invalid_email">Digite um email válido.</string>
+    <string name="error_message_empty_fields">Algum campo vazio.</string>
+    <string name="error_message_email">Digite um email.</string>
+    <string name="error_message_email_not_registered">Esse email não está cadastrado.</string>
+    <string name="error_message_email_password">Digite um email e uma senha.</string>
+    <string name="error_message_wrong_password">Senha incorreta.</string>
+    <string name="error_message_user_not_registered">Usuário não cadastrado.</string>
+
+
+    <string name="result_error_message_invalid_password">The password is invalid or the user does not have a password.</string>
+    <string name="result_error_message_no_user">There is no user record corresponding to this identifier.</string>
+    <string name="result_error_message_email_already_in_use">The email address is already in use by another account.</string>
+
+    <string name="snackbar_error_login">Erro ao realizar login.</string>
+    <string name="snackbar_error_send_email">Erro ao enviar email.</string>
+    <string name="snackbar_success_send_email">Email enviado.</string>
+    <string name="snackbar_error_create_user">Erro ao criar usuário.</string>
+    <string name="snackbar_error_email_already_in_use">Email já cadastrado.</string>
+
 </resources>
