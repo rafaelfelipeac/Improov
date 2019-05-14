@@ -27,7 +27,12 @@ class ProfileFragment : BaseFragment() {
         profile_logout_button.setOnClickListener {
             prefs.login = false
             FirebaseAuth.getInstance().signOut()
-            navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationWelcome())
+
+            mGoogleSignInClient?.signOut()?.addOnCompleteListener {
+                if (it.isSuccessful) {
+                    navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationWelcome())
+                }
+            }
         }
     }
 }

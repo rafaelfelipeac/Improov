@@ -12,6 +12,9 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.crashlytics.android.Crashlytics
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputEditText
@@ -43,6 +46,8 @@ class MainActivity : BaseActivity() {
     lateinit var bottomSheetDoneGoalYes: Button
     lateinit var bottomSheetDoneGoal: BottomSheetBehavior<*>
 
+    var mGoogleSignInClient: GoogleSignInClient? = null
+
     var item: Item? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +60,7 @@ class MainActivity : BaseActivity() {
 
         setupElements()
         setupToolbar()
+        setupGoogleClient()
 
         NavigationUI.setupWithNavController(bottom_nav, navController)
     }
@@ -75,6 +81,15 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
+
+    private fun setupGoogleClient() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+    }
 
     private fun setupElements() {
         toolbar = findViewById(R.id.toolbar)!!

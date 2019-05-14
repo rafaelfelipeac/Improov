@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
@@ -24,11 +25,16 @@ class WelcomeFragment : BaseFragment() {
 
         hideNavigation()
 
-        if (prefs.login) {
+        return inflater.inflate(R.layout.fragment_welcome, container, false)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val account = GoogleSignIn.getLastSignedInAccount(context!!)
+        if (account != null || prefs.login) {
             navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationGoals())
         }
-
-        return inflater.inflate(R.layout.fragment_welcome, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

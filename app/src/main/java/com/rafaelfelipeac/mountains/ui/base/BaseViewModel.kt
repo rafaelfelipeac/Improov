@@ -1,6 +1,7 @@
 package com.rafaelfelipeac.mountains.ui.base
 
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.rafaelfelipeac.mountains.app.App
 import com.rafaelfelipeac.mountains.database.goal.GoalRepository
 import com.rafaelfelipeac.mountains.database.historic.HistoricRepository
@@ -14,6 +15,8 @@ abstract class BaseViewModel : ViewModel() {
     val goalRepository: GoalRepository = GoalRepository(App.database?.goalDAO()!!)
     val itemRepository: ItemRepository = ItemRepository(App.database?.itemDAO()!!)
     val historicRepository: HistoricRepository = HistoricRepository(App.database?.historicDAO()!!)
+
+    var auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private val injector: ViewModelInjector = DaggerViewModelInjector
         .builder()

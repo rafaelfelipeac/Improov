@@ -2,7 +2,6 @@ package com.rafaelfelipeac.mountains.ui.fragments.login
 
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.rafaelfelipeac.mountains.models.FirebaseResult
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
@@ -10,8 +9,6 @@ import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 class LoginViewModel : BaseViewModel() {
 
     var loginResult: MutableLiveData<FirebaseResult> = MutableLiveData()
-
-    var auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     fun signIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->

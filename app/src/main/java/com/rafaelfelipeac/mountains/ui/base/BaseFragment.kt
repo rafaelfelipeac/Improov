@@ -20,6 +20,8 @@ abstract class BaseFragment : Fragment() {
 
     val navigation: BottomNavigationView get() = (activity as MainActivity).findViewById(R.id.bottom_nav)
 
+    val mGoogleSignInClient get() = (activity as MainActivity).mGoogleSignInClient
+
     fun showNavigation() {
         navigation.visibility = View.VISIBLE
     }
