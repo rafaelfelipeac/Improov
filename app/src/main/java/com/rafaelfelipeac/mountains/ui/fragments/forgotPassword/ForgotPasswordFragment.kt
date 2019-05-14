@@ -14,7 +14,6 @@ import com.rafaelfelipeac.mountains.extension.isEmpty
 import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_create_user.*
 import kotlinx.android.synthetic.main.fragment_forgot_password.*
 
 class ForgotPasswordFragment : BaseFragment() {

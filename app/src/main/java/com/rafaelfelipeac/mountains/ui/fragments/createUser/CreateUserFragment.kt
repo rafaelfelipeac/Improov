@@ -9,10 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
-import com.rafaelfelipeac.mountains.extension.emailIsInvalid
-import com.rafaelfelipeac.mountains.extension.gone
-import com.rafaelfelipeac.mountains.extension.isEmpty
-import com.rafaelfelipeac.mountains.extension.visible
+import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_create_user.*
@@ -42,6 +39,11 @@ class CreateUserFragment : BaseFragment() {
                 showProgressBar()
                 viewModel.createUser(create_user_email.text.toString(), create_user_password.text.toString())
             }
+        }
+
+        create_user_eye.setOnClickListener {
+            create_user_password.showOrHidePassword()
+            create_user_confirm_password.showOrHidePassword()
         }
     }
 
@@ -96,9 +98,11 @@ class CreateUserFragment : BaseFragment() {
 
     private fun showProgressBar() {
         create_user_progress_bar.visible()
+        create_user_eye.gone()
     }
 
     private fun hideProgressBar() {
         create_user_progress_bar.gone()
+        create_user_eye.visible()
     }
 }

@@ -3,6 +3,9 @@ package com.rafaelfelipeac.mountains.ui.fragments.login
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,18 +15,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
-import com.rafaelfelipeac.mountains.extension.emailIsInvalid
-import com.rafaelfelipeac.mountains.extension.gone
-import com.rafaelfelipeac.mountains.extension.isEmpty
-import com.rafaelfelipeac.mountains.extension.visible
+import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_create_user.*
 import kotlinx.android.synthetic.main.fragment_login.*
 
+
 class LoginFragment : BaseFragment() {
+
+    private var visiblePassword = false
 
     private val GOOGLE_SIGN_IN = 100
 
@@ -58,6 +61,10 @@ class LoginFragment : BaseFragment() {
 
         login_forgot_password.setOnClickListener {
             navController.navigate(LoginFragmentDirections.actionNavigationLoginToForgotPasswordFragment())
+        }
+
+        login_eye.setOnClickListener {
+            login_password.showOrHidePassword()
         }
     }
 
@@ -132,9 +139,12 @@ class LoginFragment : BaseFragment() {
 
     private fun showProgressBar() {
         login_progress_bar.visible()
+        login_eye.gone()
     }
 
     private fun hideProgressBar() {
         login_progress_bar.gone()
+        login_eye.visible()
     }
 }
+

@@ -1,7 +1,9 @@
 package com.rafaelfelipeac.mountains.extension
 
+import android.text.InputType
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.fragment_forgot_password.*
 
 fun TextInputEditText.toFloat(): Float {
     return text.toString().toFloat()
@@ -21,4 +23,14 @@ fun TextInputEditText.isEmpty(): Boolean {
 
 fun TextInputEditText.emailIsInvalid(): Boolean {
     return !android.util.Patterns.EMAIL_ADDRESS.matcher(this.text.toString()).matches()
+}
+
+fun TextInputEditText.showOrHidePassword() {
+    if (transformationMethod == HideReturnsTransformationMethod.getInstance()) {
+        transformationMethod = PasswordTransformationMethod.getInstance()
+    } else {
+        transformationMethod = HideReturnsTransformationMethod.getInstance()
+    }
+
+    setSelection(text?.length!!)
 }
