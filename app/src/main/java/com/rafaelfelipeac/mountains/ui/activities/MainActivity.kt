@@ -19,10 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.mountains.R
-import com.rafaelfelipeac.mountains.extension.convertDateToString
-import com.rafaelfelipeac.mountains.extension.gone
-import com.rafaelfelipeac.mountains.extension.resetValue
-import com.rafaelfelipeac.mountains.extension.visible
+import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.Item
 import com.rafaelfelipeac.mountains.ui.base.BaseActivity

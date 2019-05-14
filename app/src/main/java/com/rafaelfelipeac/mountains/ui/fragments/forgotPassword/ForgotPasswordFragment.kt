@@ -9,9 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.emailIsInvalid
+import com.rafaelfelipeac.mountains.extension.gone
 import com.rafaelfelipeac.mountains.extension.isEmpty
+import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_create_user.*
 import kotlinx.android.synthetic.main.fragment_forgot_password.*
 
 class ForgotPasswordFragment : BaseFragment() {
@@ -36,6 +39,7 @@ class ForgotPasswordFragment : BaseFragment() {
 
         forgot_password_send_button.setOnClickListener {
             if (verifyElements()) {
+                showProgressBar()
                 viewModel.resetPassword(forgot_password_email.text.toString())
             }
         }
@@ -43,6 +47,8 @@ class ForgotPasswordFragment : BaseFragment() {
 
     private fun observeViewModel() {
         viewModel.forgotResult.observe(this, Observer { sendResult ->
+            hideProgressBar()
+
             when {
                 sendResult.isSuccessful -> {
                     setErrorMessage(getString(R.string.empty_string))
@@ -76,5 +82,13 @@ class ForgotPasswordFragment : BaseFragment() {
 
     private fun setErrorMessage(message: String) {
         forgot_password_error_message.text = message
+    }
+
+    private fun showProgressBar() {
+        forgot_progress_bar.visible()
+    }
+
+    private fun hideProgressBar() {
+        forgot_progress_bar.gone()
     }
 }

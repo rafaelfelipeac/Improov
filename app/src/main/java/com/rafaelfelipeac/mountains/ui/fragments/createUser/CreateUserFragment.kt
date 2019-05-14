@@ -10,7 +10,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.extension.emailIsInvalid
+import com.rafaelfelipeac.mountains.extension.gone
 import com.rafaelfelipeac.mountains.extension.isEmpty
+import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_create_user.*
@@ -37,6 +39,7 @@ class CreateUserFragment : BaseFragment() {
 
         create_user_create_button.setOnClickListener {
             if (verifyElements()) {
+                showProgressBar()
                 viewModel.createUser(create_user_email.text.toString(), create_user_password.text.toString())
             }
         }
@@ -44,13 +47,15 @@ class CreateUserFragment : BaseFragment() {
 
     private fun observeViewModel() {
         viewModel.createResult.observe(this, Observer { createResult ->
+            hideProgressBar()
+
             when {
                 createResult.isSuccessful -> {
                     prefs.login = true
                     navController.navigate(CreateUserFragmentDirections.actionNavigationCreateUserToNavigationGoals())
                 }
                 createResult.message == getString(R.string.result_error_message_email_already_in_use) -> {
-                    showSnackBar(getString(R.string.snackbar_error_email_already_in_use))
+                    setErrorMessage(getString(R.string.snackbar_error_email_already_in_use))
                 }
                 else -> {
                     setErrorMessage(getString(R.string.empty_string))
@@ -87,5 +92,13 @@ class CreateUserFragment : BaseFragment() {
 
     private fun setErrorMessage(message: String) {
         create_user_error_message.text = message
+    }
+
+    private fun showProgressBar() {
+        create_user_progress_bar.visible()
+    }
+
+    private fun hideProgressBar() {
+        create_user_progress_bar.gone()
     }
 }

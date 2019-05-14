@@ -15,9 +15,12 @@ import com.google.android.gms.common.api.ApiException
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.extension.emailIsInvalid
+import com.rafaelfelipeac.mountains.extension.gone
 import com.rafaelfelipeac.mountains.extension.isEmpty
+import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_create_user.*
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseFragment() {
@@ -48,6 +51,7 @@ class LoginFragment : BaseFragment() {
 
         login_sign_in_button.setOnClickListener {
             if (verifyElements()) {
+                showProgressBar()
                 viewModel.signIn(login_email.text.toString(), login_password.text.toString())
             }
         }
@@ -66,6 +70,8 @@ class LoginFragment : BaseFragment() {
             try {
                 val account = task.getResult(ApiException::class.java)!!
 
+                showProgressBar()
+
                 viewModel.signInGoogle(account)
             } catch (e: ApiException) {
                 Log.w(TAG, "Google sign in failed", e)
@@ -75,6 +81,8 @@ class LoginFragment : BaseFragment() {
 
     private fun observeViewModel() {
         viewModel.loginResult.observe(this, Observer { loginResult ->
+            hideProgressBar()
+
             when {
                 loginResult.isSuccessful -> {
                     prefs.login = true
@@ -120,5 +128,13 @@ class LoginFragment : BaseFragment() {
 
     private fun setErrorMessage(message: String) {
         login_sign_in_error_message.text = message
+    }
+
+    private fun showProgressBar() {
+        login_progress_bar.visible()
+    }
+
+    private fun hideProgressBar() {
+        login_progress_bar.gone()
     }
 }

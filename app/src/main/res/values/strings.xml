@@ -65,7 +65,7 @@
     <string name="error_message_min_characters">A senha deve ter no mínimo 6 caracteres.</string>
     <string name="error_message_different_passwords">Senhas não coincidem.</string>
     <string name="error_message_invalid_email">Digite um email válido.</string>
-    <string name="error_message_empty_fields">Algum campo vazio.</string>
+    <string name="error_message_empty_fields">Preenchar todos campos.</string>
     <string name="error_message_email">Digite um email.</string>
     <string name="error_message_email_not_registered">Esse email não está cadastrado.</string>
     <string name="error_message_email_password">Digite um email e uma senha.</string>
