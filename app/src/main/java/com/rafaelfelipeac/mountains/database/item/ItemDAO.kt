@@ -1,9 +1,11 @@
 package com.rafaelfelipeac.mountains.database.item
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
-import com.rafaelfelipeac.mountains.models.Historic
+import androidx.room.Query
 import com.rafaelfelipeac.mountains.models.Item
 
 @Dao

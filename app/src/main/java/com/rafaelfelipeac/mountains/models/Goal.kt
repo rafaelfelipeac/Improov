@@ -9,6 +9,7 @@ import java.util.*
 data class Goal(
     @PrimaryKey(autoGenerate = true)
     var goalId: Long = 0,
+    var userId: Long = 0,
     var name: String = "",
     var value: Float = 0F,
     var order: Int = 0,

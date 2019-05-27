@@ -23,10 +23,7 @@ import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_login.*
 
-
 class LoginFragment : BaseFragment() {
-
-    private var visiblePassword = false
 
     private val GOOGLE_SIGN_IN = 100
 
