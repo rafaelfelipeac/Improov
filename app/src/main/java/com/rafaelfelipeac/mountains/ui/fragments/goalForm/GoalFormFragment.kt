@@ -62,7 +62,7 @@ class GoalFormFragment : BaseFragment() {
         })
 
         viewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goals = goals
+            this.goals = goals.filter { it.userId == user?.userId }
         })
 
         viewModel.goalIdInserted.observe(this, Observer { goalIdForm ->
@@ -199,38 +199,40 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun updateOrCreateGoal(): Goal {
-        goal?.name = goalForm_goal_name.text.toString()
-        goal?.mountains = form_goal_switch_mountains.isChecked
-        goal?.type = getTypeSelected()
+        goal.name = goalForm_goal_name.text.toString()
+        goal.mountains = form_goal_switch_mountains.isChecked
+        goal.type = getTypeSelected()
 
-        if (goal?.goalId == null) {
-            goal?.createdDate = getCurrentTime()
-            goal?.value = 0F
-            goal?.done = false
+        if (goal.goalId == 0L) {
+            goal.userId = user?.userId!!
+            goal.createdDate = getCurrentTime()
+            goal.value = 0F
+            goal.done = false
+
 
             val order =
                 if (goals?.isEmpty()!!) 0
                 else goals!![goals!!.size-1].order + 1
 
-            goal?.order = order
+            goal.order = order
         }
         else
-            goal?.updatedDate = getCurrentTime()
+            goal.updatedDate = getCurrentTime()
 
         if (getTypeSelected() == 2) {
-            goal?.incrementValue = goalForm_goal_inc_value.toFloat()
-            goal?.decrementValue = goalForm_goal_dec_value.toFloat()
+            goal.incrementValue = goalForm_goal_inc_value.toFloat()
+            goal.decrementValue = goalForm_goal_dec_value.toFloat()
         }
 
-        if (goal?.mountains!!) {
-            goal?.bronzeValue = form_goal_editText_bronze.toFloat()
-            goal?.silverValue = form_goal_editText_silver.toFloat()
-            goal?.goldValue = form_goal_editText_gold.toFloat()
+        if (goal.mountains) {
+            goal.bronzeValue = form_goal_editText_bronze.toFloat()
+            goal.silverValue = form_goal_editText_silver.toFloat()
+            goal.goldValue = form_goal_editText_gold.toFloat()
         } else {
-            goal?.singleValue = form_goal_editText_single.toFloat()
+            goal.singleValue = form_goal_editText_single.toFloat()
         }
 
-        return goal!!
+        return goal
     }
 
     private fun getTypeSelected(): Int {

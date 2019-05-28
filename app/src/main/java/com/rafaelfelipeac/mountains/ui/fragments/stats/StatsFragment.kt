@@ -48,7 +48,7 @@ class StatsFragment : BaseFragment() {
 
     private fun observeViewModel() {
         viewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goals = goals
+            this.goals = goals.filter { it.userId == it.userId }
 
             setupStats()
         })

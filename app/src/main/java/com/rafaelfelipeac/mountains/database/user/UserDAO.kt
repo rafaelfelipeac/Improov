@@ -20,5 +20,5 @@ interface UserDAO {
     fun delete(user: User)
 
     @Query("SELECT * FROM user WHERE uui = :uui")
-    fun getByUUI(uui: String): User
+    fun getByUUI(uui: String): User?
 }

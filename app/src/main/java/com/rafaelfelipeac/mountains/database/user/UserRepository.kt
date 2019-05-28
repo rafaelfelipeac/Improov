@@ -6,11 +6,11 @@ import javax.inject.Inject
 
 class UserRepository @Inject constructor(private val userDAO: UserDAO) {
 
-    fun getItems(): LiveData<List<User>> {
+    fun getUsers(): LiveData<List<User>> {
         return userDAO.getAll()
     }
 
-    fun getItem(userId: Long): LiveData<User> {
+    fun getUser(userId: Long): LiveData<User> {
         return userDAO.get(userId)
     }
 
@@ -22,7 +22,7 @@ class UserRepository @Inject constructor(private val userDAO: UserDAO) {
         return userDAO.delete(user)
     }
 
-    fun getItemByUUI(uui: String): User {
+    fun getUserByUUI(uui: String): User? {
         return userDAO.getByUUI(uui)
     }
 }

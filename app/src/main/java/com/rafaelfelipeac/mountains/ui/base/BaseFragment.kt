@@ -22,6 +22,8 @@ abstract class BaseFragment : Fragment() {
 
     val mGoogleSignInClient get() = (activity as MainActivity).mGoogleSignInClient
 
+    val user get () = (activity as MainActivity).user
+
     fun showNavigation() {
         navigation.visibility = View.VISIBLE
     }

@@ -22,7 +22,6 @@ import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.HistoricAdapter
 import com.rafaelfelipeac.mountains.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
-import com.rafaelfelipeac.mountains.ui.fragments.goalForm.GoalFormFragmentArgs
 import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperItem
 import kotlinx.android.synthetic.main.fragment_goal.*
 import java.util.*
@@ -89,17 +88,17 @@ class GoalFragment : BaseFragment() {
         })
 
         viewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goals = goals
+            this.goals = goals.filter { it.userId == user?.userId }
         })
 
         viewModel.getItems()?.observe(this, Observer { items ->
-            this.items = items
+            this.items = items.filter { it.goalId == goal?.goalId }
 
             setupItems()
         })
 
         viewModel.getHistory()?.observe(this, Observer { history ->
-            this.history = history
+            this.history = history.filter { it.goalId == goal?.goalId }
 
             setHistory()
         })
@@ -220,7 +219,7 @@ class GoalFragment : BaseFragment() {
                     item.goalId = goal?.goalId!!
                     item.name = bottomSheetItemName?.text.toString()
                     item.done = false
-                    item.order = items?.filter { it.goalId == goal?.goalId }!!.size + 1
+                    item.order = items?.size!! + 1
                     item.createdDate = getCurrentTime()
                 } else {
                     item = (activity as MainActivity).item!!
@@ -322,7 +321,6 @@ class GoalFragment : BaseFragment() {
 
     private fun setItems() {
         items
-            ?.filter { it.goalId == goal?.goalId }
             ?.sortedBy { it.order }
             ?.let { itemsAdapter.setItems(it) }
 
@@ -341,7 +339,6 @@ class GoalFragment : BaseFragment() {
 
     private fun setHistory() {
         history
-            ?.filter { it.goalId == goal?.goalId }
             ?.reversed()
             ?.let { historicAdapter.setItems(it) }
 

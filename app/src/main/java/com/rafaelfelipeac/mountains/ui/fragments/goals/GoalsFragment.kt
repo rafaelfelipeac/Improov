@@ -64,8 +64,12 @@ class GoalsFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
+        viewModel.user?.observe(this, Observer { user ->
+            (activity as MainActivity).user = user
+        })
+
         viewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goals = goals
+            this.goals = goals.filter { it.userId == user?.userId }
 
             setupItems()
         })
@@ -135,7 +139,7 @@ class GoalsFragment : BaseFragment() {
     fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: MutableList<Goal>) {
         val goal = items[position]
 
-        when(direction) {
+        when (direction) {
             ItemTouchHelper.RIGHT -> {
                 if (goal.done || goal.getPercentage() >= 100) {
                     doneOrUndoneGoal(goal)
@@ -149,13 +153,20 @@ class GoalsFragment : BaseFragment() {
 
                 viewModel.deleteGoal(goal)
 
-                showSnackBarWithAction(holder.itemView, getString(R.string.goals_fragment_resolved_goal_message), goal as Any, ::deleteGoal)
+                showSnackBarWithAction(
+                    holder.itemView,
+                    getString(R.string.goals_fragment_resolved_goal_message),
+                    goal as Any,
+                    ::deleteGoal
+                )
             }
         }
     }
 
-    fun onViewMoved(oldPosition: Int, newPosition: Int, items: MutableList<Goal>,
-                    function: (oldPosition: Int, newPosition: Int) -> Unit) {
+    fun onViewMoved(
+        oldPosition: Int, newPosition: Int, items: MutableList<Goal>,
+        function: (oldPosition: Int, newPosition: Int) -> Unit
+    ) {
         val targetGoal = items[oldPosition]
         val otherGoal = items[newPosition]
 
