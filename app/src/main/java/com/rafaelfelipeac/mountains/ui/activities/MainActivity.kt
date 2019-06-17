@@ -27,10 +27,14 @@ import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.Item
 import com.rafaelfelipeac.mountains.models.User
 import com.rafaelfelipeac.mountains.ui.base.BaseActivity
+import com.rafaelfelipeac.mountains.ui.fragments.goals.GoalsFragment
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_sheet_goal_done.*
 import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.*
+import androidx.navigation.fragment.NavHostFragment
+
+
 
 class MainActivity : BaseActivity() {
 
@@ -69,9 +73,20 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        if (lastFragment()) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
+
 
         clearToolbarMenu()
+    }
+
+    private fun lastFragment(): Boolean {
+        val currentFragment = NavHostFragment.findNavController(nav_host_fragment).currentDestination!!.id
+
+        return currentFragment == R.id.navigation_goals
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

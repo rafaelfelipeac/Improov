@@ -1,6 +1,5 @@
 package com.rafaelfelipeac.mountains.extension
 
-import android.text.InputType
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import com.google.android.material.textfield.TextInputEditText

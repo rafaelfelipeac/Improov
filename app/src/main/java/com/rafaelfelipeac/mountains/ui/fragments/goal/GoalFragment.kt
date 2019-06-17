@@ -88,7 +88,7 @@ class GoalFragment : BaseFragment() {
         })
 
         viewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goals = goals.filter { it.userId == user?.userId }
+            this.goals = goals.filter { it.userId == user.userId }
         })
 
         viewModel.getItems()?.observe(this, Observer { items ->
@@ -100,7 +100,7 @@ class GoalFragment : BaseFragment() {
         viewModel.getHistory()?.observe(this, Observer { history ->
             this.history = history.filter { it.goalId == goal?.goalId }
 
-            setHistory()
+            setupHistoric()
         })
     }
 
@@ -157,14 +157,14 @@ class GoalFragment : BaseFragment() {
             if (goal_total_total.isNotEmpty()) {
                 count = goal?.value!! + goal_total_total.toFloat()
 
-                goal_total_total.resetValue()
-
                 val oldDone = goal!!.done
                 goal?.done = verifyIfGoalIsDone()
 
                 updateTextAndGoal(goal_count)
 
                 viewModel.saveHistoric(Historic(value = goal_total_total.toFloat(), date = Date(), goalId = goal?.goalId!!))
+
+                goal_total_total.resetValue()
 
                 if (!oldDone && goal!!.done)
                     showSnackBar(getString(R.string.message_goal_done))
@@ -258,6 +258,8 @@ class GoalFragment : BaseFragment() {
                 goal_cl_dec_inc.invisible()
                 goal_cl_total.invisible()
 
+                historic_items_list.invisible()
+
                 if ((activity as MainActivity).toolbar.menu.findItem(R.id.menu_goal_add) == null)
                     (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
             }
@@ -266,12 +268,16 @@ class GoalFragment : BaseFragment() {
                 goal_cl_dec_inc.visible()
                 goal_cl_total.invisible()
 
+                historic_items_list.visible()
+
                 goal_inc_dec_total.text = count.getNumberInRightFormat()
             }
             3 -> {
                 goal_cl_list.invisible()
                 goal_cl_dec_inc.invisible()
                 goal_cl_total.visible()
+
+                historic_items_list.visible()
             }
         }
 
@@ -303,6 +309,10 @@ class GoalFragment : BaseFragment() {
         goal?.done = verifyIfGoalIsDone()
 
         updateSingleOrMountains()
+    }
+
+    private fun setupHistoric() {
+        setHistory()
     }
 
     private fun setupItems() {

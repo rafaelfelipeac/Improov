@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/navigation_stats"
+            android:id="@+id/navigation_menu_stats"
             android:icon="@drawable/ic_chart"
             android:title="Estatísticas"/>
 
     <item
-            android:id="@+id/navigation_goals"
+            android:id="@+id/navigation_menu_goals"
             android:icon="@drawable/ic_list"
             android:title="Metas"/>
 
     <item
-            android:id="@+id/navigation_profile"
+            android:id="@+id/navigation_menu_profile"
             android:icon="@drawable/ic_list"
             android:title="Perfil"/>
 

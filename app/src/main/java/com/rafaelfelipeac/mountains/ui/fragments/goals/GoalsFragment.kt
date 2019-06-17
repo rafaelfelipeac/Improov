@@ -20,6 +20,7 @@ import com.rafaelfelipeac.mountains.ui.adapter.GoalsAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperGoal
 import kotlinx.android.synthetic.main.fragment_goals.*
+import androidx.activity.OnBackPressedCallback
 
 class GoalsFragment : BaseFragment() {
 
