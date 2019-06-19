@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
-            android:background="@mipmap/ic_item_done2"
+            android:background="@mipmap/ic_app_logo"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"

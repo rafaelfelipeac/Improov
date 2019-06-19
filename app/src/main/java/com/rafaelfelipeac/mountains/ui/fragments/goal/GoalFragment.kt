@@ -58,6 +58,8 @@ class GoalFragment : BaseFragment() {
 
         setHasOptionsMenu(true)
 
+        (activity as MainActivity).openToolbar()
+
         (activity as MainActivity).bottomNavigationVisible(View.GONE)
 
         goalId = arguments?.let { GoalFragmentArgs.fromBundle(it).goalId }
@@ -130,9 +132,9 @@ class GoalFragment : BaseFragment() {
             R.id.menu_goal_edit -> {
                 navController.navigate(GoalFragmentDirections.actionNavigationGoalToNavigationGoalForm(goal?.goalId!!))
             }
-//            android.R.id.home -> {
-//                navController.navigateUp()
-//            }
+            android.R.id.home -> {
+                navController.navigateUp()
+            }
         }
 
         return false
@@ -394,7 +396,7 @@ class GoalFragment : BaseFragment() {
 
     private fun updateMountains() {
         when {
-            goal?.value!! == 0F -> {
+            goal?.value!! == 0F || goal?.value!! < 0 -> {
                 resetMountains()
             }
             goal?.value!! > 0 && goal?.value!! <= goal?.bronzeValue!! -> {
@@ -426,15 +428,6 @@ class GoalFragment : BaseFragment() {
 
                 if (goal?.value == goal?.goldValue!!) enableIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold)
                 else disableIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold_dark)
-            }
-            else -> {
-                setMountainBronzeValue(goal?.bronzeValue!!)
-                setMountainSilverValue(goal?.silverValue!!)
-                setMountainGoldValue(goal?.goldValue!!)
-
-                enableIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze)
-                enableIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver)
-                enableIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold)
             }
         }
     }

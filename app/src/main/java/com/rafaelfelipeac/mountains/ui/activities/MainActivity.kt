@@ -34,8 +34,6 @@ import kotlinx.android.synthetic.main.bottom_sheet_goal_done.*
 import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.*
 import androidx.navigation.fragment.NavHostFragment
 
-
-
 class MainActivity : BaseActivity() {
 
     lateinit var toolbar: Toolbar
@@ -78,7 +76,6 @@ class MainActivity : BaseActivity() {
         } else {
             super.onBackPressed()
         }
-
 
         clearToolbarMenu()
     }
@@ -184,4 +181,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun clearToolbarMenu() = toolbar.menu!!.clear()
+
+    fun closeToolbar() = supportActionBar?.hide()
+
+    fun openToolbar() = supportActionBar?.show()
 }

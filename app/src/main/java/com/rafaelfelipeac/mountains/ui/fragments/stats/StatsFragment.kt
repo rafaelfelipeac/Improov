@@ -25,6 +25,8 @@ class StatsFragment : BaseFragment() {
 
         injector.inject(this)
 
+        (activity as MainActivity).closeToolbar()
+
         setHasOptionsMenu(true)
 
         (activity as MainActivity).bottomNavigationVisible(View.VISIBLE)
@@ -42,6 +44,8 @@ class StatsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observeViewModel()
+
+        showNavigation()
 
         (activity as MainActivity).closeBottomSheetDoneGoal()
     }

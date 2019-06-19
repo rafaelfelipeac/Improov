@@ -14,6 +14,12 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment() {
 
+    override fun onResume() {
+        super.onResume()
+
+        (activity as MainActivity).closeToolbar()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_profile_title)
@@ -24,6 +30,8 @@ class ProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showNavigation()
+
         profile_logout_button.setOnClickListener {
             prefs.login = false
             FirebaseAuth.getInstance().signOut()
@@ -33,6 +41,10 @@ class ProfileFragment : BaseFragment() {
                     navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationWelcome())
                 }
             }
+        }
+
+        profile_edit_profile.setOnClickListener {
+            navController.navigate(R.id.action_navigation_profile_to_editProfileFragment)
         }
     }
 }

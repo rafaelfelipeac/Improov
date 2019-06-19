@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/bottom_sheet_done_goal"
         android:layout_width="match_parent"
         android:layout_height="240dp"
@@ -10,15 +9,7 @@
         app:behavior_hideable="true"
         app:behavior_peekHeight="0dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        android:background="@color/colorPrimaryDarkOne">
-
-    <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/colorPrimaryDarkTwo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:background="@drawable/rounded_bottom_view">
 
     <TextView
             android:id="@+id/textView"

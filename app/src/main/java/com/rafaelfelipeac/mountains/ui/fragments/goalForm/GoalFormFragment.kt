@@ -25,6 +25,8 @@ class GoalFormFragment : BaseFragment() {
 
         goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goalId }
 
+        (activity as MainActivity).openToolbar()
+
         setHasOptionsMenu(true)
     }
 
@@ -62,7 +64,7 @@ class GoalFormFragment : BaseFragment() {
         })
 
         viewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goals = goals.filter { it.userId == user?.userId }
+            this.goals = goals.filter { it.userId == user.userId }
         })
 
         viewModel.goalIdInserted.observe(this, Observer { goalIdForm ->
@@ -94,6 +96,8 @@ class GoalFormFragment : BaseFragment() {
             R.id.menu_goal_save -> {
                 if (verifyIfFieldsAreEmpty()) {
                     showSnackBar(getString(R.string.message_some_empty_value))
+                } else if (getTypeSelected() == -1) {
+                    showSnackBar(getString(R.string.message_empty_type_goal))
                 } else if (!validateMountainsValues()) {
                     showSnackBar(getString(R.string.message_gold_silver_bronze_order))
                 } else if (verifyIfIncOrDecValuesAreEmpty()) {
@@ -154,7 +158,7 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun isMountains(isMountain: Boolean) {
-        goal?.mountains = isMountain
+        goal.mountains = isMountain
 
         if (isMountain) {
             form_goal_editText_single.resetValue()
@@ -204,7 +208,7 @@ class GoalFormFragment : BaseFragment() {
         goal.type = getTypeSelected()
 
         if (goal.goalId == 0L) {
-            goal.userId = user?.userId!!
+            goal.userId = user.userId
             goal.createdDate = getCurrentTime()
             goal.value = 0F
             goal.done = false
@@ -244,30 +248,30 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setupGoal() {
-        goalForm_goal_name.setText(goal?.name)
+        goalForm_goal_name.setText(goal.name)
 
-        if (goal?.mountains!!) {
+        if (goal.mountains) {
             form_goal_mountains.visible()
             form_goal_single.invisible()
 
-            form_goal_editText_bronze.setText(goal?.bronzeValue?.getNumberInRightFormat())
-            form_goal_editText_silver.setText(goal?.silverValue?.getNumberInRightFormat())
-            form_goal_editText_gold.setText(goal?.goldValue?.getNumberInRightFormat())
+            form_goal_editText_bronze.setText(goal.bronzeValue.getNumberInRightFormat())
+            form_goal_editText_silver.setText(goal.silverValue.getNumberInRightFormat())
+            form_goal_editText_gold.setText(goal.goldValue.getNumberInRightFormat())
 
             form_goal_switch_mountains.isChecked = true
         } else {
-            form_goal_editText_single.setText(goal?.singleValue?.getNumberInRightFormat())
+            form_goal_editText_single.setText(goal.singleValue.getNumberInRightFormat())
         }
 
-        when(goal?.type) {
+        when(goal.type) {
             1 -> {radioButtonLista.isChecked = true}
             2 -> {
                 radioButtonIncDec.isChecked = true
 
                 goalForm_goal_inc_dev.visible()
 
-                goalForm_goal_inc_value.setText(goal?.incrementValue?.getNumberInRightFormat())
-                goalForm_goal_dec_value.setText(goal?.decrementValue?.getNumberInRightFormat())
+                goalForm_goal_inc_value.setText(goal.incrementValue.getNumberInRightFormat())
+                goalForm_goal_dec_value.setText(goal.decrementValue.getNumberInRightFormat())
             }
             3 -> {radioButtonTotal.isChecked = true}
         }

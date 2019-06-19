@@ -1,10 +1,10 @@
 package com.rafaelfelipeac.mountains.extension
 
-import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 fun Date.convertDateToString(): String {
-    val instance = DateFormat.getInstance()
+    val format = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
 
-    return instance.format(this)
+    return format.format(this)
 }

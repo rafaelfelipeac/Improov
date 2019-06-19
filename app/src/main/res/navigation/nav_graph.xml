@@ -97,8 +97,13 @@
               android:label="fragment_profile"
               tools:layout="@layout/fragment_profile">
 
-        <action android:id="@+id/action_navigation_profile_to_navigation_welcome"
-                app:destination="@id/navigation_welcome"/>
+        <action android:id="@+id/action_navigation_profile_to_navigation_welcome" app:destination="@id/navigation_welcome"/>
+        <action android:id="@+id/action_navigation_profile_to_editProfileFragment" app:destination="@id/editProfileFragment"/>
     </fragment>
+
+    <fragment android:id="@+id/editProfileFragment"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.editProfile.EditProfileFragment"
+              android:label="fragment_edit_profile"
+              tools:layout="@layout/fragment_edit_profile"/>
 
 </navigation>

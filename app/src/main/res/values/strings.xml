@@ -18,7 +18,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bottom_sheet_empty_item_name">Nome do item está vazio.</string>
     <string name="fragment_title_goal">Meta</string>
-    <string name="bottom_sheet_item_date_format">Concluído em %s</string>
+    <string name="bottom_sheet_item_date_format">Concluído em %s.</string>
     <string name="item_swiped_deleted">Item removido.</string>
     <string name="percentage_100">100.00%s</string>
     <string name="percentage_others">%.2f %s</string>
@@ -40,7 +40,7 @@
     <string name="fragment_create_user_title">Criar usuário</string>
     <string name="fragment_forgot_password_title">Esqueci a senha</string>
     <string name="fragment_login_title">Login</string>
-    <string name="fragment_welcome_title"> </string>
+    <string name="fragment_welcome_title"></string>
 
     <string name="fragment_search_search_message">Pesquisa.</string>
 
@@ -73,14 +73,18 @@
     <string name="error_message_user_not_registered">Usuário não cadastrado.</string>
 
 
-    <string name="result_error_message_invalid_password">The password is invalid or the user does not have a password.</string>
+    <string name="result_error_message_invalid_password">The password is invalid or the user does not have a password.
+    </string>
     <string name="result_error_message_no_user">There is no user record corresponding to this identifier.</string>
-    <string name="result_error_message_email_already_in_use">The email address is already in use by another account.</string>
+    <string name="result_error_message_email_already_in_use">The email address is already in use by another account.
+    </string>
 
     <string name="snackbar_error_login">Erro ao realizar login.</string>
     <string name="snackbar_error_send_email">Erro ao enviar email.</string>
     <string name="snackbar_success_send_email">Email enviado.</string>
     <string name="snackbar_error_create_user">Erro ao criar usuário.</string>
     <string name="snackbar_error_email_already_in_use">Email já cadastrado.</string>
+    <string name="message_empty_type_goal">Escolha o tipo do objetivo.</string>
+    <string name="fragment_edit_profile_title">Editar perfil</string>
 
 </resources>

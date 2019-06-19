@@ -20,7 +20,6 @@ import com.rafaelfelipeac.mountains.ui.adapter.GoalsAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperGoal
 import kotlinx.android.synthetic.main.fragment_goals.*
-import androidx.activity.OnBackPressedCallback
 
 class GoalsFragment : BaseFragment() {
 
@@ -34,6 +33,8 @@ class GoalsFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         injector.inject(this)
+
+        (activity as MainActivity).closeToolbar()
 
         setHasOptionsMenu(true)
 
@@ -84,6 +85,8 @@ class GoalsFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
+
+        (activity as MainActivity).closeToolbar()
 
         fabScrollListener()
 
