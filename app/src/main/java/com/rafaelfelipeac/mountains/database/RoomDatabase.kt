@@ -13,7 +13,7 @@ import com.rafaelfelipeac.mountains.models.Historic
 import com.rafaelfelipeac.mountains.models.Item
 import com.rafaelfelipeac.mountains.models.User
 
-@Database(entities = [Goal::class, Item::class, Historic::class, User::class], version = 26)
+@Database(entities = [Goal::class, Item::class, Historic::class, User::class], version = 27)
 @TypeConverters(Converters::class)
 abstract class RoomDatabase : RoomDatabase() {
 

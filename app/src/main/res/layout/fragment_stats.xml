@@ -25,129 +25,140 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/rounded_background">
 
-           <androidx.constraintlayout.widget.ConstraintLayout
-                   android:id="@+id/cl_stats_on"
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:visibility="invisible">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_stats_on"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp">
 
-               <TextView android:id="@+id/stats_message"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:text="Você já atingiu 14 objetivos!"
-                         android:textSize="18sp"
-                         android:textColor="@color/colorPrimary"
-                         android:textAlignment="center"
-                         app:layout_constraintStart_toStartOf="parent"
-                         android:layout_marginStart="16dp"
-                         app:layout_constraintEnd_toEndOf="parent"
-                         android:layout_marginEnd="16dp"
-                         android:layout_marginTop="16dp"
-                         app:layout_constraintTop_toTopOf="parent"/>
-
-               <ImageView android:id="@+id/stats_single_image"
-                          android:layout_width="60dp"
-                          android:layout_height="60dp"
-                          android:background="@mipmap/ic_single_dark"
+                <TextView android:id="@+id/stats_message"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:text="Você já atingiu 14 objetivos!"
+                          android:textSize="22sp"
+                          android:textColor="@color/colorPrimary"
+                          android:textAlignment="center"
                           app:layout_constraintStart_toStartOf="parent"
-                          android:layout_marginStart="8dp"
+                          android:layout_marginStart="16dp"
                           app:layout_constraintEnd_toEndOf="parent"
-                          android:layout_marginEnd="8dp"
+                          android:layout_marginEnd="16dp"
                           android:layout_marginTop="48dp"
-                          app:layout_constraintTop_toBottomOf="@+id/stats_message"/>
+                          app:layout_constraintTop_toTopOf="parent"/>
 
-               <TextView android:id="@+id/stats_single_value"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="13x"
-                         app:layout_constraintStart_toStartOf="parent"
-                         android:layout_marginStart="8dp"
-                         app:layout_constraintEnd_toEndOf="parent"
-                         android:layout_marginEnd="8dp"
-                         android:layout_marginTop="8dp"
-                         android:textSize="18sp"
-                         android:textColor="@color/colorPrimary"
-                         app:layout_constraintTop_toBottomOf="@+id/stats_single_image"/>
+                <ImageView android:id="@+id/stats_single_image"
+                           android:layout_width="60dp"
+                           android:layout_height="60dp"
+                           android:background="@mipmap/ic_medal"
+                           app:layout_constraintStart_toStartOf="parent"
+                           android:layout_marginStart="8dp"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           android:layout_marginEnd="8dp"
+                           android:layout_marginTop="48dp"
+                           app:layout_constraintTop_toBottomOf="@+id/stats_message"/>
 
-               <ImageView android:id="@+id/stats_mountain_bronze"
-                          android:layout_width="60dp"
-                          android:layout_height="60dp"
-                          android:background="@mipmap/ic_mountain_bronze_dark"
-                          app:layout_constraintEnd_toStartOf="@+id/stats_mountain_silver"
-                          android:layout_marginEnd="8dp"
-                          app:layout_constraintStart_toStartOf="parent"
-                          android:layout_marginStart="8dp"
-                          app:layout_constraintTop_toTopOf="@+id/stats_mountain_silver"/>
-
-               <TextView android:id="@+id/stats_mountain_bronze_value"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="12x"
-                         android:layout_marginTop="8dp"
-                         app:layout_constraintTop_toBottomOf="@+id/stats_mountain_bronze"
-                         app:layout_constraintStart_toStartOf="@+id/stats_mountain_bronze"
-                         app:layout_constraintEnd_toEndOf="@+id/stats_mountain_bronze"
-                         android:textSize="18sp"
-                         android:textColor="@color/colorPrimary"/>
-
-               <ImageView android:id="@+id/stats_mountain_silver"
-                          android:layout_width="60dp"
-                          android:layout_height="60dp"
-                          android:background="@mipmap/ic_mountain_silver_dark"
+                <TextView android:id="@+id/stats_single_value"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="13x"
                           app:layout_constraintStart_toStartOf="parent"
                           android:layout_marginStart="8dp"
                           app:layout_constraintEnd_toEndOf="parent"
                           android:layout_marginEnd="8dp"
+                          android:layout_marginTop="8dp"
+                          android:textSize="18sp"
+                          android:textColor="@color/colorPrimary"
+                          app:layout_constraintTop_toBottomOf="@+id/stats_single_image"/>
+
+                <ImageView android:id="@+id/stats_mountain_bronze"
+                           android:layout_width="60dp"
+                           android:layout_height="60dp"
+                           android:background="@mipmap/ic_bronze"
+                           app:layout_constraintEnd_toStartOf="@+id/stats_mountain_silver"
+                           android:layout_marginEnd="8dp"
+                           app:layout_constraintStart_toStartOf="parent"
+                           android:layout_marginStart="8dp"
+                           app:layout_constraintTop_toTopOf="@+id/stats_mountain_silver"/>
+
+                <TextView android:id="@+id/stats_mountain_bronze_value"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="12x"
+                          android:layout_marginTop="8dp"
+                          app:layout_constraintTop_toBottomOf="@+id/stats_mountain_bronze"
+                          app:layout_constraintStart_toStartOf="@+id/stats_mountain_bronze"
+                          app:layout_constraintEnd_toEndOf="@+id/stats_mountain_bronze"
+                          android:textSize="18sp"
+                          android:textColor="@color/colorPrimary"/>
+
+                <ImageView android:id="@+id/stats_mountain_silver"
+                           android:layout_width="60dp"
+                           android:layout_height="60dp"
+                           android:background="@mipmap/ic_silver"
+                           app:layout_constraintStart_toStartOf="parent"
+                           android:layout_marginStart="8dp"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           android:layout_marginEnd="8dp"
+                           android:layout_marginTop="32dp"
+                           app:layout_constraintTop_toBottomOf="@+id/stats_single_value"/>
+
+                <TextView android:id="@+id/stats_mountain_silver_value"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="12x"
+                          app:layout_constraintStart_toStartOf="@+id/stats_mountain_silver"
+                          app:layout_constraintEnd_toEndOf="@+id/stats_mountain_silver"
+                          android:layout_marginTop="8dp"
+                          app:layout_constraintTop_toBottomOf="@+id/stats_mountain_silver"
+                          android:textSize="18sp"
+                          android:textColor="@color/colorPrimary"/>
+
+                <ImageView android:id="@+id/stats_mountain_gold"
+                           android:layout_width="60dp"
+                           android:layout_height="60dp"
+                           android:background="@mipmap/ic_gold"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           android:layout_marginEnd="8dp"
+                           android:layout_marginStart="8dp"
+                           app:layout_constraintStart_toEndOf="@+id/stats_mountain_silver"
+                           app:layout_constraintTop_toTopOf="@+id/stats_mountain_silver"/>
+
+                <TextView android:id="@+id/stats_mountain_gold_value"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="12x"
+                          app:layout_constraintStart_toStartOf="@+id/stats_mountain_gold"
+                          app:layout_constraintEnd_toEndOf="@+id/stats_mountain_gold"
+                          android:layout_marginTop="8dp"
+                          app:layout_constraintTop_toBottomOf="@+id/stats_mountain_gold"
+                          android:textSize="18sp"
+                          android:textColor="@color/colorPrimary"/>
+
+                <TextView android:id="@+id/stats_message_2"
+                          android:layout_width="0dp"
+                          android:layout_height="wrap_content"
+                          android:text="Continue trabalhando em seus objetivos! \n\n Sua sala de troféus nunca estará cheia o bastante."
+                          android:textColor="@color/colorPrimary"
+                          android:textSize="18sp"
+                          android:textAlignment="center"
+                          app:layout_constraintStart_toStartOf="parent"
+                          android:layout_marginStart="32dp"
+                          app:layout_constraintEnd_toEndOf="parent"
+                          android:layout_marginEnd="32dp"
                           android:layout_marginTop="32dp"
-                          app:layout_constraintTop_toBottomOf="@+id/stats_single_value"/>
+                          app:layout_constraintTop_toBottomOf="@+id/stats_mountain_silver_value"
+                          android:layout_marginBottom="8dp"
+                          app:layout_constraintBottom_toBottomOf="parent"
+                          app:layout_constraintVertical_bias="0.0"/>
 
-               <TextView android:id="@+id/stats_mountain_silver_value"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="12x"
-                         app:layout_constraintStart_toStartOf="@+id/stats_mountain_silver"
-                         app:layout_constraintEnd_toEndOf="@+id/stats_mountain_silver"
-                         android:layout_marginTop="8dp"
-                         app:layout_constraintTop_toBottomOf="@+id/stats_mountain_silver"
-                         android:textSize="18sp"
-                         android:textColor="@color/colorPrimary"/>
-
-               <ImageView android:id="@+id/stats_mountain_gold"
-                          android:layout_width="60dp"
-                          android:layout_height="60dp"
-                          android:background="@mipmap/ic_mountain_gold_dark"
-                          app:layout_constraintEnd_toEndOf="parent"
-                          android:layout_marginEnd="8dp"
-                          android:layout_marginStart="8dp"
-                          app:layout_constraintStart_toEndOf="@+id/stats_mountain_silver"
-                          app:layout_constraintTop_toTopOf="@+id/stats_mountain_silver"/>
-
-               <TextView android:id="@+id/stats_mountain_gold_value"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="12x"
-                         app:layout_constraintStart_toStartOf="@+id/stats_mountain_gold"
-                         app:layout_constraintEnd_toEndOf="@+id/stats_mountain_gold"
-                         android:layout_marginTop="8dp"
-                         app:layout_constraintTop_toBottomOf="@+id/stats_mountain_gold"
-                         android:textSize="18sp"
-                         android:textColor="@color/colorPrimary"/>
-
-               <TextView android:id="@+id/stats_message_2"
-                         android:layout_width="0dp"
-                         android:layout_height="wrap_content"
-                         android:text="Continue trabalhando em seus objetivos! \n\n Sua sala de troféus e FFhas nunca estará cheia o bastante."
-                         android:textColor="@color/colorPrimary"
-                         android:textSize="18sp"
-                         android:textAlignment="center"
-                         app:layout_constraintStart_toStartOf="parent"
-                         android:layout_marginStart="32dp"
-                         app:layout_constraintEnd_toEndOf="parent"
-                         android:layout_marginEnd="32dp"
-                         android:layout_marginTop="48dp"
-                         app:layout_constraintTop_toBottomOf="@+id/stats_mountain_silver_value"/>
-
-           </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_stats_off"
@@ -158,11 +169,16 @@
                         android:id="@+id/goals_placeholder_image"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:background="@mipmap/ic_mountain_silver" app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.35000002"/>
+                        android:background="@mipmap/ic_app_logo"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0.40"/>
 
                 <TextView
                         android:id="@+id/goals_placeholder_message"
@@ -172,13 +188,17 @@
                         android:textSize="18sp"
                         android:textColor="@color/colorPrimary"
                         android:textAlignment="center"
-                        app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
-                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp"
-                        android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/goals_placeholder_image"/>
-
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="32dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/goals_placeholder_image"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

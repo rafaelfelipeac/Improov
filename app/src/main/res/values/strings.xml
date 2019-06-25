@@ -9,9 +9,9 @@
     <string name="message_goal_value_invalid">Valor inválido.</string>
     <string name="message_goal_value_updated">Valor atualizado.</string>
     <string name="message_goal_done">Objetivo concluído!</string>
-    <string name="message_empty_items">Você não tem itens adicionados.</string>
+    <string name="message_empty_items">Você ainda não tem itens adicionados nesse objetivo.</string>
     <string name="message_empty_goals">Você não tem nenhum objetivo em andamento. \n\n Comece agora mesmo!</string>
-    <string name="message_empty_stats">Crie objetivos para poder acompanhar as estatistícas e seu progresso.</string>
+    <string name="message_empty_stats">Crie objetivos para acompanhar estatísticas e informações de progresso.</string>
     <string name="bottom_sheet_item_title_add">Novo item</string>
     <string name="bottom_sheet_item_title_edit">Editar item</string>
 
@@ -26,7 +26,7 @@
     <string name="snackbar_action_undo">DESFAZER</string>
     <string name="fragment_title_goal_form">Nova meta</string>
     <string name="fragment_title_goals">Metas</string>
-    <string name="goals_fragment_resolved_goal_message">Meta removida.</string>
+    <string name="goals_fragment_resolved_goal_message">Meta arquivada.</string>
     <string name="fragment_title_stats">Estatísticas</string>
     <string name="stats_goals_completed_message">Você já concluiu %d objetivos!</string>
     <string name="stats_single_value">%dx</string>

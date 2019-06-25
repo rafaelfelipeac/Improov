@@ -385,11 +385,11 @@ class GoalFragment : BaseFragment() {
             }
             goal?.value!! > 0 && goal?.value!! < goal?.singleValue!! -> {
                 setSingleValue(goal?.value!!)
-                disableIcon(goal_single_image, R.mipmap.ic_single_dark)
+                disableIcon(goal_single_image, R.mipmap.ic_medal_dark)
             }
             goal?.value!! > 0 && goal?.value!! >= goal?.singleValue!! -> {
                 setSingleValue(goal?.singleValue!!)
-                enableIcon(goal_single_image, R.mipmap.ic_single)
+                enableIcon(goal_single_image, R.mipmap.ic_medal)
             }
         }
     }
@@ -402,32 +402,32 @@ class GoalFragment : BaseFragment() {
             goal?.value!! > 0 && goal?.value!! <= goal?.bronzeValue!! -> {
                 setMountainBronzeValue(goal?.value!!)
 
-                if (goal?.value == goal?.bronzeValue!!) enableIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze)
-                else disableIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze_dark)
-
                 resetMountainSilver()
+
+                if (goal?.value == goal?.bronzeValue!!) enableIcon(goal_mountain_bronze_image, R.mipmap.ic_bronze)
+                else disableIcon(goal_mountain_bronze_image, R.mipmap.ic_bronze_dark)
             }
             goal?.value!! > 0 && goal?.value!! <= goal?.silverValue!! -> {
                 setMountainBronzeValue(goal?.bronzeValue!!)
                 setMountainSilverValue(goal?.value!!)
 
-                enableIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze)
-
-                if (goal?.value == goal?.silverValue!!) enableIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver)
-                else disableIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver_dark)
+                enableIcon(goal_mountain_bronze_image, R.mipmap.ic_bronze)
 
                 resetMountainGold()
+
+                if (goal?.value == goal?.silverValue!!) enableIcon(goal_mountain_silver_image, R.mipmap.ic_silver)
+                else disableIcon(goal_mountain_silver_image, R.mipmap.ic_silver_dark)
             }
             goal?.value!! > 0 && goal?.value!! <= goal?.goldValue!! -> {
                 setMountainBronzeValue(goal?.bronzeValue!!)
                 setMountainSilverValue(goal?.silverValue!!)
                 setMountainGoldValue(goal?.value!!)
 
-                enableIcon(goal_mountain_bronze_image, R.mipmap.ic_mountain_bronze)
-                enableIcon(goal_mountain_silver_image, R.mipmap.ic_mountain_silver)
+                enableIcon(goal_mountain_bronze_image, R.mipmap.ic_bronze)
+                enableIcon(goal_mountain_silver_image, R.mipmap.ic_silver)
 
-                if (goal?.value == goal?.goldValue!!) enableIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold)
-                else disableIcon(goal_mountain_gold_image, R.mipmap.ic_mountain_gold_dark)
+                if (goal?.value == goal?.goldValue!!) enableIcon(goal_mountain_gold_image, R.mipmap.ic_gold)
+                else disableIcon(goal_mountain_gold_image, R.mipmap.ic_gold_dark)
             }
         }
     }

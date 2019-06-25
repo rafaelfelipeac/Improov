@@ -24,7 +24,7 @@
                     android:id="@+id/goals_placeholder_image"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@mipmap/ic_mountain_silver"
+                    android:background="@mipmap/ic_app_logo"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintVertical_bias="0.35000002"/>
+                    app:layout_constraintVertical_bias="0.40"/>
 
             <TextView
                     android:id="@+id/goals_placeholder_message"

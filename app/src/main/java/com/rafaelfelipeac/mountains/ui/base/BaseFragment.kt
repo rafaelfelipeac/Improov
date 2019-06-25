@@ -3,10 +3,12 @@ package com.rafaelfelipeac.mountains.ui.base
 import android.app.Activity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.setMessageColor
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
@@ -23,6 +25,7 @@ abstract class BaseFragment : Fragment() {
     val mGoogleSignInClient get() = (activity as MainActivity).mGoogleSignInClient
 
     val user get () = (activity as MainActivity).user
+    var userFirebase = FirebaseAuth.getInstance().currentUser
 
     fun showNavigation() {
         navigation.visibility = View.VISIBLE
@@ -45,6 +48,15 @@ abstract class BaseFragment : Fragment() {
             .setMessageColor(R.color.colorPrimaryDarkOne)
             .setAction(getString(R.string.snackbar_action_undo)) { function(obj) }
             .setActionTextColor(ContextCompat.getColor(context!!, R.color.colorPrimaryDarkOne))
+            .show()
+    }
+
+    fun showDialogWithAction(title: String, function: () -> Unit) {
+        AlertDialog.Builder(context!!)
+            .setTitle(title)
+            .setPositiveButton("OK") { _, _ -> function() }
+            .setNegativeButton("Cancelar") { dialog, _ -> dialog.dismiss() }
+            .create()
             .show()
     }
 

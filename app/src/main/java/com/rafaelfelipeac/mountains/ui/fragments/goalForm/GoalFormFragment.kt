@@ -3,8 +3,10 @@ package com.rafaelfelipeac.mountains.ui.fragments.goalForm
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
@@ -19,6 +21,9 @@ class GoalFormFragment : BaseFragment() {
     private var goals: List<Goal>? = null
 
     private lateinit var viewModel: GoalFormViewModel
+
+    private var bottomSheetTip: BottomSheetBehavior<*>? = null
+    private var bottomSheetTipClose: ImageView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +59,44 @@ class GoalFormFragment : BaseFragment() {
 
         setRadioButtonType()
         setSwitchMountains()
+
+        goalForm_help.setOnClickListener {
+            (activity as MainActivity).setupBottomSheetTipsOne()
+            setupBottomSheetTip()
+            (activity as MainActivity).openBottomSheetTips()
+        }
+
+        goalForm_help2.setOnClickListener {
+            (activity as MainActivity).setupBottomSheetTipsTwo()
+            setupBottomSheetTip()
+            (activity as MainActivity).openBottomSheetTips()
+        }
+    }
+
+    private fun setupBottomSheetTip() {
+        (activity as MainActivity).closeBottomSheetDoneGoal()
+
+        bottomSheetTip = (activity as MainActivity).bottomSheetTip
+        bottomSheetTipClose = (activity as MainActivity).bottomSheetTipClose
+
+        bottomSheetTip?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(view: View, status: Int) {
+                when (status) {
+                    BottomSheetBehavior.STATE_HIDDEN -> { }
+                    BottomSheetBehavior.STATE_EXPANDED -> { }
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> { }
+                    BottomSheetBehavior.STATE_COLLAPSED -> { hideSoftKeyboard(view, activity) }
+                    BottomSheetBehavior.STATE_DRAGGING -> { }
+                    BottomSheetBehavior.STATE_SETTLING -> { }
+                }
+            }
+
+            override fun onSlide(view: View, statusSlide: Float) {}
+        })
+
+        bottomSheetTipClose?.setOnClickListener {
+            (activity as MainActivity).closeBottomSheetTips()
+        }
     }
 
     private fun observeViewModel() {

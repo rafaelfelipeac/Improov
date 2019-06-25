@@ -27,12 +27,17 @@ import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.Item
 import com.rafaelfelipeac.mountains.models.User
 import com.rafaelfelipeac.mountains.ui.base.BaseActivity
-import com.rafaelfelipeac.mountains.ui.fragments.goals.GoalsFragment
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_sheet_goal_done.*
 import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.*
 import androidx.navigation.fragment.NavHostFragment
+import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.bottom_sheet_item_button_save
+import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.bottom_sheet_item_date
+import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.bottom_sheet_item_name
+import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.bottom_sheet_item_title
+import kotlinx.android.synthetic.main.bottom_sheet_tips_one.*
+import kotlinx.android.synthetic.main.bottom_sheet_tips_two.*
 
 class MainActivity : BaseActivity() {
 
@@ -48,6 +53,9 @@ class MainActivity : BaseActivity() {
     lateinit var bottomSheetDoneGoalNo: Button
     lateinit var bottomSheetDoneGoalYes: Button
     lateinit var bottomSheetDoneGoal: BottomSheetBehavior<*>
+
+    lateinit var bottomSheetTipClose: ImageView
+    lateinit var bottomSheetTip: BottomSheetBehavior<*>
 
     var mGoogleSignInClient: GoogleSignInClient? = null
 
@@ -128,6 +136,16 @@ class MainActivity : BaseActivity() {
         bottomSheetDoneGoalNo = bottom_sheet_button_no
     }
 
+    fun setupBottomSheetTipsOne() {
+        bottomSheetTip = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_tips_one))
+        bottomSheetTipClose = bottom_sheet_tips_one_button_close
+    }
+
+    fun setupBottomSheetTipsTwo() {
+        bottomSheetTip = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_tips_two))
+        bottomSheetTipClose = bottom_sheet_tips_two_button_close
+    }
+
     fun bottomNavigationVisible(visibility: Int) {
         bottomNavigation.visibility = visibility
     }
@@ -171,6 +189,12 @@ class MainActivity : BaseActivity() {
     }
 
     fun closeBottomSheetDoneGoal() { bottomSheetDoneGoal.state = BottomSheetBehavior.STATE_COLLAPSED }
+
+    fun openBottomSheetTips() {
+        bottomSheetTip.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+    fun closeBottomSheetTips() { bottomSheetTip.state = BottomSheetBehavior.STATE_COLLAPSED }
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)

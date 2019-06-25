@@ -14,6 +14,7 @@ data class Goal(
     var value: Float = 0F,
     var order: Int = 0,
     var done: Boolean = false,
+    var archived: Boolean = false,
     var type: Int = 0,
     var mountains: Boolean = false,
     var singleValue: Float = 0F,
@@ -26,5 +27,5 @@ data class Goal(
     var updatedDate: Date? = null,
     var doneDate: Date? = null,
     var undoneDate: Date? = null,
-    var deleteDate: Date? = null,
+    var archiveDate: Date? = null,
     var finalDate: Date? = null): Serializable

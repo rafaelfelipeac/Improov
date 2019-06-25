@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.google.firebase.auth.FirebaseAuth
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
@@ -17,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_edit_profile.*
 class EditProfileFragment : BaseFragment() {
 
     private lateinit var viewModel: EditProfileViewModel
+    private var cont = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,27 +27,27 @@ class EditProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // update 'user' when open GoalsFragment and on success from update
-
-        edit_profile_name.setText(FirebaseAuth.getInstance().currentUser?.displayName)
-        edit_profile_email.setText(FirebaseAuth.getInstance().currentUser?.email)
+        edit_profile_name.setText(userFirebase?.displayName)
+        edit_profile_email.setText(userFirebase?.email)
 
         observeViewModel()
 
         edit_profile_create_button.setOnClickListener {
             if (verifyElements()) {
-
-
                 if (updateName()) {
                     viewModel.updateName(edit_profile_name.text.toString())
-                    showProgressBar()
+                    cont++
                 }
                 if (updatePassword()) {
                     viewModel.updatePassword(edit_profile_password.text.toString())
-                    showProgressBar()
+                    cont++
                 }
                 if (updateEmail()) {
                     viewModel.updateEmail(edit_profile_email.text.toString())
+                    cont++
+                }
+
+                if (cont > 0) {
                     showProgressBar()
                 }
             }
@@ -70,9 +70,8 @@ class EditProfileFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_edit_profile, container, false)
     }
 
-
     private fun updateEmail(): Boolean {
-      return user.email != edit_profile_email.text.toString()
+      return userFirebase?.email != edit_profile_email.text.toString()
     }
 
     private fun updatePassword(): Boolean {
@@ -82,7 +81,7 @@ class EditProfileFragment : BaseFragment() {
     }
 
     private fun updateName(): Boolean {
-        return user.name != edit_profile_name.text.toString()
+        return userFirebase?.displayName != edit_profile_name.text.toString()
     }
 
     private fun verifyElements(): Boolean {
@@ -113,18 +112,29 @@ class EditProfileFragment : BaseFragment() {
 
     private fun observeViewModel() {
         viewModel.updateUser.observe(this, Observer { createResult ->
-            hideProgressBar()
-
             when {
                 createResult.isSuccessful -> {
+                    if (--cont == 0) {
+                        hideProgressBar()
+                    }
 
+                    edit_profile_password.setText("")
+                    edit_profile_confirm_password.setText("")
+
+                    showSnackBar("Perfil editado.")
                 }
                 createResult.message == getString(R.string.result_error_message_email_already_in_use) -> {
+                    hideProgressBar()
                     setErrorMessage(getString(R.string.snackbar_error_email_already_in_use))
                 }
+                createResult.message == "This operation is sensitive and requires recent authentication. Log in again before retrying this request." -> {
+                    hideProgressBar()
+                    setErrorMessage("Por questões de segurança, você precisa deslogar e logar novamente no app antes de fazer essa mudança.")
+                }
                 else -> {
+                    hideProgressBar()
                     setErrorMessage(getString(R.string.empty_string))
-                    showSnackBar(getString(R.string.snackbar_error_create_user))
+                    showSnackBar("Erro ao atualizar informações do usuário.")
                 }
             }
         })

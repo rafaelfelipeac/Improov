@@ -71,7 +71,7 @@ class GoalsFragment : BaseFragment() {
         })
 
         viewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goals = goals.filter { it.userId == user?.userId }
+            this.goals = goals.filter { it.userId == user.userId && !it.archived}
 
             setupItems()
         })
@@ -153,16 +153,19 @@ class GoalsFragment : BaseFragment() {
                 }
             }
             ItemTouchHelper.LEFT -> {
-                goal.deleteDate = getCurrentTime()
+                goal.archived = true
+                goal.archiveDate = getCurrentTime()
 
-                viewModel.deleteGoal(goal)
+                viewModel.saveGoal(goal)
 
                 showSnackBarWithAction(
                     holder.itemView,
                     getString(R.string.goals_fragment_resolved_goal_message),
                     goal as Any,
-                    ::deleteGoal
+                    ::archiveGoal
                 )
+
+                setupItems()
             }
         }
     }
@@ -193,7 +196,8 @@ class GoalsFragment : BaseFragment() {
         viewModel.saveGoal(goal)
     }
 
-    private fun deleteGoal(goal: Any) {
-        viewModel.saveGoal(goal as Goal)
+    private fun archiveGoal(goal: Any) {
+        (goal as Goal).archived = false
+        viewModel.saveGoal(goal)
     }
 }

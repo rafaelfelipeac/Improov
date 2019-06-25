@@ -17,6 +17,9 @@ class ProfileFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
 
+        profile_name.text = userFirebase?.displayName
+        profile_email.text = userFirebase?.email
+
         (activity as MainActivity).closeToolbar()
     }
 
@@ -33,18 +36,22 @@ class ProfileFragment : BaseFragment() {
         showNavigation()
 
         profile_logout_button.setOnClickListener {
-            prefs.login = false
-            FirebaseAuth.getInstance().signOut()
-
-            mGoogleSignInClient?.signOut()?.addOnCompleteListener {
-                if (it.isSuccessful) {
-                    navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationWelcome())
-                }
-            }
+            showDialogWithAction("Tem certeza que deseja sair do app?", ::logout)
         }
 
         profile_edit_profile.setOnClickListener {
             navController.navigate(R.id.action_navigation_profile_to_editProfileFragment)
+        }
+    }
+
+    private fun logout() {
+        prefs.login = false
+        FirebaseAuth.getInstance().signOut()
+
+        mGoogleSignInClient?.signOut()?.addOnCompleteListener {
+            if (it.isSuccessful) {
+                navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationWelcome())
+            }
         }
     }
 }

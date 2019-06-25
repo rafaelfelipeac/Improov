@@ -10,6 +10,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
+import com.rafaelfelipeac.mountains.ui.adapter.DotsAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_welcome.*
 
@@ -47,5 +48,8 @@ class WelcomeFragment : BaseFragment() {
         welcome_create_account.setOnClickListener {
             navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationCreateUser())
         }
+
+        viewpager.adapter = DotsAdapter(activity?.supportFragmentManager!!)
+        dots.setupWithViewPager(viewpager, true)
     }
 }
