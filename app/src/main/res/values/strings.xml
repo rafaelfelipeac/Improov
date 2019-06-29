@@ -51,7 +51,7 @@
     <string name="fragment_create_user_create_button_message">Criar conta</string>
 
     <string name="fragment_forgot_password_email_til_hint">Email</string>
-    <string name="fragment_forgot_password_send_button_message">Enviar email de recuperação</string>
+    <string name="fragment_forgot_password_send_button_message">Enviar email</string>
 
     <string name="fragment_login_or_message">ou</string>
     <string name="fragment_login_email_til_hint">Email</string>

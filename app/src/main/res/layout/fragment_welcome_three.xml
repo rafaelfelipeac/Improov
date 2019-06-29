@@ -8,30 +8,36 @@
         tools:context=".ui.fragments.welcome.WelcomeThreeFragment"
         android:background="@color/colorPrimaryDarkOne">
 
-
-    <ImageView android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:background="@mipmap/ic_app_logo"
-               app:layout_constraintEnd_toEndOf="parent"
-               android:layout_marginEnd="8dp"
-               app:layout_constraintStart_toStartOf="parent"
-               android:layout_marginStart="8dp"
-               android:layout_marginBottom="8dp"
-               app:layout_constraintBottom_toBottomOf="parent"
-               android:layout_marginTop="8dp"
-               app:layout_constraintTop_toTopOf="parent"
-               android:id="@+id/imageView2"
-               app:layout_constraintVertical_bias="0.3"/>
-
-    <TextView
+    <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3"
-            android:textSize="26sp"
-            android:textColor="@color/colorPrimary" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" app:layout_constraintVertical_bias="0.0"/>
+            android:background="@mipmap/ic_app_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.0"/>
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Acompanhe as estatísticas e progresso dos seus objetivos. \n\nLorem ipsum dolor sit amet, consectetur adipiscing elit."
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.0"
+            android:textAlignment="center"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
