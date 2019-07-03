@@ -26,6 +26,8 @@ class WelcomeFragment : BaseFragment() {
 
         hideNavigation()
 
+        (activity as MainActivity).closeToolbar()
+
         return inflater.inflate(R.layout.fragment_welcome, container, false)
     }
 
@@ -49,7 +51,7 @@ class WelcomeFragment : BaseFragment() {
             navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationCreateUser())
         }
 
-        viewpager.adapter = DotsAdapter(activity?.supportFragmentManager!!)
+        viewpager.adapter = DotsAdapter(fragmentManager!!)
         dots.setupWithViewPager(viewpager, true)
     }
 }

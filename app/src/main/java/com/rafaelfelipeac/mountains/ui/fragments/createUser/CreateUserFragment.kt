@@ -25,6 +25,7 @@ class CreateUserFragment : BaseFragment() {
         viewModel = ViewModelProviders.of(this).get(CreateUserViewModel::class.java)
 
         hideNavigation()
+        (activity as MainActivity).openToolbar()
 
         return inflater.inflate(R.layout.fragment_create_user, container, false)
     }

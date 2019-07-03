@@ -87,4 +87,18 @@
     <string name="message_empty_type_goal">Escolha o tipo do objetivo.</string>
     <string name="fragment_edit_profile_title">Editar perfil</string>
 
+
+    <!--welcome-->
+    <string name="welcome_one_message">Seja bem-vindo ao Mountains. \n\nCrie um registro de seus objetivos e mantenha-se focado em alcançá-los.
+    </string>
+    <string name="welcome_two_message">Use o Mountains para acessar rapidamente os objetivos em andamento. \n\nSe mantenha atualizado do caminho a percorrer.
+    </string>
+    <string name="welcome_three_message">Tenha acesso a estatísticas e acompanhe o seu progresso. \n\nMantenha seus objetivos sempre em desenvolvimento.
+    </string>
+
+    <!--forgot-->
+    <string name="forgot_message">Digite o email que voce usou para criar sua conta. \n\nVamos te enviar instruções para resetar sua senha.
+    </string>
+
+
 </resources>

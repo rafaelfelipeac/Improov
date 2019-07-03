@@ -36,6 +36,7 @@ class LoginFragment : BaseFragment() {
         viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
         hideNavigation()
+        (activity as MainActivity).openToolbar()
 
         return inflater.inflate(R.layout.fragment_login, container, false)
     }

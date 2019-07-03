@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 
-class WelcomeTwoFragment : Fragment() {
+class WelcomeTwoFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_welcome_two, container, false)

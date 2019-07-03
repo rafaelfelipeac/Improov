@@ -1,5 +1,6 @@
 package com.rafaelfelipeac.mountains.ui.adapter
 
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -17,5 +18,9 @@ class DotsAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
             2 -> WelcomeThreeFragment()
             else -> WelcomeOneFragment()
         }
+    }
+
+    override fun saveState(): Parcelable? {
+        return null
     }
 }
