@@ -478,7 +478,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintVertical_bias="0.40"/>
+                    app:layout_constraintVertical_bias="0.35"/>
 
             <TextView
                     android:id="@+id/items_placeholder_message"
@@ -488,9 +488,12 @@
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"
                     android:textAlignment="center"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp"
-                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/items_placeholder_image"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/items_placeholder_image"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

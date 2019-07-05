@@ -3,7 +3,6 @@ package com.rafaelfelipeac.mountains.ui.fragments.goalForm
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
@@ -178,7 +177,7 @@ class GoalFormFragment : BaseFragment() {
                 radioButtonIncDec.isChecked = false
                 radioButtonTotal.isChecked = false
 
-                goalForm_goal_inc_dev.gone()
+                goalForm_goal_inc_dev.invisible()
             }
         }
 
@@ -196,7 +195,7 @@ class GoalFormFragment : BaseFragment() {
                 radioButtonIncDec.isChecked = false
                 radioButtonLista.isChecked = false
 
-                goalForm_goal_inc_dev.gone()
+                goalForm_goal_inc_dev.invisible()
             }
         }
     }

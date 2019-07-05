@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
+import com.rafaelfelipeac.mountains.ui.dialogs.LogoutDialogFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment() {
@@ -36,7 +38,20 @@ class ProfileFragment : BaseFragment() {
         showNavigation()
 
         profile_logout_button.setOnClickListener {
-            showDialogWithAction("Tem certeza que deseja sair do app?", ::logout)
+            val dialog = LogoutDialogFragment()
+
+            dialog.setOnClickListener(object : LogoutDialogFragment.OnClickListener {
+                override fun onClickCancel() {
+                    dialog.dismiss()
+                }
+
+                override fun onClickOK() {
+                    dialog.dismiss()
+                    logout()
+                }
+            })
+
+            dialog.show(fragmentManager!!, "tag")
         }
 
         profile_edit_profile.setOnClickListener {

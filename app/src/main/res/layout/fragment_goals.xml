@@ -33,7 +33,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintVertical_bias="0.40"/>
+                    app:layout_constraintVertical_bias="0.35"/>
 
             <TextView
                     android:id="@+id/goals_placeholder_message"
@@ -47,7 +47,7 @@
                     android:layout_marginStart="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="32dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/goals_placeholder_image"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
