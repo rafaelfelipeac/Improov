@@ -99,6 +99,25 @@
     <!--forgot-->
     <string name="forgot_message">Digite o email que voce usou para criar sua conta. \n\nVamos te enviar instruções para resetar sua senha.
     </string>
+    <string name="bottom_sheet_1_message_1">Uma boa tática para evitar que objetivos muito grandes e complexos sejam
+        abandonados é dividir esse objetivo em partes menores. \n\nDessa forma, a sensação de progresso é maior e você
+        estará sempre motivado para alcançar aquilo que deseja. \n\nNesse modo, seu objetivo é dividido em 3 partes: bronze,
+        prata e ouro.
+    </string>
+    <string name="bottom_sheet_1_message_2">O primeira parte do objetivo será o valor bronze. A cada
+        parte do objetivo atingida, fica-se mais perto do valor ouro e da conclusão do objetivo.
+    </string>
+    <string name="bottom_sheet_2_message_1">Seus objetivos podem ser de três diferentes tipos:</string>
+    <string name="bottom_sheet_2_message_2">
+        - Lista\n
+        Para objetivos que consistem em concluir diferentes itens de uma lista. Cada item concluído representa 1 ponto para o objetivo final.\n\n
+
+        - Contator\n
+        Para objetivos onde os valores a serem somados ou subtraídos sejam sempre os mesmos.\n\n
+
+        - Valor final\n
+        Para objetivos onde os valores a serem somados ou subtraídos mudem constantemente.
+    </string>
 
 
 </resources>

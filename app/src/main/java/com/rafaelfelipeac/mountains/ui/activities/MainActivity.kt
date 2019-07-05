@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -54,7 +55,7 @@ class MainActivity : BaseActivity() {
     lateinit var bottomSheetDoneGoalYes: Button
     lateinit var bottomSheetDoneGoal: BottomSheetBehavior<*>
 
-    lateinit var bottomSheetTipClose: ImageView
+    lateinit var bottomSheetTipClose: ConstraintLayout
     lateinit var bottomSheetTip: BottomSheetBehavior<*>
 
     var mGoogleSignInClient: GoogleSignInClient? = null

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.rafaelfelipeac.mountains.R
@@ -23,7 +24,7 @@ class GoalFormFragment : BaseFragment() {
     private lateinit var viewModel: GoalFormViewModel
 
     private var bottomSheetTip: BottomSheetBehavior<*>? = null
-    private var bottomSheetTipClose: ImageView? = null
+    private var bottomSheetTipClose: ConstraintLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
