@@ -2,14 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/navigation_stats"
-            android:icon="@drawable/ic_chart"
-            android:title="Estatísticas"/>
-
-    <item
             android:id="@+id/navigation_goals"
             android:icon="@drawable/ic_list"
             android:title="Metas"/>
+
+    <item
+            android:id="@+id/navigation_profile2"
+            android:icon="@drawable/ic_list"
+            android:title="Outro"/>
+
+    <item
+            android:id="@+id/navigation_goalForm"
+            android:icon="@drawable/ic_add_goal"
+            android:title=""/>
+
+    <item
+            android:id="@+id/navigation_stats"
+            android:icon="@drawable/ic_chart"
+            android:title="Estatísticas"/>
 
     <item
             android:id="@+id/navigation_profile"

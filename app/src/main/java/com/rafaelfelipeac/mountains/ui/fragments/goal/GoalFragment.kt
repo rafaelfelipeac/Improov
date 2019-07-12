@@ -82,6 +82,10 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
+        viewModel.user?.observe(this, Observer { user ->
+            (activity as MainActivity).user = user
+        })
+
         viewModel.getGoal()?.observe(this, Observer { goal ->
             this.goal = goal
 

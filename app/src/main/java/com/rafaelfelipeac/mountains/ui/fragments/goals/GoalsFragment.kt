@@ -59,10 +59,6 @@ class GoalsFragment : BaseFragment() {
         (activity as MainActivity).closeBottomSheetItem()
 
         showNavigation()
-
-        fab_goals.setOnClickListener {
-            navController.navigate(R.id.action_navigation_goals_to_navigation_goalForm)
-        }
     }
 
     private fun observeViewModel() {
@@ -77,18 +73,10 @@ class GoalsFragment : BaseFragment() {
         })
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        fabScrollListener()
-    }
-
     override fun onResume() {
         super.onResume()
 
         (activity as MainActivity).closeToolbar()
-
-        fabScrollListener()
 
         (activity as MainActivity).closeBottomSheetItem()
     }
@@ -124,20 +112,6 @@ class GoalsFragment : BaseFragment() {
         goals_list.adapter = goalsAdapter
 
         touchHelper.attachToRecyclerView(goals_list)
-    }
-
-    private fun fabScrollListener() {
-        goals_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0 || dy < 0 && fab_goals.isShown) fab_goals.hide()
-                super.onScrolled(recyclerView, dx, dy)
-            }
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) fab_goals.show()
-                super.onScrollStateChanged(recyclerView, newState)
-            }
-        })
     }
 
     fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: MutableList<Goal>) {

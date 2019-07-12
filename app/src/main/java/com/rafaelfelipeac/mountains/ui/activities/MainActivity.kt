@@ -1,5 +1,7 @@
 package com.rafaelfelipeac.mountains.ui.activities
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.MenuItem
@@ -39,6 +41,9 @@ import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.bottom_sheet_it
 import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.bottom_sheet_item_title
 import kotlinx.android.synthetic.main.bottom_sheet_tips_one.*
 import kotlinx.android.synthetic.main.bottom_sheet_tips_two.*
+import android.util.TypedValue
+import android.view.View
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 
 class MainActivity : BaseActivity() {
 
@@ -75,8 +80,27 @@ class MainActivity : BaseActivity() {
         setupElements()
         setupToolbar()
         setupGoogleClient()
+        setDimensBottomNav()
 
         NavigationUI.setupWithNavController(bottom_nav, navController)
+    }
+
+    private fun setDimensBottomNav() {
+        val menuView = bottom_nav.getChildAt(0) as BottomNavigationMenuView
+
+        for (i in 0 until menuView.childCount) {
+            if (i == 2) {
+                val iconView = menuView.getChildAt(i).findViewById<View>(com.google.android.material.R.id.icon)
+
+                val layoutParams = iconView.layoutParams
+                val displayMetrics = resources.displayMetrics
+
+                layoutParams.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40f, displayMetrics).toInt()
+                layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40f, displayMetrics).toInt()
+
+                iconView.layoutParams = layoutParams
+            }
+        }
     }
 
     override fun onBackPressed() {
@@ -115,7 +139,7 @@ class MainActivity : BaseActivity() {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
     }
 
-    private fun setupElements() {
+    fun setupElements() {
         toolbar = findViewById(R.id.toolbar)!!
         navController = findNavController(R.id.nav_host_fragment)
         bottomNavigation = bottom_nav
@@ -148,7 +172,10 @@ class MainActivity : BaseActivity() {
     }
 
     fun bottomNavigationVisible(visibility: Int) {
-        bottomNavigation.visibility = visibility
+        if (bottom_nav != null) {
+            bottomNavigation = bottom_nav
+            bottomNavigation.visibility = visibility
+        }
     }
 
     fun openBottomSheetItem(item: Item?) {
