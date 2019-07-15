@@ -3,7 +3,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDarkOne"
@@ -15,10 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.0"
             android:id="@+id/include"/>
 
     <fragment
@@ -32,25 +29,64 @@
             app:navGraph="@navigation/nav_graph"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             app:layout_constraintTop_toBottomOf="@+id/include"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_nav"/>
+            app:layout_constraintBottom_toTopOf="@+id/fake_bottom_nav"
+            android:layout_marginBottom="0dp"/>
 
     <include
-            layout="@layout/bottom_sheet"/>
+            layout="@layout/bottom_sheet"
+            android:id="@+id/include2"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav"
+    <View
+            android:id="@+id/fake_bottom_nav"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/nav_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:visibility="invisible"
-            app:itemBackground="@color/colorPrimaryDarkOne"
-            app:itemTextColor="@drawable/bottom_navigation_colors"
-            app:itemIconTint="@drawable/bottom_navigation_colors"
-            android:background="@color/colorPrimaryDarkOne"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:menu="@menu/menu_navigation"/>
+            android:elevation="1dp"
+            tools:visibility="visible">
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/bottom_app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:fabAlignmentMode="center"
+                android:backgroundTint="@color/colorPrimaryDarkOne"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_anchor="@id/bottom_app_bar"
+                android:src="@drawable/ic_plus"
+                android:layout_marginBottom="30dp"/>
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottom_nav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    app:menu="@menu/menu_navigation"
+                    app:itemTextColor="@drawable/bottom_navigation_colors"
+                    app:itemIconTint="@drawable/bottom_navigation_colors"
+                    android:background="@android:color/transparent"/>
+
+        </FrameLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,11 @@
 package com.rafaelfelipeac.mountains.ui.fragments.goal
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.Historic
 import com.rafaelfelipeac.mountains.models.Item
+import com.rafaelfelipeac.mountains.models.User
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 
 class GoalViewModel: BaseViewModel() {
@@ -13,7 +15,11 @@ class GoalViewModel: BaseViewModel() {
     private var items: LiveData<List<Item>>? = null
     private var history: LiveData<List<Historic>>? = null
 
+    var user: MutableLiveData<User>? = MutableLiveData()
+
     init {
+        getUser()
+
         goals = goalRepository.getGoals()
         items = itemRepository.getItems()
         history = historicRepository.getHistory()
@@ -21,6 +27,11 @@ class GoalViewModel: BaseViewModel() {
 
     fun init(goalId: Long) {
         goal = goalRepository.getGoal(goalId)
+    }
+
+    // User
+    private fun getUser() {
+        user?.value = userRepository.getUserByUUI(auth.currentUser?.uid!!)
     }
 
     // Goal

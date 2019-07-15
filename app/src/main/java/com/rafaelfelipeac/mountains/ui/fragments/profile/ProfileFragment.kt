@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
 import com.google.firebase.auth.FirebaseAuth
+import com.rafaelfelipeac.mountains.BuildConfig
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
@@ -52,6 +52,12 @@ class ProfileFragment : BaseFragment() {
             })
 
             dialog.show(fragmentManager!!, "tag")
+        }
+
+        profile_version.text = String.format("%s", "Versão: " + BuildConfig.VERSION_NAME)
+
+        fab.setOnClickListener {
+            navController.navigate(R.id.action_navigation_profile_to_navigation_goalForm)
         }
 
         profile_edit_profile.setOnClickListener {

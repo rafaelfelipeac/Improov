@@ -16,7 +16,6 @@ import com.crashlytics.android.Crashlytics
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.mountains.R
@@ -39,12 +38,17 @@ import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.bottom_sheet_it
 import kotlinx.android.synthetic.main.bottom_sheet_item_fragment.bottom_sheet_item_title
 import kotlinx.android.synthetic.main.bottom_sheet_tips_one.*
 import kotlinx.android.synthetic.main.bottom_sheet_tips_two.*
+import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : BaseActivity() {
 
     lateinit var toolbar: Toolbar
     lateinit var navController: NavController
-    lateinit var bottomNavigation: BottomNavigationView
+    lateinit var fakeBottomNav: View
+    lateinit var navLayout: CoordinatorLayout
+    lateinit var fab: FloatingActionButton
 
     lateinit var bottomSheetItemSave: Button
     lateinit var bottomSheetItemClose: ImageView
@@ -80,11 +84,8 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        if (lastFragment()) {
-            finish()
-        } else {
-            super.onBackPressed()
-        }
+        if (lastFragment()) { finish() }
+        else { super.onBackPressed() }
 
         clearToolbarMenu()
     }
@@ -118,7 +119,11 @@ class MainActivity : BaseActivity() {
     private fun setupElements() {
         toolbar = findViewById(R.id.toolbar)!!
         navController = findNavController(R.id.nav_host_fragment)
-        bottomNavigation = bottom_nav
+        navLayout = nav_layout
+        fakeBottomNav = fake_bottom_nav
+        fab = fab_layout
+
+        bottom_nav.alpha = 0.9F
 
         setupBottomSheetItem()
         setupBottomSheetDoneGoal()
@@ -148,7 +153,13 @@ class MainActivity : BaseActivity() {
     }
 
     fun bottomNavigationVisible(visibility: Int) {
-        bottomNavigation.visibility = visibility
+        if (bottom_nav != null) {
+            navLayout = nav_layout
+            navLayout.visibility = visibility
+
+            fakeBottomNav = fake_bottom_nav
+            fakeBottomNav.visibility = visibility
+        }
     }
 
     fun openBottomSheetItem(item: Item?) {
