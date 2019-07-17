@@ -78,8 +78,11 @@
                     android:id="@+id/bottom_nav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:elevation="0dp"
                     android:layout_gravity="bottom"
                     app:menu="@menu/menu_navigation"
+                    app:labelVisibilityMode="labeled"
+                    app:backgroundTint="@android:color/transparent"
                     app:itemTextColor="@drawable/bottom_navigation_colors"
                     app:itemIconTint="@drawable/bottom_navigation_colors"
                     android:background="@android:color/transparent"/>

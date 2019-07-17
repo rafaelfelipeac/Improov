@@ -10,7 +10,7 @@
 
     <item
             android:id="@+id/navigation_profile2"
-            android:icon="@drawable/ic_list"
+            android:icon="@drawable/ic_help"
             android:title="Outro"/>
 
     <item
@@ -28,7 +28,7 @@
 
     <item
             android:id="@+id/navigation_profile"
-            android:icon="@drawable/ic_list"
+            android:icon="@drawable/ic_profile"
             android:title="Perfil"/>
 
 </menu>

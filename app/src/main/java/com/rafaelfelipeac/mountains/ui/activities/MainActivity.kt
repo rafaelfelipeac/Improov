@@ -99,8 +99,6 @@ class MainActivity : BaseActivity() {
         navLayout = nav_layout
         fakeBottomNav = fake_bottom_nav
         fab = fab_layout
-
-        bottom_nav.alpha = 0.9F
     }
 
     fun setupBottomSheetTipsOne() {
