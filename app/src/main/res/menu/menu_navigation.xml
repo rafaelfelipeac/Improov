@@ -10,7 +10,7 @@
 
     <item
             android:id="@+id/navigation_profile2"
-            android:icon="@drawable/ic_help"
+            android:icon="@drawable/ic_archive"
             android:title="Outro"/>
 
     <item

@@ -51,10 +51,10 @@
               android:id="@+id/view"
               card_view:layout_constraintVertical_bias="0.491"
               card_view:layout_constraintStart_toEndOf="@+id/goal_done_view"
-              card_view:layout_constraintEnd_toStartOf="@+id/goal_delete_view"/>
+              card_view:layout_constraintEnd_toStartOf="@+id/goal_archive_view"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/goal_delete_view"
+                android:id="@+id/goal_archive_view"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 card_view:layout_constraintTop_toTopOf="parent"
@@ -63,10 +63,10 @@
                 android:background="@color/colorRed"
                 card_view:layout_constraintStart_toEndOf="@+id/view">
 
-            <ImageView android:id="@+id/goal_delete_image"
+            <ImageView android:id="@+id/goal_archive_image"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       card_view:srcCompat="@drawable/ic_delete"
+                       card_view:srcCompat="@drawable/ic_archive"
                        android:tint="@color/colorPrimaryDarkOne"
                        android:layout_centerVertical="true"
                        card_view:layout_constraintTop_toTopOf="parent"
