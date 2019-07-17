@@ -47,8 +47,6 @@ class StatsFragment : BaseFragment() {
 
         showNavigation()
 
-        (activity as MainActivity).closeBottomSheetDoneGoal()
-
         fab.setOnClickListener {
             navController.navigate(R.id.action_navigation_stats_to_navigation_goalForm)
         }

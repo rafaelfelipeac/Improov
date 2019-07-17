@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.getPercentage
 import com.rafaelfelipeac.mountains.extension.invisible
@@ -24,6 +26,10 @@ import kotlinx.android.synthetic.main.fragment_goals.*
 class GoalsFragment : BaseFragment() {
 
     private var goalsAdapter = GoalsAdapter(this)
+
+    lateinit var bottomSheetDoneGoalNo: Button
+    lateinit var bottomSheetDoneGoalYes: Button
+    lateinit var bottomSheetDoneGoal: BottomSheetDialog
 
     var goals: List<Goal>? = null
 
@@ -55,14 +61,39 @@ class GoalsFragment : BaseFragment() {
 
         observeViewModel()
 
-        (activity as MainActivity).closeBottomSheetDoneGoal()
-        (activity as MainActivity).closeBottomSheetItem()
-
         fab.setOnClickListener {
             navController.navigate(R.id.action_navigation_goals_to_navigation_goalForm)
         }
 
         showNavigation()
+
+        setupBottomSheetDoneGoal()
+    }
+
+    private fun setupBottomSheetDoneGoal() {
+        bottomSheetDoneGoal = BottomSheetDialog(this.activity!!)
+        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_goal_done, null)
+        bottomSheetDoneGoal.setContentView(sheetView)
+
+        bottomSheetDoneGoalYes = sheetView.findViewById(R.id.bottom_sheet_button_yes)
+        bottomSheetDoneGoalNo = sheetView.findViewById(R.id.bottom_sheet_button_no)
+    }
+
+    private fun openBottomSheetDoneGoal(goal: Goal, function: (goal: Goal) -> Unit) {
+        bottomSheetDoneGoal.show()
+
+        bottomSheetDoneGoalYes.setOnClickListener {
+            function(goal)
+            closeBottomSheetDoneGoal()
+        }
+
+        bottomSheetDoneGoalNo.setOnClickListener {
+            closeBottomSheetDoneGoal()
+        }
+    }
+
+    private fun closeBottomSheetDoneGoal() {
+        bottomSheetDoneGoal.hide()
     }
 
     private fun observeViewModel() {
@@ -81,8 +112,6 @@ class GoalsFragment : BaseFragment() {
         super.onResume()
 
         (activity as MainActivity).closeToolbar()
-
-        (activity as MainActivity).closeBottomSheetItem()
     }
 
     private fun setupItems() {
@@ -127,7 +156,7 @@ class GoalsFragment : BaseFragment() {
                     doneOrUndoneGoal(goal)
                 } else {
                     setupItems()
-                    (activity as MainActivity).openBottomSheetDoneGoal(goal, ::doneOrUndoneGoal)
+                    openBottomSheetDoneGoal(goal, ::doneOrUndoneGoal)
                 }
             }
             ItemTouchHelper.LEFT -> {

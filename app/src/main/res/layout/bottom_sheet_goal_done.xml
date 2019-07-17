@@ -4,12 +4,24 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/bottom_sheet_done_goal"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:behavior_hideable="true"
         app:behavior_peekHeight="0dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        android:background="@drawable/rounded_bottom_view">
+        android:background="@drawable/rounded_primary_dark_two">
+
+    <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:background="@drawable/rounded_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:id="@+id/view5"/>
 
     <TextView
             android:id="@+id/textView"
@@ -24,19 +36,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="64dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/view5"/>
 
     <android.widget.Button
             android:id="@+id/bottom_sheet_button_yes"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text="SIM"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/view"/>
+            app:layout_constraintEnd_toStartOf="@+id/view"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.0"/>
 
     <View
             android:id="@+id/view"
@@ -54,13 +69,16 @@
     <android.widget.Button
             android:id="@+id/bottom_sheet_button_no"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text="NÃO"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             app:layout_constraintStart_toEndOf="@+id/view"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

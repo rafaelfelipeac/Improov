@@ -1,11 +1,11 @@
 package com.rafaelfelipeac.mountains.ui.fragments.goalForm
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
@@ -45,10 +45,6 @@ class GoalFormFragment : BaseFragment() {
 
         goalId?.let { viewModel.init(it) }
 
-//        if (goalId != null) {
-//            viewModel.init(goalId!!)
-//        }
-
         return inflater.inflate(R.layout.fragment_goal_form, container, false)
     }
 
@@ -74,27 +70,11 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setupBottomSheetTip() {
-        (activity as MainActivity).closeBottomSheetDoneGoal()
-
         bottomSheetTip = (activity as MainActivity).bottomSheetTip
         bottomSheetTipClose = (activity as MainActivity).bottomSheetTipClose
 
-        bottomSheetTip?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(view: View, status: Int) {
-                when (status) {
-                    BottomSheetBehavior.STATE_HIDDEN -> { }
-                    BottomSheetBehavior.STATE_EXPANDED -> { }
-                    BottomSheetBehavior.STATE_HALF_EXPANDED -> { }
-                    BottomSheetBehavior.STATE_COLLAPSED -> { hideSoftKeyboard(view, activity) }
-                    BottomSheetBehavior.STATE_DRAGGING -> { }
-                    BottomSheetBehavior.STATE_SETTLING -> { }
-                }
-            }
-
-            override fun onSlide(view: View, statusSlide: Float) {}
-        })
-
         bottomSheetTipClose?.setOnClickListener {
+            hideSoftKeyboard(view!!, activity)
             (activity as MainActivity).closeBottomSheetTips()
         }
     }
@@ -124,12 +104,6 @@ class GoalFormFragment : BaseFragment() {
         super.onStart()
 
         hideNavigation()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        (activity as MainActivity).closeBottomSheetItem()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
