@@ -28,6 +28,8 @@ import java.util.*
 
 class GoalFragment : BaseFragment() {
 
+    private var isFromDragAndDrop: Boolean = false
+
     private var itemsAdapter = ItemsAdapter(this)
     private var historicAdapter = HistoricAdapter()
 
@@ -79,6 +81,12 @@ class GoalFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_goal, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        isFromDragAndDrop = false
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -123,7 +131,6 @@ class GoalFragment : BaseFragment() {
             }
         }
     }
-
 
     private fun openBottomSheetItem(item: Item?) {
         bottomSheetItem.show()
@@ -170,7 +177,11 @@ class GoalFragment : BaseFragment() {
         viewModel.getItems()?.observe(this, Observer { items ->
             this.items = items.filter { it.goalId == goal?.goalId }
 
-            setupItems()
+            if (!isFromDragAndDrop) {
+                setupItems()
+            }
+
+            isFromDragAndDrop = false
         })
 
         viewModel.getHistory()?.observe(this, Observer { history ->
@@ -497,6 +508,8 @@ class GoalFragment : BaseFragment() {
 
         targetItem.order = newPosition
         otherItem.order = oldPosition
+
+        isFromDragAndDrop = true
 
         viewModel.saveItem(targetItem)
         viewModel.saveItem(otherItem)

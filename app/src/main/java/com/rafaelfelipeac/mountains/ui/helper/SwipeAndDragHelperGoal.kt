@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.rafaelfelipeac.mountains.R
+import kotlin.math.abs
 
 class SwipeAndDragHelperGoal(private val contract: ActionCompletionContract) : ItemTouchHelper.Callback() {
 
@@ -51,7 +52,7 @@ class SwipeAndDragHelperGoal(private val contract: ActionCompletionContract) : I
                              dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
 
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-            val alpha = 1 - Math.abs(dX) / recyclerView.width
+            val alpha = 1 - abs(dX) / recyclerView.width
             viewHolder.itemView.alpha = alpha
         }
 

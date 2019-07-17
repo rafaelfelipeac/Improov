@@ -25,6 +25,8 @@ import kotlinx.android.synthetic.main.fragment_goals.*
 
 class GoalsFragment : BaseFragment() {
 
+    private var isFromDragAndDrop: Boolean = false
+
     private var goalsAdapter = GoalsAdapter(this)
 
     lateinit var bottomSheetDoneGoalNo: Button
@@ -104,7 +106,11 @@ class GoalsFragment : BaseFragment() {
         viewModel.getGoals()?.observe(this, Observer { goals ->
             this.goals = goals.filter { it.userId == user.userId && !it.archived}
 
-            setupItems()
+            if (!isFromDragAndDrop) {
+                setupItems()
+            }
+
+            isFromDragAndDrop = false
         })
     }
 
@@ -186,6 +192,8 @@ class GoalsFragment : BaseFragment() {
 
         targetGoal.order = newPosition
         otherGoal.order = oldPosition
+
+        isFromDragAndDrop = true
 
         viewModel.saveGoal(targetGoal)
         viewModel.saveGoal(otherGoal)
