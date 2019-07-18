@@ -54,6 +54,7 @@ class GoalFormFragment : BaseFragment() {
         observeViewModel()
 
         setRadioButtonType()
+        setRadioRepetition()
         setSwitchMountains()
 
         goalForm_help.setOnClickListener {
@@ -66,6 +67,54 @@ class GoalFormFragment : BaseFragment() {
             (activity as MainActivity).setupBottomSheetTipsTwo()
             setupBottomSheetTip()
             (activity as MainActivity).openBottomSheetTips()
+        }
+
+        goalForm_help3.setOnClickListener {
+            (activity as MainActivity).setupBottomSheetTipsTwo()
+            setupBottomSheetTip()
+            (activity as MainActivity).openBottomSheetTips()
+        }
+    }
+
+    private fun setRadioRepetition() {
+        radioButton1.setOnClickListener {
+            if (radioButton1.isChecked) {
+                radioButton2.isChecked = false
+                radioButton3.isChecked = false
+                radioButton4.isChecked = false
+
+                block_of_radius2.gone()
+            }
+        }
+
+        radioButton2.setOnClickListener {
+            if (radioButton2.isChecked) {
+                radioButton1.isChecked = false
+                radioButton3.isChecked = false
+                radioButton4.isChecked = false
+
+                block_of_radius2.visible()
+            }
+        }
+
+        radioButton3.setOnClickListener {
+            if (radioButton3.isChecked) {
+                radioButton1.isChecked = false
+                radioButton2.isChecked = false
+                radioButton4.isChecked = false
+
+                block_of_radius2.gone()
+            }
+        }
+
+        radioButton4.setOnClickListener {
+            if (radioButton4.isChecked) {
+                radioButton1.isChecked = false
+                radioButton2.isChecked = false
+                radioButton3.isChecked = false
+
+                block_of_radius2.gone()
+            }
         }
     }
 
