@@ -10,6 +10,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
+import com.rafaelfelipeac.mountains.models.GoalType
+import com.rafaelfelipeac.mountains.models.RepetitionType
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_goal_form.*
@@ -166,7 +168,7 @@ class GoalFormFragment : BaseFragment() {
             R.id.menu_goal_save -> {
                 if (verifyIfFieldsAreEmpty()) {
                     showSnackBar(getString(R.string.message_some_empty_value))
-                } else if (getTypeSelected() == -1) {
+                } else if (getGoalTypeSelected() == GoalType.INVALID) {
                     showSnackBar(getString(R.string.message_empty_type_goal))
                 } else if (!validateMountainsValues()) {
                     showSnackBar(getString(R.string.message_gold_silver_bronze_order))
@@ -186,14 +188,14 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun verifyIfIncOrDecValuesAreEmpty() =
-        getTypeSelected() == 2 && (goalForm_goal_inc_value.isEmpty() || goalForm_goal_dec_value.isEmpty())
+        getGoalTypeSelected() == GoalType.COUNTER && (goalForm_goal_inc_value.isEmpty() || goalForm_goal_dec_value.isEmpty())
 
     private fun setSwitchMountains() {
         form_goal_switch_mountains.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                isMountains(true)
+                isDivideAndConquer(true)
             } else {
-                isMountains(false)
+                isDivideAndConquer(false)
             }
         }
     }
@@ -204,7 +206,7 @@ class GoalFormFragment : BaseFragment() {
                 radioButtonIncDec.isChecked = false
                 radioButtonTotal.isChecked = false
 
-                goalForm_goal_inc_dev.invisible()
+                goalForm_goal_inc_dev.gone()
             }
         }
 
@@ -222,15 +224,15 @@ class GoalFormFragment : BaseFragment() {
                 radioButtonIncDec.isChecked = false
                 radioButtonLista.isChecked = false
 
-                goalForm_goal_inc_dev.invisible()
+                goalForm_goal_inc_dev.gone()
             }
         }
     }
 
-    private fun isMountains(isMountain: Boolean) {
-        goal.mountains = isMountain
+    private fun isDivideAndConquer(isDivideAndConquer: Boolean) {
+        goal.divideAndConquer = isDivideAndConquer
 
-        if (isMountain) {
+        if (isDivideAndConquer) {
             form_goal_editText_single.resetValue()
 
             form_goal_mountains.visible()
@@ -274,8 +276,15 @@ class GoalFormFragment : BaseFragment() {
 
     private fun updateOrCreateGoal(): Goal {
         goal.name = goalForm_goal_name.text.toString()
-        goal.mountains = form_goal_switch_mountains.isChecked
-        goal.type = getTypeSelected()
+        goal.divideAndConquer = form_goal_switch_mountains.isChecked
+        goal.goalType = getGoalTypeSelected()
+
+        val repetitionType = getRepetitionTypeSelected()
+
+        if (repetitionType != RepetitionType.REP_NONE) {
+            goal.repetition = true
+            goal.repetitionType = repetitionType
+        }
 
         if (goal.goalId == 0L) {
             goal.userId = user.userId
@@ -293,12 +302,12 @@ class GoalFormFragment : BaseFragment() {
         else
             goal.updatedDate = getCurrentTime()
 
-        if (getTypeSelected() == 2) {
+        if (getGoalTypeSelected() == GoalType.COUNTER) {
             goal.incrementValue = goalForm_goal_inc_value.toFloat()
             goal.decrementValue = goalForm_goal_dec_value.toFloat()
         }
 
-        if (goal.mountains) {
+        if (goal.divideAndConquer) {
             goal.bronzeValue = form_goal_editText_bronze.toFloat()
             goal.silverValue = form_goal_editText_silver.toFloat()
             goal.goldValue = form_goal_editText_gold.toFloat()
@@ -309,18 +318,27 @@ class GoalFormFragment : BaseFragment() {
         return goal
     }
 
-    private fun getTypeSelected(): Int {
-        if (radioButtonLista.isChecked)     return 1
-        if (radioButtonIncDec.isChecked)    return 2
-        if (radioButtonTotal.isChecked)     return 3
+    private fun getRepetitionTypeSelected(): RepetitionType {
+        if (radioButton1.isChecked)         return RepetitionType.REP1
+        if (radioButton2.isChecked)         return RepetitionType.REP2
+        if (radioButton3.isChecked)         return RepetitionType.REP3
+        if (radioButton4.isChecked)         return RepetitionType.REP4
 
-        return -1
+        return RepetitionType.REP_NONE
+    }
+
+    private fun getGoalTypeSelected(): GoalType {
+        if (radioButtonLista.isChecked)     return GoalType.LIST
+        if (radioButtonIncDec.isChecked)    return GoalType.COUNTER
+        if (radioButtonTotal.isChecked)     return GoalType.FINAL_VALUE
+
+        return GoalType.INVALID
     }
 
     private fun setupGoal() {
         goalForm_goal_name.setText(goal.name)
 
-        if (goal.mountains) {
+        if (goal.divideAndConquer) {
             form_goal_mountains.visible()
             form_goal_single.invisible()
 
@@ -333,9 +351,9 @@ class GoalFormFragment : BaseFragment() {
             form_goal_editText_single.setText(goal.singleValue.getNumberInRightFormat())
         }
 
-        when(goal.type) {
-            1 -> {radioButtonLista.isChecked = true}
-            2 -> {
+        when(goal.goalType) {
+            GoalType.LIST -> { radioButtonLista.isChecked = true }
+            GoalType.COUNTER -> {
                 radioButtonIncDec.isChecked = true
 
                 goalForm_goal_inc_dev.visible()
@@ -343,7 +361,14 @@ class GoalFormFragment : BaseFragment() {
                 goalForm_goal_inc_value.setText(goal.incrementValue.getNumberInRightFormat())
                 goalForm_goal_dec_value.setText(goal.decrementValue.getNumberInRightFormat())
             }
-            3 -> {radioButtonTotal.isChecked = true}
+            GoalType.FINAL_VALUE -> { radioButtonTotal.isChecked = true }
+        }
+
+        when(goal.repetitionType) {
+            RepetitionType.REP1 -> { radioButton1.isChecked = true }
+            RepetitionType.REP2 -> { radioButton2.isChecked = true }
+            RepetitionType.REP3 -> { radioButton3.isChecked = true }
+            RepetitionType.REP4 -> { radioButton4.isChecked = true }
         }
     }
 }

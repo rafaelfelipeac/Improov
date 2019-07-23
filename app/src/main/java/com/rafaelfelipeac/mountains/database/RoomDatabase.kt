@@ -7,14 +7,13 @@ import com.rafaelfelipeac.mountains.database.goal.GoalDAO
 import com.rafaelfelipeac.mountains.database.historic.HistoricDAO
 import com.rafaelfelipeac.mountains.database.item.ItemDAO
 import com.rafaelfelipeac.mountains.database.user.UserDAO
-import com.rafaelfelipeac.mountains.models.converts.Converters
-import com.rafaelfelipeac.mountains.models.Goal
-import com.rafaelfelipeac.mountains.models.Historic
-import com.rafaelfelipeac.mountains.models.Item
-import com.rafaelfelipeac.mountains.models.User
+import com.rafaelfelipeac.mountains.models.*
+import com.rafaelfelipeac.mountains.models.converts.DateConverters
+import com.rafaelfelipeac.mountains.models.converts.GoalTypeConverters
+import com.rafaelfelipeac.mountains.models.converts.RepetitionConverters
 
-@Database(entities = [Goal::class, Item::class, Historic::class, User::class], version = 27)
-@TypeConverters(Converters::class)
+@Database(entities = [Goal::class, Item::class, Historic::class, User::class], version = 29)
+@TypeConverters(DateConverters::class, GoalTypeConverters::class, RepetitionConverters::class)
 abstract class RoomDatabase : RoomDatabase() {
 
     abstract fun goalDAO(): GoalDAO

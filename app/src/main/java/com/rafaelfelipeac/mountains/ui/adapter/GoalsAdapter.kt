@@ -8,12 +8,15 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.getPercentage
+import com.rafaelfelipeac.mountains.extension.gone
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.base.BaseAdapter
+import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import com.rafaelfelipeac.mountains.ui.fragments.goals.GoalsFragment
+import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragment
 import com.rafaelfelipeac.mountains.ui.helper.ActionCompletionContract
 
-class GoalsAdapter(private val fragment: GoalsFragment) : BaseAdapter<Goal>(), ActionCompletionContract {
+class GoalsAdapter(private val fragment: BaseFragment, private val dragAndDrop: Boolean) : BaseAdapter<Goal>(), ActionCompletionContract {
 
     var clickListener: (goalId: Long) -> Unit = { }
 
@@ -51,6 +54,10 @@ class GoalsAdapter(private val fragment: GoalsFragment) : BaseAdapter<Goal>(), A
 
         val itemDrag = holder.itemView.findViewById<ImageView>(R.id.goal_image_view)
 
+        if (!dragAndDrop) {
+            itemDrag.gone()
+        }
+
         itemDrag.setOnTouchListener { _, _ ->
             touchHelper?.startDrag(holder)
             false
@@ -58,10 +65,16 @@ class GoalsAdapter(private val fragment: GoalsFragment) : BaseAdapter<Goal>(), A
     }
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int) {
-        fragment.onViewMoved(oldPosition, newPosition, items, ::notifyItemMoved)
+        if (fragment is GoalsFragment) {
+            fragment.onViewMoved(oldPosition, newPosition, items, ::notifyItemMoved)
+        }
     }
 
     override fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder) {
-        fragment.onViewSwiped(position, direction, holder, items)
+        if (fragment is GoalsFragment) {
+            fragment.onViewSwiped(position, direction, holder, items)
+        } else if (fragment is TodayFragment) {
+            fragment.onViewSwiped(position, direction, holder, items)
+        }
     }
 }

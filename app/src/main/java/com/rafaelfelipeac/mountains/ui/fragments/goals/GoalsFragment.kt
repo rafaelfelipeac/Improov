@@ -27,7 +27,7 @@ class GoalsFragment : BaseFragment() {
 
     private var isFromDragAndDrop: Boolean = false
 
-    private var goalsAdapter = GoalsAdapter(this)
+    private var goalsAdapter = GoalsAdapter(this, true)
 
     lateinit var bottomSheetDoneGoalNo: Button
     lateinit var bottomSheetDoneGoalYes: Button
@@ -153,6 +153,27 @@ class GoalsFragment : BaseFragment() {
         touchHelper.attachToRecyclerView(goals_list)
     }
 
+    fun onViewMoved(
+        oldPosition: Int, newPosition: Int, items: MutableList<Goal>,
+        function: (oldPosition: Int, newPosition: Int) -> Unit
+    ) {
+        val targetGoal = items[oldPosition]
+        val otherGoal = items[newPosition]
+
+        targetGoal.order = newPosition
+        otherGoal.order = oldPosition
+
+        isFromDragAndDrop = true
+
+        viewModel.saveGoal(targetGoal)
+        viewModel.saveGoal(otherGoal)
+
+        items.removeAt(oldPosition)
+        items.add(newPosition, targetGoal)
+
+        function(oldPosition, newPosition)
+    }
+
     fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: MutableList<Goal>) {
         val goal = items[position]
 
@@ -181,27 +202,6 @@ class GoalsFragment : BaseFragment() {
                 setupItems()
             }
         }
-    }
-
-    fun onViewMoved(
-        oldPosition: Int, newPosition: Int, items: MutableList<Goal>,
-        function: (oldPosition: Int, newPosition: Int) -> Unit
-    ) {
-        val targetGoal = items[oldPosition]
-        val otherGoal = items[newPosition]
-
-        targetGoal.order = newPosition
-        otherGoal.order = oldPosition
-
-        isFromDragAndDrop = true
-
-        viewModel.saveGoal(targetGoal)
-        viewModel.saveGoal(otherGoal)
-
-        items.removeAt(oldPosition)
-        items.add(newPosition, targetGoal)
-
-        function(oldPosition, newPosition)
     }
 
     private fun doneOrUndoneGoal(goal: Goal) {

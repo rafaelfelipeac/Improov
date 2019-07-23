@@ -75,8 +75,8 @@ class StatsFragment : BaseFragment() {
     private fun setStats() {
         val goals = goals!!
 
-        val doneWithSingles = goals.filter { !it.mountains }
-        val doneWithMountains = goals.filter { it.mountains }
+        val doneWithSingles = goals.filter { !it.divideAndConquer }
+        val doneWithMountains = goals.filter { it.divideAndConquer }
 
         val quantitySingles = doneWithSingles.filter { it.value >= it.singleValue }.size
         val quantityBronze = doneWithMountains.filter { it.value >= it.bronzeValue }.size

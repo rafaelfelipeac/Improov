@@ -25,8 +25,7 @@
             tools:layout="@layout/fragment_login">
 
         <action android:id="@+id/action_navigation_login_to_navigation_goals" app:destination="@id/navigation_goals"/>
-        <action android:id="@+id/action_navigation_login_to_forgotPasswordFragment"
-                app:destination="@id/navigation_forgotPassword"/>
+        <action android:id="@+id/action_navigation_login_to_navigation_forgotPassword" app:destination="@id/navigation_forgotPassword"/>
 
     </fragment>
 
@@ -56,7 +55,7 @@
         <action android:id="@+id/action_navigation_goals_to_navigation_goal" app:destination="@id/navigation_goal"/>
         <action android:id="@+id/action_navigation_goals_to_navigation_stats" app:destination="@id/navigation_stats"/>
         <action android:id="@+id/action_navigation_goals_to_navigation_profile" app:destination="@id/navigation_profile"/>
-        <action android:id="@+id/action_navigation_goals_to_navigation_search" app:destination="@id/navigation_search"/>
+        <action android:id="@+id/action_navigation_goals_to_navigation_today" app:destination="@id/navigation_today"/>
 
     </fragment>
 
@@ -90,15 +89,7 @@
             android:label="fragment_stats"
             tools:layout="@layout/fragment_stats">
 
-        <action android:id="@+id/action_navigation_stats_to_navigation_goalForm"
-                app:destination="@id/navigation_goalForm"/>
-    </fragment>
-
-    <fragment
-            android:id="@+id/navigation_search"
-            android:name="com.rafaelfelipeac.mountains.ui.fragments.search.SearchFragment"
-            android:label="fragment_search"
-            tools:layout="@layout/fragment_search">
+        <action android:id="@+id/action_navigation_stats_to_navigation_goalForm" app:destination="@id/navigation_goalForm"/>
 
     </fragment>
 
@@ -109,15 +100,25 @@
             tools:layout="@layout/fragment_profile">
 
         <action android:id="@+id/action_navigation_profile_to_navigation_welcome" app:destination="@id/navigation_welcome"/>
-        <action android:id="@+id/action_navigation_profile_to_editProfileFragment" app:destination="@id/editProfileFragment"/>
-        <action android:id="@+id/action_navigation_profile_to_navigation_goalForm"
-                app:destination="@id/navigation_goalForm"/>
+        <action android:id="@+id/action_navigation_profile_to_navigation_editProfile" app:destination="@id/navigation_editProfile"/>
+        <action android:id="@+id/action_navigation_profile_to_navigation_goalForm" app:destination="@id/navigation_goalForm"/>
+
     </fragment>
 
     <fragment
-            android:id="@+id/editProfileFragment"
+            android:id="@+id/navigation_editProfile"
             android:name="com.rafaelfelipeac.mountains.ui.fragments.editProfile.EditProfileFragment"
             android:label="fragment_edit_profile"
             tools:layout="@layout/fragment_edit_profile"/>
+
+    <fragment android:id="@+id/navigation_today"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragment"
+              android:label="fragment_today"
+              tools:layout="@layout/fragment_today">
+
+        <action android:id="@+id/action_navigation_today_to_navigation_goalForm" app:destination="@id/navigation_goalForm"/>
+        <action android:id="@+id/action_navigation_today_to_navigation_goal" app:destination="@id/navigation_goal"/>
+
+    </fragment>
 
 </navigation>

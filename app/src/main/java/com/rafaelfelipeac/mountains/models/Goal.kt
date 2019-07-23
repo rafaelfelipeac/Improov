@@ -15,8 +15,10 @@ data class Goal(
     var order: Int = 0,
     var done: Boolean = false,
     var archived: Boolean = false,
-    var type: Int = 0,
-    var mountains: Boolean = false,
+    var goalType: GoalType = GoalType.INVALID,
+    var repetition: Boolean = false,
+    var repetitionType: RepetitionType = RepetitionType.REP_NONE,
+    var divideAndConquer: Boolean = false,
     var singleValue: Float = 0F,
     var bronzeValue: Float = 0F,
     var silverValue: Float = 0F,
@@ -29,3 +31,7 @@ data class Goal(
     var undoneDate: Date? = null,
     var archiveDate: Date? = null,
     var finalDate: Date? = null): Serializable
+
+enum class GoalType { LIST, COUNTER, FINAL_VALUE, INVALID }
+
+enum class RepetitionType { REP1, REP2, REP3, REP4, REP_NONE }

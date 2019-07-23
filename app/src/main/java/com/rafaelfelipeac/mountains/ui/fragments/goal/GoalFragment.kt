@@ -16,6 +16,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
+import com.rafaelfelipeac.mountains.models.GoalType
 import com.rafaelfelipeac.mountains.models.Historic
 import com.rafaelfelipeac.mountains.models.Item
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
@@ -198,7 +199,7 @@ class GoalFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (goal?.type == 1) {
+        if (goal?.goalType == GoalType.LIST) {
             inflater.inflate(R.menu.menu_add, menu)
         }
 
@@ -274,7 +275,7 @@ class GoalFragment : BaseFragment() {
         goal_title.text = goal?.name
         goal_count.text = count.getNumberInRightFormat()
 
-        if (goal?.mountains!!) {
+        if (goal?.divideAndConquer!!) {
             goal_single.invisible()
             goal_mountains.visible()
 
@@ -285,8 +286,8 @@ class GoalFragment : BaseFragment() {
             goal_single_text.text = goal?.singleValue?.getNumberInRightFormat()
         }
 
-        when (goal?.type) {
-            1 -> {
+        when (goal?.goalType) {
+            GoalType.LIST -> {
                 goal_cl_list.visible()
                 goal_cl_dec_inc.invisible()
                 goal_cl_total.invisible()
@@ -296,7 +297,7 @@ class GoalFragment : BaseFragment() {
                 if ((activity as MainActivity).toolbar.menu.findItem(R.id.menu_goal_add) == null)
                     (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
             }
-            2 -> {
+            GoalType.COUNTER -> {
                 goal_cl_list.invisible()
                 goal_cl_dec_inc.visible()
                 goal_cl_total.invisible()
@@ -305,7 +306,7 @@ class GoalFragment : BaseFragment() {
 
                 goal_inc_dec_total.text = count.getNumberInRightFormat()
             }
-            3 -> {
+            GoalType.FINAL_VALUE -> {
                 goal_cl_list.invisible()
                 goal_cl_dec_inc.invisible()
                 goal_cl_total.visible()
@@ -349,7 +350,7 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun setupItems() {
-        if (goal?.type == 1) {
+        if (goal?.goalType == GoalType.LIST) {
             if (items?.any { it.goalId == goal?.goalId }!!) {
                 setItems()
 
@@ -390,11 +391,11 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun verifyIfGoalIsDone() =
-        ((goal!!.mountains && goal!!.value >= goal!!.goldValue) ||
-                (!goal!!.mountains && goal!!.value >= goal!!.singleValue))
+        ((goal!!.divideAndConquer && goal!!.value >= goal!!.goldValue) ||
+                (!goal!!.divideAndConquer && goal!!.value >= goal!!.singleValue))
 
     private fun updateSingleOrMountains() {
-        if (goal?.mountains!!) {
+        if (goal?.divideAndConquer!!) {
             updateMountains()
         } else {
             updateSingle()
@@ -402,7 +403,7 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun resetSingleOrMountains() {
-        if (goal?.mountains!!) {
+        if (goal?.divideAndConquer!!) {
             resetMountains()
         } else {
             resetSingle()
