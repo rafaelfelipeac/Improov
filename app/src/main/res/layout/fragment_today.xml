@@ -70,7 +70,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/today_delayed_cl"
+                    android:id="@+id/today_late_cl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
@@ -79,7 +79,7 @@
                     android:layout_marginTop="16dp">
 
                 <TextView
-                        android:id="@+id/today_delayed_title"
+                        android:id="@+id/today_late_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="ATRASADO"
@@ -94,7 +94,7 @@
                         android:layout_marginTop="8dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/today_delayed_list"
+                        android:id="@+id/today_late_list"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:visibility="visible"
@@ -103,7 +103,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/today_delayed_title"
+                        app:layout_constraintTop_toBottomOf="@+id/today_late_title"
                         android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginTop="8dp"
@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/today_delayed_cl"
+                    app:layout_constraintTop_toBottomOf="@+id/today_late_cl"
                     android:layout_marginTop="8dp">
 
                 <TextView

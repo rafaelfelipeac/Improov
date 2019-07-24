@@ -58,7 +58,7 @@ class LoginFragment : BaseFragment() {
         }
 
         login_forgot_password.setOnClickListener {
-            navController.navigate(LoginFragmentDirections.actionNavigationLoginToForgotPasswordFragment())
+            navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationForgotPassword())
         }
 
         login_eye.setOnClickListener {

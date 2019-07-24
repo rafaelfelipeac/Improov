@@ -18,6 +18,9 @@ data class Goal(
     var goalType: GoalType = GoalType.INVALID,
     var repetition: Boolean = false,
     var repetitionType: RepetitionType = RepetitionType.REP_NONE,
+    var repetitionLastDate: Date? = null,
+    var repetitionNextDate: Date? = null,
+    var repetitionDoneToday: Boolean = false,
     var divideAndConquer: Boolean = false,
     var singleValue: Float = 0F,
     var bronzeValue: Float = 0F,
@@ -30,7 +33,8 @@ data class Goal(
     var doneDate: Date? = null,
     var undoneDate: Date? = null,
     var archiveDate: Date? = null,
-    var finalDate: Date? = null): Serializable
+    var finalDate: Date? = null
+): Serializable
 
 enum class GoalType { LIST, COUNTER, FINAL_VALUE, INVALID }
 

@@ -284,6 +284,7 @@ class GoalFormFragment : BaseFragment() {
         if (repetitionType != RepetitionType.REP_NONE) {
             goal.repetition = true
             goal.repetitionType = repetitionType
+            goal.setNextRepetitionDate()
         }
 
         if (goal.goalId == 0L) {
@@ -362,6 +363,7 @@ class GoalFormFragment : BaseFragment() {
                 goalForm_goal_dec_value.setText(goal.decrementValue.getNumberInRightFormat())
             }
             GoalType.FINAL_VALUE -> { radioButtonTotal.isChecked = true }
+            else -> { }
         }
 
         when(goal.repetitionType) {
@@ -369,6 +371,7 @@ class GoalFormFragment : BaseFragment() {
             RepetitionType.REP2 -> { radioButton2.isChecked = true }
             RepetitionType.REP3 -> { radioButton3.isChecked = true }
             RepetitionType.REP4 -> { radioButton4.isChecked = true }
+            else -> { }
         }
     }
 }

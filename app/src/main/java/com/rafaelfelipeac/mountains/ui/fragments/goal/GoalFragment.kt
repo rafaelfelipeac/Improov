@@ -286,6 +286,10 @@ class GoalFragment : BaseFragment() {
             goal_single_text.text = goal?.singleValue?.getNumberInRightFormat()
         }
 
+        if (goal?.repetition!!) {
+            goal_repetition.text = String.format("%s %s", "Próxima ocorrência: ", goal?.repetitionNextDate.format())
+        }
+
         when (goal?.goalType) {
             GoalType.LIST -> {
                 goal_cl_list.visible()

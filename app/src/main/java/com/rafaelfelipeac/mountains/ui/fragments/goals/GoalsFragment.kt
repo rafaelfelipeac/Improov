@@ -15,6 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.getPercentage
 import com.rafaelfelipeac.mountains.extension.invisible
+import com.rafaelfelipeac.mountains.extension.isToday
 import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
@@ -111,7 +112,18 @@ class GoalsFragment : BaseFragment() {
             }
 
             isFromDragAndDrop = false
+
+            verifyMidnight()
         })
+    }
+
+    private fun verifyMidnight() {
+        goals?.forEach {
+            if (it.repetition && it.repetitionNextDate.isToday() && it.repetitionDoneToday) {
+                it.repetitionDoneToday = false
+                viewModel.saveGoal(it)
+            }
+        }
     }
 
     override fun onResume() {

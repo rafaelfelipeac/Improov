@@ -12,7 +12,7 @@ import com.rafaelfelipeac.mountains.models.converts.DateConverters
 import com.rafaelfelipeac.mountains.models.converts.GoalTypeConverters
 import com.rafaelfelipeac.mountains.models.converts.RepetitionConverters
 
-@Database(entities = [Goal::class, Item::class, Historic::class, User::class], version = 29)
+@Database(entities = [Goal::class, Item::class, Historic::class, User::class], version = 31)
 @TypeConverters(DateConverters::class, GoalTypeConverters::class, RepetitionConverters::class)
 abstract class RoomDatabase : RoomDatabase() {
 

@@ -12,7 +12,6 @@ import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.gone
 import com.rafaelfelipeac.mountains.extension.setMessageColor
 import com.rafaelfelipeac.mountains.extension.visible
-import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import java.util.*
 
@@ -46,6 +45,13 @@ abstract class BaseFragment : Fragment() {
     fun showSnackBar(message: String) {
         Snackbar
             .make(view!!, message, Snackbar.LENGTH_SHORT)
+            .setMessageColor(R.color.colorPrimaryDarkOne)
+            .show()
+    }
+
+    fun showSnackBarLong(message: String) {
+        Snackbar
+            .make(view!!, message, Snackbar.LENGTH_LONG)
             .setMessageColor(R.color.colorPrimaryDarkOne)
             .show()
     }

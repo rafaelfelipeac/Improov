@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
-import com.rafaelfelipeac.mountains.extension.getPercentage
+import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.GoalsAdapter
@@ -18,24 +20,48 @@ import kotlinx.android.synthetic.main.fragment_today.*
 
 class TodayFragment : BaseFragment() {
 
-    private var goalsDelayedAdapter = GoalsAdapter(this, false)
+    private var goalsLateAdapter = GoalsAdapter(this, false)
     private var goalsTodayAdapter = GoalsAdapter(this, false)
 
+    private lateinit var viewModel: TodayViewModel
+
+    private var goalsLate: List<Goal>? = null
+    private var goalsToday: List<Goal>? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        viewModel = ViewModelProviders.of(this).get(TodayViewModel::class.java)
+
         return inflater.inflate(R.layout.fragment_today, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)
 
         fab.setOnClickListener {
             navController.navigate(R.id.action_navigation_today_to_navigation_goalForm)
         }
 
-        showNavigation()
+        observeViewModel()
 
-        setItemsDelayed()
-        setItemsToday()
+        showNavigation()
+    }
+
+    private fun observeViewModel() {
+        viewModel.user?.observe(this, Observer { user ->
+            (activity as MainActivity).user = user
+        })
+
+        viewModel.getGoals()?.observe(this, Observer { goals ->
+            this.goalsLate =
+                goals.filter { it.userId == user.userId && !it.archived && it.repetition && !it.repetitionDoneToday && it.isLate() && !it.isToday() }
+            this.goalsToday =
+                goals.filter { it.userId == user.userId && !it.archived && it.repetition && !it.repetitionDoneToday && it.isToday() }
+            var goalsFuture =
+                goals.filter { it.userId == user.userId && !it.archived && it.repetition && !it.repetitionDoneToday && it.isFuture() }
+
+            setItemsLate()
+            setItemsToday()
+        })
     }
 
     override fun onResume() {
@@ -44,31 +70,27 @@ class TodayFragment : BaseFragment() {
         (activity as MainActivity).closeToolbar()
     }
 
-    private fun setItemsDelayed() {
-        val goals = listOf(Goal(name = "1"), Goal(name = "2"), Goal(name = "3"), Goal(name = "4"), Goal(name = "5"))
+    private fun setItemsLate() {
+        goalsLate?.sortedBy { it.order }.let { goalsLateAdapter.setItems(it!!) }
 
-        goals.sortedBy { it.order }.let { goalsDelayedAdapter.setItems(it) }
-
-        goalsDelayedAdapter.clickListener = {
+        goalsLateAdapter.clickListener = {
             val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(it)
             navController.navigate(action)
         }
 
-        val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsDelayedAdapter)
+        val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsLateAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        goalsDelayedAdapter.touchHelper = touchHelper
+        goalsLateAdapter.touchHelper = touchHelper
 
-        today_delayed_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        today_delayed_list.adapter = goalsDelayedAdapter
+        today_late_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        today_late_list.adapter = goalsLateAdapter
 
-        touchHelper.attachToRecyclerView(today_delayed_list)
+        touchHelper.attachToRecyclerView(today_late_list)
     }
 
     private fun setItemsToday() {
-        val goals = listOf(Goal(name = "1"), Goal(name = "2"), Goal(name = "3"), Goal(name = "4"), Goal(name = "5"))
-
-        goals.sortedBy { it.order }.let { goalsTodayAdapter.setItems(it) }
+        goalsToday?.sortedBy { it.order }.let { goalsTodayAdapter.setItems(it!!) }
 
         goalsTodayAdapter.clickListener = {
             val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(it)
@@ -91,28 +113,15 @@ class TodayFragment : BaseFragment() {
 
         when (direction) {
             ItemTouchHelper.RIGHT -> {
-                if (goal.done || goal.getPercentage() >= 100) {
-                    //doneOrUndoneGoal(goal)
-                } else {
-                    //setupItems()
-                    //openBottomSheetDoneGoal(goal, ::doneOrUndoneGoal)
-                }
-            }
-            ItemTouchHelper.LEFT -> {
-                goal.archived = true
-                goal.archiveDate = getCurrentTime()
+                goal.repetitionDoneToday = true
+                goal.repetitionLastDate = getCurrentTime()
+                goal.addNextRepetitionDate(1)
 
-                //viewModel.saveGoal(goal)
-//
-//                showSnackBarWithAction(
-//                    holder.itemView,
-//                    getString(R.string.goals_fragment_resolved_goal_message),
-//                    goal as Any,
-//                    ::archiveGoal
-//                )
-//
-//                setupItems()
+                viewModel.saveGoal(goal)
+
+                showSnackBarLong(String.format("%s %s", "Feito. Próxima ocorrência: ", goal.repetitionNextDate.format()))
             }
+            ItemTouchHelper.LEFT -> { }
         }
     }
 }
