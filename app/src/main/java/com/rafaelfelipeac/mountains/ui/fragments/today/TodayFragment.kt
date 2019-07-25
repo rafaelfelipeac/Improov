@@ -149,17 +149,24 @@ class TodayFragment : BaseFragment() {
 
         when (direction) {
             ItemTouchHelper.RIGHT -> {
+                val beforeGoal = goal.copy()
+
                 goal.repetitionDoneToday = true
                 goal.repetitionLastDate = getCurrentTime()
                 goal.addNextRepetitionDate(1)
 
                 viewModel.saveGoal(goal)
 
-                showSnackBarLong(String.format("%s %s", "Feito. Próxima ocorrência: ", goal.repetitionNextDate.format()))
+                showSnackBarWithAction(holder.itemView, String.format("%s %s.", "Próxima ocorrência: ",
+                    goal.repetitionNextDate.format()), beforeGoal, ::undoDone)
             }
             ItemTouchHelper.LEFT -> {
                 viewModel.saveGoal(goal)
             }
         }
+    }
+
+    private fun undoDone(goal: Any) {
+        viewModel.saveGoal(goal as Goal)
     }
 }
