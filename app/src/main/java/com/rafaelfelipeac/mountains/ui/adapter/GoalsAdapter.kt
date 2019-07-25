@@ -2,6 +2,7 @@ package com.rafaelfelipeac.mountains.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.getPercentage
 import com.rafaelfelipeac.mountains.extension.gone
+import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.base.BaseAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
@@ -16,7 +18,7 @@ import com.rafaelfelipeac.mountains.ui.fragments.goals.GoalsFragment
 import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragment
 import com.rafaelfelipeac.mountains.ui.helper.ActionCompletionContract
 
-class GoalsAdapter(private val fragment: BaseFragment, private val dragAndDrop: Boolean) : BaseAdapter<Goal>(), ActionCompletionContract {
+class GoalsAdapter(private val fragment: BaseFragment) : BaseAdapter<Goal>(), ActionCompletionContract {
 
     var clickListener: (goalId: Long) -> Unit = { }
 
@@ -28,12 +30,13 @@ class GoalsAdapter(private val fragment: BaseFragment, private val dragAndDrop: 
         val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_item_title)
         val image = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress)
         val percentage = viewHolder.itemView.findViewById<TextView>(R.id.goal_percentage)
+        val goalRepetition = viewHolder.itemView.findViewById<TextView>(R.id.goal_item_repetition)
 
         title.text = item.name
 
         if (item.done) {
             image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
-            percentage.text = context.getString(R.string.empty_string)
+            percentage.gone()
         }
         else {
             image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
@@ -44,6 +47,18 @@ class GoalsAdapter(private val fragment: BaseFragment, private val dragAndDrop: 
                 String.format(context.getString(R.string.percentage_others), item.getPercentage(), context.getString(R.string.percentage_symbol))
             }
         }
+
+        if (item.repetition) {
+            percentage.gone()
+
+            image.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
+            image.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+
+            image.background = ContextCompat.getDrawable(context!!, R.drawable.ic_repetition)
+
+            goalRepetition.visible()
+            goalRepetition.text = String.format("%s %s", "Repetição: ", "3 vezes por semana.")
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -53,10 +68,6 @@ class GoalsAdapter(private val fragment: BaseFragment, private val dragAndDrop: 
         holder.setIsRecyclable(false)
 
         val itemDrag = holder.itemView.findViewById<ImageView>(R.id.goal_image_view)
-
-        if (!dragAndDrop) {
-            itemDrag.gone()
-        }
 
         itemDrag.setOnTouchListener { _, _ ->
             touchHelper?.startDrag(holder)

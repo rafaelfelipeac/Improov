@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -11,17 +12,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
+import com.rafaelfelipeac.mountains.models.DayOfWeek
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
-import com.rafaelfelipeac.mountains.ui.adapter.GoalsAdapter
+import com.rafaelfelipeac.mountains.ui.adapter.DayOfWeekAdapter
+import com.rafaelfelipeac.mountains.ui.adapter.GoalsRepetitionAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperGoal
 import kotlinx.android.synthetic.main.fragment_today.*
 
 class TodayFragment : BaseFragment() {
 
-    private var goalsLateAdapter = GoalsAdapter(this, false)
-    private var goalsTodayAdapter = GoalsAdapter(this, false)
+    private var weekVisible = false
+
+    private var goalsLateAdapter = GoalsRepetitionAdapter(this)
+    private var goalsTodayAdapter = GoalsRepetitionAdapter(this)
+    private var goalsWeekAdapter = DayOfWeekAdapter(this)
 
     private lateinit var viewModel: TodayViewModel
 
@@ -39,6 +45,19 @@ class TodayFragment : BaseFragment() {
 
         fab.setOnClickListener {
             navController.navigate(R.id.action_navigation_today_to_navigation_goalForm)
+        }
+
+        today_week_week.setOnClickListener {
+            weekVisible =
+                if (!weekVisible) {
+                    today_week_week_information.visible()
+                    today_week_image.background = ContextCompat.getDrawable(context!!, R.drawable.ic_up)
+                    true
+                } else {
+                    today_week_week_information.gone()
+                    today_week_image.background = ContextCompat.getDrawable(context!!, R.drawable.ic_down)
+                    false
+                }
         }
 
         observeViewModel()
@@ -61,6 +80,7 @@ class TodayFragment : BaseFragment() {
 
             setItemsLate()
             setItemsToday()
+            setItemsWeek()
         })
     }
 
@@ -108,6 +128,22 @@ class TodayFragment : BaseFragment() {
         touchHelper.attachToRecyclerView(today_today_list)
     }
 
+    private fun setItemsWeek() {
+        val days = listOf(
+            DayOfWeek("sexta-feira","26 JUL"),
+            DayOfWeek("sábado", "27 JUL"),
+            DayOfWeek("domingo", "28 JUL"),
+            DayOfWeek("segunda-feira", "29 JUL"),
+            DayOfWeek("terça-feira","30 JUL"),
+            DayOfWeek("quarta-feira", "31 JUL"),
+            DayOfWeek("quinta-feira", "1 AGO"))
+
+        days.let { goalsWeekAdapter.setItems(it) }
+
+        today_week_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        today_week_list.adapter = goalsWeekAdapter
+    }
+
     fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: MutableList<Goal>) {
         val goal = items[position]
 
@@ -121,7 +157,9 @@ class TodayFragment : BaseFragment() {
 
                 showSnackBarLong(String.format("%s %s", "Feito. Próxima ocorrência: ", goal.repetitionNextDate.format()))
             }
-            ItemTouchHelper.LEFT -> { }
+            ItemTouchHelper.LEFT -> {
+                viewModel.saveGoal(goal)
+            }
         }
     }
 }

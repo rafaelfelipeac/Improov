@@ -28,11 +28,11 @@ class GoalsFragment : BaseFragment() {
 
     private var isFromDragAndDrop: Boolean = false
 
-    private var goalsAdapter = GoalsAdapter(this, true)
+    private var goalsAdapter = GoalsAdapter(this)
 
-    lateinit var bottomSheetDoneGoalNo: Button
-    lateinit var bottomSheetDoneGoalYes: Button
-    lateinit var bottomSheetDoneGoal: BottomSheetDialog
+    private lateinit var bottomSheetDoneGoalNo: Button
+    private lateinit var bottomSheetDoneGoalYes: Button
+    private lateinit var bottomSheetDoneGoal: BottomSheetDialog
 
     var goals: List<Goal>? = null
 
