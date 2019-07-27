@@ -617,12 +617,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Todo dia"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textColor="@color/colorPrimary"
                         app:layout_constraintStart_toEndOf="@+id/radioButton1"
-                        android:layout_marginStart="8dp"
                         app:layout_constraintTop_toTopOf="@+id/radioButton1"
-                        app:layout_constraintBottom_toBottomOf="@+id/radioButton1"/>
+                        app:layout_constraintBottom_toBottomOf="@+id/radioButton1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintHorizontal_bias="0.0"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -637,17 +639,6 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Alguns dias por semana"
-                        android:textSize="16sp"
-                        android:textColor="@color/colorPrimary"
-                        app:layout_constraintStart_toEndOf="@+id/radioButton2"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintTop_toTopOf="@+id/radioButton2"
-                        app:layout_constraintBottom_toBottomOf="@+id/radioButton2"/>
-
                 <RadioButton
                         android:id="@+id/radioButton2"
                         android:layout_width="wrap_content"
@@ -661,6 +652,19 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintVertical_bias="0.0"/>
 
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Alguns dias por semana"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintStart_toEndOf="@+id/radioButton2"
+                        app:layout_constraintTop_toTopOf="@+id/radioButton2"
+                        app:layout_constraintBottom_toBottomOf="@+id/radioButton2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintHorizontal_bias="0.0"/>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/block_of_radius2"
                         android:layout_width="match_parent"
@@ -671,99 +675,99 @@
                         app:layout_constraintTop_toBottomOf="@+id/radioButton2"
                         tools:visibility="visible">
 
-                    <Button
+                    <CheckBox
                             android:id="@+id/weekDay1"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:text="1"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:text="Domingo"
+                            android:textColor="@color/colorPrimary"
                             android:layout_marginTop="8dp"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/weekDay2"
-                            android:layout_marginEnd="8dp"/>
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintStart_toStartOf="parent"/>
 
-                    <Button
+                    <CheckBox
                             android:id="@+id/weekDay2"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:text="2"
-                            android:layout_marginTop="8dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:text="Segunda-feira"
+                            android:textColor="@color/colorPrimary"
+                            app:layout_constraintTop_toTopOf="@+id/weekDay1"
+                            app:layout_constraintStart_toEndOf="@+id/weekDay1"
+                            app:layout_constraintBottom_toBottomOf="@+id/weekDay1"
                             android:layout_marginStart="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginEnd="8dp"/>
 
-                    <Button
+                    <CheckBox
                             android:id="@+id/weekDay3"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:text="3"
-                            android:layout_marginTop="8dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/weekDay2"
-                            android:layout_marginStart="8dp"/>
-
-                    <Button
-                            android:id="@+id/weekDay4"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:text="4"
-                            android:layout_marginTop="8dp"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:text="Terça-feira"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_marginStart="8dp"
                             app:layout_constraintTop_toBottomOf="@+id/weekDay1"
-                            app:layout_constraintEnd_toStartOf="@+id/weekDay5"
-                            android:layout_marginEnd="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginBottom="8dp"/>
+                            app:layout_constraintStart_toStartOf="parent"/>
 
-                    <Button
+                    <CheckBox
+                            android:id="@+id/weekDay4"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:text="Quarta-feira"
+                            android:textColor="@color/colorPrimary"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintTop_toTopOf="@+id/weekDay3"
+                            app:layout_constraintBottom_toBottomOf="@+id/weekDay3"
+                            app:layout_constraintStart_toEndOf="@+id/weekDay3"/>
+
+                    <CheckBox
                             android:id="@+id/weekDay5"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:text="5"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:text="Quinta-feira"
+                            android:textColor="@color/colorPrimary"
                             android:layout_marginStart="8dp"
-                            app:layout_constraintTop_toTopOf="@+id/weekDay4"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/view6"
-                            app:layout_constraintHorizontal_bias="1.0"
-                            android:layout_marginEnd="4dp"
-                            android:layout_marginBottom="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
+                            app:layout_constraintTop_toBottomOf="@+id/weekDay3"/>
 
-                    <View
-                            android:layout_width="1dp"
-                            android:layout_height="1dp"
-                            android:layout_marginEnd="8dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginBottom="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginTop="8dp"
-                            app:layout_constraintTop_toBottomOf="@+id/weekDay2"
-                            android:id="@+id/view6"
-                            app:layout_constraintEnd_toEndOf="parent"/>
-
-                    <Button
+                    <CheckBox
                             android:id="@+id/weekDay6"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:text="6"
-                            app:layout_constraintTop_toTopOf="@+id/weekDay5"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:text="Sexta-feira"
+                            android:textColor="@color/colorPrimary"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginEnd="8dp"
-                            app:layout_constraintStart_toEndOf="@+id/view6"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            android:layout_marginStart="4dp"
-                            android:layout_marginBottom="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-
-                    <Button
-                            android:id="@+id/weekDay7"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:text="7"
-                            app:layout_constraintTop_toTopOf="@+id/weekDay6"
-                            app:layout_constraintStart_toEndOf="@+id/weekDay6"
                             android:layout_marginStart="8dp"
+                            app:layout_constraintTop_toTopOf="@+id/weekDay5"
+                            app:layout_constraintStart_toEndOf="@+id/weekDay5"
+                            app:layout_constraintBottom_toBottomOf="@+id/weekDay5"/>
+
+                    <CheckBox
+                            android:id="@+id/weekDay7"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:text="Sábado"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintTop_toBottomOf="@+id/weekDay5"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             android:layout_marginBottom="8dp"/>
 
@@ -785,17 +789,22 @@
                         android:id="@+id/radioButton3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/editText"
-                        app:layout_constraintBottom_toBottomOf="@+id/editText"/>
+                        app:layout_constraintBottom_toBottomOf="@+id/editText"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"/>
 
                 <EditText
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toEndOf="@+id/radioButton3"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="16dp"
                         android:id="@+id/editText"
                         android:textColor="@color/colorPrimary"
                         app:layout_constraintTop_toTopOf="@+id/textView16"
@@ -806,7 +815,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="dias por"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textColor="@color/colorPrimary"
                         app:layout_constraintStart_toEndOf="@+id/editText"
                         android:layout_marginStart="8dp"
@@ -841,6 +850,8 @@
                         android:id="@+id/radioButton4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -854,10 +865,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="A cada "
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textColor="@color/colorPrimary"
                         app:layout_constraintStart_toEndOf="@+id/radioButton4"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="16dp"
                         app:layout_constraintTop_toTopOf="@+id/radioButton4"
                         app:layout_constraintBottom_toBottomOf="@+id/radioButton4"
                         android:id="@+id/textView17"/>
@@ -877,7 +888,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="dias"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textColor="@color/colorPrimary"
                         app:layout_constraintStart_toEndOf="@+id/editText2"
                         app:layout_constraintTop_toTopOf="@+id/editText2"

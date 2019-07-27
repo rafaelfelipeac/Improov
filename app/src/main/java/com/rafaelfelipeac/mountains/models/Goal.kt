@@ -21,6 +21,8 @@ data class Goal(
     var repetitionLastDate: Date? = null,
     var repetitionNextDate: Date? = null,
     var repetitionDoneToday: Boolean = false,
+    var repetitionWeekDays: MutableList<Boolean> = mutableListOf(),
+    var repetitionWeekDaysLong: MutableList<Long> = mutableListOf(),
     var divideAndConquer: Boolean = false,
     var singleValue: Float = 0F,
     var bronzeValue: Float = 0F,

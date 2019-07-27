@@ -279,14 +279,6 @@ class GoalFormFragment : BaseFragment() {
         goal.divideAndConquer = form_goal_switch_mountains.isChecked
         goal.goalType = getGoalTypeSelected()
 
-        val repetitionType = getRepetitionTypeSelected()
-
-        if (repetitionType != RepetitionType.REP_NONE) {
-            goal.repetition = true
-            goal.repetitionType = repetitionType
-            goal.setNextRepetitionDate()
-        }
-
         if (goal.goalId == 0L) {
             goal.userId = user.userId
             goal.createdDate = getCurrentTime()
@@ -316,7 +308,31 @@ class GoalFormFragment : BaseFragment() {
             goal.singleValue = form_goal_editText_single.toFloat()
         }
 
+        goal.repetitionWeekDays = getWeekDaysSelected()
+
+        val repetitionType = getRepetitionTypeSelected()
+
+        if (repetitionType != RepetitionType.REP_NONE) {
+            goal.repetition = true
+            goal.repetitionType = repetitionType
+            goal.setNextRepetitionDate()
+        }
+
         return goal
+    }
+
+    private fun getWeekDaysSelected(): MutableList<Boolean> {
+        val weekDays = mutableListOf<Boolean>()
+
+        weekDays.add(weekDay1.isChecked)
+        weekDays.add(weekDay2.isChecked)
+        weekDays.add(weekDay3.isChecked)
+        weekDays.add(weekDay4.isChecked)
+        weekDays.add(weekDay5.isChecked)
+        weekDays.add(weekDay6.isChecked)
+        weekDays.add(weekDay7.isChecked)
+
+        return weekDays
     }
 
     private fun getRepetitionTypeSelected(): RepetitionType {
@@ -372,6 +388,18 @@ class GoalFormFragment : BaseFragment() {
             RepetitionType.REP3 -> { radioButton3.isChecked = true }
             RepetitionType.REP4 -> { radioButton4.isChecked = true }
             else -> { }
+        }
+
+        if (goal.repetition && goal.repetitionType == RepetitionType.REP2) {
+            block_of_radius2.visible()
+
+            weekDay1.isChecked = goal.repetitionWeekDays[0]
+            weekDay2.isChecked = goal.repetitionWeekDays[1]
+            weekDay3.isChecked = goal.repetitionWeekDays[2]
+            weekDay4.isChecked = goal.repetitionWeekDays[3]
+            weekDay5.isChecked = goal.repetitionWeekDays[4]
+            weekDay6.isChecked = goal.repetitionWeekDays[5]
+            weekDay7.isChecked = goal.repetitionWeekDays[6]
         }
     }
 }
