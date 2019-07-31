@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
-import com.rafaelfelipeac.mountains.models.DayOfWeek
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.DayOfWeekAdapter
@@ -20,19 +19,21 @@ import com.rafaelfelipeac.mountains.ui.adapter.GoalsRepetitionAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperGoal
 import kotlinx.android.synthetic.main.fragment_today.*
+import java.util.*
 
 class TodayFragment : BaseFragment() {
 
     private var weekVisible = false
 
+    private lateinit var viewModel: TodayViewModel
+
     private var goalsLateAdapter = GoalsRepetitionAdapter(this)
     private var goalsTodayAdapter = GoalsRepetitionAdapter(this)
     private var goalsWeekAdapter = DayOfWeekAdapter(this)
 
-    private lateinit var viewModel: TodayViewModel
-
     private var goalsLate: List<Goal>? = null
     private var goalsToday: List<Goal>? = null
+    private var goalsFuture: List<Goal>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(this).get(TodayViewModel::class.java)
@@ -75,8 +76,8 @@ class TodayFragment : BaseFragment() {
                 goals.filter { it.userId == user.userId && !it.archived && it.repetition && !it.repetitionDoneToday && it.isLate() && !it.isToday() }
             this.goalsToday =
                 goals.filter { it.userId == user.userId && !it.archived && it.repetition && !it.repetitionDoneToday && it.isToday() }
-            var goalsFuture =
-                goals.filter { it.userId == user.userId && !it.archived && it.repetition && !it.repetitionDoneToday && it.isFuture() }
+            this.goalsFuture =
+                goals.filter { it.userId == user.userId && !it.archived && it.repetition && it.isFuture() }
 
             setItemsLate()
             setItemsToday()
@@ -129,14 +130,16 @@ class TodayFragment : BaseFragment() {
     }
 
     private fun setItemsWeek() {
-        val days = listOf(
-            DayOfWeek("sexta-feira","26 JUL"),
-            DayOfWeek("sábado", "27 JUL"),
-            DayOfWeek("domingo", "28 JUL"),
-            DayOfWeek("segunda-feira", "29 JUL"),
-            DayOfWeek("terça-feira","30 JUL"),
-            DayOfWeek("quarta-feira", "31 JUL"),
-            DayOfWeek("quinta-feira", "1 AGO"))
+        val calendar = Calendar.getInstance()
+        val days = calendar.getNextWeek()
+
+        days.forEach { day ->
+            goalsFuture?.forEach { goal ->
+                if (day.title2 == goal.repetitionNextDate.format()) {
+                    day.list.add(goal)
+                }
+            }
+        }
 
         days.let { goalsWeekAdapter.setItems(it) }
 
@@ -152,8 +155,8 @@ class TodayFragment : BaseFragment() {
                 val beforeGoal = goal.copy()
 
                 goal.repetitionDoneToday = true
-                goal.repetitionLastDate = getCurrentTime()
-                goal.addNextRepetitionDate(1)
+                goal.repetitionDoneDate = getCurrentTime()
+                goal.nextRepetitionDateAfterDone()
 
                 viewModel.saveGoal(goal)
 

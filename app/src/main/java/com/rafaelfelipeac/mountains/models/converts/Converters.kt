@@ -3,6 +3,7 @@ package com.rafaelfelipeac.mountains.models.converts
 import androidx.room.TypeConverter
 import com.rafaelfelipeac.mountains.models.GoalType
 import com.rafaelfelipeac.mountains.models.RepetitionType
+import com.rafaelfelipeac.mountains.models.PeriodType
 import java.util.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -23,6 +24,11 @@ class Converters {
     @TypeConverter fun stringToRepetitionType(value: String): RepetitionType = RepetitionType.valueOf(value)
 
     @TypeConverter fun repetitionTypeToString(repetitionType: RepetitionType) = repetitionType.name
+
+    // periodType
+    @TypeConverter fun stringToPeriodType(value: String): PeriodType = PeriodType.valueOf(value)
+
+    @TypeConverter fun periodTypeToString(periodType: PeriodType) = periodType.name
 
     // boolean
     @TypeConverter fun stringListToBooleanList(listOfDays: String): List<Boolean> { return Gson().

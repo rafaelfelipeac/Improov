@@ -15,10 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
-import com.rafaelfelipeac.mountains.models.Goal
-import com.rafaelfelipeac.mountains.models.GoalType
-import com.rafaelfelipeac.mountains.models.Historic
-import com.rafaelfelipeac.mountains.models.Item
+import com.rafaelfelipeac.mountains.models.*
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.HistoricAdapter
 import com.rafaelfelipeac.mountains.ui.adapter.ItemsAdapter
@@ -287,7 +284,15 @@ class GoalFragment : BaseFragment() {
         }
 
         if (goal?.repetition!!) {
-            goal_repetition.text = String.format("%s %s", "Próxima ocorrência: ", goal?.repetitionNextDate.format())
+            goal_repetition.visible()
+
+            goal_repetition_next.text = String.format("%s %s", "Próxima ocorrência: ", goal?.repetitionNextDate.format())
+
+            if (goal?.repetitionType == RepetitionType.REP3 || goal?.repetitionType == RepetitionType.REP4) {
+                goal_repetition_last.visible()
+                goal_repetition_last.text =
+                    String.format("%s %s", "Último dia do ciclo:", goal?.repetitionLastDate.format())
+            }
         }
 
         when (goal?.goalType) {

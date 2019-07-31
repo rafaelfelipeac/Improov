@@ -124,6 +124,7 @@
         - Valor final\n
         Para objetivos onde os valores a serem somados ou subtraídos mudem constantemente.
     </string>
+    <string name="goals_adapter_item_repetition">Repetição:</string>
 
 
 </resources>

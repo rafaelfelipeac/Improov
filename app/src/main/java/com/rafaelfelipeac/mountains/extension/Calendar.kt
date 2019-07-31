@@ -1,5 +1,6 @@
 package com.rafaelfelipeac.mountains.extension
 
+import com.rafaelfelipeac.mountains.models.DayOfWeek
 import java.util.*
 
 fun Calendar.addDays(days: Int) {
@@ -12,4 +13,31 @@ fun Calendar.setToMidnight() {
     set(Calendar.MINUTE, 0)
     set(Calendar.SECOND, 0)
     set(Calendar.MILLISECOND, 0)
+}
+
+fun Calendar.getNextWeek(): List<DayOfWeek> {
+    val today = Calendar.getInstance()
+
+    val days = mutableListOf<DayOfWeek>()
+
+    for (i in 0..6) {
+        today.addDays(1)
+
+        days.add(DayOfWeek(today.getDayOfWeek(today.get(Calendar.DAY_OF_WEEK)), today.time.format().toString()))
+    }
+
+    return days
+}
+
+fun Calendar.getDayOfWeek(day: Int): String {
+    return when (day) {
+        1 -> "Domingo"
+        2 -> "Segunda-feira"
+        3 -> "Terça-feira"
+        4 -> "Quarta-feira"
+        5 -> "Quinta-feira"
+        6 -> "Sexta-feira"
+        7 -> "Sábado"
+        else -> ""
+    }
 }

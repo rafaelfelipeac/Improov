@@ -10,7 +10,7 @@ import com.rafaelfelipeac.mountains.database.user.UserDAO
 import com.rafaelfelipeac.mountains.models.*
 import com.rafaelfelipeac.mountains.models.converts.Converters
 
-@Database(entities = [Goal::class, Item::class, Historic::class, User::class], version = 34)
+@Database(entities = [Goal::class, Item::class, Historic::class, User::class], version = 38)
 @TypeConverters(Converters::class)
 abstract class RoomDatabase : RoomDatabase() {
 

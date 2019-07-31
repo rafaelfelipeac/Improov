@@ -8,10 +8,12 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.extension.getName
 import com.rafaelfelipeac.mountains.extension.getPercentage
 import com.rafaelfelipeac.mountains.extension.gone
 import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.models.Goal
+import com.rafaelfelipeac.mountains.models.RepetitionType.*
 import com.rafaelfelipeac.mountains.ui.base.BaseAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import com.rafaelfelipeac.mountains.ui.fragments.goals.GoalsFragment
@@ -57,7 +59,35 @@ class GoalsAdapter(private val fragment: BaseFragment) : BaseAdapter<Goal>(), Ac
             image.background = ContextCompat.getDrawable(context!!, R.drawable.ic_repetition)
 
             goalRepetition.visible()
-            goalRepetition.text = String.format("%s %s", "Repetição: ", "3 vezes por semana.")
+
+            when (item.repetitionType) {
+                REP1 -> {
+                    goalRepetition.text = String.format("%s %s.",
+                        context.getString(R.string.goals_adapter_item_repetition),
+                        "Todo dia")
+                }
+                REP2 -> {
+                    goalRepetition.text = String.format("%s %s %s.",
+                        context.getString(R.string.goals_adapter_item_repetition),
+                        item.repetitionWeekDaysLong.filter { it > 0 }.size.toString(),
+                        "vezes por semana")
+                }
+                REP3 -> {
+                    goalRepetition.text = String.format("%s %s %s %s.",
+                        context.getString(R.string.goals_adapter_item_repetition),
+                        item.repetitionPeriodTotal.toString(),
+                        "dias por",
+                        item.repetitionPeriodType.getName())
+                }
+                REP4 -> {
+                    goalRepetition.text = String.format("%s %s %s %s.",
+                        context.getString(R.string.goals_adapter_item_repetition),
+                        "A cada",
+                        item.repetitionPeriodDaysBetween.toString(),
+                        "dias")
+                }
+                REP_NONE -> TODO()
+            }
         }
     }
 
@@ -89,3 +119,4 @@ class GoalsAdapter(private val fragment: BaseFragment) : BaseAdapter<Goal>(), Ac
         }
     }
 }
+
