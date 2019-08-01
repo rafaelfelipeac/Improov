@@ -69,44 +69,54 @@ fun Goal.nextRepetitionDateAfterDone() {
 
     when (repetitionType) {
         RepetitionType.REP1 -> {
-            date.addDays(1)
+            repetitionNextDate.addDays(1)
         }
         RepetitionType.REP2 -> {
             discoverNextWeek(repetitionWeekDays)
 
-            val doneDate = Calendar.getInstance()
-            doneDate.timeInMillis = repetitionDoneDate?.time!!
-            doneDate.setToMidnight()
-
-            val nextDate = Calendar.getInstance()
-            nextDate.timeInMillis = repetitionNextDate?.time!!
-            nextDate.setToMidnight()
+            repetitionDoneDate.setToMidnight()
+            repetitionNextDate.setToMidnight()
 
             val list = repetitionWeekDaysLong
-                .filter {
-                            it > 0L &&
-                            it > doneDate.timeInMillis
-                            it > nextDate.timeInMillis }
+                .filter { it > 0L && it > repetitionDoneDate?.time!! && it > repetitionNextDate?.time!! }
                 .sortedBy { it }
 
             if (list.isNotEmpty()) {
                 date.timeInMillis = list[0]
             } else {
-                // agendar para um dia fora da próxima semana
+                val nextWeek = upOnNextWeek()
+
+                val upRepetitionDoneDate = repetitionDoneDate?.time?.let { Date(it) }
+                val upRepetitionNextDate = repetitionNextDate?.time?.let { Date(it) }
+
+                val upList = nextWeek
+                    .filter { it > 0L && it > upRepetitionDoneDate?.time!! && it > upRepetitionNextDate?.time!! }
+                    .sortedBy { it }
+
+                if (upList.isNotEmpty()) {
+                    date.timeInMillis = upList[0]
+                }
             }
+
+            repetitionNextDate = date.time
         }
         RepetitionType.REP3 -> {
+            repetitionPeriodDone++
+
             if (repetitionPeriodDone == repetitionPeriodTotal) {
-                setRepetitionNextDate()
+                setRepetitionNextCycle()
+                repetitionPeriodDone = 0
+            } else {
+                repetitionNextDate?.addDays(1)
             }
         }
         RepetitionType.REP4 -> {
-            //repetitionPeriodDone
+            repetitionPeriodDone++
+
+            setRepetitionNextCycle()
         }
         RepetitionType.REP_NONE -> TODO()
     }
-
-    repetitionNextDate = date.time
 }
 
 fun Goal.setRepetitionLastDate() {
@@ -137,28 +147,27 @@ fun Goal.setRepetitionLastDate() {
     repetitionLastDate = calendar.time
 }
 
-fun Goal.setRepetitionNextDate() {
+fun Goal.setRepetitionNextCycle() {
     val calendar = Calendar.getInstance()
     calendar.setToMidnight()
 
     when (this.repetitionPeriodType) {
         PeriodType.PER_WEEK -> {
-            calendar.add(Calendar.DAY_OF_WEEK, 1)
+            calendar.timeInMillis = repetitionNextDate?.time!!
 
-            calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
+            calendar.setToNext(Calendar.SUNDAY)
             repetitionNextDate = calendar.time
 
-            calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
+            calendar.setToNext(Calendar.SATURDAY)
             repetitionLastDate = calendar.time
-
         }
         PeriodType.PER_MONTH -> {
-            calendar.add(Calendar.MONTH, 1)
+            calendar.timeInMillis = repetitionNextDate?.time!!
 
-            calendar.set(Calendar.DAY_OF_MONTH, 1)
+            calendar.firstDayOfMonth()
             repetitionNextDate = calendar.time
 
-            calendar.set(Calendar.DAY_OF_MONTH, 31)
+            calendar.lastDayOfMonth()
             repetitionLastDate = calendar.time
         }
         PeriodType.PER_YEAR -> {
@@ -173,14 +182,16 @@ fun Goal.setRepetitionNextDate() {
             repetitionLastDate = calendar.time
         }
         PeriodType.PER_CUSTOM -> {
-            calendar.addDays(repetitionPeriodDaysBetween)
-        }
-        else -> {
-            TODO()
-        }
-    }
+            calendar.timeInMillis = repetitionLastDate?.time!!
 
-    repetitionLastDate = calendar.time
+            repetitionNextDate = calendar.time
+
+            calendar.addDays(repetitionPeriodDaysBetween)
+
+            repetitionLastDate = calendar.time
+        }
+        PeriodType.PER_NONE -> TODO()
+    }
 }
 
 fun Goal.discoverNextWeek(repetitionWeekDays: List<Boolean>) {
@@ -194,6 +205,22 @@ fun Goal.discoverNextWeek(repetitionWeekDays: List<Boolean>) {
     repetitionWeekDaysLong.add(nextDayOfWeek(repetitionWeekDays[5], Calendar.FRIDAY))
     repetitionWeekDaysLong.add(nextDayOfWeek(repetitionWeekDays[6], Calendar.SATURDAY))
 }
+
+fun Goal.upOnNextWeek(): MutableList<Long> {
+    val calendar = Calendar.getInstance()
+
+    val list = mutableListOf<Long>()
+
+    repetitionWeekDaysLong.forEach {
+        calendar.timeInMillis = it
+        calendar.addDays(7)
+
+        list.add(calendar.timeInMillis)
+    }
+
+    return list
+}
+
 
 fun nextDayOfWeek(selected: Boolean, day: Int): Long {
     if (selected) {

@@ -41,3 +41,25 @@ fun Calendar.getDayOfWeek(day: Int): String {
         else -> ""
     }
 }
+
+fun Calendar.firstDayOfMonth() {
+    add(Calendar.MONTH, 1)
+    set(Calendar.DATE, 1)
+}
+
+fun Calendar.lastDayOfMonth() {
+    add(Calendar.MONTH, 1)
+    set(Calendar.DATE, 1)
+    add(Calendar.DATE, -1)
+}
+
+fun Calendar.setToNext(day: Int) {
+    var diff = day - get(Calendar.DAY_OF_WEEK)
+
+    if (diff <= 0) {
+        diff += 7
+    }
+
+    add(Calendar.DAY_OF_MONTH, diff)
+    setToMidnight()
+}
