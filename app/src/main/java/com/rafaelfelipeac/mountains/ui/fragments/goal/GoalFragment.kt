@@ -44,6 +44,7 @@ class GoalFragment : BaseFragment() {
     private var seriesGold: Int = 0
 
     var goalId: Long? = null
+    var goalNew: Boolean? = null
     var goal: Goal? = null
     var goals: List<Goal>? = null
     private var items: List<Item>? = null
@@ -67,6 +68,7 @@ class GoalFragment : BaseFragment() {
         (activity as MainActivity).bottomNavigationVisible(View.GONE)
 
         goalId = arguments?.let { GoalFragmentArgs.fromBundle(it).goalId }
+        goalNew = arguments?.let { GoalFragmentArgs.fromBundle(it).goalNew }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -214,6 +216,11 @@ class GoalFragment : BaseFragment() {
             }
             R.id.menu_goal_edit -> {
                 navController.navigate(GoalFragmentDirections.actionNavigationGoalToNavigationGoalForm(goal?.goalId!!))
+            }
+            android.R.id.home -> {
+                if (goalNew!!) {
+                    navController.navigateUp()
+                }
             }
         }
 

@@ -28,7 +28,7 @@ class DayOfWeekAdapter(val fragment: TodayFragment) : BaseAdapter<DayOfWeek>() {
         title1.text = item.title1
         title2.text = item.title2
 
-        val goalsAdapter = GoalsRepetitionAdapter(fragment)
+        val goalsAdapter = GoalsAdapter(fragment)
 
         goalsAdapter.clickListener = {
             val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(it)

@@ -16,7 +16,7 @@ import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.DayOfWeekAdapter
-import com.rafaelfelipeac.mountains.ui.adapter.GoalsRepetitionAdapter
+import com.rafaelfelipeac.mountains.ui.adapter.GoalsAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperGoal
 import kotlinx.android.synthetic.main.fragment_today.*
@@ -26,8 +26,8 @@ class TodayFragment : BaseFragment() {
 
     private lateinit var viewModel: TodayViewModel
 
-    private var goalsLateAdapter = GoalsRepetitionAdapter(this)
-    private var goalsTodayAdapter = GoalsRepetitionAdapter(this)
+    private var goalsLateAdapter = GoalsAdapter(this)
+    private var goalsTodayAdapter = GoalsAdapter(this)
     private var goalsWeekAdapter = DayOfWeekAdapter(this)
 
     private var goalsLate: List<Goal>? = null

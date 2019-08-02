@@ -8,10 +8,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
-import com.rafaelfelipeac.mountains.extension.getName
-import com.rafaelfelipeac.mountains.extension.getPercentage
-import com.rafaelfelipeac.mountains.extension.gone
-import com.rafaelfelipeac.mountains.extension.visible
+import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.RepetitionType.*
 import com.rafaelfelipeac.mountains.ui.base.BaseAdapter
@@ -32,7 +29,11 @@ class GoalsAdapter(private val fragment: BaseFragment) : BaseAdapter<Goal>(), Ac
         val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_item_title)
         val image = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress)
         val percentage = viewHolder.itemView.findViewById<TextView>(R.id.goal_percentage)
-        val goalRepetition = viewHolder.itemView.findViewById<TextView>(R.id.goal_item_repetition)
+        val goalRepetition = viewHolder.itemView.findViewById<TextView>(R.id.goal_repetition_type)
+        val goalDrag = viewHolder.itemView.findViewById<ImageView>(R.id.goal_image_drag)
+        val archiveImage = viewHolder.itemView.findViewById<ImageView>(R.id.goal_archive_image)
+        val late = viewHolder.itemView.findViewById<TextView>(R.id.goal_repetition_late_date)
+        val score = viewHolder.itemView.findViewById<TextView>(R.id.goal_repetition_score)
 
         title.text = item.name
 
@@ -50,8 +51,18 @@ class GoalsAdapter(private val fragment: BaseFragment) : BaseAdapter<Goal>(), Ac
             }
         }
 
+        if (fragment is TodayFragment) {
+            goalDrag.gone()
+            archiveImage.gone()
+        }
+
         if (item.repetition) {
             percentage.gone()
+
+            if (item.repetitionNextDate != null && item.isLate() && !item.isToday()) {
+                late.text = item.repetitionNextDate.format()
+                late.visible()
+            }
 
             image.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
             image.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -78,6 +89,11 @@ class GoalsAdapter(private val fragment: BaseFragment) : BaseAdapter<Goal>(), Ac
                         item.repetitionPeriodTotal.toString(),
                         "dias por",
                         item.repetitionPeriodType.getName())
+
+                    score.text = String.format("%s/%s",
+                        item.repetitionPeriodDone.toString(),
+                        item.repetitionPeriodTotal.toString())
+                    score.visible()
                 }
                 REP4 -> {
                     goalRepetition.text = String.format("%s %s %s %s.",
@@ -97,7 +113,7 @@ class GoalsAdapter(private val fragment: BaseFragment) : BaseAdapter<Goal>(), Ac
 
         holder.setIsRecyclable(false)
 
-        val itemDrag = holder.itemView.findViewById<ImageView>(R.id.goal_image_view)
+        val itemDrag = holder.itemView.findViewById<ImageView>(R.id.goal_image_drag)
 
         itemDrag.setOnTouchListener { _, _ ->
             touchHelper?.startDrag(holder)

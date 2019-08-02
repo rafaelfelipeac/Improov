@@ -78,8 +78,10 @@
             tools:layout="@layout/fragment_goal">
 
         <argument android:name="goalId" app:argType="long"/>
+        <argument android:name="goalNew" app:argType="boolean" android:defaultValue="false"/>
 
         <action android:id="@+id/action_navigation_goal_to_navigation_goalForm" app:destination="@id/navigation_goalForm"/>
+
 
     </fragment>
 

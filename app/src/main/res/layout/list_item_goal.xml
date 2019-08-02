@@ -106,19 +106,20 @@
                 android:layout_marginStart="56dp"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
-                android:layout_marginEnd="40dp"
-                card_view:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
                 card_view:layout_constraintHorizontal_bias="0.1"
-                card_view:layout_constraintBottom_toTopOf="@+id/goal_item_repetition"
-                android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
-                card_view:layout_constraintVertical_bias="0.3"/>
+                card_view:layout_constraintBottom_toTopOf="@+id/goal_repetition_type"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                card_view:layout_constraintVertical_bias="0.3"
+                card_view:layout_constraintEnd_toStartOf="@+id/goal_repetition_late_date"/>
 
         <TextView
-                android:id="@+id/goal_item_repetition"
+                android:id="@+id/goal_repetition_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
                 android:text="Repetição: todo dia."
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorWhite"
                 android:maxLines="1"
@@ -128,6 +129,39 @@
                 card_view:layout_constraintStart_toStartOf="@+id/goal_item_title"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="8dp"/>
+
+        <TextView
+                android:id="@+id/goal_repetition_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1/5"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:visibility="gone"
+                tools:visibility="visible"
+                card_view:layout_constraintBottom_toBottomOf="@+id/goal_repetition_type"
+                card_view:layout_constraintTop_toTopOf="@+id/goal_repetition_type"
+                card_view:layout_constraintEnd_toStartOf="@+id/goal_image_drag"
+                android:layout_marginEnd="16dp"/>
+
+        <TextView
+                android:id="@+id/goal_repetition_late_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="25 Jul"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_marginEnd="16dp"
+                card_view:layout_constraintEnd_toStartOf="@+id/goal_image_drag"
+                card_view:layout_constraintBottom_toTopOf="@+id/goal_repetition_score"/>
 
         <ImageView
                 android:id="@+id/goal_progress"
@@ -159,7 +193,7 @@
                 card_view:layout_constraintBottom_toBottomOf="parent"/>
 
         <ImageView
-                android:id="@+id/goal_image_view"
+                android:id="@+id/goal_image_drag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 card_view:srcCompat="@drawable/ic_drag_indicator"
@@ -168,7 +202,7 @@
                 card_view:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="8dp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp" android:visibility="visible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
