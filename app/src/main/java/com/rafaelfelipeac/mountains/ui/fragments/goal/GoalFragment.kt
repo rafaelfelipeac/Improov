@@ -215,9 +215,6 @@ class GoalFragment : BaseFragment() {
             R.id.menu_goal_edit -> {
                 navController.navigate(GoalFragmentDirections.actionNavigationGoalToNavigationGoalForm(goal?.goalId!!))
             }
-            android.R.id.home -> {
-                navController.navigateUp()
-            }
         }
 
         return false

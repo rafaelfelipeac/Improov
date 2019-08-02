@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
@@ -22,8 +23,6 @@ import kotlinx.android.synthetic.main.fragment_today.*
 import java.util.*
 
 class TodayFragment : BaseFragment() {
-
-    private var weekVisible = false
 
     private lateinit var viewModel: TodayViewModel
 
@@ -48,9 +47,21 @@ class TodayFragment : BaseFragment() {
             navController.navigate(R.id.action_navigation_today_to_navigation_goalForm)
         }
 
+        setupWeekInformation()
+
+        observeViewModel()
+
+        showNavigation()
+    }
+
+    private fun setupWeekInformation() {
+        if (prefs.openWeekDays) {
+            today_week_week_information.visible()
+        }
+
         today_week_week.setOnClickListener {
-            weekVisible =
-                if (!weekVisible) {
+            prefs.openWeekDays =
+                if (!prefs.openWeekDays) {
                     today_week_week_information.visible()
                     today_week_image.background = ContextCompat.getDrawable(context!!, R.drawable.ic_up)
                     true
@@ -60,10 +71,6 @@ class TodayFragment : BaseFragment() {
                     false
                 }
         }
-
-        observeViewModel()
-
-        showNavigation()
     }
 
     private fun observeViewModel() {
@@ -160,8 +167,12 @@ class TodayFragment : BaseFragment() {
 
                 viewModel.saveGoal(goal)
 
-                showSnackBarWithAction(holder.itemView, String.format("%s %s.", "Próxima ocorrência: ",
-                    goal.repetitionNextDate.format()), beforeGoal, ::undoDone)
+                showSnackBarWithAction(
+                    holder.itemView, String.format(
+                        "%s %s.", "Próxima ocorrência: ",
+                        goal.repetitionNextDate.format()
+                    ), beforeGoal, ::undoDone
+                )
             }
             ItemTouchHelper.LEFT -> {
                 viewModel.saveGoal(goal)

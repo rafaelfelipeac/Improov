@@ -9,6 +9,7 @@ import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.models.DayOfWeek
 import com.rafaelfelipeac.mountains.ui.base.BaseAdapter
 import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragment
+import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragmentDirections
 import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperGoal
 
 class DayOfWeekAdapter(val fragment: TodayFragment) : BaseAdapter<DayOfWeek>() {
@@ -28,6 +29,11 @@ class DayOfWeekAdapter(val fragment: TodayFragment) : BaseAdapter<DayOfWeek>() {
         title2.text = item.title2
 
         val goalsAdapter = GoalsRepetitionAdapter(fragment)
+
+        goalsAdapter.clickListener = {
+            val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(it)
+            fragment.navController.navigate(action)
+        }
 
         val fakeGoals = item.list
 

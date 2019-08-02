@@ -295,7 +295,6 @@ class GoalFormFragment : BaseFragment() {
             goal.value = 0F
             goal.done = false
 
-
             val order =
                 if (goals?.isEmpty()!!) 0
                 else goals!![goals!!.size-1].order + 1
