@@ -69,7 +69,12 @@ fun Goal.nextRepetitionDateAfterDone() {
 
     when (repetitionType) {
         RepetitionType.REP1 -> {
-            repetitionNextDate.addDays(1)
+            if (repetitionNextDate.isLate()) {
+                today.addDays(1)
+                repetitionNextDate = today.time
+            } else {
+                repetitionNextDate.addDays(1)
+            }
         }
         RepetitionType.REP2 -> {
             discoverNextWeek(repetitionWeekDays)
@@ -107,7 +112,12 @@ fun Goal.nextRepetitionDateAfterDone() {
                 setRepetitionNextCycle()
                 repetitionPeriodDone = 0
             } else {
-                repetitionNextDate?.addDays(1)
+                if (repetitionNextDate.isLate()) {
+                    today.addDays(1)
+                    repetitionNextDate = today.time
+                } else {
+                    repetitionNextDate.addDays(1)
+                }
             }
         }
         RepetitionType.REP4 -> {

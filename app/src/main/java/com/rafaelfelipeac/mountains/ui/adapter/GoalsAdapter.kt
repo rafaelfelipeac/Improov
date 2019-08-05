@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
@@ -16,6 +17,7 @@ import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import com.rafaelfelipeac.mountains.ui.fragments.goals.GoalsFragment
 import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragment
 import com.rafaelfelipeac.mountains.ui.helper.ActionCompletionContract
+import kotlin.math.roundToInt
 
 class GoalsAdapter(private val fragment: BaseFragment) : BaseAdapter<Goal>(), ActionCompletionContract {
 
@@ -26,84 +28,103 @@ class GoalsAdapter(private val fragment: BaseFragment) : BaseAdapter<Goal>(), Ac
     override fun View.bindView(item: Goal, viewHolder: ViewHolder) {
         setOnClickListener { clickListener(item.goalId) }
 
-        val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_item_title)
-        val image = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress)
-        val percentage = viewHolder.itemView.findViewById<TextView>(R.id.goal_percentage)
-        val goalRepetition = viewHolder.itemView.findViewById<TextView>(R.id.goal_repetition_type)
-        val goalDrag = viewHolder.itemView.findViewById<ImageView>(R.id.goal_image_drag)
+        val typeIcon = viewHolder.itemView.findViewById<ImageView>(R.id.goal_type_icon)
+
         val archiveImage = viewHolder.itemView.findViewById<ImageView>(R.id.goal_archive_image)
-        val late = viewHolder.itemView.findViewById<TextView>(R.id.goal_repetition_late_date)
-        val score = viewHolder.itemView.findViewById<TextView>(R.id.goal_repetition_score)
-
-        title.text = item.name
-
-        if (item.done) {
-            image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
-            percentage.gone()
-        }
-        else {
-            image.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
-
-            percentage.text = if (item.getPercentage() >= 100) {
-                String.format(context.getString(R.string.percentage_100), context.getString(R.string.percentage_symbol))
-            } else {
-                String.format(context.getString(R.string.percentage_others), item.getPercentage(), context.getString(R.string.percentage_symbol))
-            }
-        }
 
         if (fragment is TodayFragment) {
-            goalDrag.gone()
             archiveImage.gone()
         }
 
         if (item.repetition) {
-            percentage.gone()
+            val repetitionType = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.goal_type_repetition)
+            val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_repetition_title)
+            val type = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_repetition_type)
+            val late = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_repetition_late_date)
+            val score = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_repetition_score)
+
+            repetitionType.visible()
+
+            title.text = item.name
 
             if (item.repetitionNextDate != null && item.isLate() && !item.isToday()) {
                 late.text = item.repetitionNextDate.format()
                 late.visible()
             }
 
-            image.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
-            image.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-
-            image.background = ContextCompat.getDrawable(context!!, R.drawable.ic_repetition)
-
-            goalRepetition.visible()
+            typeIcon.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
+            typeIcon.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            typeIcon.background = ContextCompat.getDrawable(context!!, R.drawable.ic_repetition)
 
             when (item.repetitionType) {
                 REP1 -> {
-                    goalRepetition.text = String.format("%s %s.",
-                        context.getString(R.string.goals_adapter_item_repetition),
-                        "Todo dia")
+                    type.text = String.format(
+                        "%s", "Todo dia"
+                    )
                 }
                 REP2 -> {
-                    goalRepetition.text = String.format("%s %s %s.",
-                        context.getString(R.string.goals_adapter_item_repetition),
+                    type.text = String.format(
+                        "%s %s",
                         item.repetitionWeekDaysLong.filter { it > 0 }.size.toString(),
-                        "vezes por semana")
+                        "vezes por semana"
+                    )
                 }
                 REP3 -> {
-                    goalRepetition.text = String.format("%s %s %s %s.",
-                        context.getString(R.string.goals_adapter_item_repetition),
+                    type.text = String.format(
+                        "%s %s %s",
                         item.repetitionPeriodTotal.toString(),
                         "dias por",
-                        item.repetitionPeriodType.getName())
+                        item.repetitionPeriodType.getName()
+                    )
 
-                    score.text = String.format("%s/%s",
+                    score.text = String.format(
+                        "%s/%s",
                         item.repetitionPeriodDone.toString(),
-                        item.repetitionPeriodTotal.toString())
+                        item.repetitionPeriodTotal.toString()
+                    )
                     score.visible()
                 }
                 REP4 -> {
-                    goalRepetition.text = String.format("%s %s %s %s.",
-                        context.getString(R.string.goals_adapter_item_repetition),
+                    type.text = String.format(
+                        "%s %s %s",
                         "A cada",
                         item.repetitionPeriodDaysBetween.toString(),
-                        "dias")
+                        "dias"
+                    )
                 }
                 REP_NONE -> TODO()
             }
+        } else {
+            val repetitionType = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.goal_type_default)
+            val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_default_title)
+            val type = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_default_type)
+            val date = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_default_date)
+            val score = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_default_score)
+
+            repetitionType.visible()
+
+            title.text = item.name
+
+            if (item.done) {
+                typeIcon.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
+
+                val params = typeIcon.layoutParams as ConstraintLayout.LayoutParams
+                params.marginStart = 10
+                typeIcon.layoutParams = params
+            } else {
+                typeIcon.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
+                typeIcon.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+
+                typeIcon.background = ContextCompat.getDrawable(context!!, R.drawable.ic_today)
+            }
+
+            score.text = String.format(
+                "%s/%s",
+                item.value.roundToInt().toString(),
+                item.singleValue.roundToInt().toString()
+            )
+
+            date.text = "13 AGO"
         }
     }
 
@@ -113,7 +134,7 @@ class GoalsAdapter(private val fragment: BaseFragment) : BaseAdapter<Goal>(), Ac
 
         holder.setIsRecyclable(false)
 
-        val itemDrag = holder.itemView.findViewById<ImageView>(R.id.goal_image_drag)
+        val itemDrag = holder.itemView.findViewById<ImageView>(R.id.goal_drag_icon)
 
         itemDrag.setOnTouchListener { _, _ ->
             touchHelper?.startDrag(holder)
