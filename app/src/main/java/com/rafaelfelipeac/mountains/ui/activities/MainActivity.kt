@@ -4,6 +4,8 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.models.User
@@ -38,6 +41,11 @@ class MainActivity : BaseActivity() {
     lateinit var bottomSheetTipClose: ConstraintLayout
     lateinit var bottomSheetTip: BottomSheetBehavior<*>
 
+    lateinit var bottomSheetFAB: BottomSheetDialog
+    lateinit var bottomSheetFABDefault: Button
+    lateinit var bottomSheetFABRepetition: Button
+    lateinit var bottomSheetFABClose: ImageView
+
     var mGoogleSignInClient: GoogleSignInClient? = null
 
     lateinit var user: User
@@ -54,7 +62,19 @@ class MainActivity : BaseActivity() {
         setupToolbar()
         setupGoogleClient()
 
+        setupBottomSheetFAB()
+
         NavigationUI.setupWithNavController(bottom_nav, navController)
+    }
+
+    private fun setupBottomSheetFAB() {
+        bottomSheetFAB = BottomSheetDialog(this)
+        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_fab, null)
+        bottomSheetFAB.setContentView(sheetView)
+
+        bottomSheetFABDefault = sheetView.findViewById(R.id.bottom_sheet_fab_default)
+        bottomSheetFABRepetition = sheetView.findViewById(R.id.bottom_sheet_fab_repetition)
+        bottomSheetFABClose = sheetView.findViewById(R.id.bottom_sheet_fab_close)
     }
 
     override fun onBackPressed() {
@@ -119,6 +139,26 @@ class MainActivity : BaseActivity() {
             fakeBottomNav = fake_bottom_nav
             fakeBottomNav.visibility = visibility
         }
+    }
+
+    fun openBottomSheetFAB() {
+        bottomSheetFAB.show()
+
+        bottomSheetFABDefault.setOnClickListener {
+            navController.navigate(R.id.action_navigation_goals_to_navigation_goalForm)
+        }
+
+        bottomSheetFABRepetition.setOnClickListener {
+            navController.navigate(R.id.action_navigation_goals_to_navigation_otherGoalForm)
+        }
+
+        bottomSheetFABClose.setOnClickListener {
+            closeBottomSheetFAB()
+        }
+    }
+
+    fun closeBottomSheetFAB() {
+        bottomSheetFAB.hide()
     }
 
     fun openBottomSheetTips() {

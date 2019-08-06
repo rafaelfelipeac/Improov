@@ -7,16 +7,13 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.GoalType
-import com.rafaelfelipeac.mountains.models.RepetitionType
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_goal_form.*
-import android.widget.ArrayAdapter
-import com.rafaelfelipeac.mountains.R
-import com.rafaelfelipeac.mountains.models.PeriodType
 
 class GoalFormFragment : BaseFragment() {
 
@@ -33,8 +30,6 @@ class GoalFormFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goalId }
-
-        (activity as MainActivity).openToolbar()
 
         setHasOptionsMenu(true)
     }
@@ -58,10 +53,10 @@ class GoalFormFragment : BaseFragment() {
         observeViewModel()
 
         setRadioButtonType()
-        setRadioRepetition()
         setSwitchMountains()
 
-        setDropdown()
+        (activity as MainActivity).openToolbar()
+        (activity as MainActivity).closeBottomSheetFAB()
 
         goalForm_help.setOnClickListener {
             (activity as MainActivity).setupBottomSheetTipsOne()
@@ -73,60 +68,6 @@ class GoalFormFragment : BaseFragment() {
             (activity as MainActivity).setupBottomSheetTipsTwo()
             setupBottomSheetTip()
             (activity as MainActivity).openBottomSheetTips()
-        }
-
-        goalForm_help3.setOnClickListener {
-            (activity as MainActivity).setupBottomSheetTipsTwo()
-            setupBottomSheetTip()
-            (activity as MainActivity).openBottomSheetTips()
-        }
-    }
-
-    private fun setDropdown() {
-        val adapter = ArrayAdapter.createFromResource(context!!, R.array.periods_array, R.layout.spinner_item)
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
-        periods_spinner.adapter = adapter
-    }
-
-    private fun setRadioRepetition() {
-        radioButton1.setOnClickListener {
-            if (radioButton1.isChecked) {
-                radioButton2.isChecked = false
-                radioButton3.isChecked = false
-                radioButton4.isChecked = false
-
-                block_of_radius2.gone()
-            }
-        }
-
-        radioButton2.setOnClickListener {
-            if (radioButton2.isChecked) {
-                radioButton1.isChecked = false
-                radioButton3.isChecked = false
-                radioButton4.isChecked = false
-
-                block_of_radius2.visible()
-            }
-        }
-
-        radioButton3.setOnClickListener {
-            if (radioButton3.isChecked) {
-                radioButton1.isChecked = false
-                radioButton2.isChecked = false
-                radioButton4.isChecked = false
-
-                block_of_radius2.gone()
-            }
-        }
-
-        radioButton4.setOnClickListener {
-            if (radioButton4.isChecked) {
-                radioButton1.isChecked = false
-                radioButton2.isChecked = false
-                radioButton3.isChecked = false
-
-                block_of_radius2.gone()
-            }
         }
     }
 
@@ -318,74 +259,7 @@ class GoalFormFragment : BaseFragment() {
             goal.singleValue = form_goal_editText_single.toFloat()
         }
 
-        goal.repetitionWeekDays = getWeekDaysSelected()
-
-        val repetitionType = getRepetitionTypeSelected()
-
-        if (repetitionType != RepetitionType.REP_NONE) {
-            goal.repetition = true
-            goal.repetitionType = repetitionType
-
-            when (repetitionType) {
-                RepetitionType.REP1-> {}
-                RepetitionType.REP2 -> {}
-                RepetitionType.REP3 -> {
-                    goal.repetitionPeriodType = getRepetitionPeriodTypeSelected()
-                    goal.repetitionPeriodTotal = goal_form_days_custom_1.text.toString().toInt()
-                    goal.setRepetitionLastDate()
-                }
-                RepetitionType.REP4 -> {
-                    goal.repetitionPeriodType = PeriodType.PER_CUSTOM
-                    goal.repetitionPeriodTotal = 1
-                    goal.repetitionPeriodDaysBetween = goal_form_add_days.text.toString().toInt()
-                    goal.setRepetitionLastDate()
-                }
-                else -> { TODO() }
-            }
-
-            goal.nextRepetitionDate()
-        }
-
         return goal
-    }
-
-    private fun getWeekDaysSelected(): MutableList<Boolean> {
-        val weekDays = mutableListOf<Boolean>()
-
-        weekDays.add(weekDay1.isChecked)
-        weekDays.add(weekDay2.isChecked)
-        weekDays.add(weekDay3.isChecked)
-        weekDays.add(weekDay4.isChecked)
-        weekDays.add(weekDay5.isChecked)
-        weekDays.add(weekDay6.isChecked)
-        weekDays.add(weekDay7.isChecked)
-
-        return weekDays
-    }
-
-    private fun getRepetitionTypeSelected(): RepetitionType {
-        if (radioButton1.isChecked)         return RepetitionType.REP1
-        if (radioButton2.isChecked)         return RepetitionType.REP2
-        if (radioButton3.isChecked)         return RepetitionType.REP3
-        if (radioButton4.isChecked)         return RepetitionType.REP4
-
-        return RepetitionType.REP_NONE
-    }
-
-    private fun getRepetitionPeriodTypeSelected(): PeriodType {
-        return when (periods_spinner.selectedItem.toString()) {
-            "semana" -> {
-                PeriodType.PER_WEEK
-            }
-            "mês" -> {
-                PeriodType.PER_MONTH
-            }
-            "ano" -> {
-                PeriodType.PER_YEAR
-            }
-            else ->
-                PeriodType.PER_NONE
-        }
     }
 
     private fun getGoalTypeSelected(): GoalType {
@@ -424,43 +298,6 @@ class GoalFormFragment : BaseFragment() {
             }
             GoalType.FINAL_VALUE -> { radioButtonTotal.isChecked = true }
             else -> { }
-        }
-
-        when(goal.repetitionType) {
-            RepetitionType.REP1 -> { radioButton1.isChecked = true }
-            RepetitionType.REP2 -> {
-                radioButton2.isChecked = true
-
-                block_of_radius2.visible()
-
-                weekDay1.isChecked = goal.repetitionWeekDays[0]
-                weekDay2.isChecked = goal.repetitionWeekDays[1]
-                weekDay3.isChecked = goal.repetitionWeekDays[2]
-                weekDay4.isChecked = goal.repetitionWeekDays[3]
-                weekDay5.isChecked = goal.repetitionWeekDays[4]
-                weekDay6.isChecked = goal.repetitionWeekDays[5]
-                weekDay7.isChecked = goal.repetitionWeekDays[6]
-            }
-            RepetitionType.REP3 -> {
-                radioButton3.isChecked = true
-
-                goal_form_days_custom_1.setText(goal.repetitionPeriodTotal.toString())
-
-                periods_spinner.setSelection(when (goal.repetitionPeriodType) {
-                    PeriodType.PER_WEEK     -> 0
-                    PeriodType.PER_MONTH    -> 1
-                    PeriodType.PER_YEAR     -> 2
-                    PeriodType.PER_CUSTOM -> TODO()
-                    PeriodType.PER_NONE -> TODO()
-                })
-
-            }
-            RepetitionType.REP4 -> {
-                radioButton4.isChecked = true
-
-                goal_form_add_days.setText(goal.repetitionPeriodDaysBetween.toString())
-            }
-            RepetitionType.REP_NONE -> TODO()
         }
     }
 }

@@ -44,7 +44,7 @@ class TodayFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fab.setOnClickListener {
-            navController.navigate(R.id.action_navigation_today_to_navigation_goalForm)
+            (activity as MainActivity).openBottomSheetFAB()
         }
 
         setupWeekInformation()
@@ -101,9 +101,14 @@ class TodayFragment : BaseFragment() {
     private fun setItemsLate() {
         goalsLate?.sortedBy { it.order }.let { goalsLateAdapter.setItems(it!!) }
 
-        goalsLateAdapter.clickListener = {
-            val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(it)
-            navController.navigate(action)
+        goalsLateAdapter.clickListener = { goalId: Long, repetition: Boolean ->
+            if (repetition) {
+                val action = TodayFragmentDirections.actionNavigationTodayToNavigationOtherGoal()
+                navController.navigate(action)
+            } else {
+                val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(goalId)
+                navController.navigate(action)
+            }
         }
 
         val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsLateAdapter)
@@ -120,9 +125,14 @@ class TodayFragment : BaseFragment() {
     private fun setItemsToday() {
         goalsToday?.sortedBy { it.order }.let { goalsTodayAdapter.setItems(it!!) }
 
-        goalsTodayAdapter.clickListener = {
-            val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(it)
-            navController.navigate(action)
+        goalsTodayAdapter.clickListener = { goalId: Long, repetition: Boolean ->
+            if (repetition) {
+                val action = TodayFragmentDirections.actionNavigationTodayToNavigationOtherGoal()
+                navController.navigate(action)
+            } else {
+                val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(goalId)
+                navController.navigate(action)
+            }
         }
 
         val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsTodayAdapter)

@@ -1,121 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never">
+        android:fillViewport="true"
+        tools:context=".ui.fragments.goalForm.GoalFormFragment"
+        android:background="@color/colorPrimaryDarkOne">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout3"
+            android:id="@+id/form_goal_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fillViewport="true"
-            tools:context=".ui.fragments.goalForm.GoalFormFragment"
-            android:background="@color/colorPrimaryDarkOne">
+            android:background="@drawable/rounded_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/goalForm_goal_name_til"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:inputType="numberDecimal|numberSigned"
+                android:textColor="@color/colorPrimary"
+                android:hint="Title"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_margin="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
+                app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/goalForm_goal_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/form_goal_single_mountains"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:background="@drawable/rounded_background"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/form_goal_title">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/form_goal_title"
+                android:id="@+id/form_goal_single"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                android:visibility="visible"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp">
+
+            <ImageView
+                    android:id="@+id/form_goal_single_image"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@mipmap/ic_medal"
+                    app:layout_constraintHorizontal_bias="0.501"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/goalForm_goal_name_til"
-                    android:layout_width="match_parent"
+                    android:id="@+id/form_goal_editText_single_til"
+                    android:layout_width="@dimen/edit_text_single_mountains"
                     android:layout_height="60dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:hint="Single"
                     android:inputType="numberDecimal|numberSigned"
-                    android:textColor="@color/colorPrimary"
-                    android:hint="Title"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_margin="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/form_goal_single_image"
                     app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
                     app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
                     app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
                     app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent">
+                    app:layout_constraintStart_toStartOf="@+id/form_goal_single_image"
+                    app:layout_constraintEnd_toEndOf="@+id/form_goal_single_image">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/goalForm_goal_name"
+                        android:id="@+id/form_goal_editText_single"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="text"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp"
+                        android:inputType="numberDecimal"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/form_goal_single_mountains"
+                android:id="@+id/form_goal_mountains"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                android:background="@drawable/rounded_background"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/form_goal_title">
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/form_goal_single"
-                    android:layout_width="match_parent"
+                    android:id="@+id/form_goal_mountain_bronze"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    android:visibility="visible"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="8dp">
+                    app:layout_constraintEnd_toStartOf="@+id/form_goal_mountain_silver"
+                    app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                        android:id="@+id/form_goal_single_image"
+                        android:id="@+id/form_goal_mountain_bronze_image"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:background="@mipmap/ic_medal"
-                        app:layout_constraintHorizontal_bias="0.501"/>
+                        android:background="@mipmap/ic_bronze"/>
 
                 <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/form_goal_editText_single_til"
+                        android:id="@+id/form_goal_editText_bronze_til"
                         android:layout_width="@dimen/edit_text_single_mountains"
                         android:layout_height="60dp"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:hint="Single"
+                        android:hint="Bronze"
+                        android:inputType="numberDecimal|numberSigned"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@+id/form_goal_mountain_bronze_image"
+                        app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                        app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                        app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
+                        app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
+                        app:layout_constraintStart_toStartOf="@+id/form_goal_mountain_bronze_image"
+                        app:layout_constraintEnd_toEndOf="@+id/form_goal_mountain_bronze_image">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/form_goal_editText_bronze"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            android:inputType="numberDecimal"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/form_goal_mountain_silver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp">
+
+                <ImageView
+                        android:id="@+id/form_goal_mountain_silver_image"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp"
+                        android:background="@mipmap/ic_silver"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/form_goal_editText_silver_til"
+                        android:layout_width="@dimen/edit_text_single_mountains"
+                        android:layout_height="60dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:hint="Silver"
                         android:inputType="numberDecimal|numberSigned"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginBottom="8dp"
                         android:layout_marginTop="16dp"
-                        app:layout_constraintTop_toBottomOf="@+id/form_goal_single_image"
+                        app:layout_constraintTop_toBottomOf="@+id/form_goal_mountain_silver_image"
                         app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-                        app:layout_constraintStart_toStartOf="@+id/form_goal_single_image"
-                        app:layout_constraintEnd_toEndOf="@+id/form_goal_single_image">
+                        app:layout_constraintStart_toStartOf="@+id/form_goal_mountain_silver_image"
+                        app:layout_constraintEnd_toEndOf="@+id/form_goal_mountain_silver_image">
 
                     <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/form_goal_editText_single"
+                            android:id="@+id/form_goal_editText_silver"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textColor="@color/colorPrimary"
@@ -127,229 +238,51 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/form_goal_mountains"
-                    android:layout_width="match_parent"
+                    android:id="@+id/form_goal_mountain_gold"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/form_goal_mountain_bronze"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintEnd_toStartOf="@+id/form_goal_mountain_silver"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                            android:id="@+id/form_goal_mountain_bronze_image"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginStart="8dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginEnd="8dp"
-                            android:background="@mipmap/ic_bronze"/>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/form_goal_editText_bronze_til"
-                            android:layout_width="@dimen/edit_text_single_mountains"
-                            android:layout_height="60dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:hint="Bronze"
-                            android:inputType="numberDecimal|numberSigned"
-                            android:layout_marginBottom="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginTop="16dp"
-                            app:layout_constraintTop_toBottomOf="@+id/form_goal_mountain_bronze_image"
-                            app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
-                            app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
-                            app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
-                            app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-                            app:layout_constraintStart_toStartOf="@+id/form_goal_mountain_bronze_image"
-                            app:layout_constraintEnd_toEndOf="@+id/form_goal_mountain_bronze_image">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/form_goal_editText_bronze"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16sp"
-                                android:inputType="numberDecimal"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/form_goal_mountain_silver"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp">
-
-                    <ImageView
-                            android:id="@+id/form_goal_mountain_silver_image"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginStart="8dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginEnd="8dp"
-                            android:background="@mipmap/ic_silver"/>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/form_goal_editText_silver_til"
-                            android:layout_width="@dimen/edit_text_single_mountains"
-                            android:layout_height="60dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:hint="Silver"
-                            android:inputType="numberDecimal|numberSigned"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginTop="16dp"
-                            app:layout_constraintTop_toBottomOf="@+id/form_goal_mountain_silver_image"
-                            app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
-                            app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
-                            app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
-                            app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-                            app:layout_constraintStart_toStartOf="@+id/form_goal_mountain_silver_image"
-                            app:layout_constraintEnd_toEndOf="@+id/form_goal_mountain_silver_image">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/form_goal_editText_silver"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16sp"
-                                android:inputType="numberDecimal"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/form_goal_mountain_gold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintStart_toEndOf="@+id/form_goal_mountain_silver"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                            android:id="@+id/form_goal_mountain_gold_image"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:background="@mipmap/ic_gold"
-                            android:layout_marginEnd="8dp"/>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/form_goal_editText_gold_til"
-                            android:layout_width="@dimen/edit_text_single_mountains"
-                            android:layout_height="60dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:hint="Gold"
-                            android:inputType="numberDecimal|numberSigned"
-                            android:layout_marginBottom="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/form_goal_mountain_gold_image"
-                            android:layout_marginTop="16dp"
-                            app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
-                            app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
-                            app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
-                            app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-                            app:layout_constraintStart_toStartOf="@+id/form_goal_mountain_gold_image"
-                            app:layout_constraintEnd_toEndOf="@+id/form_goal_mountain_gold_image">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/form_goal_editText_gold"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16sp"
-                                android:inputType="numberDecimal"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    android:id="@+id/constraintLayout4"
+                    app:layout_constraintStart_toEndOf="@+id/form_goal_mountain_silver"
                     app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                        android:id="@+id/form_goal_mountains_enabled"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Dividir e conquistar"
+                <ImageView
+                        android:id="@+id/form_goal_mountain_gold_image"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_marginStart="24dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="8dp"/>
-
-                <Switch
-                        android:id="@+id/form_goal_switch_mountains"
-                        android:layout_width="wrap_content"
-                        android:layout_height="28dp"
-                        app:layout_constraintStart_toEndOf="@+id/form_goal_mountains_enabled"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/form_goal_mountains_enabled"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintTop_toTopOf="@+id/form_goal_mountains_enabled"/>
+                        android:background="@mipmap/ic_gold"
+                        android:layout_marginEnd="8dp"/>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/goalForm_help"
-                        android:layout_width="48dp"
-                        android:layout_height="32dp"
-                        app:layout_constraintTop_toTopOf="@+id/form_goal_mountains_enabled"
-                        app:layout_constraintBottom_toBottomOf="@+id/form_goal_switch_mountains"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="16dp">
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/form_goal_editText_gold_til"
+                        android:layout_width="@dimen/edit_text_single_mountains"
+                        android:layout_height="60dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:hint="Gold"
+                        android:inputType="numberDecimal|numberSigned"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/form_goal_mountain_gold_image"
+                        android:layout_marginTop="16dp"
+                        app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                        app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                        app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
+                        app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
+                        app:layout_constraintStart_toStartOf="@+id/form_goal_mountain_gold_image"
+                        app:layout_constraintEnd_toEndOf="@+id/form_goal_mountain_gold_image">
 
-                    <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_help"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/form_goal_editText_gold"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            android:inputType="numberDecimal"/>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -357,224 +290,48 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:id="@+id/goal_form_type"
-                android:background="@drawable/rounded_background"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                android:paddingBottom="8dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintHorizontal_bias="1.0"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/form_goal_single_mountains">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:id="@+id/constraintLayout4"
+                app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                    android:id="@+id/goalForm_goal_type_text"
+                    android:id="@+id/form_goal_mountains_enabled"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tipo de meta"
-                    android:textColor="@color/colorPrimary"
+                    android:text="Dividir e conquistar"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/colorPrimary"
                     android:layout_marginStart="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="24dp"
                     app:layout_constraintHorizontal_bias="0.0"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goalForm_help2"
-                    android:layout_width="48dp"
-                    android:layout_height="32dp"
-                    app:layout_constraintTop_toTopOf="@+id/goalForm_goal_type_text"
-                    app:layout_constraintBottom_toBottomOf="@+id/goalForm_goal_type_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="16dp">
-
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_help"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <RadioButton
-                    android:id="@+id/radioButtonLista"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Lista"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/radioButtonIncDec"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintStart_toStartOf="@+id/goalForm_goal_type_text"
-                    app:layout_constraintTop_toTopOf="@+id/radioButtonIncDec"/>
-
-            <RadioButton
-                    android:id="@+id/radioButtonIncDec"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Contador"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
-                    app:layout_constraintTop_toBottomOf="@+id/goalForm_goal_type_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginEnd="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="8dp"/>
 
-            <RadioButton
-                    android:id="@+id/radioButtonTotal"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Valor final"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toEndOf="@+id/radioButtonIncDec"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintTop_toTopOf="@+id/radioButtonIncDec"
-                    app:layout_constraintBottom_toTopOf="@+id/goalForm_goal_inc_dev"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goalForm_goal_inc_dev"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="32dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="32dp"
-                    app:layout_constraintTop_toBottomOf="@+id/radioButtonIncDec"
-                    android:visibility="gone"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Defina os valores:"
-                        android:textColor="@color/colorPrimary"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:id="@+id/textView2"/>
-
-                <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/goalForm_goal_inc_value_til"
-                        android:layout_width="120dp"
-                        android:layout_height="60dp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:inputType="numberDecimal|numberSigned"
-                        android:hint="Incrementar"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
-                        app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
-                        app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
-                        app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintEnd_toStartOf="@+id/view3"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginBottom="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2"
-                        android:layout_marginTop="8dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/goalForm_goal_inc_value"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="16sp"
-                            android:inputType="numberDecimal"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <View android:layout_width="1dp"
-                      android:layout_height="1dp"
-                      app:layout_constraintStart_toStartOf="parent"
-                      android:layout_marginStart="8dp"
-                      app:layout_constraintEnd_toEndOf="parent"
-                      android:layout_marginEnd="8dp"
-                      android:id="@+id/view3"
-                      app:layout_constraintTop_toTopOf="parent"
-                      android:layout_marginTop="8dp"
-                      android:layout_marginBottom="8dp"
-                      app:layout_constraintBottom_toBottomOf="parent"/>
-
-                <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/goalForm_goal_dec_value_til"
-                        android:layout_width="120dp"
-                        android:layout_height="60dp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:inputType="numberDecimal|numberSigned"
-                        android:hint="Decrementar"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
-                        app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
-                        app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
-                        app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-                        app:layout_constraintStart_toEndOf="@+id/view3"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginBottom="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2"
-                        android:layout_marginTop="8dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/goalForm_goal_dec_value"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="16sp"
-                            android:inputType="numberDecimal"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/form_goal_repetition"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/goal_form_type"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/rounded_background"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="8dp">
-
-            <TextView
-                    android:id="@+id/goalForm_repetition_text"
+            <Switch
+                    android:id="@+id/form_goal_switch_mountains"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Repetição"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="24dp"
+                    android:layout_height="28dp"
+                    app:layout_constraintStart_toEndOf="@+id/form_goal_mountains_enabled"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/form_goal_mountains_enabled"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginEnd="8dp"
                     app:layout_constraintHorizontal_bias="0.0"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="@+id/form_goal_mountains_enabled"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goalForm_help3"
+                    android:id="@+id/goalForm_help"
                     android:layout_width="48dp"
                     android:layout_height="32dp"
-                    app:layout_constraintTop_toTopOf="@+id/goalForm_repetition_text"
-                    app:layout_constraintBottom_toBottomOf="@+id/goalForm_repetition_text"
+                    app:layout_constraintTop_toTopOf="@+id/form_goal_mountains_enabled"
+                    app:layout_constraintBottom_toBottomOf="@+id/form_goal_switch_mountains"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="16dp">
 
@@ -583,324 +340,9 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/ic_help"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="32dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@+id/goalForm_repetition_text"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    android:id="@+id/constraintLayout5">
-
-                <RadioButton
-                        android:id="@+id/radioButton1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Todo dia"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorPrimary"
-                        app:layout_constraintStart_toEndOf="@+id/radioButton1"
-                        app:layout_constraintTop_toTopOf="@+id/radioButton1"
-                        app:layout_constraintBottom_toBottomOf="@+id/radioButton1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintHorizontal_bias="0.0"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="32dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="32dp"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
-
-                <RadioButton
-                        android:id="@+id/radioButton2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintVertical_bias="0.0"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Alguns dias por semana"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorPrimary"
-                        app:layout_constraintStart_toEndOf="@+id/radioButton2"
-                        app:layout_constraintTop_toTopOf="@+id/radioButton2"
-                        app:layout_constraintBottom_toBottomOf="@+id/radioButton2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintHorizontal_bias="0.0"/>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/block_of_radius2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/radioButton2"
-                        tools:visibility="visible">
-
-                    <CheckBox
-                            android:id="@+id/weekDay1"
-                            android:layout_width="140dp"
-                            android:layout_height="wrap_content"
-                            android:minWidth="0dp"
-                            android:minHeight="0dp"
-                            android:text="Domingo"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_marginTop="8dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_marginStart="8dp"
-                            app:layout_constraintStart_toStartOf="parent"/>
-
-                    <CheckBox
-                            android:id="@+id/weekDay2"
-                            android:layout_width="140dp"
-                            android:layout_height="wrap_content"
-                            android:minWidth="0dp"
-                            android:minHeight="0dp"
-                            android:text="Segunda-feira"
-                            android:textColor="@color/colorPrimary"
-                            app:layout_constraintTop_toTopOf="@+id/weekDay1"
-                            app:layout_constraintStart_toEndOf="@+id/weekDay1"
-                            app:layout_constraintBottom_toBottomOf="@+id/weekDay1"
-                            android:layout_marginStart="8dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginEnd="8dp"/>
-
-                    <CheckBox
-                            android:id="@+id/weekDay3"
-                            android:layout_width="140dp"
-                            android:layout_height="wrap_content"
-                            android:minWidth="0dp"
-                            android:minHeight="0dp"
-                            android:text="Terça-feira"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_marginStart="8dp"
-                            app:layout_constraintTop_toBottomOf="@+id/weekDay1"
-                            app:layout_constraintStart_toStartOf="parent"/>
-
-                    <CheckBox
-                            android:id="@+id/weekDay4"
-                            android:layout_width="140dp"
-                            android:layout_height="wrap_content"
-                            android:minWidth="0dp"
-                            android:minHeight="0dp"
-                            android:text="Quarta-feira"
-                            android:textColor="@color/colorPrimary"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            app:layout_constraintTop_toTopOf="@+id/weekDay3"
-                            app:layout_constraintBottom_toBottomOf="@+id/weekDay3"
-                            app:layout_constraintStart_toEndOf="@+id/weekDay3"/>
-
-                    <CheckBox
-                            android:id="@+id/weekDay5"
-                            android:layout_width="140dp"
-                            android:layout_height="wrap_content"
-                            android:minWidth="0dp"
-                            android:minHeight="0dp"
-                            android:text="Quinta-feira"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_marginStart="8dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/weekDay3"/>
-
-                    <CheckBox
-                            android:id="@+id/weekDay6"
-                            android:layout_width="140dp"
-                            android:layout_height="wrap_content"
-                            android:minWidth="0dp"
-                            android:minHeight="0dp"
-                            android:text="Sexta-feira"
-                            android:textColor="@color/colorPrimary"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginStart="8dp"
-                            app:layout_constraintTop_toTopOf="@+id/weekDay5"
-                            app:layout_constraintStart_toEndOf="@+id/weekDay5"
-                            app:layout_constraintBottom_toBottomOf="@+id/weekDay5"/>
-
-                    <CheckBox
-                            android:id="@+id/weekDay7"
-                            android:layout_width="140dp"
-                            android:layout_height="wrap_content"
-                            android:minWidth="0dp"
-                            android:minHeight="0dp"
-                            android:text="Sábado"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_marginStart="8dp"
-                            app:layout_constraintTop_toBottomOf="@+id/weekDay5"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginBottom="8dp"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="32dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="32dp"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
-                    android:id="@+id/constraintLayout7">
-
-                <RadioButton
-                        android:id="@+id/radioButton3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/goal_form_days_custom_1"
-                        app:layout_constraintBottom_toBottomOf="@+id/goal_form_days_custom_1"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"/>
-
-                <EditText
-                        android:id="@+id/goal_form_days_custom_1"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@+id/radioButton3"
-                        android:layout_marginStart="16dp"
-                        android:textColor="@color/colorPrimary"
-                        android:textAlignment="center"
-                        app:layout_constraintTop_toTopOf="@+id/textView16"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView16"
-                        android:inputType="number"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="dias por"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorPrimary"
-                        app:layout_constraintStart_toEndOf="@+id/goal_form_days_custom_1"
-                        android:layout_marginStart="8dp"
-                        android:id="@+id/textView16"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                <Spinner
-                        android:id="@+id/periods_spinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:spinnerMode="dropdown"
-                        app:layout_constraintStart_toEndOf="@+id/textView16"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView16"
-                        android:backgroundTint="@color/colorPrimary"
-                        android:textColor="@color/colorPrimary"
-                        app:layout_constraintTop_toTopOf="@+id/textView16"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintHorizontal_bias="0.0"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="32dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="32dp"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="24dp">
-
-                <RadioButton
-                        android:id="@+id/radioButton4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="32dp"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="A cada "
-                        android:textSize="18sp"
-                        android:textColor="@color/colorPrimary"
-                        app:layout_constraintStart_toEndOf="@+id/radioButton4"
-                        android:layout_marginStart="16dp"
-                        app:layout_constraintTop_toTopOf="@+id/radioButton4"
-                        app:layout_constraintBottom_toBottomOf="@+id/radioButton4"
-                        android:id="@+id/textView17"/>
-
-                <EditText
-                        android:id="@+id/goal_form_add_days"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@+id/textView17"
-                        app:layout_constraintTop_toTopOf="@+id/textView17"
-                        android:textColor="@color/colorPrimary"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView17"
-                        android:inputType="number"
-                        android:textAlignment="center"
-                        android:layout_marginStart="8dp"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="dias"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorPrimary"
-                        app:layout_constraintStart_toEndOf="@+id/goal_form_add_days"
-                        app:layout_constraintTop_toTopOf="@+id/goal_form_add_days"
-                        app:layout_constraintBottom_toBottomOf="@+id/goal_form_add_days"
-                        android:layout_marginStart="8dp"/>
+                        app:layout_constraintTop_toTopOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -908,4 +350,192 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:id="@+id/goal_form_type"
+            android:background="@drawable/rounded_background"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            android:paddingBottom="8dp"
+            android:layout_height="0dp"
+            app:layout_constraintHorizontal_bias="1.0"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/form_goal_single_mountains"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+                android:id="@+id/goalForm_goal_type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo de meta"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/goalForm_help2"
+                android:layout_width="48dp"
+                android:layout_height="32dp"
+                app:layout_constraintTop_toTopOf="@+id/goalForm_goal_type_text"
+                app:layout_constraintBottom_toBottomOf="@+id/goalForm_goal_type_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_help"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RadioButton
+                android:id="@+id/radioButtonLista"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Lista"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/radioButtonIncDec"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="@+id/goalForm_goal_type_text"
+                app:layout_constraintTop_toTopOf="@+id/radioButtonIncDec"/>
+
+        <RadioButton
+                android:id="@+id/radioButtonIncDec"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Contador"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@+id/goalForm_goal_type_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"/>
+
+        <RadioButton
+                android:id="@+id/radioButtonTotal"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Valor final"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/radioButtonIncDec"
+                android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@+id/radioButtonIncDec"
+                app:layout_constraintBottom_toTopOf="@+id/goalForm_goal_inc_dev"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/goalForm_goal_inc_dev"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="32dp"
+                app:layout_constraintTop_toBottomOf="@+id/radioButtonIncDec"
+                android:visibility="gone"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Defina os valores:"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/textView2"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/goalForm_goal_inc_value_til"
+                    android:layout_width="120dp"
+                    android:layout_height="60dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:hint="Incrementar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/view3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    android:layout_marginTop="8dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/goalForm_goal_inc_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp"
+                        android:inputType="numberDecimal"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View android:layout_width="1dp"
+                  android:layout_height="1dp"
+                  app:layout_constraintStart_toStartOf="parent"
+                  android:layout_marginStart="8dp"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  android:layout_marginEnd="8dp"
+                  android:id="@+id/view3"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:layout_marginTop="8dp"
+                  android:layout_marginBottom="8dp"
+                  app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/goalForm_goal_dec_value_til"
+                    android:layout_width="120dp"
+                    android:layout_height="60dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:hint="Decrementar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
+                    app:layout_constraintStart_toEndOf="@+id/view3"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    android:layout_marginTop="8dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/goalForm_goal_dec_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp"
+                        android:inputType="numberDecimal"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

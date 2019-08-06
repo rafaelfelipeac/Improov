@@ -21,12 +21,12 @@ import kotlin.math.roundToInt
 
 class GoalsAdapter(private val fragment: BaseFragment) : BaseAdapter<Goal>(), ActionCompletionContract {
 
-    var clickListener: (goalId: Long) -> Unit = { }
+    var clickListener: (goalId: Long, repetition: Boolean) -> Unit = { _: Long, _: Boolean -> }
 
     override fun getLayoutRes(): Int = R.layout.list_item_goal
 
     override fun View.bindView(item: Goal, viewHolder: ViewHolder) {
-        setOnClickListener { clickListener(item.goalId) }
+        setOnClickListener { clickListener(item.goalId, item.repetition) }
 
         val typeIcon = viewHolder.itemView.findViewById<ImageView>(R.id.goal_type_icon)
 

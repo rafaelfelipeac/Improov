@@ -116,6 +116,16 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_navigation_goals_to_navigation_otherGoal">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_goals_to_navigation_otherGoalForm">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_navigation_goals_to_navigation_profile">
                               <value>
                                 <LayoutPositions />
@@ -162,6 +172,48 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="navigation_otherGoal">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="691" />
+                            <option name="y" value="-355" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_navigation_otherGoal_to_navigation_otherGoalForm">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navigation_otherGoalForm">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="403" />
+                            <option name="y" value="-564" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_navigation_otherGoalForm_to_navigation_otherGoal">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="navigation_profile">
                     <value>
                       <LayoutPositions>
@@ -188,6 +240,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_navigation_profile_to_otherGoalForm">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -198,13 +255,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="256" />
-                            <option name="y" value="119" />
+                            <option name="x" value="248" />
+                            <option name="y" value="89" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_navigation_stats_to_navigation_goalForm">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_stats_to_otherGoalForm">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -231,6 +293,16 @@
                               </value>
                             </entry>
                             <entry key="action_navigation_today_to_navigation_goalForm">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_today_to_navigation_otherGoal">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_today_to_otherGoalForm">
                               <value>
                                 <LayoutPositions />
                               </value>

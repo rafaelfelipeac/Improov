@@ -57,7 +57,7 @@ class ProfileFragment : BaseFragment() {
         profile_version.text = String.format("%s", "Versão: " + BuildConfig.VERSION_NAME)
 
         fab.setOnClickListener {
-            navController.navigate(R.id.action_navigation_profile_to_navigation_goalForm)
+            (activity as MainActivity).openBottomSheetFAB()
         }
 
         profile_edit_profile.setOnClickListener {

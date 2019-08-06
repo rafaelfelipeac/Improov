@@ -48,7 +48,7 @@ class StatsFragment : BaseFragment() {
         showNavigation()
 
         fab.setOnClickListener {
-            navController.navigate(R.id.action_navigation_stats_to_navigation_goalForm)
+            (activity as MainActivity).openBottomSheetFAB()
         }
     }
 

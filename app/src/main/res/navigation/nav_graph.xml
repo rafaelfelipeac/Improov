@@ -51,11 +51,20 @@
             android:label="fragment_goals"
             tools:layout="@layout/fragment_goals">
 
-        <action android:id="@+id/action_navigation_goals_to_navigation_goalForm" app:destination="@id/navigation_goalForm"/>
+        <action
+                android:id="@+id/action_navigation_goals_to_navigation_goalForm"
+                app:destination="@id/navigation_goalForm"
+                app:enterAnim="@anim/slide_in_up"/>
+        <action
+                android:id="@+id/action_navigation_goals_to_navigation_otherGoalForm"
+                app:destination="@id/navigation_otherGoalForm"
+                app:enterAnim="@anim/slide_in_up"/>
         <action android:id="@+id/action_navigation_goals_to_navigation_goal" app:destination="@id/navigation_goal"/>
         <action android:id="@+id/action_navigation_goals_to_navigation_stats" app:destination="@id/navigation_stats"/>
         <action android:id="@+id/action_navigation_goals_to_navigation_profile" app:destination="@id/navigation_profile"/>
         <action android:id="@+id/action_navigation_goals_to_navigation_today" app:destination="@id/navigation_today"/>
+        <action android:id="@+id/action_navigation_goals_to_navigation_otherGoal"
+                app:destination="@id/navigation_otherGoal"/>
 
     </fragment>
 
@@ -82,7 +91,6 @@
 
         <action android:id="@+id/action_navigation_goal_to_navigation_goalForm" app:destination="@id/navigation_goalForm"/>
 
-
     </fragment>
 
     <fragment
@@ -92,6 +100,7 @@
             tools:layout="@layout/fragment_stats">
 
         <action android:id="@+id/action_navigation_stats_to_navigation_goalForm" app:destination="@id/navigation_goalForm"/>
+        <action android:id="@+id/action_navigation_stats_to_otherGoalForm" app:destination="@id/navigation_otherGoalForm"/>
 
     </fragment>
 
@@ -104,6 +113,7 @@
         <action android:id="@+id/action_navigation_profile_to_navigation_welcome" app:destination="@id/navigation_welcome"/>
         <action android:id="@+id/action_navigation_profile_to_navigation_editProfile" app:destination="@id/navigation_editProfile"/>
         <action android:id="@+id/action_navigation_profile_to_navigation_goalForm" app:destination="@id/navigation_goalForm"/>
+        <action android:id="@+id/action_navigation_profile_to_otherGoalForm" app:destination="@id/navigation_otherGoalForm"/>
 
     </fragment>
 
@@ -120,6 +130,27 @@
 
         <action android:id="@+id/action_navigation_today_to_navigation_goalForm" app:destination="@id/navigation_goalForm"/>
         <action android:id="@+id/action_navigation_today_to_navigation_goal" app:destination="@id/navigation_goal"/>
+        <action android:id="@+id/action_navigation_today_to_otherGoalForm" app:destination="@id/navigation_otherGoalForm"/>
+        <action android:id="@+id/action_navigation_today_to_navigation_otherGoal" app:destination="@id/navigation_otherGoal"/>
+
+    </fragment>
+
+    <fragment android:id="@+id/navigation_otherGoalForm"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.otherGoalForm.OtherGoalFormFragment"
+              android:label="fragment_otherGoalForm">
+
+        <action android:id="@+id/action_navigation_otherGoalForm_to_navigation_otherGoal" app:destination="@id/navigation_otherGoal"/>
+
+    </fragment>
+
+    <fragment android:id="@+id/navigation_otherGoal"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.otherGoal.OtherGoalFragment"
+              android:label="fragment_other_goal"
+              tools:layout="@layout/fragment_other_goal">
+
+        <argument android:name="goalNew" app:argType="boolean" android:defaultValue="false"/>
+
+        <action android:id="@+id/action_navigation_otherGoal_to_navigation_otherGoalForm" app:destination="@id/navigation_otherGoalForm"/>
 
     </fragment>
 

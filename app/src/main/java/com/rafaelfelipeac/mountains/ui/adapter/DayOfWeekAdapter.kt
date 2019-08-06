@@ -30,9 +30,14 @@ class DayOfWeekAdapter(val fragment: TodayFragment) : BaseAdapter<DayOfWeek>() {
 
         val goalsAdapter = GoalsAdapter(fragment)
 
-        goalsAdapter.clickListener = {
-            val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(it)
-            fragment.navController.navigate(action)
+        goalsAdapter.clickListener = { goalId: Long, repetition: Boolean ->
+            if (repetition) {
+                val action = TodayFragmentDirections.actionNavigationTodayToNavigationOtherGoal()
+                fragment.navController.navigate(action)
+            } else {
+                val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(goalId)
+                fragment.navController.navigate(action)
+            }
         }
 
         val fakeGoals = item.list

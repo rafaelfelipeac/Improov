@@ -65,7 +65,7 @@ class GoalsFragment : BaseFragment() {
         observeViewModel()
 
         fab.setOnClickListener {
-            navController.navigate(R.id.action_navigation_goals_to_navigation_goalForm)
+            (activity as MainActivity).openBottomSheetFAB()
         }
 
         showNavigation()
@@ -149,9 +149,14 @@ class GoalsFragment : BaseFragment() {
             ?.sortedBy { it.order }
             ?.let { goalsAdapter.setItems(it) }
 
-        goalsAdapter.clickListener = {
-            val action = GoalsFragmentDirections.actionNavigationGoalsToNavigationGoal(it)
-            navController.navigate(action)
+        goalsAdapter.clickListener = { goalId: Long, repetition: Boolean ->
+            if (repetition) {
+                val action = GoalsFragmentDirections.actionNavigationGoalsToNavigationOtherGoal()
+                navController.navigate(action)
+            } else {
+                val action = GoalsFragmentDirections.actionNavigationGoalsToNavigationGoal(goalId)
+                navController.navigate(action)
+            }
         }
 
         val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsAdapter)
