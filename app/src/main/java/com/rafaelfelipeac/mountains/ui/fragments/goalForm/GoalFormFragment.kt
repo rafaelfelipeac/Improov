@@ -11,7 +11,7 @@ import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.GoalType
-import com.rafaelfelipeac.mountains.models.Repetition
+import com.rafaelfelipeac.mountains.models.Routine
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_goal_form.*
@@ -21,7 +21,7 @@ class GoalFormFragment : BaseFragment() {
     private var goal: Goal = Goal()
     private var goalId: Long? = null
     private var goals: List<Goal> = listOf()
-    private var repetitions: List<Repetition> = listOf()
+    private var routines: List<Routine> = listOf()
 
     private lateinit var viewModel: GoalFormViewModel
 
@@ -98,8 +98,8 @@ class GoalFormFragment : BaseFragment() {
             this.goals = goals.filter { it.userId == user.userId }
         })
 
-        viewModel.getRepetitions()?.observe(this, Observer { repetitions ->
-            this.repetitions = repetitions.filter { it.userId == user.userId }
+        viewModel.getRoutines()?.observe(this, Observer { routines ->
+            this.routines = routines.filter { it.userId == user.userId }
         })
 
         viewModel.goalIdInserted.observe(this, Observer { goalIdForm ->
@@ -244,8 +244,8 @@ class GoalFormFragment : BaseFragment() {
             goal.done = false
 
             val order =
-                if (goals.isEmpty() && repetitions.isEmpty()) 0
-                else goals.size + repetitions.size + 1
+                if (goals.isEmpty() && routines.isEmpty()) 0
+                else goals.size + routines.size + 1
                 //else goals!![goals!!.size-1].order + 1
 
             goal.order = order

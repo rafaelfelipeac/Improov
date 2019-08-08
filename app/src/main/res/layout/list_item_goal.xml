@@ -106,7 +106,7 @@
                 card_view:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
                 card_view:layout_constraintHorizontal_bias="0.0"
-                tools:src="@drawable/ic_repetition"/>
+                tools:src="@drawable/ic_routine"/>
 
         <ImageView
                 android:id="@+id/goal_drag_icon"
@@ -135,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="Título da meta default"
+                    android:text="Título do objetivo"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
                     android:maxLines="1"

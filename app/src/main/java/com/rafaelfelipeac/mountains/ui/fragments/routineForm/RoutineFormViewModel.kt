@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.ui.fragments.today
+package com.rafaelfelipeac.mountains.ui.fragments.routineForm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,27 +6,26 @@ import com.rafaelfelipeac.mountains.models.Routine
 import com.rafaelfelipeac.mountains.models.User
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 
-class TodayViewModel: BaseViewModel() {
+class RoutineFormViewModel : BaseViewModel() {
+    private var routine: LiveData<Routine>? = null
     private var routines: LiveData<List<Routine>>? = null
 
     var user: MutableLiveData<User>? = MutableLiveData()
 
+    var routineIdInserted: MutableLiveData<Long> = MutableLiveData()
+
     init {
-        verifyUser()
+        getUser()
 
         routines = routineRepository.getRoutines()
     }
 
-    private fun verifyUser() {
-        if (userRepository.getUserByUUI(auth.currentUser?.uid!!) == null) {
-            val userToSave = User()
+    fun init(routineId: Long) {
+        routine = routineRepository.getRoutine(routineId)
+    }
 
-            userToSave.uui = auth.currentUser?.uid!!
-            userToSave.email = auth.currentUser?.email!!
-
-            userRepository.save(userToSave)
-        }
-
+    // User
+    private fun getUser() {
         user?.value = userRepository.getUserByUUI(auth.currentUser?.uid!!)
     }
 
@@ -35,9 +34,11 @@ class TodayViewModel: BaseViewModel() {
         return routines
     }
 
-    fun saveRoutine(routine: Routine) {
-        routineRepository.save(routine)
+    fun getRoutine(): LiveData<Routine>? {
+        return routine
+    }
 
-        this.routines = routineRepository.getRoutines()
+    fun saveRoutine(routine: Routine) {
+        routineIdInserted.value = routineRepository.save(routine)
     }
 }

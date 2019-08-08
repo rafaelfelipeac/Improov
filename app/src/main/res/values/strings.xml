@@ -17,16 +17,16 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bottom_sheet_empty_item_name">Nome do item está vazio.</string>
-    <string name="fragment_title_goal">Meta</string>
+    <string name="fragment_title_goal">Objetivo</string>
     <string name="bottom_sheet_item_date_format">Concluído em %s.</string>
     <string name="item_swiped_deleted">Item removido.</string>
     <string name="percentage_100">100.00%s</string>
     <string name="percentage_others">%.2f %s</string>
     <string name="percentage_symbol">%</string>
     <string name="snackbar_action_undo">DESFAZER</string>
-    <string name="fragment_title_goal_form">Nova meta</string>
-    <string name="fragment_title_goals">Metas</string>
-    <string name="goals_fragment_resolved_goal_message">Meta arquivada.</string>
+    <string name="fragment_title_goal_form">Novo objetivo</string>
+    <string name="fragment_title_goals">Objetivos</string>
+    <string name="goals_fragment_resolved_goal_message">Objetivo arquivado.</string>
     <string name="fragment_title_stats">Estatísticas</string>
     <string name="stats_goals_completed_message">Você já concluiu %d objetivos!</string>
     <string name="stats_single_value">%dx</string>
@@ -124,7 +124,7 @@
         - Valor final\n
         Para objetivos onde os valores a serem somados ou subtraídos mudem constantemente.
     </string>
-    <string name="goals_adapter_item_repetition">Repetição:</string>
+    <string name="goals_adapter_item_routine">Rotina:</string>
 
 
 </resources>

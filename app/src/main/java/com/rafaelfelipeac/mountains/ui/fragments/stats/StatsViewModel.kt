@@ -2,17 +2,17 @@ package com.rafaelfelipeac.mountains.ui.fragments.stats
 
 import androidx.lifecycle.LiveData
 import com.rafaelfelipeac.mountains.models.Goal
-import com.rafaelfelipeac.mountains.models.Repetition
+import com.rafaelfelipeac.mountains.models.Routine
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 
 class StatsViewModel: BaseViewModel() {
 
     private var goals: LiveData<List<Goal>>? = null
-    private var repetitions: LiveData<List<Repetition>>? = null
+    private var routines: LiveData<List<Routine>>? = null
 
     init {
         goals = goalRepository.getGoals()
-        repetitions = repetitionRepository.getRepetitions()
+        routines = routineRepository.getRoutines()
     }
 
     // Goal
@@ -20,8 +20,8 @@ class StatsViewModel: BaseViewModel() {
         return goals
     }
 
-    // Repetition
-    fun getRepetitions(): LiveData<List<Repetition>>? {
-        return repetitions
+    // Routine
+    fun getRoutines(): LiveData<List<Routine>>? {
+        return routines
     }
 }

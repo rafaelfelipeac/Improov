@@ -2,7 +2,7 @@ package com.rafaelfelipeac.mountains.models.converts
 
 import androidx.room.TypeConverter
 import com.rafaelfelipeac.mountains.models.GoalType
-import com.rafaelfelipeac.mountains.models.RepetitionType
+import com.rafaelfelipeac.mountains.models.RoutineType
 import com.rafaelfelipeac.mountains.models.PeriodType
 import java.util.*
 import com.google.gson.Gson
@@ -20,10 +20,10 @@ class Converters {
 
     @TypeConverter fun goalTypeToString(goalType: GoalType) = goalType.name
 
-    // repetitionType
-    @TypeConverter fun stringToRepetitionType(value: String): RepetitionType = RepetitionType.valueOf(value)
+    // routineType
+    @TypeConverter fun stringToRoutineType(value: String): RoutineType = RoutineType.valueOf(value)
 
-    @TypeConverter fun repetitionTypeToString(repetitionType: RepetitionType) = repetitionType.name
+    @TypeConverter fun routineTypeToString(routineType: RoutineType) = routineType.name
 
     // periodType
     @TypeConverter fun stringToPeriodType(value: String): PeriodType = PeriodType.valueOf(value)

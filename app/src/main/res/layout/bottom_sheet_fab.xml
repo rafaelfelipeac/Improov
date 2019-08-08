@@ -12,10 +12,10 @@
         android:background="@drawable/rounded_primary_dark_two">
 
     <android.widget.Button
-            android:id="@+id/bottom_sheet_fab_default"
+            android:id="@+id/bottom_sheet_fab_goal"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Default"
+            android:text="Objetivo"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"
             android:layout_marginEnd="16dp"
@@ -38,10 +38,10 @@
             android:layout_marginEnd="8dp"/>
 
     <android.widget.Button
-            android:id="@+id/bottom_sheet_fab_repetition"
+            android:id="@+id/bottom_sheet_fab_routine"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Repetição"
+            android:text="Rotina"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"
             app:layout_constraintStart_toEndOf="@+id/bottom_sheet_fab_close"

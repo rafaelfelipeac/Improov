@@ -56,14 +56,14 @@
                 app:destination="@id/navigation_goal_form"
                 app:enterAnim="@anim/slide_in_up"/>
         <action
-                android:id="@+id/action_navigation_goals_to_navigation_repetition_form"
-                app:destination="@id/navigation_repetition_form"
+                android:id="@+id/action_navigation_goals_to_navigation_routine_form"
+                app:destination="@id/navigation_routine_form"
                 app:enterAnim="@anim/slide_in_up"/>
         <action android:id="@+id/action_navigation_goals_to_navigation_goal" app:destination="@id/navigation_goal"/>
         <action android:id="@+id/action_navigation_goals_to_navigation_stats" app:destination="@id/navigation_stats"/>
         <action android:id="@+id/action_navigation_goals_to_navigation_profile" app:destination="@id/navigation_profile"/>
         <action android:id="@+id/action_navigation_goals_to_navigation_today" app:destination="@id/navigation_today"/>
-        <action android:id="@+id/action_navigation_goals_to_navigation_repetition" app:destination="@id/navigation_repetition"/>
+        <action android:id="@+id/action_navigation_goals_to_navigation_routine" app:destination="@id/navigation_routine"/>
 
     </fragment>
 
@@ -99,7 +99,7 @@
             tools:layout="@layout/fragment_stats">
 
         <action android:id="@+id/action_navigation_stats_to_navigation_goal_form" app:destination="@id/navigation_goal_form"/>
-        <action android:id="@+id/action_navigation_stats_to_navigation_repetition_form" app:destination="@id/navigation_repetition_form"/>
+        <action android:id="@+id/action_navigation_stats_to_navigation_routine_form" app:destination="@id/navigation_routine_form"/>
 
     </fragment>
 
@@ -112,7 +112,7 @@
         <action android:id="@+id/action_navigation_profile_to_navigation_welcome" app:destination="@id/navigation_welcome"/>
         <action android:id="@+id/action_navigation_profile_to_navigation_edit_profile" app:destination="@id/navigation_edit_profile"/>
         <action android:id="@+id/action_navigation_profile_to_navigation_goal_form" app:destination="@id/navigation_goal_form"/>
-        <action android:id="@+id/action_navigation_profile_to_navigation_repetition_form" app:destination="@id/navigation_repetition_form"/>
+        <action android:id="@+id/action_navigation_profile_to_navigation_routine_form" app:destination="@id/navigation_routine_form"/>
 
     </fragment>
 
@@ -129,28 +129,28 @@
 
         <action android:id="@+id/action_navigation_today_to_navigation_goal" app:destination="@id/navigation_goal"/>
         <action android:id="@+id/action_navigation_today_to_navigation_goalForm" app:destination="@id/navigation_goal_form"/>
-        <action android:id="@+id/action_navigation_today_to_navigation_repetition" app:destination="@id/navigation_repetition"/>
-        <action android:id="@+id/action_navigation_today_to_navigation_repetition_form" app:destination="@id/navigation_repetition_form"/>
+        <action android:id="@+id/action_navigation_today_to_navigation_routine" app:destination="@id/navigation_routine"/>
+        <action android:id="@+id/action_navigation_today_to_navigation_routine_form" app:destination="@id/navigation_routine_form"/>
 
     </fragment>
 
-    <fragment android:id="@+id/navigation_repetition_form"
-              android:name="com.rafaelfelipeac.mountains.ui.fragments.repetitionForm.RepetitionFormFragment"
-              android:label="fragment_repetition_form">
+    <fragment android:id="@+id/navigation_routine_form"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.routineForm.RoutineFormFragment"
+              android:label="fragment_routine_form">
 
-        <action android:id="@+id/action_navigation_repetition_form_to_navigation_repetition" app:destination="@id/navigation_repetition"/>
+        <action android:id="@+id/action_navigation_routine_form_to_navigation_routine" app:destination="@id/navigation_routine"/>
 
     </fragment>
 
-    <fragment android:id="@+id/navigation_repetition"
-              android:name="com.rafaelfelipeac.mountains.ui.fragments.repetition.RepetitionFragment"
-              android:label="fragment_repetition"
-              tools:layout="@layout/fragment_repetition">
+    <fragment android:id="@+id/navigation_routine"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.routine.RoutineFragment"
+              android:label="fragment_routine"
+              tools:layout="@layout/fragment_routine">
 
-        <argument android:name="repetitionId" app:argType="long"/>
-        <argument android:name="repetitionNew" app:argType="boolean" android:defaultValue="false"/>
+        <argument android:name="routineId" app:argType="long"/>
+        <argument android:name="routineNew" app:argType="boolean" android:defaultValue="false"/>
 
-        <action android:id="@+id/action_navigation_repetition_to_navigation_repetition_form" app:destination="@id/navigation_repetition_form"/>
+        <action android:id="@+id/action_navigation_routine_to_navigation_routine_form" app:destination="@id/navigation_routine_form"/>
 
     </fragment>
 

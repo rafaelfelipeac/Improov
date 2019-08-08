@@ -18,8 +18,8 @@ import com.rafaelfelipeac.mountains.extension.invisible
 import com.rafaelfelipeac.mountains.extension.isToday
 import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.models.Goal
-import com.rafaelfelipeac.mountains.models.GoalAbstract
-import com.rafaelfelipeac.mountains.models.Repetition
+import com.rafaelfelipeac.mountains.models.GoalRoutine
+import com.rafaelfelipeac.mountains.models.Routine
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.GoalsAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
@@ -37,9 +37,9 @@ class GoalsFragment : BaseFragment() {
     private lateinit var bottomSheetDoneGoal: BottomSheetDialog
 
     var goals: List<Goal>? = listOf()
-    var repetitions: List<Repetition>? = listOf()
+    var routines: List<Routine>? = listOf()
 
-    var goalsFinal: MutableList<GoalAbstract>? = mutableListOf()
+    var goalsFinal: MutableList<GoalRoutine>? = mutableListOf()
 
     private lateinit var viewModel: GoalsViewModel
 
@@ -121,8 +121,8 @@ class GoalsFragment : BaseFragment() {
             verifyMidnight()
         })
 
-        viewModel.getRepetitions()?.observe(this, Observer { repetitions ->
-            this.repetitions = repetitions.filter { it.userId == user.userId && !it.archived}
+        viewModel.getRoutines()?.observe(this, Observer { routines ->
+            this.routines = routines.filter { it.userId == user.userId && !it.archived}
 
             if (!isFromDragAndDrop) {
                 setupItems()
@@ -135,10 +135,10 @@ class GoalsFragment : BaseFragment() {
     }
 
     private fun verifyMidnight() {
-        repetitions?.forEach {
+        routines?.forEach {
             if (it.nextDate.isToday() && it.doneToday) {
                 it.doneToday = false
-                viewModel.saveRepetition(it)
+                viewModel.saveRoutine(it)
             }
         }
     }
@@ -150,7 +150,7 @@ class GoalsFragment : BaseFragment() {
     }
 
     private fun setupItems() {
-        if (goals?.isNotEmpty()!! || repetitions?.isNotEmpty()!!) {
+        if (goals?.isNotEmpty()!! || routines?.isNotEmpty()!!) {
             setItems()
 
             goals_list.visible()
@@ -165,7 +165,7 @@ class GoalsFragment : BaseFragment() {
         goalsFinal = mutableListOf()
 
         goals?.let { goalsFinal?.addAll(it) }
-        repetitions?.let { goalsFinal?.addAll(it) }
+        routines?.let { goalsFinal?.addAll(it) }
 
         goalsAdapter = GoalsAdapter(this)
 
@@ -175,8 +175,8 @@ class GoalsFragment : BaseFragment() {
 
         goalsAdapter.clickListener = {
             when (it) {
-                is Repetition -> {
-                    val action = GoalsFragmentDirections.actionNavigationGoalsToNavigationRepetition(it.repetitionId)
+                is Routine -> {
+                    val action = GoalsFragmentDirections.actionNavigationGoalsToNavigationRoutine(it.routineId)
                     navController.navigate(action)
                 }
                 is Goal -> {
@@ -197,7 +197,7 @@ class GoalsFragment : BaseFragment() {
         touchHelper.attachToRecyclerView(goals_list)
     }
 
-    fun onViewMoved(oldPosition: Int, newPosition: Int, items: List<GoalAbstract>,
+    fun onViewMoved(oldPosition: Int, newPosition: Int, items: List<GoalRoutine>,
                     function: (oldPosition: Int, newPosition: Int) -> Unit) {
         val targetGoal = items[oldPosition]
         val otherGoal = items[newPosition]
@@ -209,12 +209,12 @@ class GoalsFragment : BaseFragment() {
 
         when (targetGoal) {
             is Goal -> viewModel.saveGoal(targetGoal)
-            is Repetition -> viewModel.saveRepetition(targetGoal)
+            is Routine -> viewModel.saveRoutine(targetGoal)
         }
 
         when (otherGoal) {
             is Goal -> viewModel.saveGoal(otherGoal)
-            is Repetition -> viewModel.saveRepetition(otherGoal)
+            is Routine -> viewModel.saveRoutine(otherGoal)
         }
 
 //        items.removeAt(oldPosition)
@@ -223,7 +223,7 @@ class GoalsFragment : BaseFragment() {
         function(oldPosition, newPosition)
     }
 
-    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalAbstract>) {
+    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalRoutine>) {
         val goal = items[position]
 
         when (direction) {
@@ -237,7 +237,7 @@ class GoalsFragment : BaseFragment() {
                             openBottomSheetDoneGoal(goal, ::doneOrUndoneGoal)
                         }
                     }
-                    is Repetition -> {
+                    is Routine -> {
                         setupItems()
 
                         //openBottomSheetDoneGoal()
@@ -257,7 +257,7 @@ class GoalsFragment : BaseFragment() {
 
                         setupItems()
                     }
-                    is Repetition -> {
+                    is Routine -> {
                         setupItems()
 
                         //openBottomSheetDoneGoal()

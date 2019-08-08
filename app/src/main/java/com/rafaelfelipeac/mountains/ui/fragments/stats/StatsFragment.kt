@@ -10,8 +10,8 @@ import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.invisible
 import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.models.Goal
-import com.rafaelfelipeac.mountains.models.GoalAbstract
-import com.rafaelfelipeac.mountains.models.Repetition
+import com.rafaelfelipeac.mountains.models.GoalRoutine
+import com.rafaelfelipeac.mountains.models.Routine
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_stats.*
@@ -19,8 +19,8 @@ import kotlinx.android.synthetic.main.fragment_stats.*
 class StatsFragment : BaseFragment() {
 
     var goals: List<Goal>? = null
-    var repetitions: List<Repetition>? = null
-    var goalsFinal: MutableList<GoalAbstract>? = mutableListOf()
+    var routines: List<Routine>? = null
+    var goalsFinal: MutableList<GoalRoutine>? = mutableListOf()
 
     private lateinit var viewModel: StatsViewModel
 
@@ -64,16 +64,16 @@ class StatsFragment : BaseFragment() {
             setupStats()
         })
 
-        viewModel.getRepetitions()?.observe(this, Observer { repetitions ->
+        viewModel.getRoutines()?.observe(this, Observer { routines ->
 
-            this.repetitions = repetitions.filter { it.userId == it.userId }
+            this.routines = routines.filter { it.userId == it.userId }
 
             setupStats()
         })
     }
 
     private fun setupStats() {
-        if (goals?.isNotEmpty()!! || repetitions?.isNotEmpty()!!) {
+        if (goals?.isNotEmpty()!! || routines?.isNotEmpty()!!) {
             setStats()
 
             cl_stats_on.visible()
@@ -88,7 +88,7 @@ class StatsFragment : BaseFragment() {
         goalsFinal = mutableListOf()
 
         goals?.let { goalsFinal!!.addAll(it) }
-        repetitions?.let { goalsFinal!!.addAll(it) }
+        routines?.let { goalsFinal!!.addAll(it) }
 
         val doneWithSingles = goals!!.filter { !it.divideAndConquer }
         val doneWithMountains = goals!!.filter { it.divideAndConquer }

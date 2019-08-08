@@ -3,13 +3,13 @@ package com.rafaelfelipeac.mountains.ui.fragments.goals
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.rafaelfelipeac.mountains.models.Goal
-import com.rafaelfelipeac.mountains.models.Repetition
+import com.rafaelfelipeac.mountains.models.Routine
 import com.rafaelfelipeac.mountains.models.User
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 
 class GoalsViewModel : BaseViewModel() {
     private var goals: LiveData<List<Goal>>? = null
-    private var repetitions: LiveData<List<Repetition>>? = null
+    private var routines: LiveData<List<Routine>>? = null
 
     var user: MutableLiveData<User>? = MutableLiveData()
 
@@ -17,7 +17,7 @@ class GoalsViewModel : BaseViewModel() {
         verifyUser()
 
         goals = goalRepository.getGoals()
-        repetitions = repetitionRepository.getRepetitions()
+        routines = routineRepository.getRoutines()
     }
 
     private fun verifyUser() {
@@ -50,14 +50,14 @@ class GoalsViewModel : BaseViewModel() {
         goals = goalRepository.getGoals()
     }
 
-    // Repetition
-    fun getRepetitions(): LiveData<List<Repetition>>? {
-        return repetitions
+    // Routine
+    fun getRoutines(): LiveData<List<Routine>>? {
+        return routines
     }
 
-    fun saveRepetition(repetition: Repetition) {
-        repetitionRepository.save(repetition)
+    fun saveRoutine(routine: Routine) {
+        routineRepository.save(routine)
 
-        repetitions = repetitionRepository.getRepetitions()
+        routines = routineRepository.getRoutines()
     }
 }

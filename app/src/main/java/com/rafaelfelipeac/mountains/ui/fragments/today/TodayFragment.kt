@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.extension.*
-import com.rafaelfelipeac.mountains.models.GoalAbstract
-import com.rafaelfelipeac.mountains.models.Repetition
+import com.rafaelfelipeac.mountains.models.GoalRoutine
+import com.rafaelfelipeac.mountains.models.Routine
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.DayOfWeekAdapter
 import com.rafaelfelipeac.mountains.ui.adapter.GoalsAdapter
@@ -31,9 +31,9 @@ class TodayFragment : BaseFragment() {
     private lateinit var goalsTodayAdapter: GoalsAdapter
     private var goalsWeekAdapter = DayOfWeekAdapter(this)
 
-    private var repetitionsLate: List<Repetition>? = null
-    private var repetitionsToday: List<Repetition>? = null
-    private var repetitionsFuture: List<Repetition>? = null
+    private var routinesLate: List<Routine>? = null
+    private var routinesToday: List<Routine>? = null
+    private var routinesFuture: List<Routine>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(this).get(TodayViewModel::class.java)
@@ -79,14 +79,14 @@ class TodayFragment : BaseFragment() {
             (activity as MainActivity).user = user
         })
 
-        viewModel.getRepetitions()?.observe(this, Observer { repetitions ->
+        viewModel.getRoutines()?.observe(this, Observer { routines ->
 
-            this.repetitionsLate =
-                repetitions.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isLate() && !it.isToday() }
-            this.repetitionsToday =
-                repetitions.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isToday() }
-            this.repetitionsFuture =
-                repetitions.filter { it.userId == user.userId && !it.archived && it.isFuture() }
+            this.routinesLate =
+                routines.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isLate() && !it.isToday() }
+            this.routinesToday =
+                routines.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isToday() }
+            this.routinesFuture =
+                routines.filter { it.userId == user.userId && !it.archived && it.isFuture() }
 
             setItemsLate()
             setItemsToday()
@@ -102,11 +102,11 @@ class TodayFragment : BaseFragment() {
 
     private fun setItemsLate() {
         goalsLateAdapter = GoalsAdapter(this)
-        repetitionsLate?.sortedBy { it.order }.let { goalsLateAdapter.setItems(it!!) }
+        routinesLate?.sortedBy { it.order }.let { goalsLateAdapter.setItems(it!!) }
 
         goalsLateAdapter.clickListener = {
-            if (it is Repetition) {
-                val action = TodayFragmentDirections.actionNavigationTodayToNavigationRepetition(it.repetitionId)
+            if (it is Routine) {
+                val action = TodayFragmentDirections.actionNavigationTodayToNavigationRoutine(it.routineId)
                 navController.navigate(action)
             }
         }
@@ -124,11 +124,11 @@ class TodayFragment : BaseFragment() {
 
     private fun setItemsToday() {
         goalsTodayAdapter = GoalsAdapter(this)
-        repetitionsToday?.sortedBy { it.order }.let { goalsTodayAdapter.setItems(it!!) }
+        routinesToday?.sortedBy { it.order }.let { goalsTodayAdapter.setItems(it!!) }
 
         goalsTodayAdapter.clickListener = {
-            if (it is Repetition) {
-                val action = TodayFragmentDirections.actionNavigationTodayToNavigationRepetition(it.repetitionId)
+            if (it is Routine) {
+                val action = TodayFragmentDirections.actionNavigationTodayToNavigationRoutine(it.routineId)
                 navController.navigate(action)
             }
         }
@@ -149,9 +149,9 @@ class TodayFragment : BaseFragment() {
         val days = calendar.getNextWeek()
 
         days.forEach { day ->
-            repetitionsFuture?.forEach { repetition ->
-                if (day.monthDay == repetition.nextDate.format()) {
-                    day.list.add(repetition)
+            routinesFuture?.forEach { routine ->
+                if (day.monthDay == routine.nextDate.format()) {
+                    day.list.add(routine)
                 }
             }
         }
@@ -162,30 +162,30 @@ class TodayFragment : BaseFragment() {
         today_week_list.adapter = goalsWeekAdapter
     }
 
-    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalAbstract>) {
-        val repetition = items[position] as Repetition
+    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalRoutine>) {
+        val routine = items[position] as Routine
 
         when (direction) {
             ItemTouchHelper.RIGHT -> {
-                val beforeRepetition = repetition.copy()
+                val beforeRoutine = routine.copy()
 
-                repetition.doneToday = true
-                repetition.doneDate = getCurrentTime()
-                repetition.nextRepetitionDateAfterDone()
+                routine.doneToday = true
+                routine.doneDate = getCurrentTime()
+                routine.nextRoutineDateAfterDone()
 
-                viewModel.saveRepetition(repetition)
+                viewModel.saveRoutine(routine)
 
                 showSnackBarWithAction(holder.itemView, String.format("%s %s.", "Próxima ocorrência: ",
-                        repetition.nextDate.format()), beforeRepetition, ::undoDone)
+                    routine.nextDate.format()), beforeRoutine, ::undoDone)
             }
 
             ItemTouchHelper.LEFT -> {
-                viewModel.saveRepetition(repetition)
+                viewModel.saveRoutine(routine)
             }
         }
     }
 
     private fun undoDone(goal: Any) {
-        viewModel.saveRepetition(goal as Repetition)
+        viewModel.saveRoutine(goal as Routine)
     }
 }

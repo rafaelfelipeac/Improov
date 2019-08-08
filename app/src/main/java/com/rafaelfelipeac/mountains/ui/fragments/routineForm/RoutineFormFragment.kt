@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.ui.fragments.repetitionForm
+package com.rafaelfelipeac.mountains.ui.fragments.routineForm
 
 import android.os.Bundle
 import android.view.*
@@ -10,22 +10,22 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.gone
-import com.rafaelfelipeac.mountains.extension.nextRepetitionDate
-import com.rafaelfelipeac.mountains.extension.setRepetitionLastDate
+import com.rafaelfelipeac.mountains.extension.nextRoutineDate
+import com.rafaelfelipeac.mountains.extension.setRoutineLastDate
 import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.models.*
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
-import com.rafaelfelipeac.mountains.ui.fragments.repetition.RepetitionFragmentArgs
-import kotlinx.android.synthetic.main.fragment_repetition_form.*
+import com.rafaelfelipeac.mountains.ui.fragments.routine.RoutineFragmentArgs
+import kotlinx.android.synthetic.main.fragment_routine_form.*
 
-class RepetitionFormFragment : BaseFragment() {
+class RoutineFormFragment : BaseFragment() {
 
-    private var repetition = Repetition()
-    private var repetitionId: Long? = null
-    private var repetitions: List<Repetition>? = null
+    private var routine = Routine()
+    private var routineId: Long? = null
+    private var routines: List<Routine>? = null
 
-    private lateinit var viewModel: RepetitionFormViewModel
+    private lateinit var viewModel: RoutineFormViewModel
 
     private var bottomSheetTip: BottomSheetBehavior<*>? = null
     private var bottomSheetTipClose: ConstraintLayout? = null
@@ -33,7 +33,7 @@ class RepetitionFormFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        repetitionId = arguments?.let { RepetitionFragmentArgs.fromBundle(it).repetitionId }
+        routineId = arguments?.let { RoutineFragmentArgs.fromBundle(it).routineId }
 
         setHasOptionsMenu(true)
     }
@@ -41,14 +41,14 @@ class RepetitionFormFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_goal_form)
+        (activity as MainActivity).supportActionBar?.title = "Nova rotina"
         (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
 
-        viewModel = ViewModelProviders.of(this).get(RepetitionFormViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(RoutineFormViewModel::class.java)
 
-        repetitionId?.let { viewModel.init(it) }
+        routineId?.let { viewModel.init(it) }
 
-        return inflater.inflate(R.layout.fragment_repetition_form, container, false)
+        return inflater.inflate(R.layout.fragment_routine_form, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,11 +59,11 @@ class RepetitionFormFragment : BaseFragment() {
         (activity as MainActivity).openToolbar()
         (activity as MainActivity).closeBottomSheetFAB()
 
-        setRadioRepetition()
+        setRadioRoutine()
 
         setDropdown()
 
-        repetition_form_help3.setOnClickListener {
+        routine_form_help3.setOnClickListener {
             (activity as MainActivity).setupBottomSheetTipsTwo()
             setupBottomSheetTip()
             (activity as MainActivity).openBottomSheetTips()
@@ -94,9 +94,9 @@ class RepetitionFormFragment : BaseFragment() {
 //                } else if (verifyIfIncOrDecValuesAreEmpty()) {
 //                    showSnackBar(getString(R.string.message_empty_inc_dec))
 //                } else {
-                    val repetitionToSave = updateOrCreateRepetition()
+                    val routineToSave = updateOrCreateRoutine()
 
-                    viewModel.saveRepetition(repetitionToSave)
+                    viewModel.saveRoutine(routineToSave)
 
                     return true
                // }
@@ -116,37 +116,37 @@ class RepetitionFormFragment : BaseFragment() {
         }
     }
 
-    private fun updateOrCreateRepetition(): Repetition  {
-        repetition.name = repetition_form_name.text.toString()
-        repetition.weekDays = getWeekDaysSelected()
-        repetition.userId = user.userId
+    private fun updateOrCreateRoutine(): Routine  {
+        routine.name = routine_form_name.text.toString()
+        routine.weekDays = getWeekDaysSelected()
+        routine.userId = user.userId
 
-        val repetitionType = getRepetitionTypeSelected()
+        val routineType = getRoutineTypeSelected()
 
-        if (repetitionType != RepetitionType.REP_NONE) {
-            repetition.type = repetitionType
+        if (routineType != RoutineType.ROUT_NONE) {
+            routine.type = routineType
 
-            when (repetitionType) {
-                RepetitionType.REP1-> {}
-                RepetitionType.REP2 -> {}
-                RepetitionType.REP3 -> {
-                    repetition.periodType = getRepetitionPeriodTypeSelected()
-                    repetition.periodTotal = repetition_form_days_custom_1.text.toString().toInt()
-                    repetition.setRepetitionLastDate()
+            when (routineType) {
+                RoutineType.ROUT_1-> {}
+                RoutineType.ROUT_2 -> {}
+                RoutineType.ROUT_3 -> {
+                    routine.periodType = getRoutinePeriodTypeSelected()
+                    routine.periodTotal = routine_form_days_custom_1.text.toString().toInt()
+                    routine.setRoutineLastDate()
                 }
-                RepetitionType.REP4 -> {
-                    repetition.periodType = PeriodType.PER_CUSTOM
-                    repetition.periodTotal = 1
-                    repetition.periodDaysBetween = repetition_form_add_days.text.toString().toInt()
-                    repetition.setRepetitionLastDate()
+                RoutineType.ROUT_4 -> {
+                    routine.periodType = PeriodType.PER_CUSTOM
+                    routine.periodTotal = 1
+                    routine.periodDaysBetween = routine_form_add_days.text.toString().toInt()
+                    routine.setRoutineLastDate()
                 }
                 else -> { TODO() }
             }
 
-            repetition.nextRepetitionDate()
+            routine.nextRoutineDate()
         }
 
-        return repetition
+        return routine
     }
 
     private fun getWeekDaysSelected(): MutableList<Boolean> {
@@ -163,17 +163,17 @@ class RepetitionFormFragment : BaseFragment() {
         return weekDays
     }
 
-    private fun getRepetitionTypeSelected(): RepetitionType {
-        if (radioButton1.isChecked)         return RepetitionType.REP1
-        if (radioButton2.isChecked)         return RepetitionType.REP2
-        if (radioButton3.isChecked)         return RepetitionType.REP3
-        if (radioButton4.isChecked)         return RepetitionType.REP4
+    private fun getRoutineTypeSelected(): RoutineType {
+        if (radioButton1.isChecked)         return RoutineType.ROUT_1
+        if (radioButton2.isChecked)         return RoutineType.ROUT_2
+        if (radioButton3.isChecked)         return RoutineType.ROUT_3
+        if (radioButton4.isChecked)         return RoutineType.ROUT_4
 
-        return RepetitionType.REP_NONE
+        return RoutineType.ROUT_NONE
     }
 
-    private fun getRepetitionPeriodTypeSelected(): PeriodType {
-        return when (repetition_form_periods_spinner.selectedItem.toString()) {
+    private fun getRoutinePeriodTypeSelected(): PeriodType {
+        return when (routine_form_periods_spinner.selectedItem.toString()) {
             "semana" -> {
                 PeriodType.PER_WEEK
             }
@@ -191,10 +191,10 @@ class RepetitionFormFragment : BaseFragment() {
     private fun setDropdown() {
         val adapter = ArrayAdapter.createFromResource(context!!, R.array.periods_array, R.layout.spinner_item)
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
-        repetition_form_periods_spinner.adapter = adapter
+        routine_form_periods_spinner.adapter = adapter
     }
 
-    private fun setRadioRepetition() {
+    private fun setRadioRoutine() {
         radioButton1.setOnClickListener {
             if (radioButton1.isChecked) {
                 radioButton2.isChecked = false
@@ -241,45 +241,45 @@ class RepetitionFormFragment : BaseFragment() {
             (activity as MainActivity).user = user
         })
 
-        viewModel.getRepetition()?.observe(this, Observer { repetition ->
-            this.repetition = repetition as Repetition
+        viewModel.getRoutine()?.observe(this, Observer { routine ->
+            this.routine = routine as Routine
 
-            setupRepetition()
+            setupRoutine()
         })
 
-        viewModel.getRepetitions()?.observe(this, Observer { goals ->
-            this.repetitions = goals.filter { it.userId == user.userId }
+        viewModel.getRoutines()?.observe(this, Observer { goals ->
+            this.routines = goals.filter { it.userId == user.userId }
         })
 
-        viewModel.repetitionIdInserted.observe(this, Observer { goalId ->
-            val action = RepetitionFormFragmentDirections.actionNavigationRepetitionFormToNavigationRepetition(goalId)
-            action.repetitionNew = true
+        viewModel.routineIdInserted.observe(this, Observer { goalId ->
+            val action = RoutineFormFragmentDirections.actionNavigationRoutineFormToNavigationRoutine(goalId)
+            action.routineNew = true
             navController.navigate(action)
         })
     }
 
-    private fun setupRepetition() {
-        when(repetition.type) {
-            RepetitionType.REP1 -> { radioButton1.isChecked = true }
-            RepetitionType.REP2 -> {
+    private fun setupRoutine() {
+        when(routine.type) {
+            RoutineType.ROUT_1 -> { radioButton1.isChecked = true }
+            RoutineType.ROUT_2 -> {
                 radioButton2.isChecked = true
 
                 block_of_radius2.visible()
 
-                weekDay1.isChecked = repetition.weekDays[0]
-                weekDay2.isChecked = repetition.weekDays[1]
-                weekDay3.isChecked = repetition.weekDays[2]
-                weekDay4.isChecked = repetition.weekDays[3]
-                weekDay5.isChecked = repetition.weekDays[4]
-                weekDay6.isChecked = repetition.weekDays[5]
-                weekDay7.isChecked = repetition.weekDays[6]
+                weekDay1.isChecked = routine.weekDays[0]
+                weekDay2.isChecked = routine.weekDays[1]
+                weekDay3.isChecked = routine.weekDays[2]
+                weekDay4.isChecked = routine.weekDays[3]
+                weekDay5.isChecked = routine.weekDays[4]
+                weekDay6.isChecked = routine.weekDays[5]
+                weekDay7.isChecked = routine.weekDays[6]
             }
-            RepetitionType.REP3 -> {
+            RoutineType.ROUT_3 -> {
                 radioButton3.isChecked = true
 
-                repetition_form_days_custom_1.setText(repetition.periodTotal.toString())
+                routine_form_days_custom_1.setText(routine.periodTotal.toString())
 
-                repetition_form_periods_spinner.setSelection(when (repetition.periodType) {
+                routine_form_periods_spinner.setSelection(when (routine.periodType) {
                     PeriodType.PER_WEEK     -> 0
                     PeriodType.PER_MONTH    -> 1
                     PeriodType.PER_YEAR     -> 2
@@ -288,12 +288,12 @@ class RepetitionFormFragment : BaseFragment() {
                 })
 
             }
-            RepetitionType.REP4 -> {
+            RoutineType.ROUT_4 -> {
                 radioButton4.isChecked = true
 
-                repetition_form_add_days.setText(repetition.periodDaysBetween.toString())
+                routine_form_add_days.setText(routine.periodDaysBetween.toString())
             }
-            RepetitionType.REP_NONE -> TODO()
+            RoutineType.ROUT_NONE -> TODO()
         }
     }
 }

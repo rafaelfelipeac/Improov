@@ -22,21 +22,21 @@ import kotlin.math.roundToInt
 class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     ActionCompletionContract {
 
-    private lateinit var goals: List<GoalAbstract>
+    private lateinit var goals: List<GoalRoutine>
 
-    var clickListener: (goalAbstract: GoalAbstract) -> Unit = { }
+    var clickListener: (goalRoutine: GoalRoutine) -> Unit = { }
 
     lateinit var touchHelper: ItemTouchHelper
 
     companion object {
         const val TYPE_GOAL = 1
-        const val TYPE_REPETITION = 2
+        const val TYPE_ROUTINE = 2
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (goals[position]) {
             is Goal -> TYPE_GOAL
-            is Repetition -> TYPE_REPETITION
+            is Routine -> TYPE_ROUTINE
             else -> -1
         }
     }
@@ -46,8 +46,8 @@ class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVi
             TYPE_GOAL -> {
                 GoalViewHolder(parent.inflate(R.layout.list_item_goal), fragment, touchHelper, clickListener)
             }
-            TYPE_REPETITION -> {
-                RepetitionViewHolder(parent.inflate(R.layout.list_item_repetition), fragment, touchHelper, clickListener)
+            TYPE_ROUTINE -> {
+                RoutineViewHolder(parent.inflate(R.layout.list_item_routine), fragment, touchHelper, clickListener)
             }
             else -> {
                 GoalViewHolder(parent.inflate(R.layout.list_item_goal), fragment, touchHelper, clickListener)
@@ -63,7 +63,7 @@ class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVi
 
     override fun getItemCount() = goals.size
 
-    fun setItems(goals: List<GoalAbstract>) {
+    fun setItems(goals: List<GoalRoutine>) {
         this.goals = goals
         notifyDataSetChanged()
     }
@@ -71,7 +71,7 @@ class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVi
     class GoalViewHolder(itemView: View,
                          val fragment: BaseFragment,
                          private val touchHelper: ItemTouchHelper?,
-                         private val clickListener: (goalAbstract: GoalAbstract) -> Unit) :
+                         private val clickListener: (goalRoutine: GoalRoutine) -> Unit) :
         RecyclerView.ViewHolder(itemView), GoalAbstractViewHolder {
 
         private val typeIcon= itemView.findViewById<ImageView>(R.id.goal_type_icon)
@@ -81,11 +81,11 @@ class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVi
         private val itemDrag = itemView.findViewById<ImageView>(R.id.goal_drag_icon)!!
 
         @SuppressLint("ClickableViewAccessibility")
-        override fun bindViews(goalAbstract: GoalAbstract) {
+        override fun bindViews(goalRoutine: GoalRoutine) {
 
-            itemView.setOnClickListener { clickListener(goalAbstract) }
+            itemView.setOnClickListener { clickListener(goalRoutine) }
 
-            val goal = goalAbstract as Goal
+            val goal = goalRoutine as Goal
 
             title.text = goal.name
 
@@ -117,80 +117,80 @@ class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVi
         }
     }
 
-    class RepetitionViewHolder(itemView: View,
-                               val fragment: BaseFragment,
-                               private val touchHelper: ItemTouchHelper?,
-                               val clickListener: (goalAbstract: GoalAbstract) -> Unit) :
+    class RoutineViewHolder(itemView: View,
+                            val fragment: BaseFragment,
+                            private val touchHelper: ItemTouchHelper?,
+                            val clickListener: (goalRoutine: GoalRoutine) -> Unit) :
         RecyclerView.ViewHolder(itemView), GoalAbstractViewHolder {
 
-        private val typeIcon = itemView.findViewById<ImageView>(R.id.repetition_type_icon)!!
-        private val title = itemView.findViewById<TextView>(R.id.repetition_title)
-        private val type = itemView.findViewById<TextView>(R.id.repetition_type)
-        private val late = itemView.findViewById<TextView>(R.id.repetition_late_date)
-        private val score = itemView.findViewById<TextView>(R.id.repetition_score)
-        private val archiveImage = itemView.findViewById<ImageView>(R.id.repetition_archive_image)
-        private val itemDrag = itemView.findViewById<ImageView>(R.id.repetition_drag_icon)
+        private val typeIcon = itemView.findViewById<ImageView>(R.id.routine_type_icon)!!
+        private val title = itemView.findViewById<TextView>(R.id.routine_title)
+        private val type = itemView.findViewById<TextView>(R.id.routine_type)
+        private val late = itemView.findViewById<TextView>(R.id.routine_late_date)
+        private val score = itemView.findViewById<TextView>(R.id.routine_score)
+        private val archiveImage = itemView.findViewById<ImageView>(R.id.routine_archive_image)
+        private val itemDrag = itemView.findViewById<ImageView>(R.id.routine_drag_icon)
 
         @SuppressLint("ClickableViewAccessibility")
-        override fun bindViews(goalAbstract: GoalAbstract) {
+        override fun bindViews(goalRoutine: GoalRoutine) {
 
             if (fragment is TodayFragment) {
                 archiveImage.gone()
                 itemDrag.gone()
             }
 
-            itemView.setOnClickListener { clickListener(goalAbstract) }
+            itemView.setOnClickListener { clickListener(goalRoutine) }
 
-            val repetition = goalAbstract as Repetition
+            val routine = goalRoutine as Routine
 
-            title.text = repetition.name
+            title.text = routine.name
 
-            if (repetition.nextDate != null && repetition.isLate() && !repetition.isToday()) {
-                late.text = repetition.nextDate.format()
+            if (routine.nextDate != null && routine.isLate() && !routine.isToday()) {
+                late.text = routine.nextDate.format()
                 late.visible()
             }
 
             typeIcon.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
             typeIcon.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.drawable.ic_repetition)
+            typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.drawable.ic_routine)
 
-            when (repetition.type) {
-                RepetitionType.REP1 -> {
+            when (routine.type) {
+                RoutineType.ROUT_1 -> {
                     type.text = String.format(
                         "%s", "Todo dia"
                     )
                 }
-                RepetitionType.REP2 -> {
+                RoutineType.ROUT_2 -> {
                     type.text = String.format(
                         "%s %s",
-                        repetition.weekDaysLong.filter { it > 0 }.size.toString(),
+                        routine.weekDaysLong.filter { it > 0 }.size.toString(),
                         "vezes por semana"
                     )
                 }
-                RepetitionType.REP3 -> {
+                RoutineType.ROUT_3 -> {
                     type.text = String.format(
                         "%s %s %s",
-                        repetition.periodTotal.toString(),
+                        routine.periodTotal.toString(),
                         "dias por",
-                        repetition.periodType.getName()
+                        routine.periodType.getName()
                     )
 
                     score.text = String.format(
                         "%s/%s",
-                        repetition.periodDone.toString(),
-                        repetition.periodTotal.toString()
+                        routine.periodDone.toString(),
+                        routine.periodTotal.toString()
                     )
                     score.visible()
                 }
-                RepetitionType.REP4 -> {
+                RoutineType.ROUT_4 -> {
                     type.text = String.format(
                         "%s %s %s",
                         "A cada",
-                        repetition.periodDaysBetween.toString(),
+                        routine.periodDaysBetween.toString(),
                         "dias"
                     )
                 }
-                RepetitionType.REP_NONE -> TODO()
+                RoutineType.ROUT_NONE -> TODO()
             }
 
             itemDrag.setOnTouchListener { _, _ ->
@@ -214,6 +214,6 @@ class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVi
     }
 
     interface GoalAbstractViewHolder {
-        fun bindViews(goalAbstract: GoalAbstract)
+        fun bindViews(goalRoutine: GoalRoutine)
     }
 }

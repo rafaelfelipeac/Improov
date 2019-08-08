@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.models.DayOfWeek
-import com.rafaelfelipeac.mountains.models.Repetition
+import com.rafaelfelipeac.mountains.models.Routine
 import com.rafaelfelipeac.mountains.ui.base.BaseAdapter
 import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragment
 import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragmentDirections
@@ -29,17 +29,17 @@ class DayOfWeekAdapter(val fragment: TodayFragment) : BaseAdapter<DayOfWeek>() {
         weekDay.text = item.weekDay
         monthDay.text = item.monthDay
 
-        val repetitions = item.list
+        val routines = item.list
 
         val goalsAdapter = GoalsAdapter(fragment)
 
         goalsAdapter.clickListener = {
             val action =
-                TodayFragmentDirections.actionNavigationTodayToNavigationRepetition((it as Repetition).repetitionId)
+                TodayFragmentDirections.actionNavigationTodayToNavigationRoutine((it as Routine).routineId)
             fragment.navController.navigate(action)
         }
 
-        repetitions.sortedBy { it.order }.let { goalsAdapter.setItems(it) }
+        routines.sortedBy { it.order }.let { goalsAdapter.setItems(it) }
 
         val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)

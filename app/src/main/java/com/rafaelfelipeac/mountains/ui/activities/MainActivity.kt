@@ -42,8 +42,8 @@ class MainActivity : BaseActivity() {
     lateinit var bottomSheetTip: BottomSheetBehavior<*>
 
     lateinit var bottomSheetFAB: BottomSheetDialog
-    lateinit var bottomSheetFABDefault: Button
-    lateinit var bottomSheetFABRepetition: Button
+    lateinit var bottomSheetFABGoal: Button
+    lateinit var bottomSheetFABRoutine: Button
     lateinit var bottomSheetFABClose: ImageView
 
     var mGoogleSignInClient: GoogleSignInClient? = null
@@ -72,8 +72,8 @@ class MainActivity : BaseActivity() {
         val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_fab, null)
         bottomSheetFAB.setContentView(sheetView)
 
-        bottomSheetFABDefault = sheetView.findViewById(R.id.bottom_sheet_fab_default)
-        bottomSheetFABRepetition = sheetView.findViewById(R.id.bottom_sheet_fab_repetition)
+        bottomSheetFABGoal = sheetView.findViewById(R.id.bottom_sheet_fab_goal)
+        bottomSheetFABRoutine = sheetView.findViewById(R.id.bottom_sheet_fab_routine)
         bottomSheetFABClose = sheetView.findViewById(R.id.bottom_sheet_fab_close)
     }
 
@@ -144,12 +144,12 @@ class MainActivity : BaseActivity() {
     fun openBottomSheetFAB() {
         bottomSheetFAB.show()
 
-        bottomSheetFABDefault.setOnClickListener {
+        bottomSheetFABGoal.setOnClickListener {
             navController.navigate(R.id.action_navigation_goals_to_navigation_goal_form)
         }
 
-        bottomSheetFABRepetition.setOnClickListener {
-            navController.navigate(R.id.action_navigation_goals_to_navigation_repetition_form)
+        bottomSheetFABRoutine.setOnClickListener {
+            navController.navigate(R.id.action_navigation_goals_to_navigation_routine_form)
         }
 
         bottomSheetFABClose.setOnClickListener {
