@@ -6,15 +6,17 @@ import androidx.room.TypeConverters
 import com.rafaelfelipeac.mountains.database.goal.GoalDAO
 import com.rafaelfelipeac.mountains.database.historic.HistoricDAO
 import com.rafaelfelipeac.mountains.database.item.ItemDAO
+import com.rafaelfelipeac.mountains.database.repetition.RepetitionDAO
 import com.rafaelfelipeac.mountains.database.user.UserDAO
 import com.rafaelfelipeac.mountains.models.*
 import com.rafaelfelipeac.mountains.models.converts.Converters
 
-@Database(entities = [Goal::class, Item::class, Historic::class, User::class], version = 38)
+@Database(entities = [Goal::class, Repetition::class, Item::class, Historic::class, User::class], version = 43)
 @TypeConverters(Converters::class)
 abstract class RoomDatabase : RoomDatabase() {
 
     abstract fun goalDAO(): GoalDAO
+    abstract fun repetitionDAO(): RepetitionDAO
     abstract fun itemDAO(): ItemDAO
     abstract fun historicDAO(): HistoricDAO
     abstract fun userDAO(): UserDAO

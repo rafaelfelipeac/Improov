@@ -14,7 +14,7 @@ import com.rafaelfelipeac.mountains.ui.helper.ActionCompletionContract
 
 class ItemsAdapter(private val fragment: GoalFragment) : BaseAdapter<Item>(), ActionCompletionContract {
 
-    var clickListener: (book: Item) -> Unit = { }
+    var clickListener: (item: Item) -> Unit = { }
 
     override fun getLayoutRes(): Int = R.layout.list_item_item
 

@@ -15,7 +15,7 @@ class Converters {
 
     @TypeConverter fun dateToTimestamp(date: Date?): Long? { return date?.time }
 
-    // goalType
+    // type
     @TypeConverter fun stringToGoalType(value: String): GoalType = GoalType.valueOf(value)
 
     @TypeConverter fun goalTypeToString(goalType: GoalType) = goalType.name

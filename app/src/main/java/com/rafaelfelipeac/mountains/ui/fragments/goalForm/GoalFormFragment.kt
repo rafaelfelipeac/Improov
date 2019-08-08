@@ -11,6 +11,7 @@ import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.GoalType
+import com.rafaelfelipeac.mountains.models.Repetition
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_goal_form.*
@@ -19,7 +20,8 @@ class GoalFormFragment : BaseFragment() {
 
     private var goal: Goal = Goal()
     private var goalId: Long? = null
-    private var goals: List<Goal>? = null
+    private var goals: List<Goal> = listOf()
+    private var repetitions: List<Repetition> = listOf()
 
     private lateinit var viewModel: GoalFormViewModel
 
@@ -87,13 +89,17 @@ class GoalFormFragment : BaseFragment() {
         })
 
         viewModel.getGoal()?.observe(this, Observer { goal ->
-            this.goal = goal
+            this.goal = goal as Goal
 
             setupGoal()
         })
 
         viewModel.getGoals()?.observe(this, Observer { goals ->
             this.goals = goals.filter { it.userId == user.userId }
+        })
+
+        viewModel.getRepetitions()?.observe(this, Observer { repetitions ->
+            this.repetitions = repetitions.filter { it.userId == user.userId }
         })
 
         viewModel.goalIdInserted.observe(this, Observer { goalIdForm ->
@@ -229,7 +235,7 @@ class GoalFormFragment : BaseFragment() {
     private fun updateOrCreateGoal(): Goal {
         goal.name = goalForm_goal_name.text.toString()
         goal.divideAndConquer = form_goal_switch_mountains.isChecked
-        goal.goalType = getGoalTypeSelected()
+        goal.type = getGoalTypeSelected()
 
         if (goal.goalId == 0L) {
             goal.userId = user.userId
@@ -238,8 +244,9 @@ class GoalFormFragment : BaseFragment() {
             goal.done = false
 
             val order =
-                if (goals?.isEmpty()!!) 0
-                else goals!![goals!!.size-1].order + 1
+                if (goals.isEmpty() && repetitions.isEmpty()) 0
+                else goals.size + repetitions.size + 1
+                //else goals!![goals!!.size-1].order + 1
 
             goal.order = order
         }
@@ -286,7 +293,7 @@ class GoalFormFragment : BaseFragment() {
             form_goal_editText_single.setText(goal.singleValue.getNumberInRightFormat())
         }
 
-        when(goal.goalType) {
+        when(goal.type) {
             GoalType.LIST -> { radioButtonLista.isChecked = true }
             GoalType.COUNTER -> {
                 radioButtonIncDec.isChecked = true

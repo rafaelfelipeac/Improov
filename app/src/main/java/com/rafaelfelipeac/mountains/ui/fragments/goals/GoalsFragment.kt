@@ -18,6 +18,8 @@ import com.rafaelfelipeac.mountains.extension.invisible
 import com.rafaelfelipeac.mountains.extension.isToday
 import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.models.Goal
+import com.rafaelfelipeac.mountains.models.GoalAbstract
+import com.rafaelfelipeac.mountains.models.Repetition
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.GoalsAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
@@ -28,13 +30,16 @@ class GoalsFragment : BaseFragment() {
 
     private var isFromDragAndDrop: Boolean = false
 
-    private var goalsAdapter = GoalsAdapter(this)
+    private lateinit var goalsAdapter: GoalsAdapter
 
     private lateinit var bottomSheetDoneGoalNo: Button
     private lateinit var bottomSheetDoneGoalYes: Button
     private lateinit var bottomSheetDoneGoal: BottomSheetDialog
 
-    var goals: List<Goal>? = null
+    var goals: List<Goal>? = listOf()
+    var repetitions: List<Repetition>? = listOf()
+
+    var goalsFinal: MutableList<GoalAbstract>? = mutableListOf()
 
     private lateinit var viewModel: GoalsViewModel
 
@@ -115,13 +120,25 @@ class GoalsFragment : BaseFragment() {
 
             verifyMidnight()
         })
+
+        viewModel.getRepetitions()?.observe(this, Observer { repetitions ->
+            this.repetitions = repetitions.filter { it.userId == user.userId && !it.archived}
+
+            if (!isFromDragAndDrop) {
+                setupItems()
+            }
+
+            isFromDragAndDrop = false
+
+            verifyMidnight()
+        })
     }
 
     private fun verifyMidnight() {
-        goals?.forEach {
-            if (it.repetition && it.repetitionNextDate.isToday() && it.repetitionDoneToday) {
-                it.repetitionDoneToday = false
-                viewModel.saveGoal(it)
+        repetitions?.forEach {
+            if (it.nextDate.isToday() && it.doneToday) {
+                it.doneToday = false
+                viewModel.saveRepetition(it)
             }
         }
     }
@@ -133,7 +150,7 @@ class GoalsFragment : BaseFragment() {
     }
 
     private fun setupItems() {
-        if (goals?.isNotEmpty()!!) {
+        if (goals?.isNotEmpty()!! || repetitions?.isNotEmpty()!!) {
             setItems()
 
             goals_list.visible()
@@ -145,17 +162,27 @@ class GoalsFragment : BaseFragment() {
     }
 
     private fun setItems() {
-        goals
+        goalsFinal = mutableListOf()
+
+        goals?.let { goalsFinal?.addAll(it) }
+        repetitions?.let { goalsFinal?.addAll(it) }
+
+        goalsAdapter = GoalsAdapter(this)
+
+        goalsFinal
             ?.sortedBy { it.order }
             ?.let { goalsAdapter.setItems(it) }
 
-        goalsAdapter.clickListener = { goalId: Long, repetition: Boolean ->
-            if (repetition) {
-                val action = GoalsFragmentDirections.actionNavigationGoalsToNavigationOtherGoal()
-                navController.navigate(action)
-            } else {
-                val action = GoalsFragmentDirections.actionNavigationGoalsToNavigationGoal(goalId)
-                navController.navigate(action)
+        goalsAdapter.clickListener = {
+            when (it) {
+                is Repetition -> {
+                    val action = GoalsFragmentDirections.actionNavigationGoalsToNavigationRepetition(it.repetitionId)
+                    navController.navigate(action)
+                }
+                is Goal -> {
+                    val action = GoalsFragmentDirections.actionNavigationGoalsToNavigationGoal(it.goalId)
+                    navController.navigate(action)
+                }
             }
         }
 
@@ -170,10 +197,8 @@ class GoalsFragment : BaseFragment() {
         touchHelper.attachToRecyclerView(goals_list)
     }
 
-    fun onViewMoved(
-        oldPosition: Int, newPosition: Int, items: MutableList<Goal>,
-        function: (oldPosition: Int, newPosition: Int) -> Unit
-    ) {
+    fun onViewMoved(oldPosition: Int, newPosition: Int, items: List<GoalAbstract>,
+                    function: (oldPosition: Int, newPosition: Int) -> Unit) {
         val targetGoal = items[oldPosition]
         val otherGoal = items[newPosition]
 
@@ -182,41 +207,62 @@ class GoalsFragment : BaseFragment() {
 
         isFromDragAndDrop = true
 
-        viewModel.saveGoal(targetGoal)
-        viewModel.saveGoal(otherGoal)
+        when (targetGoal) {
+            is Goal -> viewModel.saveGoal(targetGoal)
+            is Repetition -> viewModel.saveRepetition(targetGoal)
+        }
 
-        items.removeAt(oldPosition)
-        items.add(newPosition, targetGoal)
+        when (otherGoal) {
+            is Goal -> viewModel.saveGoal(otherGoal)
+            is Repetition -> viewModel.saveRepetition(otherGoal)
+        }
+
+//        items.removeAt(oldPosition)
+//        items.add(newPosition, targetGoal)
 
         function(oldPosition, newPosition)
     }
 
-    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: MutableList<Goal>) {
+    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalAbstract>) {
         val goal = items[position]
 
         when (direction) {
             ItemTouchHelper.RIGHT -> {
-                if (goal.done || goal.getPercentage() >= 100) {
-                    doneOrUndoneGoal(goal)
-                } else {
-                    setupItems()
-                    openBottomSheetDoneGoal(goal, ::doneOrUndoneGoal)
+                when (goal) {
+                    is Goal -> {
+                        if (goal.done || goal.getPercentage() >= 100) {
+                            doneOrUndoneGoal(goal)
+                        } else {
+                            setupItems()
+                            openBottomSheetDoneGoal(goal, ::doneOrUndoneGoal)
+                        }
+                    }
+                    is Repetition -> {
+                        setupItems()
+
+                        //openBottomSheetDoneGoal()
+                    }
                 }
             }
             ItemTouchHelper.LEFT -> {
-                goal.archived = true
-                goal.archiveDate = getCurrentTime()
+                when (goal) {
+                    is Goal -> {
+                        goal.archived = true
+                        goal.archiveDate = getCurrentTime()
 
-                viewModel.saveGoal(goal)
+                        viewModel.saveGoal(goal)
 
-                showSnackBarWithAction(
-                    holder.itemView,
-                    getString(R.string.goals_fragment_resolved_goal_message),
-                    goal as Any,
-                    ::archiveGoal
-                )
+                        showSnackBarWithAction(holder.itemView,
+                            getString(R.string.goals_fragment_resolved_goal_message), goal as Any, ::archiveGoal)
 
-                setupItems()
+                        setupItems()
+                    }
+                    is Repetition -> {
+                        setupItems()
+
+                        //openBottomSheetDoneGoal()
+                    }
+                }
             }
         }
     }

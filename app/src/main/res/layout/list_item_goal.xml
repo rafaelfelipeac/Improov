@@ -46,12 +46,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
+                android:id="@+id/view"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/view"
                 card_view:layout_constraintVertical_bias="0.491"
                 card_view:layout_constraintStart_toEndOf="@+id/goal_done_view"
                 card_view:layout_constraintEnd_toStartOf="@+id/goal_archive_view"/>
@@ -84,7 +84,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/goal_normal_view"
+            android:id="@+id/normal_view"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginRight="4dp"
@@ -118,16 +118,11 @@
                 card_view:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="8dp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginEnd="8dp"
-                android:visibility="gone"
-                tools:visibility="gone"/>
+                android:layout_marginEnd="8dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/goal_type_default"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                tools:visibility="gone"
                 card_view:layout_constraintTop_toTopOf="parent"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="56dp"
@@ -136,7 +131,7 @@
                 card_view:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                    android:id="@+id/goal_type_default_title"
+                    android:id="@+id/goal_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -149,19 +144,18 @@
                     card_view:layout_constraintTop_toTopOf="parent"
                     android:layout_marginEnd="8dp"
                     card_view:layout_constraintHorizontal_bias="0.0"
-                    card_view:layout_constraintBottom_toTopOf="@+id/goal_type_default_type"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     card_view:layout_constraintVertical_bias="0.3"
-                    card_view:layout_constraintEnd_toStartOf="@+id/goal_type_default_date"/>
+                    card_view:layout_constraintEnd_toStartOf="@+id/goal_date"/>
 
             <ImageView
-                    android:id="@+id/goal_type_default_progress_total"
+                    android:id="@+id/goal_progress_total"
                     android:layout_width="0dp"
                     android:layout_height="10dp"
                     card_view:layout_constraintStart_toStartOf="parent"
                     android:background="@drawable/rounded_white"
-                    card_view:layout_constraintTop_toBottomOf="@+id/goal_type_default_title"
+                    card_view:layout_constraintTop_toBottomOf="@+id/goal_title"
                     card_view:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginBottom="8dp"
                     card_view:layout_constraintVertical_bias="0.75"
@@ -169,34 +163,20 @@
                     android:layout_marginEnd="100dp"/>
 
             <ImageView
-                    android:id="@+id/goal_type_default_progress_done"
+                    android:id="@+id/goal_progress_done"
                     android:layout_width="40dp"
                     android:layout_height="8dp"
                     android:background="@drawable/rounded_primary"
-                    card_view:layout_constraintBottom_toBottomOf="@+id/goal_type_default_progress_total"
-                    card_view:layout_constraintTop_toTopOf="@+id/goal_type_default_progress_total"
-                    card_view:layout_constraintStart_toStartOf="@+id/goal_type_default_progress_total"
+                    card_view:layout_constraintBottom_toBottomOf="@+id/goal_progress_total"
+                    card_view:layout_constraintTop_toTopOf="@+id/goal_progress_total"
+                    card_view:layout_constraintStart_toStartOf="@+id/goal_progress_total"
                     android:layout_marginEnd="2dp"
-                    card_view:layout_constraintEnd_toEndOf="@+id/goal_type_default_progress_total"
+                    card_view:layout_constraintEnd_toEndOf="@+id/goal_progress_total"
                     card_view:layout_constraintHorizontal_bias="0.0"
                     android:layout_marginStart="2dp"/>
 
             <TextView
-                    android:id="@+id/goal_type_default_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorWhite"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    card_view:layout_constraintStart_toStartOf="@+id/goal_type_default_title"
-                    card_view:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="8dp"/>
-
-            <TextView
-                    android:id="@+id/goal_type_default_date"
+                    android:id="@+id/goal_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
@@ -204,102 +184,25 @@
                     android:textColor="@color/colorWhite"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    card_view:layout_constraintBottom_toTopOf="@+id/goal_type_default_score"
-                    card_view:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="16dp"/>
-
-            <TextView
-                    android:id="@+id/goal_type_default_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorWhite"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    card_view:layout_constraintTop_toTopOf="@+id/goal_type_default_type"
+                    card_view:layout_constraintBottom_toTopOf="@+id/goal_score"
                     card_view:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="16dp"
-            />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/goal_type_repetition"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                tools:visibility="visible"
-                card_view:layout_constraintEnd_toStartOf="@+id/goal_drag_icon"
-                android:layout_marginStart="56dp"
-                card_view:layout_constraintTop_toTopOf="parent"
-                card_view:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginEnd="8dp"
-                card_view:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                    android:id="@+id/goal_type_repetition_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="Título da meta repetição"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    card_view:layout_constraintStart_toStartOf="parent"
-                    card_view:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginEnd="8dp"
-                    card_view:layout_constraintHorizontal_bias="0.0"
-                    card_view:layout_constraintBottom_toTopOf="@+id/goal_type_repetition_type"
                     android:layout_marginTop="8dp"
+                    card_view:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                    android:id="@+id/goal_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
-                    card_view:layout_constraintVertical_bias="0.3"
-                    card_view:layout_constraintEnd_toStartOf="@+id/goal_type_repetition_late_date"/>
-
-            <TextView
-                    android:id="@+id/goal_type_repetition_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Repetição: todo dia."
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorWhite"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    card_view:layout_constraintStart_toStartOf="@+id/goal_type_repetition_title"
-                    card_view:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="8dp"/>
-
-            <TextView
-                    android:id="@+id/goal_type_repetition_late_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:text="25 Jul"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorWhite"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    card_view:layout_constraintBottom_toTopOf="@+id/goal_type_repetition_score"
-                    card_view:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="16dp"/>
-
-            <TextView
-                    android:id="@+id/goal_type_repetition_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1/5"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorWhite"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    card_view:layout_constraintTop_toTopOf="@+id/goal_type_repetition_type"
-                    card_view:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="16dp"/>
+                    card_view:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

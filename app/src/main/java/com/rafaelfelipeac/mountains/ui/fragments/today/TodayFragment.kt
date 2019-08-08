@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.extension.*
-import com.rafaelfelipeac.mountains.models.Goal
+import com.rafaelfelipeac.mountains.models.GoalAbstract
+import com.rafaelfelipeac.mountains.models.Repetition
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.DayOfWeekAdapter
 import com.rafaelfelipeac.mountains.ui.adapter.GoalsAdapter
@@ -26,13 +27,13 @@ class TodayFragment : BaseFragment() {
 
     private lateinit var viewModel: TodayViewModel
 
-    private var goalsLateAdapter = GoalsAdapter(this)
-    private var goalsTodayAdapter = GoalsAdapter(this)
+    private lateinit var goalsLateAdapter: GoalsAdapter
+    private lateinit var goalsTodayAdapter: GoalsAdapter
     private var goalsWeekAdapter = DayOfWeekAdapter(this)
 
-    private var goalsLate: List<Goal>? = null
-    private var goalsToday: List<Goal>? = null
-    private var goalsFuture: List<Goal>? = null
+    private var repetitionsLate: List<Repetition>? = null
+    private var repetitionsToday: List<Repetition>? = null
+    private var repetitionsFuture: List<Repetition>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(this).get(TodayViewModel::class.java)
@@ -78,13 +79,14 @@ class TodayFragment : BaseFragment() {
             (activity as MainActivity).user = user
         })
 
-        viewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goalsLate =
-                goals.filter { it.userId == user.userId && !it.archived && it.repetition && !it.repetitionDoneToday && it.isLate() && !it.isToday() }
-            this.goalsToday =
-                goals.filter { it.userId == user.userId && !it.archived && it.repetition && !it.repetitionDoneToday && it.isToday() }
-            this.goalsFuture =
-                goals.filter { it.userId == user.userId && !it.archived && it.repetition && it.isFuture() }
+        viewModel.getRepetitions()?.observe(this, Observer { repetitions ->
+
+            this.repetitionsLate =
+                repetitions.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isLate() && !it.isToday() }
+            this.repetitionsToday =
+                repetitions.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isToday() }
+            this.repetitionsFuture =
+                repetitions.filter { it.userId == user.userId && !it.archived && it.isFuture() }
 
             setItemsLate()
             setItemsToday()
@@ -99,14 +101,12 @@ class TodayFragment : BaseFragment() {
     }
 
     private fun setItemsLate() {
-        goalsLate?.sortedBy { it.order }.let { goalsLateAdapter.setItems(it!!) }
+        goalsLateAdapter = GoalsAdapter(this)
+        repetitionsLate?.sortedBy { it.order }.let { goalsLateAdapter.setItems(it!!) }
 
-        goalsLateAdapter.clickListener = { goalId: Long, repetition: Boolean ->
-            if (repetition) {
-                val action = TodayFragmentDirections.actionNavigationTodayToNavigationOtherGoal()
-                navController.navigate(action)
-            } else {
-                val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(goalId)
+        goalsLateAdapter.clickListener = {
+            if (it is Repetition) {
+                val action = TodayFragmentDirections.actionNavigationTodayToNavigationRepetition(it.repetitionId)
                 navController.navigate(action)
             }
         }
@@ -123,14 +123,12 @@ class TodayFragment : BaseFragment() {
     }
 
     private fun setItemsToday() {
-        goalsToday?.sortedBy { it.order }.let { goalsTodayAdapter.setItems(it!!) }
+        goalsTodayAdapter = GoalsAdapter(this)
+        repetitionsToday?.sortedBy { it.order }.let { goalsTodayAdapter.setItems(it!!) }
 
-        goalsTodayAdapter.clickListener = { goalId: Long, repetition: Boolean ->
-            if (repetition) {
-                val action = TodayFragmentDirections.actionNavigationTodayToNavigationOtherGoal()
-                navController.navigate(action)
-            } else {
-                val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(goalId)
+        goalsTodayAdapter.clickListener = {
+            if (it is Repetition) {
+                val action = TodayFragmentDirections.actionNavigationTodayToNavigationRepetition(it.repetitionId)
                 navController.navigate(action)
             }
         }
@@ -151,9 +149,9 @@ class TodayFragment : BaseFragment() {
         val days = calendar.getNextWeek()
 
         days.forEach { day ->
-            goalsFuture?.forEach { goal ->
-                if (day.title2 == goal.repetitionNextDate.format()) {
-                    day.list.add(goal)
+            repetitionsFuture?.forEach { repetition ->
+                if (day.monthDay == repetition.nextDate.format()) {
+                    day.list.add(repetition)
                 }
             }
         }
@@ -164,33 +162,30 @@ class TodayFragment : BaseFragment() {
         today_week_list.adapter = goalsWeekAdapter
     }
 
-    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: MutableList<Goal>) {
-        val goal = items[position]
+    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalAbstract>) {
+        val repetition = items[position] as Repetition
 
         when (direction) {
             ItemTouchHelper.RIGHT -> {
-                val beforeGoal = goal.copy()
+                val beforeRepetition = repetition.copy()
 
-                goal.repetitionDoneToday = true
-                goal.repetitionDoneDate = getCurrentTime()
-                goal.nextRepetitionDateAfterDone()
+                repetition.doneToday = true
+                repetition.doneDate = getCurrentTime()
+                repetition.nextRepetitionDateAfterDone()
 
-                viewModel.saveGoal(goal)
+                viewModel.saveRepetition(repetition)
 
-                showSnackBarWithAction(
-                    holder.itemView, String.format(
-                        "%s %s.", "Próxima ocorrência: ",
-                        goal.repetitionNextDate.format()
-                    ), beforeGoal, ::undoDone
-                )
+                showSnackBarWithAction(holder.itemView, String.format("%s %s.", "Próxima ocorrência: ",
+                        repetition.nextDate.format()), beforeRepetition, ::undoDone)
             }
+
             ItemTouchHelper.LEFT -> {
-                viewModel.saveGoal(goal)
+                viewModel.saveRepetition(repetition)
             }
         }
     }
 
     private fun undoDone(goal: Any) {
-        viewModel.saveGoal(goal as Goal)
+        viewModel.saveRepetition(goal as Repetition)
     }
 }

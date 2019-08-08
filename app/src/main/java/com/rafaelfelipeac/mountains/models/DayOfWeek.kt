@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.mountains.models
 
 data class DayOfWeek(
-    var title1: String = "",
-    val title2: String = "",
-    var list: MutableList<Goal> = mutableListOf()
+    var weekDay: String = "",
+    val monthDay: String = "",
+    var list: MutableList<Repetition> = mutableListOf()
 )

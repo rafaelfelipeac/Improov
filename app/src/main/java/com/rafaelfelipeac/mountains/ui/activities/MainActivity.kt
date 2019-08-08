@@ -145,11 +145,11 @@ class MainActivity : BaseActivity() {
         bottomSheetFAB.show()
 
         bottomSheetFABDefault.setOnClickListener {
-            navController.navigate(R.id.action_navigation_goals_to_navigation_goalForm)
+            navController.navigate(R.id.action_navigation_goals_to_navigation_goal_form)
         }
 
         bottomSheetFABRepetition.setOnClickListener {
-            navController.navigate(R.id.action_navigation_goals_to_navigation_otherGoalForm)
+            navController.navigate(R.id.action_navigation_goals_to_navigation_repetition_form)
         }
 
         bottomSheetFABClose.setOnClickListener {

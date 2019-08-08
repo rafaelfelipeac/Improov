@@ -7,106 +7,90 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
-import com.rafaelfelipeac.mountains.models.Goal
-import com.rafaelfelipeac.mountains.models.RepetitionType.*
-import com.rafaelfelipeac.mountains.ui.base.BaseAdapter
+import com.rafaelfelipeac.mountains.models.*
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
+import com.rafaelfelipeac.mountains.ui.base.inflate
 import com.rafaelfelipeac.mountains.ui.fragments.goals.GoalsFragment
 import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragment
 import com.rafaelfelipeac.mountains.ui.helper.ActionCompletionContract
 import kotlin.math.roundToInt
 
-class GoalsAdapter(private val fragment: BaseFragment) : BaseAdapter<Goal>(), ActionCompletionContract {
+class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+    ActionCompletionContract {
 
-    var clickListener: (goalId: Long, repetition: Boolean) -> Unit = { _: Long, _: Boolean -> }
+    private lateinit var goals: List<GoalAbstract>
 
-    override fun getLayoutRes(): Int = R.layout.list_item_goal
+    var clickListener: (goalAbstract: GoalAbstract) -> Unit = { }
 
-    override fun View.bindView(item: Goal, viewHolder: ViewHolder) {
-        setOnClickListener { clickListener(item.goalId, item.repetition) }
+    lateinit var touchHelper: ItemTouchHelper
 
-        val typeIcon = viewHolder.itemView.findViewById<ImageView>(R.id.goal_type_icon)
+    companion object {
+        const val TYPE_GOAL = 1
+        const val TYPE_REPETITION = 2
+    }
 
-        val archiveImage = viewHolder.itemView.findViewById<ImageView>(R.id.goal_archive_image)
-
-        if (fragment is TodayFragment) {
-            archiveImage.gone()
+    override fun getItemViewType(position: Int): Int {
+        return when (goals[position]) {
+            is Goal -> TYPE_GOAL
+            is Repetition -> TYPE_REPETITION
+            else -> -1
         }
+    }
 
-        if (item.repetition) {
-            val repetitionType = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.goal_type_repetition)
-            val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_repetition_title)
-            val type = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_repetition_type)
-            val late = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_repetition_late_date)
-            val score = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_repetition_score)
-
-            repetitionType.visible()
-
-            title.text = item.name
-
-            if (item.repetitionNextDate != null && item.isLate() && !item.isToday()) {
-                late.text = item.repetitionNextDate.format()
-                late.visible()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            TYPE_GOAL -> {
+                GoalViewHolder(parent.inflate(R.layout.list_item_goal), fragment, touchHelper, clickListener)
             }
-
-            typeIcon.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
-            typeIcon.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            typeIcon.background = ContextCompat.getDrawable(context!!, R.drawable.ic_repetition)
-
-            when (item.repetitionType) {
-                REP1 -> {
-                    type.text = String.format(
-                        "%s", "Todo dia"
-                    )
-                }
-                REP2 -> {
-                    type.text = String.format(
-                        "%s %s",
-                        item.repetitionWeekDaysLong.filter { it > 0 }.size.toString(),
-                        "vezes por semana"
-                    )
-                }
-                REP3 -> {
-                    type.text = String.format(
-                        "%s %s %s",
-                        item.repetitionPeriodTotal.toString(),
-                        "dias por",
-                        item.repetitionPeriodType.getName()
-                    )
-
-                    score.text = String.format(
-                        "%s/%s",
-                        item.repetitionPeriodDone.toString(),
-                        item.repetitionPeriodTotal.toString()
-                    )
-                    score.visible()
-                }
-                REP4 -> {
-                    type.text = String.format(
-                        "%s %s %s",
-                        "A cada",
-                        item.repetitionPeriodDaysBetween.toString(),
-                        "dias"
-                    )
-                }
-                REP_NONE -> TODO()
+            TYPE_REPETITION -> {
+                RepetitionViewHolder(parent.inflate(R.layout.list_item_repetition), fragment, touchHelper, clickListener)
             }
-        } else {
-            val repetitionType = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.goal_type_default)
-            val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_default_title)
-            val type = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_default_type)
-            val date = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_default_date)
-            val score = viewHolder.itemView.findViewById<TextView>(R.id.goal_type_default_score)
+            else -> {
+                GoalViewHolder(parent.inflate(R.layout.list_item_goal), fragment, touchHelper, clickListener)
+            }
+        }
+    }
 
-            repetitionType.visible()
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        holder.setIsRecyclable(false)
 
-            title.text = item.name
+        (holder as GoalAbstractViewHolder).bindViews(goals[position])
+    }
 
-            if (item.done) {
-                typeIcon.background = ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
+    override fun getItemCount() = goals.size
+
+    fun setItems(goals: List<GoalAbstract>) {
+        this.goals = goals
+        notifyDataSetChanged()
+    }
+
+    class GoalViewHolder(itemView: View,
+                         val fragment: BaseFragment,
+                         private val touchHelper: ItemTouchHelper?,
+                         private val clickListener: (goalAbstract: GoalAbstract) -> Unit) :
+        RecyclerView.ViewHolder(itemView), GoalAbstractViewHolder {
+
+        private val typeIcon= itemView.findViewById<ImageView>(R.id.goal_type_icon)
+        private val title = itemView.findViewById<TextView>(R.id.goal_title)!!
+        private val date = itemView.findViewById<TextView>(R.id.goal_date)!!
+        private val score = itemView.findViewById<TextView>(R.id.goal_score)!!
+        private val itemDrag = itemView.findViewById<ImageView>(R.id.goal_drag_icon)!!
+
+        @SuppressLint("ClickableViewAccessibility")
+        override fun bindViews(goalAbstract: GoalAbstract) {
+
+            itemView.setOnClickListener { clickListener(goalAbstract) }
+
+            val goal = goalAbstract as Goal
+
+            title.text = goal.name
+
+            if (goal.done) {
+                typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.mipmap.ic_item_done)
 
                 val params = typeIcon.layoutParams as ConstraintLayout.LayoutParams
                 params.marginStart = 10
@@ -115,45 +99,121 @@ class GoalsAdapter(private val fragment: BaseFragment) : BaseAdapter<Goal>(), Ac
                 typeIcon.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
                 typeIcon.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
 
-                typeIcon.background = ContextCompat.getDrawable(context!!, R.drawable.ic_today)
+                typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.drawable.ic_today)
             }
 
             score.text = String.format(
                 "%s/%s",
-                item.value.roundToInt().toString(),
-                item.singleValue.roundToInt().toString()
+                goal.value.roundToInt().toString(),
+                goal.singleValue.roundToInt().toString()
             )
 
             date.text = "13 AGO"
+
+            itemDrag.setOnTouchListener { _, _ ->
+                touchHelper?.startDrag(this)
+                false
+            }
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        super.onBindViewHolder(holder, position)
+    class RepetitionViewHolder(itemView: View,
+                               val fragment: BaseFragment,
+                               private val touchHelper: ItemTouchHelper?,
+                               val clickListener: (goalAbstract: GoalAbstract) -> Unit) :
+        RecyclerView.ViewHolder(itemView), GoalAbstractViewHolder {
 
-        holder.setIsRecyclable(false)
+        private val typeIcon = itemView.findViewById<ImageView>(R.id.repetition_type_icon)!!
+        private val title = itemView.findViewById<TextView>(R.id.repetition_title)
+        private val type = itemView.findViewById<TextView>(R.id.repetition_type)
+        private val late = itemView.findViewById<TextView>(R.id.repetition_late_date)
+        private val score = itemView.findViewById<TextView>(R.id.repetition_score)
+        private val archiveImage = itemView.findViewById<ImageView>(R.id.repetition_archive_image)
+        private val itemDrag = itemView.findViewById<ImageView>(R.id.repetition_drag_icon)
 
-        val itemDrag = holder.itemView.findViewById<ImageView>(R.id.goal_drag_icon)
+        @SuppressLint("ClickableViewAccessibility")
+        override fun bindViews(goalAbstract: GoalAbstract) {
 
-        itemDrag.setOnTouchListener { _, _ ->
-            touchHelper?.startDrag(holder)
-            false
+            if (fragment is TodayFragment) {
+                archiveImage.gone()
+                itemDrag.gone()
+            }
+
+            itemView.setOnClickListener { clickListener(goalAbstract) }
+
+            val repetition = goalAbstract as Repetition
+
+            title.text = repetition.name
+
+            if (repetition.nextDate != null && repetition.isLate() && !repetition.isToday()) {
+                late.text = repetition.nextDate.format()
+                late.visible()
+            }
+
+            typeIcon.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
+            typeIcon.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.drawable.ic_repetition)
+
+            when (repetition.type) {
+                RepetitionType.REP1 -> {
+                    type.text = String.format(
+                        "%s", "Todo dia"
+                    )
+                }
+                RepetitionType.REP2 -> {
+                    type.text = String.format(
+                        "%s %s",
+                        repetition.weekDaysLong.filter { it > 0 }.size.toString(),
+                        "vezes por semana"
+                    )
+                }
+                RepetitionType.REP3 -> {
+                    type.text = String.format(
+                        "%s %s %s",
+                        repetition.periodTotal.toString(),
+                        "dias por",
+                        repetition.periodType.getName()
+                    )
+
+                    score.text = String.format(
+                        "%s/%s",
+                        repetition.periodDone.toString(),
+                        repetition.periodTotal.toString()
+                    )
+                    score.visible()
+                }
+                RepetitionType.REP4 -> {
+                    type.text = String.format(
+                        "%s %s %s",
+                        "A cada",
+                        repetition.periodDaysBetween.toString(),
+                        "dias"
+                    )
+                }
+                RepetitionType.REP_NONE -> TODO()
+            }
+
+            itemDrag.setOnTouchListener { _, _ ->
+                touchHelper?.startDrag(this)
+                false
+            }
         }
     }
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int) {
-        if (fragment is GoalsFragment) {
-            fragment.onViewMoved(oldPosition, newPosition, items, ::notifyItemMoved)
+        when (fragment) {
+            is GoalsFragment -> fragment.onViewMoved(oldPosition, newPosition, goals, ::notifyItemMoved)
         }
     }
 
     override fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder) {
-        if (fragment is GoalsFragment) {
-            fragment.onViewSwiped(position, direction, holder, items)
-        } else if (fragment is TodayFragment) {
-            fragment.onViewSwiped(position, direction, holder, items)
+        when (fragment) {
+            is GoalsFragment -> fragment.onViewSwiped(position, direction, holder, goals)
+            is TodayFragment -> fragment.onViewSwiped(position, direction, holder, goals)
         }
     }
-}
 
+    interface GoalAbstractViewHolder {
+        fun bindViews(goalAbstract: GoalAbstract)
+    }
+}

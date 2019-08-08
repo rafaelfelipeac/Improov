@@ -2,10 +2,7 @@ package com.rafaelfelipeac.mountains.ui.fragments.goal
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.rafaelfelipeac.mountains.models.Goal
-import com.rafaelfelipeac.mountains.models.Historic
-import com.rafaelfelipeac.mountains.models.Item
-import com.rafaelfelipeac.mountains.models.User
+import com.rafaelfelipeac.mountains.models.*
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 
 class GoalViewModel: BaseViewModel() {

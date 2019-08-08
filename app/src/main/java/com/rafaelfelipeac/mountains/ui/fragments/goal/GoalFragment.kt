@@ -46,7 +46,6 @@ class GoalFragment : BaseFragment() {
     var goalId: Long? = null
     var goalNew: Boolean? = null
     var goal: Goal? = null
-    var goals: List<Goal>? = null
     private var items: List<Item>? = null
     private var history: List<Historic>? = null
 
@@ -165,13 +164,9 @@ class GoalFragment : BaseFragment() {
         })
 
         viewModel.getGoal()?.observe(this, Observer { goal ->
-            this.goal = goal
+            this.goal = goal as Goal
 
             setupGoal()
-        })
-
-        viewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goals = goals.filter { it.userId == user.userId }
         })
 
         viewModel.getItems()?.observe(this, Observer { items ->
@@ -198,7 +193,7 @@ class GoalFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (goal?.goalType == GoalType.LIST) {
+        if (goal?.type == GoalType.LIST) {
             inflater.inflate(R.menu.menu_add, menu)
         }
 
@@ -287,19 +282,7 @@ class GoalFragment : BaseFragment() {
             goal_single_text.text = goal?.singleValue?.getNumberInRightFormat()
         }
 
-        if (goal?.repetition!!) {
-            goal_repetition.visible()
-
-            goal_repetition_next.text = String.format("%s %s", "Próxima ocorrência: ", goal?.repetitionNextDate.format())
-
-            if (goal?.repetitionType == RepetitionType.REP3 || goal?.repetitionType == RepetitionType.REP4) {
-                goal_repetition_last.visible()
-                goal_repetition_last.text =
-                    String.format("%s %s", "Último dia do ciclo:", goal?.repetitionLastDate.format())
-            }
-        }
-
-        when (goal?.goalType) {
+        when (goal?.type) {
             GoalType.LIST -> {
                 goal_cl_list.visible()
                 goal_cl_dec_inc.invisible()
@@ -326,6 +309,7 @@ class GoalFragment : BaseFragment() {
 
                 historic_items_list.visible()
             }
+            GoalType.INVALID -> TODO()
         }
 
         if (isTheFirstTime()) {
@@ -363,15 +347,15 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun setupItems() {
-        if (goal?.goalType == GoalType.LIST) {
+        if (goal?.type == GoalType.LIST) {
             if (items?.any { it.goalId == goal?.goalId }!!) {
                 setItems()
 
                 goal_cl_list.visible()
-                items_placeholder.invisible()
+                goal_items_placeholder.invisible()
             } else {
                 goal_cl_list.invisible()
-                items_placeholder.visible()
+                goal_items_placeholder.visible()
             }
         }
     }
@@ -484,28 +468,28 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun resetMountainBronze() {
-        seriesBronze = arcViewBronze.resetValue(0F, goal?.bronzeValue!!, 0F)
+        seriesBronze = goal_bronze_arcView.resetValue(0F, goal?.bronzeValue!!, 0F)
     }
 
     private fun resetMountainSilver() {
-        seriesSilver = arcViewSilver.resetValue(goal?.bronzeValue!!, goal?.silverValue!!, goal?.bronzeValue!!)
+        seriesSilver = goal_silver_arcView.resetValue(goal?.bronzeValue!!, goal?.silverValue!!, goal?.bronzeValue!!)
     }
 
     private fun resetMountainGold() {
-        seriesGold = arcViewGold.resetValue(goal?.silverValue!!, goal?.goldValue!!, goal?.silverValue!!)
+        seriesGold = goal_gold_arcView.resetValue(goal?.silverValue!!, goal?.goldValue!!, goal?.silverValue!!)
     }
 
     private fun resetSingle() {
-        seriesSingle = arcViewSingle.resetValue(0F, goal?.singleValue!!, 0F)
+        seriesSingle = goal_single_arcView.resetValue(0F, goal?.singleValue!!, 0F)
     }
 
-    private fun setMountainBronzeValue(value: Float) = arcViewBronze.setup(value, seriesBronze)
+    private fun setMountainBronzeValue(value: Float) = goal_bronze_arcView.setup(value, seriesBronze)
 
-    private fun setMountainSilverValue(value: Float) = arcViewSilver.setup(value, seriesSilver)
+    private fun setMountainSilverValue(value: Float) = goal_silver_arcView.setup(value, seriesSilver)
 
-    private fun setMountainGoldValue(value: Float) = arcViewGold.setup(value, seriesGold)
+    private fun setMountainGoldValue(value: Float) = goal_gold_arcView.setup(value, seriesGold)
 
-    private fun setSingleValue(value: Float) = arcViewSingle.setup(value, seriesSingle)
+    private fun setSingleValue(value: Float) = goal_single_arcView.setup(value, seriesSingle)
 
     private fun enableIcon(image: ImageView, iconNormal: Int) {
         image.enableIcon(iconNormal, context!!)

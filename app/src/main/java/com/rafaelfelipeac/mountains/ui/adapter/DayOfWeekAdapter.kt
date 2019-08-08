@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.models.DayOfWeek
+import com.rafaelfelipeac.mountains.models.Repetition
 import com.rafaelfelipeac.mountains.ui.base.BaseAdapter
 import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragment
 import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragmentDirections
@@ -21,28 +22,24 @@ class DayOfWeekAdapter(val fragment: TodayFragment) : BaseAdapter<DayOfWeek>() {
     override fun View.bindView(item: DayOfWeek, viewHolder: ViewHolder) {
         setOnClickListener { clickListener(item) }
 
-        val title1 = viewHolder.itemView.findViewById<TextView>(R.id.day_of_week_title_1)
-        val title2 = viewHolder.itemView.findViewById<TextView>(R.id.day_of_week_title_2)
+        val weekDay = viewHolder.itemView.findViewById<TextView>(R.id.day_of_week_week_day)
+        val monthDay = viewHolder.itemView.findViewById<TextView>(R.id.day_of_week_month_day)
         val list = viewHolder.itemView.findViewById<RecyclerView>(R.id.day_of_week_list)
 
-        title1.text = item.title1
-        title2.text = item.title2
+        weekDay.text = item.weekDay
+        monthDay.text = item.monthDay
+
+        val repetitions = item.list
 
         val goalsAdapter = GoalsAdapter(fragment)
 
-        goalsAdapter.clickListener = { goalId: Long, repetition: Boolean ->
-            if (repetition) {
-                val action = TodayFragmentDirections.actionNavigationTodayToNavigationOtherGoal()
-                fragment.navController.navigate(action)
-            } else {
-                val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(goalId)
-                fragment.navController.navigate(action)
-            }
+        goalsAdapter.clickListener = {
+            val action =
+                TodayFragmentDirections.actionNavigationTodayToNavigationRepetition((it as Repetition).repetitionId)
+            fragment.navController.navigate(action)
         }
 
-        val fakeGoals = item.list
-
-        fakeGoals.sortedBy { it.order }.let { goalsAdapter.setItems(it) }
+        repetitions.sortedBy { it.order }.let { goalsAdapter.setItems(it) }
 
         val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
