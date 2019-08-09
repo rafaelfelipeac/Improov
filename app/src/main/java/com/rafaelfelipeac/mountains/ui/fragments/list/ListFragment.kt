@@ -32,9 +32,12 @@ class ListFragment : BaseFragment() {
 
     private lateinit var listAdapter: ListAdapter
 
-    private lateinit var bottomSheetGoalDoneNo: Button
-    private lateinit var bottomSheetGoalDoneYes: Button
     private lateinit var bottomSheetGoalDone: BottomSheetDialog
+    private lateinit var bottomSheetGoalDoneYes: Button
+    private lateinit var bottomSheetGoalDoneNo: Button
+
+    private lateinit var bottomSheetHabitDone: BottomSheetDialog
+    private lateinit var bottomSheetHabitDoneOK: Button
 
     var goals: List<Goal>? = listOf()
     var habits: List<Habit>? = listOf()
@@ -75,19 +78,28 @@ class ListFragment : BaseFragment() {
 
         showNavigation()
 
-        setupBottomSheetDoneGoal()
+        setupBottomSheetGoalDone()
+        setupBottomSheetHabitDone()
     }
 
-    private fun setupBottomSheetDoneGoal() {
+    private fun setupBottomSheetGoalDone() {
         bottomSheetGoalDone = BottomSheetDialog(this.activity!!)
         val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_goal_done, null)
         bottomSheetGoalDone.setContentView(sheetView)
 
-        bottomSheetGoalDoneYes = sheetView.findViewById(R.id.bottom_sheet_done_yes)
-        bottomSheetGoalDoneNo = sheetView.findViewById(R.id.bottom_sheet_done_no)
+        bottomSheetGoalDoneYes = sheetView.findViewById(R.id.bottom_sheet_goal_done_yes)
+        bottomSheetGoalDoneNo = sheetView.findViewById(R.id.bottom_sheet_goal_done_no)
     }
 
-    private fun openBottomSheetDone(goal: Goal, function: (goal: Goal) -> Unit) {
+    private fun setupBottomSheetHabitDone() {
+        bottomSheetHabitDone = BottomSheetDialog(this.activity!!)
+        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_habit_done, null)
+        bottomSheetHabitDone.setContentView(sheetView)
+
+        bottomSheetHabitDoneOK = sheetView.findViewById(R.id.bottom_sheet_habit_done_ok)
+    }
+
+    private fun openBottomSheetGoalDone(goal: Goal, function: (goal: Goal) -> Unit) {
         bottomSheetGoalDone.show()
 
         bottomSheetGoalDoneYes.setOnClickListener {
@@ -104,6 +116,18 @@ class ListFragment : BaseFragment() {
         bottomSheetGoalDone.hide()
     }
 
+    private fun openBottomSheetHabitDone() {
+        bottomSheetHabitDone.show()
+
+        bottomSheetHabitDoneOK.setOnClickListener {
+            closeBottomSheetHabitDone()
+        }
+    }
+
+    private fun closeBottomSheetHabitDone() {
+        bottomSheetHabitDone.hide()
+    }
+
     private fun observeViewModel() {
         viewModel.user?.observe(this, Observer { user ->
             (activity as MainActivity).user = user
@@ -112,13 +136,13 @@ class ListFragment : BaseFragment() {
         viewModel.getGoals()?.observe(this, Observer { goals ->
             this.goals = goals.filter { it.userId == user.userId && !it.archived}
 
-            if (!isFromDragAndDrop) {
-                setupList()
-            }
-
-            isFromDragAndDrop = false
-
-            verifyMidnight()
+//            if (!isFromDragAndDrop) {
+//                setupList()
+//            }
+//
+//            isFromDragAndDrop = false
+//
+//            verifyMidnight()
         })
 
         viewModel.getHabits()?.observe(this, Observer { habits ->
@@ -234,13 +258,13 @@ class ListFragment : BaseFragment() {
                             doneOrUndoneGoal(goalHabit)
                         } else {
                             setupList()
-                            openBottomSheetDone(goalHabit, ::doneOrUndoneGoal)
+                            openBottomSheetGoalDone(goalHabit, ::doneOrUndoneGoal)
                         }
                     }
                     is Habit -> {
                         setupList()
 
-                        //openBottomSheetDone()
+                        openBottomSheetHabitDone()
                     }
                 }
             }
@@ -260,7 +284,7 @@ class ListFragment : BaseFragment() {
                     is Habit -> {
                         setupList()
 
-                        //openBottomSheetDone()
+                        openBottomSheetHabitDone()
                     }
                 }
             }
