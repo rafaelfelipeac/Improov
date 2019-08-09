@@ -93,7 +93,7 @@ class HabitFragment : BaseFragment() {
 
         habit_next_date.text = String.format("%s %s", "Próxima ocorrência: ", habit.nextDate.format())
 
-        if (habit.type == HabitType.HABIT_3 || habit.type == HabitType.HABIT_4) {
+        if (habit.type == HabitType.HAB_PERIOD || habit.type == HabitType.HAB_CUSTOM) {
             habit_last_date.visible()
             habit_last_date.text = String.format("%s %s", "Último dia do ciclo:", habit.lastDate.format())
         }

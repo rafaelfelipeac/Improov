@@ -194,7 +194,7 @@ class GoalFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (goal?.type == GoalType.LIST) {
+        if (goal?.type == GoalType.GOAL_LIST) {
             inflater.inflate(R.menu.menu_add, menu)
         }
 
@@ -292,7 +292,7 @@ class GoalFragment : BaseFragment() {
         }
 
         when (goal?.type) {
-            GoalType.LIST -> {
+            GoalType.GOAL_LIST -> {
                 goal_cl_list.visible()
                 goal_cl_dec_inc.invisible()
                 goal_cl_total.invisible()
@@ -302,7 +302,7 @@ class GoalFragment : BaseFragment() {
                 if ((activity as MainActivity).toolbar.menu.findItem(R.id.menu_goal_add) == null)
                     (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
             }
-            GoalType.COUNTER -> {
+            GoalType.GOAL_COUNTER -> {
                 goal_cl_list.invisible()
                 goal_cl_dec_inc.visible()
                 goal_cl_total.invisible()
@@ -311,14 +311,14 @@ class GoalFragment : BaseFragment() {
 
                 goal_inc_dec_total.text = count.getNumberInRightFormat()
             }
-            GoalType.FINAL_VALUE -> {
+            GoalType.GOAL_FINAL -> {
                 goal_cl_list.invisible()
                 goal_cl_dec_inc.invisible()
                 goal_cl_total.visible()
 
                 historic_items_list.visible()
             }
-            GoalType.INVALID -> TODO()
+            GoalType.GOAL_NONE -> TODO()
         }
 
         if (isTheFirstTime()) {
@@ -356,7 +356,7 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun setupItems() {
-        if (goal?.type == GoalType.LIST) {
+        if (goal?.type == GoalType.GOAL_LIST) {
             if (items?.any { it.goalId == goal?.goalId }!!) {
                 setItems()
 

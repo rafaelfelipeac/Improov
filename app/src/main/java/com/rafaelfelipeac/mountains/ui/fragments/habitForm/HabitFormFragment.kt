@@ -87,7 +87,7 @@ class HabitFormFragment : BaseFragment() {
             R.id.menu_goal_save -> {
 //                if (verifyIfFieldsAreEmpty()) {
 //                    showSnackBar(getString(R.string.message_some_empty_value))
-//                } else if (getGoalTypeSelected() == GoalType.INVALID) {
+//                } else if (getGoalTypeSelected() == GoalType.GOAL_NONE) {
 //                    showSnackBar(getString(R.string.message_empty_type_goal))
 //                } else if (!validateMountainsValues()) {
 //                    showSnackBar(getString(R.string.message_gold_silver_bronze_order))
@@ -123,18 +123,18 @@ class HabitFormFragment : BaseFragment() {
 
         val habitType = gethabitTypeSelected()
 
-        if (habitType != HabitType.HABIT_NONE) {
+        if (habitType != HabitType.HAB_NONE) {
             habit.type = habitType
 
             when (habitType) {
-                HabitType.HABIT_1-> {}
-                HabitType.HABIT_2 -> {}
-                HabitType.HABIT_3 -> {
+                HabitType.HAB_EVERYDAY-> {}
+                HabitType.HAB_WEEKDAYS -> {}
+                HabitType.HAB_PERIOD -> {
                     habit.periodType = gethabitPeriodTypeSelected()
                     habit.periodTotal = habit_form_days_custom_1.text.toString().toInt()
                     habit.setHabitLastDate()
                 }
-                HabitType.HABIT_4 -> {
+                HabitType.HAB_CUSTOM -> {
                     habit.periodType = PeriodType.PER_CUSTOM
                     habit.periodTotal = 1
                     habit.periodDaysBetween = habit_form_add_days.text.toString().toInt()
@@ -164,12 +164,12 @@ class HabitFormFragment : BaseFragment() {
     }
 
     private fun gethabitTypeSelected(): HabitType {
-        if (radioButton1.isChecked)         return HabitType.HABIT_1
-        if (radioButton2.isChecked)         return HabitType.HABIT_2
-        if (radioButton3.isChecked)         return HabitType.HABIT_3
-        if (radioButton4.isChecked)         return HabitType.HABIT_4
+        if (radioButton1.isChecked)         return HabitType.HAB_EVERYDAY
+        if (radioButton2.isChecked)         return HabitType.HAB_WEEKDAYS
+        if (radioButton3.isChecked)         return HabitType.HAB_PERIOD
+        if (radioButton4.isChecked)         return HabitType.HAB_CUSTOM
 
-        return HabitType.HABIT_NONE
+        return HabitType.HAB_NONE
     }
 
     private fun gethabitPeriodTypeSelected(): PeriodType {
@@ -260,8 +260,8 @@ class HabitFormFragment : BaseFragment() {
 
     private fun setupHabit() {
         when(habit.type) {
-            HabitType.HABIT_1 -> { radioButton1.isChecked = true }
-            HabitType.HABIT_2 -> {
+            HabitType.HAB_EVERYDAY -> { radioButton1.isChecked = true }
+            HabitType.HAB_WEEKDAYS -> {
                 radioButton2.isChecked = true
 
                 block_of_radius2.visible()
@@ -274,7 +274,7 @@ class HabitFormFragment : BaseFragment() {
                 weekDay6.isChecked = habit.weekDays[5]
                 weekDay7.isChecked = habit.weekDays[6]
             }
-            HabitType.HABIT_3 -> {
+            HabitType.HAB_PERIOD -> {
                 radioButton3.isChecked = true
 
                 habit_form_days_custom_1.setText(habit.periodTotal.toString())
@@ -288,12 +288,12 @@ class HabitFormFragment : BaseFragment() {
                 })
 
             }
-            HabitType.HABIT_4 -> {
+            HabitType.HAB_CUSTOM -> {
                 radioButton4.isChecked = true
 
                 habit_form_add_days.setText(habit.periodDaysBetween.toString())
             }
-            HabitType.HABIT_NONE -> TODO()
+            HabitType.HAB_NONE -> TODO()
         }
     }
 }

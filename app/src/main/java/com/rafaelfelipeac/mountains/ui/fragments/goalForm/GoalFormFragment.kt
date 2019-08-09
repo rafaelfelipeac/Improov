@@ -159,7 +159,7 @@ class GoalFormFragment : BaseFragment() {
             R.id.menu_goal_save -> {
                 if (verifyIfFieldsAreEmpty()) {
                     showSnackBar(getString(R.string.message_some_empty_value))
-                } else if (getGoalTypeSelected() == GoalType.INVALID) {
+                } else if (getGoalTypeSelected() == GoalType.GOAL_NONE) {
                     showSnackBar(getString(R.string.message_empty_type_goal))
                 } else if (!validateMountainsValues()) {
                     showSnackBar(getString(R.string.message_gold_silver_bronze_order))
@@ -179,7 +179,7 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun verifyIfIncOrDecValuesAreEmpty() =
-        getGoalTypeSelected() == GoalType.COUNTER && (goalForm_goal_inc_value.isEmpty() || goalForm_goal_dec_value.isEmpty())
+        getGoalTypeSelected() == GoalType.GOAL_COUNTER && (goalForm_goal_inc_value.isEmpty() || goalForm_goal_dec_value.isEmpty())
 
     private fun setSwitchMountains() {
         form_goal_switch_mountains.setOnCheckedChangeListener { _, isChecked ->
@@ -285,7 +285,7 @@ class GoalFormFragment : BaseFragment() {
         } else
             goal.updatedDate = getCurrentTime()
 
-        if (getGoalTypeSelected() == GoalType.COUNTER) {
+        if (getGoalTypeSelected() == GoalType.GOAL_COUNTER) {
             goal.incrementValue = goalForm_goal_inc_value.toFloat()
             goal.decrementValue = goalForm_goal_dec_value.toFloat()
         }
@@ -302,11 +302,11 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun getGoalTypeSelected(): GoalType {
-        if (radioButtonLista.isChecked) return GoalType.LIST
-        if (radioButtonIncDec.isChecked) return GoalType.COUNTER
-        if (radioButtonTotal.isChecked) return GoalType.FINAL_VALUE
+        if (radioButtonLista.isChecked) return GoalType.GOAL_LIST
+        if (radioButtonIncDec.isChecked) return GoalType.GOAL_COUNTER
+        if (radioButtonTotal.isChecked) return GoalType.GOAL_FINAL
 
-        return GoalType.INVALID
+        return GoalType.GOAL_NONE
     }
 
     private fun setupGoal() {
@@ -334,10 +334,10 @@ class GoalFormFragment : BaseFragment() {
         }
 
         when (goal.type) {
-            GoalType.LIST -> {
+            GoalType.GOAL_LIST -> {
                 radioButtonLista.isChecked = true
             }
-            GoalType.COUNTER -> {
+            GoalType.GOAL_COUNTER -> {
                 radioButtonIncDec.isChecked = true
 
                 goalForm_goal_inc_dev.visible()
@@ -345,7 +345,7 @@ class GoalFormFragment : BaseFragment() {
                 goalForm_goal_inc_value.setText(goal.incrementValue.getNumberInRightFormat())
                 goalForm_goal_dec_value.setText(goal.decrementValue.getNumberInRightFormat())
             }
-            GoalType.FINAL_VALUE -> {
+            GoalType.GOAL_FINAL -> {
                 radioButtonTotal.isChecked = true
             }
             else -> {

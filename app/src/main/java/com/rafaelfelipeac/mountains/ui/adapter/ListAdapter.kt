@@ -155,19 +155,19 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
             typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.drawable.ic_habit)
 
             when (habit.type) {
-                HabitType.HABIT_1 -> {
+                HabitType.HAB_EVERYDAY -> {
                     type.text = String.format(
                         "%s", "Todo dia"
                     )
                 }
-                HabitType.HABIT_2 -> {
+                HabitType.HAB_WEEKDAYS -> {
                     type.text = String.format(
                         "%s %s",
                         habit.weekDaysLong.filter { it > 0 }.size.toString(),
                         "vezes por semana"
                     )
                 }
-                HabitType.HABIT_3 -> {
+                HabitType.HAB_PERIOD -> {
                     type.text = String.format(
                         "%s %s %s",
                         habit.periodTotal.toString(),
@@ -182,7 +182,7 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
                     )
                     score.visible()
                 }
-                HabitType.HABIT_4 -> {
+                HabitType.HAB_CUSTOM -> {
                     type.text = String.format(
                         "%s %s %s",
                         "A cada",
@@ -190,7 +190,7 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
                         "dias"
                     )
                 }
-                HabitType.HABIT_NONE -> TODO()
+                HabitType.HAB_NONE -> TODO()
             }
 
             itemDrag.setOnTouchListener { _, _ ->

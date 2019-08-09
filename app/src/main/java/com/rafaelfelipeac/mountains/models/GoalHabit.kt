@@ -17,7 +17,7 @@ data class Goal (
     @PrimaryKey(autoGenerate = true)
     var goalId: Long = 0,
     var value: Float = 0F,
-    var type: GoalType = GoalType.INVALID,
+    var type: GoalType = GoalType.GOAL_NONE,
     var done: Boolean = false,
     var divideAndConquer: Boolean = false,
     var singleValue: Float = 0F,
@@ -38,7 +38,7 @@ data class Goal (
 data class Habit (
     @PrimaryKey(autoGenerate = true)
     var habitId: Long = 0,
-    var type: HabitType = HabitType.HABIT_NONE,
+    var type: HabitType = HabitType.HAB_NONE,
     var periodType: PeriodType = PeriodType.PER_NONE,
     var periodDone: Int = 0,
     var periodTotal: Int = 0,
@@ -51,8 +51,8 @@ data class Habit (
     var weekDaysLong: MutableList<Long> = mutableListOf()
 ) : Serializable, GoalHabit()
 
-enum class HabitType { HABIT_1, HABIT_2, HABIT_3, HABIT_4, HABIT_NONE }
+enum class HabitType { HAB_EVERYDAY, HAB_WEEKDAYS, HAB_PERIOD, HAB_CUSTOM, HAB_NONE }
 
 enum class PeriodType { PER_WEEK, PER_MONTH, PER_YEAR, PER_CUSTOM, PER_NONE }
 
-enum class GoalType { LIST, COUNTER, FINAL_VALUE, INVALID }
+enum class GoalType { GOAL_LIST, GOAL_COUNTER, GOAL_FINAL, GOAL_NONE }

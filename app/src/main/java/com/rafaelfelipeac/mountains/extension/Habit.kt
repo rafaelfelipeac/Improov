@@ -16,12 +16,12 @@ fun Habit.nextHabitDate() {
 
     nextDate =
         when (type) {
-            HabitType.HABIT_1 -> {
+            HabitType.HAB_EVERYDAY -> {
                 date.addDays(0)
 
                 date.time
             }
-            HabitType.HABIT_2 -> {
+            HabitType.HAB_WEEKDAYS -> {
                 discoverNextWeek(weekDays)
 
                 val list = weekDaysLong.filter { it > 0L }.sortedBy { it }
@@ -41,12 +41,12 @@ fun Habit.nextHabitDate() {
 
                 date.time
             }
-            HabitType.HABIT_3 -> {
+            HabitType.HAB_PERIOD -> {
                 date.addDays(0)
 
                 date.time
             }
-            HabitType.HABIT_4 -> {
+            HabitType.HAB_CUSTOM -> {
                 date.addDays(0)
 
                 date.time
@@ -62,7 +62,7 @@ fun Habit.nextHabitDateAfterDone() {
     today.setToMidnight()
 
     when (type) {
-        HabitType.HABIT_1 -> {
+        HabitType.HAB_EVERYDAY -> {
             if (nextDate.isLate()) {
                 today.addDays(1)
                 nextDate = today.time
@@ -70,7 +70,7 @@ fun Habit.nextHabitDateAfterDone() {
                 nextDate.addDays(1)
             }
         }
-        HabitType.HABIT_2 -> {
+        HabitType.HAB_WEEKDAYS -> {
             discoverNextWeek(weekDays)
 
             doneDate.setToMidnight()
@@ -99,7 +99,7 @@ fun Habit.nextHabitDateAfterDone() {
 
             nextDate = date.time
         }
-        HabitType.HABIT_3 -> {
+        HabitType.HAB_PERIOD -> {
             periodDone++
 
             if (periodDone == periodTotal) {
@@ -114,12 +114,12 @@ fun Habit.nextHabitDateAfterDone() {
                 }
             }
         }
-        HabitType.HABIT_4 -> {
+        HabitType.HAB_CUSTOM -> {
             periodDone++
 
             setHabitNextCycle()
         }
-        HabitType.HABIT_NONE -> TODO()
+        HabitType.HAB_NONE -> TODO()
     }
 }
 
