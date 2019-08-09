@@ -95,7 +95,7 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigation_goals">
+                  <entry key="navigation_list">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -193,6 +193,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_navigation_profile_to_navigation_routine_form">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_navigation_profile_to_navigation_welcome">
                               <value>
                                 <LayoutPositions />
@@ -211,6 +216,15 @@
                             <option name="x" value="256" />
                             <option name="y" value="368" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_navigation_routine_to_navigation_routine_form">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

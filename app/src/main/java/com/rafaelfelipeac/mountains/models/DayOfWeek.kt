@@ -3,5 +3,5 @@ package com.rafaelfelipeac.mountains.models
 data class DayOfWeek(
     var weekDay: String = "",
     val monthDay: String = "",
-    var list: MutableList<Routine> = mutableListOf()
+    var routines: MutableList<Routine> = mutableListOf()
 )

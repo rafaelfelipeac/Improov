@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.rafaelfelipeac.mountains.R
 import kotlin.math.abs
 
-class SwipeAndDragHelperGoal(private val contract: ActionCompletionContract) : ItemTouchHelper.Callback() {
+class SwipeAndDragHelperList(private val contract: ActionCompletionContract) : ItemTouchHelper.Callback() {
 
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN

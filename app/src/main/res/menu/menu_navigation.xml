@@ -4,9 +4,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-            android:id="@+id/navigation_goals"
+            android:id="@+id/navigation_list"
             android:icon="@drawable/ic_list"
-            android:title="Metas"/>
+            android:title="Lista"/>
 
     <item
             android:id="@+id/navigation_today"

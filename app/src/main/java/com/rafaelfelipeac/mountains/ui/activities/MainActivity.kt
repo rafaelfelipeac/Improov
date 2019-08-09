@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -44,7 +43,6 @@ class MainActivity : BaseActivity() {
     lateinit var bottomSheetFAB: BottomSheetDialog
     lateinit var bottomSheetFABGoal: Button
     lateinit var bottomSheetFABRoutine: Button
-    lateinit var bottomSheetFABClose: ImageView
 
     var mGoogleSignInClient: GoogleSignInClient? = null
 
@@ -74,7 +72,6 @@ class MainActivity : BaseActivity() {
 
         bottomSheetFABGoal = sheetView.findViewById(R.id.bottom_sheet_fab_goal)
         bottomSheetFABRoutine = sheetView.findViewById(R.id.bottom_sheet_fab_routine)
-        bottomSheetFABClose = sheetView.findViewById(R.id.bottom_sheet_fab_close)
     }
 
     override fun onBackPressed() {
@@ -90,7 +87,7 @@ class MainActivity : BaseActivity() {
     private fun lastFragment(): Boolean {
         val currentFragment = NavHostFragment.findNavController(nav_host_fragment).currentDestination!!.id
 
-        return currentFragment == R.id.navigation_goals
+        return currentFragment == R.id.navigation_list
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -145,16 +142,13 @@ class MainActivity : BaseActivity() {
         bottomSheetFAB.show()
 
         bottomSheetFABGoal.setOnClickListener {
-            navController.navigate(R.id.action_navigation_goals_to_navigation_goal_form)
+            navController.navigate(R.id.action_navigation_list_to_navigation_goal_form)
         }
 
         bottomSheetFABRoutine.setOnClickListener {
-            navController.navigate(R.id.action_navigation_goals_to_navigation_routine_form)
+            navController.navigate(R.id.action_navigation_list_to_navigation_routine_form)
         }
 
-        bottomSheetFABClose.setOnClickListener {
-            closeBottomSheetFAB()
-        }
     }
 
     fun closeBottomSheetFAB() {

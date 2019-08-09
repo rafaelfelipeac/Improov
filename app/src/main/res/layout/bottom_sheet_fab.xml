@@ -11,6 +11,18 @@
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:background="@drawable/rounded_primary_dark_two">
 
+    <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:background="@drawable/rounded_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:id="@+id/view5"/>
+
     <android.widget.Button
             android:id="@+id/bottom_sheet_fab_goal"
             android:layout_width="100dp"
@@ -18,36 +30,23 @@
             android:text="Objetivo"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/bottom_sheet_fab_close"
-            app:layout_constraintVertical_bias="1.0"
-            android:layout_marginTop="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_sheet_fab_close"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageView
-            android:id="@+id/bottom_sheet_fab_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_close"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/view5"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     <android.widget.Button
             android:id="@+id/bottom_sheet_fab_routine"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Rotina"
+            android:text="Hábito"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"
-            app:layout_constraintStart_toEndOf="@+id/bottom_sheet_fab_close"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_sheet_fab_close"
-            android:layout_marginTop="32dp"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toEndOf="@+id/view5"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

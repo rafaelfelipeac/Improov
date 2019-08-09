@@ -36,7 +36,7 @@ class WelcomeFragment : BaseFragment() {
 
         val account = GoogleSignIn.getLastSignedInAccount(context!!)
         if (account != null || prefs.login) {
-            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationGoals())
+            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
         }
     }
 

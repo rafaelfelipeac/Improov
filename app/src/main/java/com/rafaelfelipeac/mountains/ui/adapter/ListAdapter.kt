@@ -14,15 +14,15 @@ import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.models.*
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import com.rafaelfelipeac.mountains.ui.base.inflate
-import com.rafaelfelipeac.mountains.ui.fragments.goals.GoalsFragment
+import com.rafaelfelipeac.mountains.ui.fragments.list.ListFragment
 import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragment
 import com.rafaelfelipeac.mountains.ui.helper.ActionCompletionContract
 import kotlin.math.roundToInt
 
-class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     ActionCompletionContract {
 
-    private lateinit var goals: List<GoalRoutine>
+    private lateinit var list: List<GoalRoutine>
 
     var clickListener: (goalRoutine: GoalRoutine) -> Unit = { }
 
@@ -34,7 +34,7 @@ class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVi
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (goals[position]) {
+        return when (list[position]) {
             is Goal -> TYPE_GOAL
             is Routine -> TYPE_ROUTINE
             else -> -1
@@ -58,13 +58,13 @@ class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVi
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.setIsRecyclable(false)
 
-        (holder as GoalAbstractViewHolder).bindViews(goals[position])
+        (holder as ListViewHolder).bindViews(list[position])
     }
 
-    override fun getItemCount() = goals.size
+    override fun getItemCount() = list.size
 
-    fun setItems(goals: List<GoalRoutine>) {
-        this.goals = goals
+    fun setItems(list: List<GoalRoutine>) {
+        this.list = list
         notifyDataSetChanged()
     }
 
@@ -72,7 +72,7 @@ class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVi
                          val fragment: BaseFragment,
                          private val touchHelper: ItemTouchHelper?,
                          private val clickListener: (goalRoutine: GoalRoutine) -> Unit) :
-        RecyclerView.ViewHolder(itemView), GoalAbstractViewHolder {
+        RecyclerView.ViewHolder(itemView), ListViewHolder {
 
         private val typeIcon= itemView.findViewById<ImageView>(R.id.goal_type_icon)
         private val title = itemView.findViewById<TextView>(R.id.goal_title)!!
@@ -121,7 +121,7 @@ class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVi
                             val fragment: BaseFragment,
                             private val touchHelper: ItemTouchHelper?,
                             val clickListener: (goalRoutine: GoalRoutine) -> Unit) :
-        RecyclerView.ViewHolder(itemView), GoalAbstractViewHolder {
+        RecyclerView.ViewHolder(itemView), ListViewHolder {
 
         private val typeIcon = itemView.findViewById<ImageView>(R.id.routine_type_icon)!!
         private val title = itemView.findViewById<TextView>(R.id.routine_title)
@@ -202,18 +202,18 @@ class GoalsAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVi
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int) {
         when (fragment) {
-            is GoalsFragment -> fragment.onViewMoved(oldPosition, newPosition, goals, ::notifyItemMoved)
+            is ListFragment -> fragment.onViewMoved(oldPosition, newPosition, list, ::notifyItemMoved)
         }
     }
 
     override fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder) {
         when (fragment) {
-            is GoalsFragment -> fragment.onViewSwiped(position, direction, holder, goals)
-            is TodayFragment -> fragment.onViewSwiped(position, direction, holder, goals)
+            is ListFragment -> fragment.onViewSwiped(position, direction, holder, list)
+            is TodayFragment -> fragment.onViewSwiped(position, direction, holder, list)
         }
     }
 
-    interface GoalAbstractViewHolder {
+    interface ListViewHolder {
         fun bindViews(goalRoutine: GoalRoutine)
     }
 }

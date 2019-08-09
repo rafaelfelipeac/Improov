@@ -17,9 +17,9 @@ import com.rafaelfelipeac.mountains.models.GoalRoutine
 import com.rafaelfelipeac.mountains.models.Routine
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.DayOfWeekAdapter
-import com.rafaelfelipeac.mountains.ui.adapter.GoalsAdapter
+import com.rafaelfelipeac.mountains.ui.adapter.ListAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
-import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperGoal
+import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperList
 import kotlinx.android.synthetic.main.fragment_today.*
 import java.util.*
 
@@ -27,8 +27,8 @@ class TodayFragment : BaseFragment() {
 
     private lateinit var viewModel: TodayViewModel
 
-    private lateinit var goalsLateAdapter: GoalsAdapter
-    private lateinit var goalsTodayAdapter: GoalsAdapter
+    private lateinit var goalsLateAdapter: ListAdapter
+    private lateinit var goalsTodayAdapter: ListAdapter
     private var goalsWeekAdapter = DayOfWeekAdapter(this)
 
     private var routinesLate: List<Routine>? = null
@@ -101,7 +101,7 @@ class TodayFragment : BaseFragment() {
     }
 
     private fun setItemsLate() {
-        goalsLateAdapter = GoalsAdapter(this)
+        goalsLateAdapter = ListAdapter(this)
         routinesLate?.sortedBy { it.order }.let { goalsLateAdapter.setItems(it!!) }
 
         goalsLateAdapter.clickListener = {
@@ -111,7 +111,7 @@ class TodayFragment : BaseFragment() {
             }
         }
 
-        val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsLateAdapter)
+        val swipeAndDragHelper = SwipeAndDragHelperList(goalsLateAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
         goalsLateAdapter.touchHelper = touchHelper
@@ -123,7 +123,7 @@ class TodayFragment : BaseFragment() {
     }
 
     private fun setItemsToday() {
-        goalsTodayAdapter = GoalsAdapter(this)
+        goalsTodayAdapter = ListAdapter(this)
         routinesToday?.sortedBy { it.order }.let { goalsTodayAdapter.setItems(it!!) }
 
         goalsTodayAdapter.clickListener = {
@@ -133,7 +133,7 @@ class TodayFragment : BaseFragment() {
             }
         }
 
-        val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsTodayAdapter)
+        val swipeAndDragHelper = SwipeAndDragHelperList(goalsTodayAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
         goalsTodayAdapter.touchHelper = touchHelper
@@ -151,7 +151,7 @@ class TodayFragment : BaseFragment() {
         days.forEach { day ->
             routinesFuture?.forEach { routine ->
                 if (day.monthDay == routine.nextDate.format()) {
-                    day.list.add(routine)
+                    day.routines.add(routine)
                 }
             }
         }

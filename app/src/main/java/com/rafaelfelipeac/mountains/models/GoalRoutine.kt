@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.util.*
 
-abstract class GoalRoutine(
+abstract class GoalRoutine (
     var userId: Long = 0,
     var name: String = "",
     var order: Int = 0,

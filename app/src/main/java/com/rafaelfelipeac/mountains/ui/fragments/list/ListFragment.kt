@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.ui.fragments.goals
+package com.rafaelfelipeac.mountains.ui.fragments.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,27 +21,27 @@ import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.GoalRoutine
 import com.rafaelfelipeac.mountains.models.Routine
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
-import com.rafaelfelipeac.mountains.ui.adapter.GoalsAdapter
+import com.rafaelfelipeac.mountains.ui.adapter.ListAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
-import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperGoal
-import kotlinx.android.synthetic.main.fragment_goals.*
+import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperList
+import kotlinx.android.synthetic.main.fragment_list.*
 
-class GoalsFragment : BaseFragment() {
+class ListFragment : BaseFragment() {
 
     private var isFromDragAndDrop: Boolean = false
 
-    private lateinit var goalsAdapter: GoalsAdapter
+    private lateinit var listAdapter: ListAdapter
 
-    private lateinit var bottomSheetDoneGoalNo: Button
-    private lateinit var bottomSheetDoneGoalYes: Button
-    private lateinit var bottomSheetDoneGoal: BottomSheetDialog
+    private lateinit var bottomSheetGoalDoneNo: Button
+    private lateinit var bottomSheetGoalDoneYes: Button
+    private lateinit var bottomSheetGoalDone: BottomSheetDialog
 
     var goals: List<Goal>? = listOf()
     var routines: List<Routine>? = listOf()
 
-    var goalsFinal: MutableList<GoalRoutine>? = mutableListOf()
+    var list: MutableList<GoalRoutine>? = mutableListOf()
 
-    private lateinit var viewModel: GoalsViewModel
+    private lateinit var viewModel: ListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,11 +57,11 @@ class GoalsFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_goals)
+        (activity as MainActivity).supportActionBar?.title = "Lista"
 
-        viewModel = ViewModelProviders.of(this).get(GoalsViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
 
-        return inflater.inflate(R.layout.fragment_goals, container, false)
+        return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,29 +79,29 @@ class GoalsFragment : BaseFragment() {
     }
 
     private fun setupBottomSheetDoneGoal() {
-        bottomSheetDoneGoal = BottomSheetDialog(this.activity!!)
+        bottomSheetGoalDone = BottomSheetDialog(this.activity!!)
         val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_goal_done, null)
-        bottomSheetDoneGoal.setContentView(sheetView)
+        bottomSheetGoalDone.setContentView(sheetView)
 
-        bottomSheetDoneGoalYes = sheetView.findViewById(R.id.bottom_sheet_button_yes)
-        bottomSheetDoneGoalNo = sheetView.findViewById(R.id.bottom_sheet_button_no)
+        bottomSheetGoalDoneYes = sheetView.findViewById(R.id.bottom_sheet_done_yes)
+        bottomSheetGoalDoneNo = sheetView.findViewById(R.id.bottom_sheet_done_no)
     }
 
-    private fun openBottomSheetDoneGoal(goal: Goal, function: (goal: Goal) -> Unit) {
-        bottomSheetDoneGoal.show()
+    private fun openBottomSheetDone(goal: Goal, function: (goal: Goal) -> Unit) {
+        bottomSheetGoalDone.show()
 
-        bottomSheetDoneGoalYes.setOnClickListener {
+        bottomSheetGoalDoneYes.setOnClickListener {
             function(goal)
-            closeBottomSheetDoneGoal()
+            closeBottomSheetGoalDone()
         }
 
-        bottomSheetDoneGoalNo.setOnClickListener {
-            closeBottomSheetDoneGoal()
+        bottomSheetGoalDoneNo.setOnClickListener {
+            closeBottomSheetGoalDone()
         }
     }
 
-    private fun closeBottomSheetDoneGoal() {
-        bottomSheetDoneGoal.hide()
+    private fun closeBottomSheetGoalDone() {
+        bottomSheetGoalDone.hide()
     }
 
     private fun observeViewModel() {
@@ -113,7 +113,7 @@ class GoalsFragment : BaseFragment() {
             this.goals = goals.filter { it.userId == user.userId && !it.archived}
 
             if (!isFromDragAndDrop) {
-                setupItems()
+                setupList()
             }
 
             isFromDragAndDrop = false
@@ -125,7 +125,7 @@ class GoalsFragment : BaseFragment() {
             this.routines = routines.filter { it.userId == user.userId && !it.archived}
 
             if (!isFromDragAndDrop) {
-                setupItems()
+                setupList()
             }
 
             isFromDragAndDrop = false
@@ -149,72 +149,72 @@ class GoalsFragment : BaseFragment() {
         (activity as MainActivity).closeToolbar()
     }
 
-    private fun setupItems() {
+    private fun setupList() {
         if (goals?.isNotEmpty()!! || routines?.isNotEmpty()!!) {
-            setItems()
+            setList()
 
-            goals_list.visible()
-            goals_placeholder.invisible()
+            list_list.visible()
+            list_placeholder.invisible()
         } else {
-            goals_list.invisible()
-            goals_placeholder.visible()
+            list_list.invisible()
+            list_placeholder.visible()
         }
     }
 
-    private fun setItems() {
-        goalsFinal = mutableListOf()
+    private fun setList() {
+        list = mutableListOf()
 
-        goals?.let { goalsFinal?.addAll(it) }
-        routines?.let { goalsFinal?.addAll(it) }
+        goals?.let { list?.addAll(it) }
+        routines?.let { list?.addAll(it) }
 
-        goalsAdapter = GoalsAdapter(this)
+        listAdapter = ListAdapter(this)
 
-        goalsFinal
+        list
             ?.sortedBy { it.order }
-            ?.let { goalsAdapter.setItems(it) }
+            ?.let { listAdapter.setItems(it) }
 
-        goalsAdapter.clickListener = {
+        listAdapter.clickListener = {
             when (it) {
                 is Routine -> {
-                    val action = GoalsFragmentDirections.actionNavigationGoalsToNavigationRoutine(it.routineId)
+                    val action = ListFragmentDirections.actionNavigationListToNavigationRoutine(it.routineId)
                     navController.navigate(action)
                 }
                 is Goal -> {
-                    val action = GoalsFragmentDirections.actionNavigationGoalsToNavigationGoal(it.goalId)
+                    val action = ListFragmentDirections.actionNavigationListToNavigationGoal(it.goalId)
                     navController.navigate(action)
                 }
             }
         }
 
-        val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsAdapter)
+        val swipeAndDragHelper = SwipeAndDragHelperList(listAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        goalsAdapter.touchHelper = touchHelper
+        listAdapter.touchHelper = touchHelper
 
-        goals_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        goals_list.adapter = goalsAdapter
+        list_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        list_list.adapter = listAdapter
 
-        touchHelper.attachToRecyclerView(goals_list)
+        touchHelper.attachToRecyclerView(list_list)
     }
 
     fun onViewMoved(oldPosition: Int, newPosition: Int, items: List<GoalRoutine>,
                     function: (oldPosition: Int, newPosition: Int) -> Unit) {
-        val targetGoal = items[oldPosition]
-        val otherGoal = items[newPosition]
+        val target = items[oldPosition]
+        val other = items[newPosition]
 
-        targetGoal.order = newPosition
-        otherGoal.order = oldPosition
+        target.order = newPosition
+        other.order = oldPosition
 
         isFromDragAndDrop = true
 
-        when (targetGoal) {
-            is Goal -> viewModel.saveGoal(targetGoal)
-            is Routine -> viewModel.saveRoutine(targetGoal)
+        when (target) {
+            is Goal -> viewModel.saveGoal(target)
+            is Routine -> viewModel.saveRoutine(target)
         }
 
-        when (otherGoal) {
-            is Goal -> viewModel.saveGoal(otherGoal)
-            is Routine -> viewModel.saveRoutine(otherGoal)
+        when (other) {
+            is Goal -> viewModel.saveGoal(other)
+            is Routine -> viewModel.saveRoutine(other)
         }
 
 //        items.removeAt(oldPosition)
@@ -224,43 +224,43 @@ class GoalsFragment : BaseFragment() {
     }
 
     fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalRoutine>) {
-        val goal = items[position]
+        val goalRoutine = items[position]
 
         when (direction) {
             ItemTouchHelper.RIGHT -> {
-                when (goal) {
+                when (goalRoutine) {
                     is Goal -> {
-                        if (goal.done || goal.getPercentage() >= 100) {
-                            doneOrUndoneGoal(goal)
+                        if (goalRoutine.done || goalRoutine.getPercentage() >= 100) {
+                            doneOrUndoneGoal(goalRoutine)
                         } else {
-                            setupItems()
-                            openBottomSheetDoneGoal(goal, ::doneOrUndoneGoal)
+                            setupList()
+                            openBottomSheetDone(goalRoutine, ::doneOrUndoneGoal)
                         }
                     }
                     is Routine -> {
-                        setupItems()
+                        setupList()
 
-                        //openBottomSheetDoneGoal()
+                        //openBottomSheetDone()
                     }
                 }
             }
             ItemTouchHelper.LEFT -> {
-                when (goal) {
+                when (goalRoutine) {
                     is Goal -> {
-                        goal.archived = true
-                        goal.archiveDate = getCurrentTime()
+                        goalRoutine.archived = true
+                        goalRoutine.archiveDate = getCurrentTime()
 
-                        viewModel.saveGoal(goal)
+                        viewModel.saveGoal(goalRoutine)
 
                         showSnackBarWithAction(holder.itemView,
-                            getString(R.string.goals_fragment_resolved_goal_message), goal as Any, ::archiveGoal)
+                            getString(R.string.goals_fragment_resolved_goal_message), goalRoutine as Any, ::archiveGoal)
 
-                        setupItems()
+                        setupList()
                     }
                     is Routine -> {
-                        setupItems()
+                        setupList()
 
-                        //openBottomSheetDoneGoal()
+                        //openBottomSheetDone()
                     }
                 }
             }

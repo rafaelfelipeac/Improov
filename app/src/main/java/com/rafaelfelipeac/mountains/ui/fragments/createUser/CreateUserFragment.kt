@@ -55,7 +55,7 @@ class CreateUserFragment : BaseFragment() {
             when {
                 createResult.isSuccessful -> {
                     prefs.login = true
-                    navController.navigate(CreateUserFragmentDirections.actionNavigationCreateUserToNavigationGoals())
+                    navController.navigate(CreateUserFragmentDirections.actionNavigationCreateUserToNavigationList())
                 }
                 createResult.message == getString(R.string.result_error_message_email_already_in_use) -> {
                     setErrorMessage(getString(R.string.snackbar_error_email_already_in_use))

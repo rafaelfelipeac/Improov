@@ -11,7 +11,7 @@ import com.rafaelfelipeac.mountains.models.Routine
 import com.rafaelfelipeac.mountains.ui.base.BaseAdapter
 import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragment
 import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragmentDirections
-import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperGoal
+import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperList
 
 class DayOfWeekAdapter(val fragment: TodayFragment) : BaseAdapter<DayOfWeek>() {
 
@@ -29,25 +29,25 @@ class DayOfWeekAdapter(val fragment: TodayFragment) : BaseAdapter<DayOfWeek>() {
         weekDay.text = item.weekDay
         monthDay.text = item.monthDay
 
-        val routines = item.list
+        val routines = item.routines
 
-        val goalsAdapter = GoalsAdapter(fragment)
+        val listAdapter = ListAdapter(fragment)
 
-        goalsAdapter.clickListener = {
+        listAdapter.clickListener = {
             val action =
                 TodayFragmentDirections.actionNavigationTodayToNavigationRoutine((it as Routine).routineId)
             fragment.navController.navigate(action)
         }
 
-        routines.sortedBy { it.order }.let { goalsAdapter.setItems(it) }
+        routines.sortedBy { it.order }.let { listAdapter.setItems(it) }
 
-        val swipeAndDragHelper = SwipeAndDragHelperGoal(goalsAdapter)
+        val swipeAndDragHelper = SwipeAndDragHelperList(listAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        goalsAdapter.touchHelper = touchHelper
+        listAdapter.touchHelper = touchHelper
 
         list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        list.adapter = goalsAdapter
+        list.adapter = listAdapter
 
         touchHelper.attachToRecyclerView(list)
     }
