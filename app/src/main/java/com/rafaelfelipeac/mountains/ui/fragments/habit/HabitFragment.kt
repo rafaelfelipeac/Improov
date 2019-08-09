@@ -1,10 +1,7 @@
 package com.rafaelfelipeac.mountains.ui.fragments.habit
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,6 +12,7 @@ import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.models.HabitType
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
+import com.rafaelfelipeac.mountains.ui.fragments.goal.GoalFragmentDirections
 import kotlinx.android.synthetic.main.fragment_habit.*
 
 class HabitFragment : BaseFragment() {
@@ -70,8 +68,17 @@ class HabitFragment : BaseFragment() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_edit, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.menu_goal_edit -> {
+                navController.navigate(HabitFragmentDirections.actionNavigationHabitToNavigationHabitForm(habit?.habitId!!))
+            }
             android.R.id.home -> {
                 if (habitNew!!) {
                     navController.navigateUp()

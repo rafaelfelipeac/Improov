@@ -71,7 +71,7 @@ class HabitFormFragment : BaseFragment() {
 
         habit_form_option_1.setOnClickListener { radioButtonChecked(1) }
 
-        habit_form_option_2.setOnClickListener { radioButtonChecked(2) }
+        habit_form_option_2.setOnClickListener { radioButtonChecked(2) ;  block_of_radius2.visible()}
 
         habit_form_option_3.setOnClickListener { radioButtonChecked(3) }
 
@@ -298,6 +298,8 @@ class HabitFormFragment : BaseFragment() {
     }
 
     private fun setupHabit() {
+        habit_form_name.setText(habit.name)
+
         when (habit.type) {
             HabitType.HAB_EVERYDAY -> {
                 radioButton1.isChecked = true

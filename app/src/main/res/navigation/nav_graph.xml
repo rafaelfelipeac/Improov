@@ -138,6 +138,8 @@
               android:name="com.rafaelfelipeac.mountains.ui.fragments.habitForm.HabitFormFragment"
               android:label="fragment_habit_form">
 
+        <argument android:name="habitId" app:argType="long"/>
+
         <action android:id="@+id/action_navigation_habit_form_to_navigation_habit" app:destination="@id/navigation_habit"/>
 
     </fragment>
