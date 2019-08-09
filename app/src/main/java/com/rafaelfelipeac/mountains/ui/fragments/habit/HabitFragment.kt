@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.ui.fragments.routine
+package com.rafaelfelipeac.mountains.ui.fragments.habit
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,20 +11,20 @@ import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.format
 import com.rafaelfelipeac.mountains.extension.visible
-import com.rafaelfelipeac.mountains.models.Routine
-import com.rafaelfelipeac.mountains.models.RoutineType
+import com.rafaelfelipeac.mountains.models.Habit
+import com.rafaelfelipeac.mountains.models.HabitType
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_routine.*
+import kotlinx.android.synthetic.main.fragment_habit.*
 
-class RoutineFragment : BaseFragment() {
+class HabitFragment : BaseFragment() {
 
-    var routineId: Long? = null
-    var routineNew: Boolean? = null
+    var habitId: Long? = null
+    var habitNew: Boolean? = null
 
-    var routine = Routine()
+    var habit = Habit()
 
-    private lateinit var viewModel: RoutineViewModel
+    private lateinit var viewModel: HabitViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,18 +37,18 @@ class RoutineFragment : BaseFragment() {
 
         (activity as MainActivity).bottomNavigationVisible(View.GONE)
 
-        routineId = arguments?.let { RoutineFragmentArgs.fromBundle(it).routineId }
-        routineNew = arguments?.let { RoutineFragmentArgs.fromBundle(it).routineNew }
+        habitId = arguments?.let { HabitFragmentArgs.fromBundle(it).habitId }
+        habitNew = arguments?.let { HabitFragmentArgs.fromBundle(it).habitNew }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = "Rotina"
 
-        viewModel = ViewModelProviders.of(this).get(RoutineViewModel::class.java)
-        viewModel.init(routineId!!)
+        viewModel = ViewModelProviders.of(this).get(HabitViewModel::class.java)
+        viewModel.init(habitId!!)
 
-        return inflater.inflate(R.layout.fragment_routine, container, false)
+        return inflater.inflate(R.layout.fragment_habit, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,10 +62,10 @@ class RoutineFragment : BaseFragment() {
             (activity as MainActivity).user = user
         })
 
-        viewModel.getRoutines()?.observe(this, Observer { routine ->
-            this.routine = routine
+        viewModel.getHabits()?.observe(this, Observer { habit ->
+            this.habit = habit
 
-            setupRoutine()
+            setupHabit()
         })
 
     }
@@ -73,7 +73,7 @@ class RoutineFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                if (routineNew!!) {
+                if (habitNew!!) {
                     navController.navigateUp()
                 }
             }
@@ -88,14 +88,14 @@ class RoutineFragment : BaseFragment() {
         hideNavigation()
     }
 
-    private fun setupRoutine() {
-        routine_name.text = routine.name
+    private fun setupHabit() {
+        habit_name.text = habit.name
 
-        routine_next_date.text = String.format("%s %s", "Próxima ocorrência: ", routine.nextDate.format())
+        habit_next_date.text = String.format("%s %s", "Próxima ocorrência: ", habit.nextDate.format())
 
-        if (routine.type == RoutineType.ROUT_3 || routine.type == RoutineType.ROUT_4) {
-            routine_last_date.visible()
-            routine_last_date.text = String.format("%s %s", "Último dia do ciclo:", routine.lastDate.format())
+        if (habit.type == HabitType.HABIT_3 || habit.type == HabitType.HABIT_4) {
+            habit_last_date.visible()
+            habit_last_date.text = String.format("%s %s", "Último dia do ciclo:", habit.lastDate.format())
         }
     }
  }

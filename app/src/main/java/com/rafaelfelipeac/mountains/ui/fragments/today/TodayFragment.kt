@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.extension.*
-import com.rafaelfelipeac.mountains.models.GoalRoutine
-import com.rafaelfelipeac.mountains.models.Routine
+import com.rafaelfelipeac.mountains.models.GoalHabit
+import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.DayOfWeekAdapter
 import com.rafaelfelipeac.mountains.ui.adapter.ListAdapter
@@ -31,9 +31,9 @@ class TodayFragment : BaseFragment() {
     private lateinit var goalsTodayAdapter: ListAdapter
     private var goalsWeekAdapter = DayOfWeekAdapter(this)
 
-    private var routinesLate: List<Routine>? = null
-    private var routinesToday: List<Routine>? = null
-    private var routinesFuture: List<Routine>? = null
+    private var habitsLate: List<Habit>? = null
+    private var habitsToday: List<Habit>? = null
+    private var habitsFuture: List<Habit>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(this).get(TodayViewModel::class.java)
@@ -79,14 +79,14 @@ class TodayFragment : BaseFragment() {
             (activity as MainActivity).user = user
         })
 
-        viewModel.getRoutines()?.observe(this, Observer { routines ->
+        viewModel.getHabits()?.observe(this, Observer { habits ->
 
-            this.routinesLate =
-                routines.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isLate() && !it.isToday() }
-            this.routinesToday =
-                routines.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isToday() }
-            this.routinesFuture =
-                routines.filter { it.userId == user.userId && !it.archived && it.isFuture() }
+            this.habitsLate =
+                habits.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isLate() && !it.isToday() }
+            this.habitsToday =
+                habits.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isToday() }
+            this.habitsFuture =
+                habits.filter { it.userId == user.userId && !it.archived && it.isFuture() }
 
             setItemsLate()
             setItemsToday()
@@ -102,11 +102,11 @@ class TodayFragment : BaseFragment() {
 
     private fun setItemsLate() {
         goalsLateAdapter = ListAdapter(this)
-        routinesLate?.sortedBy { it.order }.let { goalsLateAdapter.setItems(it!!) }
+        habitsLate?.sortedBy { it.order }.let { goalsLateAdapter.setItems(it!!) }
 
         goalsLateAdapter.clickListener = {
-            if (it is Routine) {
-                val action = TodayFragmentDirections.actionNavigationTodayToNavigationRoutine(it.routineId)
+            if (it is Habit) {
+                val action = TodayFragmentDirections.actionNavigationTodayToNavigationHabit(it.habitId)
                 navController.navigate(action)
             }
         }
@@ -124,11 +124,11 @@ class TodayFragment : BaseFragment() {
 
     private fun setItemsToday() {
         goalsTodayAdapter = ListAdapter(this)
-        routinesToday?.sortedBy { it.order }.let { goalsTodayAdapter.setItems(it!!) }
+        habitsToday?.sortedBy { it.order }.let { goalsTodayAdapter.setItems(it!!) }
 
         goalsTodayAdapter.clickListener = {
-            if (it is Routine) {
-                val action = TodayFragmentDirections.actionNavigationTodayToNavigationRoutine(it.routineId)
+            if (it is Habit) {
+                val action = TodayFragmentDirections.actionNavigationTodayToNavigationHabit(it.habitId)
                 navController.navigate(action)
             }
         }
@@ -149,9 +149,9 @@ class TodayFragment : BaseFragment() {
         val days = calendar.getNextWeek()
 
         days.forEach { day ->
-            routinesFuture?.forEach { routine ->
-                if (day.monthDay == routine.nextDate.format()) {
-                    day.routines.add(routine)
+            habitsFuture?.forEach { habit ->
+                if (day.monthDay == habit.nextDate.format()) {
+                    day.habits.add(habit)
                 }
             }
         }
@@ -162,30 +162,30 @@ class TodayFragment : BaseFragment() {
         today_week_list.adapter = goalsWeekAdapter
     }
 
-    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalRoutine>) {
-        val routine = items[position] as Routine
+    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalHabit>) {
+        val habit = items[position] as Habit
 
         when (direction) {
             ItemTouchHelper.RIGHT -> {
-                val beforeRoutine = routine.copy()
+                val beforeHabit = habit.copy()
 
-                routine.doneToday = true
-                routine.doneDate = getCurrentTime()
-                routine.nextRoutineDateAfterDone()
+                habit.doneToday = true
+                habit.doneDate = getCurrentTime()
+                habit.nextHabitDateAfterDone()
 
-                viewModel.saveRoutine(routine)
+                viewModel.saveHabit(habit)
 
                 showSnackBarWithAction(holder.itemView, String.format("%s %s.", "Próxima ocorrência: ",
-                    routine.nextDate.format()), beforeRoutine, ::undoDone)
+                    habit.nextDate.format()), beforeHabit, ::undoDone)
             }
 
             ItemTouchHelper.LEFT -> {
-                viewModel.saveRoutine(routine)
+                viewModel.saveHabit(habit)
             }
         }
     }
 
     private fun undoDone(goal: Any) {
-        viewModel.saveRoutine(goal as Routine)
+        viewModel.saveHabit(goal as Habit)
     }
 }

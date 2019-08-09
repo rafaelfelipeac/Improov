@@ -42,7 +42,7 @@ class MainActivity : BaseActivity() {
 
     lateinit var bottomSheetFAB: BottomSheetDialog
     lateinit var bottomSheetFABGoal: Button
-    lateinit var bottomSheetFABRoutine: Button
+    lateinit var bottomSheetFABHabit: Button
 
     var mGoogleSignInClient: GoogleSignInClient? = null
 
@@ -71,7 +71,7 @@ class MainActivity : BaseActivity() {
         bottomSheetFAB.setContentView(sheetView)
 
         bottomSheetFABGoal = sheetView.findViewById(R.id.bottom_sheet_fab_goal)
-        bottomSheetFABRoutine = sheetView.findViewById(R.id.bottom_sheet_fab_routine)
+        bottomSheetFABHabit = sheetView.findViewById(R.id.bottom_sheet_fab_habit)
     }
 
     override fun onBackPressed() {
@@ -145,8 +145,8 @@ class MainActivity : BaseActivity() {
             navController.navigate(R.id.action_navigation_list_to_navigation_goal_form)
         }
 
-        bottomSheetFABRoutine.setOnClickListener {
-            navController.navigate(R.id.action_navigation_list_to_navigation_routine_form)
+        bottomSheetFABHabit.setOnClickListener {
+            navController.navigate(R.id.action_navigation_list_to_navigation_habit_form)
         }
 
     }

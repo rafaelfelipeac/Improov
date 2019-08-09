@@ -19,7 +19,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_navigation_createUser_to_navigation_goals">
+                            <entry key="action_navigation_createUser_to_navigation_list">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -95,6 +95,48 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="navigation_habit">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="256" />
+                            <option name="y" value="368" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_navigation_habit_to_navigation_habit_form">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navigation_habit_form">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="500" />
+                            <option name="y" value="368" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_navigation_habit_form_to_navigation_habit">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="navigation_list">
                     <value>
                       <LayoutPositions>
@@ -106,37 +148,37 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_navigation_goals_to_navigation_goal">
+                            <entry key="action_navigation_list_to_navigation_goal">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_goals_to_navigation_goal_form">
+                            <entry key="action_navigation_list_to_navigation_goal_form">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_goals_to_navigation_profile">
+                            <entry key="action_navigation_list_to_navigation_habit">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_goals_to_navigation_routine">
+                            <entry key="action_navigation_list_to_navigation_habit_form">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_goals_to_navigation_routine_form">
+                            <entry key="action_navigation_list_to_navigation_profile">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_goals_to_navigation_stats">
+                            <entry key="action_navigation_list_to_navigation_stats">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_goals_to_navigation_today">
+                            <entry key="action_navigation_list_to_navigation_today">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -162,7 +204,7 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_login_to_navigation_goals">
+                            <entry key="action_navigation_login_to_navigation_list">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -193,54 +235,12 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_profile_to_navigation_routine_form">
+                            <entry key="action_navigation_profile_to_navigation_habit_form">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                             <entry key="action_navigation_profile_to_navigation_welcome">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="navigation_routine">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="256" />
-                            <option name="y" value="368" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_navigation_routine_to_navigation_routine_form">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="navigation_routine_form">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="500" />
-                            <option name="y" value="368" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_navigation_routine_form_to_navigation_routine">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -266,7 +266,7 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_stats_to_navigation_routine_form">
+                            <entry key="action_navigation_stats_to_navigation_habit_form">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -297,12 +297,12 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_today_to_navigation_routine">
+                            <entry key="action_navigation_today_to_navigation_habit">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_today_to_navigation_routine_form">
+                            <entry key="action_navigation_today_to_navigation_habit_form">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -328,7 +328,7 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_welcome_to_navigation_goals">
+                            <entry key="action_navigation_welcome_to_navigation_list">
                               <value>
                                 <LayoutPositions />
                               </value>

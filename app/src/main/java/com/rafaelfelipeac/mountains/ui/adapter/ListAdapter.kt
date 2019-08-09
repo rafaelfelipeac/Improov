@@ -22,21 +22,21 @@ import kotlin.math.roundToInt
 class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     ActionCompletionContract {
 
-    private lateinit var list: List<GoalRoutine>
+    private lateinit var list: List<GoalHabit>
 
-    var clickListener: (goalRoutine: GoalRoutine) -> Unit = { }
+    var clickListener: (goalHabit: GoalHabit) -> Unit = { }
 
     lateinit var touchHelper: ItemTouchHelper
 
     companion object {
         const val TYPE_GOAL = 1
-        const val TYPE_ROUTINE = 2
+        const val TYPE_HABIT = 2
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (list[position]) {
             is Goal -> TYPE_GOAL
-            is Routine -> TYPE_ROUTINE
+            is Habit -> TYPE_HABIT
             else -> -1
         }
     }
@@ -46,8 +46,8 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
             TYPE_GOAL -> {
                 GoalViewHolder(parent.inflate(R.layout.list_item_goal), fragment, touchHelper, clickListener)
             }
-            TYPE_ROUTINE -> {
-                RoutineViewHolder(parent.inflate(R.layout.list_item_routine), fragment, touchHelper, clickListener)
+            TYPE_HABIT -> {
+                HabitViewHolder(parent.inflate(R.layout.list_item_habit), fragment, touchHelper, clickListener)
             }
             else -> {
                 GoalViewHolder(parent.inflate(R.layout.list_item_goal), fragment, touchHelper, clickListener)
@@ -63,7 +63,7 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
 
     override fun getItemCount() = list.size
 
-    fun setItems(list: List<GoalRoutine>) {
+    fun setItems(list: List<GoalHabit>) {
         this.list = list
         notifyDataSetChanged()
     }
@@ -71,7 +71,7 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
     class GoalViewHolder(itemView: View,
                          val fragment: BaseFragment,
                          private val touchHelper: ItemTouchHelper?,
-                         private val clickListener: (goalRoutine: GoalRoutine) -> Unit) :
+                         private val clickListener: (goalHabit: GoalHabit) -> Unit) :
         RecyclerView.ViewHolder(itemView), ListViewHolder {
 
         private val typeIcon= itemView.findViewById<ImageView>(R.id.goal_type_icon)
@@ -81,11 +81,11 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
         private val itemDrag = itemView.findViewById<ImageView>(R.id.goal_drag_icon)!!
 
         @SuppressLint("ClickableViewAccessibility")
-        override fun bindViews(goalRoutine: GoalRoutine) {
+        override fun bindViews(goalHabit: GoalHabit) {
 
-            itemView.setOnClickListener { clickListener(goalRoutine) }
+            itemView.setOnClickListener { clickListener(goalHabit) }
 
-            val goal = goalRoutine as Goal
+            val goal = goalHabit as Goal
 
             title.text = goal.name
 
@@ -117,80 +117,80 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
         }
     }
 
-    class RoutineViewHolder(itemView: View,
-                            val fragment: BaseFragment,
-                            private val touchHelper: ItemTouchHelper?,
-                            val clickListener: (goalRoutine: GoalRoutine) -> Unit) :
+    class HabitViewHolder(itemView: View,
+                          val fragment: BaseFragment,
+                          private val touchHelper: ItemTouchHelper?,
+                          val clickListener: (goalHabit: GoalHabit) -> Unit) :
         RecyclerView.ViewHolder(itemView), ListViewHolder {
 
-        private val typeIcon = itemView.findViewById<ImageView>(R.id.routine_type_icon)!!
-        private val title = itemView.findViewById<TextView>(R.id.routine_title)
-        private val type = itemView.findViewById<TextView>(R.id.routine_type)
-        private val late = itemView.findViewById<TextView>(R.id.routine_late_date)
-        private val score = itemView.findViewById<TextView>(R.id.routine_score)
-        private val archiveImage = itemView.findViewById<ImageView>(R.id.routine_archive_image)
-        private val itemDrag = itemView.findViewById<ImageView>(R.id.routine_drag_icon)
+        private val typeIcon = itemView.findViewById<ImageView>(R.id.habit_type_icon)!!
+        private val title = itemView.findViewById<TextView>(R.id.habit_title)
+        private val type = itemView.findViewById<TextView>(R.id.habit_type)
+        private val late = itemView.findViewById<TextView>(R.id.habit_late_date)
+        private val score = itemView.findViewById<TextView>(R.id.habit_score)
+        private val archiveImage = itemView.findViewById<ImageView>(R.id.habit_archive_image)
+        private val itemDrag = itemView.findViewById<ImageView>(R.id.habit_drag_icon)
 
         @SuppressLint("ClickableViewAccessibility")
-        override fun bindViews(goalRoutine: GoalRoutine) {
+        override fun bindViews(goalHabit: GoalHabit) {
 
             if (fragment is TodayFragment) {
                 archiveImage.gone()
                 itemDrag.gone()
             }
 
-            itemView.setOnClickListener { clickListener(goalRoutine) }
+            itemView.setOnClickListener { clickListener(goalHabit) }
 
-            val routine = goalRoutine as Routine
+            val habit = goalHabit as Habit
 
-            title.text = routine.name
+            title.text = habit.name
 
-            if (routine.nextDate != null && routine.isLate() && !routine.isToday()) {
-                late.text = routine.nextDate.format()
+            if (habit.nextDate != null && habit.isLate() && !habit.isToday()) {
+                late.text = habit.nextDate.format()
                 late.visible()
             }
 
             typeIcon.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
             typeIcon.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.drawable.ic_routine)
+            typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.drawable.ic_habit)
 
-            when (routine.type) {
-                RoutineType.ROUT_1 -> {
+            when (habit.type) {
+                HabitType.HABIT_1 -> {
                     type.text = String.format(
                         "%s", "Todo dia"
                     )
                 }
-                RoutineType.ROUT_2 -> {
+                HabitType.HABIT_2 -> {
                     type.text = String.format(
                         "%s %s",
-                        routine.weekDaysLong.filter { it > 0 }.size.toString(),
+                        habit.weekDaysLong.filter { it > 0 }.size.toString(),
                         "vezes por semana"
                     )
                 }
-                RoutineType.ROUT_3 -> {
+                HabitType.HABIT_3 -> {
                     type.text = String.format(
                         "%s %s %s",
-                        routine.periodTotal.toString(),
+                        habit.periodTotal.toString(),
                         "dias por",
-                        routine.periodType.getName()
+                        habit.periodType.getName()
                     )
 
                     score.text = String.format(
                         "%s/%s",
-                        routine.periodDone.toString(),
-                        routine.periodTotal.toString()
+                        habit.periodDone.toString(),
+                        habit.periodTotal.toString()
                     )
                     score.visible()
                 }
-                RoutineType.ROUT_4 -> {
+                HabitType.HABIT_4 -> {
                     type.text = String.format(
                         "%s %s %s",
                         "A cada",
-                        routine.periodDaysBetween.toString(),
+                        habit.periodDaysBetween.toString(),
                         "dias"
                     )
                 }
-                RoutineType.ROUT_NONE -> TODO()
+                HabitType.HABIT_NONE -> TODO()
             }
 
             itemDrag.setOnTouchListener { _, _ ->
@@ -214,6 +214,6 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
     }
 
     interface ListViewHolder {
-        fun bindViews(goalRoutine: GoalRoutine)
+        fun bindViews(goalHabit: GoalHabit)
     }
 }

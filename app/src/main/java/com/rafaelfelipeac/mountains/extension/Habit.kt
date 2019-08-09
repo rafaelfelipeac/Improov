@@ -1,27 +1,27 @@
 package com.rafaelfelipeac.mountains.extension
 
 import com.rafaelfelipeac.mountains.models.PeriodType
-import com.rafaelfelipeac.mountains.models.Routine
-import com.rafaelfelipeac.mountains.models.RoutineType
+import com.rafaelfelipeac.mountains.models.Habit
+import com.rafaelfelipeac.mountains.models.HabitType
 import java.util.*
 
-fun Routine.isToday() = nextDate.isToday()
+fun Habit.isToday() = nextDate.isToday()
 
-fun Routine.isLate() = nextDate.isLate()
+fun Habit.isLate() = nextDate.isLate()
 
-fun Routine.isFuture() =  nextDate.isFuture()
+fun Habit.isFuture() =  nextDate.isFuture()
 
-fun Routine.nextRoutineDate() {
+fun Habit.nextHabitDate() {
     val date = Calendar.getInstance()
 
     nextDate =
         when (type) {
-            RoutineType.ROUT_1 -> {
+            HabitType.HABIT_1 -> {
                 date.addDays(0)
 
                 date.time
             }
-            RoutineType.ROUT_2 -> {
+            HabitType.HABIT_2 -> {
                 discoverNextWeek(weekDays)
 
                 val list = weekDaysLong.filter { it > 0L }.sortedBy { it }
@@ -41,12 +41,12 @@ fun Routine.nextRoutineDate() {
 
                 date.time
             }
-            RoutineType.ROUT_3 -> {
+            HabitType.HABIT_3 -> {
                 date.addDays(0)
 
                 date.time
             }
-            RoutineType.ROUT_4 -> {
+            HabitType.HABIT_4 -> {
                 date.addDays(0)
 
                 date.time
@@ -55,14 +55,14 @@ fun Routine.nextRoutineDate() {
         }
 }
 
-fun Routine.nextRoutineDateAfterDone() {
+fun Habit.nextHabitDateAfterDone() {
     val date = Calendar.getInstance()
     val today = Calendar.getInstance()
 
     today.setToMidnight()
 
     when (type) {
-        RoutineType.ROUT_1 -> {
+        HabitType.HABIT_1 -> {
             if (nextDate.isLate()) {
                 today.addDays(1)
                 nextDate = today.time
@@ -70,7 +70,7 @@ fun Routine.nextRoutineDateAfterDone() {
                 nextDate.addDays(1)
             }
         }
-        RoutineType.ROUT_2 -> {
+        HabitType.HABIT_2 -> {
             discoverNextWeek(weekDays)
 
             doneDate.setToMidnight()
@@ -85,11 +85,11 @@ fun Routine.nextRoutineDateAfterDone() {
             } else {
                 val nextWeek = upOnNextWeek()
 
-                val upRoutineDoneDate = doneDate?.time?.let { Date(it) }
-                val upRoutineNextDate = nextDate?.time?.let { Date(it) }
+                val upHabitDoneDate = doneDate?.time?.let { Date(it) }
+                val upHabitNextDate = nextDate?.time?.let { Date(it) }
 
                 val upList = nextWeek
-                    .filter { it > 0L && it > upRoutineDoneDate?.time!! && it > upRoutineNextDate?.time!! }
+                    .filter { it > 0L && it > upHabitDoneDate?.time!! && it > upHabitNextDate?.time!! }
                     .sortedBy { it }
 
                 if (upList.isNotEmpty()) {
@@ -99,11 +99,11 @@ fun Routine.nextRoutineDateAfterDone() {
 
             nextDate = date.time
         }
-        RoutineType.ROUT_3 -> {
+        HabitType.HABIT_3 -> {
             periodDone++
 
             if (periodDone == periodTotal) {
-                setRoutineNextCycle()
+                setHabitNextCycle()
                 periodDone = 0
             } else {
                 if (nextDate.isLate()) {
@@ -114,16 +114,16 @@ fun Routine.nextRoutineDateAfterDone() {
                 }
             }
         }
-        RoutineType.ROUT_4 -> {
+        HabitType.HABIT_4 -> {
             periodDone++
 
-            setRoutineNextCycle()
+            setHabitNextCycle()
         }
-        RoutineType.ROUT_NONE -> TODO()
+        HabitType.HABIT_NONE -> TODO()
     }
 }
 
-fun Routine.setRoutineLastDate() {
+fun Habit.setHabitLastDate() {
     val calendar = Calendar.getInstance()
 
     when (this.periodType) {
@@ -151,7 +151,7 @@ fun Routine.setRoutineLastDate() {
     lastDate = calendar.time
 }
 
-fun Routine.setRoutineNextCycle() {
+fun Habit.setHabitNextCycle() {
     val calendar = Calendar.getInstance()
     calendar.setToMidnight()
 
@@ -198,19 +198,19 @@ fun Routine.setRoutineNextCycle() {
     }
 }
 
-fun Routine.discoverNextWeek(routineWeekDays: List<Boolean>) {
+fun Habit.discoverNextWeek(habitWeekDays: List<Boolean>) {
     weekDaysLong = mutableListOf()
 
-    weekDaysLong.add(nextDayOfWeek(routineWeekDays[0], Calendar.SUNDAY))
-    weekDaysLong.add(nextDayOfWeek(routineWeekDays[1], Calendar.MONDAY))
-    weekDaysLong.add(nextDayOfWeek(routineWeekDays[2], Calendar.TUESDAY))
-    weekDaysLong.add(nextDayOfWeek(routineWeekDays[3], Calendar.WEDNESDAY))
-    weekDaysLong.add(nextDayOfWeek(routineWeekDays[4], Calendar.THURSDAY))
-    weekDaysLong.add(nextDayOfWeek(routineWeekDays[5], Calendar.FRIDAY))
-    weekDaysLong.add(nextDayOfWeek(routineWeekDays[6], Calendar.SATURDAY))
+    weekDaysLong.add(nextDayOfWeek(habitWeekDays[0], Calendar.SUNDAY))
+    weekDaysLong.add(nextDayOfWeek(habitWeekDays[1], Calendar.MONDAY))
+    weekDaysLong.add(nextDayOfWeek(habitWeekDays[2], Calendar.TUESDAY))
+    weekDaysLong.add(nextDayOfWeek(habitWeekDays[3], Calendar.WEDNESDAY))
+    weekDaysLong.add(nextDayOfWeek(habitWeekDays[4], Calendar.THURSDAY))
+    weekDaysLong.add(nextDayOfWeek(habitWeekDays[5], Calendar.FRIDAY))
+    weekDaysLong.add(nextDayOfWeek(habitWeekDays[6], Calendar.SATURDAY))
 }
 
-fun Routine.upOnNextWeek(): MutableList<Long> {
+fun Habit.upOnNextWeek(): MutableList<Long> {
     val calendar = Calendar.getInstance()
 
     val list = mutableListOf<Long>()

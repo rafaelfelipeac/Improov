@@ -18,8 +18,8 @@ import com.rafaelfelipeac.mountains.extension.invisible
 import com.rafaelfelipeac.mountains.extension.isToday
 import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.models.Goal
-import com.rafaelfelipeac.mountains.models.GoalRoutine
-import com.rafaelfelipeac.mountains.models.Routine
+import com.rafaelfelipeac.mountains.models.GoalHabit
+import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.adapter.ListAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
@@ -37,9 +37,9 @@ class ListFragment : BaseFragment() {
     private lateinit var bottomSheetGoalDone: BottomSheetDialog
 
     var goals: List<Goal>? = listOf()
-    var routines: List<Routine>? = listOf()
+    var habits: List<Habit>? = listOf()
 
-    var list: MutableList<GoalRoutine>? = mutableListOf()
+    var list: MutableList<GoalHabit>? = mutableListOf()
 
     private lateinit var viewModel: ListViewModel
 
@@ -121,8 +121,8 @@ class ListFragment : BaseFragment() {
             verifyMidnight()
         })
 
-        viewModel.getRoutines()?.observe(this, Observer { routines ->
-            this.routines = routines.filter { it.userId == user.userId && !it.archived}
+        viewModel.getHabits()?.observe(this, Observer { habits ->
+            this.habits = habits.filter { it.userId == user.userId && !it.archived}
 
             if (!isFromDragAndDrop) {
                 setupList()
@@ -135,10 +135,10 @@ class ListFragment : BaseFragment() {
     }
 
     private fun verifyMidnight() {
-        routines?.forEach {
+        habits?.forEach {
             if (it.nextDate.isToday() && it.doneToday) {
                 it.doneToday = false
-                viewModel.saveRoutine(it)
+                viewModel.saveHabit(it)
             }
         }
     }
@@ -150,7 +150,7 @@ class ListFragment : BaseFragment() {
     }
 
     private fun setupList() {
-        if (goals?.isNotEmpty()!! || routines?.isNotEmpty()!!) {
+        if (goals?.isNotEmpty()!! || habits?.isNotEmpty()!!) {
             setList()
 
             list_list.visible()
@@ -165,7 +165,7 @@ class ListFragment : BaseFragment() {
         list = mutableListOf()
 
         goals?.let { list?.addAll(it) }
-        routines?.let { list?.addAll(it) }
+        habits?.let { list?.addAll(it) }
 
         listAdapter = ListAdapter(this)
 
@@ -175,8 +175,8 @@ class ListFragment : BaseFragment() {
 
         listAdapter.clickListener = {
             when (it) {
-                is Routine -> {
-                    val action = ListFragmentDirections.actionNavigationListToNavigationRoutine(it.routineId)
+                is Habit -> {
+                    val action = ListFragmentDirections.actionNavigationListToNavigationHabit(it.habitId)
                     navController.navigate(action)
                 }
                 is Goal -> {
@@ -197,7 +197,7 @@ class ListFragment : BaseFragment() {
         touchHelper.attachToRecyclerView(list_list)
     }
 
-    fun onViewMoved(oldPosition: Int, newPosition: Int, items: List<GoalRoutine>,
+    fun onViewMoved(oldPosition: Int, newPosition: Int, items: List<GoalHabit>,
                     function: (oldPosition: Int, newPosition: Int) -> Unit) {
         val target = items[oldPosition]
         val other = items[newPosition]
@@ -209,12 +209,12 @@ class ListFragment : BaseFragment() {
 
         when (target) {
             is Goal -> viewModel.saveGoal(target)
-            is Routine -> viewModel.saveRoutine(target)
+            is Habit -> viewModel.saveHabit(target)
         }
 
         when (other) {
             is Goal -> viewModel.saveGoal(other)
-            is Routine -> viewModel.saveRoutine(other)
+            is Habit -> viewModel.saveHabit(other)
         }
 
 //        items.removeAt(oldPosition)
@@ -223,21 +223,21 @@ class ListFragment : BaseFragment() {
         function(oldPosition, newPosition)
     }
 
-    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalRoutine>) {
-        val goalRoutine = items[position]
+    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalHabit>) {
+        val goalHabit = items[position]
 
         when (direction) {
             ItemTouchHelper.RIGHT -> {
-                when (goalRoutine) {
+                when (goalHabit) {
                     is Goal -> {
-                        if (goalRoutine.done || goalRoutine.getPercentage() >= 100) {
-                            doneOrUndoneGoal(goalRoutine)
+                        if (goalHabit.done || goalHabit.getPercentage() >= 100) {
+                            doneOrUndoneGoal(goalHabit)
                         } else {
                             setupList()
-                            openBottomSheetDone(goalRoutine, ::doneOrUndoneGoal)
+                            openBottomSheetDone(goalHabit, ::doneOrUndoneGoal)
                         }
                     }
-                    is Routine -> {
+                    is Habit -> {
                         setupList()
 
                         //openBottomSheetDone()
@@ -245,19 +245,19 @@ class ListFragment : BaseFragment() {
                 }
             }
             ItemTouchHelper.LEFT -> {
-                when (goalRoutine) {
+                when (goalHabit) {
                     is Goal -> {
-                        goalRoutine.archived = true
-                        goalRoutine.archiveDate = getCurrentTime()
+                        goalHabit.archived = true
+                        goalHabit.archiveDate = getCurrentTime()
 
-                        viewModel.saveGoal(goalRoutine)
+                        viewModel.saveGoal(goalHabit)
 
                         showSnackBarWithAction(holder.itemView,
-                            getString(R.string.goals_fragment_resolved_goal_message), goalRoutine as Any, ::archiveGoal)
+                            getString(R.string.goals_fragment_resolved_goal_message), goalHabit as Any, ::archiveGoal)
 
                         setupList()
                     }
-                    is Routine -> {
+                    is Habit -> {
                         setupList()
 
                         //openBottomSheetDone()

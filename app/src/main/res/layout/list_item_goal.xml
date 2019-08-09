@@ -106,7 +106,7 @@
                 card_view:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
                 card_view:layout_constraintHorizontal_bias="0.0"
-                tools:src="@drawable/ic_routine"/>
+                tools:src="@drawable/ic_habit"/>
 
         <ImageView
                 android:id="@+id/goal_drag_icon"

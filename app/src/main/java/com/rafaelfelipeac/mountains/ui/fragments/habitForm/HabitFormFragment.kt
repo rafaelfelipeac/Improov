@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.ui.fragments.routineForm
+package com.rafaelfelipeac.mountains.ui.fragments.habitForm
 
 import android.os.Bundle
 import android.view.*
@@ -10,22 +10,22 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.gone
-import com.rafaelfelipeac.mountains.extension.nextRoutineDate
-import com.rafaelfelipeac.mountains.extension.setRoutineLastDate
+import com.rafaelfelipeac.mountains.extension.nextHabitDate
+import com.rafaelfelipeac.mountains.extension.setHabitLastDate
 import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.models.*
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
-import com.rafaelfelipeac.mountains.ui.fragments.routine.RoutineFragmentArgs
-import kotlinx.android.synthetic.main.fragment_routine_form.*
+import com.rafaelfelipeac.mountains.ui.fragments.habit.HabitFragmentArgs
+import kotlinx.android.synthetic.main.fragment_habit_form.*
 
-class RoutineFormFragment : BaseFragment() {
+class HabitFormFragment : BaseFragment() {
 
-    private var routine = Routine()
-    private var routineId: Long? = null
-    private var routines: List<Routine>? = null
+    private var habit = Habit()
+    private var habitId: Long? = null
+    private var habits: List<Habit>? = null
 
-    private lateinit var viewModel: RoutineFormViewModel
+    private lateinit var viewModel: HabitFormViewModel
 
     private var bottomSheetTip: BottomSheetBehavior<*>? = null
     private var bottomSheetTipClose: ConstraintLayout? = null
@@ -33,7 +33,7 @@ class RoutineFormFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        routineId = arguments?.let { RoutineFragmentArgs.fromBundle(it).routineId }
+        habitId = arguments?.let { HabitFragmentArgs.fromBundle(it).habitId }
 
         setHasOptionsMenu(true)
     }
@@ -41,14 +41,14 @@ class RoutineFormFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = "Nova rotina"
+        (activity as MainActivity).supportActionBar?.title = "Novo hábito"
         (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
 
-        viewModel = ViewModelProviders.of(this).get(RoutineFormViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(HabitFormViewModel::class.java)
 
-        routineId?.let { viewModel.init(it) }
+        habitId?.let { viewModel.init(it) }
 
-        return inflater.inflate(R.layout.fragment_routine_form, container, false)
+        return inflater.inflate(R.layout.fragment_habit_form, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,11 +59,11 @@ class RoutineFormFragment : BaseFragment() {
         (activity as MainActivity).openToolbar()
         (activity as MainActivity).closeBottomSheetFAB()
 
-        setRadioRoutine()
+        setRadioHabit()
 
         setDropdown()
 
-        routine_form_help3.setOnClickListener {
+        habit_form_help3.setOnClickListener {
             (activity as MainActivity).setupBottomSheetTipsTwo()
             setupBottomSheetTip()
             (activity as MainActivity).openBottomSheetTips()
@@ -94,9 +94,9 @@ class RoutineFormFragment : BaseFragment() {
 //                } else if (verifyIfIncOrDecValuesAreEmpty()) {
 //                    showSnackBar(getString(R.string.message_empty_inc_dec))
 //                } else {
-                    val routineToSave = updateOrCreateRoutine()
+                    val habitToSave = updateOrCreateHabit()
 
-                    viewModel.saveRoutine(routineToSave)
+                    viewModel.saveHabit(habitToSave)
 
                     return true
                // }
@@ -116,37 +116,37 @@ class RoutineFormFragment : BaseFragment() {
         }
     }
 
-    private fun updateOrCreateRoutine(): Routine  {
-        routine.name = routine_form_name.text.toString()
-        routine.weekDays = getWeekDaysSelected()
-        routine.userId = user.userId
+    private fun updateOrCreateHabit(): Habit  {
+        habit.name = habit_form_name.text.toString()
+        habit.weekDays = getWeekDaysSelected()
+        habit.userId = user.userId
 
-        val routineType = getRoutineTypeSelected()
+        val habitType = gethabitTypeSelected()
 
-        if (routineType != RoutineType.ROUT_NONE) {
-            routine.type = routineType
+        if (habitType != HabitType.HABIT_NONE) {
+            habit.type = habitType
 
-            when (routineType) {
-                RoutineType.ROUT_1-> {}
-                RoutineType.ROUT_2 -> {}
-                RoutineType.ROUT_3 -> {
-                    routine.periodType = getRoutinePeriodTypeSelected()
-                    routine.periodTotal = routine_form_days_custom_1.text.toString().toInt()
-                    routine.setRoutineLastDate()
+            when (habitType) {
+                HabitType.HABIT_1-> {}
+                HabitType.HABIT_2 -> {}
+                HabitType.HABIT_3 -> {
+                    habit.periodType = gethabitPeriodTypeSelected()
+                    habit.periodTotal = habit_form_days_custom_1.text.toString().toInt()
+                    habit.setHabitLastDate()
                 }
-                RoutineType.ROUT_4 -> {
-                    routine.periodType = PeriodType.PER_CUSTOM
-                    routine.periodTotal = 1
-                    routine.periodDaysBetween = routine_form_add_days.text.toString().toInt()
-                    routine.setRoutineLastDate()
+                HabitType.HABIT_4 -> {
+                    habit.periodType = PeriodType.PER_CUSTOM
+                    habit.periodTotal = 1
+                    habit.periodDaysBetween = habit_form_add_days.text.toString().toInt()
+                    habit.setHabitLastDate()
                 }
                 else -> { TODO() }
             }
 
-            routine.nextRoutineDate()
+            habit.nextHabitDate()
         }
 
-        return routine
+        return habit
     }
 
     private fun getWeekDaysSelected(): MutableList<Boolean> {
@@ -163,17 +163,17 @@ class RoutineFormFragment : BaseFragment() {
         return weekDays
     }
 
-    private fun getRoutineTypeSelected(): RoutineType {
-        if (radioButton1.isChecked)         return RoutineType.ROUT_1
-        if (radioButton2.isChecked)         return RoutineType.ROUT_2
-        if (radioButton3.isChecked)         return RoutineType.ROUT_3
-        if (radioButton4.isChecked)         return RoutineType.ROUT_4
+    private fun gethabitTypeSelected(): HabitType {
+        if (radioButton1.isChecked)         return HabitType.HABIT_1
+        if (radioButton2.isChecked)         return HabitType.HABIT_2
+        if (radioButton3.isChecked)         return HabitType.HABIT_3
+        if (radioButton4.isChecked)         return HabitType.HABIT_4
 
-        return RoutineType.ROUT_NONE
+        return HabitType.HABIT_NONE
     }
 
-    private fun getRoutinePeriodTypeSelected(): PeriodType {
-        return when (routine_form_periods_spinner.selectedItem.toString()) {
+    private fun gethabitPeriodTypeSelected(): PeriodType {
+        return when (habit_form_periods_spinner.selectedItem.toString()) {
             "semana" -> {
                 PeriodType.PER_WEEK
             }
@@ -191,10 +191,10 @@ class RoutineFormFragment : BaseFragment() {
     private fun setDropdown() {
         val adapter = ArrayAdapter.createFromResource(context!!, R.array.periods_array, R.layout.spinner_item)
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
-        routine_form_periods_spinner.adapter = adapter
+        habit_form_periods_spinner.adapter = adapter
     }
 
-    private fun setRadioRoutine() {
+    private fun setRadioHabit() {
         radioButton1.setOnClickListener {
             if (radioButton1.isChecked) {
                 radioButton2.isChecked = false
@@ -241,45 +241,45 @@ class RoutineFormFragment : BaseFragment() {
             (activity as MainActivity).user = user
         })
 
-        viewModel.getRoutine()?.observe(this, Observer { routine ->
-            this.routine = routine as Routine
+        viewModel.getHabit()?.observe(this, Observer { habit ->
+            this.habit = habit as Habit
 
-            setupRoutine()
+            setupHabit()
         })
 
-        viewModel.getRoutines()?.observe(this, Observer { goals ->
-            this.routines = goals.filter { it.userId == user.userId }
+        viewModel.getHabits()?.observe(this, Observer { goals ->
+            this.habits = goals.filter { it.userId == user.userId }
         })
 
-        viewModel.routineIdInserted.observe(this, Observer { goalId ->
-            val action = RoutineFormFragmentDirections.actionNavigationRoutineFormToNavigationRoutine(goalId)
-            action.routineNew = true
+        viewModel.habitIdInserted.observe(this, Observer { goalId ->
+            val action = HabitFormFragmentDirections.actionNavigationHabitFormToNavigationHabit(goalId)
+            action.habitNew = true
             navController.navigate(action)
         })
     }
 
-    private fun setupRoutine() {
-        when(routine.type) {
-            RoutineType.ROUT_1 -> { radioButton1.isChecked = true }
-            RoutineType.ROUT_2 -> {
+    private fun setupHabit() {
+        when(habit.type) {
+            HabitType.HABIT_1 -> { radioButton1.isChecked = true }
+            HabitType.HABIT_2 -> {
                 radioButton2.isChecked = true
 
                 block_of_radius2.visible()
 
-                weekDay1.isChecked = routine.weekDays[0]
-                weekDay2.isChecked = routine.weekDays[1]
-                weekDay3.isChecked = routine.weekDays[2]
-                weekDay4.isChecked = routine.weekDays[3]
-                weekDay5.isChecked = routine.weekDays[4]
-                weekDay6.isChecked = routine.weekDays[5]
-                weekDay7.isChecked = routine.weekDays[6]
+                weekDay1.isChecked = habit.weekDays[0]
+                weekDay2.isChecked = habit.weekDays[1]
+                weekDay3.isChecked = habit.weekDays[2]
+                weekDay4.isChecked = habit.weekDays[3]
+                weekDay5.isChecked = habit.weekDays[4]
+                weekDay6.isChecked = habit.weekDays[5]
+                weekDay7.isChecked = habit.weekDays[6]
             }
-            RoutineType.ROUT_3 -> {
+            HabitType.HABIT_3 -> {
                 radioButton3.isChecked = true
 
-                routine_form_days_custom_1.setText(routine.periodTotal.toString())
+                habit_form_days_custom_1.setText(habit.periodTotal.toString())
 
-                routine_form_periods_spinner.setSelection(when (routine.periodType) {
+                habit_form_periods_spinner.setSelection(when (habit.periodType) {
                     PeriodType.PER_WEEK     -> 0
                     PeriodType.PER_MONTH    -> 1
                     PeriodType.PER_YEAR     -> 2
@@ -288,12 +288,12 @@ class RoutineFormFragment : BaseFragment() {
                 })
 
             }
-            RoutineType.ROUT_4 -> {
+            HabitType.HABIT_4 -> {
                 radioButton4.isChecked = true
 
-                routine_form_add_days.setText(routine.periodDaysBetween.toString())
+                habit_form_add_days.setText(habit.periodDaysBetween.toString())
             }
-            RoutineType.ROUT_NONE -> TODO()
+            HabitType.HABIT_NONE -> TODO()
         }
     }
 }

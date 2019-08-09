@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.util.*
 
-abstract class GoalRoutine (
+abstract class GoalHabit (
     var userId: Long = 0,
     var name: String = "",
     var order: Int = 0,
@@ -32,13 +32,13 @@ data class Goal (
     var undoneDate: Date? = null,
     var archiveDate: Date? = null,
     var finalDate: Date? = null
-) : Serializable, GoalRoutine()
+) : Serializable, GoalHabit()
 
-@Entity(tableName = "routine")
-data class Routine (
+@Entity(tableName = "habit")
+data class Habit (
     @PrimaryKey(autoGenerate = true)
-    var routineId: Long = 0,
-    var type: RoutineType = RoutineType.ROUT_NONE,
+    var habitId: Long = 0,
+    var type: HabitType = HabitType.HABIT_NONE,
     var periodType: PeriodType = PeriodType.PER_NONE,
     var periodDone: Int = 0,
     var periodTotal: Int = 0,
@@ -49,9 +49,9 @@ data class Routine (
     var doneToday: Boolean = false,
     var weekDays: MutableList<Boolean> = mutableListOf(),
     var weekDaysLong: MutableList<Long> = mutableListOf()
-) : Serializable, GoalRoutine()
+) : Serializable, GoalHabit()
 
-enum class RoutineType { ROUT_1, ROUT_2, ROUT_3, ROUT_4, ROUT_NONE }
+enum class HabitType { HABIT_1, HABIT_2, HABIT_3, HABIT_4, HABIT_NONE }
 
 enum class PeriodType { PER_WEEK, PER_MONTH, PER_YEAR, PER_CUSTOM, PER_NONE }
 

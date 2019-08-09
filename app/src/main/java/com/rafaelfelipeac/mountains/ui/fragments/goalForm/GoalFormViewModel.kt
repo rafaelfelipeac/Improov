@@ -3,7 +3,7 @@ package com.rafaelfelipeac.mountains.ui.fragments.goalForm
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.rafaelfelipeac.mountains.models.Goal
-import com.rafaelfelipeac.mountains.models.Routine
+import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.models.User
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 
@@ -11,7 +11,7 @@ class GoalFormViewModel : BaseViewModel() {
 
     private var goal: LiveData<Goal>? = null
     private var goals: LiveData<List<Goal>>? = null
-    private var routines: LiveData<List<Routine>>? = null
+    private var habits: LiveData<List<Habit>>? = null
 
     var user: MutableLiveData<User>? = MutableLiveData()
 
@@ -45,8 +45,8 @@ class GoalFormViewModel : BaseViewModel() {
         goalIdInserted.value = goalRepository.save(goal)
     }
 
-    // Routine
-    fun getRoutines(): LiveData<List<Routine>>? {
-        return routines
+    // Habit
+    fun getHabits(): LiveData<List<Habit>>? {
+        return habits
     }
 }

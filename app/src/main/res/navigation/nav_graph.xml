@@ -56,14 +56,14 @@
                 app:destination="@id/navigation_goal_form"
                 app:enterAnim="@anim/slide_in_up"/>
         <action
-                android:id="@+id/action_navigation_list_to_navigation_routine_form"
-                app:destination="@id/navigation_routine_form"
+                android:id="@+id/action_navigation_list_to_navigation_habit_form"
+                app:destination="@id/navigation_habit_form"
                 app:enterAnim="@anim/slide_in_up"/>
         <action android:id="@+id/action_navigation_list_to_navigation_goal" app:destination="@id/navigation_goal"/>
         <action android:id="@+id/action_navigation_list_to_navigation_stats" app:destination="@id/navigation_stats"/>
         <action android:id="@+id/action_navigation_list_to_navigation_profile" app:destination="@id/navigation_profile"/>
         <action android:id="@+id/action_navigation_list_to_navigation_today" app:destination="@id/navigation_today"/>
-        <action android:id="@+id/action_navigation_list_to_navigation_routine" app:destination="@id/navigation_routine"/>
+        <action android:id="@+id/action_navigation_list_to_navigation_habit" app:destination="@id/navigation_habit"/>
 
     </fragment>
 
@@ -99,7 +99,7 @@
             tools:layout="@layout/fragment_stats">
 
         <action android:id="@+id/action_navigation_stats_to_navigation_goal_form" app:destination="@id/navigation_goal_form"/>
-        <action android:id="@+id/action_navigation_stats_to_navigation_routine_form" app:destination="@id/navigation_routine_form"/>
+        <action android:id="@+id/action_navigation_stats_to_navigation_habit_form" app:destination="@id/navigation_habit_form"/>
 
     </fragment>
 
@@ -112,7 +112,7 @@
         <action android:id="@+id/action_navigation_profile_to_navigation_welcome" app:destination="@id/navigation_welcome"/>
         <action android:id="@+id/action_navigation_profile_to_navigation_edit_profile" app:destination="@id/navigation_edit_profile"/>
         <action android:id="@+id/action_navigation_profile_to_navigation_goal_form" app:destination="@id/navigation_goal_form"/>
-        <action android:id="@+id/action_navigation_profile_to_navigation_routine_form" app:destination="@id/navigation_routine_form"/>
+        <action android:id="@+id/action_navigation_profile_to_navigation_habit_form" app:destination="@id/navigation_habit_form"/>
 
     </fragment>
 
@@ -129,28 +129,28 @@
 
         <action android:id="@+id/action_navigation_today_to_navigation_goal" app:destination="@id/navigation_goal"/>
         <action android:id="@+id/action_navigation_today_to_navigation_goalForm" app:destination="@id/navigation_goal_form"/>
-        <action android:id="@+id/action_navigation_today_to_navigation_routine" app:destination="@id/navigation_routine"/>
-        <action android:id="@+id/action_navigation_today_to_navigation_routine_form" app:destination="@id/navigation_routine_form"/>
+        <action android:id="@+id/action_navigation_today_to_navigation_habit" app:destination="@id/navigation_habit"/>
+        <action android:id="@+id/action_navigation_today_to_navigation_habit_form" app:destination="@id/navigation_habit_form"/>
 
     </fragment>
 
-    <fragment android:id="@+id/navigation_routine_form"
-              android:name="com.rafaelfelipeac.mountains.ui.fragments.routineForm.RoutineFormFragment"
-              android:label="fragment_routine_form">
+    <fragment android:id="@+id/navigation_habit_form"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.habitForm.HabitFormFragment"
+              android:label="fragment_habit_form">
 
-        <action android:id="@+id/action_navigation_routine_form_to_navigation_routine" app:destination="@id/navigation_routine"/>
+        <action android:id="@+id/action_navigation_habit_form_to_navigation_habit" app:destination="@id/navigation_habit"/>
 
     </fragment>
 
-    <fragment android:id="@+id/navigation_routine"
-              android:name="com.rafaelfelipeac.mountains.ui.fragments.routine.RoutineFragment"
-              android:label="fragment_routine"
-              tools:layout="@layout/fragment_routine">
+    <fragment android:id="@+id/navigation_habit"
+              android:name="com.rafaelfelipeac.mountains.ui.fragments.habit.HabitFragment"
+              android:label="fragment_habit"
+              tools:layout="@layout/fragment_habit">
 
-        <argument android:name="routineId" app:argType="long"/>
-        <argument android:name="routineNew" app:argType="boolean" android:defaultValue="false"/>
+        <argument android:name="habitId" app:argType="long"/>
+        <argument android:name="habitNew" app:argType="boolean" android:defaultValue="false"/>
 
-        <action android:id="@+id/action_navigation_routine_to_navigation_routine_form" app:destination="@id/navigation_routine_form"/>
+        <action android:id="@+id/action_navigation_habit_to_navigation_habit_form" app:destination="@id/navigation_habit_form"/>
 
     </fragment>
 

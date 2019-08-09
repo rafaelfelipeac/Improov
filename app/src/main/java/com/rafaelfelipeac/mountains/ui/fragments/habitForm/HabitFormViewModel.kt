@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.ui.fragments.today
+package com.rafaelfelipeac.mountains.ui.fragments.habitForm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,27 +6,26 @@ import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.models.User
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 
-class TodayViewModel: BaseViewModel() {
+class HabitFormViewModel : BaseViewModel() {
+    private var habit: LiveData<Habit>? = null
     private var habits: LiveData<List<Habit>>? = null
 
     var user: MutableLiveData<User>? = MutableLiveData()
 
+    var habitIdInserted: MutableLiveData<Long> = MutableLiveData()
+
     init {
-        verifyUser()
+        getUser()
 
         habits = habitRepository.getHabits()
     }
 
-    private fun verifyUser() {
-        if (userRepository.getUserByUUI(auth.currentUser?.uid!!) == null) {
-            val userToSave = User()
+    fun init(habitId: Long) {
+        habit = habitRepository.getHabit(habitId)
+    }
 
-            userToSave.uui = auth.currentUser?.uid!!
-            userToSave.email = auth.currentUser?.email!!
-
-            userRepository.save(userToSave)
-        }
-
+    // User
+    private fun getUser() {
         user?.value = userRepository.getUserByUUI(auth.currentUser?.uid!!)
     }
 
@@ -35,9 +34,11 @@ class TodayViewModel: BaseViewModel() {
         return habits
     }
 
-    fun saveHabit(habit: Habit) {
-        habitRepository.save(habit)
+    fun getHabit(): LiveData<Habit>? {
+        return habit
+    }
 
-        this.habits = habitRepository.getHabits()
+    fun saveHabit(habit: Habit) {
+        habitIdInserted.value = habitRepository.save(habit)
     }
 }
