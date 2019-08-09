@@ -1,5 +1,6 @@
 package com.rafaelfelipeac.mountains.ui.fragments.goalForm
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,8 @@ import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_goal_form.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class GoalFormFragment : BaseFragment() {
 
@@ -22,6 +25,8 @@ class GoalFormFragment : BaseFragment() {
     private var goalId: Long? = null
     private var goals: List<Goal> = listOf()
     private var habits: List<Habit> = listOf()
+
+    private var cal = Calendar.getInstance()
 
     private lateinit var viewModel: GoalFormViewModel
 
@@ -70,6 +75,34 @@ class GoalFormFragment : BaseFragment() {
             (activity as MainActivity).setupBottomSheetTipsTwo()
             setupBottomSheetTip()
             (activity as MainActivity).openBottomSheetTips()
+        }
+
+        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, monthOfYear)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            val myFormat = "dd/MM/yyyy"
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            goal_form_date.text = sdf.format(cal.time)
+
+            goal.finalDate = cal.time
+        }
+
+        goal_form_date.setOnClickListener {
+            val datePickerDialog = DatePickerDialog(context!!,
+                R.style.DialogTheme,
+                dateSetListener,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH))
+
+            datePickerDialog.show()
+
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.colorPrimary))
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setBackgroundColor(resources.getColor(android.R.color.transparent))
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.colorPrimary))
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setBackgroundColor(resources.getColor(android.R.color.transparent))
         }
     }
 
@@ -205,7 +238,7 @@ class GoalFormFragment : BaseFragment() {
         }
     }
 
-    private fun validateMountainsValues() : Boolean {
+    private fun validateMountainsValues(): Boolean {
         return try {
             val gold = form_goal_editText_gold.toFloat()
             val silver = form_goal_editText_silver.toFloat()
@@ -246,11 +279,10 @@ class GoalFormFragment : BaseFragment() {
             val order =
                 if (goals.isEmpty() && habits.isEmpty()) 0
                 else goals.size + habits.size + 1
-                //else goals!![goals!!.size-1].order + 1
+            //else goals!![goals!!.size-1].order + 1
 
             goal.order = order
-        }
-        else
+        } else
             goal.updatedDate = getCurrentTime()
 
         if (getGoalTypeSelected() == GoalType.COUNTER) {
@@ -270,15 +302,23 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun getGoalTypeSelected(): GoalType {
-        if (radioButtonLista.isChecked)     return GoalType.LIST
-        if (radioButtonIncDec.isChecked)    return GoalType.COUNTER
-        if (radioButtonTotal.isChecked)     return GoalType.FINAL_VALUE
+        if (radioButtonLista.isChecked) return GoalType.LIST
+        if (radioButtonIncDec.isChecked) return GoalType.COUNTER
+        if (radioButtonTotal.isChecked) return GoalType.FINAL_VALUE
 
         return GoalType.INVALID
     }
 
     private fun setupGoal() {
         goalForm_goal_name.setText(goal.name)
+
+        if (goal.finalDate != null) {
+            val myFormat = "dd/MM/yyyy"
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            goal_form_date.text = sdf.format(goal.finalDate)
+
+            cal.time = goal.finalDate
+        }
 
         if (goal.divideAndConquer) {
             form_goal_mountains.visible()
@@ -293,8 +333,10 @@ class GoalFormFragment : BaseFragment() {
             form_goal_editText_single.setText(goal.singleValue.getNumberInRightFormat())
         }
 
-        when(goal.type) {
-            GoalType.LIST -> { radioButtonLista.isChecked = true }
+        when (goal.type) {
+            GoalType.LIST -> {
+                radioButtonLista.isChecked = true
+            }
             GoalType.COUNTER -> {
                 radioButtonIncDec.isChecked = true
 
@@ -303,8 +345,11 @@ class GoalFormFragment : BaseFragment() {
                 goalForm_goal_inc_value.setText(goal.incrementValue.getNumberInRightFormat())
                 goalForm_goal_dec_value.setText(goal.decrementValue.getNumberInRightFormat())
             }
-            GoalType.FINAL_VALUE -> { radioButtonTotal.isChecked = true }
-            else -> { }
+            GoalType.FINAL_VALUE -> {
+                radioButtonTotal.isChecked = true
+            }
+            else -> {
+            }
         }
     }
 }

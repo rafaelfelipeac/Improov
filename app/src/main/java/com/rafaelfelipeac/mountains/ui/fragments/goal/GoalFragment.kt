@@ -22,6 +22,7 @@ import com.rafaelfelipeac.mountains.ui.adapter.ItemsAdapter
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import com.rafaelfelipeac.mountains.ui.helper.SwipeAndDragHelperItem
 import kotlinx.android.synthetic.main.fragment_goal.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class GoalFragment : BaseFragment() {
@@ -270,6 +271,14 @@ class GoalFragment : BaseFragment() {
 
         goal_title.text = goal?.name
         goal_count.text = count.getNumberInRightFormat()
+
+        if (goal?.finalDate != null) {
+            val myFormat = "dd/MM/yyyy"
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+
+            goal_final_date.text = sdf.format(goal?.finalDate)
+            goal_final_date.visible()
+        }
 
         if (goal?.divideAndConquer!!) {
             goal_single.invisible()
