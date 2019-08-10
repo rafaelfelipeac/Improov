@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.extension.*
+import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.GoalHabit
 import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
@@ -27,13 +28,17 @@ class TodayFragment : BaseFragment() {
 
     private lateinit var viewModel: TodayViewModel
 
-    private lateinit var goalsLateAdapter: ListAdapter
-    private lateinit var goalsTodayAdapter: ListAdapter
-    private var goalsWeekAdapter = DayOfWeekAdapter(this)
+    private lateinit var listLateAdapter: ListAdapter
+    private lateinit var listTodayAdapter: ListAdapter
+    private var dayOfWeekAdapter = DayOfWeekAdapter(this)
 
     private var habitsLate: List<Habit>? = null
     private var habitsToday: List<Habit>? = null
     private var habitsFuture: List<Habit>? = null
+
+    private var goalsLate: List<Goal>? = null
+    private var goalsToday: List<Goal>? = null
+    private var goalsFuture: List<Goal>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(this).get(TodayViewModel::class.java)
@@ -79,6 +84,20 @@ class TodayFragment : BaseFragment() {
             (activity as MainActivity).user = user
         })
 
+        viewModel.getGoals()?.observe(this, Observer { goals ->
+
+            this.goalsLate =
+                goals.filter { it.userId == user.userId && !it.archived && !it.done && it.finalDate.isLate() && !it.finalDate.isToday() }
+            this.goalsToday =
+                goals.filter { it.userId == user.userId && !it.archived && !it.done && it.finalDate.isToday() }
+            this.goalsFuture =
+                goals.filter { it.userId == user.userId && !it.archived && it.finalDate.isFuture() }
+
+//            setItemsLate()
+//            setItemsToday()
+//            setItemsWeek()
+        })
+
         viewModel.getHabits()?.observe(this, Observer { habits ->
 
             this.habitsLate =
@@ -101,45 +120,73 @@ class TodayFragment : BaseFragment() {
     }
 
     private fun setItemsLate() {
-        goalsLateAdapter = ListAdapter(this)
-        habitsLate?.sortedBy { it.order }.let { goalsLateAdapter.setItems(it!!) }
+        listLateAdapter = ListAdapter(this)
 
-        goalsLateAdapter.clickListener = {
-            if (it is Habit) {
-                val action = TodayFragmentDirections.actionNavigationTodayToNavigationHabit(it.habitId)
-                navController.navigate(action)
+        val late = mutableListOf<GoalHabit>()
+
+        goalsLate?.let { late.addAll(it) }
+        habitsLate?.let { late.addAll(it) }
+
+        late
+            .sortedBy { it.order }
+            .let { listLateAdapter.setItems(it) }
+
+        listLateAdapter.clickListener = {
+            when (it) {
+                is Habit -> {
+                    val action = TodayFragmentDirections.actionNavigationTodayToNavigationHabit(it.habitId)
+                    navController.navigate(action)
+                }
+                is Goal -> {
+                    val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(it.goalId)
+                    navController.navigate(action)
+                }
             }
         }
 
-        val swipeAndDragHelper = SwipeAndDragHelperList(goalsLateAdapter)
+        val swipeAndDragHelper = SwipeAndDragHelperList(listLateAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        goalsLateAdapter.touchHelper = touchHelper
+        listLateAdapter.touchHelper = touchHelper
 
         today_late_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        today_late_list.adapter = goalsLateAdapter
+        today_late_list.adapter = listLateAdapter
 
         touchHelper.attachToRecyclerView(today_late_list)
     }
 
     private fun setItemsToday() {
-        goalsTodayAdapter = ListAdapter(this)
-        habitsToday?.sortedBy { it.order }.let { goalsTodayAdapter.setItems(it!!) }
+        listTodayAdapter = ListAdapter(this)
 
-        goalsTodayAdapter.clickListener = {
-            if (it is Habit) {
-                val action = TodayFragmentDirections.actionNavigationTodayToNavigationHabit(it.habitId)
-                navController.navigate(action)
+        val today = mutableListOf<GoalHabit>()
+
+        goalsToday?.let { today.addAll(it) }
+        habitsToday?.let { today.addAll(it) }
+
+        today
+            .sortedBy { it.order }
+            .let { listTodayAdapter.setItems(it) }
+
+        listTodayAdapter.clickListener = {
+            when (it) {
+                is Habit -> {
+                    val action = TodayFragmentDirections.actionNavigationTodayToNavigationHabit(it.habitId)
+                    navController.navigate(action)
+                }
+                is Goal -> {
+                    val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(it.goalId)
+                    navController.navigate(action)
+                }
             }
         }
 
-        val swipeAndDragHelper = SwipeAndDragHelperList(goalsTodayAdapter)
+        val swipeAndDragHelper = SwipeAndDragHelperList(listTodayAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        goalsTodayAdapter.touchHelper = touchHelper
+        listTodayAdapter.touchHelper = touchHelper
 
         today_today_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        today_today_list.adapter = goalsTodayAdapter
+        today_today_list.adapter = listTodayAdapter
 
         touchHelper.attachToRecyclerView(today_today_list)
     }
@@ -151,36 +198,56 @@ class TodayFragment : BaseFragment() {
         days.forEach { day ->
             habitsFuture?.forEach { habit ->
                 if (day.monthDay == habit.nextDate.format()) {
-                    day.habits.add(habit)
+                    day.list.add(habit)
+                }
+            }
+            goalsFuture?.forEach {goal ->
+                if (day.monthDay == goal.finalDate.format()) {
+                    day.list.add(goal)
                 }
             }
         }
 
-        days.let { goalsWeekAdapter.setItems(it) }
+        days.let { dayOfWeekAdapter.setItems(it) }
 
         today_week_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        today_week_list.adapter = goalsWeekAdapter
+        today_week_list.adapter = dayOfWeekAdapter
     }
 
     fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalHabit>) {
-        val habit = items[position] as Habit
+        val goalHabit = items[position]
 
         when (direction) {
             ItemTouchHelper.RIGHT -> {
-                val beforeHabit = habit.copy()
+                when (goalHabit) {
+                    is Goal -> {
 
-                habit.doneToday = true
-                habit.doneDate = getCurrentTime()
-                habit.nextHabitDateAfterDone()
+                    }
+                    is Habit -> {
+                        val beforeHabit = goalHabit.copy()
 
-                viewModel.saveHabit(habit)
+                        goalHabit.doneToday = true
+                        goalHabit.doneDate = getCurrentTime()
+                        goalHabit.nextHabitDateAfterDone()
 
-                showSnackBarWithAction(holder.itemView, String.format("%s %s.", "Próxima ocorrência: ",
-                    habit.nextDate.format()), beforeHabit, ::undoDone)
+                        viewModel.saveHabit(goalHabit)
+
+                        showSnackBarWithAction(holder.itemView, String.format("%s %s.", "Próxima ocorrência: ",
+                            goalHabit.nextDate.format()), beforeHabit, ::undoDone)
+                    }
+                }
+
             }
 
             ItemTouchHelper.LEFT -> {
-                viewModel.saveHabit(habit)
+                when (goalHabit) {
+                    is Goal -> {
+                        viewModel.saveGoal(goalHabit)
+                    }
+                    is Habit -> {
+                        viewModel.saveHabit(goalHabit)
+                    }
+                }
             }
         }
     }
@@ -189,3 +256,20 @@ class TodayFragment : BaseFragment() {
         viewModel.saveHabit(goal as Habit)
     }
 }
+
+//private fun <Goal> List<Goal>?.convertGoal(): Collection<GoalHabit>? {
+//    val list = mutableListOf<GoalHabit>()
+//
+//    this?.forEach { list.add(it as GoalHabit) }
+//
+//    return list
+//}
+//
+//private fun <Habit> List<Habit>?.convertHabit(): Collection<GoalHabit>? {
+//    val list = mutableListOf<GoalHabit>()
+//
+//    this?.forEach { list.add(it as GoalHabit) }
+//
+//    return list
+//}
+

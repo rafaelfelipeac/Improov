@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.models.DayOfWeek
+import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.ui.base.BaseAdapter
 import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragment
@@ -24,31 +25,39 @@ class DayOfWeekAdapter(val fragment: TodayFragment) : BaseAdapter<DayOfWeek>() {
 
         val weekDay = viewHolder.itemView.findViewById<TextView>(R.id.day_of_week_week_day)
         val monthDay = viewHolder.itemView.findViewById<TextView>(R.id.day_of_week_month_day)
-        val list = viewHolder.itemView.findViewById<RecyclerView>(R.id.day_of_week_list)
+        val itemsList = viewHolder.itemView.findViewById<RecyclerView>(R.id.day_of_week_items_list)
 
         weekDay.text = item.weekDay
         monthDay.text = item.monthDay
 
-        val habits = item.habits
+        val list = item.list
 
         val listAdapter = ListAdapter(fragment)
 
         listAdapter.clickListener = {
-            val action = TodayFragmentDirections.actionNavigationTodayToNavigationHabit((it as Habit).habitId)
-            fragment.navController.navigate(action)
+            when (it) {
+                is Goal -> {
+                    val action = TodayFragmentDirections.actionNavigationTodayToNavigationGoal(it.goalId)
+                    fragment.navController.navigate(action)
+                }
+                is Habit -> {
+                    val action = TodayFragmentDirections.actionNavigationTodayToNavigationHabit(it.habitId)
+                    fragment.navController.navigate(action)
+                }
+            }
         }
 
-        habits.sortedBy { it.order }.let { listAdapter.setItems(it) }
+        list.sortedBy { it.order }.let { listAdapter.setItems(it) }
 
         val swipeAndDragHelper = SwipeAndDragHelperList(listAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
         listAdapter.touchHelper = touchHelper
 
-        list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        list.adapter = listAdapter
+        itemsList.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        itemsList.adapter = listAdapter
 
-        touchHelper.attachToRecyclerView(list)
+        touchHelper.attachToRecyclerView(itemsList)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

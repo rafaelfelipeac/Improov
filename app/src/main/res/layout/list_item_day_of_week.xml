@@ -44,7 +44,7 @@
             app:layout_constraintHorizontal_bias="0.0"/>
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/day_of_week_list"
+            android:id="@+id/day_of_week_items_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="visible"

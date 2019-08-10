@@ -78,10 +78,16 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
         private val title = itemView.findViewById<TextView>(R.id.goal_title)!!
         private val date = itemView.findViewById<TextView>(R.id.goal_date)!!
         private val score = itemView.findViewById<TextView>(R.id.goal_score)!!
+        private val archiveImage = itemView.findViewById<ImageView>(R.id.goal_archive_image)
         private val itemDrag = itemView.findViewById<ImageView>(R.id.goal_drag_icon)!!
 
         @SuppressLint("ClickableViewAccessibility")
         override fun bindViews(goalHabit: GoalHabit) {
+
+            if (fragment is TodayFragment) {
+                archiveImage.gone()
+                itemDrag.gone()
+            }
 
             itemView.setOnClickListener { clickListener(goalHabit) }
 
