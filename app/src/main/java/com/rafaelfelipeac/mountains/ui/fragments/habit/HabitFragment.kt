@@ -12,7 +12,6 @@ import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.models.HabitType
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
-import com.rafaelfelipeac.mountains.ui.fragments.goal.GoalFragmentDirections
 import kotlinx.android.synthetic.main.fragment_habit.*
 
 class HabitFragment : BaseFragment() {
@@ -27,7 +26,7 @@ class HabitFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //injector.inject(this)
+        injector.inject(this)
 
         setHasOptionsMenu(true)
 
@@ -77,7 +76,7 @@ class HabitFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_goal_edit -> {
-                navController.navigate(HabitFragmentDirections.actionNavigationHabitToNavigationHabitForm(habit?.habitId!!))
+                navController.navigate(HabitFragmentDirections.actionNavigationHabitToNavigationHabitForm(habit.habitId))
             }
             android.R.id.home -> {
                 if (habitNew!!) {

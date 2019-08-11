@@ -9,13 +9,18 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.di.modules.viewModel.ViewModelFactory
 import com.rafaelfelipeac.mountains.extension.gone
 import com.rafaelfelipeac.mountains.extension.setMessageColor
 import com.rafaelfelipeac.mountains.extension.visible
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import java.util.*
+import javax.inject.Inject
 
 abstract class BaseFragment : Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     protected val injector by lazy { (activity as BaseActivity).injector }
 

@@ -25,6 +25,12 @@ class LoginFragment : BaseFragment() {
 
     private lateinit var viewModel: LoginViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        injector.inject(this)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_login_title)

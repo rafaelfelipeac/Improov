@@ -15,9 +15,6 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>(
 
     var touchHelper: ItemTouchHelper? = null
 
-    var goalDAO = App.database?.goalDAO()
-    var itemDAO = App.database?.itemDAO()
-
     override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(parent)

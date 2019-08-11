@@ -36,6 +36,8 @@ class GoalFormFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        injector.inject(this)
+
         goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goalId }
 
         setHasOptionsMenu(true)

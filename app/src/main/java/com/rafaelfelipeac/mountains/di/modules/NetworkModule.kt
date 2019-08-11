@@ -1,6 +1,6 @@
-package com.rafaelfelipeac.mountains.di.module
+package com.rafaelfelipeac.mountains.di.modules
 
-import com.rafaelfelipeac.mountains.network.RMApi
+import com.rafaelfelipeac.mountains.network.GoalHabitApi
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -15,8 +15,8 @@ object NetworkModule {
     @Provides
     @Reusable
     @JvmStatic
-    fun provideMountainsApi(retrofit: Retrofit): RMApi {
-        return retrofit.create(RMApi::class.java)
+    fun provideGoalHabitApi(retrofit: Retrofit): GoalHabitApi {
+        return retrofit.create(GoalHabitApi::class.java)
     }
 
     @Provides

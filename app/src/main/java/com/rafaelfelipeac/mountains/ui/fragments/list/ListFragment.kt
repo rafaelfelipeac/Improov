@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -44,7 +43,7 @@ class ListFragment : BaseFragment() {
 
     var list: MutableList<GoalHabit>? = mutableListOf()
 
-    private lateinit var viewModel: ListViewModel
+    private val listViewModel by lazy { viewModelFactory.get<ListViewModel>(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,8 +60,6 @@ class ListFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         (activity as MainActivity).supportActionBar?.title = "Lista"
-
-        viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
 
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
@@ -129,11 +126,11 @@ class ListFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.user?.observe(this, Observer { user ->
+        listViewModel.user?.observe(this, Observer { user ->
             (activity as MainActivity).user = user
         })
 
-        viewModel.getGoals()?.observe(this, Observer { goals ->
+        listViewModel.getGoals()?.observe(this, Observer { goals ->
             this.goals = goals.filter { it.userId == user.userId && !it.archived}
 
 //            if (!isFromDragAndDrop) {
@@ -145,7 +142,7 @@ class ListFragment : BaseFragment() {
 //            verifyMidnight()
         })
 
-        viewModel.getHabits()?.observe(this, Observer { habits ->
+        listViewModel.getHabits()?.observe(this, Observer { habits ->
             this.habits = habits.filter { it.userId == user.userId && !it.archived}
 
             if (!isFromDragAndDrop) {
@@ -162,7 +159,7 @@ class ListFragment : BaseFragment() {
         habits?.forEach {
             if (it.nextDate.isToday() && it.doneToday) {
                 it.doneToday = false
-                viewModel.saveHabit(it)
+                listViewModel.saveHabit(it)
             }
         }
     }
@@ -232,13 +229,13 @@ class ListFragment : BaseFragment() {
         isFromDragAndDrop = true
 
         when (target) {
-            is Goal -> viewModel.saveGoal(target)
-            is Habit -> viewModel.saveHabit(target)
+            is Goal -> listViewModel.saveGoal(target)
+            is Habit -> listViewModel.saveHabit(target)
         }
 
         when (other) {
-            is Goal -> viewModel.saveGoal(other)
-            is Habit -> viewModel.saveHabit(other)
+            is Goal -> listViewModel.saveGoal(other)
+            is Habit -> listViewModel.saveHabit(other)
         }
 
 //        items.removeAt(oldPosition)
@@ -274,7 +271,7 @@ class ListFragment : BaseFragment() {
                         goalHabit.archived = true
                         goalHabit.archiveDate = getCurrentTime()
 
-                        viewModel.saveGoal(goalHabit)
+                        listViewModel.saveGoal(goalHabit)
 
                         showSnackBarWithAction(holder.itemView,
                             getString(R.string.goals_fragment_resolved_goal_message), goalHabit as Any, ::archiveGoal)
@@ -295,11 +292,11 @@ class ListFragment : BaseFragment() {
         goal.done = !goal.done
         goal.undoneDate = getCurrentTime()
 
-        viewModel.saveGoal(goal)
+        listViewModel.saveGoal(goal)
     }
 
     private fun archiveGoal(goal: Any) {
         (goal as Goal).archived = false
-        viewModel.saveGoal(goal)
+        listViewModel.saveGoal(goal)
     }
 }

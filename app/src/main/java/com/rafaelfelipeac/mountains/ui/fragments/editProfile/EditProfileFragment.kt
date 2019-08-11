@@ -21,6 +21,8 @@ class EditProfileFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        injector.inject(this)
+
         (activity as MainActivity).openToolbar()
     }
 

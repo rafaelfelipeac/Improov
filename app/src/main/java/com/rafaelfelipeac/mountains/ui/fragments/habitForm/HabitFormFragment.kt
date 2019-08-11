@@ -33,6 +33,8 @@ class HabitFormFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        injector.inject(this)
+
         habitId = arguments?.let { HabitFragmentArgs.fromBundle(it).habitId }
 
         setHasOptionsMenu(true)

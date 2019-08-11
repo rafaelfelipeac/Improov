@@ -18,6 +18,12 @@ class WelcomeFragment : BaseFragment() {
 
     private lateinit var viewModel: WelcomeViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        injector.inject(this)
+
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_welcome_title)

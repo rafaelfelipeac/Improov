@@ -16,6 +16,12 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        injector.inject(this)
+    }
+
     override fun onResume() {
         super.onResume()
 

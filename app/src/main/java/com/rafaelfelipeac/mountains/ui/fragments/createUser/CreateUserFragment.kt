@@ -18,6 +18,12 @@ class CreateUserFragment : BaseFragment() {
 
     private lateinit var viewModel: CreateUserViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        injector.inject(this)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_create_user_title)

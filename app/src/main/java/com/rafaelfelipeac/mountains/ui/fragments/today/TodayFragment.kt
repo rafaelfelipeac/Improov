@@ -40,6 +40,12 @@ class TodayFragment : BaseFragment() {
     private var goalsToday: List<Goal>? = null
     private var goalsFuture: List<Goal>? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        injector.inject(this)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(this).get(TodayViewModel::class.java)
 
@@ -256,20 +262,3 @@ class TodayFragment : BaseFragment() {
         viewModel.saveHabit(goal as Habit)
     }
 }
-
-//private fun <Goal> List<Goal>?.convertGoal(): Collection<GoalHabit>? {
-//    val list = mutableListOf<GoalHabit>()
-//
-//    this?.forEach { list.add(it as GoalHabit) }
-//
-//    return list
-//}
-//
-//private fun <Habit> List<Habit>?.convertHabit(): Collection<GoalHabit>? {
-//    val list = mutableListOf<GoalHabit>()
-//
-//    this?.forEach { list.add(it as GoalHabit) }
-//
-//    return list
-//}
-

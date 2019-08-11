@@ -7,9 +7,7 @@ import com.rafaelfelipeac.mountains.database.RoomDatabase
 import com.rafaelfelipeac.mountains.di.AppComponent
 import com.rafaelfelipeac.mountains.di.DaggerAppComponent
 
-val prefs: Prefs by lazy {
-    App.prefs!!
-}
+val prefs: Prefs by lazy { App.prefs!! }
 
 class App : Application() {
     val appComponent: AppComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
