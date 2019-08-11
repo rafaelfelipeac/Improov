@@ -18,6 +18,10 @@ import com.rafaelfelipeac.mountains.ui.fragments.list.ListFragment
 import com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragment
 import com.rafaelfelipeac.mountains.ui.helper.ActionCompletionContract
 import kotlin.math.roundToInt
+import android.util.DisplayMetrics
+import kotlinx.android.synthetic.main.fragment_search.view.*
+import kotlin.math.ceil
+
 
 class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     ActionCompletionContract {
@@ -80,6 +84,7 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
         private val score = itemView.findViewById<TextView>(R.id.goal_score)!!
         private val archiveImage = itemView.findViewById<ImageView>(R.id.goal_archive_image)
         private val itemDrag = itemView.findViewById<ImageView>(R.id.goal_drag_icon)!!
+        private val progressDone = itemView.findViewById<ImageView>(R.id.goal_progress_done)
 
         @SuppressLint("ClickableViewAccessibility")
         override fun bindViews(goalHabit: GoalHabit) {
@@ -108,13 +113,23 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
                 typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.drawable.ic_today)
             }
 
-            score.text = String.format(
-                "%s/%s",
-                goal.value.roundToInt().toString(),
-                goal.singleValue.roundToInt().toString()
-            )
+            if (goal.divideAndConquer) {
+                score.text = String.format(
+                    "%s/%s",
+                    goal.value.roundToInt().toString(),
+                    goal.goldValue.roundToInt().toString()
+                )
+            } else {
+                score.text = String.format(
+                    "%s/%s",
+                    goal.value.roundToInt().toString(),
+                    goal.singleValue.roundToInt().toString()
+                )
+            }
 
-            date.text = "13 AGO"
+            progressDone.setWidthForProgress(goal, fragment)
+
+            date.text = goal.finalDate.format()
 
             itemDrag.setOnTouchListener { _, _ ->
                 touchHelper?.startDrag(this)
