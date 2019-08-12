@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
+import javax.inject.Inject
 
-class StatsViewModel: BaseViewModel() {
+class StatsViewModel @Inject constructor() : BaseViewModel() {
 
     private var goals: LiveData<List<Goal>>? = null
     private var habits: LiveData<List<Habit>>? = null

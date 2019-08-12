@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.models.User
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
+import javax.inject.Inject
 
-class HabitFormViewModel : BaseViewModel() {
+class HabitFormViewModel @Inject constructor() : BaseViewModel() {
     private var habit: LiveData<Habit>? = null
     private var habits: LiveData<List<Habit>>? = null
 

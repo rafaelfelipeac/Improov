@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.invisible
 import com.rafaelfelipeac.mountains.extension.visible
@@ -22,7 +21,7 @@ class StatsFragment : BaseFragment() {
     var habits: List<Habit>? = null
     var goalsFinal: MutableList<GoalHabit>? = mutableListOf()
 
-    private lateinit var viewModel: StatsViewModel
+    private val statsViewModel by lazy { viewModelFactory.get<StatsViewModel>(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +37,6 @@ class StatsFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_stats)
-
-        viewModel = ViewModelProviders.of(this).get(StatsViewModel::class.java)
 
         return inflater.inflate(R.layout.fragment_stats, container, false)
     }
@@ -57,14 +54,14 @@ class StatsFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.getGoals()?.observe(this, Observer { goals ->
+        statsViewModel.getGoals()?.observe(this, Observer { goals ->
 
             this.goals = goals.filter { it.userId == it.userId }
 
             setupStats()
         })
 
-        viewModel.getHabits()?.observe(this, Observer { habits ->
+        statsViewModel.getHabits()?.observe(this, Observer { habits ->
 
             this.habits = habits.filter { it.userId == it.userId }
 

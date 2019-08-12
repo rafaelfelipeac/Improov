@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.emailIsInvalid
 import com.rafaelfelipeac.mountains.extension.gone
@@ -18,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_forgot_password.*
 
 class ForgotPasswordFragment : BaseFragment() {
 
-    private lateinit var viewModel: ForgotPasswordViewModel
+    private val forgotPasswordViewModel by lazy { viewModelFactory.get<ForgotPasswordViewModel>(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +28,6 @@ class ForgotPasswordFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_forgot_password_title)
-
-        viewModel = ViewModelProviders.of(this).get(ForgotPasswordViewModel::class.java)
 
         hideNavigation()
 
@@ -45,13 +42,13 @@ class ForgotPasswordFragment : BaseFragment() {
         forgot_password_send_button.setOnClickListener {
             if (verifyElements()) {
                 showProgressBar()
-                viewModel.resetPassword(forgot_password_email.text.toString())
+                forgotPasswordViewModel.resetPassword(forgot_password_email.text.toString())
             }
         }
     }
 
     private fun observeViewModel() {
-        viewModel.forgotResult.observe(this, Observer { sendResult ->
+        forgotPasswordViewModel.forgotResult.observe(this, Observer { sendResult ->
             hideProgressBar()
 
             when {

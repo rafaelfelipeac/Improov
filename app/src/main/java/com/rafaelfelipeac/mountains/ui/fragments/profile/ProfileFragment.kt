@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment() {
 
+    private val profileViewModel by lazy { viewModelFactory.get<ProfileViewModel>(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

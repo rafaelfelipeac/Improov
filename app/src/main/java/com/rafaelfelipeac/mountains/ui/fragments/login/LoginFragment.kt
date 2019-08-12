@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.rafaelfelipeac.mountains.R
@@ -23,7 +22,7 @@ class LoginFragment : BaseFragment() {
 
     private val GOOGLE_SIGN_IN = 100
 
-    private lateinit var viewModel: LoginViewModel
+    private val loginViewModel by lazy { viewModelFactory.get<LoginViewModel>(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +34,8 @@ class LoginFragment : BaseFragment() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_login_title)
 
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
-
         hideNavigation()
+
         (activity as MainActivity).openToolbar()
 
         return inflater.inflate(R.layout.fragment_login, container, false)
@@ -55,7 +53,7 @@ class LoginFragment : BaseFragment() {
         login_sign_in_button.setOnClickListener {
             if (verifyElements()) {
                 showProgressBar()
-                viewModel.signIn(login_email.text.toString(), login_password.text.toString())
+                loginViewModel.signIn(login_email.text.toString(), login_password.text.toString())
             }
         }
 
@@ -79,7 +77,7 @@ class LoginFragment : BaseFragment() {
 
                 showProgressBar()
 
-                viewModel.signInGoogle(account)
+                loginViewModel.signInGoogle(account)
             } catch (e: ApiException) {
                 Log.w(TAG, "Google sign in failed", e)
             }
@@ -87,7 +85,7 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.loginResult.observe(this, Observer { loginResult ->
+        loginViewModel.loginResult.observe(this, Observer { loginResult ->
             hideProgressBar()
 
             when {

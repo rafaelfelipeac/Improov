@@ -5,8 +5,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.GoogleAuthProvider
 import com.rafaelfelipeac.mountains.models.FirebaseResult
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
+import javax.inject.Inject
 
-class LoginViewModel : BaseViewModel() {
+class LoginViewModel @Inject constructor() : BaseViewModel() {
 
     var loginResult: MutableLiveData<FirebaseResult> = MutableLiveData()
 

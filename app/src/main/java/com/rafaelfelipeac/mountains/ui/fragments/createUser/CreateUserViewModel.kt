@@ -3,8 +3,9 @@ package com.rafaelfelipeac.mountains.ui.fragments.createUser
 import androidx.lifecycle.MutableLiveData
 import com.rafaelfelipeac.mountains.models.FirebaseResult
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
+import javax.inject.Inject
 
-class CreateUserViewModel: BaseViewModel() {
+class CreateUserViewModel @Inject constructor() : BaseViewModel() {
 
     var createResult: MutableLiveData<FirebaseResult> = MutableLiveData()
 

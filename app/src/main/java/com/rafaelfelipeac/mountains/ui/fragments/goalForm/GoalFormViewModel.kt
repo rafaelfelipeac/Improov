@@ -6,8 +6,9 @@ import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.models.User
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
+import javax.inject.Inject
 
-class GoalFormViewModel : BaseViewModel() {
+class GoalFormViewModel @Inject constructor() : BaseViewModel() {
 
     private var goal: LiveData<Goal>? = null
     private var goals: LiveData<List<Goal>>? = null

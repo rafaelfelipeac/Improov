@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
@@ -15,7 +14,8 @@ import kotlinx.android.synthetic.main.fragment_edit_profile.*
 
 class EditProfileFragment : BaseFragment() {
 
-    private lateinit var viewModel: EditProfileViewModel
+    private val editProfileViewModel by lazy { viewModelFactory.get<EditProfileViewModel>(this) }
+
     private var cont = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,15 +37,15 @@ class EditProfileFragment : BaseFragment() {
         edit_profile_create_button.setOnClickListener {
             if (verifyElements()) {
                 if (updateName()) {
-                    viewModel.updateName(edit_profile_name.text.toString())
+                    editProfileViewModel.updateName(edit_profile_name.text.toString())
                     cont++
                 }
                 if (updatePassword()) {
-                    viewModel.updatePassword(edit_profile_password.text.toString())
+                    editProfileViewModel.updatePassword(edit_profile_password.text.toString())
                     cont++
                 }
                 if (updateEmail()) {
-                    viewModel.updateEmail(edit_profile_email.text.toString())
+                    editProfileViewModel.updateEmail(edit_profile_email.text.toString())
                     cont++
                 }
 
@@ -64,8 +64,6 @@ class EditProfileFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_edit_profile_title)
-
-        viewModel = ViewModelProviders.of(this).get(EditProfileViewModel::class.java)
 
         hideNavigation()
 
@@ -113,7 +111,7 @@ class EditProfileFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.updateUser.observe(this, Observer { createResult ->
+        editProfileViewModel.updateUser.observe(this, Observer { createResult ->
             when {
                 createResult.isSuccessful -> {
                     if (--cont == 0) {

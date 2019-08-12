@@ -6,7 +6,6 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.*
@@ -28,10 +27,10 @@ class GoalFormFragment : BaseFragment() {
 
     private var cal = Calendar.getInstance()
 
-    private lateinit var viewModel: GoalFormViewModel
-
     private var bottomSheetTip: BottomSheetBehavior<*>? = null
     private var bottomSheetTipClose: ConstraintLayout? = null
+
+    private val goalFormViewModel by lazy { viewModelFactory.get<GoalFormViewModel>(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +48,7 @@ class GoalFormFragment : BaseFragment() {
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_goal_form)
         (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
 
-        viewModel = ViewModelProviders.of(this).get(GoalFormViewModel::class.java)
-
-        goalId?.let { viewModel.init(it) }
+        goalId?.let { goalFormViewModel.init(it) }
 
         return inflater.inflate(R.layout.fragment_goal_form, container, false)
     }
@@ -119,25 +116,25 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.user?.observe(this, Observer { user ->
+        goalFormViewModel.user?.observe(this, Observer { user ->
             (activity as MainActivity).user = user
         })
 
-        viewModel.getGoal()?.observe(this, Observer { goal ->
+        goalFormViewModel.getGoal()?.observe(this, Observer { goal ->
             this.goal = goal as Goal
 
             setupGoal()
         })
 
-        viewModel.getGoals()?.observe(this, Observer { goals ->
+        goalFormViewModel.getGoals()?.observe(this, Observer { goals ->
             this.goals = goals.filter { it.userId == user.userId }
         })
 
-        viewModel.getHabits()?.observe(this, Observer { habits ->
+        goalFormViewModel.getHabits()?.observe(this, Observer { habits ->
             this.habits = habits.filter { it.userId == user.userId }
         })
 
-        viewModel.goalIdInserted.observe(this, Observer { goalIdForm ->
+        goalFormViewModel.goalIdInserted.observe(this, Observer { goalIdForm ->
             val action = GoalFormFragmentDirections.actionNavigationGoalFormToNavigationGoal(goalIdForm)
             action.goalNew = true
             navController.navigate(action)
@@ -170,7 +167,7 @@ class GoalFormFragment : BaseFragment() {
                 } else {
                     val goalToSave = updateOrCreateGoal()
 
-                    viewModel.saveGoal(goalToSave)
+                    goalFormViewModel.saveGoal(goalToSave)
 
                     return true
                 }

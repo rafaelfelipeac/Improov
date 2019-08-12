@@ -4,8 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.rafaelfelipeac.mountains.models.FirebaseResult
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
+import javax.inject.Inject
 
-class EditProfileViewModel : BaseViewModel() {
+class EditProfileViewModel @Inject constructor() : BaseViewModel() {
     var updateUser: MutableLiveData<FirebaseResult> = MutableLiveData()
 
     fun updateName(name: String) {

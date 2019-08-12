@@ -26,7 +26,7 @@ import java.util.*
 
 class TodayFragment : BaseFragment() {
 
-    private lateinit var viewModel: TodayViewModel
+    private val todayViewModel by lazy { viewModelFactory.get<TodayViewModel>(this) }
 
     private lateinit var listLateAdapter: ListAdapter
     private lateinit var listTodayAdapter: ListAdapter
@@ -47,7 +47,6 @@ class TodayFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewModel = ViewModelProviders.of(this).get(TodayViewModel::class.java)
 
         return inflater.inflate(R.layout.fragment_today, container, false)
     }
@@ -86,11 +85,11 @@ class TodayFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.user?.observe(this, Observer { user ->
+        todayViewModel.user?.observe(this, Observer { user ->
             (activity as MainActivity).user = user
         })
 
-        viewModel.getGoals()?.observe(this, Observer { goals ->
+        todayViewModel.getGoals()?.observe(this, Observer { goals ->
 
             this.goalsLate =
                 goals.filter { it.userId == user.userId && !it.archived && !it.done && it.finalDate.isLate() && !it.finalDate.isToday() }
@@ -104,7 +103,7 @@ class TodayFragment : BaseFragment() {
 //            setItemsWeek()
         })
 
-        viewModel.getHabits()?.observe(this, Observer { habits ->
+        todayViewModel.getHabits()?.observe(this, Observer { habits ->
 
             this.habitsLate =
                 habits.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isLate() && !it.isToday() }
@@ -236,7 +235,7 @@ class TodayFragment : BaseFragment() {
                         goalHabit.doneDate = getCurrentTime()
                         goalHabit.nextHabitDateAfterDone()
 
-                        viewModel.saveHabit(goalHabit)
+                        todayViewModel.saveHabit(goalHabit)
 
                         showSnackBarWithAction(holder.itemView, String.format("%s %s.", "Próxima ocorrência: ",
                             goalHabit.nextDate.format()), beforeHabit, ::undoDone)
@@ -248,10 +247,10 @@ class TodayFragment : BaseFragment() {
             ItemTouchHelper.LEFT -> {
                 when (goalHabit) {
                     is Goal -> {
-                        viewModel.saveGoal(goalHabit)
+                        todayViewModel.saveGoal(goalHabit)
                     }
                     is Habit -> {
-                        viewModel.saveHabit(goalHabit)
+                        todayViewModel.saveHabit(goalHabit)
                     }
                 }
             }
@@ -259,6 +258,6 @@ class TodayFragment : BaseFragment() {
     }
 
     private fun undoDone(goal: Any) {
-        viewModel.saveHabit(goal as Habit)
+        todayViewModel.saveHabit(goal as Habit)
     }
 }

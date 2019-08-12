@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.format
 import com.rafaelfelipeac.mountains.extension.visible
@@ -21,7 +20,7 @@ class HabitFragment : BaseFragment() {
 
     var habit = Habit()
 
-    private lateinit var viewModel: HabitViewModel
+    private val habitViewModel by lazy { viewModelFactory.get<HabitViewModel>(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +41,7 @@ class HabitFragment : BaseFragment() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = "Rotina"
 
-        viewModel = ViewModelProviders.of(this).get(HabitViewModel::class.java)
-        viewModel.init(habitId!!)
+        habitViewModel.init(habitId!!)
 
         return inflater.inflate(R.layout.fragment_habit, container, false)
     }
@@ -55,11 +53,11 @@ class HabitFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.user?.observe(this, Observer { user ->
+        habitViewModel.user?.observe(this, Observer { user ->
             (activity as MainActivity).user = user
         })
 
-        viewModel.getHabits()?.observe(this, Observer { habit ->
+        habitViewModel.getHabits()?.observe(this, Observer { habit ->
             this.habit = habit
 
             setupHabit()

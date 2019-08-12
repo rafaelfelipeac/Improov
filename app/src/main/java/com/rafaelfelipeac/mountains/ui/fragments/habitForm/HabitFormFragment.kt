@@ -6,14 +6,15 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.extension.gone
 import com.rafaelfelipeac.mountains.extension.nextHabitDate
 import com.rafaelfelipeac.mountains.extension.setHabitLastDate
 import com.rafaelfelipeac.mountains.extension.visible
-import com.rafaelfelipeac.mountains.models.*
+import com.rafaelfelipeac.mountains.models.Habit
+import com.rafaelfelipeac.mountains.models.HabitType
+import com.rafaelfelipeac.mountains.models.PeriodType
 import com.rafaelfelipeac.mountains.ui.activities.MainActivity
 import com.rafaelfelipeac.mountains.ui.base.BaseFragment
 import com.rafaelfelipeac.mountains.ui.fragments.habit.HabitFragmentArgs
@@ -25,10 +26,10 @@ class HabitFormFragment : BaseFragment() {
     private var habitId: Long? = null
     private var habits: List<Habit>? = null
 
-    private lateinit var viewModel: HabitFormViewModel
-
     private var bottomSheetTip: BottomSheetBehavior<*>? = null
     private var bottomSheetTipClose: ConstraintLayout? = null
+
+    private val habitFormViewModel by lazy { viewModelFactory.get<HabitFormViewModel>(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +47,7 @@ class HabitFormFragment : BaseFragment() {
         (activity as MainActivity).supportActionBar?.title = "Novo hábito"
         (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
 
-        viewModel = ViewModelProviders.of(this).get(HabitFormViewModel::class.java)
-
-        habitId?.let { viewModel.init(it) }
+        habitId?.let { habitFormViewModel.init(it) }
 
         return inflater.inflate(R.layout.fragment_habit_form, container, false)
     }
@@ -112,7 +111,7 @@ class HabitFormFragment : BaseFragment() {
 //                } else {
                 val habitToSave = updateOrCreateHabit()
 
-                viewModel.saveHabit(habitToSave)
+                habitFormViewModel.saveHabit(habitToSave)
 
                 return true
                 // }
@@ -278,21 +277,21 @@ class HabitFormFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.user?.observe(this, Observer { user ->
+        habitFormViewModel.user?.observe(this, Observer { user ->
             (activity as MainActivity).user = user
         })
 
-        viewModel.getHabit()?.observe(this, Observer { habit ->
+        habitFormViewModel.getHabit()?.observe(this, Observer { habit ->
             this.habit = habit as Habit
 
             setupHabit()
         })
 
-        viewModel.getHabits()?.observe(this, Observer { goals ->
+        habitFormViewModel.getHabits()?.observe(this, Observer { goals ->
             this.habits = goals.filter { it.userId == user.userId }
         })
 
-        viewModel.habitIdInserted.observe(this, Observer { goalId ->
+        habitFormViewModel.habitIdInserted.observe(this, Observer { goalId ->
             val action = HabitFormFragmentDirections.actionNavigationHabitFormToNavigationHabit(goalId)
             action.habitNew = true
             navController.navigate(action)

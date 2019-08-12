@@ -3,8 +3,9 @@ package com.rafaelfelipeac.mountains.ui.fragments.forgotPassword
 import androidx.lifecycle.MutableLiveData
 import com.rafaelfelipeac.mountains.models.FirebaseResult
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
+import javax.inject.Inject
 
-class ForgotPasswordViewModel : BaseViewModel() {
+class ForgotPasswordViewModel @Inject constructor() : BaseViewModel() {
 
     var forgotResult: MutableLiveData<FirebaseResult> = MutableLiveData()
 

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
@@ -16,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_welcome.*
 
 class WelcomeFragment : BaseFragment() {
 
-    private lateinit var viewModel: WelcomeViewModel
+    private val welcomeViewModel by lazy { viewModelFactory.get<WelcomeViewModel>(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injector.inject(this)
@@ -27,8 +26,6 @@ class WelcomeFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_welcome_title)
-
-        viewModel = ViewModelProviders.of(this).get(WelcomeViewModel::class.java)
 
         hideNavigation()
 

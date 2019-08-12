@@ -1,15 +1,14 @@
 package com.rafaelfelipeac.mountains.ui.fragments.today
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.rafaelfelipeac.mountains.models.Goal
-import com.rafaelfelipeac.mountains.models.GoalHabit
 import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.models.User
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
+import javax.inject.Inject
 
-class TodayViewModel: BaseViewModel() {
+class TodayViewModel @Inject constructor() : BaseViewModel() {
     private var habits: LiveData<List<Habit>>? = null
     private var goals: LiveData<List<Goal>>? = null
 
