@@ -1,9 +1,9 @@
-package com.rafaelfelipeac.mountains.core.database.historic
+package com.rafaelfelipeac.mountains.features.goal.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
-import com.rafaelfelipeac.mountains.models.Historic
+import com.rafaelfelipeac.mountains.features.goal.Historic
 
 @Dao
 interface HistoricDAO {

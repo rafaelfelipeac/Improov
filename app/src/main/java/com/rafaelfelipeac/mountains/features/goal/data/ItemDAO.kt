@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.core.database.item
+package com.rafaelfelipeac.mountains.features.goal.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -6,7 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import com.rafaelfelipeac.mountains.models.Item
+import com.rafaelfelipeac.mountains.features.goal.Item
 
 @Dao
 interface ItemDAO {

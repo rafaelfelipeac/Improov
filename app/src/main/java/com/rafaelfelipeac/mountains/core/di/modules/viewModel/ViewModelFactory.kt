@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.di.modules.viewModel
+package com.rafaelfelipeac.mountains.core.di.modules.viewModel
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
