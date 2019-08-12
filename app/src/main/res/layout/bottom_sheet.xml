@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".ui.activities.MainActivity">
+        tools:context=".features.main.MainActivity">
 
     <include layout="@layout/bottom_sheet_tips_one" />
 

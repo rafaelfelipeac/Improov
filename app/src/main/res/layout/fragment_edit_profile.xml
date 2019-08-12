@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.editProfile.EditProfileFragment"
+        tools:context=".features.editProfile.EditProfileFragment"
         android:background="@color/colorPrimaryDarkOne">
 
     <com.google.android.material.textfield.TextInputLayout

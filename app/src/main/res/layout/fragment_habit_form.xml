@@ -15,7 +15,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true"
-                tools:context=".ui.fragments.habitForm.HabitFormFragment"
+                tools:context=".features.habit.presentation.HabitFormFragment"
                 android:background="@color/colorPrimaryDarkOne">
 
             <androidx.constraintlayout.widget.ConstraintLayout

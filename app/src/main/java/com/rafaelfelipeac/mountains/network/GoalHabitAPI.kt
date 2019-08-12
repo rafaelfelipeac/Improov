@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.mountains.network
 
-import com.rafaelfelipeac.mountains.models.Goal
-import com.rafaelfelipeac.mountains.models.Habit
+import com.rafaelfelipeac.mountains.features.goal.Goal
+import com.rafaelfelipeac.mountains.features.habit.Habit
 import io.reactivex.Observable
 import retrofit2.http.GET
 

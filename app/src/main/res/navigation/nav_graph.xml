@@ -8,7 +8,7 @@
 
     <fragment
             android:id="@+id/navigation_welcome"
-            android:name="com.rafaelfelipeac.mountains.ui.fragments.welcome.WelcomeFragment"
+            android:name="com.rafaelfelipeac.mountains.features.welcome.WelcomeFragment"
             android:label="fragment_welcome"
             tools:layout="@layout/fragment_welcome">
 
@@ -20,7 +20,7 @@
 
     <fragment
             android:id="@+id/navigation_login"
-            android:name="com.rafaelfelipeac.mountains.ui.fragments.login.LoginFragment"
+            android:name="com.rafaelfelipeac.mountains.features.login.LoginFragment"
             android:label="fragment_login"
             tools:layout="@layout/fragment_login">
 
@@ -31,13 +31,13 @@
 
     <fragment
             android:id="@+id/navigation_forgot_password"
-            android:name="com.rafaelfelipeac.mountains.ui.fragments.forgotPassword.ForgotPasswordFragment"
+            android:name="com.rafaelfelipeac.mountains.features.forgotPassword.ForgotPasswordFragment"
             android:label="fragment_forgot_password"
             tools:layout="@layout/fragment_forgot_password"/>
 
     <fragment
             android:id="@+id/navigation_create_user"
-            android:name="com.rafaelfelipeac.mountains.ui.fragments.createUser.CreateUserFragment"
+            android:name="com.rafaelfelipeac.mountains.features.createUser.CreateUserFragment"
             android:label="fragment_create_user"
             tools:layout="@layout/fragment_create_user">
 
@@ -47,7 +47,7 @@
 
     <fragment
             android:id="@+id/navigation_list"
-            android:name="com.rafaelfelipeac.mountains.ui.fragments.list.ListFragment"
+            android:name="com.rafaelfelipeac.mountains.features.list.ListFragment"
             android:label="fragment_list"
             tools:layout="@layout/fragment_list">
 
@@ -69,7 +69,7 @@
 
     <fragment
             android:id="@+id/navigation_goal_form"
-            android:name="com.rafaelfelipeac.mountains.ui.fragments.goalForm.GoalFormFragment"
+            android:name="com.rafaelfelipeac.mountains.features.goal.presentation.GoalFormFragment"
             android:label="fragment_goal_form"
             tools:layout="@layout/fragment_goal_form">
 
@@ -81,7 +81,7 @@
 
     <fragment
             android:id="@+id/navigation_goal"
-            android:name="com.rafaelfelipeac.mountains.ui.fragments.goal.GoalFragment"
+            android:name="com.rafaelfelipeac.mountains.features.goal.presentation.GoalFragment"
             android:label="fragment_goal"
             tools:layout="@layout/fragment_goal">
 
@@ -94,7 +94,7 @@
 
     <fragment
             android:id="@+id/navigation_stats"
-            android:name="com.rafaelfelipeac.mountains.ui.fragments.stats.StatsFragment"
+            android:name="com.rafaelfelipeac.mountains.features.stats.StatsFragment"
             android:label="fragment_stats"
             tools:layout="@layout/fragment_stats">
 
@@ -105,7 +105,7 @@
 
     <fragment
             android:id="@+id/navigation_profile"
-            android:name="com.rafaelfelipeac.mountains.ui.fragments.profile.ProfileFragment"
+            android:name="com.rafaelfelipeac.mountains.features.profile.ProfileFragment"
             android:label="fragment_profile"
             tools:layout="@layout/fragment_profile">
 
@@ -118,12 +118,12 @@
 
     <fragment
             android:id="@+id/navigation_edit_profile"
-            android:name="com.rafaelfelipeac.mountains.ui.fragments.editProfile.EditProfileFragment"
+            android:name="com.rafaelfelipeac.mountains.features.editProfile.EditProfileFragment"
             android:label="fragment_edit_profile"
             tools:layout="@layout/fragment_edit_profile"/>
 
     <fragment android:id="@+id/navigation_today"
-              android:name="com.rafaelfelipeac.mountains.ui.fragments.today.TodayFragment"
+              android:name="com.rafaelfelipeac.mountains.features.today.TodayFragment"
               android:label="fragment_today"
               tools:layout="@layout/fragment_today">
 
@@ -135,7 +135,7 @@
     </fragment>
 
     <fragment android:id="@+id/navigation_habit_form"
-              android:name="com.rafaelfelipeac.mountains.ui.fragments.habitForm.HabitFormFragment"
+              android:name="com.rafaelfelipeac.mountains.features.habit.presentation.HabitFormFragment"
               android:label="fragment_habit_form">
 
         <argument android:name="habitId" app:argType="long"/>
@@ -145,7 +145,7 @@
     </fragment>
 
     <fragment android:id="@+id/navigation_habit"
-              android:name="com.rafaelfelipeac.mountains.ui.fragments.habit.HabitFragment"
+              android:name="com.rafaelfelipeac.mountains.features.habit.presentation.HabitFragment"
               android:label="fragment_habit"
               tools:layout="@layout/fragment_habit">
 

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDarkOne"
-        tools:context=".ui.activities.MainActivity"
+        tools:context=".features.main.MainActivity"
         android:orientation="vertical">
 
     <include

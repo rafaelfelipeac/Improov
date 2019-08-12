@@ -5,7 +5,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".ui.fragments.welcome.WelcomeTwoFragment"
+        tools:context=".features.welcome.WelcomeTwoFragment"
         android:background="@color/colorPrimaryDarkOne">
 
     <ImageView

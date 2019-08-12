@@ -3,9 +3,9 @@ package com.rafaelfelipeac.mountains.app
 import android.app.Application
 import androidx.room.Room
 import com.rafaelfelipeac.mountains.R
-import com.rafaelfelipeac.mountains.database.RoomDatabase
-import com.rafaelfelipeac.mountains.di.AppComponent
-import com.rafaelfelipeac.mountains.di.DaggerAppComponent
+import com.rafaelfelipeac.mountains.core.persistence.database.RoomDatabase
+import com.rafaelfelipeac.mountains.core.di.AppComponent
+import com.rafaelfelipeac.mountains.core.di.DaggerAppComponent
 
 val prefs: Prefs by lazy { App.prefs!! }
 
