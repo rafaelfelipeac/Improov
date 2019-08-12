@@ -2,15 +2,22 @@ package com.rafaelfelipeac.mountains.ui.fragments.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.rafaelfelipeac.mountains.database.goal.GoalRepository
+import com.rafaelfelipeac.mountains.database.habit.HabitRepository
+import com.rafaelfelipeac.mountains.database.user.UserRepository
 import com.rafaelfelipeac.mountains.models.Goal
 import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.models.User
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 import javax.inject.Inject
 
-class ListViewModel @Inject constructor() : BaseViewModel() {
-    private var goals: LiveData<List<Goal>>? = null
-    private var habits: LiveData<List<Habit>>? = null
+class ListViewModel @Inject constructor(
+    private val userRepository: UserRepository,
+    private val goalRepository: GoalRepository,
+    private val habitRepository: HabitRepository) : BaseViewModel() {
+
+    private var goals: LiveData<List<Goal>>
+    private var habits: LiveData<List<Habit>>
 
     var user: MutableLiveData<User>? = MutableLiveData()
 

@@ -2,12 +2,16 @@ package com.rafaelfelipeac.mountains.ui.fragments.habit
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.rafaelfelipeac.mountains.database.habit.HabitRepository
+import com.rafaelfelipeac.mountains.database.user.UserRepository
 import com.rafaelfelipeac.mountains.models.Habit
 import com.rafaelfelipeac.mountains.models.User
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 import javax.inject.Inject
 
-class HabitViewModel @Inject constructor() : BaseViewModel() {
+class HabitViewModel @Inject constructor(
+    private val userRepository: UserRepository,
+    private val habitRepository: HabitRepository) : BaseViewModel() {
 
     private var habit: LiveData<Habit>? = null
 

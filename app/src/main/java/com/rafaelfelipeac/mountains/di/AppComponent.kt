@@ -7,6 +7,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Component(modules = [
+    ContextModule::class,
     ViewModelModule::class,
     CreateUserModule::class,
     EditProfileModule::class,

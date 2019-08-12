@@ -2,11 +2,19 @@ package com.rafaelfelipeac.mountains.ui.fragments.goal
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.rafaelfelipeac.mountains.database.goal.GoalRepository
+import com.rafaelfelipeac.mountains.database.historic.HistoricRepository
+import com.rafaelfelipeac.mountains.database.item.ItemRepository
+import com.rafaelfelipeac.mountains.database.user.UserRepository
 import com.rafaelfelipeac.mountains.models.*
 import com.rafaelfelipeac.mountains.ui.base.BaseViewModel
 import javax.inject.Inject
 
-class GoalViewModel @Inject constructor() : BaseViewModel() {
+class GoalViewModel @Inject constructor(
+    private val userRepository: UserRepository,
+    private val goalRepository: GoalRepository,
+    private val itemRepository: ItemRepository,
+    private val historicRepository: HistoricRepository) : BaseViewModel() {
 
     private var goal: LiveData<Goal>? = null
     private var goals: LiveData<List<Goal>>? = null
