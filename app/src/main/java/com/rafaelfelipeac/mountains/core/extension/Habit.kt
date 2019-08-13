@@ -1,8 +1,8 @@
 package com.rafaelfelipeac.mountains.core.extension
 
-import com.rafaelfelipeac.mountains.features.habit.Habit
-import com.rafaelfelipeac.mountains.features.habit.HabitType
-import com.rafaelfelipeac.mountains.features.habit.PeriodType
+import com.rafaelfelipeac.mountains.features.commons.Habit
+import com.rafaelfelipeac.mountains.features.commons.HabitType
+import com.rafaelfelipeac.mountains.features.commons.PeriodType
 import java.util.*
 
 fun Habit.isToday() = nextDate.isToday()

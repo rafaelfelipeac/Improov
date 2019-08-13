@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.mountains.core.di.modules
 
-import com.rafaelfelipeac.mountains.network.GoalHabitApi
+import com.rafaelfelipeac.mountains.network.retrofit.GoalHabitApi
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable

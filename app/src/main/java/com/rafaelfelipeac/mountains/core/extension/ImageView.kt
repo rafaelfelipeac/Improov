@@ -5,8 +5,8 @@ import android.util.DisplayMetrics
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import com.rafaelfelipeac.mountains.core.platform.BaseFragment
-import com.rafaelfelipeac.mountains.features.goal.Goal
+import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
+import com.rafaelfelipeac.mountains.features.commons.Goal
 import kotlin.math.ceil
 
 fun ImageView.enableIcon(iconNormal: Int, context: Context) {

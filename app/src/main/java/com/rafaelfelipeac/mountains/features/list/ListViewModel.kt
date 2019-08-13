@@ -2,13 +2,13 @@ package com.rafaelfelipeac.mountains.features.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.rafaelfelipeac.mountains.others.models.user.UserRepository
-import com.rafaelfelipeac.mountains.others.models.User
-import com.rafaelfelipeac.mountains.core.platform.BaseViewModel
-import com.rafaelfelipeac.mountains.features.goal.Goal
-import com.rafaelfelipeac.mountains.features.goal.GoalRepository
-import com.rafaelfelipeac.mountains.features.habit.Habit
-import com.rafaelfelipeac.mountains.features.habit.HabitRepository
+import com.rafaelfelipeac.mountains.features.commons.UserRepository
+import com.rafaelfelipeac.mountains.features.commons.User
+import com.rafaelfelipeac.mountains.core.platform.base.BaseViewModel
+import com.rafaelfelipeac.mountains.features.commons.Goal
+import com.rafaelfelipeac.mountains.features.commons.GoalRepository
+import com.rafaelfelipeac.mountains.features.commons.Habit
+import com.rafaelfelipeac.mountains.features.commons.HabitRepository
 import javax.inject.Inject
 
 class ListViewModel @Inject constructor(

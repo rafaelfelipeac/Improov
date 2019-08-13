@@ -8,10 +8,10 @@ import androidx.lifecycle.Observer
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.extension.invisible
 import com.rafaelfelipeac.mountains.core.extension.visible
-import com.rafaelfelipeac.mountains.others.models.GoalHabit
-import com.rafaelfelipeac.mountains.core.platform.BaseFragment
-import com.rafaelfelipeac.mountains.features.goal.Goal
-import com.rafaelfelipeac.mountains.features.habit.Habit
+import com.rafaelfelipeac.mountains.features.commons.GoalHabit
+import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
+import com.rafaelfelipeac.mountains.features.commons.Goal
+import com.rafaelfelipeac.mountains.features.commons.Habit
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_stats.*
 

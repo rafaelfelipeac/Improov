@@ -1,9 +1,9 @@
 package com.rafaelfelipeac.mountains.core.persistence.converts
 
 import androidx.room.TypeConverter
-import com.rafaelfelipeac.mountains.features.goal.GoalType
-import com.rafaelfelipeac.mountains.features.habit.HabitType
-import com.rafaelfelipeac.mountains.features.habit.PeriodType
+import com.rafaelfelipeac.mountains.features.commons.GoalType
+import com.rafaelfelipeac.mountains.features.commons.HabitType
+import com.rafaelfelipeac.mountains.features.commons.PeriodType
 import java.util.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

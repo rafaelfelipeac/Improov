@@ -1,22 +1,22 @@
 package com.rafaelfelipeac.mountains.core.di
 
-import com.rafaelfelipeac.mountains.core.platform.BaseActivity
-import com.rafaelfelipeac.mountains.features.createUser.CreateUserFragment
-import com.rafaelfelipeac.mountains.features.editProfile.EditProfileFragment
-import com.rafaelfelipeac.mountains.features.forgotPassword.ForgotPasswordFragment
-import com.rafaelfelipeac.mountains.features.goal.presentation.GoalFragment
-import com.rafaelfelipeac.mountains.features.goal.presentation.GoalFormFragment
-import com.rafaelfelipeac.mountains.features.habit.presentation.HabitFragment
-import com.rafaelfelipeac.mountains.features.habit.presentation.HabitFormFragment
+import com.rafaelfelipeac.mountains.core.platform.base.BaseActivity
+import com.rafaelfelipeac.mountains.features.createuser.CreateUserFragment
+import com.rafaelfelipeac.mountains.features.editprofile.EditProfileFragment
+import com.rafaelfelipeac.mountains.features.forgotpassword.ForgotPasswordFragment
+import com.rafaelfelipeac.mountains.features.goal.presentation.goal.GoalFragment
+import com.rafaelfelipeac.mountains.features.goal.presentation.goalform.GoalFormFragment
+import com.rafaelfelipeac.mountains.features.habit.HabitFragment
+import com.rafaelfelipeac.mountains.features.habit.HabitFormFragment
 import com.rafaelfelipeac.mountains.features.list.ListFragment
 import com.rafaelfelipeac.mountains.features.login.LoginFragment
 import com.rafaelfelipeac.mountains.features.profile.ProfileFragment
 import com.rafaelfelipeac.mountains.features.stats.StatsFragment
-import com.rafaelfelipeac.mountains.features.today.TodayFragment
+import com.rafaelfelipeac.mountains.features.today.presentation.TodayFragment
 import com.rafaelfelipeac.mountains.features.welcome.WelcomeFragment
-import com.rafaelfelipeac.mountains.features.welcome.WelcomeOneFragment
-import com.rafaelfelipeac.mountains.features.welcome.WelcomeThreeFragment
-import com.rafaelfelipeac.mountains.features.welcome.WelcomeTwoFragment
+import com.rafaelfelipeac.mountains.features.welcome.WelcomeAFragment
+import com.rafaelfelipeac.mountains.features.welcome.WelcomeCFragment
+import com.rafaelfelipeac.mountains.features.welcome.WelcomeBFragment
 
 interface Injector {
     fun inject(baseActivity: BaseActivity)
@@ -47,9 +47,9 @@ interface Injector {
 
     fun inject(welcomeFragment: WelcomeFragment)
 
-    fun inject(welcomeOneFragment: WelcomeOneFragment)
+    fun inject(welcomeAFragment: WelcomeAFragment)
 
-    fun inject(welcomeTwoFragment: WelcomeTwoFragment)
+    fun inject(welcomeBFragment: WelcomeBFragment)
 
-    fun inject(welcomeThreeFragment: WelcomeThreeFragment)
+    fun inject(welcomeCFragment: WelcomeCFragment)
 }

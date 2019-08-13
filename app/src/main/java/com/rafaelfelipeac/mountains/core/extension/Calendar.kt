@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.mountains.core.extension
 
-import com.rafaelfelipeac.mountains.others.models.DayOfWeek
+import com.rafaelfelipeac.mountains.features.today.DayOfWeek
 import java.util.*
 
 fun Calendar.addDays(days: Int) {
@@ -23,7 +23,12 @@ fun Calendar.getNextWeek(): List<DayOfWeek> {
     for (i in 0..6) {
         today.addDays(1)
 
-        days.add(DayOfWeek(today.getDayOfWeek(today.get(Calendar.DAY_OF_WEEK)), today.time.format().toString()))
+        days.add(
+            DayOfWeek(
+                today.getDayOfWeek(today.get(Calendar.DAY_OF_WEEK)),
+                today.time.format().toString()
+            )
+        )
     }
 
     return days

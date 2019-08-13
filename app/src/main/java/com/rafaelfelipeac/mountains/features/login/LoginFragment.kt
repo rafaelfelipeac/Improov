@@ -14,7 +14,7 @@ import com.google.android.gms.common.api.ApiException
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.core.extension.*
-import com.rafaelfelipeac.mountains.core.platform.BaseFragment
+import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_login.*
 

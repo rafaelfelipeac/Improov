@@ -15,7 +15,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true"
-                tools:context=".features.goal.presentation.GoalFormFragment"
+                tools:context=".features.goal.presentation.goalform.GoalFormFragment"
                 android:background="@color/colorPrimaryDarkOne">
 
             <androidx.constraintlayout.widget.ConstraintLayout

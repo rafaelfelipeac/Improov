@@ -9,8 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.rafaelfelipeac.mountains.BuildConfig
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.app.prefs
-import com.rafaelfelipeac.mountains.core.platform.BaseFragment
-import com.rafaelfelipeac.mountains.others.dialogs.LogoutDialogFragment
+import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 
 import kotlinx.android.synthetic.main.fragment_profile.*

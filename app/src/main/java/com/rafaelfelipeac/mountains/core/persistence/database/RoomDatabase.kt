@@ -5,15 +5,15 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.rafaelfelipeac.mountains.features.goal.data.HistoricDAO
 import com.rafaelfelipeac.mountains.features.goal.data.ItemDAO
-import com.rafaelfelipeac.mountains.others.models.user.UserDAO
-import com.rafaelfelipeac.mountains.others.models.*
+import com.rafaelfelipeac.mountains.features.commons.data.UserDAO
 import com.rafaelfelipeac.mountains.core.persistence.converts.Converters
-import com.rafaelfelipeac.mountains.features.goal.Goal
+import com.rafaelfelipeac.mountains.features.commons.Goal
 import com.rafaelfelipeac.mountains.features.goal.Historic
 import com.rafaelfelipeac.mountains.features.goal.Item
-import com.rafaelfelipeac.mountains.features.goal.data.GoalDAO
-import com.rafaelfelipeac.mountains.features.habit.Habit
-import com.rafaelfelipeac.mountains.features.habit.data.HabitDAO
+import com.rafaelfelipeac.mountains.features.commons.data.GoalDAO
+import com.rafaelfelipeac.mountains.features.commons.Habit
+import com.rafaelfelipeac.mountains.features.commons.User
+import com.rafaelfelipeac.mountains.features.commons.data.HabitDAO
 
 @Database(entities = [Goal::class, Habit::class, Item::class, Historic::class, User::class], version = 46)
 @TypeConverters(Converters::class)

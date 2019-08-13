@@ -2,7 +2,7 @@ package com.rafaelfelipeac.mountains.core.di.modules
 
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.mountains.core.di.modules.viewModel.ViewModelKey
-import com.rafaelfelipeac.mountains.features.createUser.CreateUserViewModel
+import com.rafaelfelipeac.mountains.features.createuser.CreateUserViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

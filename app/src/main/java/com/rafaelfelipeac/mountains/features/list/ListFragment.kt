@@ -16,13 +16,13 @@ import com.rafaelfelipeac.mountains.core.extension.getPercentage
 import com.rafaelfelipeac.mountains.core.extension.invisible
 import com.rafaelfelipeac.mountains.core.extension.isToday
 import com.rafaelfelipeac.mountains.core.extension.visible
-import com.rafaelfelipeac.mountains.core.platform.BaseFragment
-import com.rafaelfelipeac.mountains.others.adapter.ListAdapter
-import com.rafaelfelipeac.mountains.features.goal.Goal
-import com.rafaelfelipeac.mountains.features.habit.Habit
-import com.rafaelfelipeac.mountains.others.helper.SwipeAndDragHelperList
+import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
+import com.rafaelfelipeac.mountains.features.commons.presentation.ListAdapter
+import com.rafaelfelipeac.mountains.features.commons.Goal
+import com.rafaelfelipeac.mountains.features.commons.Habit
+import com.rafaelfelipeac.mountains.features.commons.presentation.SwipeAndDragHelperList
 import com.rafaelfelipeac.mountains.features.main.MainActivity
-import com.rafaelfelipeac.mountains.others.models.GoalHabit
+import com.rafaelfelipeac.mountains.features.commons.GoalHabit
 import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragment : BaseFragment() {
@@ -207,7 +207,8 @@ class ListFragment : BaseFragment() {
             }
         }
 
-        val swipeAndDragHelper = SwipeAndDragHelperList(listAdapter)
+        val swipeAndDragHelper =
+            SwipeAndDragHelperList(listAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
         listAdapter.touchHelper = touchHelper

@@ -3,8 +3,8 @@ package com.rafaelfelipeac.mountains.features.login
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.GoogleAuthProvider
-import com.rafaelfelipeac.mountains.others.models.FirebaseResult
-import com.rafaelfelipeac.mountains.core.platform.BaseViewModel
+import com.rafaelfelipeac.mountains.network.firebase.FirebaseResult
+import com.rafaelfelipeac.mountains.core.platform.base.BaseViewModel
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor() : BaseViewModel() {

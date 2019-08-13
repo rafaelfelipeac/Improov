@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.mountains.core.extension
 
-import com.rafaelfelipeac.mountains.features.habit.PeriodType
+import com.rafaelfelipeac.mountains.features.commons.PeriodType
 
 fun PeriodType.getName(): String {
     return when (this) {

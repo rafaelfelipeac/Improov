@@ -22,8 +22,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.rafaelfelipeac.mountains.R
-import com.rafaelfelipeac.mountains.others.models.User
-import com.rafaelfelipeac.mountains.core.platform.BaseActivity
+import com.rafaelfelipeac.mountains.features.commons.User
+import com.rafaelfelipeac.mountains.core.platform.base.BaseActivity
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_sheet_tips_one.*
