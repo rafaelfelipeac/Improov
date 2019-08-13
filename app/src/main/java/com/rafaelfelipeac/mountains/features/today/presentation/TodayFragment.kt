@@ -32,10 +32,14 @@ class TodayFragment : BaseFragment() {
     private var habitsLate: List<Habit>? = null
     private var habitsToday: List<Habit>? = null
     private var habitsFuture: List<Habit>? = null
+    private var habitsDone: List<Habit>? = null
 
     private var goalsLate: List<Goal>? = null
     private var goalsToday: List<Goal>? = null
     private var goalsFuture: List<Goal>? = null
+    private var goalsDone: List<Goal>? = null
+
+    private var seriesToday: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +92,8 @@ class TodayFragment : BaseFragment() {
 
         todayViewModel.getGoals()?.observe(this, Observer { goals ->
 
+            this.goalsDone = goals.filter { it.userId == user.userId && !it.archived && it.finalDate != null && it.finalDate.isToday() }
+
             this.goalsLate =
                 goals.filter { it.userId == user.userId && !it.archived && !it.done && it.finalDate != null && it.finalDate.isLate() && !it.finalDate.isToday() }
             this.goalsToday =
@@ -101,6 +107,8 @@ class TodayFragment : BaseFragment() {
         })
 
         todayViewModel.getHabits()?.observe(this, Observer { habits ->
+
+            this.habitsDone = habits.filter { it.userId == user.userId && !it.archived && it.doneToday }
 
             this.habitsLate =
                 habits.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isLate() && !it.isToday() }
@@ -171,12 +179,34 @@ class TodayFragment : BaseFragment() {
     }
 
     private fun setItemsToday() {
+        val calendar = Calendar.getInstance()
+        today_day.text = calendar.time.format()
+
+        val valueDone: Int
+        val valueFinal: Int
+
         if (goalsToday!!.isEmpty() && habitsToday!!.isEmpty()) {
             today_today_list.gone()
             today_today_placeholder.visible()
+
+            valueDone = habitsDone?.size!! + goalsDone?.size!!
+            valueFinal = habitsDone?.size!! + goalsDone?.size!!
+
+            resetToday(valueFinal.toFloat())
+            setTodayValue(valueDone.toFloat())
+
+            today_value.text = String.format("%s/%s", valueDone, valueFinal)
         } else {
             today_today_list.visible()
             today_today_placeholder.gone()
+
+            valueDone = habitsDone?.size!! + goalsDone?.size!!
+            valueFinal = habitsDone?.size!! + goalsDone?.size!! + goalsToday?.size!! + habitsToday?.size!!
+
+            resetToday(valueFinal.toFloat())
+            setTodayValue(valueDone.toFloat())
+
+            today_value.text = String.format("%s/%s", valueDone, valueFinal)
 
             listTodayAdapter = ListAdapter(this)
 
@@ -289,4 +319,12 @@ class TodayFragment : BaseFragment() {
     private fun undoDone(goal: Any) {
         todayViewModel.saveHabit(goal as Habit)
     }
+
+    private fun resetToday(maxValue: Float) {
+        if (seriesToday == 0) {
+            seriesToday = today_arcView.resetValue(0F, maxValue, 0F)
+        }
+    }
+
+    private fun setTodayValue(value: Float) = today_arcView.setup(value, seriesToday)
 }
