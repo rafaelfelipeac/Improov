@@ -16,6 +16,6 @@ class WelcomeBFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_welcome_two, container, false)
+        return inflater.inflate(R.layout.fragment_welcome_b, container, false)
     }
 }

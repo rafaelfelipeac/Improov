@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.rafaelfelipeac.mountains.R
-import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.core.extension.*
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.main.MainActivity
@@ -57,7 +56,7 @@ class CreateUserFragment : BaseFragment() {
 
             when {
                 createResult.isSuccessful -> {
-                    prefs.login = true
+                    preferences.login = true
                     navController.navigate(CreateUserFragmentDirections.actionNavigationCreateUserToNavigationList())
                 }
                 createResult.message == getString(R.string.result_error_message_email_already_in_use) -> {

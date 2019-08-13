@@ -11,7 +11,6 @@ import com.rafaelfelipeac.mountains.features.commons.presentation.ListAdapter
 import com.rafaelfelipeac.mountains.features.commons.Goal
 import com.rafaelfelipeac.mountains.features.commons.Habit
 import com.rafaelfelipeac.mountains.features.today.DayOfWeek
-import com.rafaelfelipeac.mountains.features.today.TodayFragmentDirections
 import com.rafaelfelipeac.mountains.features.commons.presentation.SwipeAndDragHelperList
 
 class DayOfWeekAdapter(val fragment: TodayFragment) : BaseAdapter<DayOfWeek>() {

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
-import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.core.extension.*
 import com.rafaelfelipeac.mountains.features.commons.GoalHabit
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
@@ -19,7 +18,6 @@ import com.rafaelfelipeac.mountains.features.commons.Goal
 import com.rafaelfelipeac.mountains.features.commons.Habit
 import com.rafaelfelipeac.mountains.features.commons.presentation.SwipeAndDragHelperList
 import com.rafaelfelipeac.mountains.features.main.MainActivity
-import com.rafaelfelipeac.mountains.features.today.TodayFragmentDirections
 import kotlinx.android.synthetic.main.fragment_today.*
 import java.util.*
 
@@ -65,13 +63,13 @@ class TodayFragment : BaseFragment() {
     }
 
     private fun setupWeekInformation() {
-        if (prefs.openWeekDays) {
+        if (preferences.openWeekDays) {
             today_week_week_information.visible()
         }
 
         today_week_week.setOnClickListener {
-            prefs.openWeekDays =
-                if (!prefs.openWeekDays) {
+            preferences.openWeekDays =
+                if (!preferences.openWeekDays) {
                     today_week_week_information.visible()
                     today_week_image.background = ContextCompat.getDrawable(context!!, R.drawable.ic_up)
                     true

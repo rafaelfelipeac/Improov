@@ -8,6 +8,7 @@ import javax.inject.Singleton
 
 @Component(modules = [
     ContextModule::class,
+    PreferencesModule::class,
     ViewModelModule::class,
     CreateUserModule::class,
     EditProfileModule::class,

@@ -1,10 +1,10 @@
-package com.rafaelfelipeac.mountains.app
+package com.rafaelfelipeac.mountains.core.persistence.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
 
-class Prefs(context: Context) {
-    private val constPrefsFilename = "com.rafaelfelipeac.mountains.prefs"
+class Preferences(context: Context) {
+    private val constPrefsFilename = "com.rafaelfelipeac.mountains.preferences"
     private val constLogin = "loginUser"
     private val constOpenWeekDays = "openWeekDays"
 

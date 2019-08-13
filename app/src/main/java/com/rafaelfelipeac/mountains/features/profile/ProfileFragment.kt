@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.rafaelfelipeac.mountains.BuildConfig
 import com.rafaelfelipeac.mountains.R
-import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 
@@ -74,7 +73,7 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun logout() {
-        prefs.login = false
+        preferences.login = false
         FirebaseAuth.getInstance().signOut()
 
         mGoogleSignInClient?.signOut()?.addOnCompleteListener {

@@ -19,8 +19,6 @@ import com.rafaelfelipeac.mountains.features.goal.Item
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.commons.Goal
 import com.rafaelfelipeac.mountains.features.commons.GoalType
-import com.rafaelfelipeac.mountains.features.goal.presentation.GoalFragmentArgs
-import com.rafaelfelipeac.mountains.features.goal.presentation.GoalFragmentDirections
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_goal.*
 import java.text.SimpleDateFormat

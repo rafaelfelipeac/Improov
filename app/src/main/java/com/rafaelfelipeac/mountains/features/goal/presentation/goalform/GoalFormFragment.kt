@@ -13,8 +13,6 @@ import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.commons.Goal
 import com.rafaelfelipeac.mountains.features.commons.GoalType
 import com.rafaelfelipeac.mountains.features.commons.Habit
-import com.rafaelfelipeac.mountains.features.goal.presentation.GoalFormFragmentArgs
-import com.rafaelfelipeac.mountains.features.goal.presentation.GoalFormFragmentDirections
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 import java.text.SimpleDateFormat
@@ -22,8 +20,7 @@ import java.util.*
 
 class GoalFormFragment : BaseFragment() {
 
-    private var goal: Goal =
-        Goal()
+    private var goal: Goal = Goal()
     private var goalId: Long? = null
     private var goals: List<Goal> = listOf()
     private var habits: List<Habit> = listOf()

@@ -16,8 +16,6 @@ import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.commons.Habit
 import com.rafaelfelipeac.mountains.features.commons.HabitType
 import com.rafaelfelipeac.mountains.features.commons.PeriodType
-import com.rafaelfelipeac.mountains.features.habit.presentation.HabitFormFragmentDirections
-import com.rafaelfelipeac.mountains.features.habit.presentation.HabitFragmentArgs
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_habit_form.*
 
@@ -37,9 +35,7 @@ class HabitFormFragment : BaseFragment() {
 
         injector.inject(this)
 
-        habitId = arguments?.let { HabitFragmentArgs.fromBundle(
-            it
-        ).habitId }
+        habitId = arguments?.let { HabitFragmentArgs.fromBundle(it).habitId }
 
         setHasOptionsMenu(true)
     }

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.rafaelfelipeac.mountains.R
-import com.rafaelfelipeac.mountains.app.prefs
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_welcome.*
@@ -37,7 +36,7 @@ class WelcomeFragment : BaseFragment() {
         super.onStart()
 
         val account = GoogleSignIn.getLastSignedInAccount(context!!)
-        if (account != null || prefs.login) {
+        if (account != null || preferences.login) {
             navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
         }
     }

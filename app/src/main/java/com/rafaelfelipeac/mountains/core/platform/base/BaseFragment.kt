@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.core.persistence.sharedpreferences.Preferences
 import com.rafaelfelipeac.mountains.core.di.modules.viewModel.ViewModelFactory
 import com.rafaelfelipeac.mountains.core.extension.gone
 import com.rafaelfelipeac.mountains.core.extension.setMessageColor
@@ -21,6 +22,9 @@ abstract class BaseFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+
+    @Inject
+    lateinit var preferences: Preferences
 
     protected val injector by lazy { (activity as BaseActivity).injector }
 
