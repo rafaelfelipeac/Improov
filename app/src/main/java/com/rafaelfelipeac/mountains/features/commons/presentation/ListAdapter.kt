@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.features.commons.adapter
+package com.rafaelfelipeac.mountains.features.commons.presentation
 
 import android.annotation.SuppressLint
 import android.view.View
@@ -11,15 +11,15 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.extension.*
-import com.rafaelfelipeac.mountains.others.models.*
-import com.rafaelfelipeac.mountains.core.platform.BaseFragment
-import com.rafaelfelipeac.mountains.core.platform.inflate
-import com.rafaelfelipeac.mountains.features.goal.Goal
-import com.rafaelfelipeac.mountains.features.habit.Habit
-import com.rafaelfelipeac.mountains.features.habit.HabitType
-import com.rafaelfelipeac.mountains.others.helper.ActionCompletionContract
+import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
+import com.rafaelfelipeac.mountains.core.platform.base.inflate
+import com.rafaelfelipeac.mountains.features.commons.Goal
+import com.rafaelfelipeac.mountains.features.commons.GoalHabit
+import com.rafaelfelipeac.mountains.features.commons.Habit
+import com.rafaelfelipeac.mountains.features.commons.HabitType
+import com.rafaelfelipeac.mountains.core.platform.ActionCompletionContract
 import com.rafaelfelipeac.mountains.features.list.ListFragment
-import com.rafaelfelipeac.mountains.features.today.TodayFragment
+import com.rafaelfelipeac.mountains.features.today.presentation.TodayFragment
 import kotlin.math.roundToInt
 
 class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
@@ -47,13 +47,28 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             TYPE_GOAL -> {
-                GoalViewHolder(parent.inflate(R.layout.list_item_goal), fragment, touchHelper, clickListener)
+                GoalViewHolder(
+                    parent.inflate(R.layout.list_item_goal),
+                    fragment,
+                    touchHelper,
+                    clickListener
+                )
             }
             TYPE_HABIT -> {
-                HabitViewHolder(parent.inflate(R.layout.list_item_habit), fragment, touchHelper, clickListener)
+                HabitViewHolder(
+                    parent.inflate(R.layout.list_item_habit),
+                    fragment,
+                    touchHelper,
+                    clickListener
+                )
             }
             else -> {
-                GoalViewHolder(parent.inflate(R.layout.list_item_goal), fragment, touchHelper, clickListener)
+                GoalViewHolder(
+                    parent.inflate(R.layout.list_item_goal),
+                    fragment,
+                    touchHelper,
+                    clickListener
+                )
             }
         }
     }
@@ -75,7 +90,8 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
                          val fragment: BaseFragment,
                          private val touchHelper: ItemTouchHelper?,
                          private val clickListener: (goalHabit: GoalHabit) -> Unit) :
-        RecyclerView.ViewHolder(itemView), ListViewHolder {
+        RecyclerView.ViewHolder(itemView),
+        ListViewHolder {
 
         private val typeIcon= itemView.findViewById<ImageView>(R.id.goal_type_icon)
         private val title = itemView.findViewById<TextView>(R.id.goal_title)!!
@@ -141,7 +157,8 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
                           val fragment: BaseFragment,
                           private val touchHelper: ItemTouchHelper?,
                           val clickListener: (goalHabit: GoalHabit) -> Unit) :
-        RecyclerView.ViewHolder(itemView), ListViewHolder {
+        RecyclerView.ViewHolder(itemView),
+        ListViewHolder {
 
         private val typeIcon = itemView.findViewById<ImageView>(R.id.habit_type_icon)!!
         private val title = itemView.findViewById<TextView>(R.id.habit_title)

@@ -1,8 +1,8 @@
-package com.rafaelfelipeac.mountains.features.habit.data
+package com.rafaelfelipeac.mountains.features.commons.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.rafaelfelipeac.mountains.features.habit.Habit
+import com.rafaelfelipeac.mountains.features.commons.Habit
 
 @Dao
 interface HabitDAO {

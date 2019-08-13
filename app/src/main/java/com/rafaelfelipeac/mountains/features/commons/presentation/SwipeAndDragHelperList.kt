@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.others.helper
+package com.rafaelfelipeac.mountains.features.commons.presentation
 
 import android.graphics.Canvas
 import androidx.constraintlayout.widget.ConstraintLayout

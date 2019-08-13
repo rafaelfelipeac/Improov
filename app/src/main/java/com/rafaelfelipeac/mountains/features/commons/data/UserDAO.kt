@@ -1,8 +1,8 @@
-package com.rafaelfelipeac.mountains.others.models.user
+package com.rafaelfelipeac.mountains.features.commons.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.rafaelfelipeac.mountains.others.models.User
+import com.rafaelfelipeac.mountains.features.commons.User
 
 @Dao
 interface UserDAO {
