@@ -89,11 +89,11 @@ class TodayFragment : BaseFragment() {
         todayViewModel.getGoals()?.observe(this, Observer { goals ->
 
             this.goalsLate =
-                goals.filter { it.userId == user.userId && !it.archived && !it.done && it.finalDate.isLate() && !it.finalDate.isToday() }
+                goals.filter { it.userId == user.userId && !it.archived && !it.done && it.finalDate != null && it.finalDate.isLate() && !it.finalDate.isToday() }
             this.goalsToday =
-                goals.filter { it.userId == user.userId && !it.archived && !it.done && it.finalDate.isToday() }
+                goals.filter { it.userId == user.userId && !it.archived && !it.done && it.finalDate != null && it.finalDate.isToday() }
             this.goalsFuture =
-                goals.filter { it.userId == user.userId && !it.archived && it.finalDate.isFuture() }
+                goals.filter { it.userId == user.userId && !it.archived && it.finalDate != null && it.finalDate.isFuture() }
 
 //            setItemsLate()
 //            setItemsToday()
@@ -122,89 +122,103 @@ class TodayFragment : BaseFragment() {
     }
 
     private fun setItemsLate() {
-        listLateAdapter = ListAdapter(this)
+        if (goalsLate?.isEmpty()!! && habitsLate?.isEmpty()!!) {
+            today_late_cl.gone()
+        } else {
+            today_late_cl.visible()
 
-        val late = mutableListOf<GoalHabit>()
+            listLateAdapter = ListAdapter(this)
 
-        goalsLate?.let { late.addAll(it) }
-        habitsLate?.let { late.addAll(it) }
+            val late = mutableListOf<GoalHabit>()
 
-        late
-            .sortedBy { it.order }
-            .let { listLateAdapter.setItems(it) }
+            goalsLate?.let { late.addAll(it) }
+            habitsLate?.let { late.addAll(it) }
 
-        listLateAdapter.clickListener = {
-            when (it) {
-                is Habit -> {
-                    val action =
-                        TodayFragmentDirections.actionNavigationTodayToNavigationHabit(
-                            it.habitId
-                        )
-                    navController.navigate(action)
-                }
-                is Goal -> {
-                    val action =
-                        TodayFragmentDirections.actionNavigationTodayToNavigationGoal(
-                            it.goalId
-                        )
-                    navController.navigate(action)
+            late
+                .sortedBy { it.order }
+                .let { listLateAdapter.setItems(it) }
+
+            listLateAdapter.clickListener = {
+                when (it) {
+                    is Habit -> {
+                        val action =
+                            TodayFragmentDirections.actionNavigationTodayToNavigationHabit(
+                                it.habitId
+                            )
+                        navController.navigate(action)
+                    }
+                    is Goal -> {
+                        val action =
+                            TodayFragmentDirections.actionNavigationTodayToNavigationGoal(
+                                it.goalId
+                            )
+                        navController.navigate(action)
+                    }
                 }
             }
+
+            val swipeAndDragHelper =
+                SwipeAndDragHelperList(listLateAdapter)
+            val touchHelper = ItemTouchHelper(swipeAndDragHelper)
+
+            listLateAdapter.touchHelper = touchHelper
+
+            today_late_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            today_late_list.adapter = listLateAdapter
+
+            touchHelper.attachToRecyclerView(today_late_list)
         }
-
-        val swipeAndDragHelper =
-            SwipeAndDragHelperList(listLateAdapter)
-        val touchHelper = ItemTouchHelper(swipeAndDragHelper)
-
-        listLateAdapter.touchHelper = touchHelper
-
-        today_late_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        today_late_list.adapter = listLateAdapter
-
-        touchHelper.attachToRecyclerView(today_late_list)
     }
 
     private fun setItemsToday() {
-        listTodayAdapter = ListAdapter(this)
+        if (goalsToday!!.isEmpty() && habitsToday!!.isEmpty()) {
+            today_today_list.gone()
+            today_today_placeholder.visible()
+        } else {
+            today_today_list.visible()
+            today_today_placeholder.gone()
 
-        val today = mutableListOf<GoalHabit>()
+            listTodayAdapter = ListAdapter(this)
 
-        goalsToday?.let { today.addAll(it) }
-        habitsToday?.let { today.addAll(it) }
+            val today = mutableListOf<GoalHabit>()
 
-        today
-            .sortedBy { it.order }
-            .let { listTodayAdapter.setItems(it) }
+            goalsToday?.let { today.addAll(it) }
+            habitsToday?.let { today.addAll(it) }
 
-        listTodayAdapter.clickListener = {
-            when (it) {
-                is Habit -> {
-                    val action =
-                        TodayFragmentDirections.actionNavigationTodayToNavigationHabit(
-                            it.habitId
-                        )
-                    navController.navigate(action)
-                }
-                is Goal -> {
-                    val action =
-                        TodayFragmentDirections.actionNavigationTodayToNavigationGoal(
-                            it.goalId
-                        )
-                    navController.navigate(action)
+            today
+                .sortedBy { it.order }
+                .let { listTodayAdapter.setItems(it) }
+
+            listTodayAdapter.clickListener = {
+                when (it) {
+                    is Habit -> {
+                        val action =
+                            TodayFragmentDirections.actionNavigationTodayToNavigationHabit(
+                                it.habitId
+                            )
+                        navController.navigate(action)
+                    }
+                    is Goal -> {
+                        val action =
+                            TodayFragmentDirections.actionNavigationTodayToNavigationGoal(
+                                it.goalId
+                            )
+                        navController.navigate(action)
+                    }
                 }
             }
+
+            val swipeAndDragHelper =
+                SwipeAndDragHelperList(listTodayAdapter)
+            val touchHelper = ItemTouchHelper(swipeAndDragHelper)
+
+            listTodayAdapter.touchHelper = touchHelper
+
+            today_today_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            today_today_list.adapter = listTodayAdapter
+
+            touchHelper.attachToRecyclerView(today_today_list)
         }
-
-        val swipeAndDragHelper =
-            SwipeAndDragHelperList(listTodayAdapter)
-        val touchHelper = ItemTouchHelper(swipeAndDragHelper)
-
-        listTodayAdapter.touchHelper = touchHelper
-
-        today_today_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        today_today_list.adapter = listTodayAdapter
-
-        touchHelper.attachToRecyclerView(today_today_list)
     }
 
     private fun setItemsWeek() {
@@ -217,7 +231,7 @@ class TodayFragment : BaseFragment() {
                     day.list.add(habit)
                 }
             }
-            goalsFuture?.forEach {goal ->
+            goalsFuture?.forEach { goal ->
                 if (day.monthDay == goal.finalDate.format()) {
                     day.list.add(goal)
                 }
@@ -248,8 +262,12 @@ class TodayFragment : BaseFragment() {
 
                         todayViewModel.saveHabit(goalHabit)
 
-                        showSnackBarWithAction(holder.itemView, String.format("%s %s.", "Próxima ocorrência: ",
-                            goalHabit.nextDate.format()), beforeHabit, ::undoDone)
+                        showSnackBarWithAction(
+                            holder.itemView, String.format(
+                                "%s %s.", "Próxima ocorrência: ",
+                                goalHabit.nextDate.format()
+                            ), beforeHabit, ::undoDone
+                        )
                     }
                 }
 

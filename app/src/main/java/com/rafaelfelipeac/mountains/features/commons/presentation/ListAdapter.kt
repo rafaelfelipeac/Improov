@@ -144,7 +144,9 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
 
             progressDone.setWidthForProgress(goal, fragment)
 
-            date.text = goal.finalDate.format()
+            if (goal.finalDate != null) {
+                date.text = goal.finalDate.format()
+            }
 
             itemDrag.setOnTouchListener { _, _ ->
                 touchHelper?.startDrag(this)
