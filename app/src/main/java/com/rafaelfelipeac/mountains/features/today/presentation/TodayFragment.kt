@@ -25,8 +25,8 @@ class TodayFragment : BaseFragment() {
 
     private val todayViewModel by lazy { viewModelFactory.get<TodayViewModel>(this) }
 
-    private lateinit var listLateAdapter: ListAdapter
-    private lateinit var listTodayAdapter: ListAdapter
+    lateinit var listLateAdapter: ListAdapter
+    lateinit var listTodayAdapter: ListAdapter
     private var dayOfWeekAdapter = DayOfWeekAdapter(this)
 
     private var habitsLate: List<Habit>? = null
@@ -60,6 +60,9 @@ class TodayFragment : BaseFragment() {
         }
 
         setupWeekInformation()
+
+        listLateAdapter = ListAdapter(this)
+        listTodayAdapter = ListAdapter(this)
 
         observeViewModel()
 
@@ -108,7 +111,7 @@ class TodayFragment : BaseFragment() {
 
         todayViewModel.getHabits()?.observe(this, Observer { habits ->
 
-            this.habitsDone = habits.filter { it.userId == user.userId && !it.archived && it.doneToday }
+            this.habitsDone = habits.filter { it.userId == user.userId && !it.archived && it.doneToday && (it.nextDate.isToday() || it.doneDate.isToday()) }
 
             this.habitsLate =
                 habits.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isLate() && !it.isToday() }
@@ -134,8 +137,6 @@ class TodayFragment : BaseFragment() {
             today_late_cl.gone()
         } else {
             today_late_cl.visible()
-
-            listLateAdapter = ListAdapter(this)
 
             val late = mutableListOf<GoalHabit>()
 
@@ -207,8 +208,6 @@ class TodayFragment : BaseFragment() {
             setTodayValue(valueDone.toFloat())
 
             today_value.text = String.format("%s/%s", valueDone, valueFinal)
-
-            listTodayAdapter = ListAdapter(this)
 
             val today = mutableListOf<GoalHabit>()
 
@@ -300,7 +299,6 @@ class TodayFragment : BaseFragment() {
                         )
                     }
                 }
-
             }
 
             ItemTouchHelper.LEFT -> {
