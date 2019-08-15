@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -29,15 +30,15 @@ class TodayFragment : BaseFragment() {
     lateinit var listTodayAdapter: ListAdapter
     private var dayOfWeekAdapter = DayOfWeekAdapter(this)
 
-    private var habitsLate: List<Habit>? = null
-    private var habitsToday: List<Habit>? = null
-    private var habitsFuture: List<Habit>? = null
-    private var habitsDone: List<Habit>? = null
+    private var habitsLate: List<Habit>? = listOf()
+    private var habitsToday: List<Habit>? = listOf()
+    private var habitsFuture: List<Habit>? = listOf()
+    private var habitsDone: List<Habit>? = listOf()
 
-    private var goalsLate: List<Goal>? = null
-    private var goalsToday: List<Goal>? = null
-    private var goalsFuture: List<Goal>? = null
-    private var goalsDone: List<Goal>? = null
+    private var goalsLate: List<Goal>? = listOf()
+    private var goalsToday: List<Goal>? = listOf()
+    private var goalsFuture: List<Goal>? = listOf()
+    private var goalsDone: List<Goal>? = listOf()
 
     private var seriesToday: Int = 0
 
@@ -48,6 +49,11 @@ class TodayFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        (activity as MainActivity).supportActionBar?.title = "Today"
+
+        showNavigation()
 
         return inflater.inflate(R.layout.fragment_today, container, false)
     }
@@ -65,8 +71,6 @@ class TodayFragment : BaseFragment() {
         listTodayAdapter = ListAdapter(this)
 
         observeViewModel()
-
-        showNavigation()
     }
 
     private fun setupWeekInformation() {
@@ -95,7 +99,8 @@ class TodayFragment : BaseFragment() {
 
         todayViewModel.getGoals()?.observe(this, Observer { goals ->
 
-            this.goalsDone = goals.filter { it.userId == user.userId && !it.archived && it.finalDate != null && it.finalDate.isToday() }
+            this.goalsDone =
+                goals.filter { it.userId == user.userId && !it.archived && it.finalDate != null && it.finalDate.isToday() }
 
             this.goalsLate =
                 goals.filter { it.userId == user.userId && !it.archived && !it.done && it.finalDate != null && it.finalDate.isLate() && !it.finalDate.isToday() }
@@ -104,14 +109,13 @@ class TodayFragment : BaseFragment() {
             this.goalsFuture =
                 goals.filter { it.userId == user.userId && !it.archived && it.finalDate != null && it.finalDate.isFuture() }
 
-//            setItemsLate()
-//            setItemsToday()
-//            setItemsWeek()
+            setupItems()
         })
 
         todayViewModel.getHabits()?.observe(this, Observer { habits ->
 
-            this.habitsDone = habits.filter { it.userId == user.userId && !it.archived && it.doneToday && (it.nextDate.isToday() || it.doneDate.isToday()) }
+            this.habitsDone =
+                habits.filter { it.userId == user.userId && !it.archived && it.doneToday && (it.nextDate.isToday() || it.doneDate.isToday()) }
 
             this.habitsLate =
                 habits.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isLate() && !it.isToday() }
@@ -120,9 +124,7 @@ class TodayFragment : BaseFragment() {
             this.habitsFuture =
                 habits.filter { it.userId == user.userId && !it.archived && it.isFuture() }
 
-            setItemsLate()
-            setItemsToday()
-            setItemsWeek()
+            setupItems()
         })
     }
 
@@ -130,6 +132,12 @@ class TodayFragment : BaseFragment() {
         super.onResume()
 
         (activity as MainActivity).closeToolbar()
+    }
+
+    private fun setupItems() {
+        setItemsLate()
+        setItemsToday()
+        setItemsWeek()
     }
 
     private fun setItemsLate() {
@@ -319,7 +327,7 @@ class TodayFragment : BaseFragment() {
     }
 
     private fun resetToday(maxValue: Float) {
-        if (seriesToday == 0) {
+        if (seriesToday == 0 && maxValue > 0) {
             seriesToday = today_arcView.resetValue(0F, maxValue, 0F)
         }
     }

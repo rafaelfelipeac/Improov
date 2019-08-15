@@ -53,13 +53,20 @@ class ListFragment : BaseFragment() {
         (activity as MainActivity).closeToolbar()
 
         setHasOptionsMenu(true)
+    }
 
-        (activity as MainActivity).bottomNavigationVisible(View.VISIBLE)
+    override fun onResume() {
+        super.onResume()
+
+        (activity as MainActivity).closeToolbar()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         (activity as MainActivity).supportActionBar?.title = "Lista"
+
+        showNavigation()
 
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
@@ -73,56 +80,8 @@ class ListFragment : BaseFragment() {
             navController.navigate(ListFragmentDirections.actionNavigationListToNavigationAdd())
         }
 
-        showNavigation()
-
         setupBottomSheetGoalDone()
         setupBottomSheetHabitDone()
-    }
-
-    private fun setupBottomSheetGoalDone() {
-        bottomSheetGoalDone = BottomSheetDialog(this.activity!!)
-        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_goal_done, null)
-        bottomSheetGoalDone.setContentView(sheetView)
-
-        bottomSheetGoalDoneYes = sheetView.findViewById(R.id.bottom_sheet_goal_done_yes)
-        bottomSheetGoalDoneNo = sheetView.findViewById(R.id.bottom_sheet_goal_done_no)
-    }
-
-    private fun setupBottomSheetHabitDone() {
-        bottomSheetHabitDone = BottomSheetDialog(this.activity!!)
-        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_habit_done, null)
-        bottomSheetHabitDone.setContentView(sheetView)
-
-        bottomSheetHabitDoneOK = sheetView.findViewById(R.id.bottom_sheet_habit_done_ok)
-    }
-
-    private fun openBottomSheetGoalDone(goal: Goal, function: (goal: Goal) -> Unit) {
-        bottomSheetGoalDone.show()
-
-        bottomSheetGoalDoneYes.setOnClickListener {
-            function(goal)
-            closeBottomSheetGoalDone()
-        }
-
-        bottomSheetGoalDoneNo.setOnClickListener {
-            closeBottomSheetGoalDone()
-        }
-    }
-
-    private fun closeBottomSheetGoalDone() {
-        bottomSheetGoalDone.hide()
-    }
-
-    private fun openBottomSheetHabitDone() {
-        bottomSheetHabitDone.show()
-
-        bottomSheetHabitDoneOK.setOnClickListener {
-            closeBottomSheetHabitDone()
-        }
-    }
-
-    private fun closeBottomSheetHabitDone() {
-        bottomSheetHabitDone.hide()
     }
 
     private fun observeViewModel() {
@@ -133,13 +92,11 @@ class ListFragment : BaseFragment() {
         listViewModel.getGoals()?.observe(this, Observer { goals ->
             this.goals = goals.filter { it.userId == user.userId && !it.archived}
 
-//            if (!isFromDragAndDrop) {
-//                setupList()
-//            }
-//
-//            isFromDragAndDrop = false
-//
-//            verifyMidnight()
+            if (!isFromDragAndDrop) {
+                setupList()
+            }
+
+            isFromDragAndDrop = false
         })
 
         listViewModel.getHabits()?.observe(this, Observer { habits ->
@@ -162,12 +119,6 @@ class ListFragment : BaseFragment() {
                 listViewModel.saveHabit(it)
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        (activity as MainActivity).closeToolbar()
     }
 
     private fun setupList() {
@@ -217,6 +168,52 @@ class ListFragment : BaseFragment() {
         list_list.adapter = listAdapter
 
         touchHelper.attachToRecyclerView(list_list)
+    }
+
+    private fun setupBottomSheetGoalDone() {
+        bottomSheetGoalDone = BottomSheetDialog(this.activity!!)
+        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_goal_done, null)
+        bottomSheetGoalDone.setContentView(sheetView)
+
+        bottomSheetGoalDoneYes = sheetView.findViewById(R.id.bottom_sheet_goal_done_yes)
+        bottomSheetGoalDoneNo = sheetView.findViewById(R.id.bottom_sheet_goal_done_no)
+    }
+
+    private fun setupBottomSheetHabitDone() {
+        bottomSheetHabitDone = BottomSheetDialog(this.activity!!)
+        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_habit_done, null)
+        bottomSheetHabitDone.setContentView(sheetView)
+
+        bottomSheetHabitDoneOK = sheetView.findViewById(R.id.bottom_sheet_habit_done_ok)
+    }
+
+    private fun openBottomSheetGoalDone(goal: Goal, function: (goal: Goal) -> Unit) {
+        bottomSheetGoalDone.show()
+
+        bottomSheetGoalDoneYes.setOnClickListener {
+            function(goal)
+            closeBottomSheetGoalDone()
+        }
+
+        bottomSheetGoalDoneNo.setOnClickListener {
+            closeBottomSheetGoalDone()
+        }
+    }
+
+    private fun closeBottomSheetGoalDone() {
+        bottomSheetGoalDone.hide()
+    }
+
+    private fun openBottomSheetHabitDone() {
+        bottomSheetHabitDone.show()
+
+        bottomSheetHabitDoneOK.setOnClickListener {
+            closeBottomSheetHabitDone()
+        }
+    }
+
+    private fun closeBottomSheetHabitDone() {
+        bottomSheetHabitDone.hide()
     }
 
     fun onViewMoved(oldPosition: Int, newPosition: Int, items: List<GoalHabit>,

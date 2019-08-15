@@ -110,17 +110,7 @@ class MainActivity : BaseActivity() {
         bottomSheetTip = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_tips_two))
         bottomSheetTipClose = bottom_sheet_tips_two_button_close
     }
-
-    fun bottomNavigationVisible(visibility: Int) {
-        if (bottom_nav != null) {
-            navLayout = nav_layout
-            navLayout.visibility = visibility
-
-            fakeBottomNav = fake_bottom_nav
-            fakeBottomNav.visibility = visibility
-        }
-    }
-
+    
     fun openBottomSheetTips() {
         bottomSheetTip.state = BottomSheetBehavior.STATE_EXPANDED
     }

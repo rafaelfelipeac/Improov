@@ -64,8 +64,6 @@ class GoalFragment : BaseFragment() {
 
         (activity as MainActivity).openToolbar()
 
-        (activity as MainActivity).bottomNavigationVisible(View.GONE)
-
         goalId = arguments?.let { GoalFragmentArgs.fromBundle(it).goalId }
         goalNew = arguments?.let { GoalFragmentArgs.fromBundle(it).goalNew }
     }
@@ -73,6 +71,8 @@ class GoalFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_goal)
+
+        hideNavigation()
 
         goalViewModel.init(goalId!!)
 
@@ -186,12 +186,6 @@ class GoalFragment : BaseFragment() {
 
             setupHistoric()
         })
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        hideNavigation()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

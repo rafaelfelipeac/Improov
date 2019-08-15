@@ -31,15 +31,16 @@ class HabitFragment : BaseFragment() {
 
         (activity as MainActivity).openToolbar()
 
-        (activity as MainActivity).bottomNavigationVisible(View.GONE)
-
         habitId = arguments?.let { HabitFragmentArgs.fromBundle(it).habitId }
         habitNew = arguments?.let { HabitFragmentArgs.fromBundle(it).habitNew }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = "Rotina"
+
+        hideNavigation()
 
         habitViewModel.init(habitId!!)
 
@@ -88,12 +89,6 @@ class HabitFragment : BaseFragment() {
         return false
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        hideNavigation()
-    }
-
     private fun setupHabit() {
         habit_name.text = habit.name
 
@@ -104,4 +99,4 @@ class HabitFragment : BaseFragment() {
             habit_last_date.text = String.format("%s %s", "Último dia do ciclo:", habit.lastDate.format())
         }
     }
- }
+}

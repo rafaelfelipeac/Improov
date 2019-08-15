@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.extension.invisible
@@ -12,7 +13,6 @@ import com.rafaelfelipeac.mountains.features.commons.GoalHabit
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.commons.Goal
 import com.rafaelfelipeac.mountains.features.commons.Habit
-import com.rafaelfelipeac.mountains.features.list.ListFragmentDirections
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_stats.*
 
@@ -32,12 +32,20 @@ class StatsFragment : BaseFragment() {
         (activity as MainActivity).closeToolbar()
 
         setHasOptionsMenu(true)
+    }
 
-        (activity as MainActivity).bottomNavigationVisible(View.VISIBLE)
+    override fun onResume() {
+        super.onResume()
+
+        (activity as MainActivity).closeToolbar()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_stats)
+
+        showNavigation()
 
         return inflater.inflate(R.layout.fragment_stats, container, false)
     }
@@ -46,8 +54,6 @@ class StatsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observeViewModel()
-
-        showNavigation()
 
         fab.setOnClickListener {
             navController.navigate(StatsFragmentDirections.actionNavigationStatsToNavigationAdd())

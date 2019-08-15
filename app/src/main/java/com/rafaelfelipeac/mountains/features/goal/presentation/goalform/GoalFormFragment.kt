@@ -48,6 +48,8 @@ class GoalFormFragment : BaseFragment() {
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_goal_form)
         (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
 
+        hideNavigation()
+
         if (goalId != 0L) { goalId?.let { goalFormViewModel.init(it) } }
 
         return inflater.inflate(R.layout.fragment_goal_form, container, false)
@@ -136,12 +138,6 @@ class GoalFormFragment : BaseFragment() {
         goalFormViewModel.goalIdInserted.observe(this, Observer {
             navController.navigateUp()
         })
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        hideNavigation()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

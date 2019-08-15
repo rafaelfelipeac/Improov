@@ -23,10 +23,12 @@ class CreateUserFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_create_user_title)
 
         hideNavigation()
+
         (activity as MainActivity).openToolbar()
 
         return inflater.inflate(R.layout.fragment_create_user, container, false)

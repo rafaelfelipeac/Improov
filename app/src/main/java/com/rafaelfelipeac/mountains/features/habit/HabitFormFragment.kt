@@ -46,6 +46,8 @@ class HabitFormFragment : BaseFragment() {
         (activity as MainActivity).supportActionBar?.title = "Novo hábito"
         (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
 
+        hideNavigation()
+
         if (habitId != 0L) { habitId?.let { habitFormViewModel.init(it) } }
 
         return inflater.inflate(R.layout.fragment_habit_form, container, false)
@@ -78,12 +80,6 @@ class HabitFormFragment : BaseFragment() {
         habit_form_periods_spinner.setOnTouchListener { _, _ -> radioButtonChecked(3) ; false }
 
         habit_form_add_days.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) { radioButtonChecked(4) } }
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        hideNavigation()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
