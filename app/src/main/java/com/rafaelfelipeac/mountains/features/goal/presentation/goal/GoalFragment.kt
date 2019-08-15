@@ -66,11 +66,8 @@ class GoalFragment : BaseFragment() {
 
         (activity as MainActivity).bottomNavigationVisible(View.GONE)
 
-        goalId = arguments?.let { GoalFragmentArgs.fromBundle(it)
-            .goalId }
-        goalNew = arguments?.let { GoalFragmentArgs.fromBundle(
-            it
-        ).goalNew }
+        goalId = arguments?.let { GoalFragmentArgs.fromBundle(it).goalId }
+        goalNew = arguments?.let { GoalFragmentArgs.fromBundle(it).goalNew }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -143,7 +140,10 @@ class GoalFragment : BaseFragment() {
             bottomSheetItemName.setText(item.name)
 
             if (item.done) {
-                bottomSheetItemDate.text = String.format(getString(R.string.bottom_sheet_item_date_format), item.doneDate?.convertDateToString())
+                bottomSheetItemDate.text = String.format(
+                    getString(R.string.bottom_sheet_item_date_format),
+                    item.doneDate?.convertDateToString()
+                )
                 bottomSheetItemDate.visible()
             } else {
                 bottomSheetItemDate.gone()
@@ -212,11 +212,9 @@ class GoalFragment : BaseFragment() {
                 return true
             }
             R.id.menu_goal_edit -> {
-                navController.navigate(
-                    GoalFragmentDirections.actionNavigationGoalToNavigationGoalForm(
-                        goal?.goalId!!
-                    )
-                )
+                val action = GoalFragmentDirections.actionNavigationGoalToNavigationGoalForm()
+                action.goalId =  goal?.goalId!!
+                navController.navigate(action)
             }
             android.R.id.home -> {
                 if (goalNew!!) {
@@ -528,11 +526,13 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun disableIcon(image: ImageView, iconDark: Int) {
-        image.disableIcon( iconDark, context!!)
+        image.disableIcon(iconDark, context!!)
     }
 
-    fun onViewMoved(oldPosition: Int, newPosition: Int, items: MutableList<Item>,
-                    function: (oldPosition: Int, newPosition: Int) -> Unit) {
+    fun onViewMoved(
+        oldPosition: Int, newPosition: Int, items: MutableList<Item>,
+        function: (oldPosition: Int, newPosition: Int) -> Unit
+    ) {
         val targetItem = items[oldPosition]
         val otherItem = items[newPosition]
 
@@ -553,7 +553,7 @@ class GoalFragment : BaseFragment() {
     fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: MutableList<Item>) {
         val item = items[position]
 
-        when(direction) {
+        when (direction) {
             ItemTouchHelper.RIGHT -> {
                 if (item.done) {
                     item.done = false

@@ -70,7 +70,7 @@ class ListFragment : BaseFragment() {
         observeViewModel()
 
         fab.setOnClickListener {
-            (activity as MainActivity).openBottomSheetFAB()
+            navController.navigate(ListFragmentDirections.actionNavigationListToNavigationAdd())
         }
 
         showNavigation()

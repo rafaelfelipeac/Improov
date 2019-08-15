@@ -12,13 +12,14 @@ import com.rafaelfelipeac.mountains.features.commons.GoalHabit
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.commons.Goal
 import com.rafaelfelipeac.mountains.features.commons.Habit
+import com.rafaelfelipeac.mountains.features.list.ListFragmentDirections
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_stats.*
 
 class StatsFragment : BaseFragment() {
 
-    var goals: List<Goal>? = null
-    var habits: List<Habit>? = null
+    var goals: List<Goal>? = listOf()
+    var habits: List<Habit>? = listOf()
     var goalsFinal: MutableList<GoalHabit>? = mutableListOf()
 
     private val statsViewModel by lazy { viewModelFactory.get<StatsViewModel>(this) }
@@ -49,7 +50,7 @@ class StatsFragment : BaseFragment() {
         showNavigation()
 
         fab.setOnClickListener {
-            (activity as MainActivity).openBottomSheetFAB()
+            navController.navigate(StatsFragmentDirections.actionNavigationStatsToNavigationAdd())
         }
     }
 

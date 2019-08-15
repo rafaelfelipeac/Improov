@@ -46,7 +46,7 @@ class HabitFormFragment : BaseFragment() {
         (activity as MainActivity).supportActionBar?.title = "Novo hábito"
         (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
 
-        habitId?.let { habitFormViewModel.init(it) }
+        if (habitId != 0L) { habitId?.let { habitFormViewModel.init(it) } }
 
         return inflater.inflate(R.layout.fragment_habit_form, container, false)
     }
@@ -57,7 +57,6 @@ class HabitFormFragment : BaseFragment() {
         observeViewModel()
 
         (activity as MainActivity).openToolbar()
-        (activity as MainActivity).closeBottomSheetFAB()
 
         setRadioHabit()
 
@@ -70,11 +69,8 @@ class HabitFormFragment : BaseFragment() {
         }
 
         habit_form_option_1.setOnClickListener { radioButtonChecked(1) }
-
         habit_form_option_2.setOnClickListener { radioButtonChecked(2) ;  block_of_radius2.visible()}
-
         habit_form_option_3.setOnClickListener { radioButtonChecked(3) }
-
         habit_form_option_4.setOnClickListener { radioButtonChecked(4) }
 
         habit_form_days_custom_1.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) { radioButtonChecked(3) } }
@@ -290,13 +286,8 @@ class HabitFormFragment : BaseFragment() {
             this.habits = goals.filter { it.userId == user.userId }
         })
 
-        habitFormViewModel.habitIdInserted.observe(this, Observer { goalId ->
-            val action =
-                HabitFormFragmentDirections.actionNavigationHabitFormToNavigationHabit(
-                    goalId
-                )
-            action.habitNew = true
-            navController.navigate(action)
+        habitFormViewModel.habitIdInserted.observe(this, Observer {
+            navController.navigateUp()
         })
     }
 

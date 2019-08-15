@@ -37,9 +37,7 @@ class GoalFormFragment : BaseFragment() {
 
         injector.inject(this)
 
-        goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(
-            it
-        ).goalId }
+        goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goalId }
 
         setHasOptionsMenu(true)
     }
@@ -50,7 +48,7 @@ class GoalFormFragment : BaseFragment() {
         (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_goal_form)
         (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
 
-        goalId?.let { goalFormViewModel.init(it) }
+        if (goalId != 0L) { goalId?.let { goalFormViewModel.init(it) } }
 
         return inflater.inflate(R.layout.fragment_goal_form, container, false)
     }
@@ -64,7 +62,6 @@ class GoalFormFragment : BaseFragment() {
         setSwitchMountains()
 
         (activity as MainActivity).openToolbar()
-        (activity as MainActivity).closeBottomSheetFAB()
 
         goalForm_help.setOnClickListener {
             (activity as MainActivity).setupBottomSheetTipsOne()
@@ -136,13 +133,8 @@ class GoalFormFragment : BaseFragment() {
             this.habits = habits.filter { it.userId == user.userId }
         })
 
-        goalFormViewModel.goalIdInserted.observe(this, Observer { goalIdForm ->
-            val action =
-                GoalFormFragmentDirections.actionNavigationGoalFormToNavigationGoal(
-                    goalIdForm
-                )
-            action.goalNew = true
-            navController.navigate(action)
+        goalFormViewModel.goalIdInserted.observe(this, Observer {
+            navController.navigateUp()
         })
     }
 
@@ -352,8 +344,7 @@ class GoalFormFragment : BaseFragment() {
             GoalType.GOAL_FINAL -> {
                 radioButtonTotal.isChecked = true
             }
-            else -> {
-            }
+            else -> { }
         }
     }
 }

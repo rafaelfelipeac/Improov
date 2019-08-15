@@ -12,6 +12,4 @@
 
     <include layout="@layout/bottom_sheet_tips_two" />
 
-    <include layout="@layout/bottom_sheet_fab" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

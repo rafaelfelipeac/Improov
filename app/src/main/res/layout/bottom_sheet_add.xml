@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/bottom_sheet_fab"
+        android:id="@+id/bottom_sheet_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -24,7 +24,7 @@
             android:id="@+id/view5"/>
 
     <android.widget.Button
-            android:id="@+id/bottom_sheet_fab_goal"
+            android:id="@+id/bottom_sheet_add_goal"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="Objetivo"
@@ -38,7 +38,7 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     <android.widget.Button
-            android:id="@+id/bottom_sheet_fab_habit"
+            android:id="@+id/bottom_sheet_add_habit"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="Hábito"

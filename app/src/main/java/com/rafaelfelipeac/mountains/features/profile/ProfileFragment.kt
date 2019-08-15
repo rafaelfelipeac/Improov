@@ -10,7 +10,6 @@ import com.rafaelfelipeac.mountains.BuildConfig
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.main.MainActivity
-
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment() {
@@ -64,7 +63,7 @@ class ProfileFragment : BaseFragment() {
         profile_version.text = String.format("%s", "Versão: " + BuildConfig.VERSION_NAME)
 
         fab.setOnClickListener {
-            (activity as MainActivity).openBottomSheetFAB()
+            navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationAdd())
         }
 
         profile_edit_profile.setOnClickListener {

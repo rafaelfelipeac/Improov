@@ -33,12 +33,8 @@ class HabitFragment : BaseFragment() {
 
         (activity as MainActivity).bottomNavigationVisible(View.GONE)
 
-        habitId = arguments?.let { HabitFragmentArgs.fromBundle(
-            it
-        ).habitId }
-        habitNew = arguments?.let { HabitFragmentArgs.fromBundle(
-            it
-        ).habitNew }
+        habitId = arguments?.let { HabitFragmentArgs.fromBundle(it).habitId }
+        habitNew = arguments?.let { HabitFragmentArgs.fromBundle(it).habitNew }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -78,11 +74,9 @@ class HabitFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_goal_edit -> {
-                navController.navigate(
-                    HabitFragmentDirections.actionNavigationHabitToNavigationHabitForm(
-                        habit.habitId
-                    )
-                )
+                val action = HabitFragmentDirections.actionNavigationHabitToNavigationHabitForm()
+                action.habitId = habit.habitId
+                navController.navigate(action)
             }
             android.R.id.home -> {
                 if (habitNew!!) {

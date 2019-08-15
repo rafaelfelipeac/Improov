@@ -14,7 +14,7 @@
             android:title="Hoje"/>
 
     <item
-            android:id="@+id/action_empty"
+            android:id="@+id/navigation_add"
             android:title=""
             android:checkable="false"
             android:checked="false"

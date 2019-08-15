@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.extension.*
-import com.rafaelfelipeac.mountains.features.commons.GoalHabit
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
-import com.rafaelfelipeac.mountains.features.commons.presentation.ListAdapter
 import com.rafaelfelipeac.mountains.features.commons.Goal
+import com.rafaelfelipeac.mountains.features.commons.GoalHabit
 import com.rafaelfelipeac.mountains.features.commons.Habit
+import com.rafaelfelipeac.mountains.features.commons.presentation.ListAdapter
 import com.rafaelfelipeac.mountains.features.commons.presentation.SwipeAndDragHelperList
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_today.*
@@ -56,7 +56,7 @@ class TodayFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fab.setOnClickListener {
-            (activity as MainActivity).openBottomSheetFAB()
+            navController.navigate(TodayFragmentDirections.actionNavigationTodayToNavigationAdd())
         }
 
         setupWeekInformation()
