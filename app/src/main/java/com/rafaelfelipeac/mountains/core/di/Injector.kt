@@ -2,7 +2,7 @@ package com.rafaelfelipeac.mountains.core.di
 
 import com.rafaelfelipeac.mountains.core.platform.base.BaseActivity
 import com.rafaelfelipeac.mountains.features.createuser.CreateUserFragment
-import com.rafaelfelipeac.mountains.features.editprofile.EditProfileFragment
+import com.rafaelfelipeac.mountains.features.profileedit.ProfileEditFragment
 import com.rafaelfelipeac.mountains.features.forgotpassword.ForgotPasswordFragment
 import com.rafaelfelipeac.mountains.features.goal.presentation.goal.GoalFragment
 import com.rafaelfelipeac.mountains.features.goal.presentation.goalform.GoalFormFragment
@@ -29,7 +29,7 @@ interface Injector {
 
     fun inject(createUserFragment: CreateUserFragment)
 
-    fun inject(editProfileFragment: EditProfileFragment)
+    fun inject(profileEditFragment: ProfileEditFragment)
 
     fun inject(forgotPasswordFragment: ForgotPasswordFragment)
 

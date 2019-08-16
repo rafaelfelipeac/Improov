@@ -22,13 +22,18 @@ fun ImageView.setWidthForProgress(goal: Goal, fragment: BaseFragment) {
     fragment.activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
     val logicalDensity = metrics.density
 
-    val px = if (goal.divideAndConquer) {
+    var px = if (goal.divideAndConquer) {
         ceil(((goal.value * 100) / goal.goldValue) * logicalDensity).toInt()
     } else {
         ceil(((goal.value * 100) / goal.singleValue) * logicalDensity).toInt()
     }
 
     val lp = layoutParams as ConstraintLayout.LayoutParams
+
+    if (px == 0) { // if px was 0, the width will be equivalent a match_constraint
+        px = 1
+    }
+
     lp.width = px
     layoutParams = lp
 }

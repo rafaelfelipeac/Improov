@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.features.editprofile
+package com.rafaelfelipeac.mountains.features.profileedit
 
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -6,7 +6,7 @@ import com.rafaelfelipeac.mountains.network.firebase.FirebaseResult
 import com.rafaelfelipeac.mountains.core.platform.base.BaseViewModel
 import javax.inject.Inject
 
-class EditProfileViewModel @Inject constructor() : BaseViewModel() {
+class ProfileEditViewModel @Inject constructor() : BaseViewModel() {
 
     var updateUser: MutableLiveData<FirebaseResult> = MutableLiveData()
 

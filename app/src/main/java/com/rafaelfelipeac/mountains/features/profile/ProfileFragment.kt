@@ -68,7 +68,7 @@ class ProfileFragment : BaseFragment() {
         }
 
         profile_edit_profile.setOnClickListener {
-            navController.navigate(R.id.action_navigation_profile_to_navigation_edit_profile)
+            navController.navigate(R.id.action_navigation_profile_to_navigation_profile_edit)
         }
     }
 

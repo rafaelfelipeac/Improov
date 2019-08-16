@@ -96,7 +96,7 @@
             android:label="fragment_profile"
             tools:layout="@layout/fragment_profile">
 
-        <action android:id="@+id/action_navigation_profile_to_navigation_edit_profile" app:destination="@id/navigation_edit_profile"/>
+        <action android:id="@+id/action_navigation_profile_to_navigation_profile_edit" app:destination="@id/navigation_profile_edit"/>
         <action android:id="@+id/action_navigation_profile_to_navigation_add" app:destination="@id/navigation_add"/>
         <action android:id="@+id/action_navigation_profile_to_navigation_welcome"
                 app:destination="@id/navigation_welcome"/>
@@ -104,10 +104,10 @@
     </fragment>
 
     <fragment
-            android:id="@+id/navigation_edit_profile"
-            android:name="com.rafaelfelipeac.mountains.features.editprofile.EditProfileFragment"
-            android:label="fragment_edit_profile"
-            tools:layout="@layout/fragment_edit_profile"/>
+            android:id="@+id/navigation_profile_edit"
+            android:name="com.rafaelfelipeac.mountains.features.profileedit.ProfileEditFragment"
+            android:label="fragment_profile_edit"
+            tools:layout="@layout/fragment_profile_edit"/>
 
     <fragment android:id="@+id/navigation_today"
               android:name="com.rafaelfelipeac.mountains.features.today.presentation.TodayFragment"

@@ -55,18 +55,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigation_edit_profile">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-75" />
-                            <option name="y" value="-337" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="navigation_forgot_password">
                     <value>
                       <LayoutPositions>
@@ -229,6 +217,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navigation_profile_edit">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-75" />
+                            <option name="y" value="-337" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

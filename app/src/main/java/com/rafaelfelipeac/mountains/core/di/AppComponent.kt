@@ -11,7 +11,7 @@ import javax.inject.Singleton
     PreferencesModule::class,
     ViewModelModule::class,
     CreateUserModule::class,
-    EditProfileModule::class,
+    ProfileEditModule::class,
     ForgotPasswordModule::class,
     GoalFormModule::class,
     GoalModule::class,

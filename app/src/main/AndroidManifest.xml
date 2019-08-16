@@ -4,6 +4,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         package="com.rafaelfelipeac.mountains">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
             android:name="com.rafaelfelipeac.mountains.app.App"
             android:allowBackup="true"
@@ -17,7 +19,7 @@
                 android:name="com.rafaelfelipeac.mountains.features.main.MainActivity"
                 android:theme="@style/AppTheme.Splash"
                 android:label="@string/app_name"
-                android:windowSoftInputMode="stateHidden"
+                android:windowSoftInputMode="adjustResize"
                 android:screenOrientation="portrait">
 
             <intent-filter>
@@ -34,7 +36,5 @@
                 android:value="4aeff5248210d88652894b2baac392e625a725ef" />
 
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

@@ -8,12 +8,13 @@
 
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:fillViewport="true"
                 tools:context=".features.goal.presentation.goalform.GoalFormFragment"
                 android:background="@color/colorPrimaryDarkOne">
@@ -378,7 +379,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/goal_form_type"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/rounded_background"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

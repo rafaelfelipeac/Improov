@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.features.editprofile
+package com.rafaelfelipeac.mountains.features.profileedit
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,11 +10,11 @@ import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.extension.*
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.main.MainActivity
-import kotlinx.android.synthetic.main.fragment_edit_profile.*
+import kotlinx.android.synthetic.main.fragment_profile_edit.*
 
-class EditProfileFragment : BaseFragment() {
+class ProfileEditFragment : BaseFragment() {
 
-    private val editProfileViewModel by lazy { viewModelFactory.get<EditProfileViewModel>(this) }
+    private val profileEditViewModel by lazy { viewModelFactory.get<ProfileEditViewModel>(this) }
 
     private var cont = 0
 
@@ -29,23 +29,23 @@ class EditProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        edit_profile_name.setText(userFirebase?.displayName)
-        edit_profile_email.setText(userFirebase?.email)
+        profile_edit_name.setText(userFirebase?.displayName)
+        profile_edit_email.setText(userFirebase?.email)
 
         observeViewModel()
 
-        edit_profile_create_button.setOnClickListener {
+        profile_edit_create_button.setOnClickListener {
             if (verifyElements()) {
                 if (updateName()) {
-                    editProfileViewModel.updateName(edit_profile_name.text.toString())
+                    profileEditViewModel.updateName(profile_edit_name.text.toString())
                     cont++
                 }
                 if (updatePassword()) {
-                    editProfileViewModel.updatePassword(edit_profile_password.text.toString())
+                    profileEditViewModel.updatePassword(profile_edit_password.text.toString())
                     cont++
                 }
                 if (updateEmail()) {
-                    editProfileViewModel.updateEmail(edit_profile_email.text.toString())
+                    profileEditViewModel.updateEmail(profile_edit_email.text.toString())
                     cont++
                 }
 
@@ -56,9 +56,9 @@ class EditProfileFragment : BaseFragment() {
             }
         }
 
-        edit_profile_eye.setOnClickListener {
-            edit_profile_password.showOrHidePassword()
-            edit_profile_confirm_password.showOrHidePassword()
+        profile_edit_eye.setOnClickListener {
+            profile_edit_password.showOrHidePassword()
+            profile_edit_confirm_password.showOrHidePassword()
         }
     }
 
@@ -69,41 +69,41 @@ class EditProfileFragment : BaseFragment() {
 
         hideNavigation()
 
-        return inflater.inflate(R.layout.fragment_edit_profile, container, false)
+        return inflater.inflate(R.layout.fragment_profile_edit, container, false)
     }
 
     private fun updateEmail(): Boolean {
-      return userFirebase?.email != edit_profile_email.text.toString()
+      return userFirebase?.email != profile_edit_email.text.toString()
     }
 
     private fun updatePassword(): Boolean {
-        return edit_profile_password.text.toString().isNotEmpty() && edit_profile_confirm_password.text.toString().isNotEmpty() &&
-                edit_profile_password.text.toString() == edit_profile_confirm_password.text.toString() &&
-                edit_profile_password.text.toString().length >= 6
+        return profile_edit_password.text.toString().isNotEmpty() && profile_edit_confirm_password.text.toString().isNotEmpty() &&
+                profile_edit_password.text.toString() == profile_edit_confirm_password.text.toString() &&
+                profile_edit_password.text.toString().length >= 6
     }
 
     private fun updateName(): Boolean {
-        return userFirebase?.displayName != edit_profile_name.text.toString()
+        return userFirebase?.displayName != profile_edit_name.text.toString()
     }
 
     private fun verifyElements(): Boolean {
         when {
-            edit_profile_email.isEmpty() -> {
+            profile_edit_email.isEmpty() -> {
                 setErrorMessage(getString(R.string.error_message_empty_fields))
                 return false
             }
-            edit_profile_email.emailIsInvalid() -> {
+            profile_edit_email.emailIsInvalid() -> {
                 setErrorMessage(getString(R.string.error_message_invalid_email))
                 return false
             }
-            (edit_profile_password.text.toString().isNotEmpty() || edit_profile_confirm_password.text.toString().isNotEmpty()) &&
-                    edit_profile_password.text.toString() != edit_profile_confirm_password.text.toString() -> {
+            (profile_edit_password.text.toString().isNotEmpty() || profile_edit_confirm_password.text.toString().isNotEmpty()) &&
+                    profile_edit_password.text.toString() != profile_edit_confirm_password.text.toString() -> {
                 setErrorMessage(getString(R.string.error_message_different_passwords))
                 return false
             }
-            (edit_profile_password.text.toString().isNotEmpty() || edit_profile_confirm_password.text.toString().isNotEmpty()) &&
-                    edit_profile_password.text.toString() == edit_profile_confirm_password.text.toString() &&
-                    edit_profile_password.text.toString().length < 6 -> {
+            (profile_edit_password.text.toString().isNotEmpty() || profile_edit_confirm_password.text.toString().isNotEmpty()) &&
+                    profile_edit_password.text.toString() == profile_edit_confirm_password.text.toString() &&
+                    profile_edit_password.text.toString().length < 6 -> {
                 setErrorMessage(getString(R.string.error_message_min_characters))
                 return false
             }
@@ -113,15 +113,15 @@ class EditProfileFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        editProfileViewModel.updateUser.observe(this, Observer { createResult ->
+        profileEditViewModel.updateUser.observe(this, Observer { createResult ->
             when {
                 createResult.isSuccessful -> {
                     if (--cont == 0) {
                         hideProgressBar()
                     }
 
-                    edit_profile_password.setText("")
-                    edit_profile_confirm_password.setText("")
+                    profile_edit_password.setText("")
+                    profile_edit_confirm_password.setText("")
 
                     showSnackBar("Perfil editado.")
                 }
@@ -143,16 +143,16 @@ class EditProfileFragment : BaseFragment() {
     }
 
     private fun setErrorMessage(message: String) {
-        edit_profile_error_message.text = message
+        profile_edit_error_message.text = message
     }
 
     private fun showProgressBar() {
-        edit_profile_progress_bar.visible()
-        edit_profile_eye.gone()
+        profile_edit_progress_bar.visible()
+        profile_edit_eye.gone()
     }
 
     private fun hideProgressBar() {
-        edit_profile_progress_bar.gone()
-        edit_profile_eye.visible()
+        profile_edit_progress_bar.gone()
+        profile_edit_eye.visible()
     }
 }
