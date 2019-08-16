@@ -110,7 +110,7 @@ class MainActivity : BaseActivity() {
         bottomSheetTip = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_tips_two))
         bottomSheetTipClose = bottom_sheet_tips_two_button_close
     }
-    
+
     fun openBottomSheetTips() {
         bottomSheetTip.state = BottomSheetBehavior.STATE_EXPANDED
     }

@@ -50,8 +50,6 @@ class ListFragment : BaseFragment() {
 
         injector.inject(this)
 
-        (activity as MainActivity).closeToolbar()
-
         setHasOptionsMenu(true)
     }
 

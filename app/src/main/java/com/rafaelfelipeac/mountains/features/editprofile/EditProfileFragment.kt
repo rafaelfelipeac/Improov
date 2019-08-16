@@ -51,6 +51,7 @@ class EditProfileFragment : BaseFragment() {
 
                 if (cont > 0) {
                     showProgressBar()
+                    hideSoftKeyboard()
                 }
             }
         }

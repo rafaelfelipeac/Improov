@@ -42,6 +42,8 @@ class TodayFragment : BaseFragment() {
 
     private var seriesToday: Int = 0
 
+    private var maxValue = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -100,7 +102,7 @@ class TodayFragment : BaseFragment() {
         todayViewModel.getGoals()?.observe(this, Observer { goals ->
 
             this.goalsDone =
-                goals.filter { it.userId == user.userId && !it.archived && it.finalDate != null && it.finalDate.isToday() }
+                goals.filter { it.userId == user.userId && !it.archived && it.finalDate != null && it.finalDate.isToday() && it.done }
 
             this.goalsLate =
                 goals.filter { it.userId == user.userId && !it.archived && !it.done && it.finalDate != null && it.finalDate.isLate() && !it.finalDate.isToday() }
@@ -191,31 +193,16 @@ class TodayFragment : BaseFragment() {
         val calendar = Calendar.getInstance()
         today_day.text = calendar.time.format()
 
-        val valueDone: Int
-        val valueFinal: Int
-
-        if (goalsToday!!.isEmpty() && habitsToday!!.isEmpty()) {
+        if (goalsToday!!.isEmpty() && habitsToday!!.isEmpty() && goalsDone?.isNotEmpty()!! && habitsDone?.isNotEmpty()!!) {
             today_today_list.gone()
             today_today_placeholder.visible()
 
-            valueDone = habitsDone?.size!! + goalsDone?.size!!
-            valueFinal = habitsDone?.size!! + goalsDone?.size!!
-
-            resetToday(valueFinal.toFloat())
-            setTodayValue(valueDone.toFloat())
-
-            today_value.text = String.format("%s/%s", valueDone, valueFinal)
+            setTodayGraph()
         } else {
             today_today_list.visible()
             today_today_placeholder.gone()
 
-            valueDone = habitsDone?.size!! + goalsDone?.size!!
-            valueFinal = habitsDone?.size!! + goalsDone?.size!! + goalsToday?.size!! + habitsToday?.size!!
-
-            resetToday(valueFinal.toFloat())
-            setTodayValue(valueDone.toFloat())
-
-            today_value.text = String.format("%s/%s", valueDone, valueFinal)
+            setTodayGraph()
 
             val today = mutableListOf<GoalHabit>()
 
@@ -281,6 +268,21 @@ class TodayFragment : BaseFragment() {
         today_week_list.adapter = dayOfWeekAdapter
     }
 
+    private fun setTodayGraph() {
+        val valueDone = habitsDone?.size!! + goalsDone?.size!!
+        val valueFinal = habitsDone?.size!! + goalsDone?.size!! + goalsToday?.size!! + habitsToday?.size!!
+
+        if (valueFinal > 0) {
+            if (valueFinal > maxValue) {
+                maxValue = valueFinal
+                resetToday()
+            }
+            setTodayValue(valueDone.toFloat())
+        }
+
+        today_value.text = String.format("%s/%s", valueDone, valueFinal)
+    }
+
     fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalHabit>) {
         val goalHabit = items[position]
 
@@ -326,10 +328,9 @@ class TodayFragment : BaseFragment() {
         todayViewModel.saveHabit(goal as Habit)
     }
 
-    private fun resetToday(maxValue: Float) {
-        if (seriesToday == 0 && maxValue > 0) {
-            seriesToday = today_arcView.resetValue(0F, maxValue, 0F)
-        }
+    private fun resetToday() {
+        seriesToday = today_arcView.resetValue(0F, maxValue.toFloat(), 0F)
+
     }
 
     private fun setTodayValue(value: Float) = today_arcView.setup(value, seriesToday)

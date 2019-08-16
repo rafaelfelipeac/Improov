@@ -54,6 +54,7 @@ class LoginFragment : BaseFragment() {
             if (verifyElements()) {
                 showProgressBar()
                 loginViewModel.signIn(login_email.text.toString(), login_password.text.toString())
+                hideSoftKeyboard()
             }
         }
 

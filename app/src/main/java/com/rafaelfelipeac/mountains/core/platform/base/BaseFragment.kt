@@ -41,6 +41,12 @@ abstract class BaseFragment : Fragment() {
     val user get () = (activity as MainActivity).user
     var userFirebase = FirebaseAuth.getInstance().currentUser
 
+    override fun onResume() {
+        super.onResume()
+
+        hideSoftKeyboard()
+    }
+
     fun showNavigation() {
         navLayout.visible()
         fakeBottomNav.visible()
@@ -83,14 +89,14 @@ abstract class BaseFragment : Fragment() {
             .show()
     }
 
-    fun showSoftKeyboard(activity: Activity) {
-        val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+    fun showSoftKeyboard() {
+        val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
         inputMethodManager!!.toggleSoftInputFromWindow(view?.windowToken, InputMethodManager.SHOW_FORCED, 0)
     }
 
-    fun hideSoftKeyboard(view: View, activity: Activity?) {
-        val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
-        inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
+    fun hideSoftKeyboard() {
+        val inputMethodManager = this.activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+        inputMethodManager?.hideSoftInputFromWindow(this.view?.windowToken, 0)
     }
 
     fun getCurrentTime() = Calendar.getInstance().time!!

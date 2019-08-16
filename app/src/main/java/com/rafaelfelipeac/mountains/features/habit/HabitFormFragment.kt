@@ -146,7 +146,7 @@ class HabitFormFragment : BaseFragment() {
         bottomSheetTipClose = (activity as MainActivity).bottomSheetTipClose
 
         bottomSheetTipClose?.setOnClickListener {
-            hideSoftKeyboard(view!!, activity)
+            hideSoftKeyboard()
             (activity as MainActivity).closeBottomSheetTips()
         }
     }

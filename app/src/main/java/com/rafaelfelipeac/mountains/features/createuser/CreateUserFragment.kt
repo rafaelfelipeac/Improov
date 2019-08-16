@@ -43,6 +43,7 @@ class CreateUserFragment : BaseFragment() {
             if (verifyElements()) {
                 showProgressBar()
                 createUserViewModel.createUser(create_user_email.text.toString(), create_user_password.text.toString())
+                hideSoftKeyboard()
             }
         }
 

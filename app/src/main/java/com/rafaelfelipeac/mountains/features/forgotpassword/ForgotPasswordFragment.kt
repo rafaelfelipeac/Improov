@@ -44,6 +44,7 @@ class ForgotPasswordFragment : BaseFragment() {
             if (verifyElements()) {
                 showProgressBar()
                 forgotPasswordViewModel.resetPassword(forgot_password_email.text.toString())
+                hideSoftKeyboard()
             }
         }
     }
