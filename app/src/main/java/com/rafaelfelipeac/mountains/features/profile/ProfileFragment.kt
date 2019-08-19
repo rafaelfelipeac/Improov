@@ -70,6 +70,10 @@ class ProfileFragment : BaseFragment() {
         profile_edit_profile.setOnClickListener {
             navController.navigate(R.id.action_navigation_profile_to_navigation_profile_edit)
         }
+
+        profile_settings_button.setOnClickListener {
+            navController.navigate(R.id.action_navigation_profile_to_navigation_settings)
+        }
     }
 
     private fun logout() {

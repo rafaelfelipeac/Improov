@@ -98,8 +98,8 @@
 
         <action android:id="@+id/action_navigation_profile_to_navigation_profile_edit" app:destination="@id/navigation_profile_edit"/>
         <action android:id="@+id/action_navigation_profile_to_navigation_add" app:destination="@id/navigation_add"/>
-        <action android:id="@+id/action_navigation_profile_to_navigation_welcome"
-                app:destination="@id/navigation_welcome"/>
+        <action android:id="@+id/action_navigation_profile_to_navigation_welcome" app:destination="@id/navigation_welcome"/>
+        <action android:id="@+id/action_navigation_profile_to_navigation_settings" app:destination="@id/navigation_settings"/>
 
     </fragment>
 
@@ -149,5 +149,9 @@
         <action android:id="@+id/action_navigation_add_to_navigation_habit_form" app:destination="@id/navigation_habit_form"/>
 
     </dialog>
+
+    <fragment android:id="@+id/navigation_settings"
+              android:name="com.rafaelfelipeac.mountains.features.settings.SettingsFragment"
+              android:label="fragment_settings"/>
 
 </navigation>

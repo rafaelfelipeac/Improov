@@ -21,6 +21,16 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/rounded_background">
 
+        <ImageView
+                android:id="@+id/profile_settings_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_settings"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+
         <TextView
                 android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
