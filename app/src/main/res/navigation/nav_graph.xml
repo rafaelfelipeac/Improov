@@ -152,6 +152,12 @@
 
     <fragment android:id="@+id/navigation_settings"
               android:name="com.rafaelfelipeac.mountains.features.settings.SettingsFragment"
-              android:label="fragment_settings"/>
+              android:label="fragment_settings">
+        <action android:id="@+id/action_navigation_settings_to_navigation_settings_language" app:destination="@id/navigation_settings_language"/>
+    </fragment>
+
+    <fragment android:id="@+id/navigation_settings_language"
+              android:name="com.rafaelfelipeac.mountains.features.settings.SettingsLanguageFragment"
+              android:label="fragment_settings_language"/>
 
 </navigation>

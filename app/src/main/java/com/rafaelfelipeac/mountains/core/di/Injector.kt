@@ -11,6 +11,7 @@ import com.rafaelfelipeac.mountains.features.habit.HabitFormFragment
 import com.rafaelfelipeac.mountains.features.list.ListFragment
 import com.rafaelfelipeac.mountains.features.login.LoginFragment
 import com.rafaelfelipeac.mountains.features.profile.ProfileFragment
+import com.rafaelfelipeac.mountains.features.settings.SettingsLanguageFragment
 import com.rafaelfelipeac.mountains.features.stats.StatsFragment
 import com.rafaelfelipeac.mountains.features.today.presentation.TodayFragment
 import com.rafaelfelipeac.mountains.features.welcome.WelcomeFragment
@@ -52,4 +53,6 @@ interface Injector {
     fun inject(welcomeBFragment: WelcomeBFragment)
 
     fun inject(welcomeCFragment: WelcomeCFragment)
+
+    fun inject (settingsLanguageFragment: SettingsLanguageFragment)
 }

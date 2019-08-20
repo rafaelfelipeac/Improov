@@ -126,5 +126,14 @@
     </string>
     <string name="goals_adapter_item_habit">Hábito:</string>
 
+    <string name="pref_key_category_language">language Category</string>
+    <string name="pref_key_language">language</string>
+    <string name="pref_key_category_about">about</string>
+    <string name="pref_key_rate">rate</string>
+    <string name="pref_key_contact">contact</string>
+    <string name="pref_key_version">version</string>
+
+    <string name="pref_key_language_portuguese">portuguese</string>
+    <string name="pref_key_language_english">english</string>
 
 </resources>
