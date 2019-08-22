@@ -2,7 +2,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="Language"
+        android:title="@string/settings_fragment_language_title"
         android:key="@string/pref_key_category_language">
 
         <Preference

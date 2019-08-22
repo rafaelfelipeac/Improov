@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.SharedPreferences
 
 class Preferences(context: Context) {
+
     private val constPrefsFilename = "com.rafaelfelipeac.mountains.preferences"
     private val constLogin = "loginUser"
     private val constOpenWeekDays = "openWeekDays"
+    private val constLanguage = "language"
 
     private val prefs: SharedPreferences = context.getSharedPreferences(constPrefsFilename, 0)
 
@@ -17,4 +19,8 @@ class Preferences(context: Context) {
     var openWeekDays: Boolean
         get() = prefs.getBoolean(constOpenWeekDays, false)
         set(value) = prefs.edit().putBoolean(constOpenWeekDays, value).apply()
+
+    var language: String
+        get() = prefs.getString(constLanguage, "en")!!
+        set(value) = prefs.edit().putString(constLanguage, value).apply()
 }

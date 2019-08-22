@@ -42,6 +42,8 @@
     <string name="fragment_login_title">Login</string>
     <string name="fragment_welcome_title"></string>
 
+    <string name="fragment_search_search_message">Pesquisa.</string>
+
     <string name="fragment_create_user_name_til_hint">Nome</string>
     <string name="fragment_create_user_email_til_hint">Email</string>
     <string name="fragment_create_user_password_til_hint">Password</string>
@@ -134,9 +136,9 @@
     <string name="pref_key_language_portuguese">portuguese</string>
     <string name="pref_key_language_english">english</string>
 
-    <string name="settings_fragment_language_title">Language</string>
+    <string name="settings_fragment_language_title">Idioma</string>
 
-    <string name="fragment_title_settings">Settings</string>
-    <string name="fragment_title_settings_language">Language</string>
+    <string name="fragment_title_settings">Configurações</string>
+    <string name="fragment_title_settings_language">Idioma</string>
 
 </resources>

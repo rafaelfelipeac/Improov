@@ -15,10 +15,12 @@ import com.rafaelfelipeac.mountains.features.commons.Habit
 import com.rafaelfelipeac.mountains.features.commons.User
 import com.rafaelfelipeac.mountains.features.commons.data.HabitDAO
 
-@Database(entities = [Goal::class, Habit::class, Item::class, Historic::class, User::class], version = 46)
+@Database(
+    entities = [Goal::class, Habit::class, Item::class, Historic::class, User::class],
+    version = 46,
+    exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class RoomDatabase : RoomDatabase() {
-
     abstract fun goalDAO(): GoalDAO
     abstract fun habitDAO(): HabitDAO
     abstract fun itemDAO(): ItemDAO

@@ -14,13 +14,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
+    }
 
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = "Settings"
+    override fun onResume() {
+        super.onResume()
 
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).openToolbar()
         (activity as MainActivity).navLayout.gone()
         (activity as MainActivity).fakeBottomNav.gone()
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_settings)
     }
 
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
