@@ -53,7 +53,7 @@ class TodayFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        (activity as MainActivity).supportActionBar?.title = "Today"
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_today)
 
         showNavigation()
 
@@ -247,7 +247,7 @@ class TodayFragment : BaseFragment() {
 
     private fun setItemsWeek() {
         val calendar = Calendar.getInstance()
-        val days = calendar.getNextWeek()
+        val days = calendar.getNextWeek(context!!)
 
         days.forEach { day ->
             habitsFuture?.forEach { habit ->
@@ -303,7 +303,7 @@ class TodayFragment : BaseFragment() {
 
                         showSnackBarWithAction(
                             holder.itemView, String.format(
-                                "%s %s.", "Próxima ocorrência: ",
+                                "%s %s.", getString(R.string.fragment_today_next_ocurrence),
                                 goalHabit.nextDate.format()
                             ), beforeHabit, ::undoDone
                         )

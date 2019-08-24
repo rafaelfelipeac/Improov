@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
+import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.persistence.sharedpreferences.Preferences
 import java.util.*
 
@@ -30,7 +31,7 @@ object LocaleHelper {
         var contextFun = context
 
         val locale =
-            if (language == "pt_br")
+            if (language == context.getString(R.string.language_key_portuguese))
                 Locale("pt", "BR")
             else
                 Locale(language)

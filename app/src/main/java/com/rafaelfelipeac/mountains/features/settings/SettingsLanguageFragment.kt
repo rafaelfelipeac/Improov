@@ -35,7 +35,7 @@ class SettingsLanguageFragment : BaseFragment() {
     private fun setupLayout() {
         val language = Preferences(context!!).language
 
-        if (language == "pt_br") {
+        if (language == getString(R.string.language_key_portuguese)) {
             radioButtonLanguage1.isChecked = true
         } else {
             radioButtonLanguage2.isChecked = true
@@ -44,10 +44,10 @@ class SettingsLanguageFragment : BaseFragment() {
         settings_language_radio_group.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.radioButtonLanguage1 -> {
-                    LocaleHelper.setLocale(activity!!, "pt_br")
+                    LocaleHelper.setLocale(activity!!, getString(R.string.language_key_portuguese))
                 }
                 R.id.radioButtonLanguage2 -> {
-                    LocaleHelper.setLocale(activity!!, "en")
+                    LocaleHelper.setLocale(activity!!, getString(R.string.language_key_english))
                 }
             }
 

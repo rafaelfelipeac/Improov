@@ -9,7 +9,7 @@
         android:background="@color/colorPrimaryDarkOne">
 
     <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewpager"
+            android:id="@+id/welcome_viewpager"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
@@ -23,7 +23,7 @@
             app:layout_constraintVertical_bias="0.0"/>
 
     <com.google.android.material.tabs.TabLayout
-            android:id="@+id/dots"
+            android:id="@+id/welcome_dots"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDarkOne"
@@ -32,19 +32,19 @@
             app:tabIndicatorHeight="0dp"
             app:tabPaddingStart="7dp"
             app:tabPaddingEnd="7dp"
-            app:layout_constraintTop_toBottomOf="@+id/viewpager"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_viewpager"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@+id/welcome_view"
             app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/viewpager"
-            app:layout_constraintEnd_toEndOf="@+id/viewpager"/>
+            app:layout_constraintStart_toStartOf="@+id/welcome_viewpager"
+            app:layout_constraintEnd_toEndOf="@+id/welcome_viewpager"/>
 
     <android.widget.Button
-            android:id="@+id/welcome_sign_in"
+            android:id="@+id/welcome_sign_in_button"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:textAllCaps="false"
-            android:text="@string/fragment_welcome_sign_in_message"
+            android:text="@string/welcome_sign_in"
             android:textSize="16sp"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"
@@ -68,11 +68,11 @@
             app:layout_constraintVertical_bias="0.90999997"/>
 
     <android.widget.Button
-            android:id="@+id/welcome_create_account"
+            android:id="@+id/welcome_create_account_button"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:textAllCaps="false"
-            android:text="@string/fragment_welcome_create_account_message"
+            android:text="@string/welcome_create_account"
             android:textSize="16sp"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"

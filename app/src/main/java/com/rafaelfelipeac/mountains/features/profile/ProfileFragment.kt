@@ -61,8 +61,6 @@ class ProfileFragment : BaseFragment() {
             dialog.show(fragmentManager!!, "tag")
         }
 
-        profile_version.text = String.format("%s", "Versão: " + BuildConfig.VERSION_NAME)
-
         fab.setOnClickListener {
             navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationAdd())
         }

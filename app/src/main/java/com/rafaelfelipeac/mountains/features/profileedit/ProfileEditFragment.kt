@@ -89,22 +89,22 @@ class ProfileEditFragment : BaseFragment() {
     private fun verifyElements(): Boolean {
         when {
             profile_edit_email.isEmpty() -> {
-                setErrorMessage(getString(R.string.error_message_empty_fields))
+                setErrorMessage(getString(R.string.create_user_empty_fields))
                 return false
             }
             profile_edit_email.emailIsInvalid() -> {
-                setErrorMessage(getString(R.string.error_message_invalid_email))
+                setErrorMessage(getString(R.string.forgot_password_message_invalid_email))
                 return false
             }
             (profile_edit_password.text.toString().isNotEmpty() || profile_edit_confirm_password.text.toString().isNotEmpty()) &&
                     profile_edit_password.text.toString() != profile_edit_confirm_password.text.toString() -> {
-                setErrorMessage(getString(R.string.error_message_different_passwords))
+                setErrorMessage(getString(R.string.create_user_different_passwords))
                 return false
             }
             (profile_edit_password.text.toString().isNotEmpty() || profile_edit_confirm_password.text.toString().isNotEmpty()) &&
                     profile_edit_password.text.toString() == profile_edit_confirm_password.text.toString() &&
                     profile_edit_password.text.toString().length < 6 -> {
-                setErrorMessage(getString(R.string.error_message_min_characters))
+                setErrorMessage(getString(R.string.create_user_min_characters))
                 return false
             }
         }
@@ -120,23 +120,23 @@ class ProfileEditFragment : BaseFragment() {
                         hideProgressBar()
                     }
 
-                    profile_edit_password.setText("")
-                    profile_edit_confirm_password.setText("")
+                    profile_edit_password.resetValue()
+                    profile_edit_confirm_password.resetValue()
 
-                    showSnackBar("Perfil editado.")
+                    showSnackBar(getString(R.string.profile_edit_success))
                 }
-                createResult.message == getString(R.string.result_error_message_email_already_in_use) -> {
+                createResult.message == getString(R.string.firebase_result_error_email_already_in_use) -> {
                     hideProgressBar()
-                    setErrorMessage(getString(R.string.snackbar_error_email_already_in_use))
+                    setErrorMessage(getString(R.string.create_user_snackbar_error_email_already_in_use))
                 }
-                createResult.message == "This operation is sensitive and requires recent authentication. Log in again before retrying this request." -> {
+                createResult.message == getString(R.string.profile_edit_need_login_again_firebase_message) -> {
                     hideProgressBar()
-                    setErrorMessage("Por questões de segurança, você precisa deslogar e logar novamente no app antes de fazer essa mudança.")
+                    setErrorMessage(getString(R.string.profile_edit_need_login_again))
                 }
                 else -> {
                     hideProgressBar()
                     setErrorMessage(getString(R.string.empty_string))
-                    showSnackBar("Erro ao atualizar informações do usuário.")
+                    showSnackBar(getString(R.string.profile_edit_error))
                 }
             }
         })

@@ -196,22 +196,22 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
             when (habit.type) {
                 HabitType.HAB_EVERYDAY -> {
                     type.text = String.format(
-                        "%s", "Todo dia"
+                        "%s", fragment.context!!.getString(R.string.habit_type_everyday)
                     )
                 }
                 HabitType.HAB_WEEKDAYS -> {
                     type.text = String.format(
                         "%s %s",
                         habit.weekDaysLong.filter { it > 0 }.size.toString(),
-                        "vezes por semana"
+                        fragment.context!!.getString(R.string.habit_type_weekdays)
                     )
                 }
                 HabitType.HAB_PERIOD -> {
                     type.text = String.format(
                         "%s %s %s",
                         habit.periodTotal.toString(),
-                        "dias por",
-                        habit.periodType.getName()
+                        fragment.context!!.getString(R.string.habit_type_period),
+                        habit.periodType.getName(fragment.context!!)
                     )
 
                     score.text = String.format(
@@ -224,9 +224,9 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
                 HabitType.HAB_CUSTOM -> {
                     type.text = String.format(
                         "%s %s %s",
-                        "A cada",
+                        fragment.context!!.getString(R.string.habit_type_custom_1),
                         habit.periodDaysBetween.toString(),
-                        "dias"
+                        fragment.context!!.getString(R.string.habit_type_custom_2)
                     )
                 }
                 HabitType.HAB_NONE -> TODO()

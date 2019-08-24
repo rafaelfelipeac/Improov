@@ -43,7 +43,7 @@ class HabitFormFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = "Novo hábito"
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_new_habit)
         (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
 
         hideNavigation()
@@ -213,13 +213,13 @@ class HabitFormFragment : BaseFragment() {
 
     private fun getHabitPeriodTypeSelected(): PeriodType {
         return when (habit_form_periods_spinner.selectedItem.toString()) {
-            "semana" -> {
+            context?.getString(R.string.period_type_week) -> {
                 PeriodType.PER_WEEK
             }
-            "mês" -> {
+            context?.getString(R.string.period_type_month) -> {
                 PeriodType.PER_MONTH
             }
-            "ano" -> {
+            context?.getString(R.string.period_type_year) -> {
                 PeriodType.PER_YEAR
             }
             else ->

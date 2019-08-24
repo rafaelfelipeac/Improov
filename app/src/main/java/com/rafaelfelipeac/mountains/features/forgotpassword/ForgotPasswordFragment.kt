@@ -28,7 +28,7 @@ class ForgotPasswordFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_forgot_password_title)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.forgot_password_title)
 
         hideNavigation()
 
@@ -56,14 +56,14 @@ class ForgotPasswordFragment : BaseFragment() {
             when {
                 sendResult.isSuccessful -> {
                     setErrorMessage(getString(R.string.empty_string))
-                    showSnackBar(getString(R.string.snackbar_success_send_email))
+                    showSnackBar(getString(R.string.forgot_password_snackbar_send_email_success))
                 }
-                sendResult.message.contains(getString(R.string.result_error_message_no_user)) -> {
-                    setErrorMessage(getString(R.string.error_message_email_not_registered))
+                sendResult.message.contains(getString(R.string.firebase_result_error_no_user)) -> {
+                    setErrorMessage(getString(R.string.forgot_password_message_email_not_registered))
                 }
                 else -> {
                     setErrorMessage(getString(R.string.empty_string))
-                    showSnackBar(getString(R.string.snackbar_error_send_email))
+                    showSnackBar(getString(R.string.forgot_password_snackbar_send_email_error))
                 }
             }
         })
@@ -72,11 +72,11 @@ class ForgotPasswordFragment : BaseFragment() {
     private fun verifyElements(): Boolean {
         when {
             forgot_password_email.isEmpty() -> {
-                setErrorMessage(getString(R.string.error_message_email))
+                setErrorMessage(getString(R.string.forgot_password_message_email))
                 return false
             }
             forgot_password_email.emailIsInvalid() -> {
-                setErrorMessage(getString(R.string.error_message_invalid_email))
+                setErrorMessage(getString(R.string.forgot_password_message_invalid_email))
                 return false
             }
         }
@@ -89,10 +89,10 @@ class ForgotPasswordFragment : BaseFragment() {
     }
 
     private fun showProgressBar() {
-        forgot_progress_bar.visible()
+        forgot_password_progress.visible()
     }
 
     private fun hideProgressBar() {
-        forgot_progress_bar.gone()
+        forgot_password_progress.gone()
     }
 }

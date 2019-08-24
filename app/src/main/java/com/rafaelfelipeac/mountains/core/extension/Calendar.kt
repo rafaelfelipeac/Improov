@@ -1,5 +1,7 @@
 package com.rafaelfelipeac.mountains.core.extension
 
+import android.content.Context
+import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.features.today.DayOfWeek
 import java.util.*
 
@@ -15,7 +17,7 @@ fun Calendar.setToMidnight() {
     set(Calendar.MILLISECOND, 0)
 }
 
-fun Calendar.getNextWeek(): List<DayOfWeek> {
+fun Calendar.getNextWeek(context: Context): List<DayOfWeek> {
     val today = Calendar.getInstance()
 
     val days = mutableListOf<DayOfWeek>()
@@ -25,7 +27,7 @@ fun Calendar.getNextWeek(): List<DayOfWeek> {
 
         days.add(
             DayOfWeek(
-                today.getDayOfWeek(today.get(Calendar.DAY_OF_WEEK)),
+                today.getDayOfWeek(today.get(Calendar.DAY_OF_WEEK), context),
                 today.time.format().toString()
             )
         )
@@ -34,15 +36,15 @@ fun Calendar.getNextWeek(): List<DayOfWeek> {
     return days
 }
 
-fun Calendar.getDayOfWeek(day: Int): String {
+fun Calendar.getDayOfWeek(day: Int, context: Context): String {
     return when (day) {
-        1 -> "Domingo"
-        2 -> "Segunda-feira"
-        3 -> "Terça-feira"
-        4 -> "Quarta-feira"
-        5 -> "Quinta-feira"
-        6 -> "Sexta-feira"
-        7 -> "Sábado"
+        1 -> context.getString(R.string.calendar_sunday)
+        2 -> context.getString(R.string.calendar_monday)
+        3 -> context.getString(R.string.calendar_tuesday)
+        4 -> context.getString(R.string.calendar_wednesday)
+        5 -> context.getString(R.string.calendar_thursday)
+        6 -> context.getString(R.string.calendar_friday)
+        7 -> context.getString(R.string.calendar_saturday)
         else -> ""
     }
 }

@@ -20,11 +20,11 @@ class AddFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bottom_sheet_add_goal.setOnClickListener {
+        add_button_goal.setOnClickListener {
             navController.navigate(AddFragmentDirections.actionNavigationAddToNavigationGoalForm())
         }
 
-        bottom_sheet_add_habit.setOnClickListener {
+        add_button_habit.setOnClickListener {
             navController.navigate(AddFragmentDirections.actionNavigationAddToNavigationHabitForm())
         }
     }

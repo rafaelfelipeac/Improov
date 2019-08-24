@@ -43,7 +43,7 @@ class StatsFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_stats)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.stats_title)
 
         showNavigation()
 
@@ -62,14 +62,12 @@ class StatsFragment : BaseFragment() {
 
     private fun observeViewModel() {
         statsViewModel.getGoals()?.observe(this, Observer { goals ->
-
             this.goals = goals.filter { it.userId == it.userId }
 
             setupStats()
         })
 
         statsViewModel.getHabits()?.observe(this, Observer { habits ->
-
             this.habits = habits.filter { it.userId == it.userId }
 
             setupStats()
@@ -80,11 +78,11 @@ class StatsFragment : BaseFragment() {
         if (goals?.isNotEmpty()!! || habits?.isNotEmpty()!!) {
             setStats()
 
-            cl_stats_on.visible()
-            cl_stats_off.invisible()
+            stats_default.visible()
+            stats_placeholder.invisible()
         } else {
-            cl_stats_on.invisible()
-            cl_stats_off.visible()
+            stats_default.invisible()
+            stats_placeholder.visible()
         }
     }
 
@@ -102,11 +100,11 @@ class StatsFragment : BaseFragment() {
         val quantitySilver = doneWithMountains.filter { it.value >= it.silverValue }.size
         val quantityGold = doneWithMountains.filter { it.value >= it.goldValue }.size
 
-        stats_message.text = String.format(getString(R.string.stats_goals_completed_message), goals!!.filter { it.done }.size)
+        stats_message.text = String.format(getString(R.string.stats_message), goals!!.filter { it.done }.size)
         stats_single_value.text = String.format(getString(R.string.stats_single_value), quantitySingles)
-        stats_mountain_bronze_value.text = String.format(getString(R.string.stats_bronze_value), quantityBronze)
-        stats_mountain_silver_value.text = String.format(getString(R.string.stats_silver_value), quantitySilver)
-        stats_mountain_gold_value.text = String.format(getString(R.string.stats_gold_value), quantityGold)
+        stats_bronze_value.text = String.format(getString(R.string.stats_bronze_value), quantityBronze)
+        stats_silver_value.text = String.format(getString(R.string.stats_silver_value), quantitySilver)
+        stats_gold_value.text = String.format(getString(R.string.stats_gold_value), quantityGold)
     }
 }
 

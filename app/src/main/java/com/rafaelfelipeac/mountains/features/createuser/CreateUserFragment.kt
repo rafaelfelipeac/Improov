@@ -25,7 +25,7 @@ class CreateUserFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_create_user_title)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.create_user_title)
 
         hideNavigation()
 
@@ -62,12 +62,12 @@ class CreateUserFragment : BaseFragment() {
                     preferences.login = true
                     navController.navigate(CreateUserFragmentDirections.actionNavigationCreateUserToNavigationList())
                 }
-                createResult.message == getString(R.string.result_error_message_email_already_in_use) -> {
-                    setErrorMessage(getString(R.string.snackbar_error_email_already_in_use))
+                createResult.message == getString(R.string.firebase_result_error_email_already_in_use) -> {
+                    setErrorMessage(getString(R.string.create_user_snackbar_error_email_already_in_use))
                 }
                 else -> {
                     setErrorMessage(getString(R.string.empty_string))
-                    showSnackBar(getString(R.string.snackbar_error_create_user))
+                    showSnackBar(getString(R.string.create_user_snackbar_error_create_user))
                 }
             }
         })
@@ -77,20 +77,20 @@ class CreateUserFragment : BaseFragment() {
         when {
             create_user_name.isEmpty() || create_user_email.isEmpty() ||
                     create_user_password.isEmpty() || create_user_confirm_password.isEmpty() -> {
-                setErrorMessage(getString(R.string.error_message_empty_fields))
+                setErrorMessage(getString(R.string.create_user_empty_fields))
                 return false
             }
             create_user_email.emailIsInvalid() -> {
-                setErrorMessage(getString(R.string.error_message_invalid_email))
+                setErrorMessage(getString(R.string.create_user_invalid_email))
                 return false
             }
             create_user_password.text.toString() != create_user_confirm_password.text.toString() -> {
-                setErrorMessage(getString(R.string.error_message_different_passwords))
+                setErrorMessage(getString(R.string.create_user_different_passwords))
                 return false
             }
             create_user_password.text.toString() == create_user_confirm_password.text.toString() &&
                     create_user_password.text.toString().length < 6 -> {
-                setErrorMessage(getString(R.string.error_message_min_characters))
+                setErrorMessage(getString(R.string.create_user_min_characters))
                 return false
             }
         }
@@ -103,12 +103,12 @@ class CreateUserFragment : BaseFragment() {
     }
 
     private fun showProgressBar() {
-        create_user_progress_bar.visible()
+        create_user_progress.visible()
         create_user_eye.gone()
     }
 
     private fun hideProgressBar() {
-        create_user_progress_bar.gone()
+        create_user_progress.gone()
         create_user_eye.visible()
     }
 }

@@ -83,8 +83,8 @@ abstract class BaseFragment : Fragment() {
     fun showDialogWithAction(title: String, function: () -> Unit) {
         AlertDialog.Builder(context!!)
             .setTitle(title)
-            .setPositiveButton("OK") { _, _ -> function() }
-            .setNegativeButton("Cancelar") { dialog, _ -> dialog.dismiss() }
+            .setPositiveButton(getString(R.string.dialog_action_positive)) { _, _ -> function() }
+            .setNegativeButton(getString(R.string.dialog_action_negative)) { dialog, _ -> dialog.dismiss() }
             .create()
             .show()
     }

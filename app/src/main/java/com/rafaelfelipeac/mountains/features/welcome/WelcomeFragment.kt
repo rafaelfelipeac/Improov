@@ -24,7 +24,7 @@ class WelcomeFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_welcome_title)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.welcome_title)
 
         hideNavigation()
 
@@ -46,15 +46,15 @@ class WelcomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        welcome_sign_in.setOnClickListener {
+        welcome_sign_in_button.setOnClickListener {
             navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationLogin())
         }
 
-        welcome_create_account.setOnClickListener {
+        welcome_create_account_button.setOnClickListener {
             navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationCreateUser())
         }
 
-        viewpager.adapter = WelcomeAdapter(fragmentManager!!)
-        dots.setupWithViewPager(viewpager, true)
+        welcome_viewpager.adapter = WelcomeAdapter(fragmentManager!!)
+        welcome_dots.setupWithViewPager(welcome_viewpager, true)
     }
 }

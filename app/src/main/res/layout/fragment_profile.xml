@@ -85,43 +85,16 @@
                 android:id="@+id/profile_logout_button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/rounded_button"
                 android:text="Log out"
                 android:textColor="@color/colorPrimaryDarkOne"
-                android:background="@drawable/rounded_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="32dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="32dp"
-                app:layout_constraintHorizontal_bias="0.0" android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/profile_develop"/>
-
-        <TextView
-                android:id="@+id/profile_develop"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Desenvolvido por Rafael Cordeiro"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/profile_version"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="32dp"
-                android:textStyle="bold"/>
-
-        <TextView
-                android:id="@+id/profile_version"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Versão: "
-                android:textColor="@color/colorWhite"
-                android:textSize="14sp"
-                android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="32dp"/>
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

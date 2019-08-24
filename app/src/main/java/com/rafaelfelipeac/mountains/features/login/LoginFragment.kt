@@ -80,7 +80,7 @@ class LoginFragment : BaseFragment() {
 
                 loginViewModel.signInGoogle(account)
             } catch (e: ApiException) {
-                Log.w(TAG, "Google sign in failed", e)
+                Log.w(TAG, getString(R.string.error_message_google_failed), e)
             }
         }
     }
@@ -94,10 +94,10 @@ class LoginFragment : BaseFragment() {
                     preferences.login = true
                     navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationList())
                 }
-                loginResult.message.contains(getString(R.string.result_error_message_invalid_password)) -> {
+                loginResult.message.contains(getString(R.string.firebase_result_error_invalid_password)) -> {
                     setErrorMessage(getString(R.string.error_message_wrong_password))
                 }
-                loginResult.message.contains(getString(R.string.result_error_message_no_user)) -> {
+                loginResult.message.contains(getString(R.string.firebase_result_error_no_user)) -> {
                     setErrorMessage(getString(R.string.error_message_user_not_registered))
                 }
                 else -> {
@@ -115,11 +115,11 @@ class LoginFragment : BaseFragment() {
                 return false
             }
             login_email.emailIsInvalid() -> {
-                setErrorMessage(getString(R.string.error_message_invalid_email))
+                setErrorMessage(getString(R.string.forgot_password_message_invalid_email))
                 return false
             }
             login_password.text.toString().length < 6 -> {
-                setErrorMessage(getString(R.string.error_message_min_characters))
+                setErrorMessage(getString(R.string.create_user_min_characters))
                 return false
             }
         }
