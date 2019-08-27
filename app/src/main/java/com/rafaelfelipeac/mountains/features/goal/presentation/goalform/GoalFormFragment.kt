@@ -45,7 +45,7 @@ class GoalFormFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_goal_form)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.goal_form_title)
         (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
 
         hideNavigation()
@@ -65,13 +65,13 @@ class GoalFormFragment : BaseFragment() {
 
         (activity as MainActivity).openToolbar()
 
-        goalForm_help.setOnClickListener {
+        goal_form_divide_and_conquest_help.setOnClickListener {
             (activity as MainActivity).setupBottomSheetTipsOne()
             setupBottomSheetTip()
             (activity as MainActivity).openBottomSheetTips()
         }
 
-        goalForm_help2.setOnClickListener {
+        goal_form_type_help.setOnClickListener {
             (activity as MainActivity).setupBottomSheetTipsTwo()
             setupBottomSheetTip()
             (activity as MainActivity).openBottomSheetTips()
@@ -84,12 +84,12 @@ class GoalFormFragment : BaseFragment() {
 
             val myFormat = "dd/MM/yyyy"
             val sdf = SimpleDateFormat(myFormat, Locale.US)
-            goal_form_date.text = sdf.format(cal.time)
+            goal_form_set_date.text = sdf.format(cal.time)
 
             goal.finalDate = cal.time
         }
 
-        goal_form_date.setOnClickListener {
+        goal_form_set_date.setOnClickListener {
             val datePickerDialog = DatePickerDialog(context!!,
                 R.style.DialogTheme,
                 dateSetListener,
@@ -150,13 +150,13 @@ class GoalFormFragment : BaseFragment() {
         when (item.itemId) {
             R.id.menu_goal_save -> {
                 if (verifyIfFieldsAreEmpty()) {
-                    showSnackBar(getString(R.string.message_some_empty_value))
+                    showSnackBar(getString(R.string.goal_form_some_empty_value))
                 } else if (getGoalTypeSelected() == GoalType.GOAL_NONE) {
-                    showSnackBar(getString(R.string.message_empty_type_goal))
+                    showSnackBar(getString(R.string.goal_form_empty_type_goal))
                 } else if (!validateMountainsValues()) {
-                    showSnackBar(getString(R.string.message_gold_silver_bronze_order))
+                    showSnackBar(getString(R.string.goal_form_gold_silver_bronze_order))
                 } else if (verifyIfIncOrDecValuesAreEmpty()) {
-                    showSnackBar(getString(R.string.message_empty_inc_dec))
+                    showSnackBar(getString(R.string.goal_form_empty_inc_dec))
                 } else {
                     val goalToSave = updateOrCreateGoal()
 
@@ -171,10 +171,10 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun verifyIfIncOrDecValuesAreEmpty() =
-        getGoalTypeSelected() == GoalType.GOAL_COUNTER && (goalForm_goal_inc_value.isEmpty() || goalForm_goal_dec_value.isEmpty())
+        getGoalTypeSelected() == GoalType.GOAL_COUNTER && (goal_form_goal_inc_value.isEmpty() || goal_form_goal_dec_value.isEmpty())
 
     private fun setSwitchMountains() {
-        form_goal_switch_mountains.setOnCheckedChangeListener { _, isChecked ->
+        goal_form_switch_divide_and_conquest.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 isDivideAndConquer(true)
             } else {
@@ -184,30 +184,30 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setRadioButtonType() {
-        radioButtonLista.setOnClickListener {
-            if (radioButtonLista.isChecked) {
-                radioButtonIncDec.isChecked = false
-                radioButtonTotal.isChecked = false
+        goal_form_radio_type_list.setOnClickListener {
+            if (goal_form_radio_type_list.isChecked) {
+                goal_form_radio_type_inc_dec.isChecked = false
+                goal_form_radio_type_total.isChecked = false
 
-                goalForm_goal_inc_dev.gone()
+                goal_form_goal_inc_dev.gone()
             }
         }
 
-        radioButtonIncDec.setOnClickListener {
-            if (radioButtonIncDec.isChecked) {
-                radioButtonLista.isChecked = false
-                radioButtonTotal.isChecked = false
+        goal_form_radio_type_inc_dec.setOnClickListener {
+            if (goal_form_radio_type_inc_dec.isChecked) {
+                goal_form_radio_type_list.isChecked = false
+                goal_form_radio_type_total.isChecked = false
 
-                goalForm_goal_inc_dev.visible()
+                goal_form_goal_inc_dev.visible()
             }
         }
 
-        radioButtonTotal.setOnClickListener {
-            if (radioButtonTotal.isChecked) {
-                radioButtonIncDec.isChecked = false
-                radioButtonLista.isChecked = false
+        goal_form_radio_type_total.setOnClickListener {
+            if (goal_form_radio_type_total.isChecked) {
+                goal_form_radio_type_inc_dec.isChecked = false
+                goal_form_radio_type_list.isChecked = false
 
-                goalForm_goal_inc_dev.gone()
+                goal_form_goal_inc_dev.gone()
             }
         }
     }
@@ -216,41 +216,41 @@ class GoalFormFragment : BaseFragment() {
         goal.divideAndConquer = isDivideAndConquer
 
         if (isDivideAndConquer) {
-            form_goal_editText_single.resetValue()
+            goal_form_single_value.resetValue()
 
-            form_goal_mountains.visible()
-            form_goal_single.invisible()
+            goal_form_mountains.visible()
+            goal_form_single.invisible()
         } else {
-            form_goal_editText_bronze.resetValue()
-            form_goal_editText_silver.resetValue()
-            form_goal_editText_gold.resetValue()
+            goal_form_editText_bronze.resetValue()
+            goal_form_silver_value.resetValue()
+            goal_form_gold_value.resetValue()
 
-            form_goal_mountains.invisible()
-            form_goal_single.visible()
+            goal_form_mountains.invisible()
+            goal_form_single.visible()
         }
     }
 
     private fun validateMountainsValues(): Boolean {
         return try {
-            val gold = form_goal_editText_gold.toFloat()
-            val silver = form_goal_editText_silver.toFloat()
-            val bronze = form_goal_editText_bronze.toFloat()
+            val gold = goal_form_gold_value.toFloat()
+            val silver = goal_form_silver_value.toFloat()
+            val bronze = goal_form_editText_bronze.toFloat()
 
             ((gold > silver) && (silver > bronze))
         } catch (e: Exception) {
-            if (form_goal_editText_single.isNotEmpty())
+            if (goal_form_single_value.isNotEmpty())
                 return true
             false
         }
     }
 
     private fun verifyIfFieldsAreEmpty(): Boolean {
-        val nameEmpty = goalForm_goal_name.isEmpty()
-        val singleEmpty = form_goal_editText_single.isEmpty()
+        val nameEmpty = goal_form_goal_name.isEmpty()
+        val singleEmpty = goal_form_single_value.isEmpty()
         val mountainsEmpty =
-            form_goal_editText_bronze.isEmpty() ||
-                    form_goal_editText_silver.isEmpty() ||
-                    form_goal_editText_gold.isEmpty()
+            goal_form_editText_bronze.isEmpty() ||
+                    goal_form_silver_value.isEmpty() ||
+                    goal_form_gold_value.isEmpty()
 
         if ((singleEmpty && mountainsEmpty) || nameEmpty)
             return true
@@ -258,8 +258,8 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun updateOrCreateGoal(): Goal {
-        goal.name = goalForm_goal_name.text.toString()
-        goal.divideAndConquer = form_goal_switch_mountains.isChecked
+        goal.name = goal_form_goal_name.text.toString()
+        goal.divideAndConquer = goal_form_switch_divide_and_conquest.isChecked
         goal.type = getGoalTypeSelected()
 
         if (goal.goalId == 0L) {
@@ -278,67 +278,67 @@ class GoalFormFragment : BaseFragment() {
             goal.updatedDate = getCurrentTime()
 
         if (getGoalTypeSelected() == GoalType.GOAL_COUNTER) {
-            goal.incrementValue = goalForm_goal_inc_value.toFloat()
-            goal.decrementValue = goalForm_goal_dec_value.toFloat()
+            goal.incrementValue = goal_form_goal_inc_value.toFloat()
+            goal.decrementValue = goal_form_goal_dec_value.toFloat()
         }
 
         if (goal.divideAndConquer) {
-            goal.bronzeValue = form_goal_editText_bronze.toFloat()
-            goal.silverValue = form_goal_editText_silver.toFloat()
-            goal.goldValue = form_goal_editText_gold.toFloat()
+            goal.bronzeValue = goal_form_editText_bronze.toFloat()
+            goal.silverValue = goal_form_silver_value.toFloat()
+            goal.goldValue = goal_form_gold_value.toFloat()
         } else {
-            goal.singleValue = form_goal_editText_single.toFloat()
+            goal.singleValue = goal_form_single_value.toFloat()
         }
 
         return goal
     }
 
     private fun getGoalTypeSelected(): GoalType {
-        if (radioButtonLista.isChecked) return GoalType.GOAL_LIST
-        if (radioButtonIncDec.isChecked) return GoalType.GOAL_COUNTER
-        if (radioButtonTotal.isChecked) return GoalType.GOAL_FINAL
+        if (goal_form_radio_type_list.isChecked) return GoalType.GOAL_LIST
+        if (goal_form_radio_type_inc_dec.isChecked) return GoalType.GOAL_COUNTER
+        if (goal_form_radio_type_total.isChecked) return GoalType.GOAL_FINAL
 
         return GoalType.GOAL_NONE
     }
 
     private fun setupGoal() {
-        goalForm_goal_name.setText(goal.name)
+        goal_form_goal_name.setText(goal.name)
 
         if (goal.finalDate != null) {
             val myFormat = "dd/MM/yyyy"
             val sdf = SimpleDateFormat(myFormat, Locale.US)
-            goal_form_date.text = sdf.format(goal.finalDate)
+            goal_form_set_date.text = sdf.format(goal.finalDate)
 
             cal.time = goal.finalDate
         }
 
         if (goal.divideAndConquer) {
-            form_goal_mountains.visible()
-            form_goal_single.invisible()
+            goal_form_mountains.visible()
+            goal_form_single.invisible()
 
-            form_goal_editText_bronze.setText(goal.bronzeValue.getNumberInRightFormat())
-            form_goal_editText_silver.setText(goal.silverValue.getNumberInRightFormat())
-            form_goal_editText_gold.setText(goal.goldValue.getNumberInRightFormat())
+            goal_form_editText_bronze.setText(goal.bronzeValue.getNumberInRightFormat())
+            goal_form_silver_value.setText(goal.silverValue.getNumberInRightFormat())
+            goal_form_gold_value.setText(goal.goldValue.getNumberInRightFormat())
 
-            form_goal_switch_mountains.isChecked = true
+            goal_form_switch_divide_and_conquest.isChecked = true
         } else {
-            form_goal_editText_single.setText(goal.singleValue.getNumberInRightFormat())
+            goal_form_single_value.setText(goal.singleValue.getNumberInRightFormat())
         }
 
         when (goal.type) {
             GoalType.GOAL_LIST -> {
-                radioButtonLista.isChecked = true
+                goal_form_radio_type_list.isChecked = true
             }
             GoalType.GOAL_COUNTER -> {
-                radioButtonIncDec.isChecked = true
+                goal_form_radio_type_inc_dec.isChecked = true
 
-                goalForm_goal_inc_dev.visible()
+                goal_form_goal_inc_dev.visible()
 
-                goalForm_goal_inc_value.setText(goal.incrementValue.getNumberInRightFormat())
-                goalForm_goal_dec_value.setText(goal.decrementValue.getNumberInRightFormat())
+                goal_form_goal_inc_value.setText(goal.incrementValue.getNumberInRightFormat())
+                goal_form_goal_dec_value.setText(goal.decrementValue.getNumberInRightFormat())
             }
             GoalType.GOAL_FINAL -> {
-                radioButtonTotal.isChecked = true
+                goal_form_radio_type_total.isChecked = true
             }
             else -> { }
         }

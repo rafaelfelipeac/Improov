@@ -21,7 +21,7 @@ class SettingsLanguageFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_settings_language)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.settings_language_language_title)
 
         return inflater.inflate(R.layout.fragment_settings_language, container, false)
     }
@@ -33,21 +33,18 @@ class SettingsLanguageFragment : BaseFragment() {
     }
 
     private fun setupLayout() {
-        val language = Preferences(context!!).language
-
-        if (language == getString(R.string.language_key_portuguese)) {
-            radioButtonLanguage1.isChecked = true
-        } else {
-            radioButtonLanguage2.isChecked = true
+        when (Preferences(context!!).language) {
+            getString(R.string.settings_language_key_portuguese) -> settings_language_radio_portuguese.isChecked = true
+            getString(R.string.settings_language_key_english) -> settings_language_radio_english.isChecked = true
         }
 
         settings_language_radio_group.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.radioButtonLanguage1 -> {
-                    LocaleHelper.setLocale(activity!!, getString(R.string.language_key_portuguese))
+                R.id.settings_language_radio_portuguese -> {
+                    LocaleHelper.setLocale(activity!!, getString(R.string.settings_language_key_portuguese))
                 }
-                R.id.radioButtonLanguage2 -> {
-                    LocaleHelper.setLocale(activity!!, getString(R.string.language_key_english))
+                R.id.settings_language_radio_english -> {
+                    LocaleHelper.setLocale(activity!!, getString(R.string.settings_language_key_english))
                 }
             }
 

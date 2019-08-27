@@ -147,7 +147,7 @@
                     android:textColor="@color/colorPrimary"/>
 
             <TextView
-                    android:id="@+id/stats_message_2"
+                    android:id="@+id/stats_message_footer"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/stats_message_continue"

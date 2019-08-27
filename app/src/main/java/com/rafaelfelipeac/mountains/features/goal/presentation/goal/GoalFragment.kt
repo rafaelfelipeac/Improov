@@ -70,7 +70,7 @@ class GoalFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_goal)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.goal_title)
 
         hideNavigation()
 
@@ -247,7 +247,7 @@ class GoalFragment : BaseFragment() {
             )
         }
 
-        goal_btn_save.setOnClickListener {
+        goal_button_save.setOnClickListener {
             if (goal_total_total.isNotEmpty()) {
                 count = goal?.value!! + goal_total_total.toFloat()
 
@@ -267,11 +267,11 @@ class GoalFragment : BaseFragment() {
                 goal_total_total.resetValue()
 
                 if (!oldDone && goal!!.done)
-                    showSnackBar(getString(R.string.message_goal_done))
+                    showSnackBar(getString(R.string.goal_message_goal_done))
                 else
-                    showSnackBar(getString(R.string.message_goal_value_updated))
+                    showSnackBar(getString(R.string.goal_message_goal_value_updated))
             } else {
-                showSnackBar(getString(R.string.message_goal_value_invalid))
+                showSnackBar(getString(R.string.goal_message_goal_value_invalid))
             }
         }
     }
@@ -570,7 +570,7 @@ class GoalFragment : BaseFragment() {
 
                 goalViewModel.deleteItem(item)
 
-                showSnackBarWithAction(holder.itemView, getString(R.string.item_swiped_deleted), item, ::deleteItem)
+                showSnackBarWithAction(holder.itemView, getString(R.string.habit_item_swiped_deleted), item, ::deleteItem)
             }
         }
     }

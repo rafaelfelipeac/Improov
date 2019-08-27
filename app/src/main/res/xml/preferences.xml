@@ -2,33 +2,33 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="@string/settings_fragment_language_title"
-        android:key="@string/pref_key_category_language">
+            android:key="@string/settings_pref_key_language_title"
+            android:title="@string/settings_language_title">
 
         <Preference
-                android:key="@string/pref_key_language"
-                android:title="Choose a language"/>
+                android:key="@string/settings_pref_key_language_message"
+                android:title="@string/settings_language_message" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-            android:title="About"
-            android:key="@string/pref_key_category_about">
+            android:key="@string/settings_pref_key_about_title"
+            android:title="@string/settings_about_title">
 
         <Preference
-                android:key="@string/pref_key_rate"
-                android:title="❤"
-                android:summary="Rate Mountains on Play Store"/>
+                android:key="@string/settings_pref_key_about_rate"
+                android:summary="@string/settings_about_rate_summary"
+                android:title="@string/settings_about_rate_title" />
 
         <Preference
-                android:key="@string/pref_key_contact"
-                android:title="Feedback"
-                android:summary="Email us for question, suggestion or bug report"/>
+                android:key="@string/settings_pref_key_about_contact"
+                android:summary="@string/settings_about_contact_summary"
+                android:title="@string/settings_about_contact_title" />
 
         <Preference
-                android:key="@string/pref_key_version"
-                android:title="Version"
-                android:summary="1.0.0"/>
+                android:key="@string/settings_pref_key_about_version"
+                android:summary="@string/settings_about_version_summary"
+                android:title="@string/settings_about_version_title" />
 
     </PreferenceCategory>
 

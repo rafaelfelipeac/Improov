@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.rafaelfelipeac.mountains.BuildConfig
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.main.MainActivity
@@ -25,8 +24,8 @@ class ProfileFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
 
-        profile_name.text = userFirebase?.displayName
-        profile_email.text = userFirebase?.email
+        profile_user_name.text = userFirebase?.displayName
+        profile_user_email.text = userFirebase?.email
 
         (activity as MainActivity).closeToolbar()
     }
@@ -34,7 +33,7 @@ class ProfileFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_profile_title)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.profile_title)
 
         showNavigation()
 
@@ -45,9 +44,9 @@ class ProfileFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         profile_logout_button.setOnClickListener {
-            val dialog = LogoutDialogFragment()
+            val dialog = ProfileLogoutDialog()
 
-            dialog.setOnClickListener(object : LogoutDialogFragment.OnClickListener {
+            dialog.setOnClickListener(object : ProfileLogoutDialog.OnClickListener {
                 override fun onClickCancel() {
                     dialog.dismiss()
                 }
@@ -65,7 +64,7 @@ class ProfileFragment : BaseFragment() {
             navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationAdd())
         }
 
-        profile_edit_profile.setOnClickListener {
+        profile_edit_profile_button.setOnClickListener {
             navController.navigate(R.id.action_navigation_profile_to_navigation_profile_edit)
         }
 

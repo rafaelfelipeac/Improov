@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="periods_array">
-        <item>semana</item>
-        <item>mês</item>
-        <item>ano</item>
+        <item>@string/habit_form_period_type_week</item>
+        <item>@string/habit_form_period_type_month</item>
+        <item>@string/habit_form_period_type_year</item>
     </string-array>
 </resources>

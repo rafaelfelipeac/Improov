@@ -196,21 +196,21 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
             when (habit.type) {
                 HabitType.HAB_EVERYDAY -> {
                     type.text = String.format(
-                        "%s", fragment.context!!.getString(R.string.habit_type_everyday)
+                        "%s", fragment.context!!.getString(R.string.list_adapter_habit_type_everyday)
                     )
                 }
                 HabitType.HAB_WEEKDAYS -> {
                     type.text = String.format(
                         "%s %s",
                         habit.weekDaysLong.filter { it > 0 }.size.toString(),
-                        fragment.context!!.getString(R.string.habit_type_weekdays)
+                        fragment.context!!.getString(R.string.list_adapter_habit_type_weekdays)
                     )
                 }
                 HabitType.HAB_PERIOD -> {
                     type.text = String.format(
                         "%s %s %s",
                         habit.periodTotal.toString(),
-                        fragment.context!!.getString(R.string.habit_type_period),
+                        fragment.context!!.getString(R.string.list_adapter_habit_type_period),
                         habit.periodType.getName(fragment.context!!)
                     )
 
@@ -224,9 +224,9 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
                 HabitType.HAB_CUSTOM -> {
                     type.text = String.format(
                         "%s %s %s",
-                        fragment.context!!.getString(R.string.habit_type_custom_1),
+                        fragment.context!!.getString(R.string.list_adapter_habit_type_custom_1),
                         habit.periodDaysBetween.toString(),
-                        fragment.context!!.getString(R.string.habit_type_custom_2)
+                        fragment.context!!.getString(R.string.list_adapter_habit_type_custom_2)
                     )
                 }
                 HabitType.HAB_NONE -> TODO()

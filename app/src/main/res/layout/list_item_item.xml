@@ -117,7 +117,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="Nova meta cadastrada"
+                android:text="@string/item_adapter_item_title"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"

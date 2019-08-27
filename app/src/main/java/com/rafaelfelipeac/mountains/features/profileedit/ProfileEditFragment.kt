@@ -34,7 +34,7 @@ class ProfileEditFragment : BaseFragment() {
 
         observeViewModel()
 
-        profile_edit_create_button.setOnClickListener {
+        profile_edit_save_button.setOnClickListener {
             if (verifyElements()) {
                 if (updateName()) {
                     profileEditViewModel.updateName(profile_edit_name.text.toString())
@@ -65,7 +65,7 @@ class ProfileEditFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_edit_profile_title)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.profile_edit_title)
 
         hideNavigation()
 
@@ -89,22 +89,22 @@ class ProfileEditFragment : BaseFragment() {
     private fun verifyElements(): Boolean {
         when {
             profile_edit_email.isEmpty() -> {
-                setErrorMessage(getString(R.string.create_user_empty_fields))
+                setErrorMessage(getString(R.string.profile_edit_empty_fields))
                 return false
             }
             profile_edit_email.emailIsInvalid() -> {
-                setErrorMessage(getString(R.string.forgot_password_message_invalid_email))
+                setErrorMessage(getString(R.string.profile_edit_invalid_email_message))
                 return false
             }
             (profile_edit_password.text.toString().isNotEmpty() || profile_edit_confirm_password.text.toString().isNotEmpty()) &&
                     profile_edit_password.text.toString() != profile_edit_confirm_password.text.toString() -> {
-                setErrorMessage(getString(R.string.create_user_different_passwords))
+                setErrorMessage(getString(R.string.profile_edit_different_passwords))
                 return false
             }
             (profile_edit_password.text.toString().isNotEmpty() || profile_edit_confirm_password.text.toString().isNotEmpty()) &&
                     profile_edit_password.text.toString() == profile_edit_confirm_password.text.toString() &&
                     profile_edit_password.text.toString().length < 6 -> {
-                setErrorMessage(getString(R.string.create_user_min_characters))
+                setErrorMessage(getString(R.string.profile_edit_min_characters))
                 return false
             }
         }
@@ -127,9 +127,9 @@ class ProfileEditFragment : BaseFragment() {
                 }
                 createResult.message == getString(R.string.firebase_result_error_email_already_in_use) -> {
                     hideProgressBar()
-                    setErrorMessage(getString(R.string.create_user_snackbar_error_email_already_in_use))
+                    setErrorMessage(getString(R.string.profile_edit_snackbar_error_email_already_in_use))
                 }
-                createResult.message == getString(R.string.profile_edit_need_login_again_firebase_message) -> {
+                createResult.message == getString(R.string.firebase_result_error_need_login_again) -> {
                     hideProgressBar()
                     setErrorMessage(getString(R.string.profile_edit_need_login_again))
                 }

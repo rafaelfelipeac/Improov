@@ -1,9 +1,7 @@
 package com.rafaelfelipeac.mountains.features.login
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +30,7 @@ class LoginFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_login_title)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.login_title)
 
         hideNavigation()
 
@@ -46,7 +44,7 @@ class LoginFragment : BaseFragment() {
 
         observeViewModel()
 
-        login_sign_in_google_button.setOnClickListener {
+        login_google_sign_in_button.setOnClickListener {
             signInGoogle()
         }
 
@@ -58,7 +56,7 @@ class LoginFragment : BaseFragment() {
             }
         }
 
-        login_forgot_password.setOnClickListener {
+        login_forgot_password_button.setOnClickListener {
             navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationForgotPassword())
         }
 
@@ -80,7 +78,7 @@ class LoginFragment : BaseFragment() {
 
                 loginViewModel.signInGoogle(account)
             } catch (e: ApiException) {
-                Log.w(TAG, getString(R.string.error_message_google_failed), e)
+                setErrorMessage(getString(R.string.login_google_failed_message))
             }
         }
     }
@@ -95,14 +93,14 @@ class LoginFragment : BaseFragment() {
                     navController.navigate(LoginFragmentDirections.actionNavigationLoginToNavigationList())
                 }
                 loginResult.message.contains(getString(R.string.firebase_result_error_invalid_password)) -> {
-                    setErrorMessage(getString(R.string.error_message_wrong_password))
+                    setErrorMessage(getString(R.string.login_wrong_password_message))
                 }
                 loginResult.message.contains(getString(R.string.firebase_result_error_no_user)) -> {
-                    setErrorMessage(getString(R.string.error_message_user_not_registered))
+                    setErrorMessage(getString(R.string.login_user_not_registered_message))
                 }
                 else -> {
                     setErrorMessage(getString(R.string.empty_string))
-                    showSnackBar(getString(R.string.snackbar_error_login))
+                    showSnackBar(getString(R.string.login_error_message))
                 }
             }
         })
@@ -111,15 +109,15 @@ class LoginFragment : BaseFragment() {
     private fun verifyElements(): Boolean {
         when {
             login_email.isEmpty() || login_password.isEmpty() -> {
-                setErrorMessage(getString(R.string.error_message_email_password))
+                setErrorMessage(getString(R.string.login_email_password_message))
                 return false
             }
             login_email.emailIsInvalid() -> {
-                setErrorMessage(getString(R.string.forgot_password_message_invalid_email))
+                setErrorMessage(getString(R.string.login_invalid_email_message))
                 return false
             }
             login_password.text.toString().length < 6 -> {
-                setErrorMessage(getString(R.string.create_user_min_characters))
+                setErrorMessage(getString(R.string.login_min_characters_message))
                 return false
             }
         }

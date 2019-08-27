@@ -62,7 +62,7 @@ class ListFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_list)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.list_title)
 
         showNavigation()
 
@@ -156,8 +156,7 @@ class ListFragment : BaseFragment() {
             }
         }
 
-        val swipeAndDragHelper =
-            SwipeAndDragHelperList(listAdapter)
+        val swipeAndDragHelper = SwipeAndDragHelperList(listAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
         listAdapter.touchHelper = touchHelper
@@ -270,7 +269,7 @@ class ListFragment : BaseFragment() {
                         listViewModel.saveGoal(goalHabit)
 
                         showSnackBarWithAction(holder.itemView,
-                            getString(R.string.goals_fragment_resolved_goal_message), goalHabit as Any, ::archiveGoal)
+                            getString(R.string.list_item_resolved_message), goalHabit as Any, ::archiveGoal)
 
                         setupList()
                     }

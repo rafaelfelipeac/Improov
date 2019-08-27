@@ -31,7 +31,7 @@ object LocaleHelper {
         var contextFun = context
 
         val locale =
-            if (language == context.getString(R.string.language_key_portuguese))
+            if (language == context.getString(R.string.settings_language_key_portuguese))
                 Locale("pt", "BR")
             else
                 Locale(language)

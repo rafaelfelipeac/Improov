@@ -1,7 +1,9 @@
 <resources>
+    <!-- App -->
     <string name="app_name">Mountains</string>
     <string name="database_name">mountains-db</string>
 
+    <!-- Commons -->
     <string name="empty_string"/>
 
     <!-- Add -->
@@ -35,29 +37,147 @@
     <string name="forgot_password_snackbar_send_email_success">Email enviado.</string>
 
     <!-- Goal -->
+    <string name="goal_title">Objetivo</string>
+    <string name="goal_message_goal_done">Objetivo concluído!</string>
+    <string name="goal_message_goal_value_updated">Valor atualizado.</string>
+    <string name="goal_message_goal_value_invalid">Valor inválido.</string>
+    <string name="goal_message_empty_items">Você ainda não tem itens adicionados nesse objetivo.</string>
+    <string name="goal_count">0</string>
+    <string name="goal_final_date">00/00/00</string>
+    <string name="goal_total_total_hint">0</string>
+    <string name="goal_button_save">Salvar</string>
 
     <!-- GoalForm -->
+    <string name="goal_form_title">Novo objetivo</string>
+    <string name="goal_form_some_empty_value">Algum valor vazio.</string>
+    <string name="goal_form_empty_type_goal">Escolha o tipo do objetivo.</string>
+    <string name="goal_form_gold_silver_bronze_order"><![CDATA[Gold > Silver > Bronze]]></string>
+    <string name="goal_form_empty_inc_dec">Inc/Dec vazios.</string>
+    <string name="goal_form_goal_name_hint">Title</string>
+    <string name="goal_form_set_date">set date</string>
+    <string name="goal_form_single_hint">Single</string>
+    <string name="goal_form_bronze_hint">Bronze</string>
+    <string name="goal_form_silver_hint">Silver</string>
+    <string name="goal_form_gold_hint">Gold</string>
+    <string name="goal_form_divide_and_conquest_title">Dividir e conquistar</string>
+    <string name="goal_form_type_title">Tipo de meta</string>
+    <string name="goal_form_radio_type_list">Lista</string>
+    <string name="goal_form_radio_type_inc_dec">Contador</string>
+    <string name="goal_form_radio_type_total">Valor final</string>
+    <string name="goal_form_goal_inc_dev">Defina os valores:</string>
+    <string name="goal_form_goal_inc_value_hint">Incrementar</string>
+    <string name="goal_form_goal_dec_value_hint">Decrementar</string>
 
     <!-- Habit -->
+    <string name="habit_title">Habit</string>
+    <string name="habit_next_ocurrence">Próxima ocorrência:</string>
+    <string name="habit_last_day_cycle">Último dia do ciclo:</string>
+    <string name="habit_value">0</string>
+    <string name="habit_next_date">Próximo ocorrencia: 13 de Abril.</string>
+    <string name="habit_last_date">Último dia do ciclo: 31 de Julho.</string>
+    <string name="habit_item_swiped_deleted">Item removido.</string>
 
     <!-- HabitForm -->
+    <string name="habit_form_title">Novo hábito</string>
+    <string name="habit_form_period_type_week">semana</string>
+    <string name="habit_form_period_type_month">mês</string>
+    <string name="habit_form_period_type_year">ano</string>
+    <string name="habit_form_period_type_custom">custom</string>
+    <string name="habit_form_period_type_none">none</string>
+    <string name="habit_form_name_hint">Title</string>
+    <string name="habit_form_routine">Rotina</string>
+    <string name="habit_form_everyday">Todo dia</string>
+    <string name="habit_form_weekdays">Alguns dias por semana</string>
+    <string name="habit_form_week_sunday">Domingo</string>
+    <string name="habit_form_week_monday">Segunda-feira</string>
+    <string name="habit_form_week_tuesday">Terça-feira</string>
+    <string name="habit_form_week_wednesday">Quarta-feira</string>
+    <string name="habit_form_week_thursday">Quinta-feira</string>
+    <string name="habit_form_week_friday">Sexta-feira</string>
+    <string name="habit_form_week_saturday">Sábado</string>
+    <string name="habit_form_days">dias por</string>
+    <string name="habit_form_custom_days">A cada</string>
+    <string name="habit_form_custom_days_2">dias</string>
 
     <!-- List -->
+    <string name="list_title">Lista</string>
+    <string name="list_item_resolved_message">Objetivo arquivado.</string>
+    <string name="list_placeholder_message">Você não tem nenhum objetivo em andamento. \n\n Comece agora mesmo!</string>
 
     <!-- Login -->
-
-    <!-- Main -->
+    <string name="login_title">Login</string>
+    <string name="login_google_failed_message">Google sign in failed</string>
+    <string name="login_wrong_password_message">Senha incorreta.</string>
+    <string name="login_user_not_registered_message">Usuário não cadastrado.</string>
+    <string name="login_error_message">Erro ao realizar login.</string>
+    <string name="login_email_password_message">Digite um email e uma senha.</string>
+    <string name="login_invalid_email_message">Digite um email válido.</string>
+    <string name="login_min_characters_message">A senha deve ter no mínimo 6 caracteres.</string>
+    <string name="login_google_sign_in_message">Sign in with Google</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_sign_in_button">Login</string>
+    <string name="login_forgot_password_button">Esqueci minha senha</string>
+    <string name="login_login_with_email_message">ou faça o login com seu email</string>
 
     <!-- Profile -->
+    <string name="profile_title">Perfil</string>
+    <string name="profile_user_name">Profile Fragment</string>
+    <string name="profile_user_email">emailuser@gmail.com</string>
+    <string name="profile_edit_profile_message">Editar perfil</string>
+    <string name="profile_logout_button_message">Log out</string>
+
+    <!-- ProfileLogout -->
+    <string name="profile_logout_message">Tem certeza que deseja sair do app?</string>
+    <string name="profile_logout_cancel_message">Cancelar</string>
+    <string name="profile_logout_ok_message">OK</string>
 
     <!-- ProfileEdit -->
+    <string name="profile_edit_title">Editar perfil</string>
+    <string name="profile_edit_empty_fields">Preenchar todos campos.</string>
+    <string name="profile_edit_invalid_email_message">Digite um email válido.</string>
+    <string name="profile_edit_different_passwords">Senhas não coincidem.</string>
+    <string name="profile_edit_min_characters">A senha deve ter no mínimo 6 caracteres.</string>
+    <string name="profile_edit_snackbar_error_email_already_in_use">Email já cadastrado.</string>
+    <string name="profile_edit_success">Perfil editado.</string>
+    <string name="profile_edit_error">Erro ao atualizar informações do usuário.</string>
+    <string name="profile_edit_need_login_again">Por questões de segurança, você precisa deslogar e logar novamente no app antes de fazer essa mudança.</string>
+    <string name="profile_edit_name_hint">Nome</string>
+    <string name="profile_edit_email_hint">Email</string>
+    <string name="profile_edit_password_hint">Senha</string>
+    <string name="profile_edit_confirm_password_hint">Confirme a senha</string>
+    <string name="profile_edit_save_message">Salvar</string>
 
     <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_language_title">Language</string>
+    <string name="settings_language_message">Choose a language</string>
+    <string name="settings_about_title">About</string>
+    <string name="settings_about_rate_summary">Rate Mountains on Play Store</string>
+    <string name="settings_about_rate_title">❤</string>
+    <string name="settings_about_contact_title">Feedback</string>
+    <string name="settings_about_contact_summary">Email us for question, suggestion or bug report</string>
+    <string name="settings_about_version_title">Version</string>
+    <string name="settings_about_version_summary">@string/versionName</string>
+    <string name="settings_pref_key_language_title">language category</string>
+    <string name="settings_pref_key_language_message">language</string>
+    <string name="settings_pref_key_about_title">about category</string>
+    <string name="settings_pref_key_about_message">about</string>
+    <string name="settings_pref_key_about_rate">rate</string>
+    <string name="settings_pref_key_about_contact">contact</string>
+    <string name="settings_pref_key_about_version">version</string>
+
+    <!-- SettingsLanguage -->
+    <string name="settings_language_language_title">Language</string>
+    <string name="settings_language_radio_portuguese">Português</string>
+    <string name="settings_language_radio_english">English</string>
+    <string name="settings_language_key_portuguese">pt_br</string>
+    <string name="settings_language_key_english">en</string>
 
     <!-- Stats -->
     <string name="stats_title">Estatísticas</string>
-    <string name="stats_placeholder_message">Crie objetivos para acompanhar estatísticas e informações de progresso.</string>
     <string name="stats_message">Você já concluiu %d objetivos!</string>
+    <string name="stats_placeholder_message">Crie objetivos para acompanhar estatísticas e informações de progresso.</string>
     <string name="stats_message_continue">Continue trabalhando em seus objetivos!    Sua sala de troféus nunca estará cheia o bastante.</string>
     <string name="stats_single_value">%dx</string>
     <string name="stats_bronze_value">%dx</string>
@@ -65,6 +185,15 @@
     <string name="stats_gold_value">%dx</string>
 
     <!-- Today -->
+    <string name="today_title">Today</string>
+    <string name="today_next_ocurrence">Próxima ocorrência:</string>
+    <string name="today_day_message">9 NOV</string>
+    <string name="today_value_message">3/10</string>
+    <string name="today_late_title">ATRASADO</string>
+    <string name="today_today_title">HOJE</string>
+    <string name="today_week_title">Próxima semana</string>
+    <string name="today_placeholder_message">Você não tem nenhum objetivo em andamento. \n\n Comece agora mesmo!</string>
+    <string name="today_today_placeholder_message">Parabéns! :)   Atingiu todos os objetivos do dia!</string>
 
     <!-- Welcome -->
     <string name="welcome_title">Welcome</string>
@@ -74,14 +203,50 @@
     <string name="welcome_b_message">Use o Mountains para acessar rapidamente os objetivos em andamento. \n\nSe mantenha atualizado do caminho a percorrer.</string>
     <string name="welcome_c_message">Tenha acesso a estatísticas e acompanhe o seu progresso. \n\nMantenha seus objetivos sempre em desenvolvimento.</string>
 
+    <!-- ListAdapter -->
+    <string name="list_adapter_habit_type_everyday">Todo dia</string>
+    <string name="list_adapter_habit_type_weekdays">vezes por semana</string>
+    <string name="list_adapter_habit_type_period">dias por</string>
+    <string name="list_adapter_habit_type_custom_1">A cada</string>
+    <string name="list_adapter_habit_type_custom_2">dias</string>
+    <string name="list_adapter_item_title">Título do objetivo</string>
+    <string name="list_adapter_item_type">Rotina: todo dia.</string>
+    <string name="list_adapter_date">25 Jul</string>
+    <string name="list_adapter_score">1/5</string>
 
+    <!-- HistoricAdapter -->
+    <string name="historic_adapter_date_time">00/00/0000 – 00:00:00</string>
+    <string name="historic_adapter_value">+ 0.00</string>
 
+    <!-- ItemAdapter -->
+    <string name="item_adapter_item_title">Nova meta cadastrada</string>
 
+    <!-- DayOfWeekAdapter -->
+    <string name="day_of_week_month_day">25 JUL</string>
+    <string name="day_of_week_day">DAY</string>
 
     <!-- Firebase messages -->
     <string name="firebase_result_error_invalid_password">The password is invalid or the user does not have a password.</string>
     <string name="firebase_result_error_no_user">There is no user record corresponding to this identifier.</string>
     <string name="firebase_result_error_email_already_in_use">The email address is already in use by another account.</string>
+    <string name="firebase_result_error_need_login_again">This operation is sensitive and requires recent authentication. Log in again before retrying this request.</string>
+
+
+
+    <!-- BottomSheet -->
+    <!-- BottomSheet -->
+    <!-- BottomSheet -->
+    <!-- BottomSheet -->
+    <!-- BottomSheet -->
+
+
+
+
+
+
+
+
+
 
 
 
@@ -93,66 +258,26 @@
 
 
     <string name="title_home">Home</string>
-    <string name="message_empty_inc_dec">Inc/Dec vazios.</string>
-    <string name="message_gold_silver_bronze_order"><![CDATA[Gold > Silver > Bronze]]></string>
-    <string name="message_some_empty_value">Algum valor vazio.</string>
-    <string name="message_goal_value_invalid">Valor inválido.</string>
-    <string name="message_goal_value_updated">Valor atualizado.</string>
-    <string name="message_goal_done">Objetivo concluído!</string>
-    <string name="message_empty_items">Você ainda não tem itens adicionados nesse objetivo.</string>
-    <string name="message_empty_goals">Você não tem nenhum objetivo em andamento. \n\n Comece agora mesmo!</string>
 
     <string name="bottom_sheet_item_title_add">Novo item</string>
     <string name="bottom_sheet_item_title_edit">Editar item</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bottom_sheet_empty_item_name">Nome do item está vazio.</string>
-    <string name="fragment_title_goal">Objetivo</string>
+
     <string name="bottom_sheet_item_date_format">Concluído em %s.</string>
-    <string name="item_swiped_deleted">Item removido.</string>
+
     <string name="percentage_100">100.00%s</string>
     <string name="percentage_others">%.2f %s</string>
     <string name="percentage_symbol">%</string>
     <string name="snackbar_action_undo">DESFAZER</string>
-    <string name="fragment_title_goal_form">Novo objetivo</string>
+
     <string name="fragment_title_goals">Objetivos</string>
     <string name="goals_fragment_resolved_goal_message">Objetivo arquivado.</string>
 
-
-
-    <string name="fragment_profile_title">Perfil</string>
     <string name="fragment_search_title">Pesquisar</string>
 
-
-    <string name="fragment_login_title">Login</string>
-
-
-
-
     <string name="fragment_login_or_message">ou</string>
-    <string name="fragment_login_email_til_hint">Email</string>
-    <string name="fragment_login_password_til_hint">Password</string>
-    <string name="fragment_login_sign_in_button_message">Login</string>
-    <string name="fragment_login_forgot_password_message">Esqueci minha senha</string>
-
-
-
-
-
-
-
-
-    <string name="error_message_email_password">Digite um email e uma senha.</string>
-    <string name="error_message_wrong_password">Senha incorreta.</string>
-    <string name="error_message_user_not_registered">Usuário não cadastrado.</string>
-
-
-    <string name="snackbar_error_login">Erro ao realizar login.</string>
-
-
-    <string name="message_empty_type_goal">Escolha o tipo do objetivo.</string>
-    <string name="fragment_edit_profile_title">Editar perfil</string>
-
 
     <!--forgot-->
 
@@ -179,53 +304,11 @@
     </string>
     <string name="goals_adapter_item_habit">Hábito:</string>
 
-    <string name="pref_key_category_language">language Category</string>
-    <string name="pref_key_language">language</string>
-    <string name="pref_key_category_about">about</string>
-    <string name="pref_key_rate">rate</string>
-    <string name="pref_key_contact">contact</string>
-    <string name="pref_key_version">version</string>
-
     <string name="pref_key_language_portuguese">portuguese</string>
     <string name="pref_key_language_english">english</string>
 
-    <string name="settings_fragment_language_title">Language</string>
-
-    <string name="fragment_title_settings">Settings</string>
-    <string name="fragment_title_settings_language">Language</string>
-    <string name="calendar_sunday">Domingo</string>
-    <string name="calendar_monday">Segunda-feira</string>
-    <string name="calendar_tuesday">Terça-feira</string>
-    <string name="calendar_wednesday">Quarta-feira</string>
-    <string name="calendar_thursday">Quinta-feira</string>
-    <string name="calendar_friday">Sexta-feira</string>
-    <string name="calendar_saturday">Sábado</string>
-    <string name="period_type_week">semana</string>
-    <string name="period_type_month">mês</string>
-    <string name="period_type_year">ano</string>
-    <string name="period_type_custom">custom</string>
-    <string name="period_type_none">none</string>
     <string name="dialog_action_positive">OK</string>
     <string name="dialog_action_negative">Cancelar</string>
-    <string name="habit_type_everyday">Todo dia</string>
-    <string name="habit_type_weekdays">vezes por semana</string>
-    <string name="habit_type_period">dias por</string>
-    <string name="habit_type_custom_1">A cada</string>
-    <string name="habit_type_custom_2">dias</string>
-    <string name="fragment_title_new_habit">Novo hábito</string>
-    <string name="fragment_title_habit">Habit</string>
-    <string name="habit_fragment_next_ocurrence">Próxima ocorrência:</string>
-    <string name="habit_fragment_last_day_cycle">Último dia do ciclo:</string>
-    <string name="fragment_title_list">Lista</string>
-    <string name="error_message_google_failed">Google sign in failed</string>
-    <string name="profile_edit_success">Perfil editado.</string>
-    <string name="profile_edit_need_login_again_firebase_message">This operation is sensitive and requires recent authentication. Log in again before retrying this request.</string>
-    <string name="profile_edit_need_login_again">Por questões de segurança, você precisa deslogar e logar novamente no app antes de fazer essa mudança.</string>
-    <string name="profile_edit_error">Erro ao atualizar informações do usuário.</string>
-    <string name="language_key_portuguese">pt_br</string>
-    <string name="language_key_english">en</string>
-    <string name="fragment_title_today">Today</string>
-    <string name="fragment_today_next_ocurrence">Próxima ocorrência:</string>
 
 
 </resources>

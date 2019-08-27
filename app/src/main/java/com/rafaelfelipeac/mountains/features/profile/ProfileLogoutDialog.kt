@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment
 import com.rafaelfelipeac.mountains.R
 import kotlinx.android.synthetic.main.fragment_logout_dialog.*
 
-class LogoutDialogFragment : DialogFragment() {
+class ProfileLogoutDialog : DialogFragment() {
 
     private var onClickListener: OnClickListener? = null
 
@@ -29,9 +29,9 @@ class LogoutDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        logout_dialog_cancel.setOnClickListener { onClickListener?.onClickCancel() }
+        profile_logout_cancel_button.setOnClickListener { onClickListener?.onClickCancel() }
 
-        logout_dialog_ok.setOnClickListener { onClickListener?.onClickOK() }
+        profile_logout_ok_button.setOnClickListener { onClickListener?.onClickOK() }
     }
 
     fun setOnClickListener(onOkClickListener: OnClickListener) {

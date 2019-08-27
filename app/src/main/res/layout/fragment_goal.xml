@@ -39,7 +39,7 @@
                 android:id="@+id/goal_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="@string/goal_count"
                 android:textColor="@color/colorPrimary"
                 android:textSize="26sp"
                 android:gravity="center"
@@ -54,7 +54,7 @@
                 android:id="@+id/goal_final_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="00/00/00"
+                android:text="@string/goal_final_date"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
                 android:gravity="center"
@@ -63,7 +63,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="24dp" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="8dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -115,7 +116,6 @@
                     android:layout_marginEnd="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp"
-                    android:text=""
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:layout_marginTop="16dp"/>
@@ -331,7 +331,6 @@
                     android:id="@+id/goal_inc_dec_total"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:text=""
                     android:gravity="center"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"
@@ -376,12 +375,12 @@
                 android:layout_marginTop="16dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/goal_total_total_til"
+                    android:id="@+id/goal_total_total_hint"
                     android:layout_width="200dp"
                     android:layout_height="60dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:hint=""
+                    android:hint="@string/goal_total_total_hint"
                     android:gravity="center"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"
@@ -410,10 +409,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/goal_btn_save"
+                    android:id="@+id/goal_button_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Salvar"
+                    android:text="@string/goal_button_save"
                     app:srcCompat="@mipmap/ic_update"
                     app:tint="@color/colorPrimaryDarkTwo"
                     app:backgroundTint="@color/colorPrimary"
@@ -423,7 +422,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/goal_total_total_til"
+                    app:layout_constraintStart_toEndOf="@+id/goal_total_total_hint"
                     android:layout_marginStart="8dp"
                     app:layout_constraintHorizontal_bias="0.0"/>
 
@@ -469,7 +468,7 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
             <ImageView
-                    android:id="@+id/items_placeholder_image"
+                    android:id="@+id/goal_items_placeholder_image"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@mipmap/ic_app_logo"
@@ -484,10 +483,10 @@
                     app:layout_constraintVertical_bias="0.25"/>
 
             <TextView
-                    android:id="@+id/items_placeholder_message"
+                    android:id="@+id/goal_items_placeholder_message"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/message_empty_items"
+                    android:text="@string/goal_message_empty_items"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"
                     android:textAlignment="center"
@@ -496,14 +495,14 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="32dp"
                     android:layout_marginTop="24dp"
-                    app:layout_constraintTop_toBottomOf="@+id/items_placeholder_image"
+                    app:layout_constraintTop_toBottomOf="@+id/goal_items_placeholder_image"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginBottom="32dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/historic_items_list"
+                android:id="@+id/goal_historic_items_list"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:overScrollMode="never"

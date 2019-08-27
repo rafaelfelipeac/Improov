@@ -23,25 +23,26 @@ class SettingsFragment : PreferenceFragmentCompat() {
         (activity as MainActivity).openToolbar()
         (activity as MainActivity).navLayout.gone()
         (activity as MainActivity).fakeBottomNav.gone()
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_settings)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.settings_title)
     }
 
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
         return when (preference.key) {
-            getString(R.string.pref_key_language) -> {
+            getString(R.string.settings_pref_key_language_message) -> {
                 navController.navigate(SettingsFragmentDirections.actionNavigationSettingsToNavigationSettingsLanguage())
                 true
             }
-            getString(R.string.pref_key_rate) -> {
+            getString(R.string.settings_pref_key_about_rate) -> {
                false
                 // abrir play store
             }
-            getString(R.string.pref_key_contact) -> {
+            getString(R.string.settings_pref_key_about_contact) -> {
                 false
                 // abrir email
             }
-            getString(R.string.pref_key_version) -> {
+            getString(R.string.settings_pref_key_about_version) -> {
                 false
+                // pegar versão
             }
             else -> {
                 super.onPreferenceTreeClick(preference)

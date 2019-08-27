@@ -32,10 +32,10 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-                android:id="@+id/profile_name"
+                android:id="@+id/profile_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profile Fragment"
+                android:text="@string/profile_user_name"
                 android:textColor="@color/colorPrimary"
                 android:textSize="32sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -49,26 +49,26 @@
                 android:layout_marginBottom="8dp"/>
 
         <TextView
-                android:id="@+id/profile_email"
+                android:id="@+id/profile_user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="emailuser@gmail.com"
+                android:text="@string/profile_user_email"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/profile_name"
+                app:layout_constraintStart_toStartOf="@+id/profile_user_name"
                 android:layout_marginStart="32dp"
-                app:layout_constraintTop_toBottomOf="@+id/profile_name"
+                app:layout_constraintTop_toBottomOf="@+id/profile_user_name"
                 app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintEnd_toEndOf="@+id/profile_name"
+                app:layout_constraintEnd_toEndOf="@+id/profile_user_name"
                 android:layout_marginEnd="32dp"/>
 
         <android.widget.Button
-                android:id="@+id/profile_edit_profile"
+                android:id="@+id/profile_edit_profile_button"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:text="Editar perfil"
+                android:text="@string/profile_edit_profile_message"
                 android:textColor="@color/colorPrimaryDarkOne"
                 android:background="@drawable/rounded_button"
                 app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +78,7 @@
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/profile_logout_button"
                 android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/profile_email"
+                app:layout_constraintTop_toBottomOf="@+id/profile_user_email"
                 app:layout_constraintVertical_bias="0.100000024"/>
 
         <android.widget.Button
@@ -89,7 +89,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/rounded_button"
-                android:text="Log out"
+                android:text="@string/profile_logout_button_message"
                 android:textColor="@color/colorPrimaryDarkOne"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

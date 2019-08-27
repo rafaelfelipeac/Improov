@@ -38,7 +38,7 @@ class HabitFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_habit)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.habit_title)
 
         hideNavigation()
 
@@ -92,11 +92,11 @@ class HabitFragment : BaseFragment() {
     private fun setupHabit() {
         habit_name.text = habit.name
 
-        habit_next_date.text = String.format("%s %s", getString(R.string.habit_fragment_next_ocurrence), habit.nextDate.format())
+        habit_next_date.text = String.format("%s %s", getString(R.string.habit_next_ocurrence), habit.nextDate.format())
 
         if (habit.type == HabitType.HAB_PERIOD || habit.type == HabitType.HAB_CUSTOM) {
             habit_last_date.visible()
-            habit_last_date.text = String.format("%s %s", getString(R.string.habit_fragment_last_day_cycle), habit.lastDate.format())
+            habit_last_date.text = String.format("%s %s", getString(R.string.habit_last_day_cycle), habit.lastDate.format())
         }
     }
 }

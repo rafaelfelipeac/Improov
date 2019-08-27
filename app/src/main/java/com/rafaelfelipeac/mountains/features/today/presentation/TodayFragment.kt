@@ -53,7 +53,7 @@ class TodayFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_today)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.today_title)
 
         showNavigation()
 
@@ -77,17 +77,17 @@ class TodayFragment : BaseFragment() {
 
     private fun setupWeekInformation() {
         if (preferences.openWeekDays) {
-            today_week_week_information.visible()
+            today_week_information.visible()
         }
 
         today_week_week.setOnClickListener {
             preferences.openWeekDays =
                 if (!preferences.openWeekDays) {
-                    today_week_week_information.visible()
+                    today_week_information.visible()
                     today_week_image.background = ContextCompat.getDrawable(context!!, R.drawable.ic_up)
                     true
                 } else {
-                    today_week_week_information.gone()
+                    today_week_information.gone()
                     today_week_image.background = ContextCompat.getDrawable(context!!, R.drawable.ic_down)
                     false
                 }
@@ -191,7 +191,7 @@ class TodayFragment : BaseFragment() {
 
     private fun setItemsToday() {
         val calendar = Calendar.getInstance()
-        today_day.text = calendar.time.format()
+        today_day_message.text = calendar.time.format()
 
         if (goalsToday!!.isEmpty() && habitsToday!!.isEmpty() && goalsDone?.isNotEmpty()!! && habitsDone?.isNotEmpty()!!) {
             today_today_list.gone()
@@ -280,7 +280,7 @@ class TodayFragment : BaseFragment() {
             setTodayValue(valueDone.toFloat())
         }
 
-        today_value.text = String.format("%s/%s", valueDone, valueFinal)
+        today_day_value.text = String.format("%s/%s", valueDone, valueFinal)
     }
 
     fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalHabit>) {
@@ -303,7 +303,7 @@ class TodayFragment : BaseFragment() {
 
                         showSnackBarWithAction(
                             holder.itemView, String.format(
-                                "%s %s.", getString(R.string.fragment_today_next_ocurrence),
+                                "%s %s.", getString(R.string.today_next_ocurrence),
                                 goalHabit.nextDate.format()
                             ), beforeHabit, ::undoDone
                         )

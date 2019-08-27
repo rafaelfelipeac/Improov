@@ -43,7 +43,7 @@ class HabitFormFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.fragment_title_new_habit)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.habit_form_title)
         (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
 
         hideNavigation()
@@ -64,18 +64,18 @@ class HabitFormFragment : BaseFragment() {
 
         setDropdown()
 
-        habit_form_help3.setOnClickListener {
+        habit_form_help.setOnClickListener {
             (activity as MainActivity).setupBottomSheetTipsTwo()
             setupBottomSheetTip()
             (activity as MainActivity).openBottomSheetTips()
         }
 
         habit_form_option_1.setOnClickListener { radioButtonChecked(1) }
-        habit_form_option_2.setOnClickListener { radioButtonChecked(2) ;  block_of_radius2.visible()}
+        habit_form_option_2.setOnClickListener { radioButtonChecked(2) ;  habit_form_week.visible()}
         habit_form_option_3.setOnClickListener { radioButtonChecked(3) }
         habit_form_option_4.setOnClickListener { radioButtonChecked(4) }
 
-        habit_form_days_custom_1.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) { radioButtonChecked(3) } }
+        habit_form_period_days.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) { radioButtonChecked(3) } }
 
         habit_form_periods_spinner.setOnTouchListener { _, _ -> radioButtonChecked(3) ; false }
 
@@ -115,28 +115,28 @@ class HabitFormFragment : BaseFragment() {
     private fun radioButtonChecked(pos: Int) {
         when (pos) {
             1 -> {
-                radioButton1.isChecked = true
-                radioButton2.isChecked = false
-                radioButton3.isChecked = false
-                radioButton4.isChecked = false
+                habit_form_radio_everyday.isChecked = true
+                habit_form_radio_weekdays.isChecked = false
+                habit_form_radio_period.isChecked = false
+                habit_form_radio_custom.isChecked = false
             }
             2 -> {
-                radioButton1.isChecked = false
-                radioButton2.isChecked = true
-                radioButton3.isChecked = false
-                radioButton4.isChecked = false
+                habit_form_radio_everyday.isChecked = false
+                habit_form_radio_weekdays.isChecked = true
+                habit_form_radio_period.isChecked = false
+                habit_form_radio_custom.isChecked = false
             }
             3 -> {
-                radioButton1.isChecked = false
-                radioButton2.isChecked = false
-                radioButton3.isChecked = true
-                radioButton4.isChecked = false
+                habit_form_radio_everyday.isChecked = false
+                habit_form_radio_weekdays.isChecked = false
+                habit_form_radio_period.isChecked = true
+                habit_form_radio_custom.isChecked = false
             }
             4 -> {
-                radioButton1.isChecked = false
-                radioButton2.isChecked = false
-                radioButton3.isChecked = false
-                radioButton4.isChecked = true
+                habit_form_radio_everyday.isChecked = false
+                habit_form_radio_weekdays.isChecked = false
+                habit_form_radio_period.isChecked = false
+                habit_form_radio_custom.isChecked = true
             }
         }
     }
@@ -168,7 +168,7 @@ class HabitFormFragment : BaseFragment() {
                 }
                 HabitType.HAB_PERIOD -> {
                     habit.periodType = getHabitPeriodTypeSelected()
-                    habit.periodTotal = habit_form_days_custom_1.text.toString().toInt()
+                    habit.periodTotal = habit_form_period_days.text.toString().toInt()
                     habit.setHabitLastDate()
                 }
                 HabitType.HAB_CUSTOM -> {
@@ -191,35 +191,35 @@ class HabitFormFragment : BaseFragment() {
     private fun getWeekDaysSelected(): MutableList<Boolean> {
         val weekDays = mutableListOf<Boolean>()
 
-        weekDays.add(weekDay1.isChecked)
-        weekDays.add(weekDay2.isChecked)
-        weekDays.add(weekDay3.isChecked)
-        weekDays.add(weekDay4.isChecked)
-        weekDays.add(weekDay5.isChecked)
-        weekDays.add(weekDay6.isChecked)
-        weekDays.add(weekDay7.isChecked)
+        weekDays.add(habit_form_week_sunday.isChecked)
+        weekDays.add(habit_form_week_monday.isChecked)
+        weekDays.add(habit_form_week_tuesday.isChecked)
+        weekDays.add(habit_form_week_wednesday.isChecked)
+        weekDays.add(habit_form_week_thursday.isChecked)
+        weekDays.add(habit_form_week_friday.isChecked)
+        weekDays.add(habit_form_week_saturday.isChecked)
 
         return weekDays
     }
 
     private fun getHabitTypeSelected(): HabitType {
-        if (radioButton1.isChecked) return HabitType.HAB_EVERYDAY
-        if (radioButton2.isChecked) return HabitType.HAB_WEEKDAYS
-        if (radioButton3.isChecked) return HabitType.HAB_PERIOD
-        if (radioButton4.isChecked) return HabitType.HAB_CUSTOM
+        if (habit_form_radio_everyday.isChecked) return HabitType.HAB_EVERYDAY
+        if (habit_form_radio_weekdays.isChecked) return HabitType.HAB_WEEKDAYS
+        if (habit_form_radio_period.isChecked) return HabitType.HAB_PERIOD
+        if (habit_form_radio_custom.isChecked) return HabitType.HAB_CUSTOM
 
         return HabitType.HAB_NONE
     }
 
     private fun getHabitPeriodTypeSelected(): PeriodType {
         return when (habit_form_periods_spinner.selectedItem.toString()) {
-            context?.getString(R.string.period_type_week) -> {
+            context?.getString(R.string.habit_form_period_type_week) -> {
                 PeriodType.PER_WEEK
             }
-            context?.getString(R.string.period_type_month) -> {
+            context?.getString(R.string.habit_form_period_type_month) -> {
                 PeriodType.PER_MONTH
             }
-            context?.getString(R.string.period_type_year) -> {
+            context?.getString(R.string.habit_form_period_type_year) -> {
                 PeriodType.PER_YEAR
             }
             else ->
@@ -234,35 +234,35 @@ class HabitFormFragment : BaseFragment() {
     }
 
     private fun setRadioHabit() {
-        radioButton1.setOnClickListener {
-            if (radioButton1.isChecked) {
+        habit_form_radio_everyday.setOnClickListener {
+            if (habit_form_radio_everyday.isChecked) {
                 radioButtonChecked(1)
 
-                block_of_radius2.gone()
+                habit_form_week.gone()
             }
         }
 
-        radioButton2.setOnClickListener {
-            if (radioButton2.isChecked) {
+        habit_form_radio_weekdays.setOnClickListener {
+            if (habit_form_radio_weekdays.isChecked) {
                 radioButtonChecked(2)
 
-                block_of_radius2.visible()
+                habit_form_week.visible()
             }
         }
 
-        radioButton3.setOnClickListener {
-            if (radioButton3.isChecked) {
+        habit_form_radio_period.setOnClickListener {
+            if (habit_form_radio_period.isChecked) {
                 radioButtonChecked(3)
 
-                block_of_radius2.gone()
+                habit_form_week.gone()
             }
         }
 
-        radioButton4.setOnClickListener {
-            if (radioButton4.isChecked) {
+        habit_form_radio_custom.setOnClickListener {
+            if (habit_form_radio_custom.isChecked) {
                 radioButtonChecked(4)
 
-                block_of_radius2.gone()
+                habit_form_week.gone()
             }
         }
     }
@@ -292,25 +292,25 @@ class HabitFormFragment : BaseFragment() {
 
         when (habit.type) {
             HabitType.HAB_EVERYDAY -> {
-                radioButton1.isChecked = true
+                habit_form_radio_everyday.isChecked = true
             }
             HabitType.HAB_WEEKDAYS -> {
-                radioButton2.isChecked = true
+                habit_form_radio_weekdays.isChecked = true
 
-                block_of_radius2.visible()
+                habit_form_week.visible()
 
-                weekDay1.isChecked = habit.weekDays[0]
-                weekDay2.isChecked = habit.weekDays[1]
-                weekDay3.isChecked = habit.weekDays[2]
-                weekDay4.isChecked = habit.weekDays[3]
-                weekDay5.isChecked = habit.weekDays[4]
-                weekDay6.isChecked = habit.weekDays[5]
-                weekDay7.isChecked = habit.weekDays[6]
+                habit_form_week_sunday.isChecked = habit.weekDays[0]
+                habit_form_week_monday.isChecked = habit.weekDays[1]
+                habit_form_week_tuesday.isChecked = habit.weekDays[2]
+                habit_form_week_wednesday.isChecked = habit.weekDays[3]
+                habit_form_week_thursday.isChecked = habit.weekDays[4]
+                habit_form_week_friday.isChecked = habit.weekDays[5]
+                habit_form_week_saturday.isChecked = habit.weekDays[6]
             }
             HabitType.HAB_PERIOD -> {
-                radioButton3.isChecked = true
+                habit_form_radio_period.isChecked = true
 
-                habit_form_days_custom_1.setText(habit.periodTotal.toString())
+                habit_form_period_days.setText(habit.periodTotal.toString())
 
                 habit_form_periods_spinner.setSelection(
                     when (habit.periodType) {
@@ -324,7 +324,7 @@ class HabitFormFragment : BaseFragment() {
 
             }
             HabitType.HAB_CUSTOM -> {
-                radioButton4.isChecked = true
+                habit_form_radio_custom.isChecked = true
 
                 habit_form_add_days.setText(habit.periodDaysBetween.toString())
             }

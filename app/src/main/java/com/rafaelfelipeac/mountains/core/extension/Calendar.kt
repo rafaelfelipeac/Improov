@@ -38,13 +38,13 @@ fun Calendar.getNextWeek(context: Context): List<DayOfWeek> {
 
 fun Calendar.getDayOfWeek(day: Int, context: Context): String {
     return when (day) {
-        1 -> context.getString(R.string.calendar_sunday)
-        2 -> context.getString(R.string.calendar_monday)
-        3 -> context.getString(R.string.calendar_tuesday)
-        4 -> context.getString(R.string.calendar_wednesday)
-        5 -> context.getString(R.string.calendar_thursday)
-        6 -> context.getString(R.string.calendar_friday)
-        7 -> context.getString(R.string.calendar_saturday)
+        1 -> context.getString(R.string.habit_form_week_sunday)
+        2 -> context.getString(R.string.habit_form_week_monday)
+        3 -> context.getString(R.string.habit_form_week_tuesday)
+        4 -> context.getString(R.string.habit_form_week_wednesday)
+        5 -> context.getString(R.string.habit_form_week_thursday)
+        6 -> context.getString(R.string.habit_form_week_friday)
+        7 -> context.getString(R.string.habit_form_week_saturday)
         else -> ""
     }
 }
