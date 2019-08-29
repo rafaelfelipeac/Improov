@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/bottom_sheet_tips_two"
+        android:id="@+id/tips_two"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/bottom_sheet_tips_two_button_close"
+                    android:id="@+id/tips_two_button_close"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -41,148 +41,147 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                    android:id="@+id/tips_two_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tipos de meta"
+                    android:text="@string/tips_two_title"
                     android:textColor="@color/colorPrimary"
                     android:textSize="22sp"
                     android:textAlignment="center"
-                    app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_tips_two_button_close"
+                    app:layout_constraintTop_toBottomOf="@+id/tips_two_button_close"
                     android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="24dp"
-                    android:id="@+id/textView7"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0.0"
                     android:textStyle="bold"/>
 
             <TextView
+                    android:id="@+id/tips_two_list_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lista"
+                    android:text="@string/tips_two_list_title"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView7"
+                    app:layout_constraintTop_toBottomOf="@+id/tips_two_title"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="16dp"
-                    android:id="@+id/textView8"
                     android:textStyle="bold"/>
 
             <TextView
+                    android:id="@+id/tips_two_list_message"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Para objetivos que consistem em concluir diferentes itens de uma lista. Cada item concluído representa 1 ponto para o objetivo final."
+                    android:text="@string/tips_two_list_message"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/textView10"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8"
-                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                    app:layout_constraintTop_toBottomOf="@+id/tips_two_list_title"
+                    app:layout_constraintStart_toEndOf="@+id/tips_two_list_image"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="32dp"/>
 
             <ImageView
+                    android:id="@+id/tips_two_list_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/ic_medal"
-                    android:id="@+id/imageView5"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="32dp"
-                    app:layout_constraintTop_toTopOf="@+id/textView10"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView10"/>
+                    app:layout_constraintTop_toTopOf="@+id/tips_two_list_message"
+                    app:layout_constraintBottom_toBottomOf="@+id/tips_two_list_message"/>
 
             <TextView
+                    android:id="@+id/tips_two_count_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Contador"
+                    android:text="@string/tips_two_count_title"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/textView11"
                     app:layout_constraintHorizontal_bias="0.0"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView10"
+                    app:layout_constraintTop_toBottomOf="@+id/tips_two_list_message"
                     android:textStyle="bold"/>
 
             <TextView
+                    android:id="@+id/tips_two_count_message"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Para objetivos onde os valores a serem somados ou subtraídos sejam sempre os mesmos."
+                    android:text="@string/tips_two_count_message"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11"
+                    app:layout_constraintTop_toBottomOf="@+id/tips_two_count_title"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/textView12"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toEndOf="@+id/imageView6"
+                    app:layout_constraintStart_toEndOf="@+id/tips_two_count_image"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="32dp"/>
 
             <ImageView
+                    android:id="@+id/tips_two_count_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/ic_medal"
-                    android:id="@+id/imageView6"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="32dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView12"
-                    app:layout_constraintTop_toTopOf="@+id/textView12"/>
+                    app:layout_constraintBottom_toBottomOf="@+id/tips_two_count_message"
+                    app:layout_constraintTop_toTopOf="@+id/tips_two_count_message"/>
 
             <TextView
+                    android:id="@+id/tips_two_final_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Valor final"
+                    android:text="@string/tips_two_final_title"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/textView14"
                     app:layout_constraintHorizontal_bias="0.0"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView12"
+                    app:layout_constraintTop_toBottomOf="@+id/tips_two_count_message"
                     android:textStyle="bold"/>
 
             <TextView
+                    android:id="@+id/tips_two_final_message"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Para objetivos onde os valores a serem somados ou subtraídos mudem constantemente."
+                    android:text="@string/tips_two_final_message"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/textView13"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14"
-                    app:layout_constraintStart_toEndOf="@+id/imageView7"
+                    app:layout_constraintTop_toBottomOf="@+id/tips_two_final_title"
+                    app:layout_constraintStart_toEndOf="@+id/tips_two_final_image"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="24dp"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
             <ImageView
+                    android:id="@+id/tips_two_final_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/ic_medal"
-                    app:layout_constraintTop_toTopOf="@+id/textView13"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView13"
+                    app:layout_constraintTop_toTopOf="@+id/tips_two_final_message"
+                    app:layout_constraintBottom_toBottomOf="@+id/tips_two_final_message"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="32dp"
-                    android:id="@+id/imageView7"/>
+                    android:layout_marginStart="32dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

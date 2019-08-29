@@ -95,18 +95,18 @@ class GoalFragment : BaseFragment() {
 
     private fun setupBottomSheetItem() {
         bottomSheetItem = BottomSheetDialog(this.activity!!)
-        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_item_fragment, null)
+        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_item, null)
         bottomSheetItem.setContentView(sheetView)
 
-        bottomSheetItemSave = sheetView.findViewById(R.id.bottom_sheet_item_button_save)
-        bottomSheetItemName = sheetView.findViewById(R.id.bottom_sheet_item_name)
-        bottomSheetItemTitle = sheetView.findViewById(R.id.bottom_sheet_item_title)
-        bottomSheetItemDate = sheetView.findViewById(R.id.bottom_sheet_item_date)
-        bottomSheetItemEmptyName = sheetView.findViewById(R.id.bottom_sheet_item_empty_name)
+        bottomSheetItemSave = sheetView.findViewById(R.id.item_button_save)
+        bottomSheetItemName = sheetView.findViewById(R.id.item_title)
+        bottomSheetItemTitle = sheetView.findViewById(R.id.item_title)
+        bottomSheetItemDate = sheetView.findViewById(R.id.item_date)
+        bottomSheetItemEmptyName = sheetView.findViewById(R.id.item_empty_name)
 
         bottomSheetItemSave.setOnClickListener {
             if (bottomSheetItemName.isEmpty()) {
-                bottomSheetItemEmptyName.text = getString(R.string.bottom_sheet_empty_item_name)
+                bottomSheetItemEmptyName.text = getString(R.string.item_empty_name)
             } else {
                 var item = Item()
 
@@ -136,12 +136,12 @@ class GoalFragment : BaseFragment() {
         this.item = item
 
         if (item != null) {
-            bottomSheetItemTitle.text = getString(R.string.bottom_sheet_item_title_edit)
+            bottomSheetItemTitle.text = getString(R.string.item_title_edit)
             bottomSheetItemName.setText(item.name)
 
             if (item.done) {
                 bottomSheetItemDate.text = String.format(
-                    getString(R.string.bottom_sheet_item_date_format),
+                    getString(R.string.item_date_format),
                     item.doneDate?.convertDateToString()
                 )
                 bottomSheetItemDate.visible()
@@ -149,7 +149,7 @@ class GoalFragment : BaseFragment() {
                 bottomSheetItemDate.gone()
             }
         } else {
-            bottomSheetItemTitle.text = getString(R.string.bottom_sheet_item_title_add)
+            bottomSheetItemTitle.text = getString(R.string.item_title_add)
             bottomSheetItemName.resetValue()
             bottomSheetItemDate.resetValue()
             bottomSheetItemDate.gone()
@@ -200,12 +200,12 @@ class GoalFragment : BaseFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_goal_add -> {
+            R.id.menu_add -> {
                 openBottomSheetItem(null)
 
                 return true
             }
-            R.id.menu_goal_edit -> {
+            R.id.menu_edit -> {
                 val action = GoalFragmentDirections.actionNavigationGoalToNavigationGoalForm()
                 action.goalId =  goal?.goalId!!
                 navController.navigate(action)
@@ -312,9 +312,9 @@ class GoalFragment : BaseFragment() {
                 goal_cl_dec_inc.invisible()
                 goal_cl_total.invisible()
 
-                historic_items_list.invisible()
+                goal_historic_items_list.invisible()
 
-                if ((activity as MainActivity).toolbar.menu.findItem(R.id.menu_goal_add) == null)
+                if ((activity as MainActivity).toolbar.menu.findItem(R.id.menu_add) == null)
                     (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
             }
             GoalType.GOAL_COUNTER -> {
@@ -322,7 +322,7 @@ class GoalFragment : BaseFragment() {
                 goal_cl_dec_inc.visible()
                 goal_cl_total.invisible()
 
-                historic_items_list.visible()
+                goal_historic_items_list.visible()
 
                 goal_inc_dec_total.text = count.getNumberInRightFormat()
             }
@@ -331,7 +331,7 @@ class GoalFragment : BaseFragment() {
                 goal_cl_dec_inc.invisible()
                 goal_cl_total.visible()
 
-                historic_items_list.visible()
+                goal_historic_items_list.visible()
             }
             GoalType.GOAL_NONE -> TODO()
         }
@@ -407,8 +407,8 @@ class GoalFragment : BaseFragment() {
             ?.reversed()
             ?.let { historicAdapter.setItems(it) }
 
-        historic_items_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        historic_items_list.adapter = historicAdapter
+        goal_historic_items_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        goal_historic_items_list.adapter = historicAdapter
     }
 
     private fun verifyIfGoalIsDone() =

@@ -75,8 +75,8 @@ class MainActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when {
-            item?.itemId == R.id.menu_goal_save -> false
-            item?.itemId == R.id.menu_goal_add -> false
+            item?.itemId == R.id.menu_save -> false
+            item?.itemId == R.id.menu_add -> false
             item?.itemId == android.R.id.home -> false
             else -> false
         }
@@ -102,13 +102,13 @@ class MainActivity : BaseActivity() {
     }
 
     fun setupBottomSheetTipsOne() {
-        bottomSheetTip = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_tips_one))
-        bottomSheetTipClose = bottom_sheet_tips_one_button_close
+        bottomSheetTip = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.tips_one))
+        bottomSheetTipClose = tips_one_button_close
     }
 
     fun setupBottomSheetTipsTwo() {
-        bottomSheetTip = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.bottom_sheet_tips_two))
-        bottomSheetTipClose = bottom_sheet_tips_two_button_close
+        bottomSheetTip = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.tips_two))
+        bottomSheetTipClose = tips_two_button_close
     }
 
     fun openBottomSheetTips() {

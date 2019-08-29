@@ -90,7 +90,7 @@ class HabitFormFragment : BaseFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_goal_save -> {
+            R.id.menu_save -> {
 //                if (verifyIfFieldsAreEmpty()) {
 //                    showSnackBar(getString(R.string.message_some_empty_value))
 //                } else if (getGoalTypeSelected() == GoalType.GOAL_NONE) {

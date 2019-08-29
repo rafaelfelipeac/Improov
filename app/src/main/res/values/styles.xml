@@ -1,5 +1,4 @@
 <resources>
-
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimaryDark">@color/colorPrimaryDarkOne</item>
         <item name="titleTextColor">@color/colorPrimary</item>

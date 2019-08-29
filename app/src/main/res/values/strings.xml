@@ -1,10 +1,25 @@
 <resources>
+
     <!-- App -->
     <string name="app_name">Mountains</string>
     <string name="database_name">mountains-db</string>
 
     <!-- Commons -->
     <string name="empty_string"/>
+    <string name="snackbar_action_undo">DESFAZER</string>
+    <string name="dialog_action_positive">OK</string>
+    <string name="dialog_action_negative">Cancelar</string>
+
+    <!-- Menu -->
+    <string name="menu_add">Add</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_save">Save</string>
+
+    <!-- Navigation -->
+    <string name="navigation_list">Lista</string>
+    <string name="navigation_today">Hoje</string>
+    <string name="navigation_stats">Estatísticas</string>
+    <string name="navigation_profile">Perfil</string>
 
     <!-- Add -->
     <string name="add_goal">Objetivo</string>
@@ -231,84 +246,44 @@
     <string name="firebase_result_error_email_already_in_use">The email address is already in use by another account.</string>
     <string name="firebase_result_error_need_login_again">This operation is sensitive and requires recent authentication. Log in again before retrying this request.</string>
 
+    <!-- BottomSheet Goal Done -->
+    <string name="goal_done_message">Há itens pendentes nesse objetivo.    Deseja dar como concluído?</string>
+    <string name="goal_done_yes">SIM</string>
+    <string name="goal_done_no">NÃO</string>
 
+    <!-- BottomSheet Habit Done -->
+    <string name="habit_done_message">Hábitos só podem ser concluídos dentro da tela Today.</string>
+    <string name="habit_done_ok">OK</string>
 
-    <!-- BottomSheet -->
-    <!-- BottomSheet -->
-    <!-- BottomSheet -->
-    <!-- BottomSheet -->
-    <!-- BottomSheet -->
+    <!-- BottomSheet Item -->
+    <string name="item_name">Item Title</string>
+    <string name="item_name_hint">Item name</string>
+    <string name="item_date">Concluído em 23/02/19 – 12:32:23</string>
+    <string name="item_button_save">Salvar</string>
+    <string name="item_title_add">Novo item</string>
+    <string name="item_title_edit">Editar item</string>
+    <string name="item_empty_name">Nome do item está vazio.</string>
+    <string name="item_date_format">Concluído em %s.</string>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <string name="title_home">Home</string>
-
-    <string name="bottom_sheet_item_title_add">Novo item</string>
-    <string name="bottom_sheet_item_title_edit">Editar item</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="bottom_sheet_empty_item_name">Nome do item está vazio.</string>
-
-    <string name="bottom_sheet_item_date_format">Concluído em %s.</string>
-
-    <string name="percentage_100">100.00%s</string>
-    <string name="percentage_others">%.2f %s</string>
-    <string name="percentage_symbol">%</string>
-    <string name="snackbar_action_undo">DESFAZER</string>
-
-    <string name="fragment_title_goals">Objetivos</string>
-    <string name="goals_fragment_resolved_goal_message">Objetivo arquivado.</string>
-
-    <string name="fragment_search_title">Pesquisar</string>
-
-    <string name="fragment_login_or_message">ou</string>
-
-    <!--forgot-->
-
-    <string name="bottom_sheet_1_message_1">Uma boa tática para evitar que objetivos muito grandes e complexos sejam
+    <!-- BottomSheet Tips One -->
+    <string name="tips_one_title">Dividir e Conquistar</string>
+    <string name="tips_one_message_1">Uma boa tática para evitar que objetivos muito grandes e complexos sejam
         abandonados é dividir esse objetivo em partes menores. \n\nDessa forma, a sensação de progresso é maior e você
         estará sempre motivado para alcançar aquilo que deseja. \n\nNesse modo, seu objetivo é dividido em 3 partes:
         bronze,
         prata e ouro.
     </string>
-    <string name="bottom_sheet_1_message_2">O primeira parte do objetivo será o valor bronze. A cada
+    <string name="tips_one_message_2">O primeira parte do objetivo será o valor bronze. A cada
         parte do objetivo atingida, fica-se mais perto do valor ouro e da conclusão do objetivo.
     </string>
-    <string name="bottom_sheet_2_message_1">Seus objetivos podem ser de três diferentes tipos:</string>
-    <string name="bottom_sheet_2_message_2">
-        - Lista\n
-        Para objetivos que consistem em concluir diferentes itens de uma lista. Cada item concluído representa 1 ponto
-        para o objetivo final.\n\n
 
-        - Contator\n
-        Para objetivos onde os valores a serem somados ou subtraídos sejam sempre os mesmos.\n\n
-
-        - Valor final\n
-        Para objetivos onde os valores a serem somados ou subtraídos mudem constantemente.
-    </string>
-    <string name="goals_adapter_item_habit">Hábito:</string>
-
-    <string name="pref_key_language_portuguese">portuguese</string>
-    <string name="pref_key_language_english">english</string>
-
-    <string name="dialog_action_positive">OK</string>
-    <string name="dialog_action_negative">Cancelar</string>
-
+    <!-- BottomSheet Tips Two -->
+    <string name="tips_two_title">Tipos de meta</string>
+    <string name="tips_two_list_title">Lista</string>
+    <string name="tips_two_list_message">Para objetivos que consistem em concluir diferentes itens de uma lista. Cada item concluído representa 1 ponto para o objetivo final.</string>
+    <string name="tips_two_count_title">Contador</string>
+    <string name="tips_two_count_message">Para objetivos onde os valores a serem somados ou subtraídos sejam sempre os mesmos.</string>
+    <string name="tips_two_final_title">Valor final</string>
+    <string name="tips_two_final_message">Para objetivos onde os valores a serem somados ou subtraídos mudem constantemente.</string>
 
 </resources>

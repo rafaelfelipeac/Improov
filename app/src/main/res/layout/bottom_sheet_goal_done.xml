@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/bottom_sheet_done_goal"
+        android:id="@+id/done_goal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -12,6 +12,7 @@
         android:background="@drawable/rounded_primary_dark_two">
 
     <View
+            android:id="@+id/goal_done_indicator"
             android:layout_width="40dp"
             android:layout_height="4dp"
             android:background="@drawable/rounded_primary"
@@ -20,14 +21,13 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="16dp"
-            android:id="@+id/add_indicator"/>
+            android:layout_marginTop="16dp" />
 
     <TextView
-            android:id="@+id/textView"
+            android:id="@+id/goal_done_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Há itens pendentes nesse objetivo. \n\n Deseja dar como concluído?"
+            android:text="@string/goal_done_message"
             android:textSize="20sp"
             android:textColor="@color/colorPrimary"
             android:gravity="center_horizontal"
@@ -36,17 +36,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="64dp"
             android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/add_indicator"/>
+            app:layout_constraintTop_toBottomOf="@+id/goal_done_indicator"/>
 
     <android.widget.Button
-            android:id="@+id/bottom_sheet_goal_done_yes"
+            android:id="@+id/goal_done_yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SIM"
+            android:text="@string/goal_done_yes"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"
             android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/goal_done_message"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toStartOf="@+id/view"
             android:layout_marginBottom="24dp"
@@ -58,7 +58,7 @@
             android:layout_width="1dp"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/goal_done_message"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,14 +67,14 @@
             android:layout_marginEnd="8dp"/>
 
     <android.widget.Button
-            android:id="@+id/bottom_sheet_goal_done_no"
+            android:id="@+id/goal_done_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NÃO"
+            android:text="@string/goal_done_no"
             android:textColor="@color/colorPrimaryDarkOne"
             android:background="@drawable/rounded_button"
             android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/goal_done_message"
             app:layout_constraintStart_toEndOf="@+id/view"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="24dp"

@@ -74,7 +74,7 @@ class HabitFragment : BaseFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_goal_edit -> {
+            R.id.menu_edit -> {
                 val action = HabitFragmentDirections.actionNavigationHabitToNavigationHabitForm()
                 action.habitId = habit.habitId
                 navController.navigate(action)

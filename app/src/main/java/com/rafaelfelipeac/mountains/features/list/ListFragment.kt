@@ -172,8 +172,8 @@ class ListFragment : BaseFragment() {
         val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_goal_done, null)
         bottomSheetGoalDone.setContentView(sheetView)
 
-        bottomSheetGoalDoneYes = sheetView.findViewById(R.id.bottom_sheet_goal_done_yes)
-        bottomSheetGoalDoneNo = sheetView.findViewById(R.id.bottom_sheet_goal_done_no)
+        bottomSheetGoalDoneYes = sheetView.findViewById(R.id.goal_done_yes)
+        bottomSheetGoalDoneNo = sheetView.findViewById(R.id.goal_done_no)
     }
 
     private fun setupBottomSheetHabitDone() {
@@ -181,7 +181,7 @@ class ListFragment : BaseFragment() {
         val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_habit_done, null)
         bottomSheetHabitDone.setContentView(sheetView)
 
-        bottomSheetHabitDoneOK = sheetView.findViewById(R.id.bottom_sheet_habit_done_ok)
+        bottomSheetHabitDoneOK = sheetView.findViewById(R.id.habit_done_ok)
     }
 
     private fun openBottomSheetGoalDone(goal: Goal, function: (goal: Goal) -> Unit) {

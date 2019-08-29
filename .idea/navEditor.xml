@@ -211,12 +211,12 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_profile_to_navigation_welcome">
+                            <entry key="action_navigation_profile_to_navigation_settings">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_profile_to_settingsFragment">
+                            <entry key="action_navigation_profile_to_navigation_welcome">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -231,8 +231,41 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="14" />
-                            <option name="y" value="-473" />
+                            <option name="x" value="48" />
+                            <option name="y" value="-354" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navigation_settings">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-79" />
+                            <option name="y" value="-696" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_navigation_settings_to_navigation_settings_language">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navigation_settings_language">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="119" />
+                            <option name="y" value="-687" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -317,18 +350,6 @@
                               </value>
                             </entry>
                           </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="settingsFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-306" />
-                            <option name="y" value="-477" />
-                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
