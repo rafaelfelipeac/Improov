@@ -6,9 +6,9 @@
 
     <!-- Commons -->
     <string name="empty_string"/>
-    <string name="snackbar_action_undo">DESFAZER</string>
+    <string name="snackbar_action_undo">UNDO</string>
     <string name="dialog_action_positive">OK</string>
-    <string name="dialog_action_negative">Cancelar</string>
+    <string name="dialog_action_negative">Cancel</string>
 
     <!-- Menu -->
     <string name="menu_add">Add</string>
@@ -16,152 +16,152 @@
     <string name="menu_save">Save</string>
 
     <!-- Navigation -->
-    <string name="navigation_list">Lista</string>
-    <string name="navigation_today">Hoje</string>
-    <string name="navigation_stats">Estatísticas</string>
-    <string name="navigation_profile">Perfil</string>
+    <string name="navigation_list">List</string>
+    <string name="navigation_today">Today</string>
+    <string name="navigation_stats">Statistics</string>
+    <string name="navigation_profile">Profile</string>
 
     <!-- Add -->
-    <string name="add_goal">Objetivo</string>
-    <string name="add_habit">Hábito</string>
+    <string name="add_goal">Goal</string>
+    <string name="add_habit">Habit</string>
 
     <!-- CreateUser -->
-    <string name="create_user_title">Criar usuário</string>
-    <string name="create_user_message">Precisamos de algumas informações para criar sua conta.</string>
-    <string name="create_user_hint_name">Nome</string>
+    <string name="create_user_title">Create User</string>
+    <string name="create_user_message">We need some information to create your account..</string>
+    <string name="create_user_hint_name">Name</string>
     <string name="create_user_hint_email">Email</string>
     <string name="create_user_hint_password">Password</string>
     <string name="create_user_hint_confirm_password">Confirm Password</string>
-    <string name="create_user_create_button">Criar conta</string>
-    <string name="create_user_snackbar_error_email_already_in_use">Email já cadastrado.</string>
-    <string name="create_user_snackbar_error_create_user">Erro ao criar usuário.</string>
-    <string name="create_user_empty_fields">Preenchar todos campos.</string>
-    <string name="create_user_invalid_email">Digite um email válido.</string>
-    <string name="create_user_different_passwords">Senhas não coincidem.</string>
-    <string name="create_user_min_characters">A senha deve ter no mínimo 6 caracteres.</string>
+    <string name="create_user_create_button">Create Account</string>
+    <string name="create_user_snackbar_error_email_already_in_use">Email .</string>already in use.
+    <string name="create_user_snackbar_error_create_user">Error creating user.</string>
+    <string name="create_user_empty_fields">You need to fill in all fields.</string>
+    <string name="create_user_invalid_email">Enter a valid email address.</string>
+    <string name="create_user_different_passwords">Passwords do not match.</string>
+    <string name="create_user_min_characters">Password must be at least 6 characters.</string>
 
     <!-- ForgotPassword -->
-    <string name="forgot_password_title">Esqueci a senha</string>
-    <string name="forgot_password_message">Digite o email que voce usou para criar sua conta. \n\nVamos te enviar instruções para resetar sua senha.</string>
+    <string name="forgot_password_title">I forgot the password</string>
+    <string name="forgot_password_message">Enter the email you used to create your account. \n\nWe will send you instructions to reset your password.</string>
     <string name="forgot_password_hint_email">Email</string>
-    <string name="forgot_password_send_button">Enviar email</string>
-    <string name="forgot_password_message_email_not_registered">Esse email não está cadastrado.</string>
-    <string name="forgot_password_message_email">Digite um email.</string>
-    <string name="forgot_password_message_invalid_email">Digite um email válido.</string>
-    <string name="forgot_password_snackbar_send_email_error">Erro ao enviar email.</string>
-    <string name="forgot_password_snackbar_send_email_success">Email enviado.</string>
+    <string name="forgot_password_send_button">Send email</string>
+    <string name="forgot_password_message_email_not_registered">This email is not registered.</string>
+    <string name="forgot_password_message_email">Enter an email.</string>
+    <string name="forgot_password_message_invalid_email">Enter a valid email address.</string>
+    <string name="forgot_password_snackbar_send_email_error">Error sending email.</string>
+    <string name="forgot_password_snackbar_send_email_success">Email sent.</string>
 
     <!-- Goal -->
-    <string name="goal_title">Objetivo</string>
-    <string name="goal_message_goal_done">Objetivo concluído!</string>
-    <string name="goal_message_goal_value_updated">Valor atualizado.</string>
-    <string name="goal_message_goal_value_invalid">Valor inválido.</string>
-    <string name="goal_message_empty_items">Você ainda não tem itens adicionados nesse objetivo.</string>
+    <string name="goal_title">Goal</string>
+    <string name="goal_message_goal_done">Goal completed!</string>
+    <string name="goal_message_goal_value_updated">Updated value.</string>
+    <string name="goal_message_goal_value_invalid">Invalid value.</string>
+    <string name="goal_message_empty_items">You have no items added for this goal yet.</string>
     <string name="goal_count">0</string>
     <string name="goal_final_date">00/00/00</string>
     <string name="goal_total_total_hint">0</string>
-    <string name="goal_button_save">Salvar</string>
+    <string name="goal_button_save">Save</string>
 
     <!-- GoalForm -->
-    <string name="goal_form_title">Novo objetivo</string>
-    <string name="goal_form_some_empty_value">Algum valor vazio.</string>
-    <string name="goal_form_empty_type_goal">Escolha o tipo do objetivo.</string>
+    <string name="goal_form_title">New Goal</string>
+    <string name="goal_form_some_empty_value">Any empty value.</string>
+    <string name="goal_form_empty_type_goal">Choose the type of goal.</string>
     <string name="goal_form_gold_silver_bronze_order"><![CDATA[Gold > Silver > Bronze]]></string>
-    <string name="goal_form_empty_inc_dec">Inc/Dec vazios.</string>
+    <string name="goal_form_empty_inc_dec">Inc/Dec empty.</string>
     <string name="goal_form_goal_name_hint">Title</string>
     <string name="goal_form_set_date">set date</string>
     <string name="goal_form_single_hint">Single</string>
     <string name="goal_form_bronze_hint">Bronze</string>
     <string name="goal_form_silver_hint">Silver</string>
     <string name="goal_form_gold_hint">Gold</string>
-    <string name="goal_form_divide_and_conquest_title">Dividir e conquistar</string>
-    <string name="goal_form_type_title">Tipo de meta</string>
-    <string name="goal_form_radio_type_list">Lista</string>
-    <string name="goal_form_radio_type_inc_dec">Contador</string>
-    <string name="goal_form_radio_type_total">Valor final</string>
-    <string name="goal_form_goal_inc_dev">Defina os valores:</string>
-    <string name="goal_form_goal_inc_value_hint">Incrementar</string>
-    <string name="goal_form_goal_dec_value_hint">Decrementar</string>
+    <string name="goal_form_divide_and_conquest_title">Divide and Conquer</string>
+    <string name="goal_form_type_title">Goal type</string>
+    <string name="goal_form_radio_type_list">List</string>
+    <string name="goal_form_radio_type_inc_dec">Counter</string>
+    <string name="goal_form_radio_type_total">Final value</string>
+    <string name="goal_form_goal_inc_dev">Set the values:</string>
+    <string name="goal_form_goal_inc_value_hint">Increment</string>
+    <string name="goal_form_goal_dec_value_hint">Decrement</string>
 
     <!-- Habit -->
     <string name="habit_title">Habit</string>
-    <string name="habit_next_ocurrence">Próxima ocorrência:</string>
-    <string name="habit_last_day_cycle">Último dia do ciclo:</string>
+    <string name="habit_next_ocurrence">Next occurrence:</string>
+    <string name="habit_last_day_cycle">Last day of the cycle:</string>
     <string name="habit_value">0</string>
-    <string name="habit_next_date">Próximo ocorrencia: 13 de Abril.</string>
-    <string name="habit_last_date">Último dia do ciclo: 31 de Julho.</string>
-    <string name="habit_item_swiped_deleted">Item removido.</string>
+    <string name="habit_next_date">Next occurrence: April 13.</string>
+    <string name="habit_last_date">Last day of the cycle: July 31st.</string>
+    <string name="habit_item_swiped_deleted">Item removed.</string>
 
     <!-- HabitForm -->
-    <string name="habit_form_title">Novo hábito</string>
-    <string name="habit_form_period_type_week">semana</string>
-    <string name="habit_form_period_type_month">mês</string>
-    <string name="habit_form_period_type_year">ano</string>
+    <string name="habit_form_title">New Habit</string>
+    <string name="habit_form_period_type_week">week</string>
+    <string name="habit_form_period_type_month">month</string>
+    <string name="habit_form_period_type_year">year</string>
     <string name="habit_form_period_type_custom">custom</string>
     <string name="habit_form_period_type_none">none</string>
     <string name="habit_form_name_hint">Title</string>
-    <string name="habit_form_routine">Rotina</string>
-    <string name="habit_form_everyday">Todo dia</string>
-    <string name="habit_form_weekdays">Alguns dias por semana</string>
-    <string name="habit_form_week_sunday">Domingo</string>
-    <string name="habit_form_week_monday">Segunda-feira</string>
-    <string name="habit_form_week_tuesday">Terça-feira</string>
-    <string name="habit_form_week_wednesday">Quarta-feira</string>
-    <string name="habit_form_week_thursday">Quinta-feira</string>
-    <string name="habit_form_week_friday">Sexta-feira</string>
-    <string name="habit_form_week_saturday">Sábado</string>
-    <string name="habit_form_days">dias por</string>
-    <string name="habit_form_custom_days">A cada</string>
-    <string name="habit_form_custom_days_2">dias</string>
+    <string name="habit_form_routine">Routine</string>
+    <string name="habit_form_everyday">Everyday</string>
+    <string name="habit_form_weekdays">A few days a week</string>
+    <string name="habit_form_week_sunday">Sunday</string>
+    <string name="habit_form_week_monday">Monday</string>
+    <string name="habit_form_week_tuesday">Tuesday</string>
+    <string name="habit_form_week_wednesday">Wednesday</string>
+    <string name="habit_form_week_thursday">Thursday</string>
+    <string name="habit_form_week_friday">Friday</string>
+    <string name="habit_form_week_saturday">Saturday</string>
+    <string name="habit_form_days">days by</string>
+    <string name="habit_form_custom_days">Every</string>
+    <string name="habit_form_custom_days_2">days</string>
 
     <!-- List -->
-    <string name="list_title">Lista</string>
-    <string name="list_item_resolved_message">Objetivo arquivado.</string>
-    <string name="list_placeholder_message">Você não tem nenhum objetivo em andamento. \n\n Comece agora mesmo!</string>
+    <string name="list_title">List</string>
+    <string name="list_item_resolved_message">Archived goal.</string>
+    <string name="list_placeholder_message">You have no goals in progress. \n\n Get started now!</string>
 
     <!-- Login -->
     <string name="login_title">Login</string>
     <string name="login_google_failed_message">Google sign in failed</string>
-    <string name="login_wrong_password_message">Senha incorreta.</string>
-    <string name="login_user_not_registered_message">Usuário não cadastrado.</string>
-    <string name="login_error_message">Erro ao realizar login.</string>
-    <string name="login_email_password_message">Digite um email e uma senha.</string>
-    <string name="login_invalid_email_message">Digite um email válido.</string>
-    <string name="login_min_characters_message">A senha deve ter no mínimo 6 caracteres.</string>
+    <string name="login_wrong_password_message">Incorrect password.</string>
+    <string name="login_user_not_registered_message">Unregistered User.</string>
+    <string name="login_error_message">Error logging in..</string>
+    <string name="login_email_password_message">Enter an email and password.</string>
+    <string name="login_invalid_email_message">Enter a valid email address.</string>
+    <string name="login_min_characters_message">Password must be at least 6 characters.</string>
     <string name="login_google_sign_in_message">Sign in with Google</string>
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="login_sign_in_button">Login</string>
-    <string name="login_forgot_password_button">Esqueci minha senha</string>
-    <string name="login_login_with_email_message">ou faça o login com seu email</string>
+    <string name="login_forgot_password_button">I forgot my password</string>
+    <string name="login_login_with_email_message">or login with your email</string>
 
     <!-- Profile -->
-    <string name="profile_title">Perfil</string>
-    <string name="profile_user_name">Profile Fragment</string>
-    <string name="profile_user_email">emailuser@gmail.com</string>
-    <string name="profile_edit_profile_message">Editar perfil</string>
+    <string name="profile_title">Profile</string>
+    <string name="profile_user_name">User Profile </string>
+    <string name="profile_user_email">userprofile@gmail.com</string>
+    <string name="profile_edit_profile_message">Edit profile</string>
     <string name="profile_logout_button_message">Log out</string>
 
     <!-- ProfileLogout -->
-    <string name="profile_logout_message">Tem certeza que deseja sair do app?</string>
-    <string name="profile_logout_cancel_message">Cancelar</string>
+    <string name="profile_logout_message">Are you sure you want to exit the app?</string>
+    <string name="profile_logout_cancel_message">Cancel</string>
     <string name="profile_logout_ok_message">OK</string>
 
     <!-- ProfileEdit -->
-    <string name="profile_edit_title">Editar perfil</string>
-    <string name="profile_edit_empty_fields">Preenchar todos campos.</string>
-    <string name="profile_edit_invalid_email_message">Digite um email válido.</string>
-    <string name="profile_edit_different_passwords">Senhas não coincidem.</string>
-    <string name="profile_edit_min_characters">A senha deve ter no mínimo 6 caracteres.</string>
-    <string name="profile_edit_snackbar_error_email_already_in_use">Email já cadastrado.</string>
-    <string name="profile_edit_success">Perfil editado.</string>
-    <string name="profile_edit_error">Erro ao atualizar informações do usuário.</string>
-    <string name="profile_edit_need_login_again">Por questões de segurança, você precisa deslogar e logar novamente no app antes de fazer essa mudança.</string>
-    <string name="profile_edit_name_hint">Nome</string>
+    <string name="profile_edit_title">Edit Profile</string>
+    <string name="profile_edit_empty_fields">You need to fill in all fields.</string>
+    <string name="profile_edit_invalid_email_message">Enter a valid email address.</string>
+    <string name="profile_edit_different_passwords">Passwords do not match.</string>
+    <string name="profile_edit_min_characters">Password must be at least 6 characters.</string>
+    <string name="profile_edit_snackbar_error_email_already_in_use">E-mail already registered.</string>
+    <string name="profile_edit_success">Profile edited.</string>
+    <string name="profile_edit_error">Error updating user info.</string>
+    <string name="profile_edit_need_login_again">For security reasons, you need to log out and log back in to the app before making this change.</string>
+    <string name="profile_edit_name_hint">Name</string>
     <string name="profile_edit_email_hint">Email</string>
-    <string name="profile_edit_password_hint">Senha</string>
-    <string name="profile_edit_confirm_password_hint">Confirme a senha</string>
-    <string name="profile_edit_save_message">Salvar</string>
+    <string name="profile_edit_password_hint">Password</string>
+    <string name="profile_edit_confirm_password_hint">Confirm password</string>
+    <string name="profile_edit_save_message">Save</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
@@ -190,10 +190,10 @@
     <string name="settings_language_key_english">en</string>
 
     <!-- Stats -->
-    <string name="stats_title">Estatísticas</string>
-    <string name="stats_message">Você já concluiu %d objetivos!</string>
-    <string name="stats_placeholder_message">Crie objetivos para acompanhar estatísticas e informações de progresso.</string>
-    <string name="stats_message_continue">Continue trabalhando em seus objetivos!    Sua sala de troféus nunca estará cheia o bastante.</string>
+    <string name="stats_title">Statistics</string>
+    <string name="stats_message">You have already completed %d goals!</string>
+    <string name="stats_placeholder_message">Create goals to track statistics and progress information.</string>
+    <string name="stats_message_continue">Keep working on your goals! Your trophy room will never be full enough.</string>
     <string name="stats_single_value">%dx</string>
     <string name="stats_bronze_value">%dx</string>
     <string name="stats_silver_value">%dx</string>
@@ -201,32 +201,32 @@
 
     <!-- Today -->
     <string name="today_title">Today</string>
-    <string name="today_next_ocurrence">Próxima ocorrência:</string>
-    <string name="today_day_message">9 NOV</string>
+    <string name="today_next_ocurrence">Next occurrence:</string>
+    <string name="today_day_message">NOV 9</string>
     <string name="today_value_message">3/10</string>
-    <string name="today_late_title">ATRASADO</string>
-    <string name="today_today_title">HOJE</string>
-    <string name="today_week_title">Próxima semana</string>
-    <string name="today_placeholder_message">Você não tem nenhum objetivo em andamento. \n\n Comece agora mesmo!</string>
-    <string name="today_today_placeholder_message">Parabéns! :)   Atingiu todos os objetivos do dia!</string>
+    <string name="today_late_title">LATE</string>
+    <string name="today_today_title">TODAY</string>
+    <string name="today_week_title">Next week</string>
+    <string name="today_placeholder_message">You have no goals in progress. \n\nGet started now!</string>
+    <string name="today_today_placeholder_message">Congratulations! :) Achieved all goals of the day!</string>
 
     <!-- Welcome -->
     <string name="welcome_title">Welcome</string>
-    <string name="welcome_sign_in">Entrar</string>
-    <string name="welcome_create_account">Criar conta</string>
-    <string name="welcome_a_message">Seja bem-vindo ao Mountains. \n\nCrie um registro de seus objetivos e mantenha-se focado em alcançá-los.</string>
-    <string name="welcome_b_message">Use o Mountains para acessar rapidamente os objetivos em andamento. \n\nSe mantenha atualizado do caminho a percorrer.</string>
-    <string name="welcome_c_message">Tenha acesso a estatísticas e acompanhe o seu progresso. \n\nMantenha seus objetivos sempre em desenvolvimento.</string>
+    <string name="welcome_sign_in">Log in</string>
+    <string name="welcome_create_account">Create account</string>
+    <string name="welcome_a_message">Welcome to the Mountains. \n\n Create a record of your goals and stay focused on achieving them.</string>
+    <string name="welcome_b_message">Use Mountains to quickly access ongoing goals. \n\n Keep up to date on the way to go.</string>
+    <string name="welcome_c_message">Get statistics and track your progress. \n\n Keep your goals always under development.</string>
 
     <!-- ListAdapter -->
-    <string name="list_adapter_habit_type_everyday">Todo dia</string>
-    <string name="list_adapter_habit_type_weekdays">vezes por semana</string>
-    <string name="list_adapter_habit_type_period">dias por</string>
-    <string name="list_adapter_habit_type_custom_1">A cada</string>
-    <string name="list_adapter_habit_type_custom_2">dias</string>
-    <string name="list_adapter_item_title">Título do objetivo</string>
-    <string name="list_adapter_item_type">Rotina: todo dia.</string>
-    <string name="list_adapter_date">25 Jul</string>
+    <string name="list_adapter_habit_type_everyday">Everyday</string>
+    <string name="list_adapter_habit_type_weekdays">times a week</string>
+    <string name="list_adapter_habit_type_period">days by</string>
+    <string name="list_adapter_habit_type_custom_1">Every</string>
+    <string name="list_adapter_habit_type_custom_2">days</string>
+    <string name="list_adapter_item_title">Goal or Habit title</string>
+    <string name="list_adapter_item_type">Routine: everyday.</string>
+    <string name="list_adapter_date">Jul 25</string>
     <string name="list_adapter_score">1/5</string>
 
     <!-- HistoricAdapter -->
@@ -234,10 +234,10 @@
     <string name="historic_adapter_value">+ 0.00</string>
 
     <!-- ItemAdapter -->
-    <string name="item_adapter_item_title">Nova meta cadastrada</string>
+    <string name="item_adapter_item_title">New goal registered</string>
 
     <!-- DayOfWeekAdapter -->
-    <string name="day_of_week_month_day">25 JUL</string>
+    <string name="day_of_week_month_day">JUL 25</string>
     <string name="day_of_week_day">DAY</string>
 
     <!-- Firebase messages -->
@@ -247,43 +247,42 @@
     <string name="firebase_result_error_need_login_again">This operation is sensitive and requires recent authentication. Log in again before retrying this request.</string>
 
     <!-- BottomSheet Goal Done -->
-    <string name="goal_done_message">Há itens pendentes nesse objetivo.    Deseja dar como concluído?</string>
-    <string name="goal_done_yes">SIM</string>
-    <string name="goal_done_no">NÃO</string>
+    <string name="goal_done_message">There are pending items in this goal. Do you wish to complete?</string>
+    <string name="goal_done_yes">YES</string>
+    <string name="goal_done_no">NO</string>
 
     <!-- BottomSheet Habit Done -->
-    <string name="habit_done_message">Hábitos só podem ser concluídos dentro da tela Today.</string>
+    <string name="habit_done_message">Habits can only be completed within the Today screen.</string>
     <string name="habit_done_ok">OK</string>
 
     <!-- BottomSheet Item -->
     <string name="item_name">Item Title</string>
     <string name="item_name_hint">Item name</string>
-    <string name="item_date">Concluído em 23/02/19 – 12:32:23</string>
-    <string name="item_button_save">Salvar</string>
-    <string name="item_title_add">Novo item</string>
-    <string name="item_title_edit">Editar item</string>
-    <string name="item_empty_name">Nome do item está vazio.</string>
-    <string name="item_date_format">Concluído em %s.</string>
+    <string name="item_date">Completed on 02/23/19 – 12:32:23</string>
+    <string name="item_button_save">Save</string>
+    <string name="item_title_add">New item</string>
+    <string name="item_title_edit">Edit item</string>
+    <string name="item_empty_name">Item name is empty.</string>
+    <string name="item_date_format">Completed on %s.</string>
 
     <!-- BottomSheet Tips One -->
-    <string name="tips_one_title">Dividir e Conquistar</string>
-    <string name="tips_one_message_1">Uma boa tática para evitar que objetivos muito grandes e complexos sejam
-        abandonados é dividir esse objetivo em partes menores. \n\nDessa forma, a sensação de progresso é maior e você
-        estará sempre motivado para alcançar aquilo que deseja. \n\nNesse modo, seu objetivo é dividido em 3 partes:
-        bronze,
-        prata e ouro.
+    <string name="tips_one_title">Divide And Conquer</string>
+    <string name="tips_one_message_1">A good tactic to prevent very large and complex goals from being
+         abandoned is to divide this objective into smaller parts. \n\n There is a greater sense of progress and you
+         You will always be motivated to achieve what you want. \n\n Therefore, your goal is divided into 3 parts:
+         bronze, silver and gold.
     </string>
-    <string name="tips_one_message_2">O primeira parte do objetivo será o valor bronze. A cada
-        parte do objetivo atingida, fica-se mais perto do valor ouro e da conclusão do objetivo.
+    <string name="tips_one_message_2">The first part of the goal will be the bronze value. Every
+         part of the goal achieved is closer to the gold value and goal completion.
     </string>
 
     <!-- BottomSheet Tips Two -->
-    <string name="tips_two_title">Tipos de meta</string>
-    <string name="tips_two_list_title">Lista</string>
-    <string name="tips_two_list_message">Para objetivos que consistem em concluir diferentes itens de uma lista. Cada item concluído representa 1 ponto para o objetivo final.</string>
-    <string name="tips_two_count_title">Contador</string>
-    <string name="tips_two_count_message">Para objetivos onde os valores a serem somados ou subtraídos sejam sempre os mesmos.</string>
-    <string name="tips_two_final_title">Valor final</string>
-    <string name="tips_two_final_message">Para objetivos onde os valores a serem somados ou subtraídos mudem constantemente.</string>
+    <string name="tips_two_title">Goals type</string>
+    <string name="tips_two_list_title">List</string>
+    <string name="tips_two_list_message">For goals that consist of completing different items on a list. Each completed item represents 1 point for the final goal.</string>
+    <string name="tips_two_counter_title">Counter</string>
+    <string name="tips_two_counter_message">For goals where the values to be added or subtracted are always the same.</string>
+    <string name="tips_two_final_title">Final value</string>
+    <string name="tips_two_final_message">For goals where the values to be added or subtracted constantly change.</string>
 
 </resources>

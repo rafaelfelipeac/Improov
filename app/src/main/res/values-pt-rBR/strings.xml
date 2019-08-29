@@ -276,8 +276,8 @@
     <string name="tips_two_title">Tipos de meta</string>
     <string name="tips_two_list_title">Lista</string>
     <string name="tips_two_list_message">Para objetivos que consistem em concluir diferentes itens de uma lista. Cada item concluído representa 1 ponto para o objetivo final.</string>
-    <string name="tips_two_count_title">Contador</string>
-    <string name="tips_two_count_message">Para objetivos onde os valores a serem somados ou subtraídos sejam sempre os mesmos.</string>
+    <string name="tips_two_counter_title">Contador</string>
+    <string name="tips_two_counter_message">Para objetivos onde os valores a serem somados ou subtraídos sejam sempre os mesmos.</string>
     <string name="tips_two_final_title">Valor final</string>
     <string name="tips_two_final_message">Para objetivos onde os valores a serem somados ou subtraídos mudem constantemente.</string>
 
