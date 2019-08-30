@@ -1,5 +1,6 @@
 package com.rafaelfelipeac.mountains.features.settings
 
+import android.content.ActivityNotFoundException
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
@@ -7,6 +8,10 @@ import androidx.preference.PreferenceFragmentCompat
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.extension.gone
 import com.rafaelfelipeac.mountains.features.main.MainActivity
+import android.content.Intent
+import android.net.Uri
+import com.rafaelfelipeac.mountains.core.platform.AppConfig.MARKET_BASE_URL
+import com.rafaelfelipeac.mountains.core.platform.AppConfig.PLAY_STORE_BASE_URL
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -33,16 +38,28 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
             }
             getString(R.string.settings_pref_key_about_rate) -> {
-               false
-                // abrir play store
+                val appPackageName = "com.rafaelfelipeac.sweetdreams" // getPackageName() from Context or Activity object
+
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("$MARKET_BASE_URL$appPackageName")))
+                } catch (exception: ActivityNotFoundException) {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("$PLAY_STORE_BASE_URL$appPackageName")))
+                }
+
+                false
             }
             getString(R.string.settings_pref_key_about_contact) -> {
+                val emailIntent = Intent(Intent.ACTION_SENDTO,
+                    Uri.fromParts("mailto", getString(R.string.settings_email_to), null))
+
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.settings_email_title))
+
+                startActivity(Intent.createChooser(emailIntent, getString(R.string.settings_email_sender_title)))
+
                 false
-                // abrir email
             }
             getString(R.string.settings_pref_key_about_version) -> {
                 false
-                // pegar versão
             }
             else -> {
                 super.onPreferenceTreeClick(preference)

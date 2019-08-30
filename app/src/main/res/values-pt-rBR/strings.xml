@@ -168,13 +168,15 @@
     <string name="settings_language_title">Idioma</string>
     <string name="settings_language_message">Escolha um idioma</string>
     <string name="settings_about_title">Sobre</string>
-    <string name="settings_about_rate_summary">Avalie Mountains na Play Store.</string>
+    <string name="settings_about_rate_summary">Avalie o Mountains na Play Store.</string>
     <string name="settings_about_rate_title">❤</string>
     <string name="settings_about_contact_title">Feedback</string>
     <string name="settings_about_contact_summary">Nos envie um email com dúvidas, sugestões ou reporte um bug.</string>
     <string name="settings_about_version_title">Versão</string>
     <string name="settings_about_version_summary">@string/versionName</string>
-
+    <string name="settings_email_to">rafaelfelipeac@gmail.com</string>
+    <string name="settings_email_title">Feedback - Mountains</string>
+    <string name="settings_email_sender_title">Enviar email…</string>
     <string name="settings_pref_key_language_title">language category</string>
     <string name="settings_pref_key_language_message">language</string>
     <string name="settings_pref_key_about_title">about category</string>
