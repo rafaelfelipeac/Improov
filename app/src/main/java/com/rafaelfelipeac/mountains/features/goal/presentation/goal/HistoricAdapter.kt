@@ -20,7 +20,7 @@ class HistoricAdapter : BaseAdapter<Historic>() {
         val date = viewHolder.itemView.findViewById<TextView>(R.id.historic_date)
         val value = viewHolder.itemView.findViewById<TextView>(R.id.historic_value)
 
-        date.text = item.date?.convertDateToString()
+        date.text = item.date?.convertDateToString(context)
         value.text = item.value.getValueWithSymbol()
     }
 

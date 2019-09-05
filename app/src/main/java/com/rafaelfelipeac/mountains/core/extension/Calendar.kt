@@ -28,7 +28,7 @@ fun Calendar.getNextWeek(context: Context): List<DayOfWeek> {
         days.add(
             DayOfWeek(
                 today.getDayOfWeek(today.get(Calendar.DAY_OF_WEEK), context),
-                today.time.format().toString()
+                today.time.format(context).toString()
             )
         )
     }

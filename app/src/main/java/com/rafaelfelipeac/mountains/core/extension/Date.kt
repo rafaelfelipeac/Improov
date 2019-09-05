@@ -1,12 +1,16 @@
 package com.rafaelfelipeac.mountains.core.extension
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.text.format.DateFormat
 import android.text.format.DateUtils
+import com.rafaelfelipeac.mountains.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun Date.convertDateToString(): String {
-    val format = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+@SuppressLint("SimpleDateFormat")
+fun Date.convertDateToString(context: Context): String {
+    val format = SimpleDateFormat(context.getString(R.string.date_format_full))
 
     return format.format(this)
 }
@@ -17,7 +21,7 @@ fun Date?.isLate() = this!! < Calendar.getInstance().time
 
 fun Date?.isFuture() = this!! > Calendar.getInstance().time
 
-fun Date?.format() = DateFormat.format("dd MMM",   this)!!
+fun Date?.format(context: Context) = DateFormat.format(context.getString(R.string.date_format_dd_MMM),   this)!!
 
 fun Date?.addDays(days: Int) {
     val calendar = getCalendar(this?.time!!)

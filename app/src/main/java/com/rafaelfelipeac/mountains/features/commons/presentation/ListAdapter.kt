@@ -145,7 +145,7 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
             progressDone.setWidthForProgress(goal, fragment)
 
             if (goal.finalDate != null) {
-                date.text = goal.finalDate.format()
+                date.text = goal.finalDate.format(fragment.context!!)
             }
 
             itemDrag.setOnTouchListener { _, _ ->
@@ -185,7 +185,7 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
             title.text = habit.name
 
             if (habit.nextDate != null && habit.isLate() && !habit.isToday()) {
-                late.text = habit.nextDate.format()
+                late.text = fragment.context?.let { habit.nextDate.format(it) }
                 late.visible()
             }
 

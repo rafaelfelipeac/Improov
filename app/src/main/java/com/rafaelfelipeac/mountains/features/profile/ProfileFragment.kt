@@ -47,11 +47,11 @@ class ProfileFragment : BaseFragment() {
             val dialog = ProfileLogoutDialog()
 
             dialog.setOnClickListener(object : ProfileLogoutDialog.OnClickListener {
-                override fun onClickCancel() {
+                override fun onCancel() {
                     dialog.dismiss()
                 }
 
-                override fun onClickOK() {
+                override fun onOK() {
                     dialog.dismiss()
                     logout()
                 }

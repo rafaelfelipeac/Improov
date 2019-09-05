@@ -29,9 +29,9 @@ class ProfileLogoutDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        profile_logout_cancel_button.setOnClickListener { onClickListener?.onClickCancel() }
+        profile_logout_cancel_button.setOnClickListener { onClickListener?.onCancel() }
 
-        profile_logout_ok_button.setOnClickListener { onClickListener?.onClickOK() }
+        profile_logout_ok_button.setOnClickListener { onClickListener?.onOK() }
     }
 
     fun setOnClickListener(onOkClickListener: OnClickListener) {
@@ -39,7 +39,7 @@ class ProfileLogoutDialog : DialogFragment() {
     }
 
     interface OnClickListener {
-        fun onClickCancel()
-        fun onClickOK()
+        fun onCancel()
+        fun onOK()
     }
 }

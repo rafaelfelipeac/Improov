@@ -82,7 +82,7 @@ class GoalFormFragment : BaseFragment() {
             cal.set(Calendar.MONTH, monthOfYear)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            val myFormat = "dd/MM/yyyy"
+            val myFormat = getString(R.string.date_format_dmy)
             val sdf = SimpleDateFormat(myFormat, Locale.US)
             goal_form_set_date.text = sdf.format(cal.time)
 
@@ -305,7 +305,7 @@ class GoalFormFragment : BaseFragment() {
         goal_form_goal_name.setText(goal.name)
 
         if (goal.finalDate != null) {
-            val myFormat = "dd/MM/yyyy"
+            val myFormat = getString(R.string.date_format_dmy)
             val sdf = SimpleDateFormat(myFormat, Locale.US)
             goal_form_set_date.text = sdf.format(goal.finalDate)
 

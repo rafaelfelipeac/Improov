@@ -191,7 +191,7 @@ class TodayFragment : BaseFragment() {
 
     private fun setItemsToday() {
         val calendar = Calendar.getInstance()
-        today_day_message.text = calendar.time.format()
+        today_day_message.text = context?.let { calendar.time.format(it) }
 
         if (goalsToday!!.isEmpty() && habitsToday!!.isEmpty() && goalsDone?.isNotEmpty()!! && habitsDone?.isNotEmpty()!!) {
             today_today_list.gone()
@@ -251,12 +251,12 @@ class TodayFragment : BaseFragment() {
 
         days.forEach { day ->
             habitsFuture?.forEach { habit ->
-                if (day.monthDay == habit.nextDate.format()) {
+                if (day.monthDay == habit.nextDate.format(context!!)) {
                     day.list.add(habit)
                 }
             }
             goalsFuture?.forEach { goal ->
-                if (day.monthDay == goal.finalDate.format()) {
+                if (day.monthDay == goal.finalDate.format(context!!)) {
                     day.list.add(goal)
                 }
             }
@@ -304,7 +304,7 @@ class TodayFragment : BaseFragment() {
                         showSnackBarWithAction(
                             holder.itemView, String.format(
                                 "%s %s.", getString(R.string.today_next_ocurrence),
-                                goalHabit.nextDate.format()
+                                context?.let { goalHabit.nextDate.format(it) }
                             ), beforeHabit, ::undoDone
                         )
                     }

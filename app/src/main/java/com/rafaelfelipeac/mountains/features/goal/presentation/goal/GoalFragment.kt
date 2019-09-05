@@ -142,7 +142,7 @@ class GoalFragment : BaseFragment() {
             if (item.done) {
                 bottomSheetItemDate.text = String.format(
                     getString(R.string.item_date_format),
-                    item.doneDate?.convertDateToString()
+                    context?.let { item.doneDate?.convertDateToString(it) }
                 )
                 bottomSheetItemDate.visible()
             } else {
@@ -288,7 +288,7 @@ class GoalFragment : BaseFragment() {
         goal_count.text = count.getNumberInRightFormat()
 
         if (goal?.finalDate != null) {
-            val myFormat = "dd/MM/yyyy"
+            val myFormat = getString(R.string.date_format_dmy)
             val sdf = SimpleDateFormat(myFormat, Locale.US)
 
             goal_final_date.text = sdf.format(goal?.finalDate)
