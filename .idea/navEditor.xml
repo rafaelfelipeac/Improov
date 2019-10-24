@@ -34,39 +34,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigation_create_user">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-859" />
-                            <option name="y" value="49" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_navigation_create_user_to_navigation_list">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="navigation_forgot_password">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-609" />
-                            <option name="y" value="565" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="navigation_goal">
                     <value>
                       <LayoutPositions>
@@ -164,32 +131,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigation_login">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-861" />
-                            <option name="y" value="338" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_navigation_login_to_navigation_forgot_password">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_navigation_login_to_navigation_list">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="navigation_profile">
                     <value>
                       <LayoutPositions>
@@ -264,8 +205,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="119" />
-                            <option name="y" value="-687" />
+                            <option name="x" value="129" />
+                            <option name="y" value="-703" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -328,23 +269,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1151" />
-                            <option name="y" value="187" />
+                            <option name="x" value="-604" />
+                            <option name="y" value="196" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_navigation_welcome_to_navigation_create_user">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="action_navigation_welcome_to_navigation_list">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_navigation_welcome_to_navigation_login">
                               <value>
                                 <LayoutPositions />
                               </value>

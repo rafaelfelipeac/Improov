@@ -14,14 +14,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.crashlytics.android.Crashlytics
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.platform.base.BaseActivity
-import com.rafaelfelipeac.mountains.features.commons.User
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_sheet_tips_one.*
@@ -38,10 +34,6 @@ class MainActivity : BaseActivity() {
     lateinit var bottomSheetTipClose: ConstraintLayout
     lateinit var bottomSheetTip: BottomSheetBehavior<*>
 
-    var mGoogleSignInClient: GoogleSignInClient? = null
-
-    lateinit var user: User
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,7 +44,6 @@ class MainActivity : BaseActivity() {
 
         setupElements()
         setupToolbar()
-        setupGoogleClient()
 
         NavigationUI.setupWithNavController(bottom_nav, navController)
     }
@@ -83,15 +74,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
-
-    private fun setupGoogleClient() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-    }
 
     private fun setupElements() {
         toolbar = findViewById(R.id.toolbar)!!

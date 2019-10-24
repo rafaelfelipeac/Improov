@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.core.extension.invisible
+import com.rafaelfelipeac.mountains.core.extension.visible
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_welcome.*
@@ -36,9 +37,7 @@ class WelcomeFragment : BaseFragment() {
     override fun onStart() {
         super.onStart()
 
-        val account = GoogleSignIn.getLastSignedInAccount(context!!)
-
-        if (account != null || preferences.login) {
+        if (preferences.welcome) {
             navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
         }
     }
@@ -46,15 +45,21 @@ class WelcomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        welcome_sign_in_button.setOnClickListener {
-            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationLogin())
+        welcome_start_button.setOnClickListener {
+            preferences.welcome = true
+
+            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
         }
 
-        welcome_create_account_button.setOnClickListener {
-            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationCreateUser())
-        }
-
-        welcome_viewpager.adapter = WelcomeAdapter(fragmentManager!!)
+        welcome_viewpager.adapter = WelcomeAdapter(this, fragmentManager!!)
         welcome_dots.setupWithViewPager(welcome_viewpager, true)
+    }
+
+    fun showStartButton() {
+        welcome_start_button.visible()
+    }
+
+    fun hideStartButton() {
+        welcome_start_button.invisible()
     }
 }

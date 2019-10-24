@@ -30,32 +30,6 @@
     <string name="add_goal">Objetivo</string>
     <string name="add_habit">Hábito</string>
 
-    <!-- CreateUser -->
-    <string name="create_user_title">Criar usuário</string>
-    <string name="create_user_message">Precisamos de algumas informações para criar sua conta.</string>
-    <string name="create_user_hint_name">Nome</string>
-    <string name="create_user_hint_email">Email</string>
-    <string name="create_user_hint_password">Senha</string>
-    <string name="create_user_hint_confirm_password">Confirme a senha</string>
-    <string name="create_user_create_button">Criar conta</string>
-    <string name="create_user_snackbar_error_email_already_in_use">Email já cadastrado.</string>
-    <string name="create_user_snackbar_error_create_user">Erro ao criar usuário.</string>
-    <string name="create_user_empty_fields">Preencher todos campos.</string>
-    <string name="create_user_invalid_email">Digite um email válido.</string>
-    <string name="create_user_different_passwords">Senhas não coincidem.</string>
-    <string name="create_user_min_characters">A senha deve ter no mínimo 6 caracteres.</string>
-
-    <!-- ForgotPassword -->
-    <string name="forgot_password_title">Esqueci a senha</string>
-    <string name="forgot_password_message">Digite o email que voce usou para criar sua conta. \n\nVamos te enviar instruções para resetar sua senha.</string>
-    <string name="forgot_password_hint_email">Email</string>
-    <string name="forgot_password_send_button">Enviar email</string>
-    <string name="forgot_password_message_email_not_registered">Esse email não está cadastrado.</string>
-    <string name="forgot_password_message_email">Digite um email.</string>
-    <string name="forgot_password_message_invalid_email">Digite um email válido.</string>
-    <string name="forgot_password_snackbar_send_email_error">Erro ao enviar email.</string>
-    <string name="forgot_password_snackbar_send_email_success">Email enviado.</string>
-
     <!-- Goal -->
     <string name="goal_title">Objetivo</string>
     <string name="goal_message_goal_done">Objetivo concluído!</string>
@@ -124,33 +98,17 @@
     <string name="list_item_resolved_message">Objetivo arquivado.</string>
     <string name="list_placeholder_message">Você não tem nenhum objetivo em andamento. \n\n Comece agora mesmo!</string>
 
-    <!-- Login -->
-    <string name="login_title">Entrar</string>
-    <string name="login_google_failed_message">Falha no login do Google</string>
-    <string name="login_wrong_password_message">Senha incorreta.</string>
-    <string name="login_user_not_registered_message">Usuário não cadastrado.</string>
-    <string name="login_error_message">Erro ao realizar login.</string>
-    <string name="login_email_password_message">Digite um email e uma senha.</string>
-    <string name="login_invalid_email_message">Digite um email válido.</string>
-    <string name="login_min_characters_message">A senha deve ter no mínimo 6 caracteres.</string>
-    <string name="login_google_sign_in_message">Faça login com o Google</string>
-    <string name="login_email_hint">Email</string>
-    <string name="login_password_hint">Senha</string>
-    <string name="login_sign_in_button">Entrar</string>
-    <string name="login_forgot_password_button">Esqueci minha senha</string>
-    <string name="login_login_with_email_message">ou faça o login com seu email</string>
-
     <!-- Profile -->
     <string name="profile_title">Perfil</string>
     <string name="profile_user_name">Nome do usuário</string>
     <string name="profile_user_email">emaildousuario@gmail.com</string>
     <string name="profile_edit_profile_message">Editar perfil</string>
-    <string name="profile_logout_button_message">Sair</string>
+    <string name="profile_show_welcome_message">Ver mensagens iniciais</string>
 
-    <!-- ProfileLogout -->
-    <string name="profile_logout_message">Tem certeza que deseja sair do app?</string>
-    <string name="profile_logout_cancel_message">Cancelar</string>
-    <string name="profile_logout_ok_message">OK</string>
+    <!-- TwoButtons -->
+    <string name="two_buttons_message">Tem certeza que deseja sair do app?</string>
+    <string name="two_buttons_cancel_message">Cancelar</string>
+    <string name="two_buttons_ok_message">OK</string>
 
     <!-- ProfileEdit -->
     <string name="profile_edit_title">Editar perfil</string>
@@ -221,7 +179,7 @@
     <!-- Welcome -->
     <string name="welcome_title">Bem-vindo</string>
     <string name="welcome_sign_in">Entrar</string>
-    <string name="welcome_create_account">Criar conta</string>
+    <string name="welcome_start">Começar</string>
     <string name="welcome_a_message">Seja bem-vindo ao Mountains. \n\nCrie um registro de seus objetivos e mantenha-se focado em alcançá-los.</string>
     <string name="welcome_b_message">Use o Mountains para acessar rapidamente os objetivos em andamento. \n\nSe mantenha atualizado do caminho a percorrer.</string>
     <string name="welcome_c_message">Tenha acesso a estatísticas e acompanhe o seu progresso. \n\nMantenha seus objetivos sempre em desenvolvimento.</string>
@@ -287,11 +245,5 @@
     <string name="tips_two_counter_message">Para objetivos onde os valores a serem somados ou subtraídos sejam sempre os mesmos.</string>
     <string name="tips_two_final_title">Valor final</string>
     <string name="tips_two_final_message">Para objetivos onde os valores a serem somados ou subtraídos mudem constantemente.</string>
-
-    <!-- Firebase messages -->
-    <string name="firebase_result_error_invalid_password">The password is invalid or the user does not have a password.</string>
-    <string name="firebase_result_error_no_user">There is no user record corresponding to this identifier.</string>
-    <string name="firebase_result_error_email_already_in_use">The email address is already in use by another account.</string>
-    <string name="firebase_result_error_need_login_again">This operation is sensitive and requires recent authentication. Log in again before retrying this request.</string>
 
 </resources>

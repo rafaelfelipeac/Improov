@@ -6,7 +6,6 @@ import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.persistence.database.RoomDatabase
 import com.rafaelfelipeac.mountains.features.goal.data.HistoricDAO
 import com.rafaelfelipeac.mountains.features.goal.data.ItemDAO
-import com.rafaelfelipeac.mountains.features.commons.data.UserDAO
 import com.rafaelfelipeac.mountains.features.commons.data.GoalDAO
 import com.rafaelfelipeac.mountains.features.commons.data.HabitDAO
 import dagger.Module
@@ -24,10 +23,6 @@ object PersistenceModule {
             .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
             .build()
-
-    @Provides
-    @JvmStatic
-    fun provideUserDAO(appDatabase: RoomDatabase): UserDAO = appDatabase.userDAO()
 
     @Provides
     @JvmStatic

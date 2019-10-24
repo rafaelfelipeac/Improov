@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.features.profile
+package com.rafaelfelipeac.mountains.features.commons
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,14 +9,14 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
 import com.rafaelfelipeac.mountains.R
-import kotlinx.android.synthetic.main.fragment_logout_dialog.*
+import kotlinx.android.synthetic.main.fragment_two_buttons_dialog.*
 
-class ProfileLogoutDialog : DialogFragment() {
+class TwoButtonsDialog : DialogFragment() {
 
     private var onClickListener: OnClickListener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view =  inflater.inflate(R.layout.fragment_logout_dialog, container, false)
+        val view =  inflater.inflate(R.layout.fragment_two_buttons_dialog, container, false)
 
         if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -29,9 +29,9 @@ class ProfileLogoutDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        profile_logout_cancel_button.setOnClickListener { onClickListener?.onCancel() }
+        two_buttons_cancel_button.setOnClickListener { onClickListener?.onCancel() }
 
-        profile_logout_ok_button.setOnClickListener { onClickListener?.onOK() }
+        two_buttons_ok_button.setOnClickListener { onClickListener?.onOK() }
     }
 
     fun setOnClickListener(onOkClickListener: OnClickListener) {

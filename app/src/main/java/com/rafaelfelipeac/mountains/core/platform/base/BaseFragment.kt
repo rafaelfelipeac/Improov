@@ -7,7 +7,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.persistence.sharedpreferences.Preferences
 import com.rafaelfelipeac.mountains.core.di.modules.viewModel.ViewModelFactory
@@ -35,11 +34,6 @@ abstract class BaseFragment : Fragment() {
     private val fakeBottomNav get() = (activity as MainActivity).fakeBottomNav
 
     val fab get() = (activity as MainActivity).fab
-
-    val mGoogleSignInClient get() = (activity as MainActivity).mGoogleSignInClient
-
-    val user get () = (activity as MainActivity).user
-    var userFirebase = FirebaseAuth.getInstance().currentUser
 
     override fun onResume() {
         super.onResume()

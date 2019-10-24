@@ -95,21 +95,17 @@ class TodayFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        todayViewModel.user?.observe(this, Observer { user ->
-            (activity as MainActivity).user = user
-        })
-
         todayViewModel.getGoals()?.observe(this, Observer { goals ->
 
             this.goalsDone =
-                goals.filter { it.userId == user.userId && !it.archived && it.finalDate != null && it.finalDate.isToday() && it.done }
+                goals.filter { !it.archived && it.finalDate != null && it.finalDate.isToday() && it.done }
 
             this.goalsLate =
-                goals.filter { it.userId == user.userId && !it.archived && !it.done && it.finalDate != null && it.finalDate.isLate() && !it.finalDate.isToday() }
+                goals.filter { !it.archived && !it.done && it.finalDate != null && it.finalDate.isLate() && !it.finalDate.isToday() }
             this.goalsToday =
-                goals.filter { it.userId == user.userId && !it.archived && !it.done && it.finalDate != null && it.finalDate.isToday() }
+                goals.filter { !it.archived && !it.done && it.finalDate != null && it.finalDate.isToday() }
             this.goalsFuture =
-                goals.filter { it.userId == user.userId && !it.archived && it.finalDate != null && it.finalDate.isFuture() }
+                goals.filter { !it.archived && it.finalDate != null && it.finalDate.isFuture() }
 
             setupItems()
         })
@@ -117,14 +113,14 @@ class TodayFragment : BaseFragment() {
         todayViewModel.getHabits()?.observe(this, Observer { habits ->
 
             this.habitsDone =
-                habits.filter { it.userId == user.userId && !it.archived && it.doneToday && (it.nextDate.isToday() || it.doneDate.isToday()) }
+                habits.filter { !it.archived && it.doneToday && (it.nextDate.isToday() || it.doneDate.isToday()) }
 
             this.habitsLate =
-                habits.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isLate() && !it.isToday() }
+                habits.filter { !it.archived && !it.doneToday && it.isLate() && !it.isToday() }
             this.habitsToday =
-                habits.filter { it.userId == user.userId && !it.archived && !it.doneToday && it.isToday() }
+                habits.filter { !it.archived && !it.doneToday && it.isToday() }
             this.habitsFuture =
-                habits.filter { it.userId == user.userId && !it.archived && it.isFuture() }
+                habits.filter { !it.archived && it.isFuture() }
 
             setupItems()
         })

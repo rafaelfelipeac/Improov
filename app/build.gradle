@@ -5,7 +5,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'io.gitlab.arturbosch.detekt'
 apply plugin: 'io.fabric'
-apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -53,25 +52,25 @@ android {
     dependencies {
         implementation fileTree(dir: 'libs', include: ['*.jar'])
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-        implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+        implementation 'androidx.appcompat:appcompat:1.1.0'
         implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-        implementation 'androidx.vectordrawable:vectordrawable:1.1.0-rc01'
+        implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
         implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-        implementation 'com.google.android.material:material:1.1.0-alpha09'
+        implementation 'com.google.android.material:material:1.2.0-alpha01'
         implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0-beta01'
 
         // test
-        implementation 'androidx.vectordrawable:vectordrawable:1.1.0-rc01'
+        implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
         testImplementation 'junit:junit:4.12'
         androidTestImplementation 'androidx.test:runner:1.2.0'
         androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
         // LiveData & ViewModel
-        implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-alpha03'
+        implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-beta01'
 
         // Room
-        kapt 'androidx.room:room-compiler:2.2.0-beta01'
-        implementation 'androidx.room:room-runtime:2.2.0-beta01'
+        kapt 'androidx.room:room-compiler:2.2.0'
+        implementation 'androidx.room:room-runtime:2.2.0'
 
         // Retrofit
         implementation "com.squareup.retrofit2:retrofit:2.4.0"
@@ -93,8 +92,8 @@ android {
         implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
 
         // Navigation
-        implementation "androidx.navigation:navigation-fragment-ktx:2.2.0-alpha01"
-        implementation "androidx.navigation:navigation-ui-ktx:2.2.0-alpha01"
+        implementation "androidx.navigation:navigation-fragment-ktx:2.2.0-beta01"
+        implementation "androidx.navigation:navigation-ui-ktx:2.2.0-beta01"
 
         // Preference
         implementation 'com.android.support:preference-v14:28.0.0'
@@ -109,13 +108,6 @@ android {
         implementation('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
             transitive = true
         }
-
-        // Firebase
-        implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
-
-        implementation 'com.google.firebase:firebase-core:17.2.0'
-        implementation 'com.google.firebase:firebase-auth:19.0.0'
-        implementation 'com.google.android.gms:play-services-auth:17.0.0'
 
         implementation 'com.android.support:multidex:1.0.3'
     }
@@ -138,6 +130,4 @@ android {
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.google.firebase:firebase-auth:19.0.0'
-    implementation 'com.google.firebase:firebase-core:17.2.0'
 }

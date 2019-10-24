@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 const val preferences_name = "com.rafaelfelipeac.mountains.preferences"
-const val KEY_LOGIN = "KEY_LOGIN"
+const val KEY_WELCOME = "KEY_WELCOME"
 const val KEY_WEEKDAYS = "KEY_WEEKDAYS"
 const val KEY_LANGUAGE = "KEY_LANGUAGE"
 
@@ -12,9 +12,9 @@ class Preferences(context: Context) {
 
     private val prefs: SharedPreferences = context.getSharedPreferences(preferences_name, 0)
 
-    var login: Boolean
-        get() = prefs.getBoolean(KEY_LOGIN, false)
-        set(value) = prefs.edit().putBoolean(KEY_LOGIN, value).apply()
+    var welcome: Boolean
+        get() = prefs.getBoolean(KEY_WELCOME, false)
+        set(value) = prefs.edit().putBoolean(KEY_WELCOME, value).apply()
 
     var openWeekDays: Boolean
         get() = prefs.getBoolean(KEY_WEEKDAYS, false)

@@ -29,23 +29,15 @@ class ProfileEditFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        profile_edit_name.setText(userFirebase?.displayName)
-        profile_edit_email.setText(userFirebase?.email)
+        //profile_edit_name.setText(userFirebase?.displayName)
+        //profile_edit_email.setText(userFirebase?.email)
 
         observeViewModel()
 
         profile_edit_save_button.setOnClickListener {
             if (verifyElements()) {
                 if (updateName()) {
-                    profileEditViewModel.updateName(profile_edit_name.text.toString())
-                    cont++
-                }
-                if (updatePassword()) {
-                    profileEditViewModel.updatePassword(profile_edit_password.text.toString())
-                    cont++
-                }
-                if (updateEmail()) {
-                    profileEditViewModel.updateEmail(profile_edit_email.text.toString())
+                    //profileEditViewModel.updateName(profile_edit_name.text.toString())
                     cont++
                 }
 
@@ -72,18 +64,9 @@ class ProfileEditFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_profile_edit, container, false)
     }
 
-    private fun updateEmail(): Boolean {
-      return userFirebase?.email != profile_edit_email.text.toString()
-    }
-
-    private fun updatePassword(): Boolean {
-        return profile_edit_password.text.toString().isNotEmpty() && profile_edit_confirm_password.text.toString().isNotEmpty() &&
-                profile_edit_password.text.toString() == profile_edit_confirm_password.text.toString() &&
-                profile_edit_password.text.toString().length >= 6
-    }
-
     private fun updateName(): Boolean {
-        return userFirebase?.displayName != profile_edit_name.text.toString()
+        //return userFirebase?.displayName != profile_edit_name.text.toString()
+        return false
     }
 
     private fun verifyElements(): Boolean {
@@ -113,33 +96,33 @@ class ProfileEditFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        profileEditViewModel.updateUser.observe(this, Observer { createResult ->
-            when {
-                createResult.isSuccessful -> {
-                    if (--cont == 0) {
-                        hideProgressBar()
-                    }
-
-                    profile_edit_password.resetValue()
-                    profile_edit_confirm_password.resetValue()
-
-                    showSnackBar(getString(R.string.profile_edit_success))
-                }
-                createResult.message == getString(R.string.firebase_result_error_email_already_in_use) -> {
-                    hideProgressBar()
-                    setErrorMessage(getString(R.string.profile_edit_snackbar_error_email_already_in_use))
-                }
-                createResult.message == getString(R.string.firebase_result_error_need_login_again) -> {
-                    hideProgressBar()
-                    setErrorMessage(getString(R.string.profile_edit_need_login_again))
-                }
-                else -> {
-                    hideProgressBar()
-                    setErrorMessage(getString(R.string.empty_string))
-                    showSnackBar(getString(R.string.profile_edit_error))
-                }
-            }
-        })
+//        profileEditViewModel.updateUser.observe(this, Observer { createResult ->
+//            when {
+//                createResult.isSuccessful -> {
+//                    if (--cont == 0) {
+//                        hideProgressBar()
+//                    }
+//
+//                    profile_edit_password.resetValue()
+//                    profile_edit_confirm_password.resetValue()
+//
+//                    showSnackBar(getString(R.string.profile_edit_success))
+//                }
+//                createResult.message == getString(R.string.firebase_result_error_email_already_in_use) -> {
+//                    hideProgressBar()
+//                    setErrorMessage(getString(R.string.profile_edit_snackbar_error_email_already_in_use))
+//                }
+//                createResult.message == getString(R.string.firebase_result_error_need_login_again) -> {
+//                    hideProgressBar()
+//                    setErrorMessage(getString(R.string.profile_edit_need_login_again))
+//                }
+//                else -> {
+//                    hideProgressBar()
+//                    setErrorMessage(getString(R.string.empty_string))
+//                    showSnackBar(getString(R.string.profile_edit_error))
+//                }
+//            }
+//        })
     }
 
     private fun setErrorMessage(message: String) {

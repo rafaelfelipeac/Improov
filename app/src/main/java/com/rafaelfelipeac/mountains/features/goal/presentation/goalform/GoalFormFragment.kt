@@ -117,10 +117,6 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        goalFormViewModel.user?.observe(this, Observer { user ->
-            (activity as MainActivity).user = user
-        })
-
         goalFormViewModel.getGoal()?.observe(this, Observer { goal ->
             this.goal = goal as Goal
 
@@ -128,11 +124,11 @@ class GoalFormFragment : BaseFragment() {
         })
 
         goalFormViewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goals = goals.filter { it.userId == user.userId }
+            this.goals = goals
         })
 
         goalFormViewModel.getHabits()?.observe(this, Observer { habits ->
-            this.habits = habits.filter { it.userId == user.userId }
+            this.habits = habits
         })
 
         goalFormViewModel.goalIdInserted.observe(this, Observer {
@@ -263,7 +259,6 @@ class GoalFormFragment : BaseFragment() {
         goal.type = getGoalTypeSelected()
 
         if (goal.goalId == 0L) {
-            goal.userId = user.userId
             goal.createdDate = getCurrentTime()
             goal.value = 0F
             goal.done = false

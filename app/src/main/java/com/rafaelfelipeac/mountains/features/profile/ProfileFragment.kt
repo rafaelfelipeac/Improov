@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.main.MainActivity
@@ -24,8 +23,8 @@ class ProfileFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
 
-        profile_user_name.text = userFirebase?.displayName
-        profile_user_email.text = userFirebase?.email
+//        profile_user_name.text = userFirebase?.displayName
+//        profile_user_email.text = userFirebase?.email
 
         (activity as MainActivity).closeToolbar()
     }
@@ -43,21 +42,10 @@ class ProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        profile_logout_button.setOnClickListener {
-            val dialog = ProfileLogoutDialog()
+        profile_show_welcome_button.setOnClickListener {
+            preferences.welcome = false
 
-            dialog.setOnClickListener(object : ProfileLogoutDialog.OnClickListener {
-                override fun onCancel() {
-                    dialog.dismiss()
-                }
-
-                override fun onOK() {
-                    dialog.dismiss()
-                    logout()
-                }
-            })
-
-            dialog.show(fragmentManager!!, "tag")
+            navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationWelcome())
         }
 
         fab.setOnClickListener {
@@ -70,17 +58,6 @@ class ProfileFragment : BaseFragment() {
 
         profile_settings_button.setOnClickListener {
             navController.navigate(R.id.action_navigation_profile_to_navigation_settings)
-        }
-    }
-
-    private fun logout() {
-        preferences.login = false
-        FirebaseAuth.getInstance().signOut()
-
-        mGoogleSignInClient?.signOut()?.addOnCompleteListener {
-            if (it.isSuccessful) {
-                navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationWelcome())
-            }
         }
     }
 }

@@ -30,32 +30,6 @@
     <string name="add_goal">Goal</string>
     <string name="add_habit">Habit</string>
 
-    <!-- CreateUser -->
-    <string name="create_user_title">Create User</string>
-    <string name="create_user_message">We need some information to create your account..</string>
-    <string name="create_user_hint_name">Name</string>
-    <string name="create_user_hint_email">Email</string>
-    <string name="create_user_hint_password">Password</string>
-    <string name="create_user_hint_confirm_password">Confirm Password</string>
-    <string name="create_user_create_button">Create Account</string>
-    <string name="create_user_snackbar_error_email_already_in_use">Email .</string>already in use.
-    <string name="create_user_snackbar_error_create_user">Error creating user.</string>
-    <string name="create_user_empty_fields">You need to fill in all fields.</string>
-    <string name="create_user_invalid_email">Enter a valid email address.</string>
-    <string name="create_user_different_passwords">Passwords do not match.</string>
-    <string name="create_user_min_characters">Password must be at least 6 characters.</string>
-
-    <!-- ForgotPassword -->
-    <string name="forgot_password_title">I forgot the password</string>
-    <string name="forgot_password_message">Enter the email you used to create your account. \n\nWe will send you instructions to reset your password.</string>
-    <string name="forgot_password_hint_email">Email</string>
-    <string name="forgot_password_send_button">Send email</string>
-    <string name="forgot_password_message_email_not_registered">This email is not registered.</string>
-    <string name="forgot_password_message_email">Enter an email.</string>
-    <string name="forgot_password_message_invalid_email">Enter a valid email address.</string>
-    <string name="forgot_password_snackbar_send_email_error">Error sending email.</string>
-    <string name="forgot_password_snackbar_send_email_success">Email sent.</string>
-
     <!-- Goal -->
     <string name="goal_title">Goal</string>
     <string name="goal_message_goal_done">Goal completed!</string>
@@ -124,33 +98,17 @@
     <string name="list_item_resolved_message">Archived goal.</string>
     <string name="list_placeholder_message">You have no goals in progress. \n\n Get started now!</string>
 
-    <!-- Login -->
-    <string name="login_title">Login</string>
-    <string name="login_google_failed_message">Google sign in failed</string>
-    <string name="login_wrong_password_message">Incorrect password.</string>
-    <string name="login_user_not_registered_message">Unregistered User.</string>
-    <string name="login_error_message">Error logging in..</string>
-    <string name="login_email_password_message">Enter an email and password.</string>
-    <string name="login_invalid_email_message">Enter a valid email address.</string>
-    <string name="login_min_characters_message">Password must be at least 6 characters.</string>
-    <string name="login_google_sign_in_message">Sign in with Google</string>
-    <string name="login_email_hint">Email</string>
-    <string name="login_password_hint">Password</string>
-    <string name="login_sign_in_button">Login</string>
-    <string name="login_forgot_password_button">I forgot my password</string>
-    <string name="login_login_with_email_message">or login with your email</string>
-
     <!-- Profile -->
     <string name="profile_title">Profile</string>
     <string name="profile_user_name">User Profile </string>
     <string name="profile_user_email">userprofile@gmail.com</string>
     <string name="profile_edit_profile_message">Edit profile</string>
-    <string name="profile_logout_button_message">Log out</string>
+    <string name="profile_show_welcome_message">See initial messages</string>
 
-    <!-- ProfileLogout -->
-    <string name="profile_logout_message">Are you sure you want to exit the app?</string>
-    <string name="profile_logout_cancel_message">Cancel</string>
-    <string name="profile_logout_ok_message">OK</string>
+    <!-- TwoButtons -->
+    <string name="two_buttons_message">Are you sure you want to exit the app?</string>
+    <string name="two_buttons_cancel_message">Cancel</string>
+    <string name="two_buttons_ok_message">OK</string>
 
     <!-- ProfileEdit -->
     <string name="profile_edit_title">Edit Profile</string>
@@ -222,7 +180,7 @@
     <!-- Welcome -->
     <string name="welcome_title">Welcome</string>
     <string name="welcome_sign_in">Log in</string>
-    <string name="welcome_create_account">Create account</string>
+    <string name="welcome_start">Start</string>
     <string name="welcome_a_message">Welcome to the Mountains. \n\n Create a record of your goals and stay focused on achieving them.</string>
     <string name="welcome_b_message">Use Mountains to quickly access ongoing goals. \n\n Keep up to date on the way to go.</string>
     <string name="welcome_c_message">Get statistics and track your progress. \n\n Keep your goals always under development.</string>
@@ -248,12 +206,6 @@
     <!-- DayOfWeekAdapter -->
     <string name="day_of_week_month_day">JUL 25</string>
     <string name="day_of_week_day">DAY</string>
-
-    <!-- Firebase messages -->
-    <string name="firebase_result_error_invalid_password">The password is invalid or the user does not have a password.</string>
-    <string name="firebase_result_error_no_user">There is no user record corresponding to this identifier.</string>
-    <string name="firebase_result_error_email_already_in_use">The email address is already in use by another account.</string>
-    <string name="firebase_result_error_need_login_again">This operation is sensitive and requires recent authentication. Log in again before retrying this request.</string>
 
     <!-- BottomSheet Goal Done -->
     <string name="goal_done_message">There are pending items in this goal. Do you wish to complete?</string>

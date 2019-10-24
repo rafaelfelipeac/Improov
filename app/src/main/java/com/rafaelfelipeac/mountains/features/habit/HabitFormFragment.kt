@@ -154,7 +154,6 @@ class HabitFormFragment : BaseFragment() {
     private fun updateOrCreateHabit(): Habit {
         habit.name = habit_form_name.text.toString()
         habit.weekDays = getWeekDaysSelected()
-        habit.userId = user.userId
 
         val habitType = getHabitTypeSelected()
 
@@ -268,10 +267,6 @@ class HabitFormFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        habitFormViewModel.user?.observe(this, Observer { user ->
-            (activity as MainActivity).user = user
-        })
-
         habitFormViewModel.getHabit()?.observe(this, Observer { habit ->
             this.habit = habit as Habit
 
@@ -279,7 +274,7 @@ class HabitFormFragment : BaseFragment() {
         })
 
         habitFormViewModel.getHabits()?.observe(this, Observer { goals ->
-            this.habits = goals.filter { it.userId == user.userId }
+            this.habits = goals
         })
 
         habitFormViewModel.habitIdInserted.observe(this, Observer {

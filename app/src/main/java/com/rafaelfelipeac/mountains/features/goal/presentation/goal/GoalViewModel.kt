@@ -1,17 +1,13 @@
 package com.rafaelfelipeac.mountains.features.goal.presentation.goal
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.rafaelfelipeac.mountains.features.commons.UserRepository
 import com.rafaelfelipeac.mountains.core.platform.base.BaseViewModel
 import com.rafaelfelipeac.mountains.features.commons.Goal
 import com.rafaelfelipeac.mountains.features.commons.GoalRepository
-import com.rafaelfelipeac.mountains.features.commons.User
 import com.rafaelfelipeac.mountains.features.goal.*
 import javax.inject.Inject
 
 class GoalViewModel @Inject constructor(
-    private val userRepository: UserRepository,
     private val goalRepository: GoalRepository,
     private val itemRepository: ItemRepository,
     private val historicRepository: HistoricRepository
@@ -22,11 +18,7 @@ class GoalViewModel @Inject constructor(
     private var items: LiveData<List<Item>>? = null
     private var history: LiveData<List<Historic>>? = null
 
-    var user: MutableLiveData<User>? = MutableLiveData()
-
     init {
-        getUser()
-
         goals = goalRepository.getGoals()
         items = itemRepository.getItems()
         history = historicRepository.getHistory()
@@ -34,11 +26,6 @@ class GoalViewModel @Inject constructor(
 
     fun init(goalId: Long) {
         goal = goalRepository.getGoal(goalId)
-    }
-
-    // User
-    private fun getUser() {
-        user?.value = userRepository.getUserByUUI(auth.currentUser?.uid!!)
     }
 
     // Goal

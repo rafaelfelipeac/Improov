@@ -62,13 +62,13 @@ class StatsFragment : BaseFragment() {
 
     private fun observeViewModel() {
         statsViewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goals = goals.filter { it.userId == it.userId }
+            this.goals = goals
 
             setupStats()
         })
 
         statsViewModel.getHabits()?.observe(this, Observer { habits ->
-            this.habits = habits.filter { it.userId == it.userId }
+            this.habits = habits
 
             setupStats()
         })

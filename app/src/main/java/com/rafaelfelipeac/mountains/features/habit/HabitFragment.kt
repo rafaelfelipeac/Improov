@@ -54,10 +54,6 @@ class HabitFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        habitViewModel.user?.observe(this, Observer { user ->
-            (activity as MainActivity).user = user
-        })
-
         habitViewModel.getHabits()?.observe(this, Observer { habit ->
             this.habit = habit
 

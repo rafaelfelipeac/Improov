@@ -83,12 +83,8 @@ class ListFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        listViewModel.user?.observe(this, Observer { user ->
-            (activity as MainActivity).user = user
-        })
-
         listViewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goals = goals.filter { it.userId == user.userId && !it.archived}
+            this.goals = goals.filter { !it.archived}
 
             if (!isFromDragAndDrop) {
                 setupList()
@@ -98,7 +94,7 @@ class ListFragment : BaseFragment() {
         })
 
         listViewModel.getHabits()?.observe(this, Observer { habits ->
-            this.habits = habits.filter { it.userId == user.userId && !it.archived}
+            this.habits = habits.filter { !it.archived}
 
             if (!isFromDragAndDrop) {
                 setupList()

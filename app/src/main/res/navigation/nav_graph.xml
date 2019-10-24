@@ -12,36 +12,7 @@
             android:label="fragment_welcome"
             tools:layout="@layout/fragment_welcome">
 
-        <action android:id="@+id/action_navigation_welcome_to_navigation_login" app:destination="@id/navigation_login"/>
-        <action android:id="@+id/action_navigation_welcome_to_navigation_create_user" app:destination="@id/navigation_create_user"/>
         <action android:id="@+id/action_navigation_welcome_to_navigation_list" app:destination="@id/navigation_list"/>
-
-    </fragment>
-
-    <fragment
-            android:id="@+id/navigation_login"
-            android:name="com.rafaelfelipeac.mountains.features.login.LoginFragment"
-            android:label="fragment_login"
-            tools:layout="@layout/fragment_login">
-
-        <action android:id="@+id/action_navigation_login_to_navigation_forgot_password" app:destination="@id/navigation_forgot_password"/>
-        <action android:id="@+id/action_navigation_login_to_navigation_list" app:destination="@id/navigation_list"/>
-
-    </fragment>
-
-    <fragment
-            android:id="@+id/navigation_forgot_password"
-            android:name="com.rafaelfelipeac.mountains.features.forgotpassword.ForgotPasswordFragment"
-            android:label="fragment_forgot_password"
-            tools:layout="@layout/fragment_forgot_password"/>
-
-    <fragment
-            android:id="@+id/navigation_create_user"
-            android:name="com.rafaelfelipeac.mountains.features.createuser.CreateUserFragment"
-            android:label="fragment_create_user"
-            tools:layout="@layout/fragment_create_user">
-
-        <action android:id="@+id/action_navigation_create_user_to_navigation_list" app:destination="@id/navigation_list"/>
 
     </fragment>
 

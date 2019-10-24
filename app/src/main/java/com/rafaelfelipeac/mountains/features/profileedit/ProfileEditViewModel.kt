@@ -1,61 +1,6 @@
 package com.rafaelfelipeac.mountains.features.profileedit
 
-import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.UserProfileChangeRequest
-import com.rafaelfelipeac.mountains.network.firebase.FirebaseResult
 import com.rafaelfelipeac.mountains.core.platform.base.BaseViewModel
 import javax.inject.Inject
 
-class ProfileEditViewModel @Inject constructor() : BaseViewModel() {
-
-    var updateUser: MutableLiveData<FirebaseResult> = MutableLiveData()
-
-    fun updateName(name: String) {
-        val profileUpdates = UserProfileChangeRequest.Builder()
-            .setDisplayName(name)
-            .build()
-
-        auth.currentUser?.updateProfile(profileUpdates)?.addOnCompleteListener { task ->
-            val firebaseResult = FirebaseResult()
-            firebaseResult.isSuccessful = task.isSuccessful
-
-            if (task.isSuccessful) {
-                updateUser.value = firebaseResult
-            } else {
-                firebaseResult.message = task.exception?.message!!
-
-                updateUser.value = firebaseResult
-            }
-        }
-    }
-
-    fun updatePassword(password: String) {
-        auth.currentUser?.updatePassword(password)?.addOnCompleteListener { task ->
-            val firebaseResult = FirebaseResult()
-            firebaseResult.isSuccessful = task.isSuccessful
-
-            if (task.isSuccessful) {
-                updateUser.value = firebaseResult
-            } else {
-                firebaseResult.message = task.exception?.message!!
-
-                updateUser.value = firebaseResult
-            }
-        }
-    }
-
-    fun updateEmail(email: String) {
-        auth.currentUser?.updateEmail(email)?.addOnCompleteListener { task ->
-            val firebaseResult = FirebaseResult()
-            firebaseResult.isSuccessful = task.isSuccessful
-
-            if (task.isSuccessful) {
-                updateUser.value = firebaseResult
-            } else {
-                firebaseResult.message = task.exception?.message!!
-
-                updateUser.value = firebaseResult
-            }
-        }
-    }
-}
+class ProfileEditViewModel @Inject constructor() : BaseViewModel()
