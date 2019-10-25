@@ -10,10 +10,10 @@ class WelcomeAdapter(val fragment: WelcomeFragment, fm: FragmentManager) : Fragm
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> WelcomeAFragment(fragment)
-            1 -> WelcomeBFragment(fragment)
-            2 -> WelcomeCFragment(fragment)
-            else -> WelcomeAFragment(fragment)
+            0 -> WelcomeItemFragment(fragment, 0)
+            1 -> WelcomeItemFragment(fragment, 1)
+            2 -> WelcomeItemFragment(fragment, 2)
+            else -> WelcomeItemFragment(fragment, 0)
         }
     }
 

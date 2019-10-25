@@ -11,9 +11,7 @@ import com.rafaelfelipeac.mountains.features.profileedit.ProfileEditFragment
 import com.rafaelfelipeac.mountains.features.settings.SettingsLanguageFragment
 import com.rafaelfelipeac.mountains.features.stats.StatsFragment
 import com.rafaelfelipeac.mountains.features.today.presentation.TodayFragment
-import com.rafaelfelipeac.mountains.features.welcome.WelcomeAFragment
-import com.rafaelfelipeac.mountains.features.welcome.WelcomeBFragment
-import com.rafaelfelipeac.mountains.features.welcome.WelcomeCFragment
+import com.rafaelfelipeac.mountains.features.welcome.WelcomeItemFragment
 import com.rafaelfelipeac.mountains.features.welcome.WelcomeFragment
 
 interface Injector {
@@ -39,11 +37,7 @@ interface Injector {
 
     fun inject(welcomeFragment: WelcomeFragment)
 
-    fun inject(welcomeAFragment: WelcomeAFragment)
-
-    fun inject(welcomeBFragment: WelcomeBFragment)
-
-    fun inject(welcomeCFragment: WelcomeCFragment)
+    fun inject(welcomeItemFragment: WelcomeItemFragment)
 
     fun inject (settingsLanguageFragment: SettingsLanguageFragment)
 }
