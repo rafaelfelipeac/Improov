@@ -23,8 +23,7 @@ class ProfileFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
 
-//        profile_user_name.text = userFirebase?.displayName
-//        profile_user_email.text = userFirebase?.email
+        profile_user_name.text = preferences.name
 
         (activity as MainActivity).closeToolbar()
     }
