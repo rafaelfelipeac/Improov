@@ -101,30 +101,21 @@
     <!-- Profile -->
     <string name="profile_title">Profile</string>
     <string name="profile_user_name">User Profile </string>
-    <string name="profile_user_email">userprofile@gmail.com</string>
-    <string name="profile_edit_profile_message">Edit profile</string>
+    <string name="profile_add_name_message">Register your name</string>
+    <string name="profile_edit_name_message">Edit your name</string>
     <string name="profile_show_welcome_message">See initial messages</string>
+
+    <!-- ProfileName -->
+    <string name="profile_name_title">Edit name</string>
+    <string name="profile_name_empty_fields">Your name cannot be empty.</string>
+    <string name="profile_name_success">Profile edited.</string>
+    <string name="profile_name_name_hint">Name</string>
+    <string name="profile_name_save_message">Save</string>
 
     <!-- TwoButtons -->
     <string name="two_buttons_message">Are you sure you want to exit the app?</string>
     <string name="two_buttons_cancel_message">Cancel</string>
     <string name="two_buttons_ok_message">OK</string>
-
-    <!-- ProfileEdit -->
-    <string name="profile_edit_title">Edit Profile</string>
-    <string name="profile_edit_empty_fields">You need to fill in all fields.</string>
-    <string name="profile_edit_invalid_email_message">Enter a valid email address.</string>
-    <string name="profile_edit_different_passwords">Passwords do not match.</string>
-    <string name="profile_edit_min_characters">Password must be at least 6 characters.</string>
-    <string name="profile_edit_snackbar_error_email_already_in_use">E-mail already registered.</string>
-    <string name="profile_edit_success">Profile edited.</string>
-    <string name="profile_edit_error">Error updating user info.</string>
-    <string name="profile_edit_need_login_again">For security reasons, you need to log out and log back in to the app before making this change.</string>
-    <string name="profile_edit_name_hint">Name</string>
-    <string name="profile_edit_email_hint">Email</string>
-    <string name="profile_edit_password_hint">Password</string>
-    <string name="profile_edit_confirm_password_hint">Confirm password</string>
-    <string name="profile_edit_save_message">Save</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>

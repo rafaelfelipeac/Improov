@@ -101,30 +101,21 @@
     <!-- Profile -->
     <string name="profile_title">Perfil</string>
     <string name="profile_user_name">Nome do usuário</string>
-    <string name="profile_user_email">emaildousuario@gmail.com</string>
-    <string name="profile_edit_profile_message">Editar perfil</string>
+    <string name="profile_add_name_message">Cadastre seu nome</string>
+    <string name="profile_edit_name_message">Altere seu nome</string>
     <string name="profile_show_welcome_message">Ver mensagens iniciais</string>
+
+    <!-- ProfileName -->
+    <string name="profile_name_title">Editar nome</string>
+    <string name="profile_name_empty_fields">Seu nome não pode ser vazio.</string>
+    <string name="profile_name_success">Perfil editado.</string>
+    <string name="profile_name_name_hint">Nome</string>
+    <string name="profile_name_save_message">Salvar</string>
 
     <!-- TwoButtons -->
     <string name="two_buttons_message">Tem certeza que deseja sair do app?</string>
     <string name="two_buttons_cancel_message">Cancelar</string>
     <string name="two_buttons_ok_message">OK</string>
-
-    <!-- ProfileEdit -->
-    <string name="profile_edit_title">Editar perfil</string>
-    <string name="profile_edit_empty_fields">Preenchar todos campos.</string>
-    <string name="profile_edit_invalid_email_message">Digite um email válido.</string>
-    <string name="profile_edit_different_passwords">Senhas não coincidem.</string>
-    <string name="profile_edit_min_characters">A senha deve ter no mínimo 6 caracteres.</string>
-    <string name="profile_edit_snackbar_error_email_already_in_use">Email já cadastrado.</string>
-    <string name="profile_edit_success">Perfil editado.</string>
-    <string name="profile_edit_error">Erro ao atualizar informações do usuário.</string>
-    <string name="profile_edit_need_login_again">Por questões de segurança, você precisa deslogar e logar novamente no app antes de fazer essa mudança.</string>
-    <string name="profile_edit_name_hint">Nome</string>
-    <string name="profile_edit_email_hint">Email</string>
-    <string name="profile_edit_password_hint">Senha</string>
-    <string name="profile_edit_confirm_password_hint">Confirme a senha</string>
-    <string name="profile_edit_save_message">Salvar</string>
 
     <!-- Settings -->
     <string name="settings_title">Configurações</string>

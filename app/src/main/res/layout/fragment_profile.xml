@@ -59,7 +59,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/rounded_button"
-                android:text="@string/profile_edit_profile_message"
+                android:text="@string/profile_edit_name_message"
                 android:textColor="@color/colorPrimaryDarkOne"
                 app:layout_constraintBottom_toTopOf="@+id/profile_show_welcome_button"
                 app:layout_constraintEnd_toEndOf="parent"

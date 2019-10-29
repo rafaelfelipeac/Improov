@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.mountains.features.profileedit
+package com.rafaelfelipeac.mountains.features.profilename
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,9 @@ import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 
-class ProfileEditFragment : BaseFragment() {
+class ProfileNameFragment : BaseFragment() {
 
-    private val profileEditViewModel by lazy { viewModelFactory.get<ProfileEditViewModel>(this) }
+    private val profileEditViewModel by lazy { viewModelFactory.get<ProfileNameViewModel>(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class ProfileEditFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.profile_edit_title)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.profile_name_title)
 
         hideNavigation()
 
@@ -52,7 +52,7 @@ class ProfileEditFragment : BaseFragment() {
     private fun verifyElements(): Boolean {
         when {
             profile_edit_name.isEmpty() -> {
-                setErrorMessage(getString(R.string.profile_edit_empty_fields))
+                setErrorMessage(getString(R.string.profile_name_empty_fields))
                 return false
             }
         }

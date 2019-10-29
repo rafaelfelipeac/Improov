@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.rafaelfelipeac.mountains.R
+import com.rafaelfelipeac.mountains.core.extension.gone
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
 import com.rafaelfelipeac.mountains.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -23,7 +24,14 @@ class ProfileFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
 
-        profile_user_name.text = preferences.name
+        if (preferences.name.isNotEmpty()) {
+            profile_user_name.text = preferences.name
+        } else {
+            profile_user_name.gone()
+            profile_edit_profile_button.text = getString(R.string.profile_add_name_message)
+        }
+
+
 
         (activity as MainActivity).closeToolbar()
     }

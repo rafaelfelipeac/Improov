@@ -76,7 +76,7 @@
 
     <fragment
             android:id="@+id/navigation_profile_edit"
-            android:name="com.rafaelfelipeac.mountains.features.profileedit.ProfileEditFragment"
+            android:name="com.rafaelfelipeac.mountains.features.profilename.ProfileNameFragment"
             android:label="fragment_profile_edit"
             tools:layout="@layout/fragment_profile_edit"/>
 

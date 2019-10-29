@@ -7,7 +7,7 @@ import com.rafaelfelipeac.mountains.features.habit.HabitFormFragment
 import com.rafaelfelipeac.mountains.features.habit.HabitFragment
 import com.rafaelfelipeac.mountains.features.list.ListFragment
 import com.rafaelfelipeac.mountains.features.profile.ProfileFragment
-import com.rafaelfelipeac.mountains.features.profileedit.ProfileEditFragment
+import com.rafaelfelipeac.mountains.features.profilename.ProfileNameFragment
 import com.rafaelfelipeac.mountains.features.settings.SettingsLanguageFragment
 import com.rafaelfelipeac.mountains.features.stats.StatsFragment
 import com.rafaelfelipeac.mountains.features.today.presentation.TodayFragment
@@ -23,7 +23,7 @@ interface Injector {
 
     fun inject(statsFragment: StatsFragment)
 
-    fun inject(profileEditFragment: ProfileEditFragment)
+    fun inject(profileNameFragment: ProfileNameFragment)
 
     fun inject(goalFormFragment: GoalFormFragment)
 
