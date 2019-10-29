@@ -98,11 +98,11 @@ class GoalFragment : BaseFragment() {
         val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_item, null)
         bottomSheetItem.setContentView(sheetView)
 
-        bottomSheetItemSave = sheetView.findViewById(R.id.item_button_save)
-        bottomSheetItemName = sheetView.findViewById(R.id.item_title)
-        bottomSheetItemTitle = sheetView.findViewById(R.id.item_title)
-        bottomSheetItemDate = sheetView.findViewById(R.id.item_date)
-        bottomSheetItemEmptyName = sheetView.findViewById(R.id.item_empty_name)
+        bottomSheetItemSave = sheetView.findViewById(R.id.bottom_sheet_item_button_save)
+        bottomSheetItemName = sheetView.findViewById(R.id.bottom_sheet_item_name)
+        bottomSheetItemTitle = sheetView.findViewById(R.id.bottom_sheet_item_title)
+        bottomSheetItemDate = sheetView.findViewById(R.id.bottom_sheet_item_date)
+        bottomSheetItemEmptyName = sheetView.findViewById(R.id.bottom_sheet_item_empty_name)
 
         bottomSheetItemSave.setOnClickListener {
             if (bottomSheetItemName.isEmpty()) {

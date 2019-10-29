@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/item"
+        android:id="@+id/bottom_sheet_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -13,7 +13,7 @@
         android:background="@drawable/rounded_primary_dark_two">
 
     <View
-            android:id="@+id/item_indicator"
+            android:id="@+id/bottom_sheet_item_indicator"
             android:layout_width="40dp"
             android:layout_height="4dp"
             android:background="@drawable/rounded_primary"
@@ -25,15 +25,15 @@
             android:layout_marginTop="16dp" />
 
     <TextView
-            android:id="@+id/item_title"
+            android:id="@+id/bottom_sheet_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/item_name"
+            android:text="@string/bottom_sheet_item_name"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="24dp"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@+id/item_indicator"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_item_indicator"
             android:layout_marginTop="16dp"
             android:textStyle="bold"/>
 
@@ -47,15 +47,15 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/item_title"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_item_title"
             android:layout_marginBottom="8dp">
 
         <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/item_name_hint"
+                android:id="@+id/bottom_sheet_item_name_hint"
                 android:layout_width="match_parent"
                 android:layout_height="63dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="@string/item_name_hint"
+                android:hint="@string/bottom_sheet_item_name_hint"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toTopOf="parent"
@@ -68,7 +68,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/item_name"
+                    android:id="@+id/bottom_sheet_item_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/colorPrimary"
@@ -77,36 +77,36 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-                android:id="@+id/item_empty_name"
+                android:id="@+id/bottom_sheet_item_empty_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="@color/colorPrimary"
-                app:layout_constraintTop_toBottomOf="@+id/item_name_hint"
-                app:layout_constraintStart_toStartOf="@+id/item_name_hint"
+                app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_item_name_hint"
+                app:layout_constraintStart_toStartOf="@+id/bottom_sheet_item_name_hint"
                 app:layout_constraintHorizontal_bias="0.9"
                 android:layout_marginStart="8dp"/>
 
         <TextView
-                android:id="@+id/item_date"
+                android:id="@+id/bottom_sheet_item_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/item_date"
+                android:text="@string/bottom_sheet_item_date"
                 android:textColor="@color/colorPrimary"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="24dp"
                 android:textSize="12sp"
-                app:layout_constraintTop_toBottomOf="@+id/item_name_hint"
-                app:layout_constraintBottom_toBottomOf="@+id/item_button_save"
+                app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_item_name_hint"
+                app:layout_constraintBottom_toBottomOf="@+id/bottom_sheet_item_button_save"
                 app:layout_constraintVertical_bias="1.0"
                 tools:visibility="visible"/>
 
         <android.widget.Button
-                android:id="@+id/item_button_save"
+                android:id="@+id/bottom_sheet_item_button_save"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:text="@string/item_button_save"
+                android:text="@string/bottom_sheet_item_button_save"
                 android:textColor="@color/colorPrimaryDarkOne"
                 android:background="@drawable/rounded_button"
                 app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +115,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintHorizontal_bias="0.98"
                 android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/item_name_hint"
+                app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_item_name_hint"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="16dp"/>
 

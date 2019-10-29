@@ -207,10 +207,10 @@
     <string name="habit_done_ok">OK</string>
 
     <!-- BottomSheet Item -->
-    <string name="item_name">Título do Item</string>
-    <string name="item_name_hint">Nome do Item</string>
-    <string name="item_date">Concluído em 23/02/19 – 12:32:23</string>
-    <string name="item_button_save">Salvar</string>
+    <string name="bottom_sheet_item_name">Título do Item</string>
+    <string name="bottom_sheet_item_name_hint">Nome do Item</string>
+    <string name="bottom_sheet_item_date">Concluído em 23/02/19 – 12:32:23</string>
+    <string name="bottom_sheet_item_button_save">Salvar</string>
     <string name="item_title_add">Novo item</string>
     <string name="item_title_edit">Editar item</string>
     <string name="item_empty_name">Nome do item está vazio.</string>

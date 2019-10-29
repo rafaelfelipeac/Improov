@@ -208,10 +208,10 @@
     <string name="habit_done_ok">OK</string>
 
     <!-- BottomSheet Item -->
-    <string name="item_name">Item Title</string>
-    <string name="item_name_hint">Item name</string>
-    <string name="item_date">Completed on 02/23/19 – 12:32:23</string>
-    <string name="item_button_save">Save</string>
+    <string name="bottom_sheet_item_name">Item Title</string>
+    <string name="bottom_sheet_item_name_hint">Item name</string>
+    <string name="bottom_sheet_item_date">Completed on 02/23/19 – 12:32:23</string>
+    <string name="bottom_sheet_item_button_save">Save</string>
     <string name="item_title_add">New item</string>
     <string name="item_title_edit">Edit item</string>
     <string name="item_empty_name">Item name is empty.</string>

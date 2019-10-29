@@ -113,7 +113,7 @@
                 android:layout_marginBottom="8dp"/>
 
         <TextView
-                android:id="@+id/item_title"
+                android:id="@+id/bottom_sheet_item_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
