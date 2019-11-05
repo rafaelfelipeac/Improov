@@ -308,14 +308,15 @@ class TodayFragment : BaseFragment() {
             }
 
             ItemTouchHelper.LEFT -> {
-                when (goalHabit) {
-                    is Goal -> {
-                        todayViewModel.saveGoal(goalHabit)
-                    }
-                    is Habit -> {
-                        todayViewModel.saveHabit(goalHabit)
-                    }
-                }
+                setupItems()
+//                when (goalHabit) {
+//                    is Goal -> {
+//                        todayViewModel.saveGoal(goalHabit)
+//                    }
+//                    is Habit -> {
+//                        todayViewModel.saveHabit(goalHabit)
+//                    }
+//                }
             }
         }
     }

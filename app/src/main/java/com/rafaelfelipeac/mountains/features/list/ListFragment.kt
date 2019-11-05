@@ -257,24 +257,25 @@ class ListFragment : BaseFragment() {
                 }
             }
             ItemTouchHelper.LEFT -> {
-                when (goalHabit) {
-                    is Goal -> {
-                        goalHabit.archived = true
-                        goalHabit.archiveDate = getCurrentTime()
-
-                        listViewModel.saveGoal(goalHabit)
-
-                        showSnackBarWithAction(holder.itemView,
-                            getString(R.string.list_item_resolved_message), goalHabit as Any, ::archiveGoal)
-
-                        setupList()
-                    }
-                    is Habit -> {
-                        setupList()
-
-                        openBottomSheetHabitDone()
-                    }
-                }
+                setupList()
+//                when (goalHabit) {
+//                    is Goal -> {
+//                        goalHabit.archived = true
+//                        goalHabit.archiveDate = getCurrentTime()
+//
+//                        listViewModel.saveGoal(goalHabit)
+//
+//                        showSnackBarWithAction(holder.itemView,
+//                            getString(R.string.list_item_resolved_message), goalHabit as Any, ::archiveGoal)
+//
+//
+//                    }
+//                    is Habit -> {
+//                        setupList()
+//
+//                        openBottomSheetHabitDone()
+//                    }
+//                }
             }
         }
     }

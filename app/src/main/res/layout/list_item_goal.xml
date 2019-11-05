@@ -66,18 +66,18 @@
                 android:background="@color/colorPrimary"
                 card_view:layout_constraintStart_toEndOf="@+id/view">
 
-            <ImageView
-                    android:id="@+id/goal_archive_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    card_view:srcCompat="@drawable/ic_archive"
-                    android:tint="@color/colorPrimaryDarkOne"
-                    android:layout_centerVertical="true"
-                    card_view:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginBottom="14dp"
-                    card_view:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginEnd="16dp"
-                    card_view:layout_constraintEnd_toEndOf="parent"/>
+<!--            <ImageView-->
+<!--                    android:id="@+id/goal_archive_image"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    card_view:srcCompat="@drawable/ic_archive"-->
+<!--                    android:tint="@color/colorPrimaryDarkOne"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    card_view:layout_constraintTop_toTopOf="parent"-->
+<!--                    android:layout_marginBottom="14dp"-->
+<!--                    card_view:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    card_view:layout_constraintEnd_toEndOf="parent"/>-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

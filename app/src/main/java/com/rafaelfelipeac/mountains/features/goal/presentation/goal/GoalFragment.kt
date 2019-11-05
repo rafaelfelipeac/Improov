@@ -566,11 +566,12 @@ class GoalFragment : BaseFragment() {
                 }
             }
             ItemTouchHelper.LEFT -> {
-                item.deleteDate = getCurrentTime()
-
-                goalViewModel.deleteItem(item)
-
-                showSnackBarWithAction(holder.itemView, getString(R.string.habit_item_swiped_deleted), item, ::deleteItem)
+                setupItems()
+//                item.deleteDate = getCurrentTime()
+//
+//                goalViewModel.deleteItem(item)
+//
+//                showSnackBarWithAction(holder.itemView, getString(R.string.habit_item_swiped_deleted), item, ::deleteItem)
             }
         }
     }
