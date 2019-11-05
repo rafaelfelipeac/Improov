@@ -8,7 +8,7 @@ import java.util.*
 @Entity(tableName = "historic")
 data class Historic (
     @PrimaryKey(autoGenerate = true)
-    var historicId: Long = 0,
-    var goalId: Long = 0,
-    var value: Float = 0F,
-    var date: Date? = null): Serializable
+    val historicId: Long = 0,
+    val goalId: Long,
+    val value: Float,
+    val date: Date?): Serializable

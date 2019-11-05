@@ -108,21 +108,25 @@ class GoalFragment : BaseFragment() {
             if (bottomSheetItemName.isEmpty()) {
                 bottomSheetItemEmptyName.text = getString(R.string.item_empty_name)
             } else {
-                var item = Item()
-
                 if (this.item == null) {
-                    item.goalId = goal?.goalId!!
-                    item.name = bottomSheetItemName.text.toString()
-                    item.done = false
-                    item.order = items?.size!! + 1
-                    item.createdDate = getCurrentTime()
+                    // new item
+                    val item = Item(
+                        goalId = goal?.goalId!!,
+                        name = bottomSheetItemName.text.toString(),
+                        done = false,
+                        order = items?.size!! + 1,
+                        createdDate = getCurrentTime()
+                    )
+
+                    goalViewModel.saveItem(item)
                 } else {
-                    item = this.item!!
+                    // update item
+                    val item = this.item!!
                     item.name = bottomSheetItemName.text.toString()
                     item.updatedDate = getCurrentTime()
-                }
 
-                goalViewModel.saveItem(item)
+                    goalViewModel.saveItem(item)
+                }
 
                 bottomSheetItemName.resetValue()
                 closeBottomSheetItem()
