@@ -104,6 +104,8 @@ class HabitFormFragment : BaseFragment() {
 
                 habitFormViewModel.saveHabit(habitToSave)
 
+                verifyFistTimeSaving()
+
                 return true
                 // }
             }
@@ -324,6 +326,13 @@ class HabitFormFragment : BaseFragment() {
                 habit_form_add_days.setText(habit.periodDaysBetween.toString())
             }
             HabitType.HAB_NONE -> TODO()
+        }
+    }
+
+    private fun verifyFistTimeSaving() {
+        if (preferences.fistTimeAdd) {
+            preferences.fistTimeAdd = false
+            preferences.fistTimeList = true
         }
     }
 }

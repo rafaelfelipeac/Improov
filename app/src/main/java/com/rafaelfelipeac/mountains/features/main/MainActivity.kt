@@ -21,6 +21,7 @@ import com.rafaelfelipeac.mountains.core.platform.base.BaseActivity
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_sheet_tips_one.*
+import kotlinx.android.synthetic.main.bottom_sheet_tips_three.*
 import kotlinx.android.synthetic.main.bottom_sheet_tips_two.*
 
 class MainActivity : BaseActivity() {
@@ -91,6 +92,11 @@ class MainActivity : BaseActivity() {
     fun setupBottomSheetTipsTwo() {
         bottomSheetTip = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.tips_two))
         bottomSheetTipClose = tips_two_button_close
+    }
+
+    fun setupBottomSheetTipsThree() {
+        bottomSheetTip = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.tips_three))
+        bottomSheetTipClose = tips_three_button_close
     }
 
     fun openBottomSheetTips() {

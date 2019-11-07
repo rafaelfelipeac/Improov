@@ -51,6 +51,8 @@ class ProfileFragment : BaseFragment() {
 
         profile_show_welcome_button.setOnClickListener {
             preferences.welcome = false
+            preferences.fistTimeAdd = true
+            preferences.fistTimeList = false
 
             navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationWelcome())
         }

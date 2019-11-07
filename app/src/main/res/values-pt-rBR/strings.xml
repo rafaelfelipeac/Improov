@@ -237,4 +237,11 @@
     <string name="tips_two_final_title">Valor final</string>
     <string name="tips_two_final_message">Para objetivos onde os valores a serem somados ou subtraídos mudem constantemente.</string>
 
+    <!-- BottomSheet Tips Three -->
+    <string name="tips_three_title">Deslize</string>
+    <string name="tips_three_message_1">Ao finalizar um objetivo, hábito ou item, deslize para o lado para dar aquele elemento como concluído.
+    </string>
+    <string name="tips_three_message_2">Se mudar de ideia, apenas deslize novamente para o elemento deixar de estar como concluído.
+    </string>
+
 </resources>

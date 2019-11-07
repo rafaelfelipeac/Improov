@@ -1,15 +1,18 @@
 package com.rafaelfelipeac.mountains.features.list
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rafaelfelipeac.mountains.R
 import com.rafaelfelipeac.mountains.core.extension.getPercentage
@@ -17,12 +20,12 @@ import com.rafaelfelipeac.mountains.core.extension.invisible
 import com.rafaelfelipeac.mountains.core.extension.isToday
 import com.rafaelfelipeac.mountains.core.extension.visible
 import com.rafaelfelipeac.mountains.core.platform.base.BaseFragment
-import com.rafaelfelipeac.mountains.features.commons.presentation.ListAdapter
 import com.rafaelfelipeac.mountains.features.commons.Goal
+import com.rafaelfelipeac.mountains.features.commons.GoalHabit
 import com.rafaelfelipeac.mountains.features.commons.Habit
+import com.rafaelfelipeac.mountains.features.commons.presentation.ListAdapter
 import com.rafaelfelipeac.mountains.features.commons.presentation.SwipeAndDragHelperList
 import com.rafaelfelipeac.mountains.features.main.MainActivity
-import com.rafaelfelipeac.mountains.features.commons.GoalHabit
 import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragment : BaseFragment() {
@@ -37,6 +40,9 @@ class ListFragment : BaseFragment() {
 
     private lateinit var bottomSheetHabitDone: BottomSheetDialog
     private lateinit var bottomSheetHabitDoneOK: Button
+
+    private var bottomSheetTip: BottomSheetBehavior<*>? = null
+    private var bottomSheetTipClose: ConstraintLayout? = null
 
     var goals: List<Goal>? = listOf()
     var habits: List<Habit>? = listOf()
@@ -80,6 +86,27 @@ class ListFragment : BaseFragment() {
 
         setupBottomSheetGoalDone()
         setupBottomSheetHabitDone()
+
+        if (preferences.fistTimeList) {
+            preferences.fistTimeList = false
+
+            Handler().postDelayed({
+                    (activity as MainActivity).setupBottomSheetTipsThree()
+                    setupBottomSheetTip()
+                    (activity as MainActivity).openBottomSheetTips()
+                }, 2000
+            )
+        }
+    }
+
+    private fun setupBottomSheetTip() {
+        bottomSheetTip = (activity as MainActivity).bottomSheetTip
+        bottomSheetTipClose = (activity as MainActivity).bottomSheetTipClose
+
+        bottomSheetTipClose?.setOnClickListener {
+            hideSoftKeyboard()
+            (activity as MainActivity).closeBottomSheetTips()
+        }
     }
 
     private fun observeViewModel() {

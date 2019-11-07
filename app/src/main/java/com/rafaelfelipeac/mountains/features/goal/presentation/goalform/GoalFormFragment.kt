@@ -158,6 +158,8 @@ class GoalFormFragment : BaseFragment() {
 
                     goalFormViewModel.saveGoal(goalToSave)
 
+                    verifyFistTimeSaving()
+
                     return true
                 }
             }
@@ -336,6 +338,13 @@ class GoalFormFragment : BaseFragment() {
                 goal_form_radio_type_total.isChecked = true
             }
             else -> { }
+        }
+    }
+
+    private fun verifyFistTimeSaving() {
+        if (preferences.fistTimeAdd) {
+            preferences.fistTimeAdd = false
+            preferences.fistTimeList = true
         }
     }
 }

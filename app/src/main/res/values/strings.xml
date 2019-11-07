@@ -237,4 +237,12 @@
     <string name="tips_two_final_title">Final value</string>
     <string name="tips_two_final_message">For goals where the values to be added or subtracted constantly change.</string>
 
+    <!-- BottomSheet Tips Three -->
+    <string name="tips_three_title">Swipe</string>
+    <string name="tips_three_message_1">When you finish a goal, there is an item or item, slide sideways to the element as done.
+    </string>
+    <string name="tips_three_message_2">If you change your mind, just swipe back to make the element no longer complete.
+    </string>
+
+
 </resources>
