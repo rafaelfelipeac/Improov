@@ -56,7 +56,7 @@ class StatsFragment : BaseFragment() {
         observeViewModel()
 
         fab.setOnClickListener {
-            navController.navigate(StatsFragmentDirections.actionNavigationStatsToNavigationAdd())
+            navController.navigate(StatsFragmentDirections.actionNavigationStatsToNavigationGoalForm())
         }
     }
 

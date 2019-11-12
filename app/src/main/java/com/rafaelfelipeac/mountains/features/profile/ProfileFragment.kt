@@ -58,7 +58,7 @@ class ProfileFragment : BaseFragment() {
         }
 
         fab.setOnClickListener {
-            navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationAdd())
+            navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationGoalForm())
         }
 
         profile_edit_profile_button.setOnClickListener {

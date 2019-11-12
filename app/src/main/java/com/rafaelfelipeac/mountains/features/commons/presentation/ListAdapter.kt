@@ -22,7 +22,8 @@ import com.rafaelfelipeac.mountains.features.list.ListFragment
 import com.rafaelfelipeac.mountains.features.today.presentation.TodayFragment
 import kotlin.math.roundToInt
 
-class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+class ListAdapter(val fragment: BaseFragment) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     ActionCompletionContract {
 
     private lateinit var list: List<GoalHabit>
@@ -146,6 +147,8 @@ class ListAdapter(val fragment: BaseFragment) : RecyclerView.Adapter<RecyclerVie
 
             if (goal.finalDate != null) {
                 date.text = goal.finalDate.format(fragment.context!!)
+            } else {
+                date.text = ""
             }
 
             itemDrag.setOnTouchListener { _, _ ->

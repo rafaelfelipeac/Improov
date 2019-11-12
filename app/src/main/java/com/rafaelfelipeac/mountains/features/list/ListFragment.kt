@@ -81,7 +81,7 @@ class ListFragment : BaseFragment() {
         observeViewModel()
 
         fab.setOnClickListener {
-            navController.navigate(ListFragmentDirections.actionNavigationListToNavigationAdd())
+            navController.navigate(ListFragmentDirections.actionNavigationListToNavigationGoalForm())
         }
 
         setupBottomSheetGoalDone()

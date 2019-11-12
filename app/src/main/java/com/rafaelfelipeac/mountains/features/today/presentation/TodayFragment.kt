@@ -64,7 +64,7 @@ class TodayFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fab.setOnClickListener {
-            navController.navigate(TodayFragmentDirections.actionNavigationTodayToNavigationAdd())
+            navController.navigate(TodayFragmentDirections.actionNavigationTodayToNavigationGoalForm())
         }
 
         setupWeekInformation()
