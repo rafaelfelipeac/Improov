@@ -70,7 +70,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/goal_single_mountains"
+            android:id="@+id/goal_single_divide_and_conquer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_background"
@@ -132,7 +132,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/goal_mountains"
+                android:id="@+id/goal_divide_and_conquer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
@@ -145,15 +145,15 @@
                 app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goal_mountain_bronze"
+                    android:id="@+id/goal_divide_and_conquer_bronze"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/goal_mountain_silver"
+                    app:layout_constraintEnd_toStartOf="@+id/goal_divide_and_conquer_silver"
                     app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                        android:id="@+id/goal_mountain_bronze_image"
+                        android:id="@+id/goal_divide_and_conquer_bronze_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -165,33 +165,33 @@
                         android:background="@mipmap/ic_bronze_dark"/>
 
                 <TextView
-                        android:id="@+id/goal_mountain_bronze_text"
+                        android:id="@+id/goal_divide_and_conquer_bronze_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/goal_mountain_bronze_image"
+                        app:layout_constraintTop_toBottomOf="@+id/goal_divide_and_conquer_bronze_image"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="@+id/goal_mountain_bronze_image"
-                        app:layout_constraintStart_toStartOf="@+id/goal_mountain_bronze_image"
+                        app:layout_constraintEnd_toEndOf="@+id/goal_divide_and_conquer_bronze_image"
+                        app:layout_constraintStart_toStartOf="@+id/goal_divide_and_conquer_bronze_image"
                         android:layout_marginTop="16dp"/>
 
                 <com.hookedonplay.decoviewlib.DecoView
                         android:id="@+id/goal_bronze_arcView"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
-                        app:layout_constraintEnd_toEndOf="@+id/goal_mountain_bronze_image"
-                        app:layout_constraintStart_toStartOf="@+id/goal_mountain_bronze_image"
+                        app:layout_constraintEnd_toEndOf="@+id/goal_divide_and_conquer_bronze_image"
+                        app:layout_constraintStart_toStartOf="@+id/goal_divide_and_conquer_bronze_image"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginTop="7dp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goal_mountain_silver"
+                    android:id="@+id/goal_divide_and_conquer_silver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/goal_mountain_bronze"
-                    app:layout_constraintEnd_toStartOf="@+id/goal_mountain_gold"
+                    app:layout_constraintStart_toEndOf="@+id/goal_divide_and_conquer_bronze"
+                    app:layout_constraintEnd_toStartOf="@+id/goal_divide_and_conquer_gold"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -199,7 +199,7 @@
                     android:layout_marginEnd="4dp">
 
                 <ImageView
-                        android:id="@+id/goal_mountain_silver_image"
+                        android:id="@+id/goal_divide_and_conquer_silver_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -211,39 +211,39 @@
                         android:background="@mipmap/ic_silver_dark"/>
 
                 <TextView
-                        android:id="@+id/goal_mountain_silver_text"
+                        android:id="@+id/goal_divide_and_conquer_silver_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/goal_mountain_silver_image"
+                        app:layout_constraintTop_toBottomOf="@+id/goal_divide_and_conquer_silver_image"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="@+id/goal_mountain_silver_image"
-                        app:layout_constraintStart_toStartOf="@+id/goal_mountain_silver_image"
+                        app:layout_constraintEnd_toEndOf="@+id/goal_divide_and_conquer_silver_image"
+                        app:layout_constraintStart_toStartOf="@+id/goal_divide_and_conquer_silver_image"
                         android:layout_marginTop="16dp"/>
 
                 <com.hookedonplay.decoviewlib.DecoView
                         android:id="@+id/goal_silver_arcView"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
-                        app:layout_constraintEnd_toEndOf="@+id/goal_mountain_silver_image"
-                        app:layout_constraintStart_toStartOf="@+id/goal_mountain_silver_image"
+                        app:layout_constraintEnd_toEndOf="@+id/goal_divide_and_conquer_silver_image"
+                        app:layout_constraintStart_toStartOf="@+id/goal_divide_and_conquer_silver_image"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginTop="7dp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goal_mountain_gold"
+                    android:id="@+id/goal_divide_and_conquer_gold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/goal_mountain_silver"
+                    app:layout_constraintStart_toEndOf="@+id/goal_divide_and_conquer_silver"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent">
 
                 <ImageView
-                        android:id="@+id/goal_mountain_gold_image"
+                        android:id="@+id/goal_divide_and_conquer_gold_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -256,14 +256,14 @@
                         android:layout_marginTop="22dp"/>
 
                 <TextView
-                        android:id="@+id/goal_mountain_gold_text"
+                        android:id="@+id/goal_divide_and_conquer_gold_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/goal_mountain_gold_image"
+                        app:layout_constraintTop_toBottomOf="@+id/goal_divide_and_conquer_gold_image"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="@+id/goal_mountain_gold_image"
-                        app:layout_constraintStart_toStartOf="@+id/goal_mountain_gold_image"
+                        app:layout_constraintEnd_toEndOf="@+id/goal_divide_and_conquer_gold_image"
+                        app:layout_constraintStart_toStartOf="@+id/goal_divide_and_conquer_gold_image"
                         android:visibility="visible"
                         android:layout_marginTop="16dp"/>
 
@@ -271,8 +271,8 @@
                         android:id="@+id/goal_gold_arcView"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
-                        app:layout_constraintEnd_toEndOf="@+id/goal_mountain_gold_image"
-                        app:layout_constraintStart_toStartOf="@+id/goal_mountain_gold_image"
+                        app:layout_constraintEnd_toEndOf="@+id/goal_divide_and_conquer_gold_image"
+                        app:layout_constraintStart_toStartOf="@+id/goal_divide_and_conquer_gold_image"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginTop="7dp"/>
 
@@ -292,7 +292,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/goal_single_mountains"
+            app:layout_constraintTop_toBottomOf="@+id/goal_single_divide_and_conquer"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent">

@@ -8,7 +8,7 @@
 
     <fragment
             android:id="@+id/navigation_welcome"
-            android:name="com.rafaelfelipeac.mountains.features.welcome.WelcomeFragment"
+            android:name="com.rafaelfelipeac.improov.features.welcome.WelcomeFragment"
             android:label="fragment_welcome"
             tools:layout="@layout/fragment_welcome">
 
@@ -18,7 +18,7 @@
 
     <fragment
             android:id="@+id/navigation_list"
-            android:name="com.rafaelfelipeac.mountains.features.list.ListFragment"
+            android:name="com.rafaelfelipeac.improov.features.list.ListFragment"
             android:label="fragment_list"
             tools:layout="@layout/fragment_list">
 
@@ -33,7 +33,7 @@
 
     <fragment
             android:id="@+id/navigation_goal_form"
-            android:name="com.rafaelfelipeac.mountains.features.goal.presentation.goalform.GoalFormFragment"
+            android:name="com.rafaelfelipeac.improov.features.goal.presentation.goalform.GoalFormFragment"
             android:label="fragment_goal_form"
             tools:layout="@layout/fragment_goal_form">
 
@@ -43,7 +43,7 @@
 
     <fragment
             android:id="@+id/navigation_goal"
-            android:name="com.rafaelfelipeac.mountains.features.goal.presentation.goal.GoalFragment"
+            android:name="com.rafaelfelipeac.improov.features.goal.presentation.goal.GoalFragment"
             android:label="fragment_goal"
             tools:layout="@layout/fragment_goal">
 
@@ -56,7 +56,7 @@
 
     <fragment
             android:id="@+id/navigation_stats"
-            android:name="com.rafaelfelipeac.mountains.features.stats.StatsFragment"
+            android:name="com.rafaelfelipeac.improov.features.stats.StatsFragment"
             android:label="fragment_stats"
             tools:layout="@layout/fragment_stats">
 
@@ -69,7 +69,7 @@
 
     <fragment
             android:id="@+id/navigation_profile"
-            android:name="com.rafaelfelipeac.mountains.features.profile.ProfileFragment"
+            android:name="com.rafaelfelipeac.improov.features.profile.ProfileFragment"
             android:label="fragment_profile"
             tools:layout="@layout/fragment_profile">
 
@@ -85,12 +85,12 @@
 
     <fragment
             android:id="@+id/navigation_profile_edit"
-            android:name="com.rafaelfelipeac.mountains.features.profilename.ProfileNameFragment"
+            android:name="com.rafaelfelipeac.improov.features.profilename.ProfileNameFragment"
             android:label="fragment_profile_edit"
             tools:layout="@layout/fragment_profile_edit"/>
 
     <fragment android:id="@+id/navigation_today"
-              android:name="com.rafaelfelipeac.mountains.features.today.presentation.TodayFragment"
+              android:name="com.rafaelfelipeac.improov.features.today.presentation.TodayFragment"
               android:label="fragment_today"
               tools:layout="@layout/fragment_today">
 
@@ -104,7 +104,7 @@
     </fragment>
 
     <fragment android:id="@+id/navigation_habit_form"
-              android:name="com.rafaelfelipeac.mountains.features.habit.HabitFormFragment"
+              android:name="com.rafaelfelipeac.improov.features.habit.HabitFormFragment"
               android:label="fragment_habit_form">
 
         <argument android:name="habitId" app:argType="long" android:defaultValue="0L"/>
@@ -112,7 +112,7 @@
     </fragment>
 
     <fragment android:id="@+id/navigation_habit"
-              android:name="com.rafaelfelipeac.mountains.features.habit.HabitFragment"
+              android:name="com.rafaelfelipeac.improov.features.habit.HabitFragment"
               android:label="fragment_habit"
               tools:layout="@layout/fragment_habit">
 
@@ -124,7 +124,7 @@
     </fragment>
 
     <dialog android:id="@+id/navigation_add"
-              android:name="com.rafaelfelipeac.mountains.features.add.AddFragment"
+              android:name="com.rafaelfelipeac.improov.features.add.AddFragment"
               android:label="fragment_add"
               tools:layout="@layout/bottom_sheet_add">
 
@@ -134,13 +134,13 @@
     </dialog>
 
     <fragment android:id="@+id/navigation_settings"
-              android:name="com.rafaelfelipeac.mountains.features.settings.SettingsFragment"
+              android:name="com.rafaelfelipeac.improov.features.settings.SettingsFragment"
               android:label="fragment_settings">
         <action android:id="@+id/action_navigation_settings_to_navigation_settings_language" app:destination="@id/navigation_settings_language"/>
     </fragment>
 
     <fragment android:id="@+id/navigation_settings_language"
-              android:name="com.rafaelfelipeac.mountains.features.settings.SettingsLanguageFragment"
+              android:name="com.rafaelfelipeac.improov.features.settings.SettingsLanguageFragment"
               android:label="fragment_settings_language"/>
 
 </navigation>

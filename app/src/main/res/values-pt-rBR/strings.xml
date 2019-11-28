@@ -1,8 +1,8 @@
 <resources>
 
     <!-- App -->
-    <string name="app_name">Mountains</string>
-    <string name="database_name">mountains-db</string>
+    <string name="app_name">Improov</string>
+    <string name="database_name">improov-db</string>
 
     <!-- Date -->
     <string name="date_format_dmy">dd/MM/yyyy</string>
@@ -53,7 +53,7 @@
     <string name="goal_form_bronze_hint">Bronze</string>
     <string name="goal_form_silver_hint">Prata</string>
     <string name="goal_form_gold_hint">Ouro</string>
-    <string name="goal_form_divide_and_conquest_title">Dividir e conquistar</string>
+    <string name="goal_form_divide_and_conquer_title">Dividir e conquistar</string>
     <string name="goal_form_type_title">Tipo de meta</string>
     <string name="goal_form_radio_type_list">Lista</string>
     <string name="goal_form_radio_type_inc_dec">Contador</string>
@@ -122,14 +122,14 @@
     <string name="settings_language_title">Idioma</string>
     <string name="settings_language_message">Escolha um idioma</string>
     <string name="settings_about_title">Sobre</string>
-    <string name="settings_about_rate_summary">Avalie o Mountains na Play Store.</string>
+    <string name="settings_about_rate_summary">Avalie o Improov na Play Store.</string>
     <string name="settings_about_rate_title">❤</string>
     <string name="settings_about_contact_title">Feedback</string>
     <string name="settings_about_contact_summary">Nos envie um email com dúvidas, sugestões ou reporte um bug.</string>
     <string name="settings_about_version_title">Versão</string>
     <string name="settings_about_version_summary">@string/versionName</string>
     <string name="settings_email_to">rafaelfelipeac@gmail.com</string>
-    <string name="settings_email_title">Feedback - Mountains</string>
+    <string name="settings_email_title">Feedback - Improov</string>
     <string name="settings_email_sender_title">Enviar email…</string>
     <string name="settings_pref_key_language_title">language category</string>
     <string name="settings_pref_key_language_message">language</string>
@@ -171,8 +171,8 @@
     <string name="welcome_title">Bem-vindo</string>
     <string name="welcome_sign_in">Entrar</string>
     <string name="welcome_start">Começar</string>
-    <string name="welcome_a_message">Seja bem-vindo ao Mountains. \n\nCrie um registro de seus objetivos e mantenha-se focado em alcançá-los.</string>
-    <string name="welcome_b_message">Use o Mountains para acessar rapidamente os objetivos em andamento. \n\nSe mantenha atualizado do caminho a percorrer.</string>
+    <string name="welcome_a_message">Seja bem-vindo ao Improov. \n\nCrie um registro de seus objetivos e mantenha-se focado em alcançá-los.</string>
+    <string name="welcome_b_message">Use o Improov para acessar rapidamente os objetivos em andamento. \n\nSe mantenha atualizado do caminho a percorrer.</string>
     <string name="welcome_c_message">Tenha acesso a estatísticas e acompanhe o seu progresso. \n\nMantenha seus objetivos sempre em desenvolvimento.</string>
 
     <!-- ListAdapter -->

@@ -58,26 +58,26 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <android.widget.Button
-                        android:id="@+id/goal_form_set_date"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
-                        android:background="@drawable/rounded_button"
-                        android:text="@string/goal_form_set_date"
-                        android:textColor="@color/colorPrimaryDarkOne"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/goal_form_goal_name_hint" />
+<!--                <android.widget.Button-->
+<!--                        android:id="@+id/goal_form_set_date"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_marginEnd="8dp"-->
+<!--                        android:layout_marginBottom="16dp"-->
+<!--                        android:background="@drawable/rounded_button"-->
+<!--                        android:text="@string/goal_form_set_date"-->
+<!--                        android:textColor="@color/colorPrimaryDarkOne"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/goal_form_goal_name_hint" />-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goal_form_single_mountains"
+                    android:id="@+id/goal_form_single_divide_and_conquer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -102,7 +102,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/goal_form_divide_and_conquest">
+                        app:layout_constraintTop_toBottomOf="@+id/goal_form_divide_and_conquer_info">
 
                     <ImageView
                             android:id="@+id/goal_form_single_image"
@@ -119,7 +119,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/goal_form_single_hint"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="@dimen/edit_text_single_mountains"
+                            android:layout_width="@dimen/edit_text_single_divide_and_conquer"
                             android:layout_height="60dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginBottom="8dp"
@@ -147,7 +147,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/goal_form_mountains"
+                        android:id="@+id/goal_form_divide_and_conquer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -159,19 +159,19 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/goal_form_divide_and_conquest">
+                        app:layout_constraintTop_toBottomOf="@+id/goal_form_divide_and_conquer_info">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/goal_form_mountain_bronze"
+                            android:id="@+id/goal_form_divide_and_conquer_bronze"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            app:layout_constraintEnd_toStartOf="@+id/goal_form_mountain_silver"
+                            app:layout_constraintEnd_toStartOf="@+id/goal_form_divide_and_conquer_silver"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                                android:id="@+id/goal_form_mountain_bronze_image"
+                                android:id="@+id/goal_form_divide_and_conquer_bronze_image"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_marginStart="8dp"
@@ -184,7 +184,7 @@
                         <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/goal_form_bronze_hint"
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="@dimen/edit_text_single_mountains"
+                                android:layout_width="@dimen/edit_text_single_divide_and_conquer"
                                 android:layout_height="60dp"
                                 android:layout_marginTop="16dp"
                                 android:layout_marginBottom="8dp"
@@ -195,9 +195,9 @@
                                 app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
                                 app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/goal_form_mountain_bronze_image"
-                                app:layout_constraintStart_toStartOf="@+id/goal_form_mountain_bronze_image"
-                                app:layout_constraintTop_toBottomOf="@+id/goal_form_mountain_bronze_image">
+                                app:layout_constraintEnd_toEndOf="@+id/goal_form_divide_and_conquer_bronze_image"
+                                app:layout_constraintStart_toStartOf="@+id/goal_form_divide_and_conquer_bronze_image"
+                                app:layout_constraintTop_toBottomOf="@+id/goal_form_divide_and_conquer_bronze_image">
 
                             <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/goal_form_editText_bronze"
@@ -212,7 +212,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/goal_form_mountain_silver"
+                            android:id="@+id/goal_form_divide_and_conquer_silver"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -222,7 +222,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                                android:id="@+id/goal_form_mountain_silver_image"
+                                android:id="@+id/goal_form_divide_and_conquer_silver_image"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_marginStart="8dp"
@@ -235,7 +235,7 @@
                         <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/goal_form_silver_hint"
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="@dimen/edit_text_single_mountains"
+                                android:layout_width="@dimen/edit_text_single_divide_and_conquer"
                                 android:layout_height="60dp"
                                 android:layout_marginTop="16dp"
                                 android:layout_marginBottom="8dp"
@@ -246,9 +246,9 @@
                                 app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
                                 app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/goal_form_mountain_silver_image"
-                                app:layout_constraintStart_toStartOf="@+id/goal_form_mountain_silver_image"
-                                app:layout_constraintTop_toBottomOf="@+id/goal_form_mountain_silver_image">
+                                app:layout_constraintEnd_toEndOf="@+id/goal_form_divide_and_conquer_silver_image"
+                                app:layout_constraintStart_toStartOf="@+id/goal_form_divide_and_conquer_silver_image"
+                                app:layout_constraintTop_toBottomOf="@+id/goal_form_divide_and_conquer_silver_image">
 
                             <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/goal_form_silver_value"
@@ -263,16 +263,16 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/goal_form_mountain_gold"
+                            android:id="@+id/goal_form_divide_and_conquer_gold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/goal_form_mountain_silver"
+                            app:layout_constraintStart_toEndOf="@+id/goal_form_divide_and_conquer_silver"
                             app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                                android:id="@+id/goal_form_mountain_gold_image"
+                                android:id="@+id/goal_form_divide_and_conquer_gold_image"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_marginEnd="8dp"
@@ -284,7 +284,7 @@
                         <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/goal_form_gold_hint"
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="@dimen/edit_text_single_mountains"
+                                android:layout_width="@dimen/edit_text_single_divide_and_conquer"
                                 android:layout_height="60dp"
                                 android:layout_marginTop="16dp"
                                 android:layout_marginBottom="8dp"
@@ -295,9 +295,9 @@
                                 app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
                                 app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/goal_form_mountain_gold_image"
-                                app:layout_constraintStart_toStartOf="@+id/goal_form_mountain_gold_image"
-                                app:layout_constraintTop_toBottomOf="@+id/goal_form_mountain_gold_image">
+                                app:layout_constraintEnd_toEndOf="@+id/goal_form_divide_and_conquer_gold_image"
+                                app:layout_constraintStart_toStartOf="@+id/goal_form_divide_and_conquer_gold_image"
+                                app:layout_constraintTop_toBottomOf="@+id/goal_form_divide_and_conquer_gold_image">
 
                             <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/goal_form_gold_value"
@@ -314,7 +314,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/goal_form_divide_and_conquest"
+                        android:id="@+id/goal_form_divide_and_conquer_info"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -323,14 +323,14 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                            android:id="@+id/goal_form_divide_and_conquest_title"
+                            android:id="@+id/goal_form_divide_and_conquer_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="24dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="@string/goal_form_divide_and_conquest_title"
+                            android:text="@string/goal_form_divide_and_conquer_title"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -340,25 +340,25 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     <Switch
-                            android:id="@+id/goal_form_switch_divide_and_conquest"
+                            android:id="@+id/goal_form_switch_divide_and_conquer"
                             android:layout_width="wrap_content"
                             android:layout_height="28dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/goal_form_divide_and_conquest_title"
+                            app:layout_constraintBottom_toBottomOf="@+id/goal_form_divide_and_conquer_title"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toEndOf="@+id/goal_form_divide_and_conquest_title"
-                            app:layout_constraintTop_toTopOf="@+id/goal_form_divide_and_conquest_title" />
+                            app:layout_constraintStart_toEndOf="@+id/goal_form_divide_and_conquer_title"
+                            app:layout_constraintTop_toTopOf="@+id/goal_form_divide_and_conquer_title" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/goal_form_divide_and_conquest_help"
                             android:layout_width="48dp"
                             android:layout_height="32dp"
                             android:layout_marginEnd="16dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/goal_form_switch_divide_and_conquest"
+                            app:layout_constraintBottom_toBottomOf="@+id/goal_form_switch_divide_and_conquer"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/goal_form_divide_and_conquest_title">
+                            app:layout_constraintTop_toTopOf="@+id/goal_form_divide_and_conquer_title">
 
                         <ImageView
                                 android:layout_width="wrap_content"
@@ -388,7 +388,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/goal_form_single_mountains"
+                    app:layout_constraintTop_toBottomOf="@+id/goal_form_single_divide_and_conquer"
                     app:layout_constraintVertical_bias="0.0">
 
                 <TextView

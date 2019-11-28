@@ -2,12 +2,12 @@
 <manifest
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        package="com.rafaelfelipeac.mountains">
+        package="com.rafaelfelipeac.improov">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-            android:name="com.rafaelfelipeac.mountains.app.App"
+            android:name="com.rafaelfelipeac.improov.app.App"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -16,7 +16,7 @@
             tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-                android:name="com.rafaelfelipeac.mountains.features.main.MainActivity"
+                android:name="com.rafaelfelipeac.improov.features.main.MainActivity"
                 android:theme="@style/AppTheme.Splash"
                 android:label="@string/app_name"
                 android:windowSoftInputMode="adjustResize"
