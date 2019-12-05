@@ -494,14 +494,13 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/goal_form_goal_inc_value_hint"
+                            android:id="@+id/goal_form_goal_dec_value_hint"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="120dp"
                             android:layout_height="60dp"
                             android:layout_marginTop="8dp"
-                            android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
-                            android:hint="@string/goal_form_goal_inc_value_hint"
+                            android:hint="@string/goal_form_goal_dec_value_hint"
                             android:inputType="numberDecimal|numberSigned"
                             app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
                             app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
@@ -513,7 +512,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/textView2">
 
                         <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/goal_form_goal_inc_value"
+                                android:id="@+id/goal_form_goal_dec_value"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:inputType="numberDecimal"
@@ -536,14 +535,13 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/goal_form_goal_dec_value_hint"
+                            android:id="@+id/goal_form_goal_inc_value_hint"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="120dp"
                             android:layout_height="60dp"
-                            android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
-                            android:hint="@string/goal_form_goal_dec_value_hint"
+                            android:hint="@string/goal_form_goal_inc_value_hint"
                             android:inputType="numberDecimal|numberSigned"
                             app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
                             app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
@@ -555,7 +553,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/textView2">
 
                         <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/goal_form_goal_dec_value"
+                                android:id="@+id/goal_form_goal_inc_value"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:inputType="numberDecimal"
