@@ -19,4 +19,4 @@ interface HistoricDAO {
 
     @Delete
     fun delete(historic: Historic)
-
+}
