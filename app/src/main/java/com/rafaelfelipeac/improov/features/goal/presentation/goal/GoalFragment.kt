@@ -189,11 +189,11 @@ class GoalFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_edit, menu)
+
         if (goal?.type == GoalType.GOAL_LIST) {
             inflater.inflate(R.menu.menu_add, menu)
         }
-
-        inflater.inflate(R.menu.menu_edit, menu)
 
         super.onCreateOptionsMenu(menu, inflater)
     }
