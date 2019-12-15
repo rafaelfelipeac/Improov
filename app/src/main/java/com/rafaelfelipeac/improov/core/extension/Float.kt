@@ -5,7 +5,7 @@ fun Float.getNumberInRightFormat(): String {
         return this.toString().replace(".0", "")
     }
 
-    return this.toString()
+    return "%.2f".format(this.toString().toFloat())
 }
 
 fun Float.getValueWithSymbol(): String {

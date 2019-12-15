@@ -411,7 +411,6 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="16dp"
                         android:gravity="center"
-                        android:hint="@string/goal_total_total_hint"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
                         app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
