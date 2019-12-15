@@ -7,7 +7,7 @@
     <!-- Date -->
     <string name="date_format_dmy">dd/MM/yyyy</string>
     <string name="date_format_dd_MMM">dd MMM</string>
-    <string name="date_format_full">dd/MM/yyyy hh:mm:ss</string>
+    <string name="date_format_full">dd/MM/yyyy HH:mm:ss</string>
 
     <!-- Commons -->
     <string name="empty_string"/>
