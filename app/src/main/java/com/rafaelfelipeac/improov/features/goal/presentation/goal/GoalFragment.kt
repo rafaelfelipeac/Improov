@@ -266,10 +266,13 @@ class GoalFragment : BaseFragment() {
 
                 goal_total_total.resetValue()
 
-                if (!oldDone && goal!!.done)
+                if (!oldDone && goal!!.done) {
                     showSnackBar(getString(R.string.goal_message_goal_done))
-                else
+                } else {
                     showSnackBar(getString(R.string.goal_message_goal_value_updated))
+
+                    hideSoftKeyboard()
+                }
             } else {
                 showSnackBar(getString(R.string.goal_message_goal_value_invalid))
             }
