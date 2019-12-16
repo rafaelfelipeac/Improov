@@ -219,7 +219,7 @@ class GoalFormFragment : BaseFragment() {
             goal_form_divide_and_conquer.visible()
             goal_form_single.invisible()
         } else {
-            goal_form_editText_bronze.resetValue()
+            goal_form_bronze_value.resetValue()
             goal_form_silver_value.resetValue()
             goal_form_gold_value.resetValue()
 
@@ -232,7 +232,7 @@ class GoalFormFragment : BaseFragment() {
         return try {
             val gold = goal_form_gold_value.toFloat()
             val silver = goal_form_silver_value.toFloat()
-            val bronze = goal_form_editText_bronze.toFloat()
+            val bronze = goal_form_bronze_value.toFloat()
 
             ((gold > silver) && (silver > bronze))
         } catch (e: Exception) {
@@ -246,7 +246,7 @@ class GoalFormFragment : BaseFragment() {
         val nameEmpty = goal_form_goal_name.isEmpty()
         val singleEmpty = goal_form_single_value.isEmpty()
         val divideAndConquerEmpty =
-            goal_form_editText_bronze.isEmpty() ||
+            goal_form_bronze_value.isEmpty() ||
                     goal_form_silver_value.isEmpty() ||
                     goal_form_gold_value.isEmpty()
 
@@ -280,7 +280,7 @@ class GoalFormFragment : BaseFragment() {
         }
 
         if (goal.divideAndConquer) {
-            goal.bronzeValue = goal_form_editText_bronze.toFloat()
+            goal.bronzeValue = goal_form_bronze_value.toFloat()
             goal.silverValue = goal_form_silver_value.toFloat()
             goal.goldValue = goal_form_gold_value.toFloat()
         } else {
@@ -313,7 +313,7 @@ class GoalFormFragment : BaseFragment() {
             goal_form_divide_and_conquer.visible()
             goal_form_single.invisible()
 
-            goal_form_editText_bronze.setText(goal.bronzeValue.getNumberInRightFormat())
+            goal_form_bronze_value.setText(goal.bronzeValue.getNumberInRightFormat())
             goal_form_silver_value.setText(goal.silverValue.getNumberInRightFormat())
             goal_form_gold_value.setText(goal.goldValue.getNumberInRightFormat())
 
