@@ -14,14 +14,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.*
-import com.rafaelfelipeac.improov.features.goal.Historic
-import com.rafaelfelipeac.improov.features.goal.Item
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.commons.Goal
 import com.rafaelfelipeac.improov.features.commons.GoalType
+import com.rafaelfelipeac.improov.features.goal.Historic
+import com.rafaelfelipeac.improov.features.goal.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_goal.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class GoalFragment : BaseFragment() {
@@ -82,6 +81,8 @@ class GoalFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
 
+        resetFistTime()
+
         isFromDragAndDrop = false
     }
 
@@ -132,6 +133,13 @@ class GoalFragment : BaseFragment() {
                 closeBottomSheetItem()
             }
         }
+    }
+
+    private fun resetFistTime() {
+        seriesSingle = 0
+        seriesBronze = 0
+        seriesSilver = 0
+        seriesGold = 0
     }
 
     private fun openBottomSheetItem(item: Item?) {
