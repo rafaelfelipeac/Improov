@@ -132,14 +132,14 @@ class ListAdapter(val fragment: BaseFragment) :
             if (goal.divideAndConquer) {
                 score.text = String.format(
                     "%s/%s",
-                    goal.value.roundToInt().toString(),
-                    goal.goldValue.roundToInt().toString()
+                    goal.value.getNumberInRightFormat(),
+                    goal.goldValue.getNumberInRightFormat()
                 )
             } else {
                 score.text = String.format(
                     "%s/%s",
-                    goal.value.roundToInt().toString(),
-                    goal.singleValue.roundToInt().toString()
+                    goal.value.getNumberInRightFormat(),
+                    goal.singleValue.getNumberInRightFormat()
                 )
             }
 
