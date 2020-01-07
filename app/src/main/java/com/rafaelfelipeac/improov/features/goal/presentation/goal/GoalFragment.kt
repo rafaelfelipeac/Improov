@@ -227,6 +227,10 @@ class GoalFragment : BaseFragment() {
     private fun setupButtons() {
         goal_btn_inc.setOnClickListener {
             count += goal?.incrementValue!!
+
+            val oldDone = goal!!.done
+            goal?.done = verifyIfGoalIsDone()
+
             updateTextAndGoal(goal_inc_dec_total)
 
             goalViewModel.saveHistoric(
@@ -236,10 +240,16 @@ class GoalFragment : BaseFragment() {
                     goalId = goal?.goalId!!
                 )
             )
+
+            verifyIfWasDone(oldDone)
         }
 
         goal_btn_dec.setOnClickListener {
             count -= goal?.decrementValue!!
+
+            val oldDone = goal!!.done
+            goal?.done = verifyIfGoalIsDone()
+
             updateTextAndGoal(goal_inc_dec_total)
 
             goalViewModel.saveHistoric(
@@ -249,6 +259,8 @@ class GoalFragment : BaseFragment() {
                     goalId = goal?.goalId!!
                 )
             )
+
+            verifyIfWasDone(oldDone)
         }
 
         goal_button_save.setOnClickListener {
@@ -270,13 +282,7 @@ class GoalFragment : BaseFragment() {
 
                 goal_total_total.resetValue()
 
-                if (!oldDone && goal!!.done) {
-                    showSnackBar(getString(R.string.goal_message_goal_done))
-                } else {
-                    showSnackBar(getString(R.string.goal_message_goal_value_updated))
-
-                    hideSoftKeyboard()
-                }
+                verifyIfWasDone(oldDone)
             } else {
                 showSnackBar(getString(R.string.goal_message_goal_value_invalid))
             }
@@ -285,7 +291,13 @@ class GoalFragment : BaseFragment() {
 
     private fun onScoreFromList(done: Boolean) {
         if (done) count++ else count--
+
+        val oldDone = goal!!.done
+        goal?.done = verifyIfGoalIsDone()
+
         updateTextAndGoal(goal_count)
+
+        verifyIfWasDone(oldDone)
     }
 
     private fun setupGoal() {
@@ -586,5 +598,15 @@ class GoalFragment : BaseFragment() {
 
     private fun deleteItem(item: Any) {
         goalViewModel.saveItem(item as Item)
+    }
+
+    private fun verifyIfWasDone(oldDone: Boolean) {
+        if (!oldDone && goal!!.done) {
+            showSnackBar(getString(R.string.goal_message_goal_done))
+        } else {
+            showSnackBar(getString(R.string.goal_message_goal_value_updated))
+
+            hideSoftKeyboard()
+        }
     }
 }
