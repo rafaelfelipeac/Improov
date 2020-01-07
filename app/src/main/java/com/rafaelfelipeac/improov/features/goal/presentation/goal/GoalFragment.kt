@@ -199,10 +199,6 @@ class GoalFragment : BaseFragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_edit, menu)
 
-        if (goal?.type == GoalType.GOAL_LIST) {
-            inflater.inflate(R.menu.menu_add, menu)
-        }
-
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -325,8 +321,9 @@ class GoalFragment : BaseFragment() {
 
                 goal_historic_items_list.invisible()
 
-                if ((activity as MainActivity).toolbar.menu.findItem(R.id.menu_add) == null)
+                if ((activity as MainActivity).toolbar.menu.findItem(R.id.menu_add) == null) {
                     (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
+                }
             }
             GoalType.GOAL_COUNTER -> {
                 goal_cl_list.invisible()
