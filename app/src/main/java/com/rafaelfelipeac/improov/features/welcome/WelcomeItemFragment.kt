@@ -12,6 +12,8 @@ class WelcomeItemFragment(
     private val pos: Int
 ) : BaseFragment() {
 
+    constructor(): this(WelcomeFragment(), 0)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         injector.inject(this)
 
