@@ -36,6 +36,7 @@
     <string name="goal_message_goal_value_updated">Valor atualizado.</string>
     <string name="goal_message_goal_value_invalid">Valor inválido.</string>
     <string name="goal_message_empty_items">Você ainda não tem itens adicionados nesse objetivo.</string>
+    <string name="goal_message_empty_history">Você ainda não tem um histórico para esse objetivo.</string>
     <string name="goal_count">0</string>
     <string name="goal_final_date">00/00/00</string>
     <string name="goal_total_total_hint">0</string>

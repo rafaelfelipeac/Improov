@@ -187,22 +187,22 @@ class GoalFragment : BaseFragment() {
             this.goal = goal as Goal
 
             setupGoal()
-        })
 
-        goalViewModel.getItems()?.observe(this, Observer { items ->
-            this.items = items.filter { it.goalId == goal?.goalId }
+            goalViewModel.getItems()?.observe(this, Observer { items ->
+                this.items = items.filter { it.goalId == goal.goalId }
 
-            if (!isFromDragAndDrop) {
-                setupItems()
-            }
+                if (!isFromDragAndDrop) {
+                    setupItems()
+                }
 
-            isFromDragAndDrop = false
-        })
+                isFromDragAndDrop = false
+            })
 
-        goalViewModel.getHistory()?.observe(this, Observer { history ->
-            this.history = history.filter { it.goalId == goal?.goalId }
+            goalViewModel.getHistory()?.observe(this, Observer { history ->
+                this.history = history.filter { it.goalId == goal.goalId }
 
-            setupHistoric()
+                setupHistoric()
+            })
         })
     }
 
@@ -397,7 +397,15 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun setupHistoric() {
-        setHistory()
+        if (goal?.type == GoalType.GOAL_FINAL || goal?.type == GoalType.GOAL_COUNTER) {
+            if (history?.any { it.goalId == goal?.goalId }!!) {
+                setHistory()
+
+                goal_history_placeholder.invisible()
+            } else {
+                goal_history_placeholder.visible()
+            }
+        }
     }
 
     private fun setupItems() {
