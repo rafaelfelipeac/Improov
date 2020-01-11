@@ -11,16 +11,15 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.*
+import com.rafaelfelipeac.improov.core.platform.ActionCompletionContract
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.core.platform.base.inflate
 import com.rafaelfelipeac.improov.features.commons.Goal
 import com.rafaelfelipeac.improov.features.commons.GoalHabit
 import com.rafaelfelipeac.improov.features.commons.Habit
 import com.rafaelfelipeac.improov.features.commons.HabitType
-import com.rafaelfelipeac.improov.core.platform.ActionCompletionContract
 import com.rafaelfelipeac.improov.features.list.ListFragment
 import com.rafaelfelipeac.improov.features.today.presentation.TodayFragment
-import kotlin.math.roundToInt
 
 class ListAdapter(val fragment: BaseFragment) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(),
@@ -123,10 +122,11 @@ class ListAdapter(val fragment: BaseFragment) :
                 params.marginStart = 10
                 typeIcon.layoutParams = params
             } else {
-                typeIcon.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
-                typeIcon.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.mipmap.ic_item_undone)
 
-                typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.drawable.ic_today)
+                val params = typeIcon.layoutParams as ConstraintLayout.LayoutParams
+                params.marginStart = 10
+                typeIcon.layoutParams = params
             }
 
             if (goal.divideAndConquer) {

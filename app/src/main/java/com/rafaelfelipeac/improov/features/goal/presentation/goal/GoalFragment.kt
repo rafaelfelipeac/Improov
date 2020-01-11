@@ -188,21 +188,25 @@ class GoalFragment : BaseFragment() {
 
             setupGoal()
 
-            goalViewModel.getItems()?.observe(this, Observer { items ->
-                this.items = items.filter { it.goalId == goal.goalId }
+            if (goal.type == GoalType.GOAL_LIST) {
+                goalViewModel.getItems()?.observe(this, Observer { items ->
+                    this.items = items.filter { it.goalId == goal.goalId }
 
-                if (!isFromDragAndDrop) {
-                    setupItems()
-                }
+                    if (!isFromDragAndDrop) {
+                        setupItems()
+                    }
 
-                isFromDragAndDrop = false
-            })
+                    isFromDragAndDrop = false
+                })
+            }
 
-            goalViewModel.getHistory()?.observe(this, Observer { history ->
-                this.history = history.filter { it.goalId == goal.goalId }
+            if (goal.type == GoalType.GOAL_COUNTER || goal.type == GoalType.GOAL_FINAL) {
+                goalViewModel.getHistory()?.observe(this, Observer { history ->
+                    this.history = history.filter { it.goalId == goal.goalId }
 
-                setupHistoric()
-            })
+                    setupHistoric()
+                })
+            }
         })
     }
 
