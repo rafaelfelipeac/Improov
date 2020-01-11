@@ -94,7 +94,7 @@ class ListFragment : BaseFragment() {
                     (activity as MainActivity).setupBottomSheetTipsThree()
                     setupBottomSheetTip()
                     (activity as MainActivity).openBottomSheetTips()
-                }, 2000
+                }, 1000
             )
         }
     }

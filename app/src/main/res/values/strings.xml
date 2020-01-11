@@ -62,6 +62,7 @@
     <string name="goal_form_goal_inc_dev">Set the values:</string>
     <string name="goal_form_goal_inc_value_hint">Increment</string>
     <string name="goal_form_goal_dec_value_hint">Decrement</string>
+    <string name="goal_form_goal_dialog_one_button_message">If you want to change the goal type, the change history will be lost.</string>
 
     <!-- Habit -->
     <string name="habit_title">Habit</string>
@@ -113,10 +114,14 @@
     <string name="profile_name_name_hint">Name</string>
     <string name="profile_name_save_message">Save</string>
 
-    <!-- TwoButtons -->
-    <string name="two_buttons_message">Are you sure you want to exit the app?</string>
-    <string name="two_buttons_cancel_message">Cancel</string>
-    <string name="two_buttons_ok_message">OK</string>
+    <!-- DialogOneButton-->
+    <string name="dialog_one_button_message">Message</string>
+    <string name="dialog_one_button_ok_message">OK</string>
+
+    <!-- DialogTwoButtons -->
+    <string name="dialog_two_buttons_message">Are you sure you want to exit the app?</string>
+    <string name="dialog_two_buttons_cancel_message">Cancel</string>
+    <string name="dialog_two_buttons_ok_message">OK</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
@@ -173,7 +178,7 @@
     <string name="welcome_title">Welcome</string>
     <string name="welcome_sign_in">Log in</string>
     <string name="welcome_start">Start</string>
-    <string name="welcome_a_message">Welcome to the Improov. \n\n Create a record of your goals and stay focused on achieving them.</string>
+    <string name="welcome_a_message">Welcome to Improov. \n\n Create a record of your goals and stay focused on achieving them.</string>
     <string name="welcome_b_message">Use Improov to quickly access ongoing goals. \n\n Keep up to date on the way to go.</string>
     <string name="welcome_c_message">Get statistics and track your progress. \n\n Keep your goals always under development.</string>
 

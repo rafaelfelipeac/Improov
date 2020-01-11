@@ -10,9 +10,12 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.*
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
+import com.rafaelfelipeac.improov.features.commons.DialogOneButton
 import com.rafaelfelipeac.improov.features.commons.Goal
 import com.rafaelfelipeac.improov.features.commons.GoalType
 import com.rafaelfelipeac.improov.features.commons.Habit
+import com.rafaelfelipeac.improov.features.goal.Historic
+import com.rafaelfelipeac.improov.features.goal.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 import java.text.SimpleDateFormat
@@ -23,6 +26,8 @@ class GoalFormFragment : BaseFragment() {
     private var goal: Goal = Goal()
     private var goalId: Long? = null
     private var goals: List<Goal> = listOf()
+    private var items: List<Item> = listOf()
+    private var history: List<Historic> = listOf()
     private var habits: List<Habit> = listOf()
 
     private var cal = Calendar.getInstance()
@@ -66,12 +71,14 @@ class GoalFormFragment : BaseFragment() {
         (activity as MainActivity).openToolbar()
 
         goal_form_divide_and_conquest_help.setOnClickListener {
+            hideSoftKeyboard()
             (activity as MainActivity).setupBottomSheetTipsOne()
             setupBottomSheetTip()
             (activity as MainActivity).openBottomSheetTips()
         }
 
         goal_form_type_help.setOnClickListener {
+            hideSoftKeyboard()
             (activity as MainActivity).setupBottomSheetTipsTwo()
             setupBottomSheetTip()
             (activity as MainActivity).openBottomSheetTips()
@@ -131,6 +138,14 @@ class GoalFormFragment : BaseFragment() {
             this.habits = habits
         })
 
+        goalFormViewModel.getItems()?.observe(this, Observer { items ->
+            this.items = items
+        })
+
+        goalFormViewModel.getHistory()?.observe(this, Observer { history ->
+            this.history = history
+        })
+
         goalFormViewModel.goalIdInserted.observe(this, Observer {
             navController.navigateUp()
         })
@@ -188,6 +203,10 @@ class GoalFormFragment : BaseFragment() {
                 goal_form_radio_type_total.isChecked = false
 
                 goal_form_goal_inc_dev.gone()
+
+                if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_LIST) {
+                    showDialogOneButton()
+                }
             }
         }
 
@@ -197,6 +216,10 @@ class GoalFormFragment : BaseFragment() {
                 goal_form_radio_type_total.isChecked = false
 
                 goal_form_goal_inc_dev.visible()
+
+                if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_COUNTER) {
+                    showDialogOneButton()
+                }
             }
         }
 
@@ -206,6 +229,10 @@ class GoalFormFragment : BaseFragment() {
                 goal_form_radio_type_list.isChecked = false
 
                 goal_form_goal_inc_dev.gone()
+
+                if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_FINAL) {
+                    showDialogOneButton()
+                }
             }
         }
     }
@@ -258,12 +285,12 @@ class GoalFormFragment : BaseFragment() {
     private fun updateOrCreateGoal(): Goal {
         goal.name = goal_form_goal_name.text.toString()
         goal.divideAndConquer = goal_form_switch_divide_and_conquer.isChecked
-        goal.type = getGoalTypeSelected()
 
         if (goal.goalId == 0L) {
             goal.createdDate = getCurrentTime()
             goal.value = 0F
             goal.done = false
+            goal.type = getGoalTypeSelected()
 
             val order =
                 if (goals.isEmpty() && habits.isEmpty()) 0
@@ -271,8 +298,26 @@ class GoalFormFragment : BaseFragment() {
             //else goals!![goals!!.size-1].order + 1
 
             goal.order = order
-        } else
+        } else {
+            val oldGoalType = goal.type
+            goal.type = getGoalTypeSelected()
+
+            if (oldGoalType != goal.type) {
+                items.forEach {
+                    if (it.goalId == goal.goalId) {
+                        goalFormViewModel.deleteItem(it)
+                    }
+                }
+
+                history.forEach {
+                    if (it.goalId == goal.goalId) {
+                        goalFormViewModel.deleteHistoric(it)
+                    }
+                }
+            }
+
             goal.updatedDate = getCurrentTime()
+        }
 
         if (getGoalTypeSelected() == GoalType.GOAL_COUNTER) {
             goal.incrementValue = goal_form_goal_inc_value.toFloat()
@@ -346,5 +391,19 @@ class GoalFormFragment : BaseFragment() {
             preferences.fistTimeAdd = false
             preferences.fistTimeList = true
         }
+    }
+
+    private fun showDialogOneButton() {
+        val dialog = DialogOneButton()
+
+        dialog.setMessage(getString(R.string.goal_form_goal_dialog_one_button_message))
+
+        dialog.setOnClickListener(object : DialogOneButton.OnClickListener {
+            override fun onOK() {
+                dialog.dismiss()
+            }
+        })
+
+        dialog.show(fragmentManager!!, "")
     }
 }

@@ -9,14 +9,14 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
 import com.rafaelfelipeac.improov.R
-import kotlinx.android.synthetic.main.fragment_two_buttons_dialog.*
+import kotlinx.android.synthetic.main.fragment_dialog_two_buttons.*
 
-class TwoButtonsDialog : DialogFragment() {
+class DialogTwoButtons : DialogFragment() {
 
     private var onClickListener: OnClickListener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view =  inflater.inflate(R.layout.fragment_two_buttons_dialog, container, false)
+        val view =  inflater.inflate(R.layout.fragment_dialog_two_buttons, container, false)
 
         if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -29,9 +29,9 @@ class TwoButtonsDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        two_buttons_cancel_button.setOnClickListener { onClickListener?.onCancel() }
+        dialog_two_buttons_cancel_button.setOnClickListener { onClickListener?.onCancel() }
 
-        two_buttons_ok_button.setOnClickListener { onClickListener?.onOK() }
+        dialog_two_buttons_ok_button.setOnClickListener { onClickListener?.onOK() }
     }
 
     fun setOnClickListener(onOkClickListener: OnClickListener) {

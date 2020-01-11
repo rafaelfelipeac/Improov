@@ -62,6 +62,7 @@
     <string name="goal_form_goal_inc_dev">Defina os valores:</string>
     <string name="goal_form_goal_inc_value_hint">Incrementar</string>
     <string name="goal_form_goal_dec_value_hint">Decrementar</string>
+    <string name="goal_form_goal_dialog_one_button_message">Se você quiser trocar o tipo do objetivo, o histórico de alterações será perdido.</string>
 
     <!-- Habit -->
     <string name="habit_title">Hábito</string>
@@ -113,10 +114,14 @@
     <string name="profile_name_name_hint">Nome</string>
     <string name="profile_name_save_message">Salvar</string>
 
-    <!-- TwoButtons -->
-    <string name="two_buttons_message">Tem certeza que deseja sair do app?</string>
-    <string name="two_buttons_cancel_message">Cancelar</string>
-    <string name="two_buttons_ok_message">OK</string>
+    <!-- DialogOneButton-->
+    <string name="dialog_one_button_message">Mensagem</string>
+    <string name="dialog_one_button_ok_message">OK</string>
+
+    <!-- DialogTwoButtons -->
+    <string name="dialog_two_buttons_message">Tem certeza que deseja sair do app?</string>
+    <string name="dialog_two_buttons_cancel_message">Cancelar</string>
+    <string name="dialog_two_buttons_ok_message">OK</string>
 
     <!-- Settings -->
     <string name="settings_title">Configurações</string>

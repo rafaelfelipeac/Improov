@@ -408,6 +408,7 @@ class GoalFragment : BaseFragment() {
                 goal_history_placeholder.invisible()
             } else {
                 goal_history_placeholder.visible()
+                goal_items_placeholder.gone()
             }
         }
     }
@@ -422,6 +423,7 @@ class GoalFragment : BaseFragment() {
             } else {
                 goal_cl_list.invisible()
                 goal_items_placeholder.visible()
+                goal_history_placeholder.gone()
             }
         }
     }
