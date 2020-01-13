@@ -239,13 +239,13 @@ class GoalFragment : BaseFragment() {
     }
 
     private fun setupButtons() {
-        goal_btn_inc.setOnClickListener {
+        goal_btn_counter_inc.setOnClickListener {
             count += goal?.incrementValue!!
 
             val oldDone = goal!!.done
             goal?.done = verifyIfGoalIsDone()
 
-            updateTextAndGoal(goal_inc_dec_total)
+            updateTextAndGoal(goal_counter_total)
 
             goalViewModel.saveHistoric(
                 Historic(
@@ -258,13 +258,13 @@ class GoalFragment : BaseFragment() {
             verifyIfWasDone(oldDone)
         }
 
-        goal_btn_dec.setOnClickListener {
+        goal_btn_counter_dec.setOnClickListener {
             count -= goal?.decrementValue!!
 
             val oldDone = goal!!.done
             goal?.done = verifyIfGoalIsDone()
 
-            updateTextAndGoal(goal_inc_dec_total)
+            updateTextAndGoal(goal_counter_total)
 
             goalViewModel.saveHistoric(
                 Historic(
@@ -342,7 +342,7 @@ class GoalFragment : BaseFragment() {
         when (goal?.type) {
             GoalType.GOAL_LIST -> {
                 goal_cl_list.visible()
-                goal_cl_dec_inc.invisible()
+                goal_cl_counter.invisible()
                 goal_cl_total.invisible()
 
                 goal_historic_items_list.invisible()
@@ -353,16 +353,16 @@ class GoalFragment : BaseFragment() {
             }
             GoalType.GOAL_COUNTER -> {
                 goal_cl_list.invisible()
-                goal_cl_dec_inc.visible()
+                goal_cl_counter.visible()
                 goal_cl_total.invisible()
 
                 goal_historic_items_list.visible()
 
-                goal_inc_dec_total.text = count.getNumberInRightFormat()
+                goal_counter_total.text = count.getNumberInRightFormat()
             }
             GoalType.GOAL_FINAL -> {
                 goal_cl_list.invisible()
-                goal_cl_dec_inc.invisible()
+                goal_cl_counter.invisible()
                 goal_cl_total.visible()
 
                 goal_historic_items_list.visible()

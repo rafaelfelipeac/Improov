@@ -47,7 +47,7 @@
     <string name="goal_form_some_empty_value">Algum valor vazio.</string>
     <string name="goal_form_empty_type_goal">Escolha o tipo do objetivo.</string>
     <string name="goal_form_gold_silver_bronze_order"><![CDATA[Ouro > Prata > Bronze]]></string>
-    <string name="goal_form_empty_inc_dec">Inc/Dec vazios.</string>
+    <string name="goal_form_empty_counter">Inc/Dec vazios.</string>
     <string name="goal_form_goal_name_hint">Título</string>
     <string name="goal_form_set_date">Selecionar data</string>
     <string name="goal_form_single_hint">Único</string>
@@ -57,11 +57,11 @@
     <string name="goal_form_divide_and_conquer_title">Dividir e conquistar</string>
     <string name="goal_form_type_title">Tipo de objetivo</string>
     <string name="goal_form_radio_type_list">Lista</string>
-    <string name="goal_form_radio_type_inc_dec">Contador</string>
+    <string name="goal_form_radio_type_counter">Contador</string>
     <string name="goal_form_radio_type_total">Valor final</string>
-    <string name="goal_form_goal_inc_dev">Defina os valores:</string>
-    <string name="goal_form_goal_inc_value_hint">Incrementar</string>
-    <string name="goal_form_goal_dec_value_hint">Decrementar</string>
+    <string name="goal_form_goal_counter">Defina os valores:</string>
+    <string name="goal_form_goal_counter_inc_value_hint">Incrementar</string>
+    <string name="goal_form_goal_counter_dec_value_hint">Decrementar</string>
     <string name="goal_form_goal_dialog_one_button_message">Se você quiser trocar o tipo do objetivo, o histórico de alterações será perdido.</string>
 
     <!-- Habit -->

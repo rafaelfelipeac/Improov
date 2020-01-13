@@ -325,7 +325,7 @@
                 app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goal_cl_dec_inc"
+                    android:id="@+id/goal_cl_counter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -338,7 +338,7 @@
                     app:layout_constraintTop_toTopOf="@+id/goal_cl_total">
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/goal_btn_dec"
+                        android:id="@+id/goal_btn_counter_dec"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -346,7 +346,7 @@
                         android:layout_marginEnd="8dp"
                         app:backgroundTint="@color/colorPrimary"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/goal_inc_dec_total"
+                        app:layout_constraintEnd_toStartOf="@+id/goal_counter_total"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -355,7 +355,7 @@
                         app:tint="@color/colorPrimaryDarkTwo" />
 
                 <TextView
-                        android:id="@+id/goal_inc_dec_total"
+                        android:id="@+id/goal_counter_total"
                         android:layout_width="100dp"
                         android:layout_height="50dp"
                         android:layout_marginStart="8dp"
@@ -371,7 +371,7 @@
                         app:layout_constraintVertical_bias="0.3" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/goal_btn_inc"
+                        android:id="@+id/goal_btn_counter_inc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -381,7 +381,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toEndOf="@+id/goal_inc_dec_total"
+                        app:layout_constraintStart_toEndOf="@+id/goal_counter_total"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.3"
                         app:srcCompat="@drawable/ic_plus"
@@ -536,7 +536,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/goal_cl_dec_inc"
+                    app:layout_constraintTop_toBottomOf="@+id/goal_cl_counter"
                     app:layout_constraintVertical_bias="0.0">
 
                 <ImageView

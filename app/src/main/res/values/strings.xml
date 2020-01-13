@@ -47,7 +47,7 @@
     <string name="goal_form_some_empty_value">Any empty value.</string>
     <string name="goal_form_empty_type_goal">Choose the type of goal.</string>
     <string name="goal_form_gold_silver_bronze_order"><![CDATA[Gold > Silver > Bronze]]></string>
-    <string name="goal_form_empty_inc_dec">Inc/Dec empty.</string>
+    <string name="goal_form_empty_counter">Inc/Dec empty.</string>
     <string name="goal_form_goal_name_hint">Title</string>
     <string name="goal_form_set_date">Set date</string>
     <string name="goal_form_single_hint">Single</string>
@@ -57,11 +57,11 @@
     <string name="goal_form_divide_and_conquer_title">Divide and Conquer</string>
     <string name="goal_form_type_title">Goal type</string>
     <string name="goal_form_radio_type_list">List</string>
-    <string name="goal_form_radio_type_inc_dec">Counter</string>
+    <string name="goal_form_radio_type_counter">Counter</string>
     <string name="goal_form_radio_type_total">Final value</string>
-    <string name="goal_form_goal_inc_dev">Set the values:</string>
-    <string name="goal_form_goal_inc_value_hint">Increment</string>
-    <string name="goal_form_goal_dec_value_hint">Decrement</string>
+    <string name="goal_form_goal_counter">Set the values:</string>
+    <string name="goal_form_goal_counter_inc_value_hint">Increment</string>
+    <string name="goal_form_goal_counter_dec_value_hint">Decrement</string>
     <string name="goal_form_goal_dialog_one_button_message">If you want to change the goal type, the change history will be lost.</string>
 
     <!-- Habit -->

@@ -97,8 +97,8 @@ class HabitFormFragment : BaseFragment() {
 //                    showSnackBar(getString(R.string.message_empty_type_goal))
 //                } else if (!validateDivideAndConquerValues()) {
 //                    showSnackBar(getString(R.string.message_gold_silver_bronze_order))
-//                } else if (verifyIfIncOrDecValuesAreEmpty()) {
-//                    showSnackBar(getString(R.string.message_empty_inc_dec))
+//                } else if (verifyIfCounterValuesAreEmpty()) {
+//                    showSnackBar(getString(R.string.message_empty_counter))
 //                } else {
                 val habitToSave = updateOrCreateHabit()
 

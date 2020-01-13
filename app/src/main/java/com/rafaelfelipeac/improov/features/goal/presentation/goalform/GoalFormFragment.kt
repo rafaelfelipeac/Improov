@@ -166,8 +166,8 @@ class GoalFormFragment : BaseFragment() {
                     showSnackBar(getString(R.string.goal_form_empty_type_goal))
                 } else if (!validateDivideAndConquerValues()) {
                     showSnackBar(getString(R.string.goal_form_gold_silver_bronze_order))
-                } else if (verifyIfIncOrDecValuesAreEmpty()) {
-                    showSnackBar(getString(R.string.goal_form_empty_inc_dec))
+                } else if (verifyIfCounterValuesAreEmpty()) {
+                    showSnackBar(getString(R.string.goal_form_empty_counter))
                 } else {
                     val goalToSave = updateOrCreateGoal()
 
@@ -183,8 +183,8 @@ class GoalFormFragment : BaseFragment() {
         return false
     }
 
-    private fun verifyIfIncOrDecValuesAreEmpty() =
-        getGoalTypeSelected() == GoalType.GOAL_COUNTER && (goal_form_goal_inc_value.isEmpty() || goal_form_goal_dec_value.isEmpty())
+    private fun verifyIfCounterValuesAreEmpty() =
+        getGoalTypeSelected() == GoalType.GOAL_COUNTER && (goal_form_goal_counter_inc_value.isEmpty() || goal_form_goal_counter_dec_value.isEmpty())
 
     private fun setSwitchImproov() {
         goal_form_switch_divide_and_conquer.setOnCheckedChangeListener { _, isChecked ->
@@ -199,10 +199,10 @@ class GoalFormFragment : BaseFragment() {
     private fun setRadioButtonType() {
         goal_form_radio_type_list.setOnClickListener {
             if (goal_form_radio_type_list.isChecked) {
-                goal_form_radio_type_inc_dec.isChecked = false
+                goal_form_radio_type_counter.isChecked = false
                 goal_form_radio_type_total.isChecked = false
 
-                goal_form_goal_inc_dev.gone()
+                goal_form_goal_counter.gone()
 
                 if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_LIST) {
                     showDialogOneButton()
@@ -210,12 +210,12 @@ class GoalFormFragment : BaseFragment() {
             }
         }
 
-        goal_form_radio_type_inc_dec.setOnClickListener {
-            if (goal_form_radio_type_inc_dec.isChecked) {
+        goal_form_radio_type_counter.setOnClickListener {
+            if (goal_form_radio_type_counter.isChecked) {
                 goal_form_radio_type_list.isChecked = false
                 goal_form_radio_type_total.isChecked = false
 
-                goal_form_goal_inc_dev.visible()
+                goal_form_goal_counter.visible()
 
                 if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_COUNTER) {
                     showDialogOneButton()
@@ -225,10 +225,10 @@ class GoalFormFragment : BaseFragment() {
 
         goal_form_radio_type_total.setOnClickListener {
             if (goal_form_radio_type_total.isChecked) {
-                goal_form_radio_type_inc_dec.isChecked = false
+                goal_form_radio_type_counter.isChecked = false
                 goal_form_radio_type_list.isChecked = false
 
-                goal_form_goal_inc_dev.gone()
+                goal_form_goal_counter.gone()
 
                 if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_FINAL) {
                     showDialogOneButton()
@@ -320,8 +320,8 @@ class GoalFormFragment : BaseFragment() {
         }
 
         if (getGoalTypeSelected() == GoalType.GOAL_COUNTER) {
-            goal.incrementValue = goal_form_goal_inc_value.toFloat()
-            goal.decrementValue = goal_form_goal_dec_value.toFloat()
+            goal.incrementValue = goal_form_goal_counter_inc_value.toFloat()
+            goal.decrementValue = goal_form_goal_counter_dec_value.toFloat()
         }
 
         if (goal.divideAndConquer) {
@@ -337,7 +337,7 @@ class GoalFormFragment : BaseFragment() {
 
     private fun getGoalTypeSelected(): GoalType {
         if (goal_form_radio_type_list.isChecked) return GoalType.GOAL_LIST
-        if (goal_form_radio_type_inc_dec.isChecked) return GoalType.GOAL_COUNTER
+        if (goal_form_radio_type_counter.isChecked) return GoalType.GOAL_COUNTER
         if (goal_form_radio_type_total.isChecked) return GoalType.GOAL_FINAL
 
         return GoalType.GOAL_NONE
@@ -372,12 +372,12 @@ class GoalFormFragment : BaseFragment() {
                 goal_form_radio_type_list.isChecked = true
             }
             GoalType.GOAL_COUNTER -> {
-                goal_form_radio_type_inc_dec.isChecked = true
+                goal_form_radio_type_counter.isChecked = true
 
-                goal_form_goal_inc_dev.visible()
+                goal_form_goal_counter.visible()
 
-                goal_form_goal_inc_value.setText(goal.incrementValue.getNumberInRightFormat())
-                goal_form_goal_dec_value.setText(goal.decrementValue.getNumberInRightFormat())
+                goal_form_goal_counter_inc_value.setText(goal.incrementValue.getNumberInRightFormat())
+                goal_form_goal_counter_dec_value.setText(goal.decrementValue.getNumberInRightFormat())
             }
             GoalType.GOAL_FINAL -> {
                 goal_form_radio_type_total.isChecked = true
