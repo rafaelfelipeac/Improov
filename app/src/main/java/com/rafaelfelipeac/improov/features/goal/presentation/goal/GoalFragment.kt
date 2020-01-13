@@ -320,12 +320,12 @@ class GoalFragment : BaseFragment() {
         goal_title.text = goal?.name
         goal_count.text = count.getNumberInRightFormat()
 
-//        if (goal?.finalDate != null) {
+//        if (goal?.date != null) {
 //            val myFormat = getString(R.string.date_format_dmy)
 //            val sdf = SimpleDateFormat(myFormat, Locale.US)
 //
-//            goal_final_date.text = sdf.format(goal?.finalDate)
-//            goal_final_date.visible()
+//            goal_date.text = sdf.format(goal?.date)
+//            goal_date.visible()
 //        }
 
         if (goal?.divideAndConquer!!) {

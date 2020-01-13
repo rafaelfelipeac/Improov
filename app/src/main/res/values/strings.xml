@@ -38,7 +38,7 @@
     <string name="goal_message_empty_items">You have no items added for this goal yet.</string>
     <string name="goal_message_empty_history">You do not have a history for this goal yet.</string>
     <string name="goal_count">0</string>
-    <string name="goal_final_date">00/00/00</string>
+    <string name="goal_date">00/00/00</string>
     <string name="goal_total_total_hint">0</string>
     <string name="goal_button_save">Save</string>
 
@@ -235,12 +235,12 @@
 
     <!-- BottomSheet Tips Two -->
     <string name="tips_two_title">Goals type</string>
-    <string name="tips_two_list_title">List</string>
-    <string name="tips_two_list_message">For goals that consist of completing different items on a list. Each completed item represents 1 point for the final goal.</string>
-    <string name="tips_two_counter_title">Counter</string>
-    <string name="tips_two_counter_message">For goals where the values to be added or subtracted are always the same.</string>
-    <string name="tips_two_final_title">Final value</string>
-    <string name="tips_two_final_message">For goals where the values to be added or subtracted constantly change.</string>
+    <string name="tips_two_type_list_title">List</string>
+    <string name="tips_two_type_list_message">For goals that consist of completing different items on a list. Each completed item represents 1 point for the final goal.</string>
+    <string name="tips_two_type_counter_title">Counter</string>
+    <string name="tips_two_type_counter_message">For goals where the values to be added or subtracted are always the same.</string>
+    <string name="tips_two_type_final_title">Final value</string>
+    <string name="tips_two_type_final_message">For goals where the values to be added or subtracted constantly change.</string>
 
     <!-- BottomSheet Tips Three -->
     <string name="tips_three_title">Swipe</string>

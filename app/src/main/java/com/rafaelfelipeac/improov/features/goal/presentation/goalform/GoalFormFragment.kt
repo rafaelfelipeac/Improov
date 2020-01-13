@@ -93,7 +93,7 @@ class GoalFormFragment : BaseFragment() {
 //            val sdf = SimpleDateFormat(myFormat, Locale.US)
 //            goal_form_set_date.text = sdf.format(cal.time)
 
-            goal.finalDate = cal.time
+            goal.date = cal.time
         }
 
 //        goal_form_set_date.setOnClickListener {
@@ -346,12 +346,12 @@ class GoalFormFragment : BaseFragment() {
     private fun setupGoal() {
         goal_form_goal_name.setText(goal.name)
 
-        if (goal.finalDate != null) {
+        if (goal.date != null) {
             val myFormat = getString(R.string.date_format_dmy)
             val sdf = SimpleDateFormat(myFormat, Locale.US)
-            //goal_form_set_date.text = sdf.format(goal.finalDate)
+            //goal_form_set_date.text = sdf.format(goal.date)
 
-            cal.time = goal.finalDate
+            cal.time = goal.date
         }
 
         if (goal.divideAndConquer) {

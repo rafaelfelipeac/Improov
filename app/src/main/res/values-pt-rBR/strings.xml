@@ -38,7 +38,7 @@
     <string name="goal_message_empty_items">Você ainda não tem itens adicionados nesse objetivo.</string>
     <string name="goal_message_empty_history">Você ainda não tem um histórico para esse objetivo.</string>
     <string name="goal_count">0</string>
-    <string name="goal_final_date">00/00/00</string>
+    <string name="goal_date">00/00/00</string>
     <string name="goal_total_total_hint">0</string>
     <string name="goal_button_save">Salvar</string>
 
@@ -235,12 +235,12 @@
 
     <!-- BottomSheet Tips Two -->
     <string name="tips_two_title">Tipos de objetivo</string>
-    <string name="tips_two_list_title">Lista</string>
-    <string name="tips_two_list_message">Para objetivos que consistem em concluir diferentes itens de uma lista. Cada item concluído representa 1 ponto para o objetivo final.</string>
-    <string name="tips_two_counter_title">Contador</string>
-    <string name="tips_two_counter_message">Para objetivos onde os valores a serem somados ou subtraídos sejam sempre os mesmos.</string>
-    <string name="tips_two_final_title">Valor final</string>
-    <string name="tips_two_final_message">Para objetivos onde os valores a serem somados ou subtraídos mudem constantemente.</string>
+    <string name="tips_two_type_list_title">Lista</string>
+    <string name="tips_two_type_list_message">Para objetivos que consistem em concluir diferentes itens de uma lista. Cada item concluído representa 1 ponto para o objetivo final.</string>
+    <string name="tips_two_type_counter_title">Contador</string>
+    <string name="tips_two_type_counter_message">Para objetivos onde os valores a serem somados ou subtraídos sejam sempre os mesmos.</string>
+    <string name="tips_two_type_final_title">Valor final</string>
+    <string name="tips_two_type_final_message">Para objetivos onde os valores a serem somados ou subtraídos mudem constantemente.</string>
 
     <!-- BottomSheet Tips Three -->
     <string name="tips_three_title">Deslize</string>

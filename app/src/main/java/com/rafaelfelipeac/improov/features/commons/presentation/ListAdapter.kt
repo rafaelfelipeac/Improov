@@ -145,8 +145,8 @@ class ListAdapter(val fragment: BaseFragment) :
 
             progressDone.setWidthForProgress(goal, fragment)
 
-            if (goal.finalDate != null) {
-                date.text = goal.finalDate.format(fragment.context!!)
+            if (goal.date != null) {
+                date.text = goal.date.format(fragment.context!!)
             } else {
                 date.text = ""
             }

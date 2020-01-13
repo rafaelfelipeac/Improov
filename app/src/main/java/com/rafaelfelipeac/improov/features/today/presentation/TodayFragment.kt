@@ -98,14 +98,14 @@ class TodayFragment : BaseFragment() {
         todayViewModel.getGoals()?.observe(this, Observer { goals ->
 
             this.goalsDone =
-                goals.filter { !it.archived && it.finalDate != null && it.finalDate.isToday() && it.done }
+                goals.filter { !it.archived && it.date != null && it.date.isToday() && it.done }
 
             this.goalsLate =
-                goals.filter { !it.archived && !it.done && it.finalDate != null && it.finalDate.isLate() && !it.finalDate.isToday() }
+                goals.filter { !it.archived && !it.done && it.date != null && it.date.isLate() && !it.date.isToday() }
             this.goalsToday =
-                goals.filter { !it.archived && !it.done && it.finalDate != null && it.finalDate.isToday() }
+                goals.filter { !it.archived && !it.done && it.date != null && it.date.isToday() }
             this.goalsFuture =
-                goals.filter { !it.archived && it.finalDate != null && it.finalDate.isFuture() }
+                goals.filter { !it.archived && it.date != null && it.date.isFuture() }
 
             setupItems()
         })
@@ -252,7 +252,7 @@ class TodayFragment : BaseFragment() {
                 }
             }
             goalsFuture?.forEach { goal ->
-                if (day.monthDay == goal.finalDate.format(context!!)) {
+                if (day.monthDay == goal.date.format(context!!)) {
                     day.list.add(goal)
                 }
             }

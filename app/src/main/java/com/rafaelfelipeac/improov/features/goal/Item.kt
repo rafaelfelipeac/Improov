@@ -18,4 +18,4 @@ data class Item(
     var doneDate: Date? = null,
     var undoneDate: Date? = null,
     var deleteDate: Date? = null,
-    val finalDate: Date? = null): Serializable
+    val date: Date? = null): Serializable

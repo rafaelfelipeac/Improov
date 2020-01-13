@@ -24,7 +24,7 @@ data class Goal (
     var doneDate: Date? = null,
     var undoneDate: Date? = null,
     var archiveDate: Date? = null,
-    var finalDate: Date? = null
+    var date: Date? = null
 ) : Serializable, GoalHabit()
 
 enum class GoalType { GOAL_LIST, GOAL_COUNTER, GOAL_FINAL, GOAL_NONE }
