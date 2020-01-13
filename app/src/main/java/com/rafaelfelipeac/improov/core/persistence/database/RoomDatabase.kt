@@ -15,7 +15,7 @@ import com.rafaelfelipeac.improov.features.commons.data.HabitDAO
 
 @Database(
     entities = [Goal::class, Habit::class, Item::class, Historic::class],
-    version = 47,
+    version = 48,
     exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class RoomDatabase : RoomDatabase() {

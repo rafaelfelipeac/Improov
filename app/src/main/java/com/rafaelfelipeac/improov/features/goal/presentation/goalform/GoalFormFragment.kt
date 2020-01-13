@@ -161,13 +161,13 @@ class GoalFormFragment : BaseFragment() {
         when (item.itemId) {
             R.id.menu_save -> {
                 if (verifyIfFieldsAreEmpty()) {
-                    showSnackBar(getString(R.string.goal_form_some_empty_value))
+                    showSnackBarLong(getString(R.string.goal_form_some_empty_value))
                 } else if (getGoalTypeSelected() == GoalType.GOAL_NONE) {
-                    showSnackBar(getString(R.string.goal_form_empty_type_goal))
+                    showSnackBarLong(getString(R.string.goal_form_empty_type_goal))
                 } else if (!validateDivideAndConquerValues()) {
-                    showSnackBar(getString(R.string.goal_form_gold_silver_bronze_order))
+                    showSnackBarLong(getString(R.string.goal_form_gold_silver_bronze_order))
                 } else if (verifyIfCounterValuesAreEmpty()) {
-                    showSnackBar(getString(R.string.goal_form_empty_counter))
+                    showSnackBarLong(getString(R.string.goal_form_empty_counter))
                 } else {
                     val goalToSave = updateOrCreateGoal()
 

@@ -298,7 +298,7 @@ class GoalFragment : BaseFragment() {
 
                 verifyIfWasDone(oldDone)
             } else {
-                showSnackBar(getString(R.string.goal_message_goal_value_invalid))
+                showSnackBarLong(getString(R.string.goal_message_goal_value_invalid))
             }
         }
     }

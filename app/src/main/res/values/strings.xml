@@ -46,8 +46,8 @@
     <string name="goal_form_title">New Goal</string>
     <string name="goal_form_some_empty_value">Any empty value.</string>
     <string name="goal_form_empty_type_goal">Choose the type of goal.</string>
-    <string name="goal_form_gold_silver_bronze_order"><![CDATA[Gold > Silver > Bronze]]></string>
-    <string name="goal_form_empty_counter">Inc/Dec empty.</string>
+    <string name="goal_form_gold_silver_bronze_order">Bronze, Silver and Gold values must be in ascending order.</string>
+    <string name="goal_form_empty_counter">Counter type values are empty.</string>
     <string name="goal_form_goal_name_hint">Title</string>
     <string name="goal_form_set_date">Set date</string>
     <string name="goal_form_single_hint">Single</string>
