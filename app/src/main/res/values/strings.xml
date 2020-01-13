@@ -49,7 +49,7 @@
     <string name="goal_form_gold_silver_bronze_order"><![CDATA[Gold > Silver > Bronze]]></string>
     <string name="goal_form_empty_inc_dec">Inc/Dec empty.</string>
     <string name="goal_form_goal_name_hint">Title</string>
-    <string name="goal_form_set_date">set date</string>
+    <string name="goal_form_set_date">Set date</string>
     <string name="goal_form_single_hint">Single</string>
     <string name="goal_form_bronze_hint">Bronze</string>
     <string name="goal_form_silver_hint">Silver</string>
@@ -102,7 +102,7 @@
 
     <!-- Profile -->
     <string name="profile_title">Profile</string>
-    <string name="profile_user_name">User Profile </string>
+    <string name="profile_user_name">User name </string>
     <string name="profile_add_name_message">Register your name</string>
     <string name="profile_edit_name_message">Edit your name</string>
     <string name="profile_show_welcome_message">See initial messages</string>
@@ -145,7 +145,6 @@
     <string name="settings_pref_key_about_contact">contact</string>
     <string name="settings_pref_key_about_version">version</string>
 
-
     <!-- SettingsLanguage -->
     <string name="settings_language_language_title">Language</string>
     <string name="settings_language_radio_portuguese">Português</string>
@@ -165,7 +164,7 @@
 
     <!-- Today -->
     <string name="today_title">Today</string>
-    <string name="today_next_ocurrence">Next occurrence:</string>
+    <string name="today_next_occurrence">Next occurrence:</string>
     <string name="today_day_message">NOV 9</string>
     <string name="today_value_message">3/10</string>
     <string name="today_late_title">LATE</string>
@@ -227,7 +226,7 @@
     <string name="tips_one_title">Divide And Conquer</string>
     <string name="tips_one_message_1">A good tactic to prevent very large and complex goals from being
          abandoned is to divide this objective into smaller parts. \n\n There is a greater sense of progress and you
-         You will always be motivated to achieve what you want. \n\n Therefore, your goal is divided into 3 parts:
+         will always be motivated to achieve what you want. \n\n Therefore, your goal is divided into 3 parts:
          bronze, silver and gold.
     </string>
     <string name="tips_one_message_2">The first part of the goal will be the bronze value. Every
@@ -245,7 +244,7 @@
 
     <!-- BottomSheet Tips Three -->
     <string name="tips_three_title">Swipe</string>
-    <string name="tips_three_message_1">When you finish a goal, there is an item or item, slide sideways to the element as done.
+    <string name="tips_three_message_1">If you want to finish a goal immediately, swipe sideways to get that element done.
     </string>
     <string name="tips_three_message_2">If you change your mind, just swipe back to make the element no longer complete.
     </string>

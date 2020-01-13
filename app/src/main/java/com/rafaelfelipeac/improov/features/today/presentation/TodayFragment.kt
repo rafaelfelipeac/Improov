@@ -299,7 +299,7 @@ class TodayFragment : BaseFragment() {
 
                         showSnackBarWithAction(
                             holder.itemView, String.format(
-                                "%s %s.", getString(R.string.today_next_ocurrence),
+                                "%s %s.", getString(R.string.today_next_occurrence),
                                 context?.let { goalHabit.nextDate.format(it) }
                             ), beforeHabit, ::undoDone
                         )
