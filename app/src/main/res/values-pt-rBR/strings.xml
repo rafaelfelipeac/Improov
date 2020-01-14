@@ -179,7 +179,7 @@
     <string name="welcome_start">Começar</string>
     <string name="welcome_a_message">Seja bem-vindo ao Improov. \n\nCrie um registro de seus objetivos e mantenha-se focado em alcançá-los.</string>
     <string name="welcome_b_message">Use o Improov para acessar rapidamente os objetivos em andamento. \n\nSe mantenha atualizado do caminho a percorrer.</string>
-    <string name="welcome_c_message">Tenha acesso a estatísticas e acompanhe o seu progresso. \n\nMantenha seus objetivos sempre em desenvolvimento.</string>
+    <string name="welcome_c_message">Acompanhe seu progresso e mantenha seus objetivos sempre em desenvolvimento.</string>
 
     <!-- ListAdapter -->
     <string name="list_adapter_habit_type_everyday">Todo dia</string>
