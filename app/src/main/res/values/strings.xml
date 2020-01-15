@@ -177,9 +177,9 @@
     <string name="welcome_title">Welcome</string>
     <string name="welcome_sign_in">Log in</string>
     <string name="welcome_start">Start</string>
-    <string name="welcome_a_message">Welcome to Improov. \n\n Create a record of your goals and stay focused on achieving them.</string>
-    <string name="welcome_b_message">Use Improov to quickly access ongoing goals. \n\n Keep up to date on the way to go.</string>
-    <string name="welcome_c_message">Track your progress and keep your goals always under development.</string>
+    <string name="welcome_a_message">Welcome to Improov! \n\nCreate goals and get ready to reach them.</string>
+    <string name="welcome_b_message">Use Improov to quickly access your goals and update your progress.</string>
+    <string name="welcome_c_message">Keep track of your achievements and keep your goals constantly evolving.</string>
 
     <!-- ListAdapter -->
     <string name="list_adapter_habit_type_everyday">Everyday</string>
@@ -204,7 +204,7 @@
     <string name="day_of_week_day">DAY</string>
 
     <!-- BottomSheet Goal Done -->
-    <string name="goal_done_message">There are pending items in this goal. Do you wish to complete?</string>
+    <string name="goal_done_message">There are pending items in this goal. \nDo you want to complete it?</string>
     <string name="goal_done_yes">YES</string>
     <string name="goal_done_no">NO</string>
 
@@ -224,13 +224,11 @@
 
     <!-- BottomSheet Tips One -->
     <string name="tips_one_title">Divide And Conquer</string>
-    <string name="tips_one_message_1">A good tactic to prevent very large and complex goals from being
-         abandoned is to divide this objective into smaller parts. \n\n There is a greater sense of progress and you
-         will always be motivated to achieve what you want. \n\n Therefore, your goal is divided into 3 parts:
-         bronze, silver and gold.
+    <string name="tips_one_message_1">Splitting a large and complex goal into smaller parts is a good tactic to keep that
+        goal from being abandoned. \n\nThe sense of progress is greater and you will always be motivated to achieve what you want. \n\nTherefore your goal is divided into 3 parts:
+        bronze, silver and gold.
     </string>
-    <string name="tips_one_message_2">The first part of the goal will be the bronze value. Every
-         part of the goal achieved is closer to the gold value and goal completion.
+    <string name="tips_one_message_2">The bronze value is the first challenge. With each part of the goal achieved, you will be closer to your achievement.
     </string>
 
     <!-- BottomSheet Tips Two -->
@@ -238,15 +236,15 @@
     <string name="tips_two_type_list_title">List</string>
     <string name="tips_two_type_list_message">For goals that consist of completing different items on a list. Each completed item represents 1 point for the final goal.</string>
     <string name="tips_two_type_counter_title">Counter</string>
-    <string name="tips_two_type_counter_message">For goals where the values to be added or subtracted are always the same.</string>
+    <string name="tips_two_type_counter_message">Ideal for goals where the values to be added or subtracted are always the same.</string>
     <string name="tips_two_type_final_title">Final value</string>
-    <string name="tips_two_type_final_message">For goals where the values to be added or subtracted constantly change.</string>
+    <string name="tips_two_type_final_message">Intended for goals where the values to be added or subtracted constantly change.</string>
 
     <!-- BottomSheet Tips Three -->
     <string name="tips_three_title">Swipe</string>
-    <string name="tips_three_message_1">If you want to finish a goal immediately, swipe sideways to get that element done.
+    <string name="tips_three_message_1">If you want to finish a goal immediately, even without reaching the full amount, slide the item aside to complete it.
     </string>
-    <string name="tips_three_message_2">If you change your mind, just swipe back to make the element no longer complete.
+    <string name="tips_three_message_2">If you change your mind, just swipe again and the item will be ready to update again.
     </string>
 
 

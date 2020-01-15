@@ -50,10 +50,16 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        if (lastFragment()) {
-            finish()
-        } else {
-            super.onBackPressed()
+        when {
+            bottomSheetIsOpen() -> {
+                closeBottomSheetTips()
+            }
+            lastFragment() -> {
+                finish()
+            }
+            else -> {
+                super.onBackPressed()
+            }
         }
 
         clearToolbarMenu()
@@ -104,6 +110,10 @@ class MainActivity : BaseActivity() {
     }
 
     fun closeBottomSheetTips() { bottomSheetTip.state = BottomSheetBehavior.STATE_COLLAPSED }
+
+    private fun bottomSheetIsOpen(): Boolean {
+        return bottomSheetTip.state == BottomSheetBehavior.STATE_EXPANDED
+    }
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
