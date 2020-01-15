@@ -33,7 +33,7 @@ class MainActivity : BaseActivity() {
     lateinit var fab: FloatingActionButton
 
     lateinit var bottomSheetTipClose: ConstraintLayout
-    lateinit var bottomSheetTip: BottomSheetBehavior<*>
+    var bottomSheetTip: BottomSheetBehavior<*>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,13 +106,13 @@ class MainActivity : BaseActivity() {
     }
 
     fun openBottomSheetTips() {
-        bottomSheetTip.state = BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetTip?.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
-    fun closeBottomSheetTips() { bottomSheetTip.state = BottomSheetBehavior.STATE_COLLAPSED }
+    fun closeBottomSheetTips() { bottomSheetTip?.state = BottomSheetBehavior.STATE_COLLAPSED }
 
     private fun bottomSheetIsOpen(): Boolean {
-        return bottomSheetTip.state == BottomSheetBehavior.STATE_EXPANDED
+        return bottomSheetTip?.state == BottomSheetBehavior.STATE_EXPANDED
     }
 
     private fun setupToolbar() {
