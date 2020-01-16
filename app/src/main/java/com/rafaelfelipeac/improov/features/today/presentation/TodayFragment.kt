@@ -64,6 +64,8 @@ class TodayFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fab.setOnClickListener {
+            (activity as MainActivity).closeBottomSheetTips()
+
             navController.navigate(TodayFragmentDirections.actionNavigationTodayToNavigationGoalForm())
         }
 
@@ -130,6 +132,7 @@ class TodayFragment : BaseFragment() {
         super.onResume()
 
         (activity as MainActivity).closeToolbar()
+        (activity as MainActivity).closeBottomSheetTips()
     }
 
     private fun setupItems() {

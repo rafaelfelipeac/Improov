@@ -63,6 +63,7 @@ class ListFragment : BaseFragment() {
         super.onResume()
 
         (activity as MainActivity).closeToolbar()
+        (activity as MainActivity).closeBottomSheetTips()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -81,6 +82,8 @@ class ListFragment : BaseFragment() {
         observeViewModel()
 
         fab.setOnClickListener {
+            (activity as MainActivity).closeBottomSheetTips()
+
             navController.navigate(ListFragmentDirections.actionNavigationListToNavigationGoalForm())
         }
 

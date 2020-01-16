@@ -38,6 +38,7 @@ class StatsFragment : BaseFragment() {
         super.onResume()
 
         (activity as MainActivity).closeToolbar()
+        (activity as MainActivity).closeBottomSheetTips()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -56,6 +57,8 @@ class StatsFragment : BaseFragment() {
         observeViewModel()
 
         fab.setOnClickListener {
+            (activity as MainActivity).closeBottomSheetTips()
+
             navController.navigate(StatsFragmentDirections.actionNavigationStatsToNavigationGoalForm())
         }
     }

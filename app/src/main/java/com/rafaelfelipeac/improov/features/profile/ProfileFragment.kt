@@ -31,9 +31,8 @@ class ProfileFragment : BaseFragment() {
             profile_edit_profile_button.text = getString(R.string.profile_add_name_message)
         }
 
-
-
         (activity as MainActivity).closeToolbar()
+        (activity as MainActivity).closeBottomSheetTips()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -58,6 +57,8 @@ class ProfileFragment : BaseFragment() {
         }
 
         fab.setOnClickListener {
+            (activity as MainActivity).closeBottomSheetTips()
+
             navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationGoalForm())
         }
 

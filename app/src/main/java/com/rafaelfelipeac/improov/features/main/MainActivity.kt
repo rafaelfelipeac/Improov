@@ -72,10 +72,10 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when {
-            item?.itemId == R.id.menu_save -> false
-            item?.itemId == R.id.menu_add -> false
-            item?.itemId == android.R.id.home -> false
+        return when (item?.itemId) {
+            R.id.menu_save -> false
+            R.id.menu_add -> false
+            android.R.id.home -> false
             else -> false
         }
     }
