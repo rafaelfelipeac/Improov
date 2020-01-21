@@ -53,6 +53,8 @@ class MainActivity : BaseActivity() {
         when {
             bottomSheetIsOpen() -> {
                 closeBottomSheetTips()
+
+                setupToolbar()
             }
             lastFragment() -> {
                 finish()
