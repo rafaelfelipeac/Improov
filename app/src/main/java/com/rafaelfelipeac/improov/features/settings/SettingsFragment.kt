@@ -38,7 +38,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
             }
             getString(R.string.settings_pref_key_about_rate) -> {
-                val appPackageName = "com.rafaelfelipeac.sweetdreams" // getPackageName() from Context or Activity object
+                val appPackageName = activity?.packageName
 
                 try {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("$MARKET_BASE_URL$appPackageName")))
