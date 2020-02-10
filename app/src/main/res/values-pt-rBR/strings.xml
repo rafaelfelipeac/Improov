@@ -1,7 +1,8 @@
 <resources>
 
     <!-- App -->
-    <string name="app_name">Improov</string>
+    <string name="app_name_release">Improov</string>
+    <string name="app_name_debug">Improov Debug</string>
     <string name="database_name">improov-db</string>
 
     <!-- Date -->
