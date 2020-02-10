@@ -27,7 +27,6 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="60dp"
                     android:hint="@string/profile_name_name_hint"
-                    android:inputType="numberDecimal|numberSigned"
                     android:textColor="@color/colorPrimary"
                     app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
                     app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
@@ -43,7 +42,7 @@
                         android:id="@+id/profile_edit_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
 

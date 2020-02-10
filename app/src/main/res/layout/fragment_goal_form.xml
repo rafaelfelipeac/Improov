@@ -36,7 +36,6 @@
                         android:layout_height="60dp"
                         android:layout_margin="16dp"
                         android:hint="@string/goal_form_goal_name_hint"
-                        android:inputType="numberDecimal|numberSigned"
                         android:textColor="@color/colorPrimary"
                         app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
@@ -52,7 +51,7 @@
                             android:id="@+id/goal_form_goal_name"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:inputType="text"
+                            android:inputType="textCapSentences"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp" />
 
