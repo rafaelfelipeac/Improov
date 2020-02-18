@@ -413,6 +413,7 @@
                         android:gravity="center"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
+                        android:hint="@string/goal_new_value"
                         app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
