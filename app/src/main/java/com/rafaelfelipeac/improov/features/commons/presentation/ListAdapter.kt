@@ -1,6 +1,7 @@
 package com.rafaelfelipeac.improov.features.commons.presentation
 
 import android.annotation.SuppressLint
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
@@ -149,7 +150,12 @@ class ListAdapter(val fragment: BaseFragment) :
                 override fun onGlobalLayout() {
                     progressTotal.viewTreeObserver.removeOnGlobalLayoutListener(this)
 
-                    progressDone.setWidthForProgress(goal, progressTotal.measuredWidth - 16) // extrair isso baseado na tela
+                    val metrics = DisplayMetrics()
+                    fragment.activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
+                    val logicalDensity = metrics.density
+                    val margin = (logicalDensity * 4).toInt()
+
+                    progressDone.setWidthForProgress(goal, progressTotal.measuredWidth - margin)
                 }
             })
 
