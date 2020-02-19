@@ -22,7 +22,7 @@
     <string name="menu_save">Salvar</string>
 
     <!-- Navigation -->
-    <string name="navigation_list">Lista</string>
+    <string name="navigation_goals">Objetivos</string>
     <string name="navigation_today">Hoje</string>
     <string name="navigation_stats">Estatísticas</string>
     <string name="navigation_profile">Perfil</string>
