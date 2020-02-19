@@ -1,8 +1,10 @@
 package com.rafaelfelipeac.improov.features.commons.presentation
 
 import android.annotation.SuppressLint
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -100,6 +102,7 @@ class ListAdapter(val fragment: BaseFragment) :
         //private val archiveImage = itemView.findViewById<ImageView>(R.id.goal_archive_image)
         private val itemDrag = itemView.findViewById<ImageView>(R.id.goal_drag_icon)!!
         private val progressDone = itemView.findViewById<ImageView>(R.id.goal_progress_done)
+        private val progressTotal = itemView.findViewById<ImageView>(R.id.goal_progress_total)
 
         @SuppressLint("ClickableViewAccessibility")
         override fun bindViews(goalHabit: GoalHabit) {
@@ -143,7 +146,18 @@ class ListAdapter(val fragment: BaseFragment) :
                 )
             }
 
-            progressDone.setWidthForProgress(goal, fragment)
+            progressTotal.viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    progressTotal.viewTreeObserver.removeOnGlobalLayoutListener(this)
+
+                    val metrics = DisplayMetrics()
+                    fragment.activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
+                    val logicalDensity = metrics.density
+                    val margin = (logicalDensity * 4).toInt()
+
+                    progressDone.setWidthForProgress(goal, progressTotal.measuredWidth - margin)
+                }
+            })
 
             if (goal.date != null) {
                 date.text = goal.date.format(fragment.context!!)
