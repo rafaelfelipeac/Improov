@@ -150,13 +150,12 @@
             <ImageView
                     android:id="@+id/goal_progress_total"
                     android:layout_width="0dp"
-                    android:layout_height="14dp"
+                    android:layout_height="16dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/rounded_white"
                     card_view:layout_constraintBottom_toBottomOf="parent"
                     card_view:layout_constraintEnd_toEndOf="parent"
-                    card_view:layout_constraintHorizontal_bias="0.0"
                     card_view:layout_constraintStart_toStartOf="parent"
                     card_view:layout_constraintTop_toBottomOf="@+id/goal_title"
                     card_view:layout_constraintVertical_bias="0.75" />
@@ -165,10 +164,11 @@
                     android:id="@+id/goal_progress_done"
                     android:layout_width="0dp"
                     android:layout_height="12dp"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
                     android:background="@drawable/rounded_primary"
                     card_view:layout_constraintBottom_toBottomOf="@+id/goal_progress_total"
-                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintEnd_toEndOf="@+id/goal_progress_total"
                     card_view:layout_constraintHorizontal_bias="0.0"
                     card_view:layout_constraintStart_toStartOf="@+id/goal_progress_total"
                     card_view:layout_constraintTop_toTopOf="@+id/goal_progress_total" />
