@@ -160,31 +160,35 @@ class GoalFormFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_save -> {
-                if (verifyIfFieldsAreEmpty()) {
-                    showSnackBarLong(getString(R.string.goal_form_some_empty_value))
-                } else if (getGoalTypeSelected() == GoalType.GOAL_NONE) {
-                    showSnackBarLong(getString(R.string.goal_form_empty_type_goal))
-                } else if (!validateDivideAndConquerValues()) {
-                    showSnackBarLong(getString(R.string.goal_form_gold_silver_bronze_order))
-                } else if (verifyIfCounterValuesAreEmpty()) {
-                    showSnackBarLong(getString(R.string.goal_form_empty_counter))
-                } else {
-                    val goalToSave = updateOrCreateGoal()
+                when {
+                    checkIfAnyFieldsAreEmpty() -> { }
+                    getGoalTypeSelected() == GoalType.GOAL_NONE -> {
+                        showSnackBarLong(getString(R.string.goal_form_empty_type_goal))
 
-                    goalFormViewModel.saveGoal(goalToSave)
+                        hideSoftKeyboard()
+                        goal_form_type_title.isFocusableInTouchMode = true
+                        goal_form_type_title.requestFocus()
+                    }
+                    !validateDivideAndConquerValues() -> {
+                        showSnackBarLong(getString(R.string.goal_form_gold_silver_bronze_order))
 
-                    verifyFistTimeSaving()
+                        goal_form_bronze_value.requestFocus()
+                    }
+                    else -> {
+                        val goalToSave = updateOrCreateGoal()
 
-                    return true
+                        goalFormViewModel.saveGoal(goalToSave)
+
+                        verifyFistTimeSaving()
+
+                        return true
+                    }
                 }
             }
         }
 
         return false
     }
-
-    private fun verifyIfCounterValuesAreEmpty() =
-        getGoalTypeSelected() == GoalType.GOAL_COUNTER && (goal_form_goal_counter_inc_value.isEmpty() || goal_form_goal_counter_dec_value.isEmpty())
 
     private fun setSwitchImproov() {
         goal_form_switch_divide_and_conquer.setOnCheckedChangeListener { _, isChecked ->
@@ -253,33 +257,6 @@ class GoalFormFragment : BaseFragment() {
             goal_form_divide_and_conquer.invisible()
             goal_form_single.visible()
         }
-    }
-
-    private fun validateDivideAndConquerValues(): Boolean {
-        return try {
-            val gold = goal_form_gold_value.toFloat()
-            val silver = goal_form_silver_value.toFloat()
-            val bronze = goal_form_bronze_value.toFloat()
-
-            ((gold > silver) && (silver > bronze))
-        } catch (e: Exception) {
-            if (goal_form_single_value.isNotEmpty())
-                return true
-            false
-        }
-    }
-
-    private fun verifyIfFieldsAreEmpty(): Boolean {
-        val nameEmpty = goal_form_goal_name.isEmpty()
-        val singleEmpty = goal_form_single_value.isEmpty()
-        val divideAndConquerEmpty =
-            goal_form_bronze_value.isEmpty() ||
-                    goal_form_silver_value.isEmpty() ||
-                    goal_form_gold_value.isEmpty()
-
-        if ((singleEmpty && divideAndConquerEmpty) || nameEmpty)
-            return true
-        return false
     }
 
     private fun updateOrCreateGoal(): Goal {
@@ -405,5 +382,127 @@ class GoalFormFragment : BaseFragment() {
         })
 
         dialog.show(fragmentManager!!, "")
+    }
+
+    private fun checkIfAnyFieldsAreEmpty(): Boolean {
+        when {
+            checkIfTitleIsEmpty() -> {
+                showSnackBarLong(getString(R.string.goal_form_title_empty))
+
+                goal_form_goal_name.requestFocus()
+
+                return true
+            }
+            checkIfSingleValueIsEmpty() -> {
+                showSnackBarLong(getString(R.string.goal_form_single_value_empty))
+
+                goal_form_single_value.requestFocus()
+
+                return true
+            }
+            checkIfBronzeValueIsEmpty() -> {
+                showSnackBarLong(getString(R.string.goal_form_bronze_value_empty))
+
+                goal_form_bronze_value.requestFocus()
+
+                return true
+            }
+            checkIfSilverValueIsEmpty() -> {
+                showSnackBarLong(getString(R.string.goal_form_silver_value_empty))
+
+                goal_form_silver_value.requestFocus()
+
+                return true
+            }
+            checkIfGoldValueIsEmpty() -> {
+                showSnackBarLong(getString(R.string.goal_form_gold_value_empty))
+
+                goal_form_gold_value.requestFocus()
+
+                return true
+            }
+            checkIfDecrementValueIsEmpty() -> {
+                showSnackBarLong(getString(R.string.goal_form_decrement_value_empty))
+
+                goal_form_goal_counter_dec_value.requestFocus()
+
+                return true
+            }
+            checkIfIncrementValueIsEmpty() -> {
+                showSnackBarLong(getString(R.string.goal_form_increment_value_empty))
+
+                goal_form_goal_counter_inc_value.requestFocus()
+
+                return true
+            }
+        }
+
+        return false
+    }
+
+    private fun checkIfTitleIsEmpty(): Boolean {
+        return goal_form_goal_name.isEmpty()
+    }
+
+    private fun checkIfSingleValueIsEmpty(): Boolean {
+        if (!goal.divideAndConquer) {
+            return goal_form_single_value.isEmpty()
+        }
+
+        return false
+    }
+
+    private fun checkIfBronzeValueIsEmpty(): Boolean {
+        if (goal.divideAndConquer) {
+            return goal_form_bronze_value.isEmpty()
+        }
+
+        return false
+    }
+
+    private fun checkIfSilverValueIsEmpty(): Boolean {
+        if (goal.divideAndConquer) {
+            return goal_form_silver_value.isEmpty()
+        }
+
+        return false
+    }
+
+    private fun checkIfGoldValueIsEmpty(): Boolean {
+        if (goal.divideAndConquer) {
+            return goal_form_gold_value.isEmpty()
+        }
+
+        return false
+    }
+
+    private fun checkIfDecrementValueIsEmpty(): Boolean {
+        if (goal.type == GoalType.GOAL_COUNTER || getGoalTypeSelected() == GoalType.GOAL_COUNTER ) {
+            return goal_form_goal_counter_dec_value.isEmpty()
+        }
+
+        return false
+    }
+
+    private fun checkIfIncrementValueIsEmpty(): Boolean {
+        if (goal.type == GoalType.GOAL_COUNTER || getGoalTypeSelected() == GoalType.GOAL_COUNTER) {
+            return goal_form_goal_counter_inc_value.isEmpty()
+        }
+
+        return false
+    }
+
+    private fun validateDivideAndConquerValues(): Boolean {
+        return try {
+            val gold = goal_form_gold_value.toFloat()
+            val silver = goal_form_silver_value.toFloat()
+            val bronze = goal_form_bronze_value.toFloat()
+
+            ((gold > silver) && (silver > bronze))
+        } catch (e: Exception) {
+            if (goal_form_single_value.isNotEmpty())
+                return true
+            false
+        }
     }
 }
