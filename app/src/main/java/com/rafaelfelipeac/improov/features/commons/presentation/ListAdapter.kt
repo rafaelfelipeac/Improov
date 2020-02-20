@@ -156,6 +156,7 @@ class ListAdapter(val fragment: BaseFragment) :
                     val margin = (logicalDensity * 4).toInt()
 
                     progressDone.setWidthForProgress(goal, progressTotal.measuredWidth - margin)
+                    progressDone.visible()
                 }
             })
 
