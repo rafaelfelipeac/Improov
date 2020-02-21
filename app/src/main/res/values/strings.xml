@@ -47,12 +47,8 @@
     <!-- GoalForm -->
     <string name="goal_form_title">New Goal</string>
     <string name="goal_form_title_empty">Title cannot be empty.</string>
-    <string name="goal_form_single_value_empty">Single value cannot be empty.</string>
-    <string name="goal_form_bronze_value_empty">Bronze value cannot be empty.</string>
-    <string name="goal_form_silver_value_empty">Silver value cannot be empty.</string>
-    <string name="goal_form_gold_value_empty">Gold value cannot be empty.</string>
-    <string name="goal_form_decrement_value_empty">Decrement value cannot be empty.</string>
-    <string name="goal_form_increment_value_empty">Increment cannot be empty.</string>
+    <string name="goal_form_single_value_empty">This value cannot be empty.</string>
+    <string name="goal_form_single_value_zero">This value must be greater than 0.</string>
     <string name="goal_form_empty_type_goal">Choose the type of goal.</string>
     <string name="goal_form_gold_silver_bronze_order">Bronze, Silver and Gold values must be in ascending order.</string>
     <string name="goal_form_goal_name_hint">Title</string>

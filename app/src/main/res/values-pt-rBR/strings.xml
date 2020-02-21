@@ -47,12 +47,8 @@
     <!-- GoalForm -->
     <string name="goal_form_title">Novo objetivo</string>
     <string name="goal_form_title_empty">O título não pode ser vazio.</string>
-    <string name="goal_form_single_value_empty">O valor não pode ser vazio.</string>
-    <string name="goal_form_bronze_value_empty">O valor bronze não pode ser vazio.</string>
-    <string name="goal_form_silver_value_empty">O valor prata não pode ser vazio.</string>
-    <string name="goal_form_gold_value_empty">O valor ouro não pode ser vazio.</string>
-    <string name="goal_form_decrement_value_empty">O valor para decrementar não pode ser vazio.</string>
-    <string name="goal_form_increment_value_empty">O valor para incrementar não pode ser vazio.</string>
+    <string name="goal_form_single_value_empty">Esse valor não pode ser vazio.</string>
+    <string name="goal_form_single_value_zero">Esse valor precisa ser maior que 0.</string>
     <string name="goal_form_empty_type_goal">Escolha o tipo do objetivo.</string>
     <string name="goal_form_gold_silver_bronze_order">Os valores de Bronze, Prata e Ouro precisam estar em ordem crescente.</string>
     <string name="goal_form_goal_name_hint">Título</string>

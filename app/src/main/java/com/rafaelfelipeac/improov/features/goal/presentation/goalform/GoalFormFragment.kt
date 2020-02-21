@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.*
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
@@ -161,7 +162,7 @@ class GoalFormFragment : BaseFragment() {
         when (item.itemId) {
             R.id.menu_save -> {
                 when {
-                    checkIfAnyFieldsAreEmpty() -> { }
+                    checkIfAnyFieldsAreEmptyOrZero() -> { }
                     getGoalTypeSelected() == GoalType.GOAL_NONE -> {
                         showSnackBarLong(getString(R.string.goal_form_empty_type_goal))
 
@@ -384,112 +385,61 @@ class GoalFormFragment : BaseFragment() {
         dialog.show(fragmentManager!!, "")
     }
 
-    private fun checkIfAnyFieldsAreEmpty(): Boolean {
-        when {
-            checkIfTitleIsEmpty() -> {
-                showSnackBarLong(getString(R.string.goal_form_title_empty))
-
-                goal_form_goal_name.requestFocus()
-
-                return true
+    private fun checkIfAnyFieldsAreEmptyOrZero(): Boolean {
+        return when {
+            checkIfFieldIsEmptyOrZero(goal_form_goal_name) -> {
+                fieldIsEmptyOrZero(goal_form_goal_name)
+                true
             }
-            checkIfSingleValueIsEmpty() -> {
+            checkIfFieldIsEmptyOrZero(goal_form_single_value) && !goal.divideAndConquer -> {
+                fieldIsEmptyOrZero(goal_form_single_value)
+                true
+            }
+            checkIfFieldIsEmptyOrZero(goal_form_bronze_value) && goal.divideAndConquer -> {
+                fieldIsEmptyOrZero(goal_form_bronze_value)
+                true
+            }
+            checkIfFieldIsEmptyOrZero(goal_form_silver_value) && goal.divideAndConquer -> {
+                fieldIsEmptyOrZero(goal_form_silver_value)
+                true
+            }
+            checkIfFieldIsEmptyOrZero(goal_form_gold_value) && goal.divideAndConquer -> {
+                fieldIsEmptyOrZero(goal_form_gold_value)
+                true
+            }
+            checkIfFieldIsEmptyOrZero(goal_form_goal_counter_dec_value) &&
+                    (goal.type == GoalType.GOAL_COUNTER ||
+                            getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
+                fieldIsEmptyOrZero(goal_form_goal_counter_dec_value)
+                true
+            }
+            checkIfFieldIsEmptyOrZero(goal_form_goal_counter_inc_value) &&
+                    (goal.type == GoalType.GOAL_COUNTER ||
+                            getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
+                fieldIsEmptyOrZero(goal_form_goal_counter_inc_value)
+                true
+            }
+            else -> false
+        }
+    }
+
+    private fun checkIfFieldIsEmptyOrZero(textInputEditText: TextInputEditText): Boolean {
+        return textInputEditText.isEmpty() || textInputEditText.text.toString() == "0"
+    }
+
+    private fun fieldIsEmptyOrZero(textInputEditText: TextInputEditText) {
+        when {
+            textInputEditText.isEmpty() -> {
                 showSnackBarLong(getString(R.string.goal_form_single_value_empty))
 
-                goal_form_single_value.requestFocus()
-
-                return true
+                textInputEditText.requestFocus()
             }
-            checkIfBronzeValueIsEmpty() -> {
-                showSnackBarLong(getString(R.string.goal_form_bronze_value_empty))
+            textInputEditText.text.toString() == "0" -> {
+                showSnackBarLong(getString(R.string.goal_form_single_value_zero))
 
-                goal_form_bronze_value.requestFocus()
-
-                return true
-            }
-            checkIfSilverValueIsEmpty() -> {
-                showSnackBarLong(getString(R.string.goal_form_silver_value_empty))
-
-                goal_form_silver_value.requestFocus()
-
-                return true
-            }
-            checkIfGoldValueIsEmpty() -> {
-                showSnackBarLong(getString(R.string.goal_form_gold_value_empty))
-
-                goal_form_gold_value.requestFocus()
-
-                return true
-            }
-            checkIfDecrementValueIsEmpty() -> {
-                showSnackBarLong(getString(R.string.goal_form_decrement_value_empty))
-
-                goal_form_goal_counter_dec_value.requestFocus()
-
-                return true
-            }
-            checkIfIncrementValueIsEmpty() -> {
-                showSnackBarLong(getString(R.string.goal_form_increment_value_empty))
-
-                goal_form_goal_counter_inc_value.requestFocus()
-
-                return true
+                textInputEditText.requestFocus()
             }
         }
-
-        return false
-    }
-
-    private fun checkIfTitleIsEmpty(): Boolean {
-        return goal_form_goal_name.isEmpty()
-    }
-
-    private fun checkIfSingleValueIsEmpty(): Boolean {
-        if (!goal.divideAndConquer) {
-            return goal_form_single_value.isEmpty()
-        }
-
-        return false
-    }
-
-    private fun checkIfBronzeValueIsEmpty(): Boolean {
-        if (goal.divideAndConquer) {
-            return goal_form_bronze_value.isEmpty()
-        }
-
-        return false
-    }
-
-    private fun checkIfSilverValueIsEmpty(): Boolean {
-        if (goal.divideAndConquer) {
-            return goal_form_silver_value.isEmpty()
-        }
-
-        return false
-    }
-
-    private fun checkIfGoldValueIsEmpty(): Boolean {
-        if (goal.divideAndConquer) {
-            return goal_form_gold_value.isEmpty()
-        }
-
-        return false
-    }
-
-    private fun checkIfDecrementValueIsEmpty(): Boolean {
-        if (goal.type == GoalType.GOAL_COUNTER || getGoalTypeSelected() == GoalType.GOAL_COUNTER ) {
-            return goal_form_goal_counter_dec_value.isEmpty()
-        }
-
-        return false
-    }
-
-    private fun checkIfIncrementValueIsEmpty(): Boolean {
-        if (goal.type == GoalType.GOAL_COUNTER || getGoalTypeSelected() == GoalType.GOAL_COUNTER) {
-            return goal_form_goal_counter_inc_value.isEmpty()
-        }
-
-        return false
     }
 
     private fun validateDivideAndConquerValues(): Boolean {
