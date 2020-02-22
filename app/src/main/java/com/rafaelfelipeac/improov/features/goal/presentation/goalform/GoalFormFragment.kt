@@ -387,58 +387,39 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfAnyFieldsAreEmptyOrZero(): Boolean {
         return when {
-            checkIfFieldIsEmptyOrZero(goal_form_goal_name) -> {
-                fieldIsEmptyOrZero(goal_form_goal_name)
+            goal_form_goal_name.checkIfFieldIsEmptyOrZero() -> {
+                goal_form_goal_name.fieldIsEmptyOrZero(this)
                 true
             }
-            checkIfFieldIsEmptyOrZero(goal_form_single_value) && !goal.divideAndConquer -> {
-                fieldIsEmptyOrZero(goal_form_single_value)
+            goal_form_single_value.checkIfFieldIsEmptyOrZero() && !goal.divideAndConquer -> {
+                goal_form_single_value.fieldIsEmptyOrZero(this)
                 true
             }
-            checkIfFieldIsEmptyOrZero(goal_form_bronze_value) && goal.divideAndConquer -> {
-                fieldIsEmptyOrZero(goal_form_bronze_value)
+            goal_form_bronze_value.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
+                goal_form_bronze_value.fieldIsEmptyOrZero(this)
                 true
             }
-            checkIfFieldIsEmptyOrZero(goal_form_silver_value) && goal.divideAndConquer -> {
-                fieldIsEmptyOrZero(goal_form_silver_value)
+            goal_form_silver_value.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
+                goal_form_silver_value.fieldIsEmptyOrZero(this)
                 true
             }
-            checkIfFieldIsEmptyOrZero(goal_form_gold_value) && goal.divideAndConquer -> {
-                fieldIsEmptyOrZero(goal_form_gold_value)
+            goal_form_gold_value.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
+                goal_form_gold_value.fieldIsEmptyOrZero(this)
                 true
             }
-            checkIfFieldIsEmptyOrZero(goal_form_goal_counter_dec_value) &&
+            goal_form_goal_counter_dec_value.checkIfFieldIsEmptyOrZero() &&
                     (goal.type == GoalType.GOAL_COUNTER ||
                             getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
-                fieldIsEmptyOrZero(goal_form_goal_counter_dec_value)
+                goal_form_goal_counter_dec_value.fieldIsEmptyOrZero(this)
                 true
             }
-            checkIfFieldIsEmptyOrZero(goal_form_goal_counter_inc_value) &&
+            goal_form_goal_counter_inc_value.checkIfFieldIsEmptyOrZero() &&
                     (goal.type == GoalType.GOAL_COUNTER ||
                             getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
-                fieldIsEmptyOrZero(goal_form_goal_counter_inc_value)
+                goal_form_goal_counter_inc_value.fieldIsEmptyOrZero(this)
                 true
             }
             else -> false
-        }
-    }
-
-    private fun checkIfFieldIsEmptyOrZero(textInputEditText: TextInputEditText): Boolean {
-        return textInputEditText.isEmpty() || textInputEditText.text.toString() == "0"
-    }
-
-    private fun fieldIsEmptyOrZero(textInputEditText: TextInputEditText) {
-        when {
-            textInputEditText.isEmpty() -> {
-                showSnackBarLong(getString(R.string.goal_form_single_value_empty))
-
-                textInputEditText.requestFocus()
-            }
-            textInputEditText.text.toString() == "0" -> {
-                showSnackBarLong(getString(R.string.goal_form_single_value_zero))
-
-                textInputEditText.requestFocus()
-            }
         }
     }
 
