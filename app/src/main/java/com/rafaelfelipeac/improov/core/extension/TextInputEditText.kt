@@ -6,6 +6,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 
+const val INPUT_TYPE_DECIMAL = 8194
+
 fun TextInputEditText.toFloat(): Float {
     return text.toString().toFloat()
 }
@@ -37,24 +39,42 @@ fun TextInputEditText.showOrHidePassword() {
 }
 
 fun TextInputEditText.checkIfFieldIsEmptyOrZero(): Boolean {
-    return isEmpty() || text.toString() == "0" || text.toString() == " "
+    return when {
+        isEmpty() -> true
+        text.toString()[0] == '0' && inputType == INPUT_TYPE_DECIMAL -> {
+            return text.toString().toDouble() <= 0
+        }
+        text.toString()[0] == ' ' -> {
+            setText(text.toString().replaceFirst(" ", ""))
+
+            return checkIfFieldIsEmptyOrZero()
+        }
+        else -> false
+    }
 }
 
 fun TextInputEditText.fieldIsEmptyOrZero(fragment: BaseFragment, showSnackbar: Boolean = true) {
     when {
-        isEmpty() -> {
+        isEmpty() || text.toString() == "" -> {
             if (showSnackbar) {
                 fragment.showSnackBarLong(fragment.getString(R.string.goal_form_single_value_empty))
             }
 
             requestFocus()
         }
-        text.toString() == "0" || text.toString() == " "-> {
+        text.toString()[0] == '0' -> {
             if (showSnackbar) {
                 fragment.showSnackBarLong(fragment.getString(R.string.goal_form_single_value_zero))
             }
 
             requestFocus()
+        }
+        else -> {
+            if (text.toString()[0] == ' ') {
+                setText(text.toString().replaceFirst(" ", ""))
+
+                fieldIsEmptyOrZero(fragment, showSnackbar)
+            }
         }
     }
 }
