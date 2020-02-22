@@ -1,12 +1,11 @@
 package com.rafaelfelipeac.improov.core.extension
 
+import android.text.InputType
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-
-const val INPUT_TYPE_DECIMAL = 8194
 
 fun TextInputEditText.toFloat(): Float {
     return text.toString().toFloat()
@@ -41,7 +40,8 @@ fun TextInputEditText.showOrHidePassword() {
 fun TextInputEditText.checkIfFieldIsEmptyOrZero(): Boolean {
     return when {
         isEmpty() -> true
-        text.toString()[0] == '0' && inputType == INPUT_TYPE_DECIMAL -> {
+        text.toString()[0] == '0' &&
+                inputType == (InputType.TYPE_NUMBER_FLAG_DECIMAL + InputType.TYPE_CLASS_NUMBER) -> {
             return text.toString().toDouble() <= 0
         }
         text.toString()[0] == ' ' -> {
