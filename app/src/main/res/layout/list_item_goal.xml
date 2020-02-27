@@ -162,11 +162,10 @@
 
             <ImageView
                     android:id="@+id/goal_progress_done"
-                    android:layout_width="1dp"
+                    android:layout_width="0dp"
                     android:layout_height="12dp"
                     android:layout_marginStart="2dp"
                     android:layout_marginEnd="2dp"
-                    android:visibility="invisible"
                     android:background="@drawable/rounded_primary"
                     card_view:layout_constraintBottom_toBottomOf="@+id/goal_progress_total"
                     card_view:layout_constraintEnd_toEndOf="@+id/goal_progress_total"

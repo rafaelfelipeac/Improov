@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -146,9 +146,11 @@ class ListAdapter(val fragment: BaseFragment) :
                 )
             }
 
-            progressTotal.viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    progressTotal.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            progressTotal.viewTreeObserver.addOnPreDrawListener(object :
+                ViewTreeObserver.OnPreDrawListener {
+
+                override fun onPreDraw(): Boolean {
+                    progressTotal.viewTreeObserver.removeOnPreDrawListener(this)
 
                     val metrics = DisplayMetrics()
                     fragment.activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
@@ -156,7 +158,8 @@ class ListAdapter(val fragment: BaseFragment) :
                     val margin = (logicalDensity * 4).toInt()
 
                     progressDone.setWidthForProgress(goal, progressTotal.measuredWidth - margin)
-                    progressDone.visible()
+
+                    return true
                 }
             })
 

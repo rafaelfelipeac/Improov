@@ -2,7 +2,6 @@ package com.rafaelfelipeac.improov.core.extension
 
 import android.content.Context
 import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.rafaelfelipeac.improov.features.commons.Goal
 import kotlin.math.ceil
@@ -24,8 +23,6 @@ fun ImageView.setWidthForProgress(goal: Goal, width: Int) {
         ceil((goal.value * widthUnit)).toInt()
     }
 
-    val lp = layoutParams as ConstraintLayout.LayoutParams
-
     if (px == 0) { // if px was 0, the width will be equivalent a match_constraint
         px = 1
     }
@@ -33,6 +30,7 @@ fun ImageView.setWidthForProgress(goal: Goal, width: Int) {
         px = width
     }
 
-    lp.width = px
-    layoutParams = lp
+    val params = layoutParams
+    params.width = px
+    layoutParams = params
 }
