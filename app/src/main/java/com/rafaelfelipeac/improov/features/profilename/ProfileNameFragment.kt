@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.isEmpty
+import com.rafaelfelipeac.improov.core.extension.checkIfFieldIsEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.fieldIsEmptyOrZero
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
@@ -31,10 +32,13 @@ class ProfileNameFragment : BaseFragment() {
         profile_edit_name.setText(preferences.name)
 
         profile_edit_save_button.setOnClickListener {
-            if (verifyElements()) {
-                hideSoftKeyboard()
-                preferences.name = profile_edit_name.text.toString()
-                navController.navigateUp()
+            when {
+                verifyElements() -> { }
+                else -> {
+                    hideSoftKeyboard()
+                    preferences.name = profile_edit_name.text.toString()
+                    navController.navigateUp()
+                }
             }
         }
     }
@@ -50,14 +54,15 @@ class ProfileNameFragment : BaseFragment() {
     }
 
     private fun verifyElements(): Boolean {
-        when {
-            profile_edit_name.isEmpty() -> {
-                setErrorMessage(getString(R.string.profile_name_empty_fields))
-                return false
-            }
-        }
+        return when {
+            profile_edit_name.checkIfFieldIsEmptyOrZero() -> {
+                profile_edit_name.fieldIsEmptyOrZero(this, false)
 
-        return true
+                setErrorMessage(getString(R.string.profile_name_empty_fields))
+                true
+            }
+            else -> false
+        }
     }
 
     private fun observeViewModel() { }
