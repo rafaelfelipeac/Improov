@@ -15,10 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.getPercentage
-import com.rafaelfelipeac.improov.core.extension.invisible
-import com.rafaelfelipeac.improov.core.extension.isToday
-import com.rafaelfelipeac.improov.core.extension.visible
+import com.rafaelfelipeac.improov.core.extension.*
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.commons.Goal
 import com.rafaelfelipeac.improov.features.commons.GoalHabit
@@ -263,6 +260,8 @@ class ListFragment : BaseFragment() {
 //        items.add(newPosition, targetGoal)
 
         function(oldPosition, newPosition)
+
+        vibrate()
     }
 
     fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalHabit>) {
