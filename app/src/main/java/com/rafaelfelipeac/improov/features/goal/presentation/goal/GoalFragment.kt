@@ -586,6 +586,8 @@ class GoalFragment : BaseFragment() {
         items.add(newPosition, targetItem)
 
         function(oldPosition, newPosition)
+
+        vibrate()
     }
 
     fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: MutableList<Item>) {
