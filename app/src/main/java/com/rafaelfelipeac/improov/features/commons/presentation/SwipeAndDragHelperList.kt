@@ -40,14 +40,19 @@ class SwipeAndDragHelperList(private val contract: ActionCompletionContract) : I
 
         val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.normal_view)
 
-        getDefaultUIUtil()
-            .onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive)
+        if (foregroundView != null) {
+            getDefaultUIUtil()
+                .onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive)
+        }
     }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+        val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.normal_view)
 
-        getDefaultUIUtil()
-            .clearView(viewHolder.itemView.findViewById<ConstraintLayout>(R.id.normal_view))
+        if (foregroundView != null) {
+            getDefaultUIUtil()
+                .clearView(foregroundView)
+        }
     }
 
     override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,

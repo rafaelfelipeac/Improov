@@ -27,7 +27,7 @@ class ListAdapter(val fragment: BaseFragment) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     ActionCompletionContract {
 
-    private lateinit var list: List<GoalHabit>
+    private lateinit var list: MutableList<GoalHabit>
 
     var clickListener: (goalHabit: GoalHabit) -> Unit = { }
 
@@ -84,7 +84,7 @@ class ListAdapter(val fragment: BaseFragment) :
     override fun getItemCount() = list.size
 
     fun setItems(list: List<GoalHabit>) {
-        this.list = list
+        this.list = list.toMutableList()
         notifyDataSetChanged()
     }
 

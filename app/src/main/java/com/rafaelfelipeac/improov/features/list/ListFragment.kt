@@ -236,7 +236,7 @@ class ListFragment : BaseFragment() {
         bottomSheetHabitDone.hide()
     }
 
-    fun onViewMoved(oldPosition: Int, newPosition: Int, items: List<GoalHabit>,
+    fun onViewMoved(oldPosition: Int, newPosition: Int, items: MutableList<GoalHabit>,
                     function: (oldPosition: Int, newPosition: Int) -> Unit) {
         val target = items[oldPosition]
         val other = items[newPosition]
@@ -256,8 +256,8 @@ class ListFragment : BaseFragment() {
             is Habit -> listViewModel.saveHabit(other)
         }
 
-//        items.removeAt(oldPosition)
-//        items.add(newPosition, targetGoal)
+        items.removeAt(oldPosition)
+        items.add(newPosition, target)
 
         function(oldPosition, newPosition)
 

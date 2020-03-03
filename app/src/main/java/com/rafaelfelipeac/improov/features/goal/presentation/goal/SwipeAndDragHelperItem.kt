@@ -69,7 +69,6 @@ class SwipeAndDragHelperItem(private val contract: ActionCompletionContract) : I
 
         val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.item_normal_view)
 
-
         if (foregroundView != null) {
             getDefaultUIUtil()
                 .onDraw(c, recyclerView, foregroundView, dX, 0f, actionState, isCurrentlyActive)
