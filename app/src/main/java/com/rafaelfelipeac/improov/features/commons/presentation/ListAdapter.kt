@@ -27,7 +27,7 @@ class ListAdapter(val fragment: BaseFragment) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     ActionCompletionContract {
 
-    private lateinit var list: List<GoalHabit>
+    private lateinit var list: MutableList<GoalHabit>
 
     var clickListener: (goalHabit: GoalHabit) -> Unit = { }
 
@@ -84,7 +84,7 @@ class ListAdapter(val fragment: BaseFragment) :
     override fun getItemCount() = list.size
 
     fun setItems(list: List<GoalHabit>) {
-        this.list = list
+        this.list = list.toMutableList()
         notifyDataSetChanged()
     }
 
@@ -260,9 +260,9 @@ class ListAdapter(val fragment: BaseFragment) :
         }
     }
 
-    override fun onViewMoved(oldPosition: Int, newPosition: Int) {
+    override fun onViewMoved(fromPosition: Int, toPosition: Int) {
         when (fragment) {
-            is ListFragment -> fragment.onViewMoved(oldPosition, newPosition, list, ::notifyItemMoved)
+            is ListFragment -> fragment.onViewMoved(fromPosition, toPosition, list, ::notifyItemMoved)
         }
     }
 
