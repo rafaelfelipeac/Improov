@@ -260,9 +260,9 @@ class ListAdapter(val fragment: BaseFragment) :
         }
     }
 
-    override fun onViewMoved(oldPosition: Int, newPosition: Int) {
+    override fun onViewMoved(fromPosition: Int, toPosition: Int) {
         when (fragment) {
-            is ListFragment -> fragment.onViewMoved(oldPosition, newPosition, list, ::notifyItemMoved)
+            is ListFragment -> fragment.onViewMoved(fromPosition, toPosition, list, ::notifyItemMoved)
         }
     }
 

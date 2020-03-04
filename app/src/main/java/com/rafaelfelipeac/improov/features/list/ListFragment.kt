@@ -236,13 +236,13 @@ class ListFragment : BaseFragment() {
         bottomSheetHabitDone.hide()
     }
 
-    fun onViewMoved(oldPosition: Int, newPosition: Int, items: MutableList<GoalHabit>,
-                    function: (oldPosition: Int, newPosition: Int) -> Unit) {
-        val target = items[oldPosition]
-        val other = items[newPosition]
+    fun onViewMoved(fromPosition: Int, toPosition: Int, items: MutableList<GoalHabit>,
+                    function: (fromPosition: Int, toPosition: Int) -> Unit) {
+        val target = items[fromPosition]
+        val other = items[toPosition]
 
-        target.order = newPosition
-        other.order = oldPosition
+        target.order = toPosition
+        other.order = fromPosition
 
         isFromDragAndDrop = true
 
@@ -256,10 +256,10 @@ class ListFragment : BaseFragment() {
             is Habit -> listViewModel.saveHabit(other)
         }
 
-        items.removeAt(oldPosition)
-        items.add(newPosition, target)
+        items.removeAt(fromPosition)
+        items.add(toPosition, target)
 
-        function(oldPosition, newPosition)
+        function(fromPosition, toPosition)
 
         vibrate()
     }

@@ -43,8 +43,8 @@ class ItemsAdapter(private val fragment: GoalFragment) : BaseAdapter<Item>(),
         }
     }
 
-    override fun onViewMoved(oldPosition: Int, newPosition: Int) {
-        fragment.onViewMoved(oldPosition, newPosition, items, ::notifyItemMoved)
+    override fun onViewMoved(fromPosition: Int, toPosition: Int) {
+        fragment.onViewMoved(fromPosition, toPosition, items, ::notifyItemMoved)
     }
 
     override fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder) {
