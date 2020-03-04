@@ -15,10 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.getPercentage
-import com.rafaelfelipeac.improov.core.extension.invisible
-import com.rafaelfelipeac.improov.core.extension.isToday
-import com.rafaelfelipeac.improov.core.extension.visible
+import com.rafaelfelipeac.improov.core.extension.*
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.commons.Goal
 import com.rafaelfelipeac.improov.features.commons.GoalHabit
@@ -239,13 +236,13 @@ class ListFragment : BaseFragment() {
         bottomSheetHabitDone.hide()
     }
 
-    fun onViewMoved(oldPosition: Int, newPosition: Int, items: List<GoalHabit>,
-                    function: (oldPosition: Int, newPosition: Int) -> Unit) {
-        val target = items[oldPosition]
-        val other = items[newPosition]
+    fun onViewMoved(fromPosition: Int, toPosition: Int, items: MutableList<GoalHabit>,
+                    function: (fromPosition: Int, toPosition: Int) -> Unit) {
+        val target = items[fromPosition]
+        val other = items[toPosition]
 
-        target.order = newPosition
-        other.order = oldPosition
+        target.order = toPosition
+        other.order = fromPosition
 
         isFromDragAndDrop = true
 
@@ -259,10 +256,12 @@ class ListFragment : BaseFragment() {
             is Habit -> listViewModel.saveHabit(other)
         }
 
-//        items.removeAt(oldPosition)
-//        items.add(newPosition, targetGoal)
+        items.removeAt(fromPosition)
+        items.add(toPosition, target)
 
-        function(oldPosition, newPosition)
+        function(fromPosition, toPosition)
+
+        vibrate()
     }
 
     fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<GoalHabit>) {

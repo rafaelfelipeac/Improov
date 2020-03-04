@@ -567,25 +567,25 @@ class GoalFragment : BaseFragment() {
         image.disableIcon(iconDark, context!!)
     }
 
-    fun onViewMoved(
-        oldPosition: Int, newPosition: Int, items: MutableList<Item>,
-        function: (oldPosition: Int, newPosition: Int) -> Unit
-    ) {
-        val targetItem = items[oldPosition]
-        val otherItem = items[newPosition]
+    fun onViewMoved(fromPosition: Int, toPosition: Int, items: MutableList<Item>,
+                    function: (fromPosition: Int, toPosition: Int) -> Unit) {
+        val targetItem = items[fromPosition]
+        val otherItem = items[toPosition]
 
-        targetItem.order = newPosition
-        otherItem.order = oldPosition
+        targetItem.order = toPosition
+        otherItem.order = fromPosition
 
         isFromDragAndDrop = true
 
         goalViewModel.saveItem(targetItem)
         goalViewModel.saveItem(otherItem)
 
-        items.removeAt(oldPosition)
-        items.add(newPosition, targetItem)
+        items.removeAt(fromPosition)
+        items.add(toPosition, targetItem)
 
-        function(oldPosition, newPosition)
+        function(fromPosition, toPosition)
+
+        vibrate()
     }
 
     fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: MutableList<Item>) {
