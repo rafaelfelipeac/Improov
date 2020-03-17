@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.list.presentation
+package com.rafaelfelipeac.improov.core.extension
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

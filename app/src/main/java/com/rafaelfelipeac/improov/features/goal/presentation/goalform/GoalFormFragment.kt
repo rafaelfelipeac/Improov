@@ -7,16 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.*
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.commons.DialogOneButton
-import com.rafaelfelipeac.improov.features.commons.Goal
-import com.rafaelfelipeac.improov.features.commons.GoalType
-import com.rafaelfelipeac.improov.features.commons.Habit
-import com.rafaelfelipeac.improov.features.goal.Historic
-import com.rafaelfelipeac.improov.features.goal.Item
+import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
+import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.future.habit.Habit
+import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
+import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 import java.text.SimpleDateFormat
@@ -24,7 +23,8 @@ import java.util.*
 
 class GoalFormFragment : BaseFragment() {
 
-    private var goal: Goal = Goal()
+    private var goal: Goal =
+        Goal()
     private var goalId: Long? = null
     private var goals: List<Goal> = listOf()
     private var items: List<Item> = listOf()
@@ -139,13 +139,13 @@ class GoalFormFragment : BaseFragment() {
             this.habits = habits
         })
 
-        goalFormViewModel.getItems()?.observe(this, Observer { items ->
-            this.items = items
-        })
-
-        goalFormViewModel.getHistory()?.observe(this, Observer { history ->
-            this.history = history
-        })
+//        goalFormViewModel.getItems()?.observe(this, Observer { items ->
+//            this.items = items
+//        })
+//
+//        goalFormViewModel.getHistory()?.observe(this, Observer { history ->
+//            this.history = history
+//        })
 
         goalFormViewModel.goalIdInserted.observe(this, Observer {
             navController.navigateUp()

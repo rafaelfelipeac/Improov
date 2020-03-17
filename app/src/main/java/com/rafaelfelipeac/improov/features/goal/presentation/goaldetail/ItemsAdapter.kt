@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.goal.presentation.goal
+package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
 import android.annotation.SuppressLint
 import android.view.View
@@ -7,11 +7,11 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.features.goal.Item
+import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import com.rafaelfelipeac.improov.core.platform.base.BaseAdapter
 import com.rafaelfelipeac.improov.core.platform.ActionCompletionContract
 
-class ItemsAdapter(private val fragment: GoalFragment) : BaseAdapter<Item>(),
+class ItemsAdapter(private val detailFragment: GoalDetailFragment) : BaseAdapter<Item>(),
     ActionCompletionContract {
 
     var clickListener: (item: Item) -> Unit = { }
@@ -44,10 +44,10 @@ class ItemsAdapter(private val fragment: GoalFragment) : BaseAdapter<Item>(),
     }
 
     override fun onViewMoved(fromPosition: Int, toPosition: Int) {
-        fragment.onViewMoved(fromPosition, toPosition, items, ::notifyItemMoved)
+        detailFragment.onViewMoved(fromPosition, toPosition, items, ::notifyItemMoved)
     }
 
     override fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder) {
-        fragment.onViewSwiped(position, direction, holder, items)
+        detailFragment.onViewSwiped(position, direction, holder, items)
     }
 }

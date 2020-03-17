@@ -10,7 +10,6 @@ import javax.inject.Singleton
     ContextModule::class,
     PreferencesModule::class,
     ViewModelModule::class,
-    ProfileEditModule::class,
     GoalModule::class,
     ProfileModule::class,
     WelcomeModule::class,

@@ -1,22 +1,24 @@
-package com.rafaelfelipeac.improov.features.goal.data
+package com.rafaelfelipeac.improov.features.goal.data.dao
 
-import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
-import com.rafaelfelipeac.improov.features.goal.Historic
+import androidx.room.Query
+import com.rafaelfelipeac.improov.features.goal.data.model.HistoricDataModel
 
 @Dao
 interface HistoricDAO {
 
     @Query("SELECT * FROM historic")
-    fun getAll(): LiveData<List<Historic>>
+    fun getAll(): List<HistoricDataModel>
 
     @Query("SELECT * FROM historic WHERE historicId = :historicId")
-    fun get(historicId: Long): LiveData<Historic>
+    fun get(historicId: Long): HistoricDataModel
 
     @Insert(onConflict = REPLACE)
-    fun save(historic: Historic): Long
+    fun save(historicDataModel: HistoricDataModel): Long
 
     @Delete
-    fun delete(historic: Historic)
+    fun delete(historicDataModel: HistoricDataModel)
 }

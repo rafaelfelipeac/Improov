@@ -1,13 +1,13 @@
-package com.rafaelfelipeac.improov.features.goals.domain.usecase
+package com.rafaelfelipeac.improov.features.goal.domain.usecase
 
-import com.rafaelfelipeac.improov.features.goals.Goal
-import com.rafaelfelipeac.improov.features.goals.GoalRepository
+import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
 import javax.inject.Inject
 
 class SaveListUseCase @Inject constructor(
     private val goalRepository: GoalRepository
 ) {
-    suspend fun execute(): Long {
-        return goalRepository.save(Goal())
+    suspend fun execute(goal: Goal): Long {
+        return goalRepository.save(goal)
     }
 }

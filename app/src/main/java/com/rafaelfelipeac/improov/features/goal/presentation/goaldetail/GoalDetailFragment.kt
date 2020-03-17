@@ -17,15 +17,15 @@ import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.*
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.goal.Goal
-import com.rafaelfelipeac.improov.features.goal.GoalType
-import com.rafaelfelipeac.improov.features.goal.Historic
-import com.rafaelfelipeac.improov.features.goal.Item
+import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
+import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
+import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_goal.*
 import java.util.*
 
-class GoalFragment : BaseFragment() {
+class GoalDetailFragment : BaseFragment() {
 
     private var isFromDragAndDrop: Boolean = false
 
@@ -54,7 +54,7 @@ class GoalFragment : BaseFragment() {
 
     var item: Item? = null
 
-    private val goalViewModel by lazy { viewModelFactory.get<GoalViewModel>(this) }
+    private val goalViewModel by lazy { viewModelFactory.get<GoalDetailViewModel>(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,8 +65,8 @@ class GoalFragment : BaseFragment() {
 
         (activity as MainActivity).openToolbar()
 
-        goalId = arguments?.let { GoalFragmentArgs.fromBundle(it).goalId }
-        goalNew = arguments?.let { GoalFragmentArgs.fromBundle(it).goalNew }
+        goalId = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalId }
+        goalNew = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalNew }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -113,13 +113,14 @@ class GoalFragment : BaseFragment() {
             } else {
                 if (this.item == null) {
                     // new item
-                    val item = Item(
-                        goalId = goal?.goalId!!,
-                        name = bottomSheetItemName.text.toString(),
-                        done = false,
-                        order = items?.size!! + 1,
-                        createdDate = getCurrentTime()
-                    )
+                    val item =
+                        Item(
+                            goalId = goal?.goalId!!,
+                            name = bottomSheetItemName.text.toString(),
+                            done = false,
+                            order = items?.size!! + 1,
+                            createdDate = getCurrentTime()
+                        )
 
                     goalViewModel.saveItem(item)
                 } else {
@@ -224,7 +225,7 @@ class GoalFragment : BaseFragment() {
                 return true
             }
             R.id.menu_edit -> {
-                val action = GoalFragmentDirections.actionNavigationGoalToNavigationGoalForm()
+                val action = GoalDetailFragmentDirections.actionNavigationGoalToNavigationGoalForm()
                 action.goalId =  goal?.goalId!!
                 navController.navigate(action)
             }

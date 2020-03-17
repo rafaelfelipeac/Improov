@@ -1,11 +1,11 @@
-package com.rafaelfelipeac.improov.features.goal.presentation.goal
+package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
 import android.view.View
 import android.widget.TextView
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.convertDateToString
 import com.rafaelfelipeac.improov.core.extension.getValueWithSymbol
-import com.rafaelfelipeac.improov.features.goal.Historic
+import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.core.platform.base.BaseAdapter
 
 class HistoricAdapter : BaseAdapter<Historic>() {

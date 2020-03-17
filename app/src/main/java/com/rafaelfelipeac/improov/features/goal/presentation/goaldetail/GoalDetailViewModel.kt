@@ -2,17 +2,22 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
 import androidx.lifecycle.LiveData
 import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
-import com.rafaelfelipeac.improov.features.goal.Goal
-import com.rafaelfelipeac.improov.features.goal.GoalRepository
-import com.rafaelfelipeac.improov.features.goal.*
+import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
+import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
+import com.rafaelfelipeac.improov.features.goal.domain.model.Item
+import com.rafaelfelipeac.improov.features.goal.domain.repository.HistoricRepository
+import com.rafaelfelipeac.improov.features.goal.domain.repository.ItemRepository
+import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListViewModel
 import javax.inject.Inject
 
-class GoalViewModel @Inject constructor(
+class GoalDetailViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
     private val itemRepository: ItemRepository,
     private val historicRepository: HistoricRepository
-) : BaseViewModel() {
-
+) : BaseViewModel<GoalListViewModel.ViewState, GoalListViewModel.Action>(
+    GoalListViewModel.ViewState()
+) {
     private var goal: LiveData<Goal>? = null
     private var goals: LiveData<List<Goal>>? = null
     private var items: LiveData<List<Item>>? = null
@@ -20,8 +25,8 @@ class GoalViewModel @Inject constructor(
 
     init {
         //goals = goalRepository.getGoals()
-        items = itemRepository.getItems()
-        history = historicRepository.getHistory()
+//        items = itemRepository.getItems()
+//        history = historicRepository.getHistory()
     }
 
     fun init(goalId: Long) {
@@ -47,9 +52,9 @@ class GoalViewModel @Inject constructor(
     }
 
     fun saveHistoric(historic: Historic) {
-        historicRepository.save(historic)
-
-        history = historicRepository.getHistory()
+//        historicRepository.save(historic)
+//
+//        history = historicRepository.getHistory()
     }
 
     // Item
@@ -58,14 +63,18 @@ class GoalViewModel @Inject constructor(
     }
 
     fun saveItem(item: Item) {
-        itemRepository.save(item)
-
-        items = itemRepository.getItems()
+//        itemRepository.save(item)
+//
+//        items = itemRepository.getItems()
     }
 
     fun deleteItem(item: Item) {
-        itemRepository.delete(item)
+//        itemRepository.delete(item)
+//
+//        items = itemRepository.getItems()
+    }
 
-        items = itemRepository.getItems()
+    override fun onReduceState(viewAction: GoalListViewModel.Action): GoalListViewModel.ViewState {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

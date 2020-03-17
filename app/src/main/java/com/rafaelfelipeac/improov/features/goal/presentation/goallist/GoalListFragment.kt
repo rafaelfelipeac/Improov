@@ -2,7 +2,6 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goallist
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,17 +17,16 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.*
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.goal.Goal
-import com.rafaelfelipeac.improov.features.commons.GoalHabit
-import com.rafaelfelipeac.improov.features.goal.SwipeAndDragHelperList
+import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.goal.presentation.SwipeAndDragHelperList
 import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_list.*
 
-class GoalsFragment : BaseFragment() {
+class GoalListFragment : BaseFragment() {
 
     private var isFromDragAndDrop: Boolean = false
 
-    private lateinit var listAdapter: GoalsAdapter
+    private lateinit var listAdapter: GoalListAdapter
 
     private lateinit var bottomSheetGoalDone: BottomSheetDialog
     private lateinit var bottomSheetGoalDoneYes: Button
@@ -40,11 +38,11 @@ class GoalsFragment : BaseFragment() {
     private var bottomSheetTip: BottomSheetBehavior<*>? = null
     private var bottomSheetTipClose: ConstraintLayout? = null
 
-    var list: MutableList<GoalHabit>? = mutableListOf()
+    var list: MutableList<Goal>? = mutableListOf()
 
-    private val viewModel by lazy { viewModelFactory.get<GoalsViewModel>(this) }
+    private val viewModel by lazy { viewModelFactory.get<GoalListViewModel>(this) }
 
-    private val stateObserver = Observer<GoalsViewModel.ViewState> {
+    private val stateObserver = Observer<GoalListViewModel.ViewState> {
         listAdapter.setItems(it.goals)
 
         list_list.isVisible(it.listIsVisible)
@@ -66,7 +64,11 @@ class GoalsFragment : BaseFragment() {
         (activity as MainActivity).closeBottomSheetTips()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.list_title)
@@ -85,39 +87,25 @@ class GoalsFragment : BaseFragment() {
 //
 //            isFromDragAndDrop = false
 
-        listAdapter =
-            GoalsAdapter(
-                this
-            )
+        listAdapter = GoalListAdapter(this)
 
-        val swipeAndDragHelper =
-            SwipeAndDragHelperList(
-                listAdapter
-            )
+        val swipeAndDragHelper = SwipeAndDragHelperList(listAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
         touchHelper.attachToRecyclerView(list_list)
 
         listAdapter.touchHelper = touchHelper
-
         listAdapter.clickListener = {
-            Log.d("CORINTHIANS", "goalId = ${it.goalId}")
-
-            val action =
-                GoalsFragmentDirections.actionNavigationListToNavigationGoal(
-                    it.goalId
-                )
+            val action = GoalListFragmentDirections.actionNavigationListToNavigationGoal(it.goalId)
             navController.navigate(action)
         }
 
-
         list_list.apply {
             setHasFixedSize(true)
+
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = listAdapter
-
         }
-
 
         observe(viewModel.stateLiveData, stateObserver)
         viewModel.loadData()
@@ -125,7 +113,7 @@ class GoalsFragment : BaseFragment() {
         fab.setOnClickListener {
             (activity as MainActivity).closeBottomSheetTips()
 
-            navController.navigate(GoalsFragmentDirections.actionNavigationListToNavigationGoalForm())
+            navController.navigate(GoalListFragmentDirections.actionNavigationListToNavigationGoalForm())
         }
 
         setupBottomSheetGoalDone()
@@ -134,7 +122,8 @@ class GoalsFragment : BaseFragment() {
         if (preferences.fistTimeList) {
             preferences.fistTimeList = false
 
-            Handler().postDelayed({
+            Handler().postDelayed(
+                {
                     (activity as MainActivity).setupBottomSheetTipsThree()
                     setupBottomSheetTip()
                     (activity as MainActivity).openBottomSheetTips()
@@ -152,15 +141,6 @@ class GoalsFragment : BaseFragment() {
             (activity as MainActivity).closeBottomSheetTips()
         }
     }
-
-//    private fun verifyMidnight() {
-//        habits?.forEach {
-//            if (it.nextDate.isToday() && it.doneToday) {
-//                it.doneToday = false
-//                viewModel.saveHabit(it)
-//            }
-//        }
-//    }
 
     private fun setupBottomSheetGoalDone() {
         bottomSheetGoalDone = BottomSheetDialog(this.activity!!)
@@ -208,8 +188,10 @@ class GoalsFragment : BaseFragment() {
         bottomSheetHabitDone.hide()
     }
 
-    fun onViewMoved(fromPosition: Int, toPosition: Int, items: MutableList<Goal>,
-                    function: (fromPosition: Int, toPosition: Int) -> Unit) {
+    fun onViewMoved(
+        fromPosition: Int, toPosition: Int, items: MutableList<Goal>,
+        function: (fromPosition: Int, toPosition: Int) -> Unit
+    ) {
         val target = items[fromPosition]
         val other = items[toPosition]
 
@@ -226,7 +208,12 @@ class GoalsFragment : BaseFragment() {
         vibrate()
     }
 
-    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: List<Goal>) {
+    fun onViewSwiped(
+        position: Int,
+        direction: Int,
+        holder: RecyclerView.ViewHolder,
+        items: List<Goal>
+    ) {
         val goal = items[position]
 
         when (direction) {

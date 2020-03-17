@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.list.presentation
+package com.rafaelfelipeac.improov.core.extension
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

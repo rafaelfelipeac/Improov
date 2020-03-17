@@ -1,6 +1,6 @@
-package com.rafaelfelipeac.improov.features.goal.domain
+package com.rafaelfelipeac.improov.features.goal.domain.repository
 
-import com.rafaelfelipeac.improov.features.goal.Goal
+import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 
 interface GoalRepository {
 

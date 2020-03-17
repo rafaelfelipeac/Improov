@@ -13,10 +13,9 @@ import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.*
 import com.rafaelfelipeac.improov.core.platform.ActionCompletionContract
 import com.rafaelfelipeac.improov.core.platform.base.BaseAdapter
-import com.rafaelfelipeac.improov.features.commons.GoalHabit
-import com.rafaelfelipeac.improov.features.goal.Goal
+import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 
-class GoalsAdapter(private val fragment: GoalsFragment) : BaseAdapter<Goal>(), ActionCompletionContract {
+class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal>(), ActionCompletionContract {
 
     var clickListener: (goal: Goal) -> Unit = { }
 
@@ -109,9 +108,5 @@ class GoalsAdapter(private val fragment: GoalsFragment) : BaseAdapter<Goal>(), A
 
     override fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder) {
         fragment.onViewSwiped(position, direction, holder, items)
-    }
-
-    interface ListViewHolder {
-        fun bindViews(goalHabit: GoalHabit)
     }
 }

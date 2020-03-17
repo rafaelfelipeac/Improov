@@ -1,14 +1,11 @@
-package com.rafaelfelipeac.improov.features.goal.data.model
+package com.rafaelfelipeac.improov.features.goal.domain.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.util.*
 
-@Entity(tableName = "historic")
-data class Historic (
-    @PrimaryKey(autoGenerate = true)
+data class Historic(
     val historicId: Long = 0,
     val goalId: Long,
     val value: Float,
-    val date: Date?): Serializable
+    val date: Date?
+) : Serializable

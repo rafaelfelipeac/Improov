@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.core.di.modules
+package com.rafaelfelipeac.improov.future.habit
 
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.modules.viewModel.ViewModelKey

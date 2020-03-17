@@ -1,15 +1,12 @@
-package com.rafaelfelipeac.improov.features.goal.data.model
+package com.rafaelfelipeac.improov.features.goal.domain.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.rafaelfelipeac.improov.features.commons.GoalHabit
+import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import java.io.Serializable
 import java.util.*
 
-@Entity(tableName = "goal")
-data class Goal (
-    @PrimaryKey(autoGenerate = true)
+data class Goal(
     var goalId: Long = 0,
+    var name: String = "",
     var value: Float = 0F,
     var type: GoalType = GoalType.GOAL_NONE,
     var done: Boolean = false,
@@ -18,6 +15,8 @@ data class Goal (
     var bronzeValue: Float = 0F,
     var silverValue: Float = 0F,
     var goldValue: Float = 0F,
+    var order: Int = 0,
+    var archived: Boolean = false,
     var incrementValue: Float = 0F,
     var decrementValue: Float = 0F,
     var createdDate: Date? = null,
@@ -26,6 +25,4 @@ data class Goal (
     var undoneDate: Date? = null,
     var archiveDate: Date? = null,
     var date: Date? = null
-) : Serializable, GoalHabit()
-
-enum class GoalType { GOAL_LIST, GOAL_COUNTER, GOAL_FINAL, GOAL_NONE }
+) : Serializable

@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.goal.presentation.goal
+package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
 import android.graphics.Canvas
 import androidx.constraintlayout.widget.ConstraintLayout

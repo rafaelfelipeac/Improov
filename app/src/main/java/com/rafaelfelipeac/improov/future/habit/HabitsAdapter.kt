@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.habit
+package com.rafaelfelipeac.improov.future.habit
 
 //package com.rafaelfelipeac.improov.features.commons.presentation
 

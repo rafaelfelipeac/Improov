@@ -3,14 +3,15 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goalform
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
-import com.rafaelfelipeac.improov.features.commons.Goal
-import com.rafaelfelipeac.improov.features.commons.GoalRepository
-import com.rafaelfelipeac.improov.features.commons.Habit
-import com.rafaelfelipeac.improov.features.commons.HabitRepository
-import com.rafaelfelipeac.improov.features.goal.Historic
-import com.rafaelfelipeac.improov.features.goal.HistoricRepository
-import com.rafaelfelipeac.improov.features.goal.Item
-import com.rafaelfelipeac.improov.features.goal.ItemRepository
+import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
+import com.rafaelfelipeac.improov.future.habit.Habit
+import com.rafaelfelipeac.improov.future.habit.HabitRepository
+import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
+import com.rafaelfelipeac.improov.features.goal.domain.model.Item
+import com.rafaelfelipeac.improov.features.goal.domain.repository.HistoricRepository
+import com.rafaelfelipeac.improov.features.goal.domain.repository.ItemRepository
+import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListViewModel
 import javax.inject.Inject
 
 class GoalFormViewModel @Inject constructor(
@@ -18,19 +19,20 @@ class GoalFormViewModel @Inject constructor(
     private val itemRepository: ItemRepository,
     private val historicRepository: HistoricRepository,
     private val habitRepository: HabitRepository
-) : BaseViewModel() {
-
+) : BaseViewModel<GoalListViewModel.ViewState, GoalListViewModel.Action>(
+    GoalListViewModel.ViewState()
+) {
     private var goal: LiveData<Goal>? = null
 
-   // private var goals: LiveData<List<Goal>> = goalRepository.getGoals()
-    private var items: LiveData<List<Item>> = itemRepository.getItems()
-    private var history: LiveData<List<Historic>> = historicRepository.getHistory()
-    private var habits: LiveData<List<Habit>> = habitRepository.getHabits()
+//    private var goals: LiveData<List<Goal>> = goalRepository.getGoals()
+//    private var items: LiveData<List<Item>> = itemRepository.getItems()
+//    private var history: LiveData<List<Historic>> = historicRepository.getHistorical()
+    private var habits: LiveData<List<Habit>> = habitRepository.getHabits()!!
 
     var goalIdInserted: MutableLiveData<Long> = MutableLiveData()
 
     fun init(goalId: Long) {
-        //goal = goalRepository.getGoal(goalId)
+//        goal = goalRepository.getGoal(goalId)
     }
 
 //    // Goal
@@ -43,7 +45,7 @@ class GoalFormViewModel @Inject constructor(
     }
 
     fun saveGoal(goal: Goal) {
-        //goalIdInserted.value = goalRepository.save(goal)
+//        goalIdInserted.value = goalRepository.save(goal)
     }
 
     // Habit
@@ -52,20 +54,24 @@ class GoalFormViewModel @Inject constructor(
     }
 
     // Item
-    fun getItems(): LiveData<List<Item>>? {
-        return items
-    }
+//    fun getItems(): LiveData<List<Item>>? {
+//        return items
+//    }
 
     fun deleteItem(item: Item) {
-        itemRepository.delete(item)
+        //itemRepository.delete(item)
     }
 
     // Historic
-    fun getHistory(): LiveData<List<Historic>>? {
-        return history
-    }
+//    fun getHistory(): LiveData<List<Historic>>? {
+//        return history
+//    }
 
     fun deleteHistoric(historic: Historic) {
-        historicRepository.delete(historic)
+        //historicRepository.delete(historic)
+    }
+
+    override fun onReduceState(viewAction: GoalListViewModel.Action): GoalListViewModel.ViewState {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

@@ -1,7 +1,7 @@
-package com.rafaelfelipeac.improov.features.goals.domain.usecase
+package com.rafaelfelipeac.improov.features.goal.domain.usecase
 
-import com.rafaelfelipeac.improov.features.goals.Goal
-import com.rafaelfelipeac.improov.features.goals.GoalRepository
+import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
 import javax.inject.Inject
 
 class GetListUseCase @Inject constructor(
