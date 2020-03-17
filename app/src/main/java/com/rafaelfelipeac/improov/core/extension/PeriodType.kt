@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.core.extension
 
 import android.content.Context
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.features.commons.PeriodType
+import com.rafaelfelipeac.improov.future.habit.PeriodType
 
 fun PeriodType.getName(context: Context): String {
     return when (this) {

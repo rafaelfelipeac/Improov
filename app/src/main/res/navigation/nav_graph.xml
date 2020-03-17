@@ -18,7 +18,7 @@
 
     <fragment
             android:id="@+id/navigation_list"
-            android:name="com.rafaelfelipeac.improov.features.list.ListFragment"
+            android:name="com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListFragment"
             android:label="fragment_list"
             tools:layout="@layout/fragment_list">
 
@@ -43,7 +43,7 @@
 
     <fragment
             android:id="@+id/navigation_goal"
-            android:name="com.rafaelfelipeac.improov.features.goal.presentation.goal.GoalFragment"
+            android:name="com.rafaelfelipeac.improov.features.goal.presentation.goaldetail.GoalDetailFragment"
             android:label="fragment_goal"
             tools:layout="@layout/fragment_goal">
 
@@ -56,7 +56,7 @@
 
     <fragment
             android:id="@+id/navigation_stats"
-            android:name="com.rafaelfelipeac.improov.features.stats.StatsFragment"
+            android:name="com.rafaelfelipeac.improov.future.stats.StatsFragment"
             android:label="fragment_stats"
             tools:layout="@layout/fragment_stats">
 
@@ -90,7 +90,7 @@
             tools:layout="@layout/fragment_profile_edit"/>
 
     <fragment android:id="@+id/navigation_today"
-              android:name="com.rafaelfelipeac.improov.features.today.presentation.TodayFragment"
+              android:name="com.rafaelfelipeac.improov.future.today.presentation.TodayFragment"
               android:label="fragment_today"
               tools:layout="@layout/fragment_today">
 
@@ -104,7 +104,7 @@
     </fragment>
 
     <fragment android:id="@+id/navigation_habit_form"
-              android:name="com.rafaelfelipeac.improov.features.habit.HabitFormFragment"
+              android:name="com.rafaelfelipeac.improov.future.habit.HabitFormFragment"
               android:label="fragment_habit_form">
 
         <argument android:name="habitId" app:argType="long" android:defaultValue="0L"/>
@@ -112,7 +112,7 @@
     </fragment>
 
     <fragment android:id="@+id/navigation_habit"
-              android:name="com.rafaelfelipeac.improov.features.habit.HabitFragment"
+              android:name="com.rafaelfelipeac.improov.future.habit.HabitFragment"
               android:label="fragment_habit"
               tools:layout="@layout/fragment_habit">
 
@@ -124,7 +124,7 @@
     </fragment>
 
     <dialog android:id="@+id/navigation_add"
-              android:name="com.rafaelfelipeac.improov.features.add.AddFragment"
+              android:name="com.rafaelfelipeac.improov.future.add.AddFragment"
               android:label="fragment_add"
               tools:layout="@layout/bottom_sheet_add">
 

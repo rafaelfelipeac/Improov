@@ -1,8 +1,8 @@
 package com.rafaelfelipeac.improov.core.extension
 
-import com.rafaelfelipeac.improov.features.commons.Habit
-import com.rafaelfelipeac.improov.features.commons.HabitType
-import com.rafaelfelipeac.improov.features.commons.PeriodType
+import com.rafaelfelipeac.improov.future.habit.Habit
+import com.rafaelfelipeac.improov.future.habit.HabitType
+import com.rafaelfelipeac.improov.future.habit.PeriodType
 import java.util.*
 
 fun Habit.isToday() = nextDate.isToday()

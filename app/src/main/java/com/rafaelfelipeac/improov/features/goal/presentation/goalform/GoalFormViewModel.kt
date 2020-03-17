@@ -22,7 +22,7 @@ class GoalFormViewModel @Inject constructor(
 
     private var goal: LiveData<Goal>? = null
 
-    private var goals: LiveData<List<Goal>> = goalRepository.getGoals()
+   // private var goals: LiveData<List<Goal>> = goalRepository.getGoals()
     private var items: LiveData<List<Item>> = itemRepository.getItems()
     private var history: LiveData<List<Historic>> = historicRepository.getHistory()
     private var habits: LiveData<List<Habit>> = habitRepository.getHabits()
@@ -30,20 +30,20 @@ class GoalFormViewModel @Inject constructor(
     var goalIdInserted: MutableLiveData<Long> = MutableLiveData()
 
     fun init(goalId: Long) {
-        goal = goalRepository.getGoal(goalId)
+        //goal = goalRepository.getGoal(goalId)
     }
 
-    // Goal
-    fun getGoals(): LiveData<List<Goal>>? {
-        return goals
-    }
+//    // Goal
+//    fun getGoals(): LiveData<List<Goal>>? {
+//        return goals
+//    }
 
     fun getGoal(): LiveData<Goal>? {
         return goal
     }
 
     fun saveGoal(goal: Goal) {
-        goalIdInserted.value = goalRepository.save(goal)
+        //goalIdInserted.value = goalRepository.save(goal)
     }
 
     // Habit

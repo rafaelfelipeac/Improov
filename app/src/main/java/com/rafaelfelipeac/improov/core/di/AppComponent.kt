@@ -11,14 +11,8 @@ import javax.inject.Singleton
     PreferencesModule::class,
     ViewModelModule::class,
     ProfileEditModule::class,
-    GoalFormModule::class,
     GoalModule::class,
-    HabitFormModule::class,
-    HabitModule::class,
-    ListModule::class,
     ProfileModule::class,
-    StatsModule::class,
-    TodayModule::class,
     WelcomeModule::class,
     PersistenceModule::class
 ])

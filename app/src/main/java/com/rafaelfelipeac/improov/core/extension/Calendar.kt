@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.core.extension
 
 import android.content.Context
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.features.today.DayOfWeek
+import com.rafaelfelipeac.improov.future.today.DayOfWeek
 import java.util.*
 
 fun Calendar.addDays(days: Int) {

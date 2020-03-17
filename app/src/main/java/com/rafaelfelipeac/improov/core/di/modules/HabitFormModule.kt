@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.core.di.modules
 
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.modules.viewModel.ViewModelKey
-import com.rafaelfelipeac.improov.features.habit.HabitFormViewModel
+import com.rafaelfelipeac.improov.future.habit.HabitFormViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

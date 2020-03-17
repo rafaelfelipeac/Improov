@@ -131,9 +131,9 @@ class GoalFormFragment : BaseFragment() {
             setupGoal()
         })
 
-        goalFormViewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goals = goals
-        })
+//        goalFormViewModel.getGoals()?.observe(this, Observer { goals ->
+//            this.goals = goals
+//        })
 
         goalFormViewModel.getHabits()?.observe(this, Observer { habits ->
             this.habits = habits

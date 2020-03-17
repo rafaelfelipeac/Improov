@@ -13,3 +13,11 @@ fun View.invisible() {
 fun View.gone() {
     visibility = View.GONE
 }
+
+fun View.isVisible(isVisible: Boolean) {
+    if (isVisible) {
+        visible()
+    } else {
+       invisible()
+    }
+}

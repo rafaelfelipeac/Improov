@@ -1,12 +1,12 @@
 package com.rafaelfelipeac.improov.core.persistence.converts
 
 import androidx.room.TypeConverter
-import com.rafaelfelipeac.improov.features.commons.GoalType
-import com.rafaelfelipeac.improov.features.commons.HabitType
-import com.rafaelfelipeac.improov.features.commons.PeriodType
-import java.util.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
+import com.rafaelfelipeac.improov.future.habit.HabitType
+import com.rafaelfelipeac.improov.future.habit.PeriodType
+import java.util.*
 
 class Converters {
 
