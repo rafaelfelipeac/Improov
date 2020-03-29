@@ -35,9 +35,6 @@ class GoalListFragment : BaseFragment() {
     private lateinit var bottomSheetGoalDoneYes: Button
     private lateinit var bottomSheetGoalDoneNo: Button
 
-    private lateinit var bottomSheetHabitDone: BottomSheetDialog
-    private lateinit var bottomSheetHabitDoneOK: Button
-
     private var bottomSheetTip: BottomSheetBehavior<*>? = null
     private var bottomSheetTipClose: ConstraintLayout? = null
 
@@ -98,7 +95,6 @@ class GoalListFragment : BaseFragment() {
         }
 
         setupBottomSheetGoalDone()
-        setupBottomSheetHabitDone()
 
         if (preferences.fistTimeList) {
             preferences.fistTimeList = false
@@ -113,7 +109,7 @@ class GoalListFragment : BaseFragment() {
         }
     }
 
-    private fun setupGoals(visible: Boolean) {
+    private fun setupGoals(visible: Boolean = true) {
         setGoals()
 
         list_list.isVisible(visible)
@@ -159,14 +155,6 @@ class GoalListFragment : BaseFragment() {
         bottomSheetGoalDoneNo = sheetView.findViewById(R.id.goal_done_no)
     }
 
-    private fun setupBottomSheetHabitDone() {
-        bottomSheetHabitDone = BottomSheetDialog(this.activity!!)
-        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_habit_done, null)
-        bottomSheetHabitDone.setContentView(sheetView)
-
-        bottomSheetHabitDoneOK = sheetView.findViewById(R.id.habit_done_ok)
-    }
-
     private fun openBottomSheetGoalDone(goal: Goal, function: (goal: Goal) -> Unit) {
         bottomSheetGoalDone.show()
 
@@ -176,24 +164,13 @@ class GoalListFragment : BaseFragment() {
         }
 
         bottomSheetGoalDoneNo.setOnClickListener {
+            setupGoals()
             closeBottomSheetGoalDone()
         }
     }
 
     private fun closeBottomSheetGoalDone() {
         bottomSheetGoalDone.hide()
-    }
-
-    private fun openBottomSheetHabitDone() {
-        bottomSheetHabitDone.show()
-
-        bottomSheetHabitDoneOK.setOnClickListener {
-            closeBottomSheetHabitDone()
-        }
-    }
-
-    private fun closeBottomSheetHabitDone() {
-        bottomSheetHabitDone.hide()
     }
 
     fun onViewMoved(
@@ -237,13 +214,13 @@ class GoalListFragment : BaseFragment() {
                 }
             }
             ItemTouchHelper.LEFT -> {
-//                goalHabit.archived = true
-//                        goalHabit.archiveDate = getCurrentTime()
+//                goal.archived = true
+//                        goal.archiveDate = getCurrentTime()
 //
-//                        listViewModel.saveGoal(goalHabit)
+//                        listViewModel.saveGoal(goal)
 //
 //                        showSnackBarWithAction(holder.itemView,
-//                            getString(R.string.list_item_resolved_message), goalHabit as Any, ::archiveGoal)
+//                            getString(R.string.list_item_resolved_message), goal as Any, ::archiveGoal)
             }
         }
     }
