@@ -19,9 +19,14 @@ class SettingsLanguageFragment : BaseFragment() {
         injector.inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.settings_language_language_title)
+        (activity as MainActivity).supportActionBar?.title =
+            getString(R.string.settings_language_language_title)
 
         return inflater.inflate(R.layout.fragment_settings_language, container, false)
     }
@@ -34,17 +39,25 @@ class SettingsLanguageFragment : BaseFragment() {
 
     private fun setupLayout() {
         when (Preferences(context!!).language) {
-            getString(R.string.settings_language_key_portuguese) -> settings_language_radio_portuguese.isChecked = true
-            getString(R.string.settings_language_key_english) -> settings_language_radio_english.isChecked = true
+            getString(R.string.settings_language_key_portuguese) -> settings_language_radio_portuguese.isChecked =
+                true
+            getString(R.string.settings_language_key_english) -> settings_language_radio_english.isChecked =
+                true
         }
 
         settings_language_radio_group.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.settings_language_radio_portuguese -> {
-                    LocaleHelper.setLocale(activity!!, getString(R.string.settings_language_key_portuguese))
+                    LocaleHelper.setLocale(
+                        activity!!,
+                        getString(R.string.settings_language_key_portuguese)
+                    )
                 }
                 R.id.settings_language_radio_english -> {
-                    LocaleHelper.setLocale(activity!!, getString(R.string.settings_language_key_english))
+                    LocaleHelper.setLocale(
+                        activity!!,
+                        getString(R.string.settings_language_key_english)
+                    )
                 }
             }
 

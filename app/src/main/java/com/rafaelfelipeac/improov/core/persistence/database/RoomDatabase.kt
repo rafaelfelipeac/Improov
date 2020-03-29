@@ -17,7 +17,8 @@ const val DATABASE_VERSION_49 = 49 // Release 1.5.0
 @Database(
     entities = [GoalDataModel::class, ItemDataModel::class, HistoricDataModel::class],
     version = 49,
-    exportSchema = false)
+    exportSchema = false
+)
 @TypeConverters(Converters::class)
 abstract class RoomDatabase : RoomDatabase() {
     abstract fun goalDAO(): GoalDAO

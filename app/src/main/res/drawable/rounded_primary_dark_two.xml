@@ -4,9 +4,9 @@
         <shape>
             <corners
                     android:topLeftRadius="25dp"
-                    android:topRightRadius="25dp"/>
+                    android:topRightRadius="25dp" />
 
-            <solid android:color="@color/colorPrimaryDarkTwo"/>
+            <solid android:color="@color/colorPrimaryDarkTwo" />
         </shape>
     </item>
 </layer-list>

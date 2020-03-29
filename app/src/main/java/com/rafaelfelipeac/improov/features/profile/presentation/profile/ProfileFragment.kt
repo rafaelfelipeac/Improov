@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.profile
+package com.rafaelfelipeac.improov.features.profile.presentation.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -35,7 +35,11 @@ class ProfileFragment : BaseFragment() {
         (activity as MainActivity).closeBottomSheetTips()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.profile_title)

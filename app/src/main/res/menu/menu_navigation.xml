@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
             android:id="@+id/navigation_list"
             android:icon="@drawable/ic_list"
-            android:title="@string/navigation_goals"/>
+            android:title="@string/navigation_goals" />
 
-<!--    <item-->
-<!--            android:id="@+id/navigation_today"-->
-<!--            android:icon="@drawable/ic_today"-->
-<!--            android:title="@string/navigation_today"/>-->
+    <!--    <item-->
+    <!--            android:id="@+id/navigation_today"-->
+    <!--            android:icon="@drawable/ic_today"-->
+    <!--            android:title="@string/navigation_today"/>-->
 
     <item
             android:id="@+id/navigation_add"
-            android:title=""
             android:checkable="false"
             android:checked="false"
-            app:showAsAction="always"
-            android:enabled="false"/>
+            android:enabled="false"
+            android:title=""
+            app:showAsAction="always" />
 
-<!--    <item-->
-<!--            android:id="@+id/navigation_stats"-->
-<!--            android:icon="@drawable/ic_chart"-->
-<!--            android:title="@string/navigation_stats"/>-->
+    <!--    <item-->
+    <!--            android:id="@+id/navigation_stats"-->
+    <!--            android:icon="@drawable/ic_chart"-->
+    <!--            android:title="@string/navigation_stats"/>-->
 
     <item
             android:id="@+id/navigation_profile"
             android:icon="@drawable/ic_profile"
-            android:title="@string/navigation_profile"/>
+            android:title="@string/navigation_profile" />
 
 </menu>

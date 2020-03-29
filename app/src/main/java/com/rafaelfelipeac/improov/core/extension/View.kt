@@ -18,6 +18,6 @@ fun View.isVisible(isVisible: Boolean) {
     if (isVisible) {
         visible()
     } else {
-       invisible()
+        invisible()
     }
 }

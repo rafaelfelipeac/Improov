@@ -11,5 +11,4 @@ interface HistoricRepository {
     suspend fun save(historic: Historic): Long
 
     suspend fun delete(historic: Historic)
-
 }

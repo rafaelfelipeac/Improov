@@ -68,7 +68,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun lastFragment(): Boolean {
-        val currentFragment = NavHostFragment.findNavController(nav_host_fragment).currentDestination!!.id
+        val currentFragment =
+            NavHostFragment.findNavController(nav_host_fragment).currentDestination!!.id
 
         return currentFragment == R.id.navigation_list
     }
@@ -111,7 +112,9 @@ class MainActivity : BaseActivity() {
         bottomSheetTip?.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
-    fun closeBottomSheetTips() { bottomSheetTip?.state = BottomSheetBehavior.STATE_COLLAPSED }
+    fun closeBottomSheetTips() {
+        bottomSheetTip?.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
 
     private fun bottomSheetIsOpen(): Boolean {
         return bottomSheetTip?.state == BottomSheetBehavior.STATE_EXPANDED

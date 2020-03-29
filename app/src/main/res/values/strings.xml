@@ -11,7 +11,7 @@
     <string name="date_format_full">MM/dd/yyyy HH:mm:ss</string>
 
     <!-- Commons -->
-    <string name="empty_string"/>
+    <string name="empty_string" />
     <string name="snackbar_action_undo">UNDO</string>
     <string name="dialog_action_positive">OK</string>
     <string name="dialog_action_negative">Cancel</string>
@@ -248,6 +248,5 @@
     </string>
     <string name="tips_three_message_2">If you change your mind, just swipe again and the item will be ready to update again.
     </string>
-
 
 </resources>

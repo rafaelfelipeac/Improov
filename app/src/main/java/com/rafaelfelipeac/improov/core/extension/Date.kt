@@ -21,7 +21,8 @@ fun Date?.isLate() = this!! < Calendar.getInstance().time
 
 fun Date?.isFuture() = this!! > Calendar.getInstance().time
 
-fun Date?.format(context: Context) = DateFormat.format(context.getString(R.string.date_format_dd_MMM),   this)!!
+fun Date?.format(context: Context) =
+    DateFormat.format(context.getString(R.string.date_format_dd_MMM), this)!!
 
 fun Date?.addDays(days: Int) {
     val calendar = getCalendar(this?.time!!)

@@ -5,7 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 
-class WelcomeAdapter(val fragment: WelcomeFragment, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+class WelcomeAdapter(val fragment: WelcomeFragment, fm: FragmentManager) :
+    FragmentStatePagerAdapter(fm) {
     override fun getCount(): Int = 3
 
     override fun getItem(position: Int): Fragment {

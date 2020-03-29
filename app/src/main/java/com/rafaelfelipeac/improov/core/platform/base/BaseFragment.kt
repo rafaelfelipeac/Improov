@@ -65,7 +65,12 @@ abstract class BaseFragment : Fragment() {
             .show()
     }
 
-    fun showSnackBarWithAction(view: View, message: String, obj: Any, function: (obj: Any) -> Unit) {
+    fun showSnackBarWithAction(
+        view: View,
+        message: String,
+        obj: Any,
+        function: (obj: Any) -> Unit
+    ) {
         Snackbar
             .make(view, message, Snackbar.LENGTH_LONG)
             .setMessageColor(R.color.colorPrimaryDarkOne)
@@ -84,12 +89,18 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun showSoftKeyboard() {
-        val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
-        inputMethodManager!!.toggleSoftInputFromWindow(view?.windowToken, InputMethodManager.SHOW_FORCED, 0)
+        val inputMethodManager =
+            activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+        inputMethodManager!!.toggleSoftInputFromWindow(
+            view?.windowToken,
+            InputMethodManager.SHOW_FORCED,
+            0
+        )
     }
 
     fun hideSoftKeyboard() {
-        val inputMethodManager = this.activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+        val inputMethodManager =
+            this.activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
         inputMethodManager?.hideSoftInputFromWindow(this.view?.windowToken, 0)
     }
 

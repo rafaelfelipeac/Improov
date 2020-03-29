@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -411,9 +410,9 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="16dp"
                         android:gravity="center"
+                        android:hint="@string/goal_new_value"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:hint="@string/goal_new_value"
                         app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
@@ -461,13 +460,13 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
+                    android:descendantFocusability="blocksDescendants"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    android:descendantFocusability="blocksDescendants">
+                    app:layout_constraintVertical_bias="0.0">
 
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/goal_items_list"

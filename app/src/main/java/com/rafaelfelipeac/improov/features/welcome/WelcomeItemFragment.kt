@@ -12,7 +12,7 @@ class WelcomeItemFragment(
     private val pos: Int
 ) : BaseFragment() {
 
-    constructor(): this(WelcomeFragment(), 0)
+    constructor() : this(WelcomeFragment(), 0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injector.inject(this)
@@ -20,7 +20,11 @@ class WelcomeItemFragment(
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return when (pos) {
             0 -> inflater.inflate(R.layout.fragment_welcome_item_a, container, false)
             1 -> inflater.inflate(R.layout.fragment_welcome_item_b, container, false)
@@ -31,7 +35,7 @@ class WelcomeItemFragment(
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if(isVisibleToUser && pos == 2) {
+        if (isVisibleToUser && pos == 2) {
             fragment.showStartButton()
         } else {
             fragment.hideStartButton()

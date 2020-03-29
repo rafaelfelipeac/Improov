@@ -21,7 +21,11 @@ fun DecoView.resetValue(minValue: Float, maxValue: Float, initialValue: Float): 
     return addSeries(setupArcViewAndSeriesItem(minValue, maxValue, initialValue))
 }
 
-fun DecoView.setupArcViewAndSeriesItem(minValue: Float, maxValue: Float, initialValue: Float): SeriesItem {
+fun DecoView.setupArcViewAndSeriesItem(
+    minValue: Float,
+    maxValue: Float,
+    initialValue: Float
+): SeriesItem {
     addSeries(
         SeriesItem.Builder(ContextCompat.getColor(context!!, R.color.colorPrimaryAnother))
             .setRange(minValueDefault, maxValueDefault, initialValueDefault)

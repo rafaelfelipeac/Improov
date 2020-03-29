@@ -27,7 +27,7 @@ class Preferences(context: Context) {
         get() = prefs.getBoolean(KEY_FIRST_TIME_LIST, false)
         set(value) = prefs.edit().putBoolean(KEY_FIRST_TIME_LIST, value).apply()
 
-    var name : String
+    var name: String
         get() = prefs.getString(KEY_NAME, "")!!
         set(value) = prefs.edit().putString(KEY_NAME, value).apply()
 

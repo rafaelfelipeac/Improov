@@ -9,7 +9,7 @@ fun Habit.isToday() = nextDate.isToday()
 
 fun Habit.isLate() = nextDate.isLate()
 
-fun Habit.isFuture() =  nextDate.isFuture()
+fun Habit.isFuture() = nextDate.isFuture()
 
 fun Habit.nextHabitDate() {
     val date = Calendar.getInstance()

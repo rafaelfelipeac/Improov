@@ -9,7 +9,9 @@ import com.rafaelfelipeac.improov.features.goal.data.repository.HistoricReposito
 import com.rafaelfelipeac.improov.features.goal.data.repository.ItemRepositoryImpl
 import com.rafaelfelipeac.improov.features.goal.domain.repository.HistoricRepository
 import com.rafaelfelipeac.improov.features.goal.domain.repository.ItemRepository
+import com.rafaelfelipeac.improov.features.goal.presentation.goaldetail.GoalDetailFragment
 import com.rafaelfelipeac.improov.features.goal.presentation.goaldetail.GoalDetailViewModel
+import com.rafaelfelipeac.improov.features.goal.presentation.goalform.GoalFormFragment
 import com.rafaelfelipeac.improov.features.goal.presentation.goalform.GoalFormViewModel
 import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListFragment
 import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListViewModel
@@ -20,6 +22,15 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class GoalModule {
+
+    @Binds
+    abstract fun goalRepository(goalRepositoryImpl: GoalRepositoryImpl): GoalRepository
+
+    @Binds
+    abstract fun itemRepository(itemRepositoryImpl: ItemRepositoryImpl): ItemRepository
+
+    @Binds
+    abstract fun historicRepository(historicRepositoryImpl: HistoricRepositoryImpl): HistoricRepository
 
     @Binds
     @IntoMap
@@ -33,21 +44,21 @@ abstract class GoalModule {
 
     @Binds
     @IntoMap
+    @FragmentKey(GoalDetailFragment::class)
+    abstract fun bindGoalDetailFragment(goalDetailFragment: GoalDetailFragment): Fragment
+
+    @Binds
+    @IntoMap
     @ViewModelKey(GoalDetailViewModel::class)
     abstract fun bindGoalDetailViewModel(goalDetailViewModel: GoalDetailViewModel): ViewModel
 
     @Binds
     @IntoMap
+    @FragmentKey(GoalFormFragment::class)
+    abstract fun bindGoalFormFragment(goalFormFragment: GoalFormFragment): Fragment
+
+    @Binds
+    @IntoMap
     @ViewModelKey(GoalFormViewModel::class)
     abstract fun bindGoalFormViewModel(goalFormViewModel: GoalFormViewModel): ViewModel
-
-    @Binds
-    abstract fun goalRepository(goalRepositoryImpl: GoalRepositoryImpl): GoalRepository
-
-    @Binds
-    abstract fun itemRepository(itemRepositoryImpl: ItemRepositoryImpl): ItemRepository
-
-    @Binds
-    abstract fun historicRepository(historicRepositoryImpl: HistoricRepositoryImpl): HistoricRepository
-
 }

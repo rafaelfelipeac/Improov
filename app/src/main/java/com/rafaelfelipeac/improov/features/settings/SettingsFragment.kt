@@ -41,20 +41,37 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 val appPackageName = activity?.packageName
 
                 try {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("$MARKET_BASE_URL$appPackageName")))
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("$MARKET_BASE_URL$appPackageName")
+                        )
+                    )
                 } catch (exception: ActivityNotFoundException) {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("$PLAY_STORE_BASE_URL$appPackageName")))
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("$PLAY_STORE_BASE_URL$appPackageName")
+                        )
+                    )
                 }
 
                 false
             }
             getString(R.string.settings_pref_key_about_contact) -> {
-                val emailIntent = Intent(Intent.ACTION_SENDTO,
-                    Uri.fromParts("mailto", getString(R.string.settings_email_to), null))
+                val emailIntent = Intent(
+                    Intent.ACTION_SENDTO,
+                    Uri.fromParts("mailto", getString(R.string.settings_email_to), null)
+                )
 
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.settings_email_title))
 
-                startActivity(Intent.createChooser(emailIntent, getString(R.string.settings_email_sender_title)))
+                startActivity(
+                    Intent.createChooser(
+                        emailIntent,
+                        getString(R.string.settings_email_sender_title)
+                    )
+                )
 
                 false
             }

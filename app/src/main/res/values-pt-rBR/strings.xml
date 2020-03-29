@@ -11,7 +11,7 @@
     <string name="date_format_full">dd/MM/yyyy HH:mm:ss</string>
 
     <!-- Commons -->
-    <string name="empty_string"/>
+    <string name="empty_string" />
     <string name="snackbar_action_undo">DESFAZER</string>
     <string name="dialog_action_positive">OK</string>
     <string name="dialog_action_negative">Cancelar</string>

@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.profilename
+package com.rafaelfelipeac.improov.features.profile.presentation.profilename
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -33,7 +33,8 @@ class ProfileNameFragment : BaseFragment() {
 
         profile_edit_save_button.setOnClickListener {
             when {
-                verifyElements() -> { }
+                verifyElements() -> {
+                }
                 else -> {
                     hideSoftKeyboard()
                     preferences.name = profile_edit_name.text.toString()
@@ -43,7 +44,11 @@ class ProfileNameFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.profile_name_title)
@@ -65,7 +70,7 @@ class ProfileNameFragment : BaseFragment() {
         }
     }
 
-    private fun observeViewModel() { }
+    private fun observeViewModel() {}
 
     private fun setErrorMessage(message: String) {
         profile_edit_error_message.text = message

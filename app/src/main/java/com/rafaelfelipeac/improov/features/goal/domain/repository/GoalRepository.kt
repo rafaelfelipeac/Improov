@@ -11,5 +11,4 @@ interface GoalRepository {
     suspend fun save(goal: Goal): Long
 
     suspend fun delete(goal: Goal)
-
 }
