@@ -15,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.*
+import com.rafaelfelipeac.improov.core.extension.getPercentage
+import com.rafaelfelipeac.improov.core.extension.isVisible
+import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.vibrate
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.presentation.SwipeAndDragHelperList
@@ -24,9 +27,9 @@ import kotlinx.android.synthetic.main.fragment_list.*
 
 class GoalListFragment : BaseFragment() {
 
-    private var isFromDragAndDrop: Boolean = false
+    private var goalsAdapter = GoalListAdapter(this)
 
-    private lateinit var listAdapter: GoalListAdapter
+    private var isFromDragAndDrop = 0
 
     private lateinit var bottomSheetGoalDone: BottomSheetDialog
     private lateinit var bottomSheetGoalDoneYes: Button
@@ -38,15 +41,18 @@ class GoalListFragment : BaseFragment() {
     private var bottomSheetTip: BottomSheetBehavior<*>? = null
     private var bottomSheetTipClose: ConstraintLayout? = null
 
-    var list: MutableList<Goal>? = mutableListOf()
-
     private val viewModel by lazy { viewModelFactory.get<GoalListViewModel>(this) }
 
-    private val stateObserver = Observer<GoalListViewModel.ViewState> {
-        listAdapter.setItems(it.goals)
+    private val stateObserver = Observer<GoalListViewModel.ViewState> { response ->
+        if (isFromDragAndDrop == 0) {
+            response.goals
+                .let { goalsAdapter.setItems(it) }
+            setupGoals(response.goals.isNotEmpty())
+        }
 
-        list_list.isVisible(it.listIsVisible)
-        list_placeholder.isVisible(!it.listIsVisible)
+        if (isFromDragAndDrop > 0) {
+            isFromDragAndDrop--
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,33 +87,8 @@ class GoalListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        if (!isFromDragAndDrop) {
-//                setupList()
-//            }
-//
-//            isFromDragAndDrop = false
-
-        listAdapter = GoalListAdapter(this)
-
-        val swipeAndDragHelper = SwipeAndDragHelperList(listAdapter)
-        val touchHelper = ItemTouchHelper(swipeAndDragHelper)
-
-        touchHelper.attachToRecyclerView(list_list)
-
-        listAdapter.touchHelper = touchHelper
-        listAdapter.clickListener = {
-            val action = GoalListFragmentDirections.actionNavigationListToNavigationGoal(it.goalId)
-            navController.navigate(action)
-        }
-
-        list_list.apply {
-            setHasFixedSize(true)
-
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = listAdapter
-        }
-
         observe(viewModel.stateLiveData, stateObserver)
+
         viewModel.loadData()
 
         fab.setOnClickListener {
@@ -129,6 +110,33 @@ class GoalListFragment : BaseFragment() {
                     (activity as MainActivity).openBottomSheetTips()
                 }, 1000
             )
+        }
+    }
+
+    private fun setupGoals(visible: Boolean) {
+        setGoals()
+
+        list_list.isVisible(visible)
+        list_placeholder.isVisible(!visible)
+    }
+
+    private fun setGoals() {
+        val swipeAndDragHelper = SwipeAndDragHelperList(goalsAdapter)
+        val touchHelper = ItemTouchHelper(swipeAndDragHelper)
+
+        touchHelper.attachToRecyclerView(list_list)
+
+        goalsAdapter.touchHelper = touchHelper
+        goalsAdapter.clickListener = {
+            val action = GoalListFragmentDirections.actionNavigationListToNavigationGoal(it.goalId)
+            navController.navigate(action)
+        }
+
+        list_list.apply {
+            setHasFixedSize(true)
+
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            adapter = goalsAdapter
         }
     }
 
@@ -198,7 +206,10 @@ class GoalListFragment : BaseFragment() {
         target.order = toPosition
         other.order = fromPosition
 
-        isFromDragAndDrop = true
+        viewModel.onSaveGoal(target)
+        isFromDragAndDrop++
+        viewModel.onSaveGoal(other)
+        isFromDragAndDrop++
 
         items.removeAt(fromPosition)
         items.add(toPosition, target)

@@ -1,80 +1,127 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
+import com.rafaelfelipeac.improov.core.platform.base.BaseAction
 import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
+import com.rafaelfelipeac.improov.core.platform.base.BaseViewState
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
 import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
-import com.rafaelfelipeac.improov.features.goal.domain.repository.HistoricRepository
-import com.rafaelfelipeac.improov.features.goal.domain.repository.ItemRepository
-import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListViewModel
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.GetHistoricListUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.SaveHistoricUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.GetItemListUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.SaveItemUseCase
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class GoalDetailViewModel @Inject constructor(
-    private val goalRepository: GoalRepository,
-    private val itemRepository: ItemRepository,
-    private val historicRepository: HistoricRepository
-) : BaseViewModel<GoalListViewModel.ViewState, GoalListViewModel.Action>(
-    GoalListViewModel.ViewState()
+    private val saveGoalUseCase: SaveGoalUseCase,
+    private val getGoalUseCase: GetGoalUseCase,
+    private val getItemListUseCase: GetItemListUseCase,
+    private val saveItemUseCase: SaveItemUseCase,
+    private val getHistoricListUseCase: GetHistoricListUseCase,
+    private val saveHistoricUseCCase: SaveHistoricUseCase
+) : BaseViewModel<GoalDetailViewModel.ViewState, GoalDetailViewModel.Action>(
+    ViewState()
 ) {
-    private var goal: LiveData<Goal>? = null
-    private var goals: LiveData<List<Goal>>? = null
-    private var items: LiveData<List<Item>>? = null
-    private var history: LiveData<List<Historic>>? = null
+    private var goalId = 0L
 
-    init {
-        //goals = goalRepository.getGoals()
-//        items = itemRepository.getItems()
-//        history = historicRepository.getHistory()
+    fun setGoalId(goalId: Long) {
+        this.goalId = goalId
     }
 
-    fun init(goalId: Long) {
-        //goal = goalRepository.getGoal(goalId)
+    override fun onLoadData() {
+        getGoal()
     }
 
-    // Goal
-    fun getGoal(): LiveData<Goal>? {
-        return goal
+    fun onSaveGoal(goal: Goal) {
+        viewModelScope.launch {
+            saveGoalUseCase.execute(goal)
+        }
     }
 
-    fun getGoals(): LiveData<List<Goal>>? {
-        return goals
+    fun onSaveItem(item: Item) {
+        viewModelScope.launch {
+            saveItemUseCase.execute(item).also {
+                if (it > 0) {
+                    getItems() // for now
+                }
+            }
+        }
     }
 
-    fun saveGoal(goal: Goal) {
-        //goalRepository.save(goal)
+    fun onSaveHistoric(historic: Historic) {
+        viewModelScope.launch {
+            saveHistoricUseCCase.execute(historic).also {
+                if (it > 0) {
+                    getHistorics() // for now
+                }
+            }
+        }
     }
 
-    // Historic
-    fun getHistory(): LiveData<List<Historic>>? {
-        return history
+    private fun getGoal() {
+        viewModelScope.launch {
+            getGoalUseCase.execute(goalId).also {
+                if (it.goalId > 0) {
+                    getItems()
+                    getHistorics()
+
+                    sendAction(
+                        Action.GoalLoaded(it)
+                    )
+                }
+            }
+        }
     }
 
-    fun saveHistoric(historic: Historic) {
-//        historicRepository.save(historic)
-//
-//        history = historicRepository.getHistory()
+    private fun getItems() {
+        viewModelScope.launch {
+            getItemListUseCase.execute(goalId).also {
+                if (it.isNotEmpty()) {
+                    sendAction(
+                        Action.ItemListLoaded(it)
+                    )
+                }
+            }
+        }
     }
 
-    // Item
-    fun getItems(): LiveData<List<Item>>? {
-        return items
+    private fun getHistorics() {
+        viewModelScope.launch {
+            getHistoricListUseCase.execute(goalId).also {
+                if (it.isNotEmpty()) {
+                    sendAction(
+                        Action.HistoricListLoaded(it)
+                    )
+                }
+            }
+        }
     }
 
-    fun saveItem(item: Item) {
-//        itemRepository.save(item)
-//
-//        items = itemRepository.getItems()
+    override fun onReduceState(viewAction: Action) = when (viewAction) {
+        is Action.GoalLoaded -> state.copy(
+            goal = viewAction.goal
+        )
+        is Action.ItemListLoaded -> state.copy(
+            items = viewAction.items
+        )
+        is Action.HistoricListLoaded -> state.copy(
+            historics = viewAction.historics
+        )
     }
 
-    fun deleteItem(item: Item) {
-//        itemRepository.delete(item)
-//
-//        items = itemRepository.getItems()
-    }
+    data class ViewState(
+        val goal: Goal = Goal(),
+        val items: List<Item> = listOf(),
+        val historics: List<Historic> = listOf()
+    ) : BaseViewState
 
-    override fun onReduceState(viewAction: GoalListViewModel.Action): GoalListViewModel.ViewState {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    sealed class Action : BaseAction {
+        class GoalLoaded(val goal: Goal) : Action()
+        class ItemListLoaded(val items: List<Item>) : Action()
+        class HistoricListLoaded(val historics: List<Historic>) : Action()
     }
 }

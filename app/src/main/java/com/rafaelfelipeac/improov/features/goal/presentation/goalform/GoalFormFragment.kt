@@ -1,6 +1,5 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goalform
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -13,12 +12,10 @@ import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.commons.DialogOneButton
 import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import com.rafaelfelipeac.improov.future.habit.Habit
 import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_goal_form.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class GoalFormFragment : BaseFragment() {
@@ -26,17 +23,33 @@ class GoalFormFragment : BaseFragment() {
     private var goal: Goal =
         Goal()
     private var goalId: Long? = null
-    private var goals: List<Goal> = listOf()
     private var items: List<Item> = listOf()
-    private var history: List<Historic> = listOf()
-    private var habits: List<Habit> = listOf()
+    private var historics: List<Historic> = listOf()
+
+    private var goalsSize: Int? = null
 
     private var cal = Calendar.getInstance()
 
     private var bottomSheetTip: BottomSheetBehavior<*>? = null
     private var bottomSheetTipClose: ConstraintLayout? = null
 
-    private val goalFormViewModel by lazy { viewModelFactory.get<GoalFormViewModel>(this) }
+    private val viewModel by lazy { viewModelFactory.get<GoalFormViewModel>(this) }
+
+    private val stateObserver = Observer<GoalFormViewModel.ViewState> { response ->
+        if (response.goalSaved) {
+            navController.navigateUp()
+        }
+
+        if (response.goal.goalId > 0) {
+            goal = response.goal
+            items = response.items
+            historics = response.historics
+
+            setupGoal()
+        }
+
+        goalsSize = response.goals.size
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,15 +69,21 @@ class GoalFormFragment : BaseFragment() {
 
         hideNavigation()
 
-        if (goalId != 0L) { goalId?.let { goalFormViewModel.init(it) } }
-
         return inflater.inflate(R.layout.fragment_goal_form, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeViewModel()
+        observe(viewModel.stateLiveData, stateObserver)
+
+        goalId.let {
+            if (goalId!! > 0L) {
+                viewModel.setGoalId(goalId!!)
+            }
+        }
+
+        viewModel.loadData()
 
         setRadioButtonType()
         setSwitchImproov()
@@ -84,34 +103,6 @@ class GoalFormFragment : BaseFragment() {
             setupBottomSheetTip()
             (activity as MainActivity).openBottomSheetTips()
         }
-
-        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            cal.set(Calendar.YEAR, year)
-            cal.set(Calendar.MONTH, monthOfYear)
-            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-//            val myFormat = getString(R.string.date_format_dmy)
-//            val sdf = SimpleDateFormat(myFormat, Locale.US)
-//            goal_form_set_date.text = sdf.format(cal.time)
-
-            goal.date = cal.time
-        }
-
-//        goal_form_set_date.setOnClickListener {
-//            val datePickerDialog = DatePickerDialog(context!!,
-//                R.style.DialogTheme,
-//                dateSetListener,
-//                cal.get(Calendar.YEAR),
-//                cal.get(Calendar.MONTH),
-//                cal.get(Calendar.DAY_OF_MONTH))
-//
-//            datePickerDialog.show()
-//
-//            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.colorPrimary))
-//            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setBackgroundColor(resources.getColor(android.R.color.transparent))
-//            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.colorPrimary))
-//            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setBackgroundColor(resources.getColor(android.R.color.transparent))
-//        }
     }
 
     private fun setupBottomSheetTip() {
@@ -122,34 +113,6 @@ class GoalFormFragment : BaseFragment() {
             hideSoftKeyboard()
             (activity as MainActivity).closeBottomSheetTips()
         }
-    }
-
-    private fun observeViewModel() {
-        goalFormViewModel.getGoal()?.observe(this, Observer { goal ->
-            this.goal = goal as Goal
-
-            setupGoal()
-        })
-
-//        goalFormViewModel.getGoals()?.observe(this, Observer { goals ->
-//            this.goals = goals
-//        })
-
-        goalFormViewModel.getHabits()?.observe(this, Observer { habits ->
-            this.habits = habits
-        })
-
-//        goalFormViewModel.getItems()?.observe(this, Observer { items ->
-//            this.items = items
-//        })
-//
-//        goalFormViewModel.getHistory()?.observe(this, Observer { history ->
-//            this.history = history
-//        })
-
-        goalFormViewModel.goalIdInserted.observe(this, Observer {
-            navController.navigateUp()
-        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -178,7 +141,7 @@ class GoalFormFragment : BaseFragment() {
                     else -> {
                         val goalToSave = updateOrCreateGoal()
 
-                        goalFormViewModel.saveGoal(goalToSave)
+                        viewModel.onSaveGoal(goalToSave)
 
                         verifyFistTimeSaving()
 
@@ -271,9 +234,8 @@ class GoalFormFragment : BaseFragment() {
             goal.type = getGoalTypeSelected()
 
             val order =
-                if (goals.isEmpty() && habits.isEmpty()) 0
-                else goals.size + habits.size + 1
-            //else goals!![goals!!.size-1].order + 1
+                if (goalsSize == null || goalsSize == 0) 0
+                else goalsSize!! + 1
 
             goal.order = order
         } else {
@@ -283,13 +245,13 @@ class GoalFormFragment : BaseFragment() {
             if (oldGoalType != goal.type) {
                 items.forEach {
                     if (it.goalId == goal.goalId) {
-                        goalFormViewModel.deleteItem(it)
+                        viewModel.onDeleteItem(it)
                     }
                 }
 
-                history.forEach {
+                historics.forEach {
                     if (it.goalId == goal.goalId) {
-                        goalFormViewModel.deleteHistoric(it)
+                        viewModel.onDeleteHistoric(it)
                     }
                 }
             }
@@ -323,14 +285,6 @@ class GoalFormFragment : BaseFragment() {
 
     private fun setupGoal() {
         goal_form_goal_name.setText(goal.name)
-
-        if (goal.date != null) {
-            val myFormat = getString(R.string.date_format_dmy)
-            val sdf = SimpleDateFormat(myFormat, Locale.US)
-            //goal_form_set_date.text = sdf.format(goal.date)
-
-            cal.time = goal.date
-        }
 
         if (goal.divideAndConquer) {
             goal_form_divide_and_conquer.visible()

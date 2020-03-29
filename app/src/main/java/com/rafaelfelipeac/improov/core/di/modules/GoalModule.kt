@@ -9,6 +9,7 @@ import com.rafaelfelipeac.improov.features.goal.data.repository.HistoricReposito
 import com.rafaelfelipeac.improov.features.goal.data.repository.ItemRepositoryImpl
 import com.rafaelfelipeac.improov.features.goal.domain.repository.HistoricRepository
 import com.rafaelfelipeac.improov.features.goal.domain.repository.ItemRepository
+import com.rafaelfelipeac.improov.features.goal.presentation.goaldetail.GoalDetailViewModel
 import com.rafaelfelipeac.improov.features.goal.presentation.goalform.GoalFormViewModel
 import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListFragment
 import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListViewModel
@@ -23,12 +24,17 @@ abstract class GoalModule {
     @Binds
     @IntoMap
     @FragmentKey(GoalListFragment::class)
-    abstract fun bindListFragment(goalListFragment: GoalListFragment): Fragment
+    abstract fun bindGoalListFragment(goalListFragment: GoalListFragment): Fragment
 
     @Binds
     @IntoMap
     @ViewModelKey(GoalListViewModel::class)
-    abstract fun bindListViewModel(goalListViewModel: GoalListViewModel): ViewModel
+    abstract fun bindGoalListViewModel(goalListViewModel: GoalListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GoalDetailViewModel::class)
+    abstract fun bindGoalDetailViewModel(goalDetailViewModel: GoalDetailViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -1,77 +1,153 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goalform
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.rafaelfelipeac.improov.core.platform.base.BaseAction
 import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
+import com.rafaelfelipeac.improov.core.platform.base.BaseViewState
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
-import com.rafaelfelipeac.improov.future.habit.Habit
-import com.rafaelfelipeac.improov.future.habit.HabitRepository
 import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
-import com.rafaelfelipeac.improov.features.goal.domain.repository.HistoricRepository
-import com.rafaelfelipeac.improov.features.goal.domain.repository.ItemRepository
-import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListViewModel
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.DeleteHistoricUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.GetHistoricListUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.DeleteItemUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.GetItemListUseCase
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class GoalFormViewModel @Inject constructor(
-    private val goalRepository: GoalRepository,
-    private val itemRepository: ItemRepository,
-    private val historicRepository: HistoricRepository,
-    private val habitRepository: HabitRepository
-) : BaseViewModel<GoalListViewModel.ViewState, GoalListViewModel.Action>(
-    GoalListViewModel.ViewState()
+    private val saveGoalUseCase: SaveGoalUseCase,
+    private val getGoalUseCase: GetGoalUseCase,
+    private val getGoalListUseCase: GetGoalListUseCase,
+    private val getItemListUseCase: GetItemListUseCase,
+    private val deleteItemUseCase: DeleteItemUseCase,
+    private val getHistoricListUseCase: GetHistoricListUseCase,
+    private val deleteHistoricUseCase: DeleteHistoricUseCase
+) : BaseViewModel<GoalFormViewModel.ViewState, GoalFormViewModel.Action>(
+    ViewState()
 ) {
-    private var goal: LiveData<Goal>? = null
+    private var goalId = 0L
 
-//    private var goals: LiveData<List<Goal>> = goalRepository.getGoals()
-//    private var items: LiveData<List<Item>> = itemRepository.getItems()
-//    private var history: LiveData<List<Historic>> = historicRepository.getHistorical()
-    private var habits: LiveData<List<Habit>> = habitRepository.getHabits()!!
-
-    var goalIdInserted: MutableLiveData<Long> = MutableLiveData()
-
-    fun init(goalId: Long) {
-//        goal = goalRepository.getGoal(goalId)
+    fun setGoalId(goalId: Long) {
+        this.goalId = goalId
     }
 
-//    // Goal
-//    fun getGoals(): LiveData<List<Goal>>? {
-//        return goals
-//    }
+    override fun onLoadData() {
+        if (goalId > 0L) {
+            getGoal()
 
-    fun getGoal(): LiveData<Goal>? {
-        return goal
+            getItems()
+            getHistorics()
+        }
+
+        getGoals()
     }
 
-    fun saveGoal(goal: Goal) {
-//        goalIdInserted.value = goalRepository.save(goal)
+    fun onSaveGoal(goal: Goal) {
+        viewModelScope.launch {
+            saveGoalUseCase.execute(goal).also {
+                if (it > 0) {
+                    sendAction(Action.GoalSaved)
+                } else {
+                    sendAction(Action.GoalSaved)
+                }
+            }
+        }
     }
 
-    // Habit
-    fun getHabits(): LiveData<List<Habit>>? {
-        return habits
+    fun onDeleteItem(item: Item) {
+        viewModelScope.launch {
+            deleteItemUseCase.execute(item)
+        }
     }
 
-    // Item
-//    fun getItems(): LiveData<List<Item>>? {
-//        return items
-//    }
-
-    fun deleteItem(item: Item) {
-        //itemRepository.delete(item)
+    fun onDeleteHistoric(historic: Historic) {
+        viewModelScope.launch {
+            deleteHistoricUseCase.execute(historic)
+        }
     }
 
-    // Historic
-//    fun getHistory(): LiveData<List<Historic>>? {
-//        return history
-//    }
-
-    fun deleteHistoric(historic: Historic) {
-        //historicRepository.delete(historic)
+    private fun getGoal() {
+        viewModelScope.launch {
+            getGoalUseCase.execute(goalId).also {
+                if (it.goalId > 0) {
+                    sendAction(
+                        Action.GoalLoaded(it)
+                    )
+                }
+            }
+        }
     }
 
-    override fun onReduceState(viewAction: GoalListViewModel.Action): GoalListViewModel.ViewState {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private fun getGoals() {
+        viewModelScope.launch {
+            getGoalListUseCase.execute().also {
+                if (it.isNotEmpty()) {
+                    sendAction(
+                        Action.GoalListLoaded(it)
+                    )
+                }
+            }
+        }
+    }
+
+    private fun getItems() {
+        viewModelScope.launch {
+            getItemListUseCase.execute(goalId).also {
+                if (it.isNotEmpty()) {
+                    sendAction(
+                        Action.ItemListLoaded(it)
+                    )
+                }
+            }
+        }
+    }
+
+    private fun getHistorics() {
+        viewModelScope.launch {
+            getHistoricListUseCase.execute(goalId).also {
+                if (it.isNotEmpty()) {
+                    sendAction(
+                        Action.HistoricListLoaded(it)
+                    )
+                }
+            }
+        }
+    }
+
+    override fun onReduceState(viewAction: Action) = when (viewAction) {
+        is Action.GoalSaved -> state.copy(
+            goalSaved = true
+        )
+        is Action.GoalLoaded -> state.copy(
+            goal = viewAction.goal
+        )
+        is Action.GoalListLoaded -> state.copy(
+            goals = viewAction.goals
+        )
+        is Action.ItemListLoaded -> state.copy(
+            items = viewAction.items
+        )
+        is Action.HistoricListLoaded -> state.copy(
+            historics = viewAction.historics
+        )
+    }
+
+    data class ViewState(
+        val goalSaved: Boolean = false,
+        val goal: Goal = Goal(),
+        val goals: List<Goal> = listOf(),
+        val items: List<Item> = listOf(),
+        val historics: List<Historic> = listOf()
+    ) : BaseViewState
+
+    sealed class Action : BaseAction {
+        object GoalSaved : Action()
+        class GoalLoaded(val goal: Goal) : Action()
+        class GoalListLoaded(val goals: List<Goal>) : Action()
+        class ItemListLoaded(val items: List<Item>) : Action()
+        class HistoricListLoaded(val historics: List<Historic>) : Action()
     }
 }

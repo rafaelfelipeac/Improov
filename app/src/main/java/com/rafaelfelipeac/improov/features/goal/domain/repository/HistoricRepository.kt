@@ -4,7 +4,7 @@ import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 
 interface HistoricRepository {
 
-    suspend fun getHistorical(): List<Historic>
+    suspend fun getHistorics(): List<Historic>
 
     suspend fun getHistoric(historicId: Long): Historic
 
