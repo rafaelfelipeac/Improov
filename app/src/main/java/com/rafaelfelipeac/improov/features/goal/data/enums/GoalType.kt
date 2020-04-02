@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.goal.data.enums
+package com.rafaelfelipeac.improov.features.goal.data.enum
 
 enum class GoalType {
     GOAL_LIST,

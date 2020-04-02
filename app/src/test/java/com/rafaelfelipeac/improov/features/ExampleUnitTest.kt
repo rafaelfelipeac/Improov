@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov
+package com.rafaelfelipeac.improov.features
 
 import org.junit.Test
 
