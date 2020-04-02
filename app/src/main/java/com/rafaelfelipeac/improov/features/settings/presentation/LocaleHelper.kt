@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.settings
+package com.rafaelfelipeac.improov.features.settings.presentation
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -15,7 +15,10 @@ object LocaleHelper {
 
         val lang = preferences.language
 
-        return setLocale(context, lang)
+        return setLocale(
+            context,
+            lang
+        )
     }
 
     fun setLocale(context: Context, language: String?): Context {
@@ -23,7 +26,10 @@ object LocaleHelper {
 
         preferences.language = language!!
 
-        return updateResources(context, language)
+        return updateResources(
+            context,
+            language
+        )
     }
 
     @SuppressLint("ObsoleteSdkInt")

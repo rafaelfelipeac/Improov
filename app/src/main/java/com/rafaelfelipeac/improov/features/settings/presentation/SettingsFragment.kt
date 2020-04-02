@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.settings
+package com.rafaelfelipeac.improov.features.settings.presentation
 
 import android.content.ActivityNotFoundException
 import android.os.Bundle
@@ -12,6 +12,7 @@ import android.content.Intent
 import android.net.Uri
 import com.rafaelfelipeac.improov.core.platform.AppConfig.MARKET_BASE_URL
 import com.rafaelfelipeac.improov.core.platform.AppConfig.PLAY_STORE_BASE_URL
+import com.rafaelfelipeac.improov.features.settings.SettingsFragmentDirections
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

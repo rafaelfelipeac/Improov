@@ -6,9 +6,9 @@ import com.rafaelfelipeac.improov.features.goal.presentation.goalform.GoalFormFr
 import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListFragment
 import com.rafaelfelipeac.improov.features.profile.presentation.profile.ProfileFragment
 import com.rafaelfelipeac.improov.features.profile.presentation.profilename.ProfileNameFragment
-import com.rafaelfelipeac.improov.features.settings.SettingsLanguageFragment
-import com.rafaelfelipeac.improov.features.welcome.WelcomeFragment
-import com.rafaelfelipeac.improov.features.welcome.WelcomeItemFragment
+import com.rafaelfelipeac.improov.features.settings.presentation.SettingsLanguageFragment
+import com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeFragment
+import com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeItemFragment
 
 interface Injector {
     fun inject(baseActivity: BaseActivity)

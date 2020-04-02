@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.welcome
+package com.rafaelfelipeac.improov.features.welcome.presentation
 
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
@@ -11,10 +11,22 @@ class WelcomeAdapter(val fragment: WelcomeFragment, fm: FragmentManager) :
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> WelcomeItemFragment(fragment, 0)
-            1 -> WelcomeItemFragment(fragment, 1)
-            2 -> WelcomeItemFragment(fragment, 2)
-            else -> WelcomeItemFragment(fragment, 0)
+            0 -> WelcomeItemFragment(
+                fragment,
+                0
+            )
+            1 -> WelcomeItemFragment(
+                fragment,
+                1
+            )
+            2 -> WelcomeItemFragment(
+                fragment,
+                2
+            )
+            else -> WelcomeItemFragment(
+                fragment,
+                0
+            )
         }
     }
 

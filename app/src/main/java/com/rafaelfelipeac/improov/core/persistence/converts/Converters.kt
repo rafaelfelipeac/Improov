@@ -4,8 +4,6 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
-import com.rafaelfelipeac.improov.future.habit.HabitType
-import com.rafaelfelipeac.improov.future.habit.PeriodType
 import java.util.*
 
 class Converters {
@@ -27,20 +25,6 @@ class Converters {
 
     @TypeConverter
     fun goalTypeToString(goalType: GoalType) = goalType.name
-
-    // habitType
-    @TypeConverter
-    fun stringToHabitType(value: String): HabitType = HabitType.valueOf(value)
-
-    @TypeConverter
-    fun habitTypeToString(habitType: HabitType) = habitType.name
-
-    // periodType
-    @TypeConverter
-    fun stringToPeriodType(value: String): PeriodType = PeriodType.valueOf(value)
-
-    @TypeConverter
-    fun periodTypeToString(periodType: PeriodType) = periodType.name
 
     // boolean
     @TypeConverter

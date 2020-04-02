@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
         android:background="@color/colorPrimaryDarkOne"
-        tools:context=".features.welcome.WelcomeFragment">
+        tools:context=".features.welcome.presentation.WelcomeFragment">
 
     <androidx.viewpager.widget.ViewPager
             android:id="@+id/welcome_viewpager"

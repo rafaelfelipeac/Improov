@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.settings
+package com.rafaelfelipeac.improov.features.settings.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater

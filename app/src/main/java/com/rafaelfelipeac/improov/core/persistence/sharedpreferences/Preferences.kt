@@ -6,7 +6,6 @@ import android.content.SharedPreferences
 const val preferences_name = "com.rafaelfelipeac.improov.preferences"
 const val KEY_WELCOME = "KEY_WELCOME"
 const val KEY_NAME = "KEY_NAME"
-const val KEY_WEEKDAYS = "KEY_WEEKDAYS"
 const val KEY_LANGUAGE = "KEY_LANGUAGE"
 const val KEY_FIRST_TIME_ADD = "KEY_FIRST_TIME_ADD"
 const val KEY_FIRST_TIME_LIST = "KEY_FIRST_TIME_LIST"
@@ -30,10 +29,6 @@ class Preferences(context: Context) {
     var name: String
         get() = prefs.getString(KEY_NAME, "")!!
         set(value) = prefs.edit().putString(KEY_NAME, value).apply()
-
-    var openWeekDays: Boolean
-        get() = prefs.getBoolean(KEY_WEEKDAYS, false)
-        set(value) = prefs.edit().putBoolean(KEY_WEEKDAYS, value).apply()
 
     var language: String
         get() = prefs.getString(KEY_LANGUAGE, "en")!!

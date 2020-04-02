@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.welcome
+package com.rafaelfelipeac.improov.features.welcome.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import com.rafaelfelipeac.improov.core.extension.invisible
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.main.MainActivity
+import com.rafaelfelipeac.improov.features.welcome.WelcomeFragmentDirections
 import kotlinx.android.synthetic.main.fragment_welcome.*
 
 class WelcomeFragment : BaseFragment() {
@@ -55,7 +56,11 @@ class WelcomeFragment : BaseFragment() {
             navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
         }
 
-        welcome_viewpager.adapter = WelcomeAdapter(this, fragmentManager!!)
+        welcome_viewpager.adapter =
+            WelcomeAdapter(
+                this,
+                fragmentManager!!
+            )
         welcome_dots.setupWithViewPager(welcome_viewpager, true)
     }
 

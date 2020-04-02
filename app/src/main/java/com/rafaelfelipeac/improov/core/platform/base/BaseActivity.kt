@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.rafaelfelipeac.improov.app.App
-import com.rafaelfelipeac.improov.features.settings.LocaleHelper
+import com.rafaelfelipeac.improov.features.settings.presentation.LocaleHelper
 
 abstract class BaseActivity : AppCompatActivity() {
 

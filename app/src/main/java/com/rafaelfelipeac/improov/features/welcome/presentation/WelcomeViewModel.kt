@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.welcome
+package com.rafaelfelipeac.improov.features.welcome.presentation
 
 import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
 import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListViewModel

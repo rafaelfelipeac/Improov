@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDarkOne"
         android:fillViewport="true"
-        tools:context=".features.welcome.WelcomeItemFragment">
+        tools:context=".features.welcome.presentation.WelcomeItemFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

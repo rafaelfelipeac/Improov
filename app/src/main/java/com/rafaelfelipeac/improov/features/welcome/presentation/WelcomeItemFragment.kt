@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.welcome
+package com.rafaelfelipeac.improov.features.welcome.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater

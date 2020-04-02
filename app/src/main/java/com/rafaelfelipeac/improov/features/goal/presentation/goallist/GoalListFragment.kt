@@ -21,7 +21,6 @@ import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.vibrate
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import com.rafaelfelipeac.improov.features.goal.presentation.SwipeAndDragHelperList
 import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_list.*
 
@@ -117,7 +116,10 @@ class GoalListFragment : BaseFragment() {
     }
 
     private fun setGoals() {
-        val swipeAndDragHelper = SwipeAndDragHelperList(goalsAdapter)
+        val swipeAndDragHelper =
+            SwipeAndDragHelperList(
+                goalsAdapter
+            )
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
         touchHelper.attachToRecyclerView(list_list)

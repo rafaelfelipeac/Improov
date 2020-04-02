@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/navigation_welcome"
-            android:name="com.rafaelfelipeac.improov.features.welcome.WelcomeFragment"
+            android:name="com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeFragment"
             android:label="fragment_welcome"
             tools:layout="@layout/fragment_welcome">
 
@@ -186,7 +186,7 @@
 
     <fragment
             android:id="@+id/navigation_settings"
-            android:name="com.rafaelfelipeac.improov.features.settings.SettingsFragment"
+            android:name="com.rafaelfelipeac.improov.features.settings.presentation.SettingsFragment"
             android:label="fragment_settings">
         <action
                 android:id="@+id/action_navigation_settings_to_navigation_settings_language"
@@ -195,7 +195,7 @@
 
     <fragment
             android:id="@+id/navigation_settings_language"
-            android:name="com.rafaelfelipeac.improov.features.settings.SettingsLanguageFragment"
+            android:name="com.rafaelfelipeac.improov.features.settings.presentation.SettingsLanguageFragment"
             android:label="fragment_settings_language" />
 
 </navigation>
