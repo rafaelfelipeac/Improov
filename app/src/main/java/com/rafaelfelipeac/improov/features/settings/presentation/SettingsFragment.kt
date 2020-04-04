@@ -12,7 +12,6 @@ import android.content.Intent
 import android.net.Uri
 import com.rafaelfelipeac.improov.core.platform.AppConfig.MARKET_BASE_URL
 import com.rafaelfelipeac.improov.core.platform.AppConfig.PLAY_STORE_BASE_URL
-import com.rafaelfelipeac.improov.features.settings.SettingsFragmentDirections
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

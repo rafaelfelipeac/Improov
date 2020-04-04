@@ -10,7 +10,6 @@ import com.rafaelfelipeac.improov.core.extension.invisible
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.main.MainActivity
-import com.rafaelfelipeac.improov.features.welcome.WelcomeFragmentDirections
 import kotlinx.android.synthetic.main.fragment_welcome.*
 
 class WelcomeFragment : BaseFragment() {
