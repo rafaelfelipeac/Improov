@@ -3,7 +3,7 @@ package com.rafaelfelipeac.improov.features.goal.data.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.rafaelfelipeac.improov.core.TwoWayMapper
-import com.rafaelfelipeac.improov.features.goal.data.enum.GoalType
+import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import java.io.Serializable
 import java.util.*

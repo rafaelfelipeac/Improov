@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.*
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.goal.data.enum.GoalType
+import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
