@@ -29,7 +29,11 @@ class GoalListViewModel @Inject constructor(
         viewModelScope.launch {
             saveGoalUseCase.execute(goal).also {
                 if (it > 0) {
-                    getGoals() // for now
+                    sendAction(
+                        Action.GoalSaved
+                    )
+
+                     getGoals() // for now
                 }
             }
         }
@@ -48,16 +52,21 @@ class GoalListViewModel @Inject constructor(
     }
 
     override fun onReduceState(viewAction: Action) = when (viewAction) {
+        is Action.GoalSaved -> state.copy(
+            goalSaved = true
+        )
         is Action.GoalListLoaded -> state.copy(
             goals = viewAction.goals
         )
     }
 
     data class ViewState(
+        val goalSaved: Boolean = false,
         val goals: List<Goal> = listOf()
     ) : BaseViewState
 
     sealed class Action : BaseAction {
+        object GoalSaved : Action()
         class GoalListLoaded(val goals: List<Goal>) : Action()
     }
 }

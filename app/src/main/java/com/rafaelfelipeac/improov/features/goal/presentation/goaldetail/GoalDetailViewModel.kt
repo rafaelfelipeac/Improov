@@ -19,10 +19,10 @@ import javax.inject.Inject
 class GoalDetailViewModel @Inject constructor(
     private val saveGoalUseCase: SaveGoalUseCase,
     private val getGoalUseCase: GetGoalUseCase,
-    private val getItemListUseCase: GetItemListUseCase,
     private val saveItemUseCase: SaveItemUseCase,
-    private val getHistoricListUseCase: GetHistoricListUseCase,
-    private val saveHistoricUseCCase: SaveHistoricUseCase
+    private val getItemListUseCase: GetItemListUseCase,
+    private val saveHistoricUseCCase: SaveHistoricUseCase,
+    private val getHistoricListUseCase: GetHistoricListUseCase
 ) : BaseViewModel<GoalDetailViewModel.ViewState, GoalDetailViewModel.Action>(
     ViewState()
 ) {
@@ -38,7 +38,11 @@ class GoalDetailViewModel @Inject constructor(
 
     fun onSaveGoal(goal: Goal) {
         viewModelScope.launch {
-            saveGoalUseCase.execute(goal)
+            saveGoalUseCase.execute(goal).also {
+                if (it > 0) {
+                    sendAction(Action.GoalSaved)
+                }
+            }
         }
     }
 
@@ -46,6 +50,8 @@ class GoalDetailViewModel @Inject constructor(
         viewModelScope.launch {
             saveItemUseCase.execute(item).also {
                 if (it > 0) {
+                    sendAction(Action.ItemSaved)
+
                     getItems() // for now
                 }
             }
@@ -56,6 +62,8 @@ class GoalDetailViewModel @Inject constructor(
         viewModelScope.launch {
             saveHistoricUseCCase.execute(historic).also {
                 if (it > 0) {
+                    sendAction(Action.HistoricSaved)
+
                     getHistorics() // for now
                 }
             }
@@ -102,11 +110,20 @@ class GoalDetailViewModel @Inject constructor(
     }
 
     override fun onReduceState(viewAction: Action) = when (viewAction) {
+        is Action.GoalSaved -> state.copy(
+            goalSaved = true
+        )
         is Action.GoalLoaded -> state.copy(
             goal = viewAction.goal
         )
+        is Action.ItemSaved -> state.copy(
+            itemSaved = true
+        )
         is Action.ItemListLoaded -> state.copy(
             items = viewAction.items
+        )
+        is Action.HistoricSaved -> state.copy(
+            historicSaved = true
         )
         is Action.HistoricListLoaded -> state.copy(
             historics = viewAction.historics
@@ -114,14 +131,20 @@ class GoalDetailViewModel @Inject constructor(
     }
 
     data class ViewState(
+        val goalSaved: Boolean = false,
         val goal: Goal = Goal(),
+        val itemSaved: Boolean = false,
         val items: List<Item> = listOf(),
+        val historicSaved: Boolean = false,
         val historics: List<Historic> = listOf()
     ) : BaseViewState
 
     sealed class Action : BaseAction {
+        object GoalSaved : Action()
         class GoalLoaded(val goal: Goal) : Action()
+        object ItemSaved : Action()
         class ItemListLoaded(val items: List<Item>) : Action()
+        object HistoricSaved : Action()
         class HistoricListLoaded(val historics: List<Historic>) : Action()
     }
 }

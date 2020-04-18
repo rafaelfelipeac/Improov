@@ -59,13 +59,17 @@ class GoalFormViewModel @Inject constructor(
 
     fun onDeleteItem(item: Item) {
         viewModelScope.launch {
-            deleteItemUseCase.execute(item)
+            deleteItemUseCase.execute(item).also {
+                sendAction(Action.ItemDeleted)
+            }
         }
     }
 
     fun onDeleteHistoric(historic: Historic) {
         viewModelScope.launch {
-            deleteHistoricUseCase.execute(historic)
+            deleteHistoricUseCase.execute(historic).also {
+                sendAction(Action.HistoricDeleted)
+            }
         }
     }
 
@@ -130,8 +134,14 @@ class GoalFormViewModel @Inject constructor(
         is Action.ItemListLoaded -> state.copy(
             items = viewAction.items
         )
+        is Action.ItemDeleted -> state.copy(
+            itemDeleted = true
+        )
         is Action.HistoricListLoaded -> state.copy(
             historics = viewAction.historics
+        )
+        is Action.HistoricDeleted -> state.copy(
+            historicDeleted = true
         )
     }
 
@@ -140,7 +150,9 @@ class GoalFormViewModel @Inject constructor(
         val goal: Goal = Goal(),
         val goals: List<Goal> = listOf(),
         val items: List<Item> = listOf(),
-        val historics: List<Historic> = listOf()
+        val itemDeleted: Boolean = false,
+        val historics: List<Historic> = listOf(),
+        val historicDeleted: Boolean = false
     ) : BaseViewState
 
     sealed class Action : BaseAction {
@@ -148,6 +160,8 @@ class GoalFormViewModel @Inject constructor(
         class GoalLoaded(val goal: Goal) : Action()
         class GoalListLoaded(val goals: List<Goal>) : Action()
         class ItemListLoaded(val items: List<Item>) : Action()
+        object ItemDeleted : Action()
         class HistoricListLoaded(val historics: List<Historic>) : Action()
+        object HistoricDeleted : Action()
     }
 }
