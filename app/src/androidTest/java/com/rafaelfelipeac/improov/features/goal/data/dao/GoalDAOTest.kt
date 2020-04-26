@@ -1,13 +1,13 @@
 package com.rafaelfelipeac.improov.features.goal.data.dao
 
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.rafaelfelipeac.improov.base.BaseInstTest
 import com.rafaelfelipeac.improov.base.DataProviderAndroidTest.createGoalDataModel
 import com.rafaelfelipeac.improov.base.DataProviderAndroidTest.shouldBeEqualTo
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class GoalDAOTest : BaseInstTest() {
 
     private val goalDAO get() = roomDatabase.goalDAO()
@@ -45,6 +45,20 @@ class GoalDAOTest : BaseInstTest() {
     }
 
     @Test
+    fun givenANewGoalWhenDeleteIsCalledThenAUnitValueIsReturned() {
+        // given
+        val goal = createGoalDataModel()
+
+        goalDAO.save(goal)
+
+        // when
+        val result = goalDAO.delete(goal)
+
+        // then
+        result shouldBeEqualTo Unit
+    }
+
+    @Test
     fun givenTwoNewGoalsAndDeleteTheFirstOneWhenGetAllIsCalledThenAListWithJustOneGoalIsReturned() {
         // given
         val goalA = createGoalDataModel(goalId = 1, name = "goalA")
@@ -65,7 +79,7 @@ class GoalDAOTest : BaseInstTest() {
     }
 
     @Test
-    fun givenADatabaseWithDataAndSaveAAGoalWhenGetIsCalledThenItMustReturnedTheGoalUpdated() {
+    fun givenADatabaseWithDataAndSaveAGoalWhenGetIsCalledThenItMustReturnedTheGoalUpdated() {
         // given
         val goalId = 10L
         val goalA = createGoalDataModel(goalId = goalId, name = "goalA")

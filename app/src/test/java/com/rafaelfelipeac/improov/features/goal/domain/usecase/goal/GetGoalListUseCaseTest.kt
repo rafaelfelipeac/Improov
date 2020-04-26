@@ -25,10 +25,19 @@ class GetGoalListUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a list of goals WHEN use getGoalListUseCase THEN return the same list of goals`() {
+    fun `GIVEN a list of goals with custom order WHEN use getGoalListUseCase THEN return the list of goals ordered by order parameter`() {
         runBlocking {
             // given
-            val goals = listOf(createGoal(1), createGoal(2), createGoal(3))
+            val goals = listOf(
+                createGoal(goalId = 1, order = 1),
+                createGoal(goalId = 2, order = 2),
+                createGoal(goalId = 3, order = 3),
+                createGoal(goalId = 4, order = 20),
+                createGoal(goalId = 5, order = 13),
+                createGoal(goalId = 6, order = 5))
+
+            val orderedGoals = goals.sortedBy { it.order }
+
             given(mockGoalRepository.getGoals())
                 .willReturn(goals)
 
@@ -36,9 +45,7 @@ class GetGoalListUseCaseTest {
             val result = getGoalListUseCase.execute()
 
             // then
-            result shouldBeEqualTo goals
+            result shouldBeEqualTo orderedGoals
         }
     }
-
-    // test with order
 }
