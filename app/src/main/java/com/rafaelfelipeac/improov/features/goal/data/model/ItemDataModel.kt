@@ -11,7 +11,7 @@ import javax.inject.Inject
 @Entity(tableName = "item")
 data class ItemDataModel(
     @PrimaryKey(autoGenerate = true)
-    val itemId: Long = 0,
+    var itemId: Long = 0,
     var goalId: Long,
     var name: String,
     var order: Int,
@@ -21,7 +21,7 @@ data class ItemDataModel(
     var doneDate: Date? = null,
     var undoneDate: Date? = null,
     var deleteDate: Date? = null,
-    val date: Date? = null
+    var date: Date? = null
 ) : Serializable
 
 class ItemDataModelMapper @Inject constructor() : TwoWayMapper<ItemDataModel, Item> {

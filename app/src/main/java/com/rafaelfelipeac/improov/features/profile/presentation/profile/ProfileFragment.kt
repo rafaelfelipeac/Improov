@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment() {
@@ -31,8 +29,8 @@ class ProfileFragment : BaseFragment() {
             profile_edit_profile_button.text = getString(R.string.profile_add_name_message)
         }
 
-        (activity as MainActivity).closeToolbar()
-        (activity as MainActivity).closeBottomSheetTips()
+        main.closeToolbar()
+        main.closeBottomSheetTips()
     }
 
     override fun onCreateView(
@@ -41,8 +39,8 @@ class ProfileFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.profile_title)
+        main.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        main.supportActionBar?.title = getString(R.string.profile_title)
 
         showNavigation()
 
@@ -61,7 +59,7 @@ class ProfileFragment : BaseFragment() {
         }
 
         fab.setOnClickListener {
-            (activity as MainActivity).closeBottomSheetTips()
+            main.closeBottomSheetTips()
 
             navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationGoalForm())
         }
