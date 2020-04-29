@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_settings_language.*
 
 class SettingsLanguageFragment : BaseFragment() {
@@ -24,9 +22,8 @@ class SettingsLanguageFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title =
-            getString(R.string.settings_language_language_title)
+        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        main.supportActionBar?.title = getString(R.string.settings_language_language_title)
 
         return inflater.inflate(R.layout.fragment_settings_language, container, false)
     }

@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +20,6 @@ import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
-import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_goal.*
 import java.util.*
 
@@ -82,15 +80,15 @@ class GoalDetailFragment : BaseFragment() {
 
         setHasOptionsMenu(true)
 
-        (activity as MainActivity).openToolbar()
+        main.openToolbar()
 
         goalId = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalId }
         goalNew = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalNew }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.goal_title)
+        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        main.supportActionBar?.title = getString(R.string.goal_title)
 
         hideNavigation()
 
@@ -338,8 +336,8 @@ class GoalDetailFragment : BaseFragment() {
 
                 goal_historics_list.invisible()
 
-                if ((activity as MainActivity).toolbar.menu.findItem(R.id.menu_add) == null) {
-                    (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_add)
+                if (main.toolbar.menu.findItem(R.id.menu_add) == null) {
+                    main.toolbar.inflateMenu(R.menu.menu_add)
                 }
             }
             GoalType.GOAL_COUNTER -> {

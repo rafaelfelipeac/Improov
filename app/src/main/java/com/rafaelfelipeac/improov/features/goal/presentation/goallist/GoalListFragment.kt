@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -21,7 +20,6 @@ import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.vibrate
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_list.*
 
 class GoalListFragment : BaseFragment() {
@@ -62,8 +60,8 @@ class GoalListFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
 
-        (activity as MainActivity).closeToolbar()
-        (activity as MainActivity).closeBottomSheetTips()
+        main.closeToolbar()
+        main.closeBottomSheetTips()
     }
 
     override fun onCreateView(
@@ -72,8 +70,8 @@ class GoalListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.list_title)
+        main.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        main.supportActionBar?.title = getString(R.string.list_title)
 
         showNavigation()
 
@@ -88,7 +86,7 @@ class GoalListFragment : BaseFragment() {
         viewModel.loadData()
 
         fab.setOnClickListener {
-            (activity as MainActivity).closeBottomSheetTips()
+            main.closeBottomSheetTips()
 
             navController.navigate(GoalListFragmentDirections.actionNavigationListToNavigationGoalForm())
         }
@@ -100,9 +98,9 @@ class GoalListFragment : BaseFragment() {
 
             Handler().postDelayed(
                 {
-                    (activity as MainActivity).setupBottomSheetTipsThree()
+                    main.setupBottomSheetTipsThree()
                     setupBottomSheetTip()
-                    (activity as MainActivity).openBottomSheetTips()
+                    main.openBottomSheetTips()
                 }, 1000
             )
         }
@@ -139,12 +137,12 @@ class GoalListFragment : BaseFragment() {
     }
 
     private fun setupBottomSheetTip() {
-        bottomSheetTip = (activity as MainActivity).bottomSheetTip
-        bottomSheetTipClose = (activity as MainActivity).bottomSheetTipClose
+        bottomSheetTip = main.bottomSheetTip
+        bottomSheetTipClose = main.bottomSheetTipClose
 
         bottomSheetTipClose?.setOnClickListener {
             hideSoftKeyboard()
-            (activity as MainActivity).closeBottomSheetTips()
+            main.closeBottomSheetTips()
         }
     }
 

@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.checkIfFieldIsEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.fieldIsEmptyOrZero
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 
 class ProfileNameFragment : BaseFragment() {
@@ -21,7 +19,7 @@ class ProfileNameFragment : BaseFragment() {
 
         injector.inject(this)
 
-        (activity as MainActivity).openToolbar()
+        main.openToolbar()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,8 +48,8 @@ class ProfileNameFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.profile_name_title)
+        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        main.supportActionBar?.title = getString(R.string.profile_name_title)
 
         hideNavigation()
 

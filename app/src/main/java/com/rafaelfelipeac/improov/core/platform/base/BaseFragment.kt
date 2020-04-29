@@ -25,15 +25,17 @@ abstract class BaseFragment : Fragment() {
     @Inject
     lateinit var preferences: Preferences
 
+    val main get() = (activity as MainActivity)
+
     protected val injector by lazy { (activity as BaseActivity).injector }
 
-    val navController get() = (activity as MainActivity).navController
+    val navController get() = main.navController
 
-    private val navLayout get() = (activity as MainActivity).navLayout
+    private val navLayout get() = main.navLayout
 
-    private val fakeBottomNav get() = (activity as MainActivity).fakeBottomNav
+    private val fakeBottomNav get() = main.fakeBottomNav
 
-    val fab get() = (activity as MainActivity).fab
+    val fab get() = main.fab
 
     override fun onResume() {
         super.onResume()

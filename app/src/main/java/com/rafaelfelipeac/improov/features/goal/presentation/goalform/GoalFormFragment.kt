@@ -2,7 +2,6 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goalform
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -14,7 +13,6 @@ import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
-import com.rafaelfelipeac.improov.features.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 import java.util.*
 
@@ -63,9 +61,9 @@ class GoalFormFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.goal_form_title)
-        (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
+        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        main.supportActionBar?.title = getString(R.string.goal_form_title)
+        main.toolbar.inflateMenu(R.menu.menu_save)
 
         hideNavigation()
 
@@ -88,30 +86,30 @@ class GoalFormFragment : BaseFragment() {
         setRadioButtonType()
         setSwitchImproov()
 
-        (activity as MainActivity).openToolbar()
+        main.openToolbar()
 
         goal_form_divide_and_conquest_help.setOnClickListener {
             hideSoftKeyboard()
-            (activity as MainActivity).setupBottomSheetTipsOne()
+            main.setupBottomSheetTipsOne()
             setupBottomSheetTip()
-            (activity as MainActivity).openBottomSheetTips()
+            main.openBottomSheetTips()
         }
 
         goal_form_type_help.setOnClickListener {
             hideSoftKeyboard()
-            (activity as MainActivity).setupBottomSheetTipsTwo()
+            main.setupBottomSheetTipsTwo()
             setupBottomSheetTip()
-            (activity as MainActivity).openBottomSheetTips()
+            main.openBottomSheetTips()
         }
     }
 
     private fun setupBottomSheetTip() {
-        bottomSheetTip = (activity as MainActivity).bottomSheetTip
-        bottomSheetTipClose = (activity as MainActivity).bottomSheetTipClose
+        bottomSheetTip = main.bottomSheetTip
+        bottomSheetTipClose = main.bottomSheetTipClose
 
         bottomSheetTipClose?.setOnClickListener {
             hideSoftKeyboard()
-            (activity as MainActivity).closeBottomSheetTips()
+            main.closeBottomSheetTips()
         }
     }
 
