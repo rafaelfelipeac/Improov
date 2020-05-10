@@ -2,9 +2,7 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goalform
 
 import android.os.Bundle
 import android.view.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.*
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
@@ -27,9 +25,6 @@ class GoalFormFragment : BaseFragment() {
     private var goalsSize: Int? = null
 
     private var cal = Calendar.getInstance()
-
-    private var bottomSheetTip: BottomSheetBehavior<*>? = null
-    private var bottomSheetTipClose: ConstraintLayout? = null
 
     private val viewModel by lazy { viewModelFactory.get<GoalFormViewModel>(this) }
 
@@ -90,26 +85,16 @@ class GoalFormFragment : BaseFragment() {
 
         goal_form_divide_and_conquest_help.setOnClickListener {
             hideSoftKeyboard()
-            main.setupBottomSheetTipsOne()
+            setupBottomSheetTipsDivideAndConquer()
             setupBottomSheetTip()
-            main.openBottomSheetTips()
+            showBottomSheetTips()
         }
 
         goal_form_type_help.setOnClickListener {
             hideSoftKeyboard()
-            main.setupBottomSheetTipsTwo()
+            setupBottomSheetTipsGoalType()
             setupBottomSheetTip()
-            main.openBottomSheetTips()
-        }
-    }
-
-    private fun setupBottomSheetTip() {
-        bottomSheetTip = main.bottomSheetTip
-        bottomSheetTipClose = main.bottomSheetTipClose
-
-        bottomSheetTipClose?.setOnClickListener {
-            hideSoftKeyboard()
-            main.closeBottomSheetTips()
+            showBottomSheetTips()
         }
     }
 

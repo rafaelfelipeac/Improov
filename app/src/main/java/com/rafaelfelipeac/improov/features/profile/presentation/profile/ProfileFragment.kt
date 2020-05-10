@@ -30,7 +30,7 @@ class ProfileFragment : BaseFragment() {
         }
 
         main.closeToolbar()
-        main.closeBottomSheetTips()
+        hideBottomSheetTips()
     }
 
     override fun onCreateView(
@@ -59,7 +59,7 @@ class ProfileFragment : BaseFragment() {
         }
 
         fab.setOnClickListener {
-            main.closeBottomSheetTips()
+            hideBottomSheetTips()
 
             navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationGoalForm())
         }

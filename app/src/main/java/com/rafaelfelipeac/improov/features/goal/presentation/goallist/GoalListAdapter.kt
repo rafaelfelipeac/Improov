@@ -34,9 +34,6 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
         val progressDone = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress_done)
         val progressTotal = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress_total)
 
-
-        //val goal = goalHabit as Goal
-
         title.text = goal.name
 
         if (goal.done) {

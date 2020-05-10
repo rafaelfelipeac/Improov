@@ -63,7 +63,7 @@
                 app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
                 app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/bottom_sheet_item_button_save"
+                app:layout_constraintBottom_toTopOf="@+id/bottom_sheet_item_save"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -99,14 +99,14 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/bottom_sheet_item_button_save"
+                app:layout_constraintBottom_toBottomOf="@+id/bottom_sheet_item_save"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_item_name_hint"
                 app:layout_constraintVertical_bias="1.0"
                 tools:visibility="visible" />
 
         <android.widget.Button
-                android:id="@+id/bottom_sheet_item_button_save"
+                android:id="@+id/bottom_sheet_item_save"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"

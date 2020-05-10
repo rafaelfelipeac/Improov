@@ -7,10 +7,10 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".features.main.MainActivity">
 
-    <include layout="@layout/bottom_sheet_tips_one" />
+    <include layout="@layout/bottom_sheet_tips_divide_and_conquer" />
 
-    <include layout="@layout/bottom_sheet_tips_two" />
+    <include layout="@layout/bottom_sheet_tips_goals_type" />
 
-    <include layout="@layout/bottom_sheet_tips_three" />
+    <include layout="@layout/bottom_sheet_tips_swipe" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

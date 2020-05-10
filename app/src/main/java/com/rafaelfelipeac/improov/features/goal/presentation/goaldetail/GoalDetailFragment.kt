@@ -2,17 +2,12 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.*
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
@@ -29,13 +24,6 @@ class GoalDetailFragment : BaseFragment() {
     private var historicAdapter = HistoricAdapter()
 
     private var isFromDragAndDrop = 0
-
-    private lateinit var bottomSheetItem: BottomSheetDialog
-    private lateinit var bottomSheetItemSave: Button
-    private lateinit var bottomSheetItemName: TextInputEditText
-    private lateinit var bottomSheetItemEmptyName: TextView
-    private lateinit var bottomSheetItemTitle: TextView
-    private lateinit var bottomSheetItemDate: TextView
 
     private var seriesSingle: Int = 0
     private var seriesBronze: Int = 0
@@ -109,49 +97,7 @@ class GoalDetailFragment : BaseFragment() {
         viewModel.setGoalId(goalId!!)
         viewModel.loadData()
 
-        setupBottomSheetItem()
-    }
-
-    private fun setupBottomSheetItem() {
-        bottomSheetItem = BottomSheetDialog(this.activity!!)
-        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_item, null)
-        bottomSheetItem.setContentView(sheetView)
-
-        bottomSheetItemSave = sheetView.findViewById(R.id.bottom_sheet_item_button_save)
-        bottomSheetItemName = sheetView.findViewById(R.id.bottom_sheet_item_name)
-        bottomSheetItemTitle = sheetView.findViewById(R.id.bottom_sheet_item_title)
-        bottomSheetItemDate = sheetView.findViewById(R.id.bottom_sheet_item_date)
-        bottomSheetItemEmptyName = sheetView.findViewById(R.id.bottom_sheet_item_empty_name)
-
-        bottomSheetItemSave.setOnClickListener {
-            if (bottomSheetItemName.isEmpty()) {
-                bottomSheetItemEmptyName.text = getString(R.string.item_empty_name)
-            } else {
-                if (this.item == null) {
-                    // new item
-                    val item =
-                        Item(
-                            goalId = goal?.goalId!!,
-                            name = bottomSheetItemName.text.toString(),
-                            done = false,
-                            order = itemsSize!! + 1,
-                            createdDate = getCurrentTime()
-                        )
-
-                    viewModel.onSaveItem(item)
-                } else {
-                    // update item
-                    val item = this.item!!
-                    item.name = bottomSheetItemName.text.toString()
-                    item.updatedDate = getCurrentTime()
-
-                    viewModel.onSaveItem(item)
-                }
-
-                bottomSheetItemName.resetValue()
-                closeBottomSheetItem()
-            }
-        }
+        setupBottomSheetItem(::newItem, ::updateItem)
     }
 
     private fun resetFistTime() {
@@ -159,44 +105,6 @@ class GoalDetailFragment : BaseFragment() {
         seriesBronze = 0
         seriesSilver = 0
         seriesGold = 0
-    }
-
-    private fun openBottomSheetItem(item: Item?) {
-        bottomSheetItem.show()
-
-        bottomSheetItem.window?.setSoftInputMode(
-            WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE or
-                    WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
-        )
-
-        val bottomSheet = bottomSheetItem.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
-        BottomSheetBehavior.from(bottomSheet!!).state = BottomSheetBehavior.STATE_EXPANDED
-
-        this.item = item
-
-        if (item != null) {
-            bottomSheetItemTitle.text = getString(R.string.item_title_edit)
-            bottomSheetItemName.setText(item.name)
-
-            if (item.done) {
-                bottomSheetItemDate.text = String.format(
-                    getString(R.string.item_date_format),
-                    context?.let { item.doneDate?.convertDateToString(it) }
-                )
-                bottomSheetItemDate.visible()
-            } else {
-                bottomSheetItemDate.gone()
-            }
-        } else {
-            bottomSheetItemTitle.text = getString(R.string.item_title_add)
-            bottomSheetItemName.resetValue()
-            bottomSheetItemDate.resetValue()
-            bottomSheetItemDate.gone()
-        }
-    }
-
-    private fun closeBottomSheetItem() {
-        bottomSheetItem.hide()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -208,7 +116,7 @@ class GoalDetailFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_add -> {
-                openBottomSheetItem(null)
+                showBottomSheetItem(null)
 
                 return true
             }
@@ -407,7 +315,10 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun setItems() {
-        itemsAdapter.clickListener = { openBottomSheetItem(it) }
+        itemsAdapter.clickListener = {
+            showBottomSheetItem(it)
+            this.item = it
+        }
 
         val swipeAndDragHelper = SwipeAndDragHelperItem(itemsAdapter)
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
@@ -603,5 +514,26 @@ class GoalDetailFragment : BaseFragment() {
 
             hideSoftKeyboard()
         }
+    }
+
+    private fun newItem(name: String) {
+        val item =
+            Item(
+                goalId = goal?.goalId!!,
+                name = name,
+                done = false,
+                order = itemsSize!! + 1,
+                createdDate = getCurrentTime()
+            )
+
+        viewModel.onSaveItem(item)
+    }
+
+    private fun updateItem(name: String) {
+        val item = this.item!!
+        item.name = name
+        item.updatedDate = getCurrentTime()
+
+        viewModel.onSaveItem(item)
     }
 }

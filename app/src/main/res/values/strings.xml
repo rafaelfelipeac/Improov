@@ -224,29 +224,29 @@
     <string name="item_empty_name">Item name is empty.</string>
     <string name="item_date_format">Completed on %s.</string>
 
-    <!-- BottomSheet Tips One -->
-    <string name="tips_one_title">Divide And Conquer</string>
-    <string name="tips_one_message_1">Splitting a large and complex goal into smaller parts is a good tactic to keep that
+    <!-- BottomSheet Tips Divide And Conquer -->
+    <string name="tips_divide_and_conquer_title">Divide And Conquer</string>
+    <string name="tips_divide_and_conquer_message_1">Splitting a large and complex goal into smaller parts is a good tactic to keep that
         goal from being abandoned. \n\nThe sense of progress is greater and you will always be motivated to achieve what you want. \n\nTherefore your goal is divided into 3 parts:
         bronze, silver and gold.
     </string>
-    <string name="tips_one_message_2">The bronze value is the first challenge. With each part of the goal achieved, you will be closer to your achievement.
+    <string name="tips_divide_and_conquer_message_2">The bronze value is the first challenge. With each part of the goal achieved, you will be closer to your achievement.
     </string>
 
-    <!-- BottomSheet Tips Two -->
-    <string name="tips_two_title">Goals type</string>
-    <string name="tips_two_type_list_title">List</string>
-    <string name="tips_two_type_list_message">For goals that consist of completing different items on a list. Each completed item represents 1 point for the final goal.</string>
-    <string name="tips_two_type_counter_title">Counter</string>
-    <string name="tips_two_type_counter_message">Ideal for goals where the values to be added or subtracted are always the same.</string>
-    <string name="tips_two_type_final_title">Final value</string>
-    <string name="tips_two_type_final_message">Intended for goals where the values to be added or subtracted constantly change.</string>
+    <!-- BottomSheet Tips Goal Type -->
+    <string name="tips_goal_type_title">Goals type</string>
+    <string name="tips_goal_type_list_title">List</string>
+    <string name="tips_goal_type_list_message">For goals that consist of completing different items on a list. Each completed item represents 1 point for the final goal.</string>
+    <string name="tips_goal_type_counter_title">Counter</string>
+    <string name="tips_goal_type_counter_message">Ideal for goals where the values to be added or subtracted are always the same.</string>
+    <string name="tips_goal_type_final_title">Final value</string>
+    <string name="tips_goal_type_final_message">Intended for goals where the values to be added or subtracted constantly change.</string>
 
-    <!-- BottomSheet Tips Three -->
-    <string name="tips_three_title">Swipe</string>
-    <string name="tips_three_message_1">If you want to finish a goal immediately, even without reaching the full amount, slide the item aside to complete it.
+    <!-- BottomSheet Tips Swipe -->
+    <string name="tips_swipe_title">Swipe</string>
+    <string name="tips_swipe_message_1">If you want to finish a goal immediately, even without reaching the full amount, slide the item aside to complete it.
     </string>
-    <string name="tips_three_message_2">If you change your mind, just swipe again and the item will be ready to update again.
+    <string name="tips_swipe_message_2">If you change your mind, just swipe again and the item will be ready to update again.
     </string>
 
 </resources>

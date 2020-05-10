@@ -5,14 +5,10 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.getPercentage
 import com.rafaelfelipeac.improov.core.extension.isVisible
@@ -27,13 +23,6 @@ class GoalListFragment : BaseFragment() {
     private var goalsAdapter = GoalListAdapter(this)
 
     private var isFromDragAndDrop = 0
-
-    private lateinit var bottomSheetGoalDone: BottomSheetDialog
-    private lateinit var bottomSheetGoalDoneYes: Button
-    private lateinit var bottomSheetGoalDoneNo: Button
-
-    private var bottomSheetTip: BottomSheetBehavior<*>? = null
-    private var bottomSheetTipClose: ConstraintLayout? = null
 
     private val viewModel by lazy { viewModelFactory.get<GoalListViewModel>(this) }
 
@@ -61,7 +50,7 @@ class GoalListFragment : BaseFragment() {
         super.onResume()
 
         main.closeToolbar()
-        main.closeBottomSheetTips()
+        hideBottomSheetTips()
     }
 
     override fun onCreateView(
@@ -86,21 +75,21 @@ class GoalListFragment : BaseFragment() {
         viewModel.loadData()
 
         fab.setOnClickListener {
-            main.closeBottomSheetTips()
+            hideBottomSheetTips()
 
             navController.navigate(GoalListFragmentDirections.actionNavigationListToNavigationGoalForm())
         }
 
-        setupBottomSheetGoalDone()
+        setupBottomSheetGoal()
 
         if (preferences.fistTimeList) {
             preferences.fistTimeList = false
 
             Handler().postDelayed(
                 {
-                    main.setupBottomSheetTipsThree()
+                    setupBottomSheetTipsSwipe()
                     setupBottomSheetTip()
-                    main.openBottomSheetTips()
+                    showBottomSheetTips()
                 }, 1000
             )
         }
@@ -134,43 +123,6 @@ class GoalListFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = goalsAdapter
         }
-    }
-
-    private fun setupBottomSheetTip() {
-        bottomSheetTip = main.bottomSheetTip
-        bottomSheetTipClose = main.bottomSheetTipClose
-
-        bottomSheetTipClose?.setOnClickListener {
-            hideSoftKeyboard()
-            main.closeBottomSheetTips()
-        }
-    }
-
-    private fun setupBottomSheetGoalDone() {
-        bottomSheetGoalDone = BottomSheetDialog(this.activity!!)
-        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_goal_done, null)
-        bottomSheetGoalDone.setContentView(sheetView)
-
-        bottomSheetGoalDoneYes = sheetView.findViewById(R.id.goal_done_yes)
-        bottomSheetGoalDoneNo = sheetView.findViewById(R.id.goal_done_no)
-    }
-
-    private fun openBottomSheetGoalDone(goal: Goal, function: (goal: Goal) -> Unit) {
-        bottomSheetGoalDone.show()
-
-        bottomSheetGoalDoneYes.setOnClickListener {
-            function(goal)
-            closeBottomSheetGoalDone()
-        }
-
-        bottomSheetGoalDoneNo.setOnClickListener {
-            setupGoals()
-            closeBottomSheetGoalDone()
-        }
-    }
-
-    private fun closeBottomSheetGoalDone() {
-        bottomSheetGoalDone.hide()
     }
 
     fun onViewMoved(
@@ -209,8 +161,8 @@ class GoalListFragment : BaseFragment() {
                 if (goal.done || goal.getPercentage() >= 100) {
                     doneOrUndoneGoal(goal)
                 } else {
-                    //setupList()
-                    openBottomSheetGoalDone(goal, ::doneOrUndoneGoal)
+                    setupGoals(true)
+                    showBottomSheetGoal(goal, ::doneOrUndoneGoal)
                 }
             }
             ItemTouchHelper.LEFT -> {
