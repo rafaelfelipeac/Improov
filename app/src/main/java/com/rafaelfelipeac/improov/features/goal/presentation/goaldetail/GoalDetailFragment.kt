@@ -46,7 +46,7 @@ class GoalDetailFragment : BaseFragment() {
 
         itemsSize = response.items.size
 
-        if (isFromDragAndDrop == 0) {
+        if (isFromDragAndDrop == 0 && !response.itemSaved) {
             response.items
                 .let { itemsAdapter.setItems(it) }
             setupItems(response.items.isNotEmpty())

@@ -27,7 +27,7 @@ class GoalListFragment : BaseFragment() {
     private val viewModel by lazy { viewModelFactory.get<GoalListViewModel>(this) }
 
     private val stateObserver = Observer<GoalListViewModel.ViewState> { response ->
-        if (isFromDragAndDrop == 0) {
+        if (isFromDragAndDrop == 0 && !response.goalSaved) {
             response.goals
                 .let { goalsAdapter.setItems(it) }
             setupGoals(response.goals.isNotEmpty())
