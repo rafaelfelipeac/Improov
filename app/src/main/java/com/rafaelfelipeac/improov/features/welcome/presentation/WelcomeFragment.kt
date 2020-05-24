@@ -4,20 +4,31 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.invisible
+import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_welcome.*
 
 class WelcomeFragment : BaseFragment() {
 
-    private val welcomeViewModel by lazy { viewModelFactory.get<WelcomeViewModel>(this) }
+    private val viewModel by lazy { viewModelFactory.get<WelcomeViewModel>(this) }
+
+    private val stateObserver = Observer<WelcomeViewModel.ViewState> { response ->
+        if (response.welcome || response.welcomeSaved) {
+            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
         injector.inject(this)
 
-        super.onCreate(savedInstanceState)
+        observe(viewModel.stateLiveData, stateObserver)
+        viewModel.loadData()
     }
 
     override fun onCreateView(
@@ -36,21 +47,11 @@ class WelcomeFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_welcome, container, false)
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        if (preferences.welcome) {
-            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         welcome_start_button.setOnClickListener {
-            preferences.welcome = true
-
-            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
+            viewModel.onSaveWelcome(true)
         }
 
         welcome_viewpager.adapter =

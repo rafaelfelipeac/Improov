@@ -109,12 +109,12 @@
     <string name="profile_edit_name_message">Edit your name</string>
     <string name="profile_show_welcome_message">See initial messages</string>
 
-    <!-- ProfileName -->
-    <string name="profile_name_title">Edit name</string>
-    <string name="profile_name_empty_fields">Your name cannot be empty.</string>
-    <string name="profile_name_success">Profile edited.</string>
-    <string name="profile_name_name_hint">Name</string>
-    <string name="profile_name_save_message">Save</string>
+    <!-- ProfileEdit -->
+    <string name="profile_edit_title">Edit name</string>
+    <string name="profile_edit_empty_fields">Your name cannot be empty.</string>
+    <string name="profile_edit_success">Profile edited.</string>
+    <string name="profile_edit_name_hint">Name</string>
+    <string name="profile_edit_save_message">Save</string>
 
     <!-- DialogOneButton-->
     <string name="dialog_one_button_message">Message</string>

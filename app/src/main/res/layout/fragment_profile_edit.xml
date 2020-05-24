@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDarkOne"
-        tools:context=".features.profile.presentation.profilename.ProfileNameFragment">
+        tools:context=".features.profile.presentation.profileedit.ProfileEditFragment">
 
     <ScrollView
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="60dp"
-                    android:hint="@string/profile_name_name_hint"
+                    android:hint="@string/profile_edit_name_hint"
                     android:textColor="@color/colorPrimary"
                     app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
                     app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
@@ -67,7 +67,7 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="24dp"
                     android:background="@drawable/rounded_button"
-                    android:text="@string/profile_name_save_message"
+                    android:text="@string/profile_edit_save_message"
                     android:textColor="@color/colorPrimaryDarkOne"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

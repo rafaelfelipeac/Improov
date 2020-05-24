@@ -109,12 +109,12 @@
     <string name="profile_edit_name_message">Altere seu nome</string>
     <string name="profile_show_welcome_message">Ver mensagens iniciais</string>
 
-    <!-- ProfileName -->
-    <string name="profile_name_title">Editar nome</string>
-    <string name="profile_name_empty_fields">Seu nome não pode ser vazio.</string>
-    <string name="profile_name_success">Perfil editado.</string>
-    <string name="profile_name_name_hint">Nome</string>
-    <string name="profile_name_save_message">Salvar</string>
+    <!-- ProfileEdit -->
+    <string name="profile_edit_title">Editar nome</string>
+    <string name="profile_edit_empty_fields">Seu nome não pode ser vazio.</string>
+    <string name="profile_edit_success">Perfil editado.</string>
+    <string name="profile_edit_name_hint">Nome</string>
+    <string name="profile_edit_save_message">Salvar</string>
 
     <!-- DialogOneButton-->
     <string name="dialog_one_button_message">Mensagem</string>

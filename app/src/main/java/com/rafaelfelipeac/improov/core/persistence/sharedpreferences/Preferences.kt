@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 const val preferences_name = "com.rafaelfelipeac.improov.preferences"
+
 const val KEY_WELCOME = "KEY_WELCOME"
 const val KEY_NAME = "KEY_NAME"
 const val KEY_LANGUAGE = "KEY_LANGUAGE"
@@ -18,6 +19,14 @@ class Preferences(context: Context) {
         get() = prefs.getBoolean(KEY_WELCOME, false)
         set(value) = prefs.edit().putBoolean(KEY_WELCOME, value).apply()
 
+    var name: String
+        get() = prefs.getString(KEY_NAME, "")!!
+        set(value) = prefs.edit().putString(KEY_NAME, value).apply()
+
+    var language: String
+        get() = prefs.getString(KEY_LANGUAGE, "en")!!
+        set(value) = prefs.edit().putString(KEY_LANGUAGE, value).apply()
+
     var fistTimeAdd: Boolean
         get() = prefs.getBoolean(KEY_FIRST_TIME_ADD, true)
         set(value) = prefs.edit().putBoolean(KEY_FIRST_TIME_ADD, value).apply()
@@ -26,11 +35,4 @@ class Preferences(context: Context) {
         get() = prefs.getBoolean(KEY_FIRST_TIME_LIST, false)
         set(value) = prefs.edit().putBoolean(KEY_FIRST_TIME_LIST, value).apply()
 
-    var name: String
-        get() = prefs.getString(KEY_NAME, "")!!
-        set(value) = prefs.edit().putString(KEY_NAME, value).apply()
-
-    var language: String
-        get() = prefs.getString(KEY_LANGUAGE, "en")!!
-        set(value) = prefs.edit().putString(KEY_LANGUAGE, value).apply()
 }

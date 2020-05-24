@@ -4,14 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.gone
+import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment() {
 
-    private val profileViewModel by lazy { viewModelFactory.get<ProfileViewModel>(this) }
+    private val viewModel by lazy { viewModelFactory.get<ProfileViewModel>(this) }
+
+    private val stateObserver = Observer<ProfileViewModel.ViewState> { response ->
+        if (response.name.isNotEmpty()) {
+            profile_user_name.text = response.name
+        } else {
+            profile_user_name.gone()
+            profile_edit_profile_button.text = getString(R.string.profile_add_name_message)
+        }
+
+        if (response.welcomeSaved && response.firstTimeAddSaved && response.firstTimeListSaved) {
+            navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationWelcome())
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,13 +36,6 @@ class ProfileFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-
-        if (preferences.name.isNotEmpty()) {
-            profile_user_name.text = preferences.name
-        } else {
-            profile_user_name.gone()
-            profile_edit_profile_button.text = getString(R.string.profile_add_name_message)
-        }
 
         main.closeToolbar()
         hideBottomSheetTips()
@@ -50,12 +58,13 @@ class ProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        profile_show_welcome_button.setOnClickListener {
-            preferences.welcome = false
-            preferences.fistTimeAdd = true
-            preferences.fistTimeList = false
+        observe(viewModel.stateLiveData, stateObserver)
+        viewModel.loadData()
 
-            navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationWelcome())
+        profile_show_welcome_button.setOnClickListener {
+            viewModel.onSaveWelcome(false)
+            viewModel.onSaveFirstTimeAdd(true)
+            viewModel.onSaveFirstTimeList(false)
         }
 
         fab.setOnClickListener {

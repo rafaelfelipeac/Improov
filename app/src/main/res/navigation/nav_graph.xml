@@ -112,7 +112,7 @@
 
     <fragment
             android:id="@+id/navigation_profile_edit"
-            android:name="com.rafaelfelipeac.improov.features.profile.presentation.profilename.ProfileNameFragment"
+            android:name="com.rafaelfelipeac.improov.features.profile.presentation.profileedit.ProfileEditFragment"
             android:label="fragment_profile_edit"
             tools:layout="@layout/fragment_profile_edit" />
 

@@ -1,18 +1,24 @@
-package com.rafaelfelipeac.improov.features.profile.presentation.profilename
+package com.rafaelfelipeac.improov.features.profile.presentation.profileedit
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.checkIfFieldIsEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.fieldIsEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 
-class ProfileNameFragment : BaseFragment() {
+class ProfileEditFragment : BaseFragment() {
 
-    private val profileEditViewModel by lazy { viewModelFactory.get<ProfileNameViewModel>(this) }
+    private val viewModel by lazy { viewModelFactory.get<ProfileEditViewModel>(this) }
+
+    private val stateObserver = Observer<ProfileEditViewModel.ViewState> { response ->
+        profile_edit_name.setText(response.name)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +31,8 @@ class ProfileNameFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeViewModel()
-
-        profile_edit_name.setText(preferences.name)
+        observe(viewModel.stateLiveData, stateObserver)
+        viewModel.loadData()
 
         profile_edit_save_button.setOnClickListener {
             when {
@@ -35,7 +40,7 @@ class ProfileNameFragment : BaseFragment() {
                 }
                 else -> {
                     hideSoftKeyboard()
-                    preferences.name = profile_edit_name.text.toString()
+                    viewModel.onSaveName(profile_edit_name.text.toString())
                     navController.navigateUp()
                 }
             }
@@ -49,7 +54,7 @@ class ProfileNameFragment : BaseFragment() {
     ): View? {
 
         main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        main.supportActionBar?.title = getString(R.string.profile_name_title)
+        main.supportActionBar?.title = getString(R.string.profile_edit_title)
 
         hideNavigation()
 
@@ -61,7 +66,7 @@ class ProfileNameFragment : BaseFragment() {
             profile_edit_name.checkIfFieldIsEmptyOrZero() -> {
                 profile_edit_name.fieldIsEmptyOrZero(this, false)
 
-                setErrorMessage(getString(R.string.profile_name_empty_fields))
+                setErrorMessage(getString(R.string.profile_edit_empty_fields))
                 true
             }
             else -> false

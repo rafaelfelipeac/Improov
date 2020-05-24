@@ -71,7 +71,6 @@ class GoalListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observe(viewModel.stateLiveData, stateObserver)
-
         viewModel.loadData()
 
         fab.setOnClickListener {

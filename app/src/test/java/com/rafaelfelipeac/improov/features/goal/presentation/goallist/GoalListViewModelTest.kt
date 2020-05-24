@@ -1,7 +1,6 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goallist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.rafaelfelipeac.improov.base.BaseTest
 import com.rafaelfelipeac.improov.base.CoroutineRule
 import com.rafaelfelipeac.improov.base.DataProvider.createGoal
 import com.rafaelfelipeac.improov.base.DataProvider.shouldBeEqualTo
@@ -18,7 +17,7 @@ import org.mockito.BDDMockito.mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class GoalListViewModelTest : BaseTest() {
+class GoalListViewModelTest {
 
     @ExperimentalCoroutinesApi
     @get:Rule
