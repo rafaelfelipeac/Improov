@@ -7,7 +7,7 @@ import com.rafaelfelipeac.improov.core.platform.base.BaseViewState
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.GetNameUseCase
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveFirstTimeAddUseCase
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveFirstTimeListUseCase
-import com.rafaelfelipeac.improov.features.welcome.domain.usecase.SaveWelcomeUseCase
+import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveWelcomeUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

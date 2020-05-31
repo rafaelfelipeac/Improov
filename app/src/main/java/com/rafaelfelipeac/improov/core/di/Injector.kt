@@ -6,7 +6,8 @@ import com.rafaelfelipeac.improov.features.goal.presentation.goalform.GoalFormFr
 import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListFragment
 import com.rafaelfelipeac.improov.features.profile.presentation.profile.ProfileFragment
 import com.rafaelfelipeac.improov.features.profile.presentation.profileedit.ProfileEditFragment
-import com.rafaelfelipeac.improov.features.settings.presentation.SettingsLanguageFragment
+import com.rafaelfelipeac.improov.features.settings.presentation.settings.SettingsFragment
+import com.rafaelfelipeac.improov.features.settings.presentation.settingslanguage.SettingsLanguageFragment
 import com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeFragment
 import com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeItemFragment
 
@@ -26,6 +27,8 @@ interface Injector {
     fun inject(profileFragment: ProfileFragment)
 
     fun inject(profileEditFragment: ProfileEditFragment)
+
+    fun inject(settingsFragment: SettingsFragment)
 
     fun inject(settingsLanguageFragment: SettingsLanguageFragment)
 }

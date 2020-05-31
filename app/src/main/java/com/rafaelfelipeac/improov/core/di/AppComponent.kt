@@ -13,7 +13,8 @@ import javax.inject.Singleton
     GoalModule::class,
     ProfileModule::class,
     WelcomeModule::class,
-    PersistenceModule::class
+    PersistenceModule::class,
+    SettingsModule::class
 ])
 @Singleton
 interface AppComponent : Injector {

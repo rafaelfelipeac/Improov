@@ -7,9 +7,11 @@ import com.rafaelfelipeac.improov.core.di.modules.viewModel.ViewModelKey
 import com.rafaelfelipeac.improov.features.profile.data.respository.FirstTimeAddRepositoryImpl
 import com.rafaelfelipeac.improov.features.profile.data.respository.FirstTimeListRepositoryImpl
 import com.rafaelfelipeac.improov.features.profile.data.respository.NameRepositoryImpl
+import com.rafaelfelipeac.improov.features.profile.data.respository.WelcomeRepositoryImpl
 import com.rafaelfelipeac.improov.features.profile.domain.repository.FirstTimeAddRepository
 import com.rafaelfelipeac.improov.features.profile.domain.repository.FirstTimeListRepository
 import com.rafaelfelipeac.improov.features.profile.domain.repository.NameRepository
+import com.rafaelfelipeac.improov.features.profile.domain.repository.WelcomeRepository
 import com.rafaelfelipeac.improov.features.profile.presentation.profile.ProfileFragment
 import com.rafaelfelipeac.improov.features.profile.presentation.profile.ProfileViewModel
 import com.rafaelfelipeac.improov.features.profile.presentation.profileedit.ProfileEditFragment
@@ -23,6 +25,9 @@ abstract class ProfileModule {
 
     @Binds
     abstract fun nameRepository(nameRepositoryImpl: NameRepositoryImpl): NameRepository
+
+    @Binds
+    abstract fun welcomeRepository(welcomeRepositoryImpl: WelcomeRepositoryImpl): WelcomeRepository
 
     @Binds
     abstract fun firstTimeAddRepository(firstTimeAddRepositoryImpl: FirstTimeAddRepositoryImpl): FirstTimeAddRepository

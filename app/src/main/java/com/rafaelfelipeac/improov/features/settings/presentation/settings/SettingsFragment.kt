@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.settings.presentation
+package com.rafaelfelipeac.improov.features.settings.presentation.settings
 
 import android.content.ActivityNotFoundException
 import android.content.Intent

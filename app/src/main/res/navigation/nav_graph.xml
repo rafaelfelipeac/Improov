@@ -186,7 +186,7 @@
 
     <fragment
             android:id="@+id/navigation_settings"
-            android:name="com.rafaelfelipeac.improov.features.settings.presentation.SettingsFragment"
+            android:name="com.rafaelfelipeac.improov.features.settings.presentation.settings.SettingsFragment"
             android:label="fragment_settings">
         <action
                 android:id="@+id/action_navigation_settings_to_navigation_settings_language"
@@ -195,7 +195,7 @@
 
     <fragment
             android:id="@+id/navigation_settings_language"
-            android:name="com.rafaelfelipeac.improov.features.settings.presentation.SettingsLanguageFragment"
+            android:name="com.rafaelfelipeac.improov.features.settings.presentation.settingslanguage.SettingsLanguageFragment"
             android:label="fragment_settings_language" />
 
 </navigation>
