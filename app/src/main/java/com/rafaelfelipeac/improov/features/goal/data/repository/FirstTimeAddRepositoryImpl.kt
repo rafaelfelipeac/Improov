@@ -1,7 +1,7 @@
-package com.rafaelfelipeac.improov.features.profile.data.respository
+package com.rafaelfelipeac.improov.features.goal.data.repository
 
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
-import com.rafaelfelipeac.improov.features.profile.domain.repository.FirstTimeAddRepository
+import com.rafaelfelipeac.improov.features.goal.domain.repository.FirstTimeAddRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

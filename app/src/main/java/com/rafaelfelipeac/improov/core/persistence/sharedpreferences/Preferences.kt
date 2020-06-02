@@ -27,11 +27,11 @@ class Preferences(context: Context) {
         get() = prefs.getString(KEY_LANGUAGE, "en")!!
         set(value) = prefs.edit().putString(KEY_LANGUAGE, value).apply()
 
-    var fistTimeAdd: Boolean
+    var firstTimeAdd: Boolean
         get() = prefs.getBoolean(KEY_FIRST_TIME_ADD, true)
         set(value) = prefs.edit().putBoolean(KEY_FIRST_TIME_ADD, value).apply()
 
-    var fistTimeList: Boolean
+    var firstTimeList: Boolean
         get() = prefs.getBoolean(KEY_FIRST_TIME_LIST, false)
         set(value) = prefs.edit().putBoolean(KEY_FIRST_TIME_LIST, value).apply()
 

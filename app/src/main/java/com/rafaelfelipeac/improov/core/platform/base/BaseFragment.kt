@@ -19,7 +19,6 @@ import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.di.modules.viewModel.ViewModelFactory
 import com.rafaelfelipeac.improov.core.extension.*
-import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
@@ -30,9 +29,6 @@ abstract class BaseFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
-    @Inject
-    lateinit var preferences: Preferences
 
     protected val injector by lazy { (activity as BaseActivity).injector }
 

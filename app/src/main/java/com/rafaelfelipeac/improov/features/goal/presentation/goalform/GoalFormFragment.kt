@@ -22,6 +22,8 @@ class GoalFormFragment : BaseFragment() {
     private var items: List<Item> = listOf()
     private var historics: List<Historic> = listOf()
 
+    private var firstTimeAdd = false
+
     private var goalsSize: Int? = null
 
     private var cal = Calendar.getInstance()
@@ -42,6 +44,8 @@ class GoalFormFragment : BaseFragment() {
         }
 
         goalsSize = response.goals.size
+
+        firstTimeAdd = response.firstTimeAddLoaded
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -302,9 +306,9 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun verifyFistTimeSaving() {
-        if (preferences.fistTimeAdd) {
-            preferences.fistTimeAdd = false
-            preferences.fistTimeList = true
+        if (firstTimeAdd) {
+            viewModel.onSaveFirstTimeAdd(false)
+            viewModel.onSaveFirstTimeList(true)
         }
     }
 

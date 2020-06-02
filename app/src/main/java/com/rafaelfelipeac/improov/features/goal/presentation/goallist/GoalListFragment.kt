@@ -24,6 +24,8 @@ class GoalListFragment : BaseFragment() {
 
     private var isFromDragAndDrop = 0
 
+    private var swipeShown = false
+
     private val viewModel by lazy { viewModelFactory.get<GoalListViewModel>(this) }
 
     private val stateObserver = Observer<GoalListViewModel.ViewState> { response ->
@@ -35,6 +37,10 @@ class GoalListFragment : BaseFragment() {
 
         if (isFromDragAndDrop > 0) {
             isFromDragAndDrop--
+        }
+
+        if (response.firstTimeList && !swipeShown) {
+            showBottomSheetTipsSwipe()
         }
     }
 
@@ -80,18 +86,6 @@ class GoalListFragment : BaseFragment() {
         }
 
         setupBottomSheetGoal()
-
-        if (preferences.fistTimeList) {
-            preferences.fistTimeList = false
-
-            Handler().postDelayed(
-                {
-                    setupBottomSheetTipsSwipe()
-                    setupBottomSheetTip()
-                    showBottomSheetTips()
-                }, 1000
-            )
-        }
     }
 
     private fun setupGoals(visible: Boolean = true) {
@@ -186,5 +180,19 @@ class GoalListFragment : BaseFragment() {
     private fun archiveGoal(goal: Any) {
         (goal as Goal).archived = false
         viewModel.onSaveGoal(goal)
+    }
+
+    private fun showBottomSheetTipsSwipe() {
+        viewModel.onSaveFirstTimeList(false)
+
+        swipeShown = true
+
+        Handler().postDelayed(
+            {
+                setupBottomSheetTipsSwipe()
+                setupBottomSheetTip()
+                showBottomSheetTips()
+            }, 1000
+        )
     }
 }
