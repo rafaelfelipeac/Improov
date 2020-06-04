@@ -7,6 +7,9 @@ import com.rafaelfelipeac.improov.base.DataProvider.createHistoric
 import com.rafaelfelipeac.improov.base.DataProvider.createItem
 import com.rafaelfelipeac.improov.base.DataProvider.shouldBeEqualTo
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimeadd.GetFirstTimeAddUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimeadd.SaveFirstTimeAddUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.SaveFirstTimeListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
@@ -41,6 +44,9 @@ class GoalFormViewModelTest {
     private var mockDeleteItemUseCase = mock(DeleteItemUseCase::class.java)
     private var mockGetHistoricListUseCase = mock(GetHistoricListUseCase::class.java)
     private var mockDeleteHistoricUseCase = mock(DeleteHistoricUseCase::class.java)
+    private var mockSaveFirstTimeListUseCase = mock(SaveFirstTimeListUseCase::class.java)
+    private var mockSaveFirstTimeAddUseCase = mock(SaveFirstTimeAddUseCase::class.java)
+    private var mockGetFirstTimeAddUseCase = mock(GetFirstTimeAddUseCase::class.java)
 
     private lateinit var goalFormViewModel: GoalFormViewModel
 
@@ -53,7 +59,10 @@ class GoalFormViewModelTest {
             mockGetItemListUseCase,
             mockDeleteItemUseCase,
             mockGetHistoricListUseCase,
-            mockDeleteHistoricUseCase
+            mockDeleteHistoricUseCase,
+            mockSaveFirstTimeListUseCase,
+            mockSaveFirstTimeAddUseCase,
+            mockGetFirstTimeAddUseCase
         )
     }
 
@@ -77,7 +86,10 @@ class GoalFormViewModelTest {
             items = listOf(),
             itemDeleted = false,
             historics = listOf(),
-            historicDeleted = false
+            historicDeleted = false,
+            firstTimeAddSaved = false,
+            firstTimeListSaved = false,
+            firstTimeAddLoaded = false
         )
     }
 
@@ -102,7 +114,10 @@ class GoalFormViewModelTest {
             items = listOf(),
             itemDeleted = false,
             historics = listOf(),
-            historicDeleted = false
+            historicDeleted = false,
+            firstTimeAddSaved = false,
+            firstTimeListSaved = false,
+            firstTimeAddLoaded = false
         )
     }
 
@@ -125,7 +140,10 @@ class GoalFormViewModelTest {
             items = listOf(),
             itemDeleted = false,
             historics = listOf(),
-            historicDeleted = false
+            historicDeleted = false,
+            firstTimeAddSaved = false,
+            firstTimeListSaved = false,
+            firstTimeAddLoaded = false
         )
     }
 
@@ -154,7 +172,10 @@ class GoalFormViewModelTest {
             items = items,
             itemDeleted = false,
             historics = listOf(),
-            historicDeleted = false
+            historicDeleted = false,
+            firstTimeAddSaved = false,
+            firstTimeListSaved = false,
+            firstTimeAddLoaded = false
         )
     }
 
@@ -177,7 +198,10 @@ class GoalFormViewModelTest {
             items = listOf(),
             itemDeleted = true,
             historics = listOf(),
-            historicDeleted = false
+            historicDeleted = false,
+            firstTimeAddSaved = false,
+            firstTimeListSaved = false,
+            firstTimeAddLoaded = false
         )
     }
 
@@ -206,7 +230,10 @@ class GoalFormViewModelTest {
             items = listOf(),
             itemDeleted = false,
             historics = historics,
-            historicDeleted = false
+            historicDeleted = false,
+            firstTimeAddSaved = false,
+            firstTimeListSaved = false,
+            firstTimeAddLoaded = false
         )
     }
 
@@ -229,7 +256,88 @@ class GoalFormViewModelTest {
             items = listOf(),
             itemDeleted = false,
             historics = listOf(),
-            historicDeleted = true
+            historicDeleted = true,
+            firstTimeAddSaved = false,
+            firstTimeListSaved = false,
+            firstTimeAddLoaded = false
+        )
+    }
+
+    @Test
+    fun `GIVEN saveFirstTimeList is successful WHEN onSaveFirstTimeList is called THEN true is returned`() {
+        // given
+        val booleanValue = true
+
+        given(runBlocking { mockSaveFirstTimeListUseCase.execute(booleanValue) })
+            .willReturn(Unit)
+
+        // when
+        goalFormViewModel.onSaveFirstTimeList(booleanValue)
+
+        // then
+        goalFormViewModel.stateLiveData.value shouldBeEqualTo GoalFormViewModel.ViewState(
+            goalSaved = false,
+            goal = Goal(),
+            goals = listOf(),
+            items = listOf(),
+            itemDeleted = false,
+            historics = listOf(),
+            historicDeleted = false,
+            firstTimeAddSaved = false,
+            firstTimeListSaved = true,
+            firstTimeAddLoaded = false
+        )
+    }
+
+    @Test
+    fun `GIVEN saveFirstTimeAdd is successful WHEN onSaveFirstTimeAdd is called THEN true is returned`() {
+        // given
+        val booleanValue = true
+
+        given(runBlocking { mockSaveFirstTimeAddUseCase.execute(booleanValue) })
+            .willReturn(Unit)
+
+        // when
+        goalFormViewModel.onSaveFirstTimeAdd(booleanValue)
+
+        // then
+        goalFormViewModel.stateLiveData.value shouldBeEqualTo GoalFormViewModel.ViewState(
+            goalSaved = false,
+            goal = Goal(),
+            goals = listOf(),
+            items = listOf(),
+            itemDeleted = false,
+            historics = listOf(),
+            historicDeleted = false,
+            firstTimeAddSaved = true,
+            firstTimeListSaved = false,
+            firstTimeAddLoaded = false
+        )
+    }
+
+    @Test
+    fun `GIVEN getFirstTimeAdd is successful WHEN getFirstTimeAdd is called THEN a boolean value is returned`() {
+        // given
+        val booleanValue = true
+
+        given(runBlocking { mockGetFirstTimeAddUseCase.execute() })
+            .willReturn(booleanValue)
+
+        // when
+        goalFormViewModel.loadData()
+
+        // then
+        goalFormViewModel.stateLiveData.value shouldBeEqualTo GoalFormViewModel.ViewState(
+            goalSaved = false,
+            goal = Goal(),
+            goals = listOf(),
+            items = listOf(),
+            itemDeleted = false,
+            historics = listOf(),
+            historicDeleted = false,
+            firstTimeAddSaved = false,
+            firstTimeListSaved = false,
+            firstTimeAddLoaded = booleanValue
         )
     }
 }

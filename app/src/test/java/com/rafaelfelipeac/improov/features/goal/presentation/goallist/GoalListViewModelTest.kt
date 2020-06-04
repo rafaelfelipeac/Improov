@@ -4,6 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.rafaelfelipeac.improov.base.CoroutineRule
 import com.rafaelfelipeac.improov.base.DataProvider.createGoal
 import com.rafaelfelipeac.improov.base.DataProvider.shouldBeEqualTo
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.GetFirstTimeListUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.SaveFirstTimeListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,12 +30,19 @@ class GoalListViewModelTest {
 
     private var mockSaveGoalUseCase = mock(SaveGoalUseCase::class.java)
     private var mockGetGoalListUseCase = mock(GetGoalListUseCase::class.java)
+    private var mockSaveFirstTimeListUseCase = mock(SaveFirstTimeListUseCase::class.java)
+    private var mockGetFirstTimeListUseCase = mock(GetFirstTimeListUseCase::class.java)
 
     private lateinit var goalListViewModel: GoalListViewModel
 
     @Before
     fun setup() {
-        goalListViewModel = GoalListViewModel(mockSaveGoalUseCase, mockGetGoalListUseCase)
+        goalListViewModel = GoalListViewModel(
+            mockSaveGoalUseCase,
+            mockGetGoalListUseCase,
+            mockSaveFirstTimeListUseCase,
+            mockGetFirstTimeListUseCase
+        )
     }
 
     @Test
@@ -50,8 +59,10 @@ class GoalListViewModelTest {
 
         // then
         goalListViewModel.stateLiveData.value shouldBeEqualTo GoalListViewModel.ViewState(
-            true,
-            listOf()
+            goalSaved = true,
+            goals = listOf(),
+            firstTimeListSaved = false,
+            firstTimeList = false
         )
     }
 
@@ -67,12 +78,14 @@ class GoalListViewModelTest {
 
         // then
         goalListViewModel.stateLiveData.value shouldBeEqualTo GoalListViewModel.ViewState(
-            false,
-            listOf(
+            goalSaved = false,
+            goals = listOf(
                 goal,
                 goal,
                 goal
-            )
+            ),
+            firstTimeListSaved = false,
+            firstTimeList = false
         )
     }
 
@@ -93,8 +106,50 @@ class GoalListViewModelTest {
 
         // then 
         goalListViewModel.stateLiveData.value shouldBeEqualTo GoalListViewModel.ViewState(
-            true,
-            list
+            goalSaved = true,
+            goals = list,
+            firstTimeListSaved = false,
+            firstTimeList = false
+        )
+    }
+
+    @Test
+    fun `GIVEN saveFirstTimeList is successful WHEN onSaveFirstTimeList is called THEN true is returned`() {
+        // given
+        val booleanValue = false
+
+        given(runBlocking { mockSaveFirstTimeListUseCase.execute(booleanValue) })
+            .willReturn(Unit)
+
+        // when
+        goalListViewModel.onSaveFirstTimeList(booleanValue)
+
+        // then
+        goalListViewModel.stateLiveData.value shouldBeEqualTo GoalListViewModel.ViewState(
+            goalSaved = false,
+            goals = listOf(),
+            firstTimeListSaved = true,
+            firstTimeList = false
+        )
+    }
+
+    @Test
+    fun `GIVEN getFirstTimeList is successful WHEN loadData is called THEN a boolean value must be returned`() {
+        // given
+        val booleanValue = false
+
+        given(runBlocking { mockGetFirstTimeListUseCase.execute() })
+            .willReturn(booleanValue)
+
+        // when
+        goalListViewModel.loadData()
+
+        // then
+        goalListViewModel.stateLiveData.value shouldBeEqualTo GoalListViewModel.ViewState(
+            goalSaved = false,
+            goals = listOf(),
+            firstTimeListSaved = false,
+            firstTimeList = booleanValue
         )
     }
 }

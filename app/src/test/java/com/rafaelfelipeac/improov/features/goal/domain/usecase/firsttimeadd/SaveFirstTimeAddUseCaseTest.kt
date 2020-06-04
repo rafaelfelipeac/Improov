@@ -11,31 +11,31 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class GetFirstTimeAddUseCaseTest {
+class SaveFirstTimeAddUseCaseTest {
 
     @Mock
     internal lateinit var mockFirstTimeAddRepository: FirstTimeAddRepository
 
-    private lateinit var getFirstTimeAddUseCase: GetFirstTimeAddUseCase
+    private lateinit var saveFirstTimeAddUseCase: SaveFirstTimeAddUseCase
 
     @Before
     fun setup() {
-        getFirstTimeAddUseCase = GetFirstTimeAddUseCase(mockFirstTimeAddRepository)
+        saveFirstTimeAddUseCase = SaveFirstTimeAddUseCase(mockFirstTimeAddRepository)
     }
 
     @Test
-    fun `GIVEN a boolean value WHEN use getFirstTimeAddUseCase THEN return the boolean value`() {
+    fun `GIVEN a boolean value WHEN use saveFirstTimeAddUseCase THEN return just a Unit value`() {
         runBlocking {
             // given
-            val booleanValue = true
-            given(mockFirstTimeAddRepository.getFirstTimeAdd())
-                .willReturn(booleanValue)
+            val booleanValue = false
+            given(mockFirstTimeAddRepository.save(booleanValue))
+                .willReturn(Unit)
 
             // when
-            val result = getFirstTimeAddUseCase.execute()
+            val result = saveFirstTimeAddUseCase.execute(booleanValue)
 
             // then
-            result shouldBeEqualTo booleanValue
+            result shouldBeEqualTo Unit
         }
     }
 }
