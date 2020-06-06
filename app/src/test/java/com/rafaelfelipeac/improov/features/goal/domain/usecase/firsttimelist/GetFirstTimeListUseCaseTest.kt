@@ -28,6 +28,7 @@ class GetFirstTimeListUseCaseTest {
         runBlocking {
             // given
             val booleanValue = true
+
             given(mockFirstTimeListRepository.getFirstTimeList())
                 .willReturn(booleanValue)
 

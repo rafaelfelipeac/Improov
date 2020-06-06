@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class FirstTimeListRepositoryImplTest {
+
     @Mock
     internal lateinit var preferences: Preferences
 
