@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
+import com.rafaelfelipeac.improov.core.LocaleHelper
 import kotlinx.android.synthetic.main.fragment_settings_language.*
 
 class SettingsLanguageFragment : BaseFragment() {
@@ -16,6 +17,11 @@ class SettingsLanguageFragment : BaseFragment() {
 
     private val stateObserver = Observer<SettingsLanguageViewModel.ViewState> { response ->
         if (!response.languageSaved) {
+            LocaleHelper.setLocale(
+                context!!,
+                response.language
+            )
+
             setupLanguage(response.language)
         } else {
             recreateFragment()

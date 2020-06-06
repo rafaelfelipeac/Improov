@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.settings.presentation
+package com.rafaelfelipeac.improov.core
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -22,13 +22,9 @@ object LocaleHelper {
     }
 
     fun setLocale(context: Context, language: String?): Context {
-        val preferences = Preferences(context)
-
-        preferences.language = language!!
-
         return updateResources(
             context,
-            language
+            language!!
         )
     }
 
