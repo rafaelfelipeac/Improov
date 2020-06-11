@@ -1,10 +1,24 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goalform
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
+import android.view.MenuItem
 import androidx.lifecycle.Observer
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.*
+import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.visible
+import com.rafaelfelipeac.improov.core.extension.invisible
+import com.rafaelfelipeac.improov.core.extension.gone
+import com.rafaelfelipeac.improov.core.extension.resetValue
+import com.rafaelfelipeac.improov.core.extension.toFloat
+import com.rafaelfelipeac.improov.core.extension.fieldIsEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.checkIfFieldIsEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
+import com.rafaelfelipeac.improov.core.extension.isNotEmpty
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.commons.DialogOneButton
 import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
@@ -12,7 +26,7 @@ import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import kotlinx.android.synthetic.main.fragment_goal_form.*
-import java.util.*
+import java.util.Calendar
 
 class GoalFormFragment : BaseFragment() {
 
@@ -58,7 +72,11 @@ class GoalFormFragment : BaseFragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         main.supportActionBar?.title = getString(R.string.goal_form_title)

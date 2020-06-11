@@ -18,11 +18,16 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.di.modules.viewModel.ViewModelFactory
-import com.rafaelfelipeac.improov.core.extension.*
+import com.rafaelfelipeac.improov.core.extension.gone
+import com.rafaelfelipeac.improov.core.extension.visible
+import com.rafaelfelipeac.improov.core.extension.setMessageColor
+import com.rafaelfelipeac.improov.core.extension.isEmpty
+import com.rafaelfelipeac.improov.core.extension.resetValue
+import com.rafaelfelipeac.improov.core.extension.convertDateToString
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
-import java.util.*
+import java.util.Calendar
 import javax.inject.Inject
 
 abstract class BaseFragment : Fragment() {

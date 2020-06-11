@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.data.repository
 
-import com.rafaelfelipeac.improov.base.DataProvider.createGoal
-import com.rafaelfelipeac.improov.base.DataProvider.shouldBeEqualTo
+import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
+import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
 import com.rafaelfelipeac.improov.features.goal.data.dao.GoalDAO
 import com.rafaelfelipeac.improov.features.goal.data.model.GoalDataModelMapper
 import kotlinx.coroutines.runBlocking

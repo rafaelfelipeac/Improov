@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.profile.presentation.profile
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.rafaelfelipeac.improov.base.CoroutineRule
-import com.rafaelfelipeac.improov.base.DataProvider.shouldBeEqualTo
+import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.GetNameUseCase
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveFirstTimeAddUseCase
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveFirstTimeListUseCase

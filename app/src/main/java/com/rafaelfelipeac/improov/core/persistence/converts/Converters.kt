@@ -4,7 +4,7 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
-import java.util.*
+import java.util.Date
 
 class Converters {
 

@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.domain.model
 
 import java.io.Serializable
-import java.util.*
+import java.util.Date
 
 data class Historic(
     val historicId: Long = 0,

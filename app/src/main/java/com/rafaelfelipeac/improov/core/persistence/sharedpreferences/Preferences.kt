@@ -34,5 +34,4 @@ class Preferences(context: Context) {
     var firstTimeList: Boolean
         get() = prefs.getBoolean(KEY_FIRST_TIME_LIST, false)
         set(value) = prefs.edit().putBoolean(KEY_FIRST_TIME_LIST, value).apply()
-
 }

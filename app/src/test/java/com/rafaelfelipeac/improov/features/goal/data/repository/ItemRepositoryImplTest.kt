@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.data.repository
 
-import com.rafaelfelipeac.improov.base.DataProvider.createItem
-import com.rafaelfelipeac.improov.base.DataProvider.shouldBeEqualTo
+import com.rafaelfelipeac.improov.base.DataProviderTest.createItem
+import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
 import com.rafaelfelipeac.improov.features.goal.data.dao.ItemDAO
 import com.rafaelfelipeac.improov.features.goal.data.model.ItemDataModelMapper
 import kotlinx.coroutines.runBlocking

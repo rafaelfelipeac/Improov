@@ -2,8 +2,8 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goallist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.rafaelfelipeac.improov.base.CoroutineRule
-import com.rafaelfelipeac.improov.base.DataProvider.createGoal
-import com.rafaelfelipeac.improov.base.DataProvider.shouldBeEqualTo
+import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
+import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.GetFirstTimeListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.SaveFirstTimeListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase

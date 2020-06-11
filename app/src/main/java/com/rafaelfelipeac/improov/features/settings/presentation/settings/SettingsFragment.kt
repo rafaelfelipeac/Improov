@@ -30,7 +30,9 @@ class SettingsFragment : BasePreferenceFragment() {
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
         return when (preference.key) {
             getString(R.string.settings_pref_key_language_message) -> {
-                navController.navigate(SettingsFragmentDirections.actionNavigationSettingsToNavigationSettingsLanguage())
+                navController.navigate(
+                    SettingsFragmentDirections.actionNavigationSettingsToNavigationSettingsLanguage()
+                )
                 true
             }
             getString(R.string.settings_pref_key_about_rate) -> {

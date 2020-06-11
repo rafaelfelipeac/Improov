@@ -56,6 +56,6 @@ class SettingsLanguageViewModel @Inject constructor(
 
     sealed class Action : BaseAction {
         class LanguageLoaded(val language: String) : Action()
-        object LanguageSaved: Action()
+        object LanguageSaved : Action()
     }
 }

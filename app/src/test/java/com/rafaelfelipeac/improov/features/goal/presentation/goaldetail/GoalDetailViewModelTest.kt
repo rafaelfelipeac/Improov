@@ -2,10 +2,10 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.rafaelfelipeac.improov.base.CoroutineRule
-import com.rafaelfelipeac.improov.base.DataProvider.createGoal
-import com.rafaelfelipeac.improov.base.DataProvider.createHistoric
-import com.rafaelfelipeac.improov.base.DataProvider.createItem
-import com.rafaelfelipeac.improov.base.DataProvider.shouldBeEqualTo
+import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
+import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoric
+import com.rafaelfelipeac.improov.base.DataProviderTest.createItem
+import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase

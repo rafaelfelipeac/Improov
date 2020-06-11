@@ -3,7 +3,6 @@ package com.rafaelfelipeac.improov.core.persistence.database
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-
 fun getAllMigrations(): Array<Migration> = arrayOf(
     MIGRATION_48_49
 )

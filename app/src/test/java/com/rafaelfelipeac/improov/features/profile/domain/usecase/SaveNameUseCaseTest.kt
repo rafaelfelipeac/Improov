@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.profile.domain.usecase
 
-import com.rafaelfelipeac.improov.base.DataProvider.shouldBeEqualTo
+import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
 import com.rafaelfelipeac.improov.features.profile.domain.repository.NameRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

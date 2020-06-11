@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist
 
-import com.rafaelfelipeac.improov.base.DataProvider.shouldBeEqualTo
+import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
 import com.rafaelfelipeac.improov.features.goal.domain.repository.FirstTimeListRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

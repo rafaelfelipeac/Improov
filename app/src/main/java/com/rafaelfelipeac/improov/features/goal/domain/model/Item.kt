@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.domain.model
 
 import java.io.Serializable
-import java.util.*
+import java.util.Date
 
 data class Item(
     val itemId: Long = 0,

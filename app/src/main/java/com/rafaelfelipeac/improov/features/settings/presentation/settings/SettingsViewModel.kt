@@ -24,6 +24,6 @@ class SettingsViewModel @Inject constructor() : BaseViewModel<SettingsViewModel.
     ) : BaseViewState
 
     sealed class Action : BaseAction {
-        object Settings: Action()
+        object Settings : Action()
     }
 }

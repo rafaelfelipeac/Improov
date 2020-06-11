@@ -1,8 +1,8 @@
 package com.rafaelfelipeac.improov.features.goal.data.model
 
-import com.rafaelfelipeac.improov.base.DataProvider.createHistoric
-import com.rafaelfelipeac.improov.base.DataProvider.createHistoricDataModel
-import com.rafaelfelipeac.improov.base.DataProvider.shouldBeEqualTo
+import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoric
+import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoricDataModel
+import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner

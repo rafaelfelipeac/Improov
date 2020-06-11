@@ -1,7 +1,12 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.MenuInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
@@ -9,14 +14,25 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.*
+import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.visible
+import com.rafaelfelipeac.improov.core.extension.invisible
+import com.rafaelfelipeac.improov.core.extension.setup
+import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
+import com.rafaelfelipeac.improov.core.extension.toFloat
+import com.rafaelfelipeac.improov.core.extension.resetValue
+import com.rafaelfelipeac.improov.core.extension.isNotEmpty
+import com.rafaelfelipeac.improov.core.extension.enableIcon
+import com.rafaelfelipeac.improov.core.extension.disableIcon
+import com.rafaelfelipeac.improov.core.extension.vibrate
+import com.rafaelfelipeac.improov.core.extension.isVisible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import kotlinx.android.synthetic.main.fragment_goal.*
-import java.util.*
+import java.util.Date
 
 class GoalDetailFragment : BaseFragment() {
 
@@ -74,7 +90,11 @@ class GoalDetailFragment : BaseFragment() {
         goalNew = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalNew }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         main.supportActionBar?.title = getString(R.string.goal_title)
 
@@ -275,7 +295,8 @@ class GoalDetailFragment : BaseFragment() {
         setupButtons()
     }
 
-    private fun isTheFirstTime() = seriesSingle == 0 && (seriesBronze == 0 || seriesSilver == 0 || seriesGold == 0)
+    private fun isTheFirstTime() =
+        seriesSingle == 0 && (seriesBronze == 0 || seriesSilver == 0 || seriesGold == 0)
 
     private fun updateTextAndGoal(textView: TextView) {
         updateText(textView)
@@ -383,8 +404,11 @@ class GoalDetailFragment : BaseFragment() {
 
                 resetDivideAndConquerSilver()
 
-                if (goal?.value == goal?.bronzeValue!!) enableIcon(goal_divide_and_conquer_bronze_image, R.mipmap.ic_bronze)
-                else disableIcon(goal_divide_and_conquer_bronze_image, R.mipmap.ic_bronze_dark)
+                if (goal?.value == goal?.bronzeValue!!) {
+                    enableIcon(goal_divide_and_conquer_bronze_image, R.mipmap.ic_bronze)
+                } else {
+                    disableIcon(goal_divide_and_conquer_bronze_image, R.mipmap.ic_bronze_dark)
+                }
             }
             goal?.value!! > 0 && goal?.value!! <= goal?.silverValue!! -> {
                 setDivideAndConquerBronzeValue(goal?.bronzeValue!!)
@@ -394,8 +418,11 @@ class GoalDetailFragment : BaseFragment() {
 
                 resetDivideAndConquerGold()
 
-                if (goal?.value == goal?.silverValue!!) enableIcon(goal_divide_and_conquer_silver_image, R.mipmap.ic_silver)
-                else disableIcon(goal_divide_and_conquer_silver_image, R.mipmap.ic_silver_dark)
+                if (goal?.value == goal?.silverValue!!) {
+                    enableIcon(goal_divide_and_conquer_silver_image, R.mipmap.ic_silver)
+                } else {
+                    disableIcon(goal_divide_and_conquer_silver_image, R.mipmap.ic_silver_dark)
+                }
             }
             goal?.value!! > 0 && goal?.value!! <= goal?.goldValue!! -> {
                 setDivideAndConquerBronzeValue(goal?.bronzeValue!!)
@@ -405,8 +432,11 @@ class GoalDetailFragment : BaseFragment() {
                 enableIcon(goal_divide_and_conquer_bronze_image, R.mipmap.ic_bronze)
                 enableIcon(goal_divide_and_conquer_silver_image, R.mipmap.ic_silver)
 
-                if (goal?.value == goal?.goldValue!!) enableIcon(goal_divide_and_conquer_gold_image, R.mipmap.ic_gold)
-                else disableIcon(goal_divide_and_conquer_gold_image, R.mipmap.ic_gold_dark)
+                if (goal?.value == goal?.goldValue!!) {
+                    enableIcon(goal_divide_and_conquer_gold_image, R.mipmap.ic_gold)
+                } else {
+                    disableIcon(goal_divide_and_conquer_gold_image, R.mipmap.ic_gold_dark)
+                }
             }
         }
     }
@@ -422,22 +452,33 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun resetDivideAndConquerSilver() {
-        seriesSilver = goal_silver_arcView.resetValue(goal?.bronzeValue!!, goal?.silverValue!!, goal?.bronzeValue!!)
+        seriesSilver = goal_silver_arcView.resetValue(
+            goal?.bronzeValue!!,
+            goal?.silverValue!!,
+            goal?.bronzeValue!!
+        )
     }
 
     private fun resetDivideAndConquerGold() {
-        seriesGold = goal_gold_arcView.resetValue(goal?.silverValue!!, goal?.goldValue!!, goal?.silverValue!!)
+        seriesGold = goal_gold_arcView.resetValue(
+            goal?.silverValue!!,
+            goal?.goldValue!!,
+            goal?.silverValue!!
+        )
     }
 
     private fun resetSingle() {
         seriesSingle = goal_single_arcView.resetValue(0F, goal?.singleValue!!, 0F)
     }
 
-    private fun setDivideAndConquerBronzeValue(value: Float) = goal_bronze_arcView.setup(value, seriesBronze)
+    private fun setDivideAndConquerBronzeValue(value: Float) =
+        goal_bronze_arcView.setup(value, seriesBronze)
 
-    private fun setDivideAndConquerSilverValue(value: Float) = goal_silver_arcView.setup(value, seriesSilver)
+    private fun setDivideAndConquerSilverValue(value: Float) =
+        goal_silver_arcView.setup(value, seriesSilver)
 
-    private fun setDivideAndConquerGoldValue(value: Float) = goal_gold_arcView.setup(value, seriesGold)
+    private fun setDivideAndConquerGoldValue(value: Float) =
+        goal_gold_arcView.setup(value, seriesGold)
 
     private fun setSingleValue(value: Float) = goal_single_arcView.setup(value, seriesSingle)
 
@@ -449,8 +490,12 @@ class GoalDetailFragment : BaseFragment() {
         image.disableIcon(iconDark, context!!)
     }
 
-    fun onViewMoved(fromPosition: Int, toPosition: Int, items: MutableList<Item>,
-                    function: (fromPosition: Int, toPosition: Int) -> Unit) {
+    fun onViewMoved(
+        fromPosition: Int,
+        toPosition: Int,
+        items: MutableList<Item>,
+        function: (fromPosition: Int, toPosition: Int) -> Unit
+    ) {
         val targetItem = items[fromPosition]
         val otherItem = items[toPosition]
 
@@ -470,7 +515,12 @@ class GoalDetailFragment : BaseFragment() {
         vibrate()
     }
 
-    fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder, items: MutableList<Item>) {
+    fun onViewSwiped(
+        position: Int,
+        direction: Int,
+        holder: RecyclerView.ViewHolder,
+        items: MutableList<Item>
+    ) {
         val item = items[position]
 
         when (direction) {

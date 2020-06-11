@@ -9,9 +9,9 @@ import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import junit.framework.TestCase
 
-object DataProvider {
+object DataProviderAndroidTest {
 
-    fun createGoalDataModel(goalId: Long = 1L, name: String = "goal"): GoalDataModel {
+    fun createGoalDataModel(goalId: Long = 1L, name: String = "goal1"): GoalDataModel {
         return GoalDataModel(
             goalId = goalId,
             name = name,
@@ -36,10 +36,10 @@ object DataProvider {
         )
     }
 
-    fun createGoal(goalId: Long = 1L, name: String = "goal", order: Int = 1): Goal {
+    fun createGoal(goalId: Long = 1L): Goal {
         return Goal(
             goalId = goalId,
-            name = name,
+            name = "goal1",
             value = 5f,
             type = GoalType.GOAL_LIST,
             done = false,
@@ -48,7 +48,7 @@ object DataProvider {
             bronzeValue = 0f,
             silverValue = 0f,
             goldValue = 0f,
-            order = order,
+            order = 1,
             archived = false,
             incrementValue = 0f,
             decrementValue = 0f,
@@ -77,12 +77,12 @@ object DataProvider {
         )
     }
 
-    fun createItem(itemId: Long = 1L, goalId: Long = 1L, name: String = "item", order: Int = 1): Item {
+    fun createItem(itemId: Long = 1L, goalId: Long = 1L, name: String = "item"): Item {
         return Item(
             itemId = itemId,
             goalId = goalId,
             name = name,
-            order = order,
+            order = 1,
             done = false,
             createdDate = null,
             updatedDate = null,
@@ -97,16 +97,16 @@ object DataProvider {
         return HistoricDataModel(
             historicId = historicId,
             goalId = goalId,
-            value = value,
+            value = 0f,
             date = null
         )
     }
 
-    fun createHistoric(historicId: Long = 1L, goalId: Long = 1L, value: Float = 0f): Historic {
+    fun createHistoric(historicId: Long = 1L, goalId: Long = 1L): Historic {
         return Historic(
             historicId = historicId,
             goalId = goalId,
-            value = value,
+            value = 0f,
             date = null
         )
     }

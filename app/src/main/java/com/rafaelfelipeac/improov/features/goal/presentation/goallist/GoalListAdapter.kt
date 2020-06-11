@@ -10,12 +10,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.*
-import com.rafaelfelipeac.improov.core.platform.ActionCompletionContract
+import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
+import com.rafaelfelipeac.improov.core.extension.setWidthForProgress
+import com.rafaelfelipeac.improov.core.extension.format
+import com.rafaelfelipeac.improov.core.platform.ActionCompleteContract
 import com.rafaelfelipeac.improov.core.platform.base.BaseAdapter
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 
-class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal>(), ActionCompletionContract {
+class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal>(), ActionCompleteContract {
 
     var clickListener: (goal: Goal) -> Unit = { }
 
@@ -25,11 +27,11 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
     override fun View.bindView(goal: Goal, viewHolder: ViewHolder) {
         setOnClickListener { clickListener(goal) }
 
-        val typeIcon= viewHolder.itemView.findViewById<ImageView>(R.id.goal_type_icon)
+        val typeIcon = viewHolder.itemView.findViewById<ImageView>(R.id.goal_type_icon)
         val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_title)!!
         val date = viewHolder.itemView.findViewById<TextView>(R.id.goal_date)!!
         val score = viewHolder.itemView.findViewById<TextView>(R.id.goal_score)!!
-        //private val archiveImage = itemView.findViewById<ImageView>(R.id.goal_archive_image)
+        // private val archiveImage = itemView.findViewById<ImageView>(R.id.goal_archive_image)
         val itemDrag = viewHolder.itemView.findViewById<ImageView>(R.id.goal_drag_icon)!!
         val progressDone = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress_done)
         val progressTotal = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress_total)

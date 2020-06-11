@@ -119,7 +119,9 @@ class GoalListFragment : BaseFragment() {
     }
 
     fun onViewMoved(
-        fromPosition: Int, toPosition: Int, items: MutableList<Goal>,
+        fromPosition: Int,
+        toPosition: Int,
+        items: MutableList<Goal>,
         function: (fromPosition: Int, toPosition: Int) -> Unit
     ) {
         val target = items[fromPosition]

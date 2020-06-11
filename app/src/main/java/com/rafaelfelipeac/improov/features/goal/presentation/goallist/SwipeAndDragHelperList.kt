@@ -5,20 +5,27 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.platform.ActionCompletionContract
+import com.rafaelfelipeac.improov.core.platform.ActionCompleteContract
 import kotlin.math.abs
 
-class SwipeAndDragHelperList(private val contract: ActionCompletionContract) : ItemTouchHelper.Callback() {
+class SwipeAndDragHelperList(private val contract: ActionCompleteContract) :
+    ItemTouchHelper.Callback() {
 
-    override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
+    override fun getMovementFlags(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder
+    ): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
         val swipeFlags = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
 
         return makeMovementFlags(dragFlags, swipeFlags)
     }
 
-    override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
-                        target: RecyclerView.ViewHolder): Boolean {
+    override fun onMove(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        target: RecyclerView.ViewHolder
+    ): Boolean {
 
         contract.onViewMoved(viewHolder.adapterPosition, target.adapterPosition)
 
@@ -30,13 +37,18 @@ class SwipeAndDragHelperList(private val contract: ActionCompletionContract) : I
     }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-        getDefaultUIUtil()
-            .onSelected(viewHolder?.itemView?.findViewById<ConstraintLayout>(R.id.normal_view))
+        getDefaultUIUtil().onSelected(viewHolder?.itemView?.findViewById<ConstraintLayout>(R.id.normal_view))
     }
 
-    override fun onChildDrawOver(c: Canvas, recyclerView: RecyclerView,
-                                 viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float,
-                                 actionState: Int, isCurrentlyActive: Boolean) {
+    override fun onChildDrawOver(
+        c: Canvas,
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        dX: Float,
+        dY: Float,
+        actionState: Int,
+        isCurrentlyActive: Boolean
+    ) {
 
         val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.normal_view)
 
@@ -55,8 +67,15 @@ class SwipeAndDragHelperList(private val contract: ActionCompletionContract) : I
         }
     }
 
-    override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
-                             dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+    override fun onChildDraw(
+        c: Canvas,
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        dX: Float,
+        dY: Float,
+        actionState: Int,
+        isCurrentlyActive: Boolean
+    ) {
 
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             val alpha = 1 - abs(dX) / recyclerView.width

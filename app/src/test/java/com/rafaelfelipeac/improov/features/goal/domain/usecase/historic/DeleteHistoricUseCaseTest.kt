@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.domain.usecase.historic
 
-import com.rafaelfelipeac.improov.base.DataProvider.createHistoric
-import com.rafaelfelipeac.improov.base.DataProvider.shouldBeEqualTo
+import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoric
+import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
 import com.rafaelfelipeac.improov.features.goal.domain.repository.HistoricRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

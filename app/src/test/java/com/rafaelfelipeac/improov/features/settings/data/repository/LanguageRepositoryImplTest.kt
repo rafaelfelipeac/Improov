@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.settings.data.repository
 
-import com.rafaelfelipeac.improov.base.DataProvider.shouldBeEqualTo
+import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

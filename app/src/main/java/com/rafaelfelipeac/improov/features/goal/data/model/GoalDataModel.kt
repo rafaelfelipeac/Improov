@@ -6,7 +6,7 @@ import com.rafaelfelipeac.improov.core.TwoWayMapper
 import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import java.io.Serializable
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 
 @Entity(tableName = "goal")

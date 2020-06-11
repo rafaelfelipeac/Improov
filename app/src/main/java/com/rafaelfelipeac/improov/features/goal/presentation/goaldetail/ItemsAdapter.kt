@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import com.rafaelfelipeac.improov.core.platform.base.BaseAdapter
-import com.rafaelfelipeac.improov.core.platform.ActionCompletionContract
+import com.rafaelfelipeac.improov.core.platform.ActionCompleteContract
 
 class ItemsAdapter(private val detailFragment: GoalDetailFragment) : BaseAdapter<Item>(),
-    ActionCompletionContract {
+    ActionCompleteContract {
 
     var clickListener: (item: Item) -> Unit = { }
 
@@ -26,8 +26,11 @@ class ItemsAdapter(private val detailFragment: GoalDetailFragment) : BaseAdapter
 
         title.text = item.name
         image.background =
-            if (item.done) ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
-            else           ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
+            if (item.done) {
+                ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
+            } else {
+                ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
+            }
     }
 
     @SuppressLint("ClickableViewAccessibility")

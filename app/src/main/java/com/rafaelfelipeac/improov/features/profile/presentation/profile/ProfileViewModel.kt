@@ -94,7 +94,7 @@ class ProfileViewModel @Inject constructor(
     sealed class Action : BaseAction {
         class NameLoaded(val name: String) : Action()
         object WelcomeSaved : Action()
-        object FirstTimeAddSaved: Action()
-        object FirstTimeListSaved: Action()
+        object FirstTimeAddSaved : Action()
+        object FirstTimeListSaved : Action()
     }
 }

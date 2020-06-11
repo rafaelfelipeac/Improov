@@ -6,7 +6,8 @@ import android.text.format.DateFormat
 import android.text.format.DateUtils
 import com.rafaelfelipeac.improov.R
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Calendar
 
 @SuppressLint("SimpleDateFormat")
 fun Date.convertDateToString(context: Context): String {

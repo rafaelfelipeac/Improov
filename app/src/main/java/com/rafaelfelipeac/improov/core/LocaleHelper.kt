@@ -6,7 +6,7 @@ import android.content.res.Configuration
 import android.os.Build
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
-import java.util.*
+import java.util.Locale
 
 object LocaleHelper {
 

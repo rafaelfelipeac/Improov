@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.goal.domain.model
 
 import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import java.io.Serializable
-import java.util.*
+import java.util.Date
 
 data class Goal(
     var goalId: Long = 0,

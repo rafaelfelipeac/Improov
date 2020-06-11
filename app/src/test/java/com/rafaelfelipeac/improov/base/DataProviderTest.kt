@@ -9,10 +9,10 @@ import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import junit.framework.TestCase
 
-object DataProviderAndroidTest {
+object DataProviderTest {
 
-    fun createGoalDataModel(goalId: Long = 1L, name: String = "goal1"): GoalDataModel {
-        return  GoalDataModel(
+    fun createGoalDataModel(goalId: Long = 1L, name: String = "goal"): GoalDataModel {
+        return GoalDataModel(
             goalId = goalId,
             name = name,
             value = 5f,
@@ -36,10 +36,10 @@ object DataProviderAndroidTest {
         )
     }
 
-    fun createGoal(goalId: Long = 1L): Goal {
-        return  Goal(
+    fun createGoal(goalId: Long = 1L, name: String = "goal", order: Int = 1): Goal {
+        return Goal(
             goalId = goalId,
-            name = "goal1",
+            name = name,
             value = 5f,
             type = GoalType.GOAL_LIST,
             done = false,
@@ -48,7 +48,7 @@ object DataProviderAndroidTest {
             bronzeValue = 0f,
             silverValue = 0f,
             goldValue = 0f,
-            order = 1,
+            order = order,
             archived = false,
             incrementValue = 0f,
             decrementValue = 0f,
@@ -77,12 +77,12 @@ object DataProviderAndroidTest {
         )
     }
 
-    fun createItem(itemId: Long = 1L, goalId: Long = 1L, name: String = "item"): Item {
+    fun createItem(itemId: Long = 1L, goalId: Long = 1L, name: String = "item", order: Int = 1): Item {
         return Item(
             itemId = itemId,
             goalId = goalId,
             name = name,
-            order = 1,
+            order = order,
             done = false,
             createdDate = null,
             updatedDate = null,
@@ -97,16 +97,16 @@ object DataProviderAndroidTest {
         return HistoricDataModel(
             historicId = historicId,
             goalId = goalId,
-            value = 0f,
+            value = value,
             date = null
         )
     }
 
-    fun createHistoric(historicId: Long = 1L, goalId: Long = 1L): Historic {
+    fun createHistoric(historicId: Long = 1L, goalId: Long = 1L, value: Float = 0f): Historic {
         return Historic(
             historicId = historicId,
             goalId = goalId,
-            value = 0f,
+            value = value,
             date = null
         )
     }

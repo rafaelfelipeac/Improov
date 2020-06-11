@@ -1,7 +1,14 @@
 package com.rafaelfelipeac.improov.core.di
 
 import com.rafaelfelipeac.improov.app.App
-import com.rafaelfelipeac.improov.core.di.modules.*
+import com.rafaelfelipeac.improov.core.di.modules.ContextModule
+import com.rafaelfelipeac.improov.core.di.modules.PreferencesModule
+import com.rafaelfelipeac.improov.core.di.modules.ViewModelModule
+import com.rafaelfelipeac.improov.core.di.modules.GoalModule
+import com.rafaelfelipeac.improov.core.di.modules.ProfileModule
+import com.rafaelfelipeac.improov.core.di.modules.WelcomeModule
+import com.rafaelfelipeac.improov.core.di.modules.PersistenceModule
+import com.rafaelfelipeac.improov.core.di.modules.SettingsModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

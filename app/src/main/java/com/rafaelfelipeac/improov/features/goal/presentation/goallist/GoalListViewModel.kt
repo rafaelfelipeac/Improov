@@ -43,7 +43,7 @@ class GoalListViewModel @Inject constructor(
                         Action.GoalSaved
                     )
 
-                     getGoals() // for now
+                    getGoals() // for now
                 }
             }
         }
@@ -102,7 +102,7 @@ class GoalListViewModel @Inject constructor(
     sealed class Action : BaseAction {
         object GoalSaved : Action()
         class GoalListLoaded(val goals: List<Goal>) : Action()
-        object FirstTimeListSaved: Action()
+        object FirstTimeListSaved : Action()
         class FirstTimeListLoaded(val firstTimeList: Boolean) : Action()
     }
 }
