@@ -3,7 +3,7 @@ package com.rafaelfelipeac.improov.core.persistence.sharedpreferences
 import android.content.Context
 import android.content.SharedPreferences
 
-const val preferences_name = "com.rafaelfelipeac.improov.preferences"
+const val PREFERENCES_NAME = "com.rafaelfelipeac.improov.preferences"
 
 const val KEY_WELCOME = "KEY_WELCOME"
 const val KEY_NAME = "KEY_NAME"
@@ -13,7 +13,7 @@ const val KEY_FIRST_TIME_LIST = "KEY_FIRST_TIME_LIST"
 
 class Preferences(context: Context) {
 
-    private val prefs: SharedPreferences = context.getSharedPreferences(preferences_name, 0)
+    private val prefs: SharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, 0)
 
     var welcome: Boolean
         get() = prefs.getBoolean(KEY_WELCOME, false)

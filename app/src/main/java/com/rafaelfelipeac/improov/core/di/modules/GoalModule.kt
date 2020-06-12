@@ -37,10 +37,12 @@ abstract class GoalModule {
     abstract fun historicRepository(historicRepositoryImpl: HistoricRepositoryImpl): HistoricRepository
 
     @Binds
-    abstract fun firstTimeAddRepository(firstTimeAddRepositoryImpl: FirstTimeAddRepositoryImpl): FirstTimeAddRepository
+    abstract fun firstTimeAddRepository
+                (firstTimeAddRepositoryImpl: FirstTimeAddRepositoryImpl): FirstTimeAddRepository
 
     @Binds
-    abstract fun firstTimeListRepository(firstTimeListRepositoryImpl: FirstTimeListRepositoryImpl): FirstTimeListRepository
+    abstract fun firstTimeListRepository
+                (firstTimeListRepositoryImpl: FirstTimeListRepositoryImpl): FirstTimeListRepository
 
     @Binds
     @IntoMap

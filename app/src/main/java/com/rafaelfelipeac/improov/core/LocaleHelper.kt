@@ -42,7 +42,7 @@ object LocaleHelper {
         val resources = context.resources
         val configuration = Configuration(resources.configuration)
 
-        if (Build.VERSION.SDK_INT >= 17) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             configuration.setLocale(locale)
             contextFun = context.createConfigurationContext(configuration)
         } else {

@@ -238,27 +238,18 @@ class GoalFormFragment : BaseFragment() {
             goal.done = false
             goal.type = getGoalTypeSelected()
 
-            val order =
-                if (goalsSize == null || goalsSize == 0) 0
-                else goalsSize!! + 1
-
-            goal.order = order
+            goal.order =
+                if (goalsSize == null || goalsSize == 0) {
+                    0
+                } else {
+                    goalsSize!! + 1
+                }
         } else {
             val oldGoalType = goal.type
             goal.type = getGoalTypeSelected()
 
             if (oldGoalType != goal.type) {
-                items.forEach {
-                    if (it.goalId == goal.goalId) {
-                        viewModel.onDeleteItem(it)
-                    }
-                }
-
-                historics.forEach {
-                    if (it.goalId == goal.goalId) {
-                        viewModel.onDeleteHistoric(it)
-                    }
-                }
+                deleteReferencesFromItemsAndHistorics()
             }
 
             goal.updatedDate = getCurrentTime()
@@ -280,12 +271,35 @@ class GoalFormFragment : BaseFragment() {
         return goal
     }
 
-    private fun getGoalTypeSelected(): GoalType {
-        if (goal_form_radio_type_list.isChecked) return GoalType.GOAL_LIST
-        if (goal_form_radio_type_counter.isChecked) return GoalType.GOAL_COUNTER
-        if (goal_form_radio_type_total.isChecked) return GoalType.GOAL_FINAL
+    private fun deleteReferencesFromItemsAndHistorics() {
+        items.forEach {
+            if (it.goalId == goal.goalId) {
+                viewModel.onDeleteItem(it)
+            }
+        }
 
-        return GoalType.GOAL_NONE
+        historics.forEach {
+            if (it.goalId == goal.goalId) {
+                viewModel.onDeleteHistoric(it)
+            }
+        }
+    }
+
+    private fun getGoalTypeSelected(): GoalType {
+        return when {
+            goal_form_radio_type_list.isChecked -> {
+                GoalType.GOAL_LIST
+            }
+            goal_form_radio_type_counter.isChecked -> {
+                GoalType.GOAL_COUNTER
+            }
+            goal_form_radio_type_total.isChecked -> {
+                GoalType.GOAL_FINAL
+            }
+            else -> {
+                GoalType.GOAL_NONE
+            }
+        }
     }
 
     private fun setupGoal() {
@@ -346,10 +360,26 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfAnyFieldsAreEmptyOrZero(): Boolean {
         return when {
+            checkIfNameFieldIsEmptyOrZero() || checkIfValuesFieldsAreEmptyOrZero() ||
+                    checkIfCounterFieldsAreEmptyOrZero() -> {
+                true
+            }
+            else -> false
+        }
+    }
+
+    private fun checkIfNameFieldIsEmptyOrZero(): Boolean {
+        return when {
             goal_form_goal_name.checkIfFieldIsEmptyOrZero() -> {
                 goal_form_goal_name.fieldIsEmptyOrZero(this)
                 true
             }
+            else -> false
+        }
+    }
+
+    private fun checkIfValuesFieldsAreEmptyOrZero(): Boolean {
+        return when {
             goal_form_single_value.checkIfFieldIsEmptyOrZero() && !goal.divideAndConquer -> {
                 goal_form_single_value.fieldIsEmptyOrZero(this)
                 true
@@ -366,6 +396,12 @@ class GoalFormFragment : BaseFragment() {
                 goal_form_gold_value.fieldIsEmptyOrZero(this)
                 true
             }
+            else -> false
+        }
+    }
+
+    private fun checkIfCounterFieldsAreEmptyOrZero(): Boolean {
+        return when {
             goal_form_goal_counter_dec_value.checkIfFieldIsEmptyOrZero() &&
                     (goal.type == GoalType.GOAL_COUNTER ||
                             getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
@@ -389,10 +425,8 @@ class GoalFormFragment : BaseFragment() {
             val bronze = goal_form_bronze_value.toFloat()
 
             ((gold > silver) && (silver > bronze))
-        } catch (e: Exception) {
-            if (goal_form_single_value.isNotEmpty())
-                return true
-            false
+        } catch (e: KotlinNullPointerException) {
+            return goal_form_single_value.isNotEmpty()
         }
     }
 }

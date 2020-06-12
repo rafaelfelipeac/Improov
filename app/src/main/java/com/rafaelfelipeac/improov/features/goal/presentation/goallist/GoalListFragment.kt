@@ -18,6 +18,9 @@ import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import kotlinx.android.synthetic.main.fragment_list.*
 
+const val SECONDS_BOTTOM_SHEET = 1000L
+const val PERCENTAGE_MAX = 100
+
 class GoalListFragment : BaseFragment() {
 
     private var goalsAdapter = GoalListAdapter(this)
@@ -153,7 +156,7 @@ class GoalListFragment : BaseFragment() {
 
         when (direction) {
             ItemTouchHelper.RIGHT -> {
-                if (goal.done || goal.getPercentage() >= 100) {
+                if (goal.done || goal.getPercentage() >= PERCENTAGE_MAX) {
                     doneOrUndoneGoal(goal)
                 } else {
                     setupGoals(true)
@@ -194,7 +197,7 @@ class GoalListFragment : BaseFragment() {
                 setupBottomSheetTipsSwipe()
                 setupBottomSheetTip()
                 showBottomSheetTips()
-            }, 1000
+            }, SECONDS_BOTTOM_SHEET
         )
     }
 }

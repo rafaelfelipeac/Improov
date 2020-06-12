@@ -17,6 +17,9 @@ import com.rafaelfelipeac.improov.core.platform.ActionCompleteContract
 import com.rafaelfelipeac.improov.core.platform.base.BaseAdapter
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 
+const val MARGIN_START = 10
+const val LOGICAL_DENSITY_MULTIPLIER = 4
+
 class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal>(), ActionCompleteContract {
 
     var clickListener: (goal: Goal) -> Unit = { }
@@ -42,13 +45,13 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
             typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.mipmap.ic_item_done)
 
             val params = typeIcon.layoutParams as ConstraintLayout.LayoutParams
-            params.marginStart = 10
+            params.marginStart = MARGIN_START
             typeIcon.layoutParams = params
         } else {
             typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.mipmap.ic_item_undone)
 
             val params = typeIcon.layoutParams as ConstraintLayout.LayoutParams
-            params.marginStart = 10
+            params.marginStart = MARGIN_START
             typeIcon.layoutParams = params
         }
 
@@ -75,7 +78,7 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
                 val metrics = DisplayMetrics()
                 fragment.activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
                 val logicalDensity = metrics.density
-                val margin = (logicalDensity * 4).toInt()
+                val margin = (logicalDensity * LOGICAL_DENSITY_MULTIPLIER).toInt()
 
                 progressDone.setWidthForProgress(goal, progressTotal.measuredWidth - margin)
 

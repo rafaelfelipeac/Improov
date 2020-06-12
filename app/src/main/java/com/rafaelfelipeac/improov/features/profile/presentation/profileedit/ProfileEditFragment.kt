@@ -73,7 +73,9 @@ class ProfileEditFragment : BaseFragment() {
         }
     }
 
-    private fun observeViewModel() {}
+    private fun observeViewModel() {
+        TODO("Not yet implemented")
+    }
 
     private fun setErrorMessage(message: String) {
         profile_edit_error_message.text = message

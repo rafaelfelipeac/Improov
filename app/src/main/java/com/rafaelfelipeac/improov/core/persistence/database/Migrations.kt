@@ -9,5 +9,7 @@ fun getAllMigrations(): Array<Migration> = arrayOf(
 
 val MIGRATION_48_49 = object : Migration(DATABASE_VERSION_48, DATABASE_VERSION_49) {
 
-    override fun migrate(database: SupportSQLiteDatabase) {}
+    override fun migrate(database: SupportSQLiteDatabase) {
+        TODO("Not yet implemented")
+    }
 }

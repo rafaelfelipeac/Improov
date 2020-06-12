@@ -547,7 +547,8 @@ class GoalDetailFragment : BaseFragment() {
 //
 //                goalViewModel.deleteItem(item)
 //
-//                showSnackBarWithAction(holder.itemView, getString(R.string.habit_item_swiped_deleted), item, ::deleteItem)
+//                showSnackBarWithAction(
+//                    holder.itemView, getString(R.string.habit_item_swiped_deleted), item, ::deleteItem)
             }
         }
     }

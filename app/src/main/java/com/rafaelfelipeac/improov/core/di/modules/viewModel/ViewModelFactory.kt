@@ -21,8 +21,12 @@ class ViewModelFactory @Inject constructor(
 
         return try {
             creator.get() as T
-        } catch (e: Exception) {
-            throw RuntimeException(e)
+        } catch (e: ClassCastException) {
+            throw ClassCastException()
+        } catch (e: TypeCastException) {
+            throw TypeCastException()
+        } catch (e: KotlinNullPointerException) {
+            throw KotlinNullPointerException()
         }
     }
 
