@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_list.*
 const val SECONDS_BOTTOM_SHEET = 1000L
 const val PERCENTAGE_MAX = 100
 
+@Suppress("TooManyFunctions")
 class GoalListFragment : BaseFragment() {
 
     private var goalsAdapter = GoalListAdapter(this)

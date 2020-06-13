@@ -34,6 +34,7 @@ import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import kotlinx.android.synthetic.main.fragment_goal.*
 import java.util.Date
 
+@Suppress("TooManyFunctions")
 class GoalDetailFragment : BaseFragment() {
 
     private var itemsAdapter = ItemsAdapter(this)

@@ -20,6 +20,7 @@ import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.GetItemListU
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions", "LongParameterList")
 class GoalFormViewModel @Inject constructor(
     private val saveGoalUseCase: SaveGoalUseCase,
     private val getGoalUseCase: GetGoalUseCase,

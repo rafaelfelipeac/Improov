@@ -25,7 +25,7 @@ class ItemDataModelTest {
     }
 
     @Test
-    fun `GIVEN itemDataModel with custom itemId and name WHEN map is called THEN a item with the same itemId and name is returned`() {
+    fun `GIVEN itemDataModel WHEN map is called THEN a item with the same values is returned`() {
         // given
         val itemDataModel = createItemDataModel(itemId = 123, name = "item1")
 
@@ -49,7 +49,7 @@ class ItemDataModelTest {
     }
 
     @Test
-    fun `GIVEN item with custom itemId and name WHEN mapReverse is called THEN itemDataModel with the same itemId and name is returned`() {
+    fun `GIVEN item WHEN mapReverse is called THEN itemDataModel with the same values is returned`() {
         // given
         val item = createItem(itemId = 123, name = "item1")
 

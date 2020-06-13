@@ -25,7 +25,7 @@ class GoalDataModelTest {
     }
 
     @Test
-    fun `GIVEN goalDataModel with custom goalId and name WHEN map is called THEN a goal with the same goalId and name is returned`() {
+    fun `GIVEN goalDataModel WHEN map is called THEN a goal with the same values is returned`() {
         // given
         val goalDataModel = createGoalDataModel(goalId = 123, name = "goal123")
 
@@ -49,7 +49,7 @@ class GoalDataModelTest {
     }
 
     @Test
-    fun `GIVEN goal with custom goalId and name WHEN mapReverse is called THEN goalDataModel with the same goalId and name is returned`() {
+    fun `GIVEN goal WHEN mapReverse is called THEN goalDataModel with the same value is returned`() {
         // given
         val goal = createGoal(goalId = 123, name = "goal123")
 

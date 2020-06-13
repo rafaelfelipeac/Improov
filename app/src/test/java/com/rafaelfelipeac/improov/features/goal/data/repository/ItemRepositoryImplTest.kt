@@ -65,7 +65,7 @@ class ItemRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a item with a specific itemId WHEN save is called THEN itemRepositoryImp return the same itemId as a confirmation`() {
+    fun `GIVEN a item WHEN save is called THEN itemRepositoryImp return the itemId as a confirmation`() {
         runBlocking {
             // given
             val item = createItem(itemId)

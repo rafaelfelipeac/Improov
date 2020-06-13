@@ -90,7 +90,7 @@ class GoalListViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveGoal return success and then calling getGoalList WHEN onSaveGoal is called THEN true and a list of goals are returned`() {
+    fun `GIVEN saveGoal calling getGoalList WHEN onSaveGoal is called THEN true and a list of goals are returned`() {
         // given
         val goalId = 1L
         val goal = createGoal(goalId)

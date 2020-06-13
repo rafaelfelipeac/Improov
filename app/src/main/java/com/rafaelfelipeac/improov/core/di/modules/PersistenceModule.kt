@@ -3,8 +3,8 @@ package com.rafaelfelipeac.improov.core.di.modules
 import android.content.Context
 import androidx.room.Room
 import com.rafaelfelipeac.improov.R
+import com.rafaelfelipeac.improov.core.persistence.database.MIGRATION_48_49
 import com.rafaelfelipeac.improov.core.persistence.database.RoomDatabase
-import com.rafaelfelipeac.improov.core.persistence.database.getAllMigrations
 import com.rafaelfelipeac.improov.features.goal.data.dao.GoalDAO
 import com.rafaelfelipeac.improov.features.goal.data.dao.HistoricDAO
 import com.rafaelfelipeac.improov.features.goal.data.dao.ItemDAO
@@ -22,7 +22,7 @@ object PersistenceModule {
         Room.databaseBuilder(context, RoomDatabase::class.java, context.getString(R.string.database_name))
             .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
-            .addMigrations(*getAllMigrations())
+            .addMigrations(MIGRATION_48_49)
             .build()
 
     @Provides

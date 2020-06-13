@@ -64,7 +64,7 @@ class GoalRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a goal with a specific goalId WHEN save is called THEN goalRepositoryImp return the same goalId as a confirmation`() {
+    fun `GIVEN a goal WHEN save is called THEN goalRepositoryImp return the goalId as a confirmation`() {
         runBlocking {
             // given
             val goal = createGoal(goalId)

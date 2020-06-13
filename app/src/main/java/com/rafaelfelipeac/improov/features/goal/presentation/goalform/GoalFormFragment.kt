@@ -28,6 +28,7 @@ import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 import java.util.Calendar
 
+@Suppress("TooManyFunctions")
 class GoalFormFragment : BaseFragment() {
 
     private var goal: Goal =

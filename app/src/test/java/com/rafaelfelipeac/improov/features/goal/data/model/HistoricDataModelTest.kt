@@ -25,7 +25,7 @@ class HistoricDataModelTest {
     }
 
     @Test
-    fun `GIVEN historicDataModel with custom historicId and value WHEN map is called THEN a historic with the same historicId and value is returned`() {
+    fun `GIVEN historicDataModel WHEN map is called THEN a historic with the same values is returned`() {
         // given
         val historicDataModel = createHistoricDataModel(historicId = 123, value = 5f)
 
@@ -49,7 +49,7 @@ class HistoricDataModelTest {
     }
 
     @Test
-    fun `GIVEN historic with custom historicId and value WHEN mapReverse is called THEN historicDataModel with the same historicId and value is returned`() {
+    fun `GIVEN historic WHEN mapReverse is called THEN historicDataModel with the same values is returned`() {
         // given
         val historic = createHistoric(historicId = 123, value = 10f)
 

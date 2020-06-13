@@ -30,6 +30,7 @@ import com.rafaelfelipeac.improov.features.main.MainActivity
 import java.util.Calendar
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 abstract class BaseFragment : Fragment() {
 
     @Inject
