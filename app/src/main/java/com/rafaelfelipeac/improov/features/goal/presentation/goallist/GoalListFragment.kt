@@ -26,22 +26,14 @@ class GoalListFragment : BaseFragment() {
 
     private var goalsAdapter = GoalListAdapter(this)
 
-    private var isFromDragAndDrop = 0
-
     private var swipeShown = false
 
     private val viewModel by lazy { viewModelFactory.get<GoalListViewModel>(this) }
 
     private val stateObserver = Observer<GoalListViewModel.ViewState> { response ->
-        if (isFromDragAndDrop == 0 && !response.goalSaved) {
-            response.goals
-                .let { goalsAdapter.setItems(it) }
-            setupGoals(response.goals.isNotEmpty())
-        }
-
-        if (isFromDragAndDrop > 0) {
-            isFromDragAndDrop--
-        }
+        response.goals
+            .let { goalsAdapter.setItems(it) }
+        setupGoals(response.goals.isNotEmpty())
 
         if (response.firstTimeList && !swipeShown) {
             showBottomSheetTipsSwipe()
@@ -134,10 +126,8 @@ class GoalListFragment : BaseFragment() {
         target.order = toPosition
         other.order = fromPosition
 
-        viewModel.onSaveGoal(target)
-        isFromDragAndDrop++
-        viewModel.onSaveGoal(other)
-        isFromDragAndDrop++
+        viewModel.onSaveGoal(target, isFromDragAndDrop = true)
+        viewModel.onSaveGoal(other, isFromDragAndDrop = true)
 
         items.removeAt(fromPosition)
         items.add(toPosition, target)

@@ -426,7 +426,7 @@ class GoalFormFragment : BaseFragment() {
             val bronze = goal_form_bronze_value.toFloat()
 
             ((gold > silver) && (silver > bronze))
-        } catch (e: KotlinNullPointerException) {
+        } catch (e: NumberFormatException) {
             return goal_form_single_value.isNotEmpty()
         }
     }

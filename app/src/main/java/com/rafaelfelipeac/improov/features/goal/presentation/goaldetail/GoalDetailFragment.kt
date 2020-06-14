@@ -40,8 +40,6 @@ class GoalDetailFragment : BaseFragment() {
     private var itemsAdapter = ItemsAdapter(this)
     private var historicAdapter = HistoricAdapter()
 
-    private var isFromDragAndDrop = 0
-
     private var seriesSingle: Int = 0
     private var seriesBronze: Int = 0
     private var seriesSilver: Int = 0
@@ -63,15 +61,9 @@ class GoalDetailFragment : BaseFragment() {
 
         itemsSize = response.items.size
 
-        if (isFromDragAndDrop == 0 && !response.itemSaved) {
-            response.items
-                .let { itemsAdapter.setItems(it) }
-            setupItems(response.items.isNotEmpty())
-        }
-
-        if (isFromDragAndDrop > 0) {
-            isFromDragAndDrop--
-        }
+        response.items
+            .let { itemsAdapter.setItems(it) }
+        setupItems(response.items.isNotEmpty())
 
         response.historics
             .let { historicAdapter.setItems(it) }
@@ -484,11 +476,11 @@ class GoalDetailFragment : BaseFragment() {
     private fun setSingleValue(value: Float) = goal_single_arcView.setup(value, seriesSingle)
 
     private fun enableIcon(image: ImageView, iconNormal: Int) {
-        image.enableIcon(iconNormal, context!!)
+        image.enableIcon(iconNormal, requireContext())
     }
 
     private fun disableIcon(image: ImageView, iconDark: Int) {
-        image.disableIcon(iconDark, context!!)
+        image.disableIcon(iconDark, requireContext())
     }
 
     fun onViewMoved(
@@ -503,10 +495,8 @@ class GoalDetailFragment : BaseFragment() {
         targetItem.order = toPosition
         otherItem.order = fromPosition
 
-        viewModel.onSaveItem(targetItem)
-        isFromDragAndDrop++
-        viewModel.onSaveItem(otherItem)
-        isFromDragAndDrop++
+        viewModel.onSaveItem(targetItem, isFromDragOnDrop = true)
+        viewModel.onSaveItem(otherItem, isFromDragOnDrop = true)
 
         items.removeAt(fromPosition)
         items.add(toPosition, targetItem)

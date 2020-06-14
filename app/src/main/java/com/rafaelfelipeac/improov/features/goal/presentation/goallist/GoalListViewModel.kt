@@ -27,23 +27,25 @@ class GoalListViewModel @Inject constructor(
         getFirstTimeList()
     }
 
-    fun onSaveGoal(goal: Goal) {
-        saveGoal(goal)
+    fun onSaveGoal(goal: Goal, isFromDragAndDrop: Boolean = false) {
+        saveGoal(goal, isFromDragAndDrop)
     }
 
     fun onSaveFirstTimeList(firstTimeList: Boolean) {
         saveFirstTimeList(firstTimeList)
     }
 
-    private fun saveGoal(goal: Goal) {
+    private fun saveGoal(goal: Goal, isFromDragAndDrop: Boolean) {
         viewModelScope.launch {
             saveGoalUseCase.execute(goal).also {
                 if (it > 0) {
-                    sendAction(
-                        Action.GoalSaved
-                    )
+                    if (!isFromDragAndDrop) {
+                        sendAction(
+                            Action.GoalSaved
+                        )
 
-                    getGoals() // for now
+                        getGoals() // for now
+                    }
                 }
             }
         }

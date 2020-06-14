@@ -16,6 +16,7 @@ import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.SaveItemUseC
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 class GoalDetailViewModel @Inject constructor(
     private val saveGoalUseCase: SaveGoalUseCase,
     private val getGoalUseCase: GetGoalUseCase,
@@ -37,6 +38,18 @@ class GoalDetailViewModel @Inject constructor(
     }
 
     fun onSaveGoal(goal: Goal) {
+        saveGoal(goal)
+    }
+
+    fun onSaveItem(item: Item, isFromDragOnDrop: Boolean = false) {
+        saveItem(item, isFromDragOnDrop)
+    }
+
+    fun onSaveHistoric(historic: Historic) {
+        saveHistoric(historic)
+    }
+
+    private fun saveGoal(goal: Goal) {
         viewModelScope.launch {
             saveGoalUseCase.execute(goal).also {
                 if (it > 0) {
@@ -46,19 +59,21 @@ class GoalDetailViewModel @Inject constructor(
         }
     }
 
-    fun onSaveItem(item: Item) {
+    private fun saveItem(item: Item, isFromDragOnDrop: Boolean) {
         viewModelScope.launch {
             saveItemUseCase.execute(item).also {
                 if (it > 0) {
-                    sendAction(Action.ItemSaved)
+                    if (!isFromDragOnDrop) {
+                        sendAction(Action.ItemSaved)
 
-                    getItems() // for now
+                        getItems() // for now
+                    }
                 }
             }
         }
     }
 
-    fun onSaveHistoric(historic: Historic) {
+    private fun saveHistoric(historic: Historic) {
         viewModelScope.launch {
             saveHistoricUseCCase.execute(historic).also {
                 if (it > 0) {
