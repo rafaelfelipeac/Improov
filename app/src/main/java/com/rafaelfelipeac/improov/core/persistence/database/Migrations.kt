@@ -6,6 +6,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 val MIGRATION_48_49 = object : Migration(DATABASE_VERSION_48, DATABASE_VERSION_49) {
 
     override fun migrate(database: SupportSQLiteDatabase) {
-        TODO("Not yet implemented")
+        // no need for migration code
     }
 }
