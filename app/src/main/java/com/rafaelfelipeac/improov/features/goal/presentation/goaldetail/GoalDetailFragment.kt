@@ -1,6 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -441,27 +442,39 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun resetDivideAndConquerBronze() {
-        seriesBronze = goal_bronze_arcView.resetValue(0F, goal?.bronzeValue!!, 0F)
+        seriesBronze = goal_bronze_arcView.resetValue(
+            minValue = 0F,
+            maxValue = goal?.bronzeValue!!,
+            initialValue = 0F,
+            screenMultiplier = getScreenMultiplier()
+        )
     }
 
     private fun resetDivideAndConquerSilver() {
         seriesSilver = goal_silver_arcView.resetValue(
-            goal?.bronzeValue!!,
-            goal?.silverValue!!,
-            goal?.bronzeValue!!
+            minValue = goal?.bronzeValue!!,
+            maxValue = goal?.silverValue!!,
+            initialValue = goal?.bronzeValue!!,
+            screenMultiplier = getScreenMultiplier()
         )
     }
 
     private fun resetDivideAndConquerGold() {
         seriesGold = goal_gold_arcView.resetValue(
-            goal?.silverValue!!,
-            goal?.goldValue!!,
-            goal?.silverValue!!
+            minValue = goal?.silverValue!!,
+            maxValue = goal?.goldValue!!,
+            initialValue = goal?.silverValue!!,
+            screenMultiplier = getScreenMultiplier()
         )
     }
 
     private fun resetSingle() {
-        seriesSingle = goal_single_arcView.resetValue(0F, goal?.singleValue!!, 0F)
+        seriesSingle = goal_single_arcView.resetValue(
+            minValue = 0F,
+            maxValue = goal?.singleValue!!,
+            initialValue = 0F,
+            screenMultiplier = getScreenMultiplier()
+        )
     }
 
     private fun setDivideAndConquerBronzeValue(value: Float) =
@@ -577,5 +590,12 @@ class GoalDetailFragment : BaseFragment() {
         item.updatedDate = getCurrentTime()
 
         viewModel.onSaveItem(item)
+    }
+
+    private fun getScreenMultiplier(): Float {
+        val metrics = DisplayMetrics()
+        activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
+
+        return metrics.density
     }
 }
