@@ -6,12 +6,14 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.fragment.app.Fragment
 
+const val VIBRATE_SECONDS = 20L
+
 fun Fragment.vibrate() {
     val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
-    if (Build.VERSION.SDK_INT >= 26) {
-        vibrator.vibrate(VibrationEffect.createOneShot(20, VibrationEffect.DEFAULT_AMPLITUDE))
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        vibrator.vibrate(VibrationEffect.createOneShot(VIBRATE_SECONDS, VibrationEffect.DEFAULT_AMPLITUDE))
     } else {
-        vibrator.vibrate(20)
+        vibrator.vibrate(VIBRATE_SECONDS)
     }
 }

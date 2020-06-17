@@ -4,9 +4,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
@@ -14,15 +12,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.crashlytics.android.Crashlytics
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.platform.base.BaseActivity
+import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.bottom_sheet_tips_one.*
-import kotlinx.android.synthetic.main.bottom_sheet_tips_three.*
-import kotlinx.android.synthetic.main.bottom_sheet_tips_two.*
 
 class MainActivity : BaseActivity() {
 
@@ -31,9 +26,6 @@ class MainActivity : BaseActivity() {
     lateinit var fakeBottomNav: View
     lateinit var navLayout: CoordinatorLayout
     lateinit var fab: FloatingActionButton
-
-    lateinit var bottomSheetTipClose: ConstraintLayout
-    var bottomSheetTip: BottomSheetBehavior<*>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,9 +42,11 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
+        val baseFragment = (nav_host_fragment.childFragmentManager.fragments[0] as BaseFragment)
+
         when {
-            bottomSheetIsOpen() -> {
-                closeBottomSheetTips()
+            baseFragment.bottomSheetTipIsOpen() -> {
+                baseFragment.hideBottomSheetTips()
 
                 setupToolbar()
             }
@@ -68,7 +62,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun lastFragment(): Boolean {
-        val currentFragment = NavHostFragment.findNavController(nav_host_fragment).currentDestination!!.id
+        val currentFragment =
+            NavHostFragment.findNavController(nav_host_fragment).currentDestination!!.id
 
         return currentFragment == R.id.navigation_list
     }
@@ -90,31 +85,6 @@ class MainActivity : BaseActivity() {
         navLayout = nav_layout
         fakeBottomNav = fake_bottom_nav
         fab = fab_layout
-    }
-
-    fun setupBottomSheetTipsOne() {
-        bottomSheetTip = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.tips_one))
-        bottomSheetTipClose = tips_one_button_close
-    }
-
-    fun setupBottomSheetTipsTwo() {
-        bottomSheetTip = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.tips_two))
-        bottomSheetTipClose = tips_two_button_close
-    }
-
-    fun setupBottomSheetTipsThree() {
-        bottomSheetTip = BottomSheetBehavior.from(findViewById<LinearLayout>(R.id.tips_three))
-        bottomSheetTipClose = tips_three_button_close
-    }
-
-    fun openBottomSheetTips() {
-        bottomSheetTip?.state = BottomSheetBehavior.STATE_EXPANDED
-    }
-
-    fun closeBottomSheetTips() { bottomSheetTip?.state = BottomSheetBehavior.STATE_COLLAPSED }
-
-    private fun bottomSheetIsOpen(): Boolean {
-        return bottomSheetTip?.state == BottomSheetBehavior.STATE_EXPANDED
     }
 
     private fun setupToolbar() {

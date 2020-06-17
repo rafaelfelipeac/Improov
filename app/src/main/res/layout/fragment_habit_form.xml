@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -14,37 +13,37 @@
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDarkOne"
                 android:fillViewport="true"
-                tools:context=".features.habit.HabitFormFragment"
-                android:background="@color/colorPrimaryDarkOne">
+                tools:context=".future.habit.HabitFormFragment">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/habit_form_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_background"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:background="@drawable/rounded_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/habit_form_name_hint"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:textColor="@color/colorPrimary"
-                        android:hint="@string/habit_form_name_hint"
-                        app:layout_constraintStart_toStartOf="parent"
                         android:layout_margin="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
-                        app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                        android:hint="@string/habit_form_name_hint"
+                        android:textColor="@color/colorPrimary"
                         app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
                         app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent">
+                        app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
+                        app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/habit_form_name"
@@ -52,7 +51,7 @@
                             android:layout_height="match_parent"
                             android:inputType="textCapSentences"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,49 +60,49 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/habit_form_info"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/rounded_background"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/habit_form_info"
                     app:layout_constraintVertical_bias="0.0">
 
                 <TextView
                         android:id="@+id/habit_form_routine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
                         android:text="@string/habit_form_routine"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="24dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="24dp"
                         app:layout_constraintHorizontal_bias="0.0"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/habit_form_help"
                         android:layout_width="48dp"
                         android:layout_height="32dp"
-                        app:layout_constraintTop_toTopOf="@+id/habit_form_routine"
+                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/habit_form_routine"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="16dp">
+                        app:layout_constraintTop_toTopOf="@+id/habit_form_routine">
 
                     <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/ic_help"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -111,13 +110,13 @@
                         android:id="@+id/habit_form_option_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="32dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="32dp"
                         android:layout_marginTop="16dp"
-                        app:layout_constraintTop_toBottomOf="@+id/habit_form_routine"
-                        app:layout_constraintHorizontal_bias="0.0">
+                        android:layout_marginEnd="32dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/habit_form_routine">
 
                     <RadioButton
                             android:id="@+id/habit_form_radio_everyday"
@@ -125,24 +124,24 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"/>
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
                             android:text="@string/habit_form_everyday"
-                            android:textSize="18sp"
                             android:textColor="@color/colorPrimary"
-                            app:layout_constraintStart_toEndOf="@+id/habit_form_radio_everyday"
-                            app:layout_constraintTop_toTopOf="@+id/habit_form_radio_everyday"
+                            android:textSize="18sp"
                             app:layout_constraintBottom_toBottomOf="@+id/habit_form_radio_everyday"
                             app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginEnd="8dp"
-                            app:layout_constraintHorizontal_bias="0.0"/>
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/habit_form_radio_everyday"
+                            app:layout_constraintTop_toTopOf="@+id/habit_form_radio_everyday" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -150,11 +149,11 @@
                         android:id="@+id/habit_form_option_2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="32dp"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="32dp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/habit_form_option_1">
 
                     <RadioButton
@@ -163,33 +162,33 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
-                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintVertical_bias="0.0"/>
+                            app:layout_constraintVertical_bias="0.0" />
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
                             android:text="@string/habit_form_weekdays"
-                            android:textSize="18sp"
                             android:textColor="@color/colorPrimary"
-                            app:layout_constraintStart_toEndOf="@+id/habit_form_radio_weekdays"
-                            app:layout_constraintTop_toTopOf="@+id/habit_form_radio_weekdays"
+                            android:textSize="18sp"
                             app:layout_constraintBottom_toBottomOf="@+id/habit_form_radio_weekdays"
                             app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginEnd="8dp"
-                            app:layout_constraintHorizontal_bias="0.0"/>
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/habit_form_radio_weekdays"
+                            app:layout_constraintTop_toTopOf="@+id/habit_form_radio_weekdays" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/habit_form_week"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:visibility="gone"
-                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/habit_form_radio_weekdays"
                             tools:visibility="visible">
 
@@ -197,97 +196,97 @@
                                 android:id="@+id/habit_form_week_sunday"
                                 android:layout_width="140dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
                                 android:minWidth="0dp"
                                 android:minHeight="0dp"
                                 android:text="@string/habit_form_week_sunday"
                                 android:textColor="@color/colorPrimary"
-                                android:layout_marginTop="8dp"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:layout_marginStart="8dp"
-                                app:layout_constraintStart_toStartOf="parent"/>
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                         <CheckBox
                                 android:id="@+id/habit_form_week_monday"
                                 android:layout_width="140dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
                                 android:minWidth="0dp"
                                 android:minHeight="0dp"
                                 android:text="@string/habit_form_week_monday"
                                 android:textColor="@color/colorPrimary"
-                                app:layout_constraintTop_toTopOf="@+id/habit_form_week_sunday"
-                                app:layout_constraintStart_toEndOf="@+id/habit_form_week_sunday"
                                 app:layout_constraintBottom_toBottomOf="@+id/habit_form_week_sunday"
-                                android:layout_marginStart="8dp"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                android:layout_marginEnd="8dp"/>
+                                app:layout_constraintStart_toEndOf="@+id/habit_form_week_sunday"
+                                app:layout_constraintTop_toTopOf="@+id/habit_form_week_sunday" />
 
                         <CheckBox
                                 android:id="@+id/habit_form_week_tuesday"
                                 android:layout_width="140dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
                                 android:minWidth="0dp"
                                 android:minHeight="0dp"
                                 android:text="@string/habit_form_week_tuesday"
                                 android:textColor="@color/colorPrimary"
-                                android:layout_marginStart="8dp"
-                                app:layout_constraintTop_toBottomOf="@+id/habit_form_week_sunday"
-                                app:layout_constraintStart_toStartOf="parent"/>
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/habit_form_week_sunday" />
 
                         <CheckBox
                                 android:id="@+id/habit_form_week_wednesday"
                                 android:layout_width="140dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
                                 android:minWidth="0dp"
                                 android:minHeight="0dp"
                                 android:text="@string/habit_form_week_wednesday"
                                 android:textColor="@color/colorPrimary"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
-                                app:layout_constraintTop_toTopOf="@+id/habit_form_week_tuesday"
                                 app:layout_constraintBottom_toBottomOf="@+id/habit_form_week_tuesday"
-                                app:layout_constraintStart_toEndOf="@+id/habit_form_week_tuesday"/>
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/habit_form_week_tuesday"
+                                app:layout_constraintTop_toTopOf="@+id/habit_form_week_tuesday" />
 
                         <CheckBox
                                 android:id="@+id/habit_form_week_thursday"
                                 android:layout_width="140dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
                                 android:minWidth="0dp"
                                 android:minHeight="0dp"
                                 android:text="@string/habit_form_week_thursday"
                                 android:textColor="@color/colorPrimary"
-                                android:layout_marginStart="8dp"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/habit_form_week_tuesday"/>
+                                app:layout_constraintTop_toBottomOf="@+id/habit_form_week_tuesday" />
 
                         <CheckBox
                                 android:id="@+id/habit_form_week_friday"
                                 android:layout_width="140dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
                                 android:minWidth="0dp"
                                 android:minHeight="0dp"
                                 android:text="@string/habit_form_week_friday"
                                 android:textColor="@color/colorPrimary"
+                                app:layout_constraintBottom_toBottomOf="@+id/habit_form_week_thursday"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginStart="8dp"
-                                app:layout_constraintTop_toTopOf="@+id/habit_form_week_thursday"
                                 app:layout_constraintStart_toEndOf="@+id/habit_form_week_thursday"
-                                app:layout_constraintBottom_toBottomOf="@+id/habit_form_week_thursday"/>
+                                app:layout_constraintTop_toTopOf="@+id/habit_form_week_thursday" />
 
                         <CheckBox
                                 android:id="@+id/habit_form_week_saturday"
                                 android:layout_width="140dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginBottom="8dp"
                                 android:minWidth="0dp"
                                 android:minHeight="0dp"
                                 android:text="@string/habit_form_week_saturday"
                                 android:textColor="@color/colorPrimary"
-                                android:layout_marginStart="8dp"
-                                app:layout_constraintTop_toBottomOf="@+id/habit_form_week_thursday"
-                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginBottom="8dp"/>
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/habit_form_week_thursday" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -297,64 +296,64 @@
                         android:id="@+id/habit_form_option_3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="32dp"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="32dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/habit_form_option_2">
 
                     <RadioButton
                             android:id="@+id/habit_form_radio_period"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
                             android:minWidth="0dp"
                             android:minHeight="0dp"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/habit_form_period_days"
                             app:layout_constraintBottom_toBottomOf="@+id/habit_form_period_days"
-                            android:layout_marginEnd="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"/>
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/habit_form_period_days" />
 
                     <EditText
                             android:id="@+id/habit_form_period_days"
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            app:layout_constraintStart_toEndOf="@+id/habit_form_radio_period"
                             android:layout_marginStart="16dp"
-                            android:textColor="@color/colorPrimary"
+                            android:inputType="number"
                             android:textAlignment="center"
-                            app:layout_constraintTop_toTopOf="@+id/habit_form_days"
+                            android:textColor="@color/colorPrimary"
                             app:layout_constraintBottom_toBottomOf="@+id/habit_form_days"
-                            android:inputType="number"/>
+                            app:layout_constraintStart_toEndOf="@+id/habit_form_radio_period"
+                            app:layout_constraintTop_toTopOf="@+id/habit_form_days" />
 
                     <TextView
                             android:id="@+id/habit_form_days"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/habit_form_days"
-                            android:textSize="18sp"
-                            android:textColor="@color/colorPrimary"
-                            app:layout_constraintStart_toEndOf="@+id/habit_form_period_days"
                             android:layout_marginStart="8dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
+                            android:text="@string/habit_form_days"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/habit_form_period_days"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     <Spinner
                             android:id="@+id/habit_form_periods_spinner"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:spinnerMode="dropdown"
-                            app:layout_constraintStart_toEndOf="@+id/habit_form_days"
-                            app:layout_constraintBottom_toBottomOf="@+id/habit_form_days"
-                            android:backgroundTint="@color/colorPrimary"
-                            android:textColor="@color/colorPrimary"
-                            app:layout_constraintTop_toTopOf="@+id/habit_form_days"
-                            app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginEnd="8dp"
-                            app:layout_constraintHorizontal_bias="0.0"/>
+                            android:backgroundTint="@color/colorPrimary"
+                            android:spinnerMode="dropdown"
+                            android:textColor="@color/colorPrimary"
+                            app:layout_constraintBottom_toBottomOf="@+id/habit_form_days"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/habit_form_days"
+                            app:layout_constraintTop_toTopOf="@+id/habit_form_days" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -362,66 +361,66 @@
                         android:id="@+id/habit_form_option_4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="32dp"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="32dp"
-                        app:layout_constraintTop_toBottomOf="@+id/habit_form_option_3"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginBottom="24dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/habit_form_option_3"
                         app:layout_constraintVertical_bias="0.0">
 
                     <RadioButton
                             android:id="@+id/habit_form_radio_custom"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="32dp"
                             android:minWidth="0dp"
                             android:minHeight="0dp"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
-                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginEnd="32dp"
                             app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                             android:id="@+id/habit_form_custom_days_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/habit_form_custom_days"
-                            android:textSize="18sp"
-                            android:textColor="@color/colorPrimary"
-                            app:layout_constraintStart_toEndOf="@+id/habit_form_radio_custom"
                             android:layout_marginStart="16dp"
-                            app:layout_constraintTop_toTopOf="@+id/habit_form_radio_custom"
-                            app:layout_constraintBottom_toBottomOf="@+id/habit_form_radio_custom"/>
+                            android:text="@string/habit_form_custom_days"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/habit_form_radio_custom"
+                            app:layout_constraintStart_toEndOf="@+id/habit_form_radio_custom"
+                            app:layout_constraintTop_toTopOf="@+id/habit_form_radio_custom" />
 
                     <EditText
                             android:id="@+id/habit_form_add_days"
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            app:layout_constraintStart_toEndOf="@+id/habit_form_custom_days_1"
-                            app:layout_constraintTop_toTopOf="@+id/habit_form_custom_days_1"
-                            android:textColor="@color/colorPrimary"
-                            app:layout_constraintBottom_toBottomOf="@+id/habit_form_custom_days_1"
+                            android:layout_marginStart="8dp"
                             android:inputType="number"
                             android:textAlignment="center"
-                            android:layout_marginStart="8dp"/>
+                            android:textColor="@color/colorPrimary"
+                            app:layout_constraintBottom_toBottomOf="@+id/habit_form_custom_days_1"
+                            app:layout_constraintStart_toEndOf="@+id/habit_form_custom_days_1"
+                            app:layout_constraintTop_toTopOf="@+id/habit_form_custom_days_1" />
 
                     <TextView
                             android:id="@+id/habit_form_custom_days_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
                             android:text="@string/habit_form_custom_days_2"
-                            android:textSize="18sp"
                             android:textColor="@color/colorPrimary"
-                            app:layout_constraintStart_toEndOf="@+id/habit_form_add_days"
-                            app:layout_constraintTop_toTopOf="@+id/habit_form_add_days"
+                            android:textSize="18sp"
                             app:layout_constraintBottom_toBottomOf="@+id/habit_form_add_days"
-                            android:layout_marginStart="8dp"/>
+                            app:layout_constraintStart_toEndOf="@+id/habit_form_add_days"
+                            app:layout_constraintTop_toTopOf="@+id/habit_form_add_days" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

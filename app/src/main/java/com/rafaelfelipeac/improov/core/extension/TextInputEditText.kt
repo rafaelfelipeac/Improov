@@ -42,12 +42,12 @@ fun TextInputEditText.checkIfFieldIsEmptyOrZero(): Boolean {
         isEmpty() -> true
         text.toString()[0] == '0' &&
                 inputType == (InputType.TYPE_NUMBER_FLAG_DECIMAL + InputType.TYPE_CLASS_NUMBER) -> {
-            return text.toString().toDouble() <= 0
+            text.toString().toDouble() <= 0
         }
         text.toString()[0] == ' ' -> {
             setText(text.toString().replaceFirst(" ", ""))
 
-            return checkIfFieldIsEmptyOrZero()
+            checkIfFieldIsEmptyOrZero()
         }
         else -> false
     }
