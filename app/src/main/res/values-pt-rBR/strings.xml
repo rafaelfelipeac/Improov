@@ -11,7 +11,7 @@
     <string name="date_format_full">dd/MM/yyyy HH:mm:ss</string>
 
     <!-- Commons -->
-    <string name="empty_string"/>
+    <string name="empty_string" />
     <string name="snackbar_action_undo">DESFAZER</string>
     <string name="dialog_action_positive">OK</string>
     <string name="dialog_action_negative">Cancelar</string>
@@ -109,12 +109,12 @@
     <string name="profile_edit_name_message">Altere seu nome</string>
     <string name="profile_show_welcome_message">Ver mensagens iniciais</string>
 
-    <!-- ProfileName -->
-    <string name="profile_name_title">Editar nome</string>
-    <string name="profile_name_empty_fields">Seu nome não pode ser vazio.</string>
-    <string name="profile_name_success">Perfil editado.</string>
-    <string name="profile_name_name_hint">Nome</string>
-    <string name="profile_name_save_message">Salvar</string>
+    <!-- ProfileEdit -->
+    <string name="profile_edit_title">Editar nome</string>
+    <string name="profile_edit_empty_fields">Seu nome não pode ser vazio.</string>
+    <string name="profile_edit_success">Perfil editado.</string>
+    <string name="profile_edit_name_hint">Nome</string>
+    <string name="profile_edit_save_message">Salvar</string>
 
     <!-- DialogOneButton-->
     <string name="dialog_one_button_message">Mensagem</string>
@@ -224,29 +224,29 @@
     <string name="item_empty_name">Nome do item está vazio.</string>
     <string name="item_date_format">Concluído em %s.</string>
 
-    <!-- BottomSheet Tips One -->
-    <string name="tips_one_title">Dividir e Conquistar</string>
-    <string name="tips_one_message_1">Dividir um objetivo grande e complexo em partes menores é uma boa tática para evitar que esse objetivo seja
+    <!-- BottomSheet Tips Divide And Conquer -->
+    <string name="tips_divide_and_conquer_title">Dividir e Conquistar</string>
+    <string name="tips_divide_and_conquer_message_1">Dividir um objetivo grande e complexo em partes menores é uma boa tática para evitar que esse objetivo seja
         abandonado. \n\nA sensação de progresso é maior e você estará sempre motivado para alcançar aquilo que deseja. \n\nNesse modo seu objetivo é dividido em 3 partes:
         bronze, prata e ouro.
     </string>
-    <string name="tips_one_message_2">O valor bronze é o primeiro desafio. A cada parte do objetivo atingida, você estará mais perto da sua conquista.
+    <string name="tips_divide_and_conquer_message_2">O valor bronze é o primeiro desafio. A cada parte do objetivo atingida, você estará mais perto da sua conquista.
     </string>
 
-    <!-- BottomSheet Tips Two -->
-    <string name="tips_two_title">Tipos de objetivo</string>
-    <string name="tips_two_type_list_title">Lista</string>
-    <string name="tips_two_type_list_message">Para objetivos que consistem em concluir diferentes itens de uma lista. Cada item concluído representa 1 ponto para o objetivo final.</string>
-    <string name="tips_two_type_counter_title">Contador</string>
-    <string name="tips_two_type_counter_message">Ideal para objetivos onde os valores a serem somados ou subtraídos sejam sempre os mesmos.</string>
-    <string name="tips_two_type_final_title">Valor final</string>
-    <string name="tips_two_type_final_message">Destinado a objetivos onde os valores a serem somados ou subtraídos mudem constantemente.</string>
+    <!-- BottomSheet Tips Goal Type -->
+    <string name="tips_goal_type_title">Tipos de objetivo</string>
+    <string name="tips_goal_type_list_title">Lista</string>
+    <string name="tips_goal_type_list_message">Para objetivos que consistem em concluir diferentes itens de uma lista. Cada item concluído representa 1 ponto para o objetivo final.</string>
+    <string name="tips_goal_type_counter_title">Contador</string>
+    <string name="tips_goal_type_counter_message">Ideal para objetivos onde os valores a serem somados ou subtraídos sejam sempre os mesmos.</string>
+    <string name="tips_goal_type_final_title">Valor final</string>
+    <string name="tips_goal_type_final_message">Destinado a objetivos onde os valores a serem somados ou subtraídos mudem constantemente.</string>
 
-    <!-- BottomSheet Tips Three -->
-    <string name="tips_three_title">Deslize</string>
-    <string name="tips_three_message_1">Se desejar finalizar um objetivo imediatamente, mesmo sem ter atingido o valor total, deslize o item para o lado para concluí-lo.
+    <!-- BottomSheet Tips Swipe -->
+    <string name="tips_swipe_title">Deslize</string>
+    <string name="tips_swipe_message_1">Se desejar finalizar um objetivo imediatamente, mesmo sem ter atingido o valor total, deslize o item para o lado para concluí-lo.
     </string>
-    <string name="tips_three_message_2">Se mudar de ideia, apenas deslize novamente e o item voltará a estar pronto para ser atualizado.
+    <string name="tips_swipe_message_2">Se mudar de ideia, apenas deslize novamente e o item voltará a estar pronto para ser atualizado.
     </string>
 
 </resources>

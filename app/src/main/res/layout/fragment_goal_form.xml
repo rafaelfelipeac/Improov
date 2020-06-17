@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -57,21 +56,21 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-<!--                <android.widget.Button-->
-<!--                        android:id="@+id/goal_form_set_date"-->
-<!--                        android:layout_width="100dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:layout_marginEnd="8dp"-->
-<!--                        android:layout_marginBottom="16dp"-->
-<!--                        android:background="@drawable/rounded_button"-->
-<!--                        android:text="@string/goal_form_set_date"-->
-<!--                        android:textColor="@color/colorPrimaryDarkOne"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintEnd_toEndOf="parent"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/goal_form_goal_name_hint" />-->
+                <!--                <android.widget.Button-->
+                <!--                        android:id="@+id/goal_form_set_date"-->
+                <!--                        android:layout_width="100dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:layout_marginEnd="8dp"-->
+                <!--                        android:layout_marginBottom="16dp"-->
+                <!--                        android:background="@drawable/rounded_button"-->
+                <!--                        android:text="@string/goal_form_set_date"-->
+                <!--                        android:textColor="@color/colorPrimaryDarkOne"-->
+                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                <!--                        app:layout_constraintTop_toBottomOf="@+id/goal_form_goal_name_hint" />-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -202,11 +201,11 @@
                                     android:id="@+id/goal_form_bronze_value"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:inputType="numberDecimal"
-                                    android:textColor="@color/colorPrimary"
-                                    android:textSize="16sp"
                                     android:imeOptions="actionNext"
-                                    android:nextFocusForward="@id/goal_form_silver_value"/>
+                                    android:inputType="numberDecimal"
+                                    android:nextFocusForward="@id/goal_form_silver_value"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="16sp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -255,11 +254,11 @@
                                     android:id="@+id/goal_form_silver_value"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:inputType="numberDecimal"
-                                    android:textColor="@color/colorPrimary"
-                                    android:textSize="16sp"
                                     android:imeOptions="actionNext"
-                                    android:nextFocusForward="@id/goal_form_gold_value"/>
+                                    android:inputType="numberDecimal"
+                                    android:nextFocusForward="@id/goal_form_gold_value"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="16sp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -308,7 +307,7 @@
                                     android:layout_height="match_parent"
                                     android:inputType="numberDecimal"
                                     android:textColor="@color/colorPrimary"
-                                    android:textSize="16sp"/>
+                                    android:textSize="16sp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -518,11 +517,11 @@
                                 android:id="@+id/goal_form_goal_counter_dec_value"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:inputType="numberDecimal"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16sp"
                                 android:imeOptions="actionNext"
-                                android:nextFocusForward="@id/goal_form_goal_counter_inc_value"/>
+                                android:inputType="numberDecimal"
+                                android:nextFocusForward="@id/goal_form_goal_counter_inc_value"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

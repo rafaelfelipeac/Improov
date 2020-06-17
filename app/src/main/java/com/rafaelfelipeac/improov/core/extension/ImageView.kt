@@ -3,7 +3,7 @@ package com.rafaelfelipeac.improov.core.extension
 import android.content.Context
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import com.rafaelfelipeac.improov.features.commons.Goal
+import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import kotlin.math.ceil
 
 fun ImageView.enableIcon(iconNormal: Int, context: Context) {

@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDarkOne"
-        tools:context=".features.main.MainActivity"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:context=".features.main.MainActivity">
 
     <include
+            android:id="@+id/include"
             layout="@layout/app_bar_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/include"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <fragment
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="0dp"
             app:defaultNavHost="true"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:layout_constraintBottom_toTopOf="@+id/fake_bottom_nav"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:navGraph="@navigation/nav_graph"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             app:layout_constraintTop_toBottomOf="@+id/include"
-            app:layout_constraintBottom_toTopOf="@+id/fake_bottom_nav"
-            android:layout_marginBottom="0dp"/>
+            app:navGraph="@navigation/nav_graph" />
 
-    <include
-            layout="@layout/bottom_sheet"/>
+    <include layout="@layout/bottom_sheet" />
 
     <View
             android:id="@+id/fake_bottom_nav"
@@ -41,16 +39,16 @@
             android:layout_height="60dp"
             android:layout_gravity="bottom"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/nav_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="1dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:elevation="1dp"
             tools:visibility="visible">
 
         <com.google.android.material.bottomappbar.BottomAppBar
@@ -58,18 +56,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                app:fabAlignmentMode="center"
-                android:backgroundTint="@color/colorPrimaryDarkOne"/>
+                android:backgroundTint="@color/colorPrimaryDarkOne"
+                app:fabAlignmentMode="center" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_anchor="@id/bottom_app_bar"
-                app:tint="@color/colorPrimaryDarkOne"
-                app:backgroundTint="@color/colorPrimary"
+                android:layout_marginBottom="30dp"
                 android:src="@drawable/ic_plus"
-                android:layout_marginBottom="30dp"/>
+                app:backgroundTint="@color/colorPrimary"
+                app:layout_anchor="@id/bottom_app_bar"
+                app:tint="@color/colorPrimaryDarkOne" />
 
         <FrameLayout
                 android:layout_width="match_parent"
@@ -80,14 +78,14 @@
                     android:id="@+id/bottom_nav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:elevation="0dp"
                     android:layout_gravity="bottom"
-                    app:menu="@menu/menu_navigation"
-                    app:labelVisibilityMode="labeled"
+                    android:background="@android:color/transparent"
                     app:backgroundTint="@android:color/transparent"
-                    app:itemTextColor="@drawable/bottom_navigation_colors"
+                    app:elevation="0dp"
                     app:itemIconTint="@drawable/bottom_navigation_colors"
-                    android:background="@android:color/transparent"/>
+                    app:itemTextColor="@drawable/bottom_navigation_colors"
+                    app:labelVisibilityMode="labeled"
+                    app:menu="@menu/menu_navigation" />
 
         </FrameLayout>
 

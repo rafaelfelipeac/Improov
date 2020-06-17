@@ -1,5 +1,4 @@
-<androidx.preference.PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
             android:key="@string/settings_pref_key_language_title"
