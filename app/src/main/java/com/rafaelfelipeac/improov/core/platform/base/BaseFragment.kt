@@ -27,6 +27,7 @@ import com.rafaelfelipeac.improov.core.extension.convertDateToString
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
+import java.util.Date
 import java.util.Calendar
 import javax.inject.Inject
 
@@ -80,14 +81,14 @@ abstract class BaseFragment : Fragment() {
 
     fun showSnackBar(message: String) {
         Snackbar
-            .make(view!!, message, Snackbar.LENGTH_SHORT)
+            .make(requireView(), message, Snackbar.LENGTH_SHORT)
             .setMessageColor(R.color.colorPrimaryDarkOne)
             .show()
     }
 
     fun showSnackBarLong(message: String) {
         Snackbar
-            .make(view!!, message, Snackbar.LENGTH_LONG)
+            .make(requireView(), message, Snackbar.LENGTH_LONG)
             .setMessageColor(R.color.colorPrimaryDarkOne)
             .show()
     }
@@ -102,12 +103,12 @@ abstract class BaseFragment : Fragment() {
             .make(view, message, Snackbar.LENGTH_LONG)
             .setMessageColor(R.color.colorPrimaryDarkOne)
             .setAction(getString(R.string.snackbar_action_undo)) { function(obj) }
-            .setActionTextColor(ContextCompat.getColor(context!!, R.color.colorPrimaryDarkOne))
+            .setActionTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDarkOne))
             .show()
     }
 
     fun showDialogWithAction(title: String, function: () -> Unit) {
-        AlertDialog.Builder(context!!)
+        AlertDialog.Builder(requireContext())
             .setTitle(title)
             .setPositiveButton(getString(R.string.dialog_action_positive)) { _, _ -> function() }
             .setNegativeButton(getString(R.string.dialog_action_negative)) { dialog, _ -> dialog.dismiss() }
@@ -131,7 +132,7 @@ abstract class BaseFragment : Fragment() {
         inputMethodManager?.hideSoftInputFromWindow(this.view?.windowToken, 0)
     }
 
-    fun getCurrentTime() = Calendar.getInstance().time!!
+    fun getCurrentTime(): Date = Calendar.getInstance().time
 
     fun setupBottomSheetGoal() {
         bottomSheetGoal = BottomSheetDialog(main)
@@ -163,7 +164,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun setupBottomSheetItem(newItem: (name: String) -> Unit, updateItem: (name: String) -> Unit) {
-        bottomSheetItem = BottomSheetDialog(this.activity!!)
+        bottomSheetItem = BottomSheetDialog(this.requireActivity())
         val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_item, null)
         bottomSheetItem.setContentView(sheetView)
 

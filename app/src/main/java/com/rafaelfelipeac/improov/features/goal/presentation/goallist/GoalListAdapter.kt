@@ -42,13 +42,13 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
         title.text = goal.name
 
         if (goal.done) {
-            typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.mipmap.ic_item_done)
+            typeIcon.background = ContextCompat.getDrawable(fragment.requireContext(), R.mipmap.ic_item_done)
 
             val params = typeIcon.layoutParams as ConstraintLayout.LayoutParams
             params.marginStart = MARGIN_START
             typeIcon.layoutParams = params
         } else {
-            typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.mipmap.ic_item_undone)
+            typeIcon.background = ContextCompat.getDrawable(fragment.requireContext(), R.mipmap.ic_item_undone)
 
             val params = typeIcon.layoutParams as ConstraintLayout.LayoutParams
             params.marginStart = MARGIN_START
@@ -87,7 +87,7 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
         })
 
         if (goal.date != null) {
-            date.text = goal.date.format(fragment.context!!)
+            date.text = goal.date.format(fragment.requireContext())
         } else {
             date.text = ""
         }
