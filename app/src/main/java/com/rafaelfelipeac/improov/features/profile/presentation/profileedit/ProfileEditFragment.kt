@@ -68,6 +68,7 @@ class ProfileEditFragment : BaseFragment() {
                 profile_edit_name.fieldIsEmptyOrZero(this, false)
 
                 setErrorMessage(getString(R.string.profile_edit_empty_fields))
+
                 true
             }
             else -> false
