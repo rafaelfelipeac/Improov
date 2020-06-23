@@ -11,8 +11,8 @@
             android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_width="match_parent"
                 android:background="@color/colorPrimaryDarkOne"
                 android:fillViewport="true"
                 tools:context=".future.habit.HabitFormFragment">
