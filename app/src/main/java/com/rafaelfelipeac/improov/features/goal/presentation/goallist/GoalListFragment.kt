@@ -18,8 +18,8 @@ import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import kotlinx.android.synthetic.main.fragment_list.*
 
-const val SECONDS_BOTTOM_SHEET = 1000L
 const val PERCENTAGE_MAX = 100
+const val SECONDS_BOTTOM_SHEET = 1000L
 
 @Suppress("TooManyFunctions")
 class GoalListFragment : BaseFragment() {

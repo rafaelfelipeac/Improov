@@ -18,7 +18,7 @@ class SettingsLanguageFragment : BaseFragment() {
     private val stateObserver = Observer<SettingsLanguageViewModel.ViewState> { response ->
         if (!response.languageSaved) {
             LocaleHelper.setLocale(
-                context!!,
+                requireContext(),
                 response.language
             )
 

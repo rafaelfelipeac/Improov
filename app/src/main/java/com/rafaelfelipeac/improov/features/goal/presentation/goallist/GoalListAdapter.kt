@@ -27,8 +27,8 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
     override fun getLayoutRes(): Int = R.layout.list_item_goal
 
     @SuppressLint("ClickableViewAccessibility")
-    override fun View.bindView(goal: Goal, viewHolder: ViewHolder) {
-        setOnClickListener { clickListener(goal) }
+    override fun View.bindView(item: Goal, viewHolder: ViewHolder) {
+        setOnClickListener { clickListener(item) }
 
         val typeIcon = viewHolder.itemView.findViewById<ImageView>(R.id.goal_type_icon)
         val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_title)!!
@@ -39,33 +39,33 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
         val progressDone = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress_done)
         val progressTotal = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress_total)
 
-        title.text = goal.name
+        title.text = item.name
 
-        if (goal.done) {
-            typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.mipmap.ic_item_done)
+        if (item.done) {
+            typeIcon.background = ContextCompat.getDrawable(fragment.requireContext(), R.mipmap.ic_item_done)
 
             val params = typeIcon.layoutParams as ConstraintLayout.LayoutParams
             params.marginStart = MARGIN_START
             typeIcon.layoutParams = params
         } else {
-            typeIcon.background = ContextCompat.getDrawable(fragment.context!!, R.mipmap.ic_item_undone)
+            typeIcon.background = ContextCompat.getDrawable(fragment.requireContext(), R.mipmap.ic_item_undone)
 
             val params = typeIcon.layoutParams as ConstraintLayout.LayoutParams
             params.marginStart = MARGIN_START
             typeIcon.layoutParams = params
         }
 
-        if (goal.divideAndConquer) {
+        if (item.divideAndConquer) {
             score.text = String.format(
                 "%s/%s",
-                goal.value.getNumberInRightFormat(),
-                goal.goldValue.getNumberInRightFormat()
+                item.value.getNumberInRightFormat(),
+                item.goldValue.getNumberInRightFormat()
             )
         } else {
             score.text = String.format(
                 "%s/%s",
-                goal.value.getNumberInRightFormat(),
-                goal.singleValue.getNumberInRightFormat()
+                item.value.getNumberInRightFormat(),
+                item.singleValue.getNumberInRightFormat()
             )
         }
 
@@ -80,14 +80,14 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
                 val logicalDensity = metrics.density
                 val margin = (logicalDensity * LOGICAL_DENSITY_MULTIPLIER).toInt()
 
-                progressDone.setWidthForProgress(goal, progressTotal.measuredWidth - margin)
+                progressDone.setWidthForProgress(item, progressTotal.measuredWidth - margin)
 
                 return true
             }
         })
 
-        if (goal.date != null) {
-            date.text = goal.date.format(fragment.context!!)
+        if (item.date != null) {
+            date.text = item.date.format(fragment.requireContext())
         } else {
             date.text = ""
         }
