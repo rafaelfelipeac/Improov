@@ -97,7 +97,7 @@ class MainActivity : BaseActivity() {
 
     private fun clearToolbarMenu() = toolbar.menu!!.clear()
 
-    fun closeToolbar() = supportActionBar?.hide()
-
     fun openToolbar() = supportActionBar?.show()
+
+    fun closeToolbar() = supportActionBar?.hide()
 }
