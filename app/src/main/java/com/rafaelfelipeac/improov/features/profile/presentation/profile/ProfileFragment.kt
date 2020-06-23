@@ -38,6 +38,7 @@ class ProfileFragment : BaseFragment() {
         super.onResume()
 
         main.closeToolbar()
+
         hideBottomSheetTips()
     }
 
