@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Build .APK
-        run: bash ./gradlew assembleRelease --stacktrace
+        run: ./gradlew assembleRelease --stacktrace
 
       - name: Sign Android Release
         uses: r0adkll/sign-android-release@v1
