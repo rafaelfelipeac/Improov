@@ -41,9 +41,9 @@ jobs:
             path: ${{ env.SIGNED_RELEASE_FILE }}
 
       - name: Upload APK to Google Play
-          uses: r0adkll/upload-google-play@v1
-          with:
-            serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT }}
-            packageName: com.rafaelfelipeac.improov
-            releaseFile: ${{ env.SIGNED_RELEASE_FILE }}
-            track: alpha
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT }}
+          packageName: com.rafaelfelipeac.improov
+          releaseFile: ${{ env.SIGNED_RELEASE_FILE }}
+          track: alpha
