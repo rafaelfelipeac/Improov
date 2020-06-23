@@ -107,7 +107,6 @@ class GoalDetailFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observe(viewModel.stateLiveData, stateObserver)
-
         viewModel.setGoalId(goalId!!)
         viewModel.loadData()
 
