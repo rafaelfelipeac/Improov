@@ -40,6 +40,7 @@ class ProfileEditFragment : BaseFragment() {
                 }
                 else -> {
                     hideSoftKeyboard()
+
                     viewModel.onSaveName(profile_edit_name.text.toString())
                     navController.navigateUp()
                 }
