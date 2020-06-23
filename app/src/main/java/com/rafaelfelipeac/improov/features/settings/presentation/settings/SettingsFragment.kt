@@ -33,6 +33,7 @@ class SettingsFragment : BasePreferenceFragment() {
                 navController.navigate(
                     SettingsFragmentDirections.actionNavigationSettingsToNavigationSettingsLanguage()
                 )
+
                 true
             }
             getString(R.string.settings_pref_key_about_rate) -> {
