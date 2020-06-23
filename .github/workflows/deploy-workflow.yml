@@ -24,7 +24,7 @@ jobs:
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
       - name: Upload APK
-        uses: actions/upload artifact@v1
+        uses: actions/upload-artifact@v1
         with:
             name: app-release
             path: ${{ env.SIGNED_RELEASE_FILE }}
