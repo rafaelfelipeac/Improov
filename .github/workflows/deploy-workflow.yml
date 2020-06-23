@@ -64,5 +64,5 @@ jobs:
         with:
           serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT }}
           packageName: com.rafaelfelipeac.improov
-          releaseFile: app-release/app-release-unsigned-signed.apk
+          releaseFile: ${{ env.SIGNED_RELEASE_FILE }}
           track: alpha
