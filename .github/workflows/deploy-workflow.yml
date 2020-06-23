@@ -6,8 +6,8 @@ on:
       - master
 
 jobs:
-  buildAPK:
-    name: Build APK
+  releaseApk:
+    name: Build, Sign and Upload APK
     runs-on: ubuntu-latest
 
     steps:
@@ -34,35 +34,16 @@ jobs:
           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
-      - name: Upload APK
+      - name: Upload APK (artifact)
         uses: actions/upload-artifact@v1
         with:
             name: app-release
             path: ${{ env.SIGNED_RELEASE_FILE }}
 
-  uploadAPK:
-    name: Upload APK to Google Play
-    needs: buildAPK
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-
-      - name: Download APK
-        uses: actions/download-artifact@v1
-        with:
-          name: app-release
-
-      - name: Upload Android Release to Play Store
-        uses: r0adkll/upload-google-play@v1
-        with:
-          serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT }}
-          packageName: com.rafaelfelipeac.improov
-          releaseFile: ${{ env.SIGNED_RELEASE_FILE }}
-          track: alpha
+      - name: Upload APK to Google Play
+          uses: r0adkll/upload-google-play@v1
+          with:
+            serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT }}
+            packageName: com.rafaelfelipeac.improov
+            releaseFile: ${{ env.SIGNED_RELEASE_FILE }}
+            track: alpha
