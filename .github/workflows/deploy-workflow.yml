@@ -40,13 +40,6 @@ jobs:
             name: improov-release
             path: ${{ env.SIGNED_RELEASE_FILE }}
 
-      - name: Message to Telegram
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: New apk uploaded to alpha on Google Play Store.
-
       - name: Upload APK to Google Play
         uses: r0adkll/upload-google-play@v1
         with:
@@ -54,3 +47,10 @@ jobs:
           packageName: com.rafaelfelipeac.improov
           releaseFile: ${{ env.SIGNED_RELEASE_FILE }}
           track: alpha
+
+      - name: Message to Telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: New apk uploaded to alpha on Google Play Store.
