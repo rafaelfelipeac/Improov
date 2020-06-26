@@ -26,7 +26,6 @@ import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import kotlinx.android.synthetic.main.fragment_goal_form.*
-import java.util.Calendar
 
 @Suppress("TooManyFunctions")
 class GoalFormFragment : BaseFragment() {
@@ -40,8 +39,6 @@ class GoalFormFragment : BaseFragment() {
     private var firstTimeAdd = false
 
     private var goalsSize: Int? = null
-
-    private var cal = Calendar.getInstance()
 
     private val viewModel by lazy { viewModelFactory.get<GoalFormViewModel>(this) }
 

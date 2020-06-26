@@ -28,10 +28,10 @@ fun TextInputEditText.emailIsInvalid(): Boolean {
 }
 
 fun TextInputEditText.showOrHidePassword() {
-    if (transformationMethod == HideReturnsTransformationMethod.getInstance()) {
-        transformationMethod = PasswordTransformationMethod.getInstance()
+    transformationMethod = if (transformationMethod == HideReturnsTransformationMethod.getInstance()) {
+        PasswordTransformationMethod.getInstance()
     } else {
-        transformationMethod = HideReturnsTransformationMethod.getInstance()
+        HideReturnsTransformationMethod.getInstance()
     }
 
     setSelection(text?.length!!)
