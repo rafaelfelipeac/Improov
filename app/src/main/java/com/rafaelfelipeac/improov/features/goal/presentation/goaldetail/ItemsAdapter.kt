@@ -51,6 +51,6 @@ class ItemsAdapter(private val detailFragment: GoalDetailFragment) : BaseAdapter
     }
 
     override fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder) {
-        detailFragment.onViewSwiped(position, direction, holder, items)
+        detailFragment.onViewSwiped(position, direction, items)
     }
 }
