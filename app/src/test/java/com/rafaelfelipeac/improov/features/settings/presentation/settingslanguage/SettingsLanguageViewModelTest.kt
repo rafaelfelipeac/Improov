@@ -47,13 +47,10 @@ class SettingsLanguageViewModelTest {
             .willReturn(Unit)
 
         // when
-        settingsLanguageViewModel.onSaveLanguage(language)
+        settingsLanguageViewModel.saveLanguage(language)
 
         // then
-        settingsLanguageViewModel.stateLiveData.value shouldBeEqualTo SettingsLanguageViewModel.ViewState(
-            language = "",
-            languageSaved = true
-        )
+        settingsLanguageViewModel.saved.value shouldBeEqualTo Unit
     }
 
     @Test
@@ -68,9 +65,6 @@ class SettingsLanguageViewModelTest {
         settingsLanguageViewModel.loadData()
 
         // then
-        settingsLanguageViewModel.stateLiveData.value shouldBeEqualTo SettingsLanguageViewModel.ViewState(
-            language = language,
-            languageSaved = false
-        )
+        settingsLanguageViewModel.language.value shouldBeEqualTo language
     }
 }

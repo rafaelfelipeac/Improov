@@ -23,7 +23,7 @@ class WelcomeViewModel @Inject constructor(
         getWelcome()
     }
 
-    fun getWelcome() {
+    private fun getWelcome() {
         viewModelScope.launch {
             getWelcomeUseCase.execute().also {
                 _welcome.postValue(it)
