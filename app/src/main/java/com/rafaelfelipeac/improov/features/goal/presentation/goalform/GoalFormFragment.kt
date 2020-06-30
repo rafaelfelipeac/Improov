@@ -338,7 +338,7 @@ class GoalFormFragment : BaseFragment() {
             }
         })
 
-        dialog.show(requireFragmentManager(), "")
+        dialog.show(parentFragmentManager, "")
     }
 
     private fun checkIfAnyFieldsAreEmptyOrZero(): Boolean {

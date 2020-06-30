@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import java.util.Date
 import java.util.Calendar
 
 abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>() {
@@ -39,7 +40,7 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseAdapter<T>.ViewHolder>(
         notifyDataSetChanged()
     }
 
-    fun getCurrentTime() = Calendar.getInstance().time!!
+    fun getCurrentTime(): Date = Calendar.getInstance().time
 }
 
 @JvmOverloads
