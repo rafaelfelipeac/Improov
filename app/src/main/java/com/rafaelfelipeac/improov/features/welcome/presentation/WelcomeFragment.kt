@@ -57,7 +57,7 @@ class WelcomeFragment : BaseFragment() {
         welcome_viewpager.adapter =
             WelcomeAdapter(
                 this,
-                fragmentManager!!
+                requireFragmentManager()
             )
         welcome_dots.setupWithViewPager(welcome_viewpager, true)
     }
