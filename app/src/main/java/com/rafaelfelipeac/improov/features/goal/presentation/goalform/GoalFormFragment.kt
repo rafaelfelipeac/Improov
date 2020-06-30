@@ -26,7 +26,6 @@ import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import kotlinx.android.synthetic.main.fragment_goal_form.*
-import java.util.Calendar
 
 @Suppress("TooManyFunctions")
 class GoalFormFragment : BaseFragment() {
@@ -40,8 +39,6 @@ class GoalFormFragment : BaseFragment() {
     private var firstTimeAdd = false
 
     private var goalsSize: Int? = null
-
-    private var cal = Calendar.getInstance()
 
     private val viewModel by lazy { viewModelFactory.get<GoalFormViewModel>(this) }
 
@@ -172,41 +169,35 @@ class GoalFormFragment : BaseFragment() {
 
     private fun setRadioButtonType() {
         goal_form_radio_type_list.setOnClickListener {
-            if (goal_form_radio_type_list.isChecked) {
+            if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_LIST) {
+                showDialogNoGoalTypeChange()
+            } else if (goal_form_radio_type_list.isChecked) {
                 goal_form_radio_type_counter.isChecked = false
                 goal_form_radio_type_total.isChecked = false
 
                 goal_form_goal_counter.gone()
-
-                if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_LIST) {
-                    showDialogOneButton()
-                }
             }
         }
 
         goal_form_radio_type_counter.setOnClickListener {
-            if (goal_form_radio_type_counter.isChecked) {
+            if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_COUNTER) {
+                showDialogNoGoalTypeChange()
+            } else if (goal_form_radio_type_counter.isChecked) {
                 goal_form_radio_type_list.isChecked = false
                 goal_form_radio_type_total.isChecked = false
 
                 goal_form_goal_counter.visible()
-
-                if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_COUNTER) {
-                    showDialogOneButton()
-                }
             }
         }
 
         goal_form_radio_type_total.setOnClickListener {
-            if (goal_form_radio_type_total.isChecked) {
+            if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_FINAL) {
+                showDialogNoGoalTypeChange()
+            } else if (goal_form_radio_type_total.isChecked) {
                 goal_form_radio_type_counter.isChecked = false
                 goal_form_radio_type_list.isChecked = false
 
                 goal_form_goal_counter.gone()
-
-                if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_FINAL) {
-                    showDialogOneButton()
-                }
             }
         }
     }
@@ -246,13 +237,6 @@ class GoalFormFragment : BaseFragment() {
                     goalsSize!! + 1
                 }
         } else {
-            val oldGoalType = goal.type
-            goal.type = getGoalTypeSelected()
-
-            if (oldGoalType != goal.type) {
-                deleteReferencesFromItemsAndHistorics()
-            }
-
             goal.updatedDate = getCurrentTime()
         }
 
@@ -270,20 +254,6 @@ class GoalFormFragment : BaseFragment() {
         }
 
         return goal
-    }
-
-    private fun deleteReferencesFromItemsAndHistorics() {
-        items.forEach {
-            if (it.goalId == goal.goalId) {
-                viewModel.onDeleteItem(it)
-            }
-        }
-
-        historics.forEach {
-            if (it.goalId == goal.goalId) {
-                viewModel.onDeleteHistoric(it)
-            }
-        }
     }
 
     private fun getGoalTypeSelected(): GoalType {
@@ -319,12 +289,20 @@ class GoalFormFragment : BaseFragment() {
             goal_form_single_value.setText(goal.singleValue.getNumberInRightFormat())
         }
 
+        setupGoalType()
+    }
+
+    private fun setupGoalType() {
         when (goal.type) {
             GoalType.GOAL_LIST -> {
                 goal_form_radio_type_list.isChecked = true
+                goal_form_radio_type_counter.isChecked = false
+                goal_form_radio_type_total.isChecked = false
             }
             GoalType.GOAL_COUNTER -> {
                 goal_form_radio_type_counter.isChecked = true
+                goal_form_radio_type_list.isChecked = false
+                goal_form_radio_type_total.isChecked = false
 
                 goal_form_goal_counter.visible()
 
@@ -333,6 +311,8 @@ class GoalFormFragment : BaseFragment() {
             }
             GoalType.GOAL_FINAL -> {
                 goal_form_radio_type_total.isChecked = true
+                goal_form_radio_type_list.isChecked = false
+                goal_form_radio_type_counter.isChecked = false
             }
             else -> { }
         }
@@ -345,13 +325,15 @@ class GoalFormFragment : BaseFragment() {
         }
     }
 
-    private fun showDialogOneButton() {
+    private fun showDialogNoGoalTypeChange() {
         val dialog = DialogOneButton()
 
-        dialog.setMessage(getString(R.string.goal_form_goal_dialog_one_button_message))
+        dialog.setMessage(getString(R.string.goal_form_goal_dialog_no_goal_type_change))
 
         dialog.setOnClickListener(object : DialogOneButton.OnClickListener {
             override fun onOK() {
+                setupGoalType()
+
                 dialog.dismiss()
             }
         })
