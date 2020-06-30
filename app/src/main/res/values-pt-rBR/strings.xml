@@ -64,7 +64,7 @@
     <string name="goal_form_goal_counter">Defina os valores:</string>
     <string name="goal_form_goal_counter_inc_value_hint">Incrementar</string>
     <string name="goal_form_goal_counter_dec_value_hint">Decrementar</string>
-    <string name="goal_form_goal_dialog_one_button_message">Se você quiser trocar o tipo do objetivo, o histórico de alterações será perdido.</string>
+    <string name="goal_form_goal_dialog_no_goal_type_change">Você não pode alterar o tipo de um objetivo. Caso contrário, o histórico seria perdido.</string>
 
     <!-- Habit -->
     <string name="habit_title">Hábito</string>
