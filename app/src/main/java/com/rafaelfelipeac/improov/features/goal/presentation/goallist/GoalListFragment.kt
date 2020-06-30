@@ -140,7 +140,7 @@ class GoalListFragment : BaseFragment() {
     fun onViewSwiped(
         position: Int,
         direction: Int,
-        holder: RecyclerView.ViewHolder,
+        // holder: RecyclerView.ViewHolder,
         items: List<Goal>
     ) {
         val goal = items[position]

@@ -6,26 +6,26 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 
 class WelcomeAdapter(val fragment: WelcomeFragment, fm: FragmentManager) :
-    FragmentStatePagerAdapter(fm) {
+    FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     override fun getCount(): Int = 3
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> WelcomeItemFragment(
                 fragment,
-                0
+                WelcomePosition.FIRST
             )
             1 -> WelcomeItemFragment(
                 fragment,
-                1
+                WelcomePosition.SECOND
             )
             2 -> WelcomeItemFragment(
                 fragment,
-                2
+                WelcomePosition.THIRD
             )
             else -> WelcomeItemFragment(
                 fragment,
-                0
+                WelcomePosition.NONE
             )
         }
     }

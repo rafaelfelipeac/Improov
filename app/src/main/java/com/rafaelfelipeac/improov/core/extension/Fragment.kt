@@ -14,6 +14,7 @@ fun Fragment.vibrate() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         vibrator.vibrate(VibrationEffect.createOneShot(VIBRATE_SECONDS, VibrationEffect.DEFAULT_AMPLITUDE))
     } else {
+        @Suppress("DEPRECATION")
         vibrator.vibrate(VIBRATE_SECONDS)
     }
 }
