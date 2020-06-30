@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.observe
-import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.core.LocaleHelper
+import com.rafaelfelipeac.improov.core.extension.observeNew
+import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_settings_language.*
 
 class SettingsLanguageFragment : BaseFragment() {
@@ -36,17 +36,17 @@ class SettingsLanguageFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupViewModel()
+        observeViewModel()
     }
 
-    private fun setupViewModel() {
-        viewModel.language.observe(this) {
+    private fun observeViewModel() {
+        viewModel.language.observeNew(this) {
             LocaleHelper.setLocale(requireContext(), it)
 
             setupLanguage(it)
         }
 
-        viewModel.saved.observe(this) {
+        viewModel.saved.observeNew(this) {
             recreateFragment()
         }
     }

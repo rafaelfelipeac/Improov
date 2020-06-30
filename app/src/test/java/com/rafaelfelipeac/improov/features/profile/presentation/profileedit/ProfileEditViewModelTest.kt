@@ -39,7 +39,7 @@ class ProfileEditViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveName is successful WHEN onSaveName is called THEN true is returned`() {
+    fun `GIVEN saveName is successful WHEN onSaveName is called THEN a Unit is returned`() {
         // given
         val name = "User Name"
 
@@ -47,13 +47,10 @@ class ProfileEditViewModelTest {
             .willReturn(Unit)
 
         // when
-        profileEditViewModel.onSaveName(name)
+        profileEditViewModel.saveName(name)
 
         // then
-        profileEditViewModel.stateLiveData.value shouldBeEqualTo ProfileEditViewModel.ViewState(
-            name = "",
-            nameSaved = true
-        )
+        profileEditViewModel.saved.value shouldBeEqualTo Unit
     }
 
     @Test
@@ -68,9 +65,6 @@ class ProfileEditViewModelTest {
         profileEditViewModel.loadData()
 
         // then
-        profileEditViewModel.stateLiveData.value shouldBeEqualTo ProfileEditViewModel.ViewState(
-            name = name,
-            nameSaved = false
-        )
+        profileEditViewModel.name.value shouldBeEqualTo name
     }
 }

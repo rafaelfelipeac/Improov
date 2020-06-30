@@ -10,7 +10,7 @@ fun <T> LifecycleOwner.observe(liveData: LiveData<T>, observer: Observer<T>) {
 }
 
 @MainThread
-inline fun <T> LiveData<T>.observe(
+inline fun <T> LiveData<T>.observeNew(
     owner: LifecycleOwner,
     crossinline onChanged: (T) -> Unit
 ): Observer<T> {

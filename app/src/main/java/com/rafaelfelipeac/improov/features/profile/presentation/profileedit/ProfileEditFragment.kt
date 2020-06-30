@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.checkIfFieldIsEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.fieldIsEmptyOrZero
-import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.observeNew
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 
@@ -16,35 +15,12 @@ class ProfileEditFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelFactory.get<ProfileEditViewModel>(this) }
 
-    private val stateObserver = Observer<ProfileEditViewModel.ViewState> { response ->
-        profile_edit_name.setText(response.name)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         injector.inject(this)
 
         main.openToolbar()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        observe(viewModel.stateLiveData, stateObserver)
-        viewModel.loadData()
-
-        profile_edit_save_button.setOnClickListener {
-            when {
-                verifyElements() -> {
-                }
-                else -> {
-                    hideSoftKeyboard()
-                    viewModel.onSaveName(profile_edit_name.text.toString())
-                    navController.navigateUp()
-                }
-            }
-        }
     }
 
     override fun onCreateView(
@@ -61,6 +37,38 @@ class ProfileEditFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_profile_edit, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.loadData()
+
+        setupLayout()
+        observeViewModel()
+    }
+
+    private fun setupLayout() {
+        profile_edit_save_button.setOnClickListener {
+            when {
+                verifyElements() -> {
+                }
+                else -> {
+                    hideSoftKeyboard()
+                    viewModel.saveName(profile_edit_name.text.toString())
+                }
+            }
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.name.observeNew(this) {
+            profile_edit_name.setText(it)
+        }
+
+        viewModel.saved.observeNew(this) {
+            navController.navigateUp()
+        }
+    }
+
     private fun verifyElements(): Boolean {
         return when {
             profile_edit_name.checkIfFieldIsEmptyOrZero() -> {
@@ -71,10 +79,6 @@ class ProfileEditFragment : BaseFragment() {
             }
             else -> false
         }
-    }
-
-    private fun observeViewModel() {
-        TODO("Not yet implemented")
     }
 
     private fun setErrorMessage(message: String) {
