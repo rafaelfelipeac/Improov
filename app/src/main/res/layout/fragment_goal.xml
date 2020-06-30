@@ -40,7 +40,6 @@
                     tools:text="Title" />
 
             <View
-                    android:id="@+id/view2"
                     android:layout_width="0dp"
                     android:layout_height="2dp"
                     android:layout_marginStart="64dp"
@@ -308,7 +307,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/goal_special"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginStart="8dp"
@@ -510,7 +508,6 @@
                         app:layout_constraintVertical_bias="0.25" />
 
                 <TextView
-                        android:id="@+id/goal_items_placeholder_message"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
@@ -555,7 +552,6 @@
                         app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
-                        android:id="@+id/goal_history_placeholder_message"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"

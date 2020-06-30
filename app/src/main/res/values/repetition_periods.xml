@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="periods_array">
-        <item>@string/habit_form_period_type_week</item>
-        <item>@string/habit_form_period_type_month</item>
-        <item>@string/habit_form_period_type_year</item>
-    </string-array>
-</resources>

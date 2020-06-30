@@ -6,12 +6,10 @@
     <string name="database_name">improov-db</string>
 
     <!-- Date -->
-    <string name="date_format_dmy">dd/MM/yyyy</string>
     <string name="date_format_dd_MMM">dd MMM</string>
     <string name="date_format_full">dd/MM/yyyy HH:mm:ss</string>
 
     <!-- Commons -->
-    <string name="empty_string" />
     <string name="snackbar_action_undo">DESFAZER</string>
     <string name="dialog_action_positive">OK</string>
     <string name="dialog_action_negative">Cancelar</string>
@@ -23,13 +21,9 @@
 
     <!-- Navigation -->
     <string name="navigation_goals">Objetivos</string>
-    <string name="navigation_today">Hoje</string>
-    <string name="navigation_stats">Estatísticas</string>
     <string name="navigation_profile">Perfil</string>
 
     <!-- Add -->
-    <string name="add_goal">Objetivo</string>
-    <string name="add_habit">Hábito</string>
 
     <!-- Goal -->
     <string name="goal_title">Objetivo</string>
@@ -41,7 +35,6 @@
     <string name="goal_message_empty_history">Você ainda não tem um histórico para esse objetivo.</string>
     <string name="goal_count">0</string>
     <string name="goal_date">00/00/00</string>
-    <string name="goal_total_total_hint">0</string>
     <string name="goal_button_save">Salvar</string>
 
     <!-- GoalForm -->
@@ -51,7 +44,6 @@
     <string name="goal_form_empty_type_goal">Escolha o tipo do objetivo.</string>
     <string name="goal_form_gold_silver_bronze_order">Os valores de Bronze, Prata e Ouro precisam estar em ordem crescente.</string>
     <string name="goal_form_goal_name_hint">Título</string>
-    <string name="goal_form_set_date">Selecionar data</string>
     <string name="goal_form_single_hint">Único</string>
     <string name="goal_form_bronze_hint">Bronze</string>
     <string name="goal_form_silver_hint">Prata</string>
@@ -64,42 +56,14 @@
     <string name="goal_form_goal_counter">Defina os valores:</string>
     <string name="goal_form_goal_counter_inc_value_hint">Incrementar</string>
     <string name="goal_form_goal_counter_dec_value_hint">Decrementar</string>
-    <string name="goal_form_goal_dialog_one_button_message">Se você quiser trocar o tipo do objetivo, o histórico de alterações será perdido.</string>
+    <string name="goal_form_goal_dialog_no_goal_type_change">Você não pode alterar o tipo de um objetivo. Caso contrário, o histórico seria perdido.</string>
 
     <!-- Habit -->
-    <string name="habit_title">Hábito</string>
-    <string name="habit_next_ocurrence">Próxima ocorrência:</string>
-    <string name="habit_last_day_cycle">Último dia do ciclo:</string>
-    <string name="habit_value">0</string>
-    <string name="habit_next_date">Próximo ocorrencia: 13 de Abril.</string>
-    <string name="habit_last_date">Último dia do ciclo: 31 de Julho.</string>
-    <string name="habit_item_swiped_deleted">Item removido.</string>
 
     <!-- HabitForm -->
-    <string name="habit_form_title">Novo hábito</string>
-    <string name="habit_form_period_type_week">semana</string>
-    <string name="habit_form_period_type_month">mês</string>
-    <string name="habit_form_period_type_year">ano</string>
-    <string name="habit_form_period_type_custom">customizado</string>
-    <string name="habit_form_period_type_none">nenhum</string>
-    <string name="habit_form_name_hint">Título</string>
-    <string name="habit_form_routine">Rotina</string>
-    <string name="habit_form_everyday">Todo dia</string>
-    <string name="habit_form_weekdays">Alguns dias por semana</string>
-    <string name="habit_form_week_sunday">Domingo</string>
-    <string name="habit_form_week_monday">Segunda-feira</string>
-    <string name="habit_form_week_tuesday">Terça-feira</string>
-    <string name="habit_form_week_wednesday">Quarta-feira</string>
-    <string name="habit_form_week_thursday">Quinta-feira</string>
-    <string name="habit_form_week_friday">Sexta-feira</string>
-    <string name="habit_form_week_saturday">Sábado</string>
-    <string name="habit_form_days">dias por</string>
-    <string name="habit_form_custom_days">A cada</string>
-    <string name="habit_form_custom_days_2">dias</string>
 
     <!-- List -->
     <string name="list_title">Lista</string>
-    <string name="list_item_resolved_message">Objetivo arquivado.</string>
     <string name="list_placeholder_message">Você não tem nenhum objetivo em andamento. \n\n Comece agora mesmo!</string>
 
     <!-- Profile -->
@@ -112,7 +76,6 @@
     <!-- ProfileEdit -->
     <string name="profile_edit_title">Editar nome</string>
     <string name="profile_edit_empty_fields">Seu nome não pode ser vazio.</string>
-    <string name="profile_edit_success">Perfil editado.</string>
     <string name="profile_edit_name_hint">Nome</string>
     <string name="profile_edit_save_message">Salvar</string>
 
@@ -142,7 +105,6 @@
     <string name="settings_pref_key_language_title">language category</string>
     <string name="settings_pref_key_language_message">language</string>
     <string name="settings_pref_key_about_title">about category</string>
-    <string name="settings_pref_key_about_message">about</string>
     <string name="settings_pref_key_about_rate">rate</string>
     <string name="settings_pref_key_about_contact">contact</string>
     <string name="settings_pref_key_about_version">version</string>
@@ -155,42 +117,18 @@
     <string name="settings_language_key_english">en</string>
 
     <!-- Stats -->
-    <string name="stats_title">Estatísticas</string>
-    <string name="stats_message">Você já concluiu %d objetivos!</string>
-    <string name="stats_placeholder_message">Crie objetivos para acompanhar estatísticas e informações de progresso.</string>
-    <string name="stats_message_continue">Continue trabalhando em seus objetivos!    Sua sala de troféus nunca estará cheia o bastante.</string>
-    <string name="stats_single_value">%dx</string>
-    <string name="stats_bronze_value">%dx</string>
-    <string name="stats_silver_value">%dx</string>
-    <string name="stats_gold_value">%dx</string>
 
     <!-- Today -->
-    <string name="today_title">Hoje</string>
-    <string name="today_next_occurrence">Próxima ocorrência:</string>
-    <string name="today_day_message">9 NOV</string>
-    <string name="today_value_message">3/10</string>
-    <string name="today_late_title">ATRASADO</string>
-    <string name="today_today_title">HOJE</string>
-    <string name="today_week_title">Próxima semana</string>
-    <string name="today_placeholder_message">Você não tem nenhum objetivo em andamento. \n\n Comece agora mesmo!</string>
-    <string name="today_today_placeholder_message">Parabéns! :)   Atingiu todos os objetivos do dia!</string>
 
     <!-- Welcome -->
     <string name="welcome_title">Bem-vindo</string>
-    <string name="welcome_sign_in">Entrar</string>
     <string name="welcome_start">Começar</string>
     <string name="welcome_a_message">Bem-vindo ao Improov! \n\nCrie objetivos e se prepare para alcançá-los.</string>
     <string name="welcome_b_message">Use o Improov para acessar rapidamente seus objetivos e atualizar seu progresso.</string>
     <string name="welcome_c_message">Acompanhe suas conquistas e mantenha seus objetivos sempre em desenvolvimento.</string>
 
     <!-- ListAdapter -->
-    <string name="list_adapter_habit_type_everyday">Todo dia</string>
-    <string name="list_adapter_habit_type_weekdays">vezes por semana</string>
-    <string name="list_adapter_habit_type_period">dias por</string>
-    <string name="list_adapter_habit_type_custom_1">A cada</string>
-    <string name="list_adapter_habit_type_custom_2">dias</string>
     <string name="list_adapter_item_title">Título do objetivo ou hábito</string>
-    <string name="list_adapter_item_type">Rotina: todo dia.</string>
     <string name="list_adapter_date">25 Jul</string>
     <string name="list_adapter_score">1/5</string>
 
@@ -202,8 +140,6 @@
     <string name="item_adapter_item_title">Novo objetivo cadastrado</string>
 
     <!-- DayOfWeekAdapter -->
-    <string name="day_of_week_month_day">25 JUL</string>
-    <string name="day_of_week_day">DIA</string>
 
     <!-- BottomSheet Goal Done -->
     <string name="goal_done_message">Há itens pendentes nesse objetivo. \nDeseja concluído-lo?</string>
@@ -211,8 +147,6 @@
     <string name="goal_done_no">NÃO</string>
 
     <!-- BottomSheet Habit Done -->
-    <string name="habit_done_message">Hábitos só podem ser concluídos dentro da tela Today.</string>
-    <string name="habit_done_ok">OK</string>
 
     <!-- BottomSheet Item -->
     <string name="bottom_sheet_item_name">Título do Item</string>

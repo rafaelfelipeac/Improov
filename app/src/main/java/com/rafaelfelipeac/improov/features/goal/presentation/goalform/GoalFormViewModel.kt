@@ -13,9 +13,7 @@ import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.Sav
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
-import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.DeleteHistoricUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.GetHistoricListUseCase
-import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.DeleteItemUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.GetItemListUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,9 +24,7 @@ class GoalFormViewModel @Inject constructor(
     private val getGoalUseCase: GetGoalUseCase,
     private val getGoalListUseCase: GetGoalListUseCase,
     private val getItemListUseCase: GetItemListUseCase,
-    private val deleteItemUseCase: DeleteItemUseCase,
     private val getHistoricListUseCase: GetHistoricListUseCase,
-    private val deleteHistoricUseCase: DeleteHistoricUseCase,
     private val saveFirstTimeListUseCase: SaveFirstTimeListUseCase,
     private val saveFirstTimeAddUseCase: SaveFirstTimeAddUseCase,
     private val getFirstTimeAddUseCase: GetFirstTimeAddUseCase
@@ -58,14 +54,6 @@ class GoalFormViewModel @Inject constructor(
         saveGoal(goal)
     }
 
-    fun onDeleteItem(item: Item) {
-        deleteItem(item)
-    }
-
-    fun onDeleteHistoric(historic: Historic) {
-        deleteHistoric(historic)
-    }
-
     fun onSaveFirstTimeList(firstTimeList: Boolean) {
         saveFirstTimeList(firstTimeList)
     }
@@ -82,22 +70,6 @@ class GoalFormViewModel @Inject constructor(
                 } else {
                     sendAction(Action.GoalSaved)
                 }
-            }
-        }
-    }
-
-    private fun deleteItem(item: Item) {
-        viewModelScope.launch {
-            deleteItemUseCase.execute(item).also {
-                sendAction(Action.ItemDeleted)
-            }
-        }
-    }
-
-    private fun deleteHistoric(historic: Historic) {
-        viewModelScope.launch {
-            deleteHistoricUseCase.execute(historic).also {
-                sendAction(Action.HistoricDeleted)
             }
         }
     }
@@ -187,14 +159,8 @@ class GoalFormViewModel @Inject constructor(
         is Action.ItemListLoaded -> state.copy(
             items = viewAction.items
         )
-        is Action.ItemDeleted -> state.copy(
-            itemDeleted = true
-        )
         is Action.HistoricListLoaded -> state.copy(
             historics = viewAction.historics
-        )
-        is Action.HistoricDeleted -> state.copy(
-            historicDeleted = true
         )
         is Action.FirstTimeAddSaved -> state.copy(
             firstTimeAddSaved = true
@@ -212,9 +178,7 @@ class GoalFormViewModel @Inject constructor(
         val goal: Goal = Goal(),
         val goals: List<Goal> = listOf(),
         val items: List<Item> = listOf(),
-        val itemDeleted: Boolean = false,
         val historics: List<Historic> = listOf(),
-        val historicDeleted: Boolean = false,
         val firstTimeAddSaved: Boolean = false,
         val firstTimeListSaved: Boolean = false,
         val firstTimeAddLoaded: Boolean = false
@@ -225,9 +189,7 @@ class GoalFormViewModel @Inject constructor(
         class GoalLoaded(val goal: Goal) : Action()
         class GoalListLoaded(val goals: List<Goal>) : Action()
         class ItemListLoaded(val items: List<Item>) : Action()
-        object ItemDeleted : Action()
         class HistoricListLoaded(val historics: List<Historic>) : Action()
-        object HistoricDeleted : Action()
         object FirstTimeAddSaved : Action()
         object FirstTimeListSaved : Action()
         class FirstTimeAddLoaded(val firstTimeAddLoaded: Boolean) : Action()

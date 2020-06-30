@@ -13,9 +13,7 @@ import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.Sav
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
-import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.DeleteHistoricUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.GetHistoricListUseCase
-import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.DeleteItemUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.GetItemListUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -41,9 +39,7 @@ class GoalFormViewModelTest {
     private var mockGetGoalUseCase = mock(GetGoalUseCase::class.java)
     private var mockGetGoalListUseCase = mock(GetGoalListUseCase::class.java)
     private var mockGetItemListUseCase = mock(GetItemListUseCase::class.java)
-    private var mockDeleteItemUseCase = mock(DeleteItemUseCase::class.java)
     private var mockGetHistoricListUseCase = mock(GetHistoricListUseCase::class.java)
-    private var mockDeleteHistoricUseCase = mock(DeleteHistoricUseCase::class.java)
     private var mockSaveFirstTimeListUseCase = mock(SaveFirstTimeListUseCase::class.java)
     private var mockSaveFirstTimeAddUseCase = mock(SaveFirstTimeAddUseCase::class.java)
     private var mockGetFirstTimeAddUseCase = mock(GetFirstTimeAddUseCase::class.java)
@@ -57,9 +53,7 @@ class GoalFormViewModelTest {
             mockGetGoalUseCase,
             mockGetGoalListUseCase,
             mockGetItemListUseCase,
-            mockDeleteItemUseCase,
             mockGetHistoricListUseCase,
-            mockDeleteHistoricUseCase,
             mockSaveFirstTimeListUseCase,
             mockSaveFirstTimeAddUseCase,
             mockGetFirstTimeAddUseCase
@@ -84,9 +78,7 @@ class GoalFormViewModelTest {
             goal = Goal(),
             goals = listOf(),
             items = listOf(),
-            itemDeleted = false,
             historics = listOf(),
-            historicDeleted = false,
             firstTimeAddSaved = false,
             firstTimeListSaved = false,
             firstTimeAddLoaded = false
@@ -112,9 +104,7 @@ class GoalFormViewModelTest {
             goal = goal,
             goals = listOf(),
             items = listOf(),
-            itemDeleted = false,
             historics = listOf(),
-            historicDeleted = false,
             firstTimeAddSaved = false,
             firstTimeListSaved = false,
             firstTimeAddLoaded = false
@@ -138,9 +128,7 @@ class GoalFormViewModelTest {
             goal = Goal(),
             goals = goals,
             items = listOf(),
-            itemDeleted = false,
             historics = listOf(),
-            historicDeleted = false,
             firstTimeAddSaved = false,
             firstTimeListSaved = false,
             firstTimeAddLoaded = false
@@ -170,35 +158,7 @@ class GoalFormViewModelTest {
             goal = Goal(),
             goals = listOf(),
             items = items,
-            itemDeleted = false,
             historics = listOf(),
-            historicDeleted = false,
-            firstTimeAddSaved = false,
-            firstTimeListSaved = false,
-            firstTimeAddLoaded = false
-        )
-    }
-
-    @Test
-    fun `GIVEN deleteItem is successful WHEN onDeleteItem is called THEN return true`() {
-        // given
-        val item = createItem()
-
-        given(runBlocking { mockDeleteItemUseCase.execute(item) })
-            .willReturn(Unit)
-
-        // when
-        goalFormViewModel.onDeleteItem(item)
-
-        // then
-        goalFormViewModel.stateLiveData.value shouldBeEqualTo GoalFormViewModel.ViewState(
-            goalSaved = false,
-            goal = Goal(),
-            goals = listOf(),
-            items = listOf(),
-            itemDeleted = true,
-            historics = listOf(),
-            historicDeleted = false,
             firstTimeAddSaved = false,
             firstTimeListSaved = false,
             firstTimeAddLoaded = false
@@ -228,35 +188,7 @@ class GoalFormViewModelTest {
             goal = Goal(),
             goals = listOf(),
             items = listOf(),
-            itemDeleted = false,
             historics = historics,
-            historicDeleted = false,
-            firstTimeAddSaved = false,
-            firstTimeListSaved = false,
-            firstTimeAddLoaded = false
-        )
-    }
-
-    @Test
-    fun `GIVEN deleteHistoric is successful WHEN onDeleteHistoric is called THEN return true`() {
-        // given
-        val historic = createHistoric()
-
-        given(runBlocking { mockDeleteHistoricUseCase.execute(historic) })
-            .willReturn(Unit)
-
-        // when
-        goalFormViewModel.onDeleteHistoric(historic)
-
-        // then
-        goalFormViewModel.stateLiveData.value shouldBeEqualTo GoalFormViewModel.ViewState(
-            goalSaved = false,
-            goal = Goal(),
-            goals = listOf(),
-            items = listOf(),
-            itemDeleted = false,
-            historics = listOf(),
-            historicDeleted = true,
             firstTimeAddSaved = false,
             firstTimeListSaved = false,
             firstTimeAddLoaded = false
@@ -280,9 +212,7 @@ class GoalFormViewModelTest {
             goal = Goal(),
             goals = listOf(),
             items = listOf(),
-            itemDeleted = false,
             historics = listOf(),
-            historicDeleted = false,
             firstTimeAddSaved = false,
             firstTimeListSaved = true,
             firstTimeAddLoaded = false
@@ -306,9 +236,7 @@ class GoalFormViewModelTest {
             goal = Goal(),
             goals = listOf(),
             items = listOf(),
-            itemDeleted = false,
             historics = listOf(),
-            historicDeleted = false,
             firstTimeAddSaved = true,
             firstTimeListSaved = false,
             firstTimeAddLoaded = false
@@ -332,9 +260,7 @@ class GoalFormViewModelTest {
             goal = Goal(),
             goals = listOf(),
             items = listOf(),
-            itemDeleted = false,
             historics = listOf(),
-            historicDeleted = false,
             firstTimeAddSaved = false,
             firstTimeListSaved = false,
             firstTimeAddLoaded = booleanValue

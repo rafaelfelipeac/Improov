@@ -278,6 +278,7 @@ class GoalDetailFragment : BaseFragment() {
 
                 goal_historics_list.visible()
             }
+            GoalType.GOAL_NONE -> { }
         }
 
         if (isTheFirstTime()) {
@@ -522,7 +523,7 @@ class GoalDetailFragment : BaseFragment() {
     fun onViewSwiped(
         position: Int,
         direction: Int,
-        holder: RecyclerView.ViewHolder,
+        // holder: RecyclerView.ViewHolder,
         items: MutableList<Item>
     ) {
         val item = items[position]

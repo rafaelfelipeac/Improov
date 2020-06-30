@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/navigation_graph"
         app:startDestination="@id/navigation_welcome">
 
     <fragment
@@ -26,9 +25,6 @@
         <action
                 android:id="@+id/action_navigation_list_to_navigation_goal"
                 app:destination="@id/navigation_goal" />
-        <action
-                android:id="@+id/action_navigation_list_to_navigation_habit"
-                app:destination="@id/navigation_habit" />
         <action
                 android:id="@+id/action_navigation_list_to_navigation_add"
                 app:destination="@id/navigation_add" />
@@ -72,21 +68,6 @@
     </fragment>
 
     <fragment
-            android:id="@+id/navigation_stats"
-            android:name="com.rafaelfelipeac.improov.future.stats.StatsFragment"
-            android:label="fragment_stats"
-            tools:layout="@layout/fragment_stats">
-
-        <action
-                android:id="@+id/action_navigation_stats_to_navigation_add"
-                app:destination="@id/navigation_add" />
-        <action
-                android:id="@+id/action_navigation_stats_to_navigation_goal_form"
-                app:destination="@id/navigation_goal_form" />
-
-    </fragment>
-
-    <fragment
             android:id="@+id/navigation_profile"
             android:name="com.rafaelfelipeac.improov.features.profile.presentation.profile.ProfileFragment"
             android:label="fragment_profile"
@@ -115,74 +96,6 @@
             android:name="com.rafaelfelipeac.improov.features.profile.presentation.profileedit.ProfileEditFragment"
             android:label="fragment_profile_edit"
             tools:layout="@layout/fragment_profile_edit" />
-
-    <fragment
-            android:id="@+id/navigation_today"
-            android:name="com.rafaelfelipeac.improov.future.today.presentation.TodayFragment"
-            android:label="fragment_today"
-            tools:layout="@layout/fragment_today">
-
-        <action
-                android:id="@+id/action_navigation_today_to_navigation_goal"
-                app:destination="@id/navigation_goal" />
-        <action
-                android:id="@+id/action_navigation_today_to_navigation_habit"
-                app:destination="@id/navigation_habit" />
-        <action
-                android:id="@+id/action_navigation_today_to_navigation_add"
-                app:destination="@id/navigation_add" />
-        <action
-                android:id="@+id/action_navigation_today_to_navigation_goal_form"
-                app:destination="@id/navigation_goal_form" />
-
-    </fragment>
-
-    <fragment
-            android:id="@+id/navigation_habit_form"
-            android:name="com.rafaelfelipeac.improov.future.habit.HabitFormFragment"
-            android:label="fragment_habit_form">
-
-        <argument
-                android:name="habitId"
-                android:defaultValue="0L"
-                app:argType="long" />
-
-    </fragment>
-
-    <fragment
-            android:id="@+id/navigation_habit"
-            android:name="com.rafaelfelipeac.improov.future.habit.HabitFragment"
-            android:label="fragment_habit"
-            tools:layout="@layout/fragment_habit">
-
-        <argument
-                android:name="habitId"
-                app:argType="long" />
-        <argument
-                android:name="habitNew"
-                android:defaultValue="false"
-                app:argType="boolean" />
-
-        <action
-                android:id="@+id/action_navigation_habit_to_navigation_habit_form"
-                app:destination="@id/navigation_habit_form" />
-
-    </fragment>
-
-    <dialog
-            android:id="@+id/navigation_add"
-            android:name="com.rafaelfelipeac.improov.future.add.AddFragment"
-            android:label="fragment_add"
-            tools:layout="@layout/bottom_sheet_add">
-
-        <action
-                android:id="@+id/action_navigation_add_to_navigation_goal_form"
-                app:destination="@id/navigation_goal_form" />
-        <action
-                android:id="@+id/action_navigation_add_to_navigation_habit_form"
-                app:destination="@id/navigation_habit_form" />
-
-    </dialog>
 
     <fragment
             android:id="@+id/navigation_settings"

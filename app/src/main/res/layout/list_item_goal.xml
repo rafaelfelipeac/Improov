@@ -2,7 +2,6 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/item_cardview"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="-8dp"
@@ -14,7 +13,6 @@
         card_view:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/goal_done_delete_view"
             android:layout_width="match_parent"
             android:layout_height="70dp">
 
@@ -30,7 +28,6 @@
                 card_view:layout_constraintVertical_bias="0.0">
 
             <ImageView
-                    android:id="@+id/goal_done_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

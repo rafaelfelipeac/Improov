@@ -57,16 +57,16 @@ class WelcomeFragment : BaseFragment() {
         welcome_viewpager.adapter =
             WelcomeAdapter(
                 this,
-                requireFragmentManager()
+                parentFragmentManager
             )
         welcome_dots.setupWithViewPager(welcome_viewpager, true)
     }
 
     fun showStartButton() {
-        welcome_start_button.visible()
+        welcome_start_button?.visible()
     }
 
     fun hideStartButton() {
-        welcome_start_button.invisible()
+        welcome_start_button?.invisible()
     }
 }

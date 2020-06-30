@@ -39,10 +39,6 @@
         <item name="android:background">@drawable/rounded_primary_dark_two</item>
     </style>
 
-    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">@color/colorPrimary</item>-->
-    </style>
-
     <style name="AppPreferenceTheme" parent="@style/PreferenceThemeOverlay.v14.Material">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textColorSecondary">@android:color/white</item>

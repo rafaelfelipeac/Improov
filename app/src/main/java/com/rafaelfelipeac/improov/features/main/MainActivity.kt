@@ -1,6 +1,9 @@
 package com.rafaelfelipeac.improov.features.main
 
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -90,9 +93,14 @@ class MainActivity : BaseActivity() {
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
 
-        toolbar.navigationIcon?.setColorFilter(
-            ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP
-        )
+        val color = ContextCompat.getColor(this, R.color.colorPrimary)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            toolbar.navigationIcon?.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_ATOP)
+        } else {
+            @Suppress("DEPRECATION")
+            toolbar.navigationIcon?.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+        }
     }
 
     private fun clearToolbarMenu() = toolbar.menu!!.clear()
