@@ -1,9 +1,9 @@
 package com.rafaelfelipeac.improov.features.welcome.presentation
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.rafaelfelipeac.improov.core.platform.base.BaseAction
-import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
-import com.rafaelfelipeac.improov.core.platform.base.BaseViewState
+import com.rafaelfelipeac.improov.core.platform.base.NewBaseViewModel
 import com.rafaelfelipeac.improov.features.welcome.domain.usecase.GetWelcomeUseCase
 import com.rafaelfelipeac.improov.features.welcome.domain.usecase.SaveWelcomeUseCase
 import kotlinx.coroutines.launch
@@ -12,50 +12,30 @@ import javax.inject.Inject
 class WelcomeViewModel @Inject constructor(
     private val saveWelcomeUseCase: SaveWelcomeUseCase,
     private val getWelcomeUseCase: GetWelcomeUseCase
-) : BaseViewModel<WelcomeViewModel.ViewState, WelcomeViewModel.Action>(
-    ViewState()
-) {
+) : NewBaseViewModel() {
 
-    override fun onLoadData() {
+    val welcome: LiveData<Boolean> get() = _welcome
+    private val _welcome = MutableLiveData<Boolean>()
+    val saved: LiveData<Unit> get() = _saved
+    private val _saved = MutableLiveData<Unit>()
+
+    override fun loadData() {
         getWelcome()
     }
 
-    fun onSaveWelcome(welcome: Boolean) {
-        saveWelcome(welcome)
-    }
-
-    private fun saveWelcome(welcome: Boolean) {
-        viewModelScope.launch {
-            saveWelcomeUseCase.execute(welcome).also {
-                sendAction(Action.WelcomeSaved)
-            }
-        }
-    }
-
-    private fun getWelcome() {
+    fun getWelcome() {
         viewModelScope.launch {
             getWelcomeUseCase.execute().also {
-                sendAction(Action.WelcomeLoaded(it))
+                _welcome.postValue(it)
             }
         }
     }
 
-    override fun onReduceState(viewAction: Action) = when (viewAction) {
-        is Action.WelcomeLoaded -> state.copy(
-            welcome = viewAction.welcome
-        )
-        is Action.WelcomeSaved -> state.copy(
-            welcomeSaved = true
-        )
-    }
-
-    data class ViewState(
-        val welcomeSaved: Boolean = false,
-        val welcome: Boolean = false
-    ) : BaseViewState
-
-    sealed class Action : BaseAction {
-        object WelcomeSaved : Action()
-        class WelcomeLoaded(val welcome: Boolean) : Action()
+    fun saveWelcome(welcome: Boolean) {
+        viewModelScope.launch {
+            saveWelcomeUseCase.execute(welcome).also {
+                _saved.postValue(it)
+            }
+        }
     }
 }

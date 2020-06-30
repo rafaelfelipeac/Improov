@@ -47,13 +47,10 @@ class WelcomeViewModelTest {
             .willReturn(Unit)
 
         // when
-        welcomeViewModel.onSaveWelcome(booleanValue)
+        welcomeViewModel.saveWelcome(booleanValue)
 
         // then
-        welcomeViewModel.stateLiveData.value shouldBeEqualTo WelcomeViewModel.ViewState(
-            welcomeSaved = true,
-            welcome = false
-        )
+        welcomeViewModel.saved.value shouldBeEqualTo Unit
     }
 
     @Test
@@ -68,9 +65,6 @@ class WelcomeViewModelTest {
         welcomeViewModel.loadData()
 
         // then
-        welcomeViewModel.stateLiveData.value shouldBeEqualTo WelcomeViewModel.ViewState(
-            welcomeSaved = false,
-            welcome = booleanValue
-        )
+        welcomeViewModel.welcome.value shouldBeEqualTo booleanValue
     }
 }

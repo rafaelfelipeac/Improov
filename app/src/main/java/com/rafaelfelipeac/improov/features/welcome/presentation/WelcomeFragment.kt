@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.invisible
 import com.rafaelfelipeac.improov.core.extension.observe
@@ -16,18 +15,11 @@ class WelcomeFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelFactory.get<WelcomeViewModel>(this) }
 
-    private val stateObserver = Observer<WelcomeViewModel.ViewState> { response ->
-        if (response.welcome || response.welcomeSaved) {
-            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         injector.inject(this)
 
-        observe(viewModel.stateLiveData, stateObserver)
         viewModel.loadData()
     }
 
@@ -50,8 +42,13 @@ class WelcomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupLayout()
+        setupViewModel()
+    }
+
+    private fun setupLayout() {
         welcome_start_button.setOnClickListener {
-            viewModel.onSaveWelcome(true)
+            viewModel.saveWelcome(true)
         }
 
         welcome_viewpager.adapter =
@@ -60,6 +57,18 @@ class WelcomeFragment : BaseFragment() {
                 parentFragmentManager
             )
         welcome_dots.setupWithViewPager(welcome_viewpager, true)
+    }
+
+    private fun setupViewModel() {
+        viewModel.welcome.observe(this) {
+            if (it) {
+                navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
+            }
+        }
+
+        viewModel.saved.observe(this) {
+            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
+        }
     }
 
     fun showStartButton() {
