@@ -7,7 +7,7 @@ import javax.inject.Inject
 class DeleteItemUseCase @Inject constructor(
     private val itemRepository: ItemRepository
 ) {
-    suspend fun execute(item: Item) {
+    suspend operator fun invoke(item: Item) {
         return itemRepository.delete(item)
     }
 }

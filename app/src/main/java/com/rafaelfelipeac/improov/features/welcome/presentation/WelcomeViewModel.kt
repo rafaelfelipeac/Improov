@@ -25,17 +25,13 @@ class WelcomeViewModel @Inject constructor(
 
     private fun getWelcome() {
         viewModelScope.launch {
-            getWelcomeUseCase.execute().also {
-                _welcome.postValue(it)
-            }
+            _welcome.postValue(getWelcomeUseCase())
         }
     }
 
     fun saveWelcome(welcome: Boolean) {
         viewModelScope.launch {
-            saveWelcomeUseCase.execute(welcome).also {
-                _saved.postValue(it)
-            }
+            _saved.postValue(saveWelcomeUseCase(welcome))
         }
     }
 }

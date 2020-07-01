@@ -25,17 +25,13 @@ class ProfileEditViewModel @Inject constructor(
 
     private fun getName() {
         viewModelScope.launch {
-            getNameUseCase.execute().also {
-                _name.postValue(it)
-            }
+            _name.postValue(getNameUseCase())
         }
     }
 
     fun saveName(name: String) {
         viewModelScope.launch {
-            saveNameUseCase.execute(name).also {
-                _saved.postValue(it)
-            }
+            _saved.postValue(saveNameUseCase(name))
         }
     }
 }

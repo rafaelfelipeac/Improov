@@ -29,33 +29,25 @@ class ProfileViewModel @Inject constructor(
 
     private fun getName() {
         viewModelScope.launch {
-            getNameUseCase.execute().also {
-                _name.postValue(it)
-            }
+            _name.postValue(getNameUseCase())
         }
     }
 
     fun saveWelcome(welcome: Boolean) {
         viewModelScope.launch {
-            saveWelcomeUseCase.execute(welcome).also {
-                _saved.postValue(it)
-            }
+            _saved.postValue(saveWelcomeUseCase(welcome))
         }
     }
 
     fun saveFirstTimeAdd(saveFirstTimeAdd: Boolean) {
         viewModelScope.launch {
-            saveFirstTimeAddUseCase.execute(saveFirstTimeAdd).also {
-                _saved.postValue(it)
-            }
+            _saved.postValue(saveFirstTimeAddUseCase(saveFirstTimeAdd))
         }
     }
 
     fun saveFirstTimeList(saveFirstTimeList: Boolean) {
         viewModelScope.launch {
-            saveFirstTimeListUseCase.execute(saveFirstTimeList).also {
-                _saved.postValue(it)
-            }
+            _saved.postValue(saveFirstTimeListUseCase(saveFirstTimeList))
         }
     }
 }

@@ -6,7 +6,7 @@ import javax.inject.Inject
 class GetWelcomeUseCase @Inject constructor(
     private val welcomeRepository: WelcomeRepository
 ) {
-    suspend fun execute(): Boolean {
+    suspend operator fun invoke(): Boolean {
         return welcomeRepository.getWelcome()
     }
 }

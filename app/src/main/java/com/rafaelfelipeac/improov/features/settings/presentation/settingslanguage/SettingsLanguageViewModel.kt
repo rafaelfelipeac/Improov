@@ -25,17 +25,13 @@ class SettingsLanguageViewModel @Inject constructor(
 
     private fun getLanguage() {
         viewModelScope.launch {
-            getLanguageUseCase.execute().also {
-                _language.postValue(it)
-            }
+            _language.postValue(getLanguageUseCase())
         }
     }
 
     fun saveLanguage(language: String) {
         viewModelScope.launch {
-            saveLanguageUseCase.execute(language).also {
-                _saved.postValue(it)
-            }
+            _saved.postValue(saveLanguageUseCase(language))
         }
     }
 }
