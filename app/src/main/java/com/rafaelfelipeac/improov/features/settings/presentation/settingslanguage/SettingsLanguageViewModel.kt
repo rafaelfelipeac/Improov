@@ -34,7 +34,7 @@ class SettingsLanguageViewModel @Inject constructor(
     fun saveLanguage(language: String) {
         viewModelScope.launch {
             saveLanguageUseCase.execute(language).also {
-                _saved.postValue(Unit)
+                _saved.postValue(it)
             }
         }
     }

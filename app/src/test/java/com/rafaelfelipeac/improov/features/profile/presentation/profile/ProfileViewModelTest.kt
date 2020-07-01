@@ -45,7 +45,7 @@ class ProfileViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveWelcome is successful WHEN onSaveWelcome is called THEN true is returned`() {
+    fun `GIVEN saveWelcome is successful WHEN onSaveWelcome is called THEN a Unit is returned`() {
         // given
         val booleanValue = true
 
@@ -53,15 +53,10 @@ class ProfileViewModelTest {
             .willReturn(Unit)
 
         // when
-        profileViewModel.onSaveWelcome(booleanValue)
+        profileViewModel.saveWelcome(booleanValue)
 
         // then
-        profileViewModel.stateLiveData.value shouldBeEqualTo ProfileViewModel.ViewState(
-            name = "",
-            welcomeSaved = true,
-            firstTimeAddSaved = false,
-            firstTimeListSaved = false
-        )
+        profileViewModel.saved.value shouldBeEqualTo Unit
     }
 
     @Test
@@ -76,16 +71,11 @@ class ProfileViewModelTest {
         profileViewModel.loadData()
 
         // then
-        profileViewModel.stateLiveData.value shouldBeEqualTo ProfileViewModel.ViewState(
-            name = userName,
-            welcomeSaved = false,
-            firstTimeAddSaved = false,
-            firstTimeListSaved = false
-        )
+        profileViewModel.name.value shouldBeEqualTo userName
     }
 
     @Test
-    fun `GIVEN saveFirstTimeAdd is successful WHEN onSaveFirstTimeAdd is called THEN true is returned`() {
+    fun `GIVEN saveFirstTimeAdd is successful WHEN onSaveFirstTimeAdd is called THEN a Unit is returned`() {
         // given
         val booleanValue = true
 
@@ -93,19 +83,14 @@ class ProfileViewModelTest {
             .willReturn(Unit)
 
         // when
-        profileViewModel.onSaveFirstTimeAdd(booleanValue)
+        profileViewModel.saveFirstTimeAdd(booleanValue)
 
         // then
-        profileViewModel.stateLiveData.value shouldBeEqualTo ProfileViewModel.ViewState(
-            name = "",
-            welcomeSaved = false,
-            firstTimeAddSaved = true,
-            firstTimeListSaved = false
-        )
+        profileViewModel.saved.value shouldBeEqualTo Unit
     }
 
     @Test
-    fun `GIVEN saveFirstTimeList is successful WHEN onSaveFirstTimeList is called THEN true is returned`() {
+    fun `GIVEN saveFirstTimeList is successful WHEN onSaveFirstTimeList is called THEN a Unit is returned`() {
         // given
         val booleanValue = true
 
@@ -113,14 +98,9 @@ class ProfileViewModelTest {
             .willReturn(Unit)
 
         // when
-        profileViewModel.onSaveFirstTimeList(booleanValue)
+        profileViewModel.saveFirstTimeList(booleanValue)
 
         // then
-        profileViewModel.stateLiveData.value shouldBeEqualTo ProfileViewModel.ViewState(
-            name = "",
-            welcomeSaved = false,
-            firstTimeAddSaved = false,
-            firstTimeListSaved = true
-        )
+        profileViewModel.saved.value shouldBeEqualTo Unit
     }
 }

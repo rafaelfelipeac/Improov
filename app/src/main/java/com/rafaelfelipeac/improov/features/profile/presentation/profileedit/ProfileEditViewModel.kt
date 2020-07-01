@@ -34,7 +34,7 @@ class ProfileEditViewModel @Inject constructor(
     fun saveName(name: String) {
         viewModelScope.launch {
             saveNameUseCase.execute(name).also {
-                _saved.postValue(Unit)
+                _saved.postValue(it)
             }
         }
     }

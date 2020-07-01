@@ -4,29 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.gone
-import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.observeNew
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelFactory.get<ProfileViewModel>(this) }
-
-    private val stateObserver = Observer<ProfileViewModel.ViewState> { response ->
-        if (response.name.isNotEmpty()) {
-            profile_user_name.text = response.name
-        } else {
-            profile_user_name.gone()
-            profile_edit_profile_button.text = getString(R.string.profile_add_name_message)
-        }
-
-        if (response.welcomeSaved && response.firstTimeAddSaved && response.firstTimeListSaved) {
-            navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationWelcome())
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,19 +44,23 @@ class ProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observe(viewModel.stateLiveData, stateObserver)
         viewModel.loadData()
 
-        profile_show_welcome_button.setOnClickListener {
-            viewModel.onSaveWelcome(false)
-            viewModel.onSaveFirstTimeAdd(true)
-            viewModel.onSaveFirstTimeList(false)
-        }
+        setupLayout()
+        observeViewModel()
+    }
 
+    private fun setupLayout() {
         fab.setOnClickListener {
             hideBottomSheetTips()
 
             navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationGoalForm())
+        }
+
+        profile_show_welcome_button.setOnClickListener {
+            viewModel.saveWelcome(false)
+            viewModel.saveFirstTimeAdd(true)
+            viewModel.saveFirstTimeList(false)
         }
 
         profile_edit_profile_button.setOnClickListener {
@@ -79,6 +69,21 @@ class ProfileFragment : BaseFragment() {
 
         profile_settings_button.setOnClickListener {
             navController.navigate(R.id.action_navigation_profile_to_navigation_settings)
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.name.observeNew(this) {
+            if (it.isNotEmpty()) {
+                profile_user_name.text = it
+            } else {
+                profile_user_name.gone()
+                profile_edit_profile_button.text = getString(R.string.profile_add_name_message)
+            }
+        }
+
+        viewModel.saved.observeNew(this) {
+            navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationWelcome())
         }
     }
 }
