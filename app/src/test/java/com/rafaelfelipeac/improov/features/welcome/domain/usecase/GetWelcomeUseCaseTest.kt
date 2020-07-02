@@ -33,7 +33,7 @@ class GetWelcomeUseCaseTest {
                 .willReturn(booleanValue)
 
             // when
-            val result = getWelcomeUseCase.execute()
+            val result = getWelcomeUseCase()
 
             // then
             result shouldBeEqualTo booleanValue

@@ -43,7 +43,7 @@ class ProfileEditViewModelTest {
         // given
         val name = "User Name"
 
-        given(runBlocking { mockSaveNameUseCase.execute(name) })
+        given(runBlocking { mockSaveNameUseCase(name) })
             .willReturn(Unit)
 
         // when
@@ -58,7 +58,7 @@ class ProfileEditViewModelTest {
         // given
         val name = "User Name"
 
-        given(runBlocking { mockGetNameUseCase.execute() })
+        given(runBlocking { mockGetNameUseCase() })
             .willReturn(name)
 
         // when

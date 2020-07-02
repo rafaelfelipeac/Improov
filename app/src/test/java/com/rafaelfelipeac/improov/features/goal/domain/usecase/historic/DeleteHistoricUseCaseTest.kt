@@ -35,7 +35,7 @@ class DeleteHistoricUseCaseTest {
                 .willReturn(Unit)
 
             // when
-            val result = deleteHistoricUseCase.execute(historic)
+            val result = deleteHistoricUseCase(historic)
 
             // then
             result shouldBeEqualTo Unit

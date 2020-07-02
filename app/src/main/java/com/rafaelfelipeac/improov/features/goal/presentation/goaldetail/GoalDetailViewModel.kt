@@ -51,7 +51,7 @@ class GoalDetailViewModel @Inject constructor(
 
     private fun saveGoal(goal: Goal) {
         viewModelScope.launch {
-            saveGoalUseCase.execute(goal).also {
+            saveGoalUseCase(goal).also {
                 if (it > 0) {
                     sendAction(Action.GoalSaved)
                 }
@@ -61,7 +61,7 @@ class GoalDetailViewModel @Inject constructor(
 
     private fun saveItem(item: Item, isFromDragOnDrop: Boolean) {
         viewModelScope.launch {
-            saveItemUseCase.execute(item).also {
+            saveItemUseCase(item).also {
                 if (it > 0) {
                     if (!isFromDragOnDrop) {
                         sendAction(Action.ItemSaved)
@@ -75,7 +75,7 @@ class GoalDetailViewModel @Inject constructor(
 
     private fun saveHistoric(historic: Historic) {
         viewModelScope.launch {
-            saveHistoricUseCCase.execute(historic).also {
+            saveHistoricUseCCase(historic).also {
                 if (it > 0) {
                     sendAction(Action.HistoricSaved)
 
@@ -87,7 +87,7 @@ class GoalDetailViewModel @Inject constructor(
 
     private fun getGoal() {
         viewModelScope.launch {
-            getGoalUseCase.execute(goalId).also {
+            getGoalUseCase(goalId).also {
                 if (it.goalId > 0) {
                     getItems()
                     getHistorics()
@@ -102,7 +102,7 @@ class GoalDetailViewModel @Inject constructor(
 
     private fun getItems() {
         viewModelScope.launch {
-            getItemListUseCase.execute(goalId).also {
+            getItemListUseCase(goalId).also {
                 if (it.isNotEmpty()) {
                     sendAction(
                         Action.ItemListLoaded(it)
@@ -114,7 +114,7 @@ class GoalDetailViewModel @Inject constructor(
 
     private fun getHistorics() {
         viewModelScope.launch {
-            getHistoricListUseCase.execute(goalId).also {
+            getHistoricListUseCase(goalId).also {
                 if (it.isNotEmpty()) {
                     sendAction(
                         Action.HistoricListLoaded(it)

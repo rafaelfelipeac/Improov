@@ -60,7 +60,7 @@ class GoalDetailViewModelTest {
         val goalId = 1L
         val goal = createGoal(goalId)
 
-        given(runBlocking { mockSaveGoalUseCase.execute(goal) })
+        given(runBlocking { mockSaveGoalUseCase(goal) })
             .willReturn(goalId)
 
         // when
@@ -83,7 +83,7 @@ class GoalDetailViewModelTest {
         val goalId = 1L
         val goal = createGoal(goalId)
 
-        given(runBlocking { mockGetGoalUseCase.execute(goalId) })
+        given(runBlocking { mockGetGoalUseCase(goalId) })
             .willReturn(goal)
 
         // when
@@ -107,7 +107,7 @@ class GoalDetailViewModelTest {
         val itemId = 1L
         val item = createItem(itemId)
 
-        given(runBlocking { mockSaveItemUseCase.execute(item) })
+        given(runBlocking { mockSaveItemUseCase(item) })
             .willReturn(itemId)
 
         // when
@@ -135,9 +135,9 @@ class GoalDetailViewModelTest {
             createItem(itemId = 3, goalId = goalId)
         )
 
-        given(runBlocking { mockGetGoalUseCase.execute(goalId) })
+        given(runBlocking { mockGetGoalUseCase(goalId) })
             .willReturn(goal)
-        given(runBlocking { mockGetItemListUseCase.execute(goalId) })
+        given(runBlocking { mockGetItemListUseCase(goalId) })
             .willReturn(items)
 
         // when
@@ -161,7 +161,7 @@ class GoalDetailViewModelTest {
         val historicId = 1L
         val historic = createHistoric(historicId)
 
-        given(runBlocking { mockSaveHistoricUseCase.execute(historic) })
+        given(runBlocking { mockSaveHistoricUseCase(historic) })
             .willReturn(historicId)
 
         // when
@@ -189,9 +189,9 @@ class GoalDetailViewModelTest {
             createHistoric(historicId = 3, goalId = goalId)
         )
 
-        given(runBlocking { mockGetGoalUseCase.execute(goalId) })
+        given(runBlocking { mockGetGoalUseCase(goalId) })
             .willReturn(goal)
-        given(runBlocking { mockGetHistoricListUseCase.execute(goalId) })
+        given(runBlocking { mockGetHistoricListUseCase(goalId) })
             .willReturn(historics)
 
         // when

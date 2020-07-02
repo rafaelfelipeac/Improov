@@ -7,7 +7,7 @@ import javax.inject.Inject
 class SaveHistoricUseCase @Inject constructor(
     private val historicRepository: HistoricRepository
 ) {
-    suspend fun execute(historic: Historic): Long {
+    suspend operator fun invoke(historic: Historic): Long {
         return historicRepository.save(historic)
     }
 }

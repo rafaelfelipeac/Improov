@@ -66,7 +66,7 @@ class GoalFormViewModelTest {
         val goalId = 1L
         val goal = createGoal(goalId)
 
-        given(runBlocking { mockSaveGoalUseCase.execute(goal) })
+        given(runBlocking { mockSaveGoalUseCase(goal) })
             .willReturn(goalId)
 
         // when
@@ -91,7 +91,7 @@ class GoalFormViewModelTest {
         val goalId = 1L
         val goal = createGoal(goalId)
 
-        given(runBlocking { mockGetGoalUseCase.execute(goalId) })
+        given(runBlocking { mockGetGoalUseCase(goalId) })
             .willReturn(goal)
 
         // when
@@ -116,7 +116,7 @@ class GoalFormViewModelTest {
         // given
         val goals = listOf(createGoal(1), createGoal(2), createGoal(3))
 
-        given(runBlocking { mockGetGoalListUseCase.execute() })
+        given(runBlocking { mockGetGoalListUseCase() })
             .willReturn(goals)
 
         // when
@@ -145,7 +145,7 @@ class GoalFormViewModelTest {
             createItem(itemId = 3, goalId = goalId)
         )
 
-        given(runBlocking { mockGetItemListUseCase.execute(goalId) })
+        given(runBlocking { mockGetItemListUseCase(goalId) })
             .willReturn(items)
 
         // when
@@ -175,7 +175,7 @@ class GoalFormViewModelTest {
             createHistoric(historicId = 3, goalId = goalId)
         )
 
-        given(runBlocking { mockGetHistoricListUseCase.execute(goalId) })
+        given(runBlocking { mockGetHistoricListUseCase(goalId) })
             .willReturn(historics)
 
         // when
@@ -200,7 +200,7 @@ class GoalFormViewModelTest {
         // given
         val booleanValue = true
 
-        given(runBlocking { mockSaveFirstTimeListUseCase.execute(booleanValue) })
+        given(runBlocking { mockSaveFirstTimeListUseCase(booleanValue) })
             .willReturn(Unit)
 
         // when
@@ -224,7 +224,7 @@ class GoalFormViewModelTest {
         // given
         val booleanValue = true
 
-        given(runBlocking { mockSaveFirstTimeAddUseCase.execute(booleanValue) })
+        given(runBlocking { mockSaveFirstTimeAddUseCase(booleanValue) })
             .willReturn(Unit)
 
         // when
@@ -248,7 +248,7 @@ class GoalFormViewModelTest {
         // given
         val booleanValue = true
 
-        given(runBlocking { mockGetFirstTimeAddUseCase.execute() })
+        given(runBlocking { mockGetFirstTimeAddUseCase() })
             .willReturn(booleanValue)
 
         // when

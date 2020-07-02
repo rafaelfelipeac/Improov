@@ -64,7 +64,7 @@ class GoalFormViewModel @Inject constructor(
 
     private fun saveGoal(goal: Goal) {
         viewModelScope.launch {
-            saveGoalUseCase.execute(goal).also {
+            saveGoalUseCase(goal).also {
                 if (it > 0) {
                     sendAction(Action.GoalSaved)
                 } else {
@@ -76,7 +76,7 @@ class GoalFormViewModel @Inject constructor(
 
     private fun getGoal() {
         viewModelScope.launch {
-            getGoalUseCase.execute(goalId).also {
+            getGoalUseCase(goalId).also {
                 if (it.goalId > 0) {
                     sendAction(
                         Action.GoalLoaded(it)
@@ -88,7 +88,7 @@ class GoalFormViewModel @Inject constructor(
 
     private fun getGoals() {
         viewModelScope.launch {
-            getGoalListUseCase.execute().also {
+            getGoalListUseCase().also {
                 if (it.isNotEmpty()) {
                     sendAction(
                         Action.GoalListLoaded(it)
@@ -100,7 +100,7 @@ class GoalFormViewModel @Inject constructor(
 
     private fun getItems() {
         viewModelScope.launch {
-            getItemListUseCase.execute(goalId).also {
+            getItemListUseCase(goalId).also {
                 if (it.isNotEmpty()) {
                     sendAction(
                         Action.ItemListLoaded(it)
@@ -112,7 +112,7 @@ class GoalFormViewModel @Inject constructor(
 
     private fun getHistorics() {
         viewModelScope.launch {
-            getHistoricListUseCase.execute(goalId).also {
+            getHistoricListUseCase(goalId).also {
                 if (it.isNotEmpty()) {
                     sendAction(
                         Action.HistoricListLoaded(it)
@@ -124,7 +124,7 @@ class GoalFormViewModel @Inject constructor(
 
     private fun saveFirstTimeList(firstTimeList: Boolean) {
         viewModelScope.launch {
-            saveFirstTimeListUseCase.execute(firstTimeList).also {
+            saveFirstTimeListUseCase(firstTimeList).also {
                 sendAction(Action.FirstTimeListSaved)
             }
         }
@@ -132,7 +132,7 @@ class GoalFormViewModel @Inject constructor(
 
     private fun saveFirstTimeAdd(firstTimeAdd: Boolean) {
         viewModelScope.launch {
-            saveFirstTimeAddUseCase.execute(firstTimeAdd).also {
+            saveFirstTimeAddUseCase(firstTimeAdd).also {
                 sendAction(Action.FirstTimeAddSaved)
             }
         }
@@ -140,7 +140,7 @@ class GoalFormViewModel @Inject constructor(
 
     private fun getFirstTimeAdd() {
         viewModelScope.launch {
-            getFirstTimeAddUseCase.execute().also {
+            getFirstTimeAddUseCase().also {
                 sendAction(Action.FirstTimeAddLoaded(it))
             }
         }

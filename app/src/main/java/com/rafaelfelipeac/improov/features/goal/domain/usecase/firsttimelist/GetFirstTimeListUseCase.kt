@@ -6,7 +6,7 @@ import javax.inject.Inject
 class GetFirstTimeListUseCase @Inject constructor(
     private val firstTimeListRepository: FirstTimeListRepository
 ) {
-    suspend fun execute(): Boolean {
+    suspend operator fun invoke(): Boolean {
         return firstTimeListRepository.getFirstTimeList()
     }
 }

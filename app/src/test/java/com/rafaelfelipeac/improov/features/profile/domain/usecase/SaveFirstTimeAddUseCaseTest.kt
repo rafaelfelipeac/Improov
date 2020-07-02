@@ -33,7 +33,7 @@ class SaveFirstTimeAddUseCaseTest {
                 .willReturn(Unit)
 
             // when
-            val result = saveFirstTimeAddUseCase.execute(booleanValue)
+            val result = saveFirstTimeAddUseCase(booleanValue)
 
             // then
             result shouldBeEqualTo Unit

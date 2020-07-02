@@ -33,7 +33,7 @@ class SaveWelcomeUseCaseTest {
                 .willReturn(Unit)
 
             // when
-            val result = saveWelcomeUseCase.execute(booleanValue)
+            val result = saveWelcomeUseCase(booleanValue)
 
             // then
             result shouldBeEqualTo Unit

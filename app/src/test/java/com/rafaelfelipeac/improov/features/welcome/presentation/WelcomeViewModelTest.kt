@@ -43,7 +43,7 @@ class WelcomeViewModelTest {
         // given
         val booleanValue = true
 
-        given(runBlocking { mockSaveWelcomeUseCase.execute(booleanValue) })
+        given(runBlocking { mockSaveWelcomeUseCase(booleanValue) })
             .willReturn(Unit)
 
         // when
@@ -58,7 +58,7 @@ class WelcomeViewModelTest {
         // given
         val booleanValue = false
 
-        given(runBlocking { mockGetWelcomeUseCase.execute() })
+        given(runBlocking { mockGetWelcomeUseCase() })
             .willReturn(booleanValue)
 
         // when

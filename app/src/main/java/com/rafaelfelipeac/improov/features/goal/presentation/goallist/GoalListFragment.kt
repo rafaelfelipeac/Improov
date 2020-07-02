@@ -5,15 +5,14 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.getPercentage
 import com.rafaelfelipeac.improov.core.extension.isVisible
-import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.observeNew
 import com.rafaelfelipeac.improov.core.extension.vibrate
+import com.rafaelfelipeac.improov.core.extension.getPercentage
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -29,16 +28,6 @@ class GoalListFragment : BaseFragment() {
     private var swipeShown = false
 
     private val viewModel by lazy { viewModelFactory.get<GoalListViewModel>(this) }
-
-    private val stateObserver = Observer<GoalListViewModel.ViewState> { response ->
-        response.goals
-            .let { goalsAdapter.setItems(it) }
-        setupGoals(response.goals.isNotEmpty())
-
-        if (response.firstTimeList && !swipeShown) {
-            showBottomSheetTipsSwipe()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,16 +61,41 @@ class GoalListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observe(viewModel.stateLiveData, stateObserver)
         viewModel.loadData()
 
+        setupLayout()
+        setupBottomSheetGoal()
+        observeViewModel()
+    }
+
+    private fun setupLayout() {
         fab.setOnClickListener {
             hideBottomSheetTips()
 
             navController.navigate(GoalListFragmentDirections.actionNavigationListToNavigationGoalForm())
         }
+    }
 
-        setupBottomSheetGoal()
+    private fun observeViewModel() {
+        viewModel.goals.observeNew(this) {
+            it.let { goalsAdapter.setItems(it) }
+            setupGoals(it.isNotEmpty())
+        }
+
+        viewModel.firstTimeList.observeNew(this) {
+            if (it && !swipeShown) {
+                showBottomSheetTipsSwipe()
+            }
+        }
+
+        viewModel.savedFirstTimeList.observeNew(this) {
+            // ???
+        }
+
+        viewModel.savedGoal.observeNew(this) {
+            setupGoals()
+            // or update only the goal with the goalId (it)
+        }
     }
 
     private fun setupGoals(visible: Boolean = true) {
@@ -126,8 +140,8 @@ class GoalListFragment : BaseFragment() {
         target.order = toPosition
         other.order = fromPosition
 
-        viewModel.onSaveGoal(target, isFromDragAndDrop = true)
-        viewModel.onSaveGoal(other, isFromDragAndDrop = true)
+        viewModel.saveGoal(target, isFromDragAndDrop = true)
+        viewModel.saveGoal(other, isFromDragAndDrop = true)
 
         items.removeAt(fromPosition)
         items.add(toPosition, target)
@@ -150,7 +164,7 @@ class GoalListFragment : BaseFragment() {
                 if (goal.done || goal.getPercentage() >= PERCENTAGE_MAX) {
                     doneOrUndoneGoal(goal)
                 } else {
-                    setupGoals(true)
+                    setupGoals()
                     showBottomSheetGoal(goal, ::doneOrUndoneGoal)
                 }
             }
@@ -170,16 +184,16 @@ class GoalListFragment : BaseFragment() {
         goal.done = !goal.done
         goal.undoneDate = getCurrentTime()
 
-        viewModel.onSaveGoal(goal)
+        viewModel.saveGoal(goal)
     }
 
     private fun archiveGoal(goal: Any) {
         (goal as Goal).archived = false
-        viewModel.onSaveGoal(goal)
+        viewModel.saveGoal(goal)
     }
 
     private fun showBottomSheetTipsSwipe() {
-        viewModel.onSaveFirstTimeList(false)
+        viewModel.saveFirstTimeList(false)
 
         swipeShown = true
 

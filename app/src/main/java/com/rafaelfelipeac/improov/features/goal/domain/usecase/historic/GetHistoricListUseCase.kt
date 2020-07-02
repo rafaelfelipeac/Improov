@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetHistoricListUseCase @Inject constructor(
     private val historicRepository: HistoricRepository
 ) {
-    suspend fun execute(goalId: Long): List<Historic> {
+    suspend operator fun invoke(goalId: Long): List<Historic> {
         return historicRepository.getHistorics()
             .filter { it.goalId == goalId }
             .reversed()

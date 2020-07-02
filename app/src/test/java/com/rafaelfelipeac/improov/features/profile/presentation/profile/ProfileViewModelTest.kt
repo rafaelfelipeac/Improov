@@ -49,7 +49,7 @@ class ProfileViewModelTest {
         // given
         val booleanValue = true
 
-        given(runBlocking { mockSaveWelcomeUseCase.execute(booleanValue) })
+        given(runBlocking { mockSaveWelcomeUseCase(booleanValue) })
             .willReturn(Unit)
 
         // when
@@ -64,7 +64,7 @@ class ProfileViewModelTest {
         // given
         val userName = "User Name"
 
-        given(runBlocking { mockGetNameUseCase.execute() })
+        given(runBlocking { mockGetNameUseCase() })
             .willReturn(userName)
 
         // when
@@ -79,7 +79,7 @@ class ProfileViewModelTest {
         // given
         val booleanValue = true
 
-        given(runBlocking { mockSaveFirstTimeAddUseCase.execute(booleanValue) })
+        given(runBlocking { mockSaveFirstTimeAddUseCase(booleanValue) })
             .willReturn(Unit)
 
         // when
@@ -94,7 +94,7 @@ class ProfileViewModelTest {
         // given
         val booleanValue = true
 
-        given(runBlocking { mockSaveFirsTimeListUseCass.execute(booleanValue) })
+        given(runBlocking { mockSaveFirsTimeListUseCass(booleanValue) })
             .willReturn(Unit)
 
         // when

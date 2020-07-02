@@ -43,7 +43,7 @@ class SettingsLanguageViewModelTest {
         // given
         val language = "pt_br"
 
-        given(runBlocking { mockSaveLanguageUseCase.execute(language) })
+        given(runBlocking { mockSaveLanguageUseCase(language) })
             .willReturn(Unit)
 
         // when
@@ -58,7 +58,7 @@ class SettingsLanguageViewModelTest {
         // given
         val language = "pt_br"
 
-        given(runBlocking { mockGetLanguageUseCase.execute() })
+        given(runBlocking { mockGetLanguageUseCase() })
             .willReturn(language)
 
         // when
