@@ -7,24 +7,21 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.MenuItem
-import androidx.lifecycle.Observer
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.observe
-import com.rafaelfelipeac.improov.core.extension.visible
-import com.rafaelfelipeac.improov.core.extension.invisible
-import com.rafaelfelipeac.improov.core.extension.gone
+import com.rafaelfelipeac.improov.core.extension.observeNew
 import com.rafaelfelipeac.improov.core.extension.resetValue
-import com.rafaelfelipeac.improov.core.extension.toFloat
+import com.rafaelfelipeac.improov.core.extension.visible
+import com.rafaelfelipeac.improov.core.extension.gone
+import com.rafaelfelipeac.improov.core.extension.invisible
 import com.rafaelfelipeac.improov.core.extension.fieldIsEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.checkIfFieldIsEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.toFloat
 import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
 import com.rafaelfelipeac.improov.core.extension.isNotEmpty
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.commons.DialogOneButton
 import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
-import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 
 @Suppress("TooManyFunctions")
@@ -33,32 +30,12 @@ class GoalFormFragment : BaseFragment() {
     private var goal: Goal =
         Goal()
     private var goalId: Long? = null
-    private var items: List<Item> = listOf()
-    private var historics: List<Historic> = listOf()
 
     private var firstTimeAdd = false
 
     private var goalsSize: Int? = null
 
     private val viewModel by lazy { viewModelFactory.get<GoalFormViewModel>(this) }
-
-    private val stateObserver = Observer<GoalFormViewModel.ViewState> { response ->
-        if (response.goalSaved) {
-            navController.navigateUp()
-        }
-
-        if (response.goal.goalId > 0) {
-            goal = response.goal
-            items = response.items
-            historics = response.historics
-
-            setupGoal()
-        }
-
-        goalsSize = response.goals.size
-
-        firstTimeAdd = response.firstTimeAddLoaded
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,8 +65,6 @@ class GoalFormFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observe(viewModel.stateLiveData, stateObserver)
-
         goalId.let {
             if (goalId!! > 0L) {
                 viewModel.setGoalId(goalId!!)
@@ -103,6 +78,11 @@ class GoalFormFragment : BaseFragment() {
 
         main.openToolbar()
 
+        setupLayout()
+        observeViewModel()
+    }
+
+    private fun setupLayout() {
         goal_form_divide_and_conquest_help.setOnClickListener {
             hideSoftKeyboard()
             setupBottomSheetTipsDivideAndConquer()
@@ -115,6 +95,34 @@ class GoalFormFragment : BaseFragment() {
             setupBottomSheetTipsGoalType()
             setupBottomSheetTip()
             showBottomSheetTips()
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.savedGoal.observeNew(this) {
+            navController.navigateUp()
+        }
+
+        viewModel.goal.observeNew(this) {
+            goal = it
+
+            setupGoal()
+        }
+
+        viewModel.goals.observeNew(this) {
+            goalsSize = it.size
+        }
+
+        viewModel.savedFirstTimeList.observeNew(this) {
+            // ???
+        }
+
+        viewModel.savedFirstTimeAdd.observeNew(this) {
+            // ???
+        }
+
+        viewModel.firstTimeAdd.observeNew(this) {
+            firstTimeAdd = it
         }
     }
 
@@ -144,7 +152,7 @@ class GoalFormFragment : BaseFragment() {
                     else -> {
                         val goalToSave = updateOrCreateGoal()
 
-                        viewModel.onSaveGoal(goalToSave)
+                        viewModel.saveGoal(goalToSave)
 
                         verifyFistTimeSaving()
 
@@ -320,8 +328,8 @@ class GoalFormFragment : BaseFragment() {
 
     private fun verifyFistTimeSaving() {
         if (firstTimeAdd) {
-            viewModel.onSaveFirstTimeAdd(false)
-            viewModel.onSaveFirstTimeList(true)
+            viewModel.saveFirstTimeAdd(false)
+            viewModel.saveFirstTimeList(true)
         }
     }
 

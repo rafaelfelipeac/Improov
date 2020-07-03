@@ -36,10 +36,8 @@ class GoalListViewModel @Inject constructor(
     fun saveGoal(goal: Goal, isFromDragAndDrop: Boolean = false) {
         viewModelScope.launch {
             saveGoalUseCase(goal).also {
-                if (it > 0) {
-                    if (!isFromDragAndDrop) {
-                        _savedGoal.postValue(it)
-                    }
+                if (!isFromDragAndDrop) {
+                    _savedGoal.postValue(it)
                 }
             }
         }
