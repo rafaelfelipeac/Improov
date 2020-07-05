@@ -90,7 +90,11 @@ class GoalDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.setGoalId(goalId!!)
+        goalId.let {
+            if (it!! > 0L) {
+                viewModel.setGoalId(goalId!!)
+            }
+        }
         viewModel.loadData()
 
         observeViewModel()

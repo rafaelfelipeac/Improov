@@ -66,11 +66,10 @@ class GoalFormFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         goalId.let {
-            if (goalId!! > 0L) {
+            if (it!! > 0L) {
                 viewModel.setGoalId(goalId!!)
             }
         }
-
         viewModel.loadData()
 
         setRadioButtonType()
