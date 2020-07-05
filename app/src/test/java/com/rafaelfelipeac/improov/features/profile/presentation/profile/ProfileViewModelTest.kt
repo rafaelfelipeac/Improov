@@ -38,9 +38,9 @@ class ProfileViewModelTest {
     fun setup() {
         profileViewModel = ProfileViewModel(
             mockSaveWelcomeUseCase,
-            mockGetNameUseCase,
             mockSaveFirstTimeAddUseCase,
-            mockSaveFirsTimeListUseCass
+            mockSaveFirsTimeListUseCass,
+            mockGetNameUseCase
         )
     }
 
@@ -57,21 +57,6 @@ class ProfileViewModelTest {
 
         // then
         profileViewModel.saved.value shouldBeEqualTo Unit
-    }
-
-    @Test
-    fun `GIVEN getName is successful WHEN loadData is called THEN a name is returned`() {
-        // given
-        val userName = "User Name"
-
-        given(runBlocking { mockGetNameUseCase() })
-            .willReturn(userName)
-
-        // when
-        profileViewModel.loadData()
-
-        // then
-        profileViewModel.name.value shouldBeEqualTo userName
     }
 
     @Test
@@ -102,5 +87,20 @@ class ProfileViewModelTest {
 
         // then
         profileViewModel.saved.value shouldBeEqualTo Unit
+    }
+
+    @Test
+    fun `GIVEN getName is successful WHEN loadData is called THEN a name is returned`() {
+        // given
+        val userName = "User Name"
+
+        given(runBlocking { mockGetNameUseCase() })
+            .willReturn(userName)
+
+        // when
+        profileViewModel.loadData()
+
+        // then
+        profileViewModel.name.value shouldBeEqualTo userName
     }
 }

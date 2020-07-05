@@ -3,7 +3,7 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goalform
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.rafaelfelipeac.improov.core.platform.base.NewBaseViewModel
+import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimeadd.GetFirstTimeAddUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimeadd.SaveFirstTimeAddUseCase
@@ -22,7 +22,7 @@ class GoalFormViewModel @Inject constructor(
     private val saveFirstTimeListUseCase: SaveFirstTimeListUseCase,
     private val saveFirstTimeAddUseCase: SaveFirstTimeAddUseCase,
     private val getFirstTimeAddUseCase: GetFirstTimeAddUseCase
-) : NewBaseViewModel() {
+) : BaseViewModel() {
 
     private var goalId = 0L
 
@@ -32,10 +32,10 @@ class GoalFormViewModel @Inject constructor(
     private val _goal = MutableLiveData<Goal>()
     val goals: LiveData<List<Goal>> get() = _goals
     private val _goals = MutableLiveData<List<Goal>>()
-    val savedFirstTimeAdd: LiveData<Unit> get() = _savedFirstTimeAdd
-    private val _savedFirstTimeAdd = MutableLiveData<Unit>()
     val savedFirstTimeList: LiveData<Unit> get() = _savedFirstTimeList
     private val _savedFirstTimeList = MutableLiveData<Unit>()
+    val savedFirstTimeAdd: LiveData<Unit> get() = _savedFirstTimeAdd
+    private val _savedFirstTimeAdd = MutableLiveData<Unit>()
     val firstTimeAdd: LiveData<Boolean> get() = _firstTimeAdd
     private val _firstTimeAdd = MutableLiveData<Boolean>()
 

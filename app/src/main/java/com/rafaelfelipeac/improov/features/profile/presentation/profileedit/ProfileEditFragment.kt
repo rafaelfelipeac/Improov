@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.checkIfFieldIsEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.fieldIsEmptyOrZero
-import com.rafaelfelipeac.improov.core.extension.observeNew
+import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 
@@ -60,12 +60,12 @@ class ProfileEditFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.name.observeNew(this) {
-            profile_edit_name.setText(it)
+        viewModel.saved.observe(this) {
+            navController.navigateUp()
         }
 
-        viewModel.saved.observeNew(this) {
-            navController.navigateUp()
+        viewModel.name.observe(this) {
+            profile_edit_name.setText(it)
         }
     }
 

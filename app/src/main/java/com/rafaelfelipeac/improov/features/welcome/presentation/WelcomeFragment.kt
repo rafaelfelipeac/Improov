@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.invisible
-import com.rafaelfelipeac.improov.core.extension.observeNew
+import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_welcome.*
@@ -60,14 +60,14 @@ class WelcomeFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.welcome.observeNew(this) {
+        viewModel.saved.observe(this) {
+            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
+        }
+
+        viewModel.welcome.observe(this) {
             if (it) {
                 navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
             }
-        }
-
-        viewModel.saved.observeNew(this) {
-            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
         }
     }
 

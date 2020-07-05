@@ -6,7 +6,6 @@ import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
 import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoric
 import com.rafaelfelipeac.improov.base.DataProviderTest.createItem
 import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
-import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.GetHistoricListUseCase
@@ -64,17 +63,10 @@ class GoalDetailViewModelTest {
             .willReturn(goalId)
 
         // when
-        goalDetailViewModel.onSaveGoal(goal)
+        goalDetailViewModel.saveGoal(goal)
 
         // then
-        goalDetailViewModel.stateLiveData.value shouldBeEqualTo GoalDetailViewModel.ViewState(
-            goalSaved = true,
-            goal = Goal(),
-            itemSaved = false,
-            items = listOf(),
-            historicSaved = false,
-            historics = listOf()
-        )
+        goalDetailViewModel.savedGoal.value shouldBeEqualTo goalId
     }
 
     @Test
@@ -91,14 +83,7 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.loadData()
 
         // then
-        goalDetailViewModel.stateLiveData.value shouldBeEqualTo GoalDetailViewModel.ViewState(
-            goalSaved = false,
-            goal = goal,
-            itemSaved = false,
-            items = listOf(),
-            historicSaved = false,
-            historics = listOf()
-        )
+        goalDetailViewModel.goal.value shouldBeEqualTo goal
     }
 
     @Test
@@ -111,32 +96,22 @@ class GoalDetailViewModelTest {
             .willReturn(itemId)
 
         // when
-        goalDetailViewModel.onSaveItem(item)
+        goalDetailViewModel.saveItem(item)
 
         // then
-        goalDetailViewModel.stateLiveData.value shouldBeEqualTo GoalDetailViewModel.ViewState(
-            goalSaved = false,
-            goal = Goal(),
-            itemSaved = true,
-            items = listOf(),
-            historicSaved = false,
-            historics = listOf()
-        )
+        goalDetailViewModel.savedItem.value shouldBeEqualTo itemId
     }
 
     @Test
     fun `GIVEN getItemList is successful WHEN getItems is called THEN return a list of items`() {
         // given
         val goalId = 1L
-        val goal = createGoal(goalId)
         val items = listOf(
             createItem(itemId = 1, goalId = goalId),
             createItem(itemId = 2, goalId = goalId),
             createItem(itemId = 3, goalId = goalId)
         )
 
-        given(runBlocking { mockGetGoalUseCase(goalId) })
-            .willReturn(goal)
         given(runBlocking { mockGetItemListUseCase(goalId) })
             .willReturn(items)
 
@@ -145,14 +120,7 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.loadData()
 
         // then
-        goalDetailViewModel.stateLiveData.value shouldBeEqualTo GoalDetailViewModel.ViewState(
-            goalSaved = false,
-            goal = goal,
-            itemSaved = false,
-            items = items,
-            historicSaved = false,
-            historics = listOf()
-        )
+        goalDetailViewModel.items.value shouldBeEqualTo items
     }
 
     @Test
@@ -165,32 +133,22 @@ class GoalDetailViewModelTest {
             .willReturn(historicId)
 
         // when
-        goalDetailViewModel.onSaveHistoric(historic)
+        goalDetailViewModel.saveHistoric(historic)
 
         // then
-        goalDetailViewModel.stateLiveData.value shouldBeEqualTo GoalDetailViewModel.ViewState(
-            goalSaved = false,
-            goal = Goal(),
-            itemSaved = false,
-            items = listOf(),
-            historicSaved = true,
-            historics = listOf()
-        )
+        goalDetailViewModel.savedHistoric.value shouldBeEqualTo historicId
     }
 
     @Test
     fun `GIVEN getHistoricList is successful WHEN getHistoric is called THEN return a list of historics`() {
         // given
         val goalId = 1L
-        val goal = createGoal(goalId)
         val historics = listOf(
             createHistoric(historicId = 1, goalId = goalId),
             createHistoric(historicId = 2, goalId = goalId),
             createHistoric(historicId = 3, goalId = goalId)
         )
 
-        given(runBlocking { mockGetGoalUseCase(goalId) })
-            .willReturn(goal)
         given(runBlocking { mockGetHistoricListUseCase(goalId) })
             .willReturn(historics)
 
@@ -199,13 +157,6 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.loadData()
 
         // then
-        goalDetailViewModel.stateLiveData.value shouldBeEqualTo GoalDetailViewModel.ViewState(
-            goalSaved = false,
-            goal = goal,
-            itemSaved = false,
-            items = listOf(),
-            historicSaved = false,
-            historics = historics
-        )
+        goalDetailViewModel.historics.value shouldBeEqualTo historics
     }
 }

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.isVisible
-import com.rafaelfelipeac.improov.core.extension.observeNew
+import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.vibrate
 import com.rafaelfelipeac.improov.core.extension.getPercentage
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
@@ -77,24 +77,24 @@ class GoalListFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.goals.observeNew(this) {
+        viewModel.savedGoal.observe(this) {
+            setupGoals()
+            // or update only the goal with the goalId (it)
+        }
+
+        viewModel.goals.observe(this) {
             it.let { goalsAdapter.setItems(it) }
             setupGoals(it.isNotEmpty())
         }
 
-        viewModel.firstTimeList.observeNew(this) {
-            if (it && !swipeShown) {
-                showBottomSheetTipsSwipe()
-            }
-        }
-
-        viewModel.savedFirstTimeList.observeNew(this) {
+        viewModel.savedFirstTimeList.observe(this) {
             // ???
         }
 
-        viewModel.savedGoal.observeNew(this) {
-            setupGoals()
-            // or update only the goal with the goalId (it)
+        viewModel.firstTimeList.observe(this) {
+            if (it && !swipeShown) {
+                showBottomSheetTipsSwipe()
+            }
         }
     }
 

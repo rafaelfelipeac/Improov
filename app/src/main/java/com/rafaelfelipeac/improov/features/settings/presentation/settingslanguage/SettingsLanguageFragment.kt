@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.LocaleHelper
-import com.rafaelfelipeac.improov.core.extension.observeNew
+import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_settings_language.*
 
@@ -40,14 +40,14 @@ class SettingsLanguageFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.language.observeNew(this) {
+        viewModel.saved.observe(this) {
+            recreateFragment()
+        }
+
+        viewModel.language.observe(this) {
             LocaleHelper.setLocale(requireContext(), it)
 
             setupLanguage(it)
-        }
-
-        viewModel.saved.observeNew(this) {
-            recreateFragment()
         }
     }
 

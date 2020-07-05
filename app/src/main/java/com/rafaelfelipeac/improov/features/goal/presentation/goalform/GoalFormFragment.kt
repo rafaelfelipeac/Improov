@@ -8,7 +8,7 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.MenuItem
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.observeNew
+import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.resetValue
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.extension.gone
@@ -99,29 +99,29 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.savedGoal.observeNew(this) {
+        viewModel.savedGoal.observe(this) {
             navController.navigateUp()
         }
 
-        viewModel.goal.observeNew(this) {
+        viewModel.goal.observe(this) {
             goal = it
 
             setupGoal()
         }
 
-        viewModel.goals.observeNew(this) {
+        viewModel.goals.observe(this) {
             goalsSize = it.size
         }
 
-        viewModel.savedFirstTimeList.observeNew(this) {
+        viewModel.savedFirstTimeList.observe(this) {
             // ???
         }
 
-        viewModel.savedFirstTimeAdd.observeNew(this) {
+        viewModel.savedFirstTimeAdd.observe(this) {
             // ???
         }
 
-        viewModel.firstTimeAdd.observeNew(this) {
+        viewModel.firstTimeAdd.observe(this) {
             firstTimeAdd = it
         }
     }

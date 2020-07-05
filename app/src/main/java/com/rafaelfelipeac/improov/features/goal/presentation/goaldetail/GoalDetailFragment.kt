@@ -10,7 +10,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,21 +55,6 @@ class GoalDetailFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelFactory.get<GoalDetailViewModel>(this) }
 
-    private val stateObserver = Observer<GoalDetailViewModel.ViewState> { response ->
-        goal = response.goal
-        setupGoal()
-
-        itemsSize = response.items.size
-
-        response.items
-            .let { itemsAdapter.setItems(it) }
-        setupItems(response.items.isNotEmpty())
-
-        response.historics
-            .let { historicAdapter.setItems(it) }
-        setupHistoric(response.historics.isNotEmpty())
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -82,6 +66,12 @@ class GoalDetailFragment : BaseFragment() {
 
         goalId = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalId }
         goalNew = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalNew }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        resetFistTime()
     }
 
     override fun onCreateView(
@@ -97,28 +87,15 @@ class GoalDetailFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_goal, container, false)
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        resetFistTime()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        observe(viewModel.stateLiveData, stateObserver)
 
         viewModel.setGoalId(goalId!!)
         viewModel.loadData()
 
-        setupBottomSheetItem(::newItem, ::updateItem)
-    }
+        observeViewModel()
 
-    private fun resetFistTime() {
-        seriesSingle = 0
-        seriesBronze = 0
-        seriesSilver = 0
-        seriesGold = 0
+        setupBottomSheetItem(::newItem, ::updateItem)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -149,6 +126,44 @@ class GoalDetailFragment : BaseFragment() {
         return false
     }
 
+    private fun observeViewModel() {
+        viewModel.savedGoal.observe(this) {
+            // ???
+        }
+
+        viewModel.goal.observe(this) {
+            goal = it
+            setupGoal()
+        }
+
+        viewModel.savedItem.observe(this) {
+            // ???
+        }
+
+        viewModel.items.observe(this) {
+            itemsSize = it.size
+
+            it.let { itemsAdapter.setItems(it) }
+            setupItems(it.isNotEmpty())
+        }
+
+        viewModel.savedHistoric.observe(this) {
+            // ???
+        }
+
+        viewModel.historics.observe(this) {
+            it.let { historicAdapter.setItems(it) }
+            setupHistoric(it.isNotEmpty())
+        }
+    }
+
+    private fun resetFistTime() {
+        seriesSingle = 0
+        seriesBronze = 0
+        seriesSilver = 0
+        seriesGold = 0
+    }
+
     private fun setupButtons() {
         goal_btn_counter_inc.setOnClickListener {
             count += goal?.incrementValue!!
@@ -158,7 +173,7 @@ class GoalDetailFragment : BaseFragment() {
 
             updateTextAndGoal(goal_counter_total)
 
-            viewModel.onSaveHistoric(
+            viewModel.saveHistoric(
                 Historic(
                     value = goal?.incrementValue!!,
                     date = Date(),
@@ -177,7 +192,7 @@ class GoalDetailFragment : BaseFragment() {
 
             updateTextAndGoal(goal_counter_total)
 
-            viewModel.onSaveHistoric(
+            viewModel.saveHistoric(
                 Historic(
                     value = goal?.decrementValue!! * -1,
                     date = Date(),
@@ -197,7 +212,7 @@ class GoalDetailFragment : BaseFragment() {
 
                 updateTextAndGoal(goal_count)
 
-                viewModel.onSaveHistoric(
+                viewModel.saveHistoric(
                     Historic(
                         value = goal_total_total.toFloat(),
                         date = Date(),
@@ -297,7 +312,7 @@ class GoalDetailFragment : BaseFragment() {
         updateText(textView)
         updateGoal()
 
-        viewModel.onSaveGoal(goal!!)
+        viewModel.saveGoal(goal!!)
     }
 
     private fun updateText(textView: TextView) {
@@ -509,8 +524,8 @@ class GoalDetailFragment : BaseFragment() {
         targetItem.order = toPosition
         otherItem.order = fromPosition
 
-        viewModel.onSaveItem(targetItem, isFromDragOnDrop = true)
-        viewModel.onSaveItem(otherItem, isFromDragOnDrop = true)
+        viewModel.saveItem(targetItem, isFromDragOnDrop = true)
+        viewModel.saveItem(otherItem, isFromDragOnDrop = true)
 
         items.removeAt(fromPosition)
         items.add(toPosition, targetItem)
@@ -534,14 +549,14 @@ class GoalDetailFragment : BaseFragment() {
                     item.done = false
                     item.undoneDate = getCurrentTime()
 
-                    viewModel.onSaveItem(item)
+                    viewModel.saveItem(item)
 
                     onScoreFromList(false)
                 } else {
                     item.done = true
                     item.doneDate = getCurrentTime()
 
-                    viewModel.onSaveItem(item)
+                    viewModel.saveItem(item)
 
                     onScoreFromList(true)
                 }
@@ -559,7 +574,7 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun deleteItem(item: Any) {
-        viewModel.onSaveItem(item as Item)
+        viewModel.saveItem(item as Item)
     }
 
     private fun verifyIfWasDone(oldDone: Boolean) {
@@ -582,7 +597,7 @@ class GoalDetailFragment : BaseFragment() {
                 createdDate = getCurrentTime()
             )
 
-        viewModel.onSaveItem(item)
+        viewModel.saveItem(item)
     }
 
     private fun updateItem(name: String) {
@@ -590,7 +605,7 @@ class GoalDetailFragment : BaseFragment() {
         item.name = name
         item.updatedDate = getCurrentTime()
 
-        viewModel.onSaveItem(item)
+        viewModel.saveItem(item)
     }
 
     private fun getScreenMultiplier(): Float {
