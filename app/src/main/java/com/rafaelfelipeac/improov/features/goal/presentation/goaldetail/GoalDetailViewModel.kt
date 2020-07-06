@@ -48,9 +48,6 @@ class GoalDetailViewModel @Inject constructor(
     override fun loadData() {
         if (goalId > 0L) {
             getGoal()
-
-            getItems()
-            getHistorics()
         }
     }
 
@@ -76,7 +73,7 @@ class GoalDetailViewModel @Inject constructor(
         }
     }
 
-    private fun getItems() {
+    fun getItems() {
         viewModelScope.launch {
             _items.postValue(getItemListUseCase(goalId))
         }
@@ -88,7 +85,7 @@ class GoalDetailViewModel @Inject constructor(
         }
     }
 
-    private fun getHistorics() {
+    fun getHistorics() {
         viewModelScope.launch {
             _historics.postValue(getHistoricListUseCase(goalId))
         }

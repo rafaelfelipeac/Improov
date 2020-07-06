@@ -132,16 +132,21 @@ class GoalDetailFragment : BaseFragment() {
 
     private fun observeViewModel() {
         viewModel.savedGoal.observe(this) {
-            // ???
+            updateProgress()
         }
 
         viewModel.goal.observe(this) {
             goal = it
             setupGoal()
+
+            viewModel.getItems()
+            viewModel.getHistorics()
         }
 
         viewModel.savedItem.observe(this) {
-            // ???
+            viewModel.getItems()
+
+            updateTextAndGoal()
         }
 
         viewModel.items.observe(this) {
@@ -152,7 +157,9 @@ class GoalDetailFragment : BaseFragment() {
         }
 
         viewModel.savedHistoric.observe(this) {
-            // ???
+            viewModel.getHistorics()
+
+            updateTextAndGoal()
         }
 
         viewModel.historics.observe(this) {
@@ -175,8 +182,6 @@ class GoalDetailFragment : BaseFragment() {
             val oldDone = goal!!.done
             goal?.done = verifyIfGoalIsDone()
 
-            updateTextAndGoal(goal_counter_total)
-
             viewModel.saveHistoric(
                 Historic(
                     value = goal?.incrementValue!!,
@@ -193,8 +198,6 @@ class GoalDetailFragment : BaseFragment() {
 
             val oldDone = goal!!.done
             goal?.done = verifyIfGoalIsDone()
-
-            updateTextAndGoal(goal_counter_total)
 
             viewModel.saveHistoric(
                 Historic(
@@ -213,8 +216,6 @@ class GoalDetailFragment : BaseFragment() {
 
                 val oldDone = goal!!.done
                 goal?.done = verifyIfGoalIsDone()
-
-                updateTextAndGoal(goal_count)
 
                 viewModel.saveHistoric(
                     Historic(
@@ -238,8 +239,6 @@ class GoalDetailFragment : BaseFragment() {
 
         val oldDone = goal!!.done
         goal?.done = verifyIfGoalIsDone()
-
-        updateTextAndGoal(goal_count)
 
         verifyIfWasDone(oldDone)
     }
@@ -304,7 +303,7 @@ class GoalDetailFragment : BaseFragment() {
             resetSingleOrDivideAndConquer()
         }
 
-        updateSingleOrDivideAndConquer()
+        updateProgress()
 
         setupButtons()
     }
@@ -312,8 +311,8 @@ class GoalDetailFragment : BaseFragment() {
     private fun isTheFirstTime() =
         seriesSingle == 0 && (seriesBronze == 0 || seriesSilver == 0 || seriesGold == 0)
 
-    private fun updateTextAndGoal(textView: TextView) {
-        updateText(textView)
+    private fun updateTextAndGoal() {
+        updateText(getTextViewFromGoalType())
         updateGoal()
 
         viewModel.saveGoal(goal!!)
@@ -327,8 +326,19 @@ class GoalDetailFragment : BaseFragment() {
     private fun updateGoal() {
         goal?.value = count
         goal?.done = verifyIfGoalIsDone()
+    }
 
-        updateSingleOrDivideAndConquer()
+    private fun getTextViewFromGoalType(): TextView {
+        return when (goal?.type) {
+            GoalType.GOAL_LIST, GoalType.GOAL_FINAL -> {
+                goal_count
+            }
+            GoalType.GOAL_COUNTER -> {
+                goal_counter_total
+            }
+            GoalType.GOAL_NONE -> TODO()
+            else -> TODO()
+        }
     }
 
     private fun setupItems(visible: Boolean) {
@@ -376,7 +386,7 @@ class GoalDetailFragment : BaseFragment() {
         ((goal!!.divideAndConquer && goal!!.value >= goal!!.goldValue) ||
                 (!goal!!.divideAndConquer && goal!!.value >= goal!!.singleValue))
 
-    private fun updateSingleOrDivideAndConquer() {
+    private fun updateProgress() {
         if (goal?.divideAndConquer!!) {
             updateDivideAndConquer()
         } else {

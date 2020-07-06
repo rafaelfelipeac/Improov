@@ -88,12 +88,14 @@ class GoalListFragment : BaseFragment() {
         }
 
         viewModel.savedFirstTimeList.observe(this) {
-            // ???
+            if (!swipeShown) {
+                showBottomSheetTipsSwipe()
+            }
         }
 
         viewModel.firstTimeList.observe(this) {
-            if (it && !swipeShown) {
-                showBottomSheetTipsSwipe()
+            if (it) {
+                viewModel.saveFirstTimeList(false)
             }
         }
     }
@@ -193,8 +195,6 @@ class GoalListFragment : BaseFragment() {
     }
 
     private fun showBottomSheetTipsSwipe() {
-        viewModel.saveFirstTimeList(false)
-
         swipeShown = true
 
         Handler().postDelayed(
