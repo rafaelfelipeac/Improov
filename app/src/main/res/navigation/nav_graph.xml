@@ -11,7 +11,7 @@
             tools:layout="@layout/fragment_welcome">
 
         <action
-                android:id="@+id/action_navigation_welcome_to_navigation_list"
+                android:id="@+id/welcome_to_list"
                 app:destination="@id/navigation_list" />
 
     </fragment>
@@ -23,13 +23,13 @@
             tools:layout="@layout/fragment_list">
 
         <action
-                android:id="@+id/action_navigation_list_to_navigation_goal"
+                android:id="@+id/list_to_goal"
                 app:destination="@id/navigation_goal" />
         <action
-                android:id="@+id/action_navigation_list_to_navigation_add"
+                android:id="@+id/list_to_add"
                 app:destination="@id/navigation_add" />
         <action
-                android:id="@+id/action_navigation_list_to_navigation_goal_form"
+                android:id="@+id/list_to_goal_form"
                 app:destination="@id/navigation_goal_form" />
 
     </fragment>
@@ -62,7 +62,7 @@
                 app:argType="boolean" />
 
         <action
-                android:id="@+id/action_navigation_goal_to_navigation_goal_form"
+                android:id="@+id/goal_to_goal_form"
                 app:destination="@id/navigation_goal_form" />
 
     </fragment>
@@ -74,19 +74,19 @@
             tools:layout="@layout/fragment_profile">
 
         <action
-                android:id="@+id/action_navigation_profile_to_navigation_profile_edit"
+                android:id="@+id/profile_to_profile_edit"
                 app:destination="@id/navigation_profile_edit" />
         <action
-                android:id="@+id/action_navigation_profile_to_navigation_add"
+                android:id="@+id/profile_to_add"
                 app:destination="@id/navigation_add" />
         <action
-                android:id="@+id/action_navigation_profile_to_navigation_welcome"
+                android:id="@+id/profile_to_welcome"
                 app:destination="@id/navigation_welcome" />
         <action
-                android:id="@+id/action_navigation_profile_to_navigation_settings"
+                android:id="@+id/profile_to_settings"
                 app:destination="@id/navigation_settings" />
         <action
-                android:id="@+id/action_navigation_profile_to_navigation_goal_form"
+                android:id="@+id/profile_to_goal_form"
                 app:destination="@id/navigation_goal_form" />
 
     </fragment>
@@ -102,7 +102,7 @@
             android:name="com.rafaelfelipeac.improov.features.settings.presentation.settings.SettingsFragment"
             android:label="fragment_settings">
         <action
-                android:id="@+id/action_navigation_settings_to_navigation_settings_language"
+                android:id="@+id/settings_to_settings_language"
                 app:destination="@id/navigation_settings_language" />
     </fragment>
 

@@ -31,7 +31,7 @@ class SettingsFragment : BasePreferenceFragment() {
         return when (preference.key) {
             getString(R.string.settings_pref_key_language_message) -> {
                 navController.navigate(
-                    SettingsFragmentDirections.actionNavigationSettingsToNavigationSettingsLanguage()
+                    SettingsFragmentDirections.settingsToSettingsLanguage()
                 )
                 true
             }

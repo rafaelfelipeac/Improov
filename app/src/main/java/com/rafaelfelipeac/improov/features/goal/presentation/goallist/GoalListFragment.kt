@@ -72,7 +72,7 @@ class GoalListFragment : BaseFragment() {
         fab.setOnClickListener {
             hideBottomSheetTips()
 
-            navController.navigate(GoalListFragmentDirections.actionNavigationListToNavigationGoalForm())
+            navController.navigate(GoalListFragmentDirections.listToGoalForm())
         }
     }
 
@@ -118,7 +118,7 @@ class GoalListFragment : BaseFragment() {
 
         goalsAdapter.touchHelper = touchHelper
         goalsAdapter.clickListener = {
-            val action = GoalListFragmentDirections.actionNavigationListToNavigationGoal(it.goalId)
+            val action = GoalListFragmentDirections.listToGoal(it.goalId)
             navController.navigate(action)
         }
 

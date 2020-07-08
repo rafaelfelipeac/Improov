@@ -116,7 +116,7 @@ class GoalDetailFragment : BaseFragment() {
                 return true
             }
             R.id.menu_edit -> {
-                val action = GoalDetailFragmentDirections.actionNavigationGoalToNavigationGoalForm()
+                val action = GoalDetailFragmentDirections.goalToGoalForm()
                 action.goalId = goal?.goalId!!
                 navController.navigate(action)
             }

@@ -61,12 +61,12 @@ class WelcomeFragment : BaseFragment() {
 
     private fun observeViewModel() {
         viewModel.saved.observe(this) {
-            navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
+            navController.navigate(WelcomeFragmentDirections.welcomeToList())
         }
 
         viewModel.welcome.observe(this) {
             if (it) {
-                navController.navigate(WelcomeFragmentDirections.actionNavigationWelcomeToNavigationList())
+                navController.navigate(WelcomeFragmentDirections.welcomeToList())
             }
         }
     }

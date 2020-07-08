@@ -55,7 +55,7 @@ class ProfileFragment : BaseFragment() {
         fab.setOnClickListener {
             hideBottomSheetTips()
 
-            navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationGoalForm())
+            navController.navigate(ProfileFragmentDirections.profileToGoalForm())
         }
 
         profile_show_welcome_button.setOnClickListener {
@@ -65,17 +65,17 @@ class ProfileFragment : BaseFragment() {
         }
 
         profile_edit_profile_button.setOnClickListener {
-            navController.navigate(R.id.action_navigation_profile_to_navigation_profile_edit)
+            navController.navigate(ProfileFragmentDirections.profileToProfileEdit())
         }
 
         profile_settings_button.setOnClickListener {
-            navController.navigate(R.id.action_navigation_profile_to_navigation_settings)
+            navController.navigate(ProfileFragmentDirections.profileToSettings())
         }
     }
 
     private fun observeViewModel() {
         viewModel.saved.observe(this) {
-            navController.navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationWelcome())
+            navController.navigate(ProfileFragmentDirections.profileToWelcome())
         }
 
         viewModel.name.observe(this) {
