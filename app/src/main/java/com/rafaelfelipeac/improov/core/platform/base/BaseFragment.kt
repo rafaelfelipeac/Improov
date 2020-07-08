@@ -21,6 +21,7 @@ import com.rafaelfelipeac.improov.core.di.modules.viewModel.ViewModelFactory
 import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.extension.setMessageColor
+import com.rafaelfelipeac.improov.core.extension.setIcon
 import com.rafaelfelipeac.improov.core.extension.isEmpty
 import com.rafaelfelipeac.improov.core.extension.resetValue
 import com.rafaelfelipeac.improov.core.extension.convertDateToString
@@ -83,6 +84,7 @@ abstract class BaseFragment : Fragment() {
         Snackbar
             .make(requireView(), message, Snackbar.LENGTH_SHORT)
             .setMessageColor(R.color.colorPrimaryDarkOne)
+            .setIcon(resources, message == getString(R.string.goal_message_goal_done))
             .show()
     }
 

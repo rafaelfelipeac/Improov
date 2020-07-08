@@ -1,5 +1,7 @@
 <resources>
     <dimen name="dimens_radius_outline">30dp</dimen>
 
+    <dimen name="dimens_snackbar_icon">8dp</dimen>
+
     <dimen name="edit_text_single_divide_and_conquer">80dp</dimen>
 </resources>

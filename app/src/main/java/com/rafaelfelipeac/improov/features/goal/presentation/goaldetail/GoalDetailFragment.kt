@@ -178,9 +178,6 @@ class GoalDetailFragment : BaseFragment() {
         goal_btn_counter_inc.setOnClickListener {
             count += goal?.incrementValue!!
 
-            val oldDone = goal!!.done
-            goal?.done = verifyIfGoalIsDone()
-
             viewModel.saveHistoric(
                 Historic(
                     value = goal?.incrementValue!!,
@@ -188,15 +185,10 @@ class GoalDetailFragment : BaseFragment() {
                     goalId = goal?.goalId!!
                 )
             )
-
-            verifyIfWasDone(oldDone)
         }
 
         goal_btn_counter_dec.setOnClickListener {
             count -= goal?.decrementValue!!
-
-            val oldDone = goal!!.done
-            goal?.done = verifyIfGoalIsDone()
 
             viewModel.saveHistoric(
                 Historic(
@@ -205,16 +197,11 @@ class GoalDetailFragment : BaseFragment() {
                     goalId = goal?.goalId!!
                 )
             )
-
-            verifyIfWasDone(oldDone)
         }
 
         goal_button_save.setOnClickListener {
             if (goal_total_total.isNotEmpty()) {
                 count = goal?.value!! + goal_total_total.toFloat()
-
-                val oldDone = goal!!.done
-                goal?.done = verifyIfGoalIsDone()
 
                 viewModel.saveHistoric(
                     Historic(
@@ -225,21 +212,10 @@ class GoalDetailFragment : BaseFragment() {
                 )
 
                 goal_total_total.resetValue()
-
-                verifyIfWasDone(oldDone)
             } else {
                 showSnackBarLong(getString(R.string.goal_message_goal_value_invalid))
             }
         }
-    }
-
-    private fun onScoreFromList(done: Boolean) {
-        if (done) count++ else count--
-
-        val oldDone = goal!!.done
-        goal?.done = verifyIfGoalIsDone()
-
-        verifyIfWasDone(oldDone)
     }
 
     private fun setupGoal() {
@@ -327,7 +303,10 @@ class GoalDetailFragment : BaseFragment() {
 
     private fun updateGoal() {
         goal?.value = count
+
+        val oldDone = goal!!.done
         goal?.done = verifyIfGoalIsDone()
+        verifyIfWasDone(oldDone)
     }
 
     private fun getTextViewFromGoalType(): TextView {
@@ -571,14 +550,14 @@ class GoalDetailFragment : BaseFragment() {
 
                     viewModel.saveItem(item)
 
-                    onScoreFromList(false)
+                    count--
                 } else {
                     item.done = true
                     item.doneDate = getCurrentTime()
 
                     viewModel.saveItem(item)
 
-                    onScoreFromList(true)
+                    count++
                 }
             }
             ItemTouchHelper.LEFT -> {
