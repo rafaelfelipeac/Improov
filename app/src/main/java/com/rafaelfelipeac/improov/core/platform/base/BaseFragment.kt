@@ -200,6 +200,7 @@ abstract class BaseFragment : Fragment() {
         if (item != null) {
             bottomSheetItemTitle.text = getString(R.string.item_title_edit)
             bottomSheetItemName.setText(item.name)
+            bottomSheetItemName.setSelection(bottomSheetItemName.text?.length!!)
 
             if (item.done) {
                 bottomSheetItemDate.text = String.format(
