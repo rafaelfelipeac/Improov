@@ -185,6 +185,8 @@ class GoalDetailFragment : BaseFragment() {
                     goalId = goal?.goalId!!
                 )
             )
+
+            updateGoal()
         }
 
         goal_btn_counter_dec.setOnClickListener {
@@ -197,6 +199,8 @@ class GoalDetailFragment : BaseFragment() {
                     goalId = goal?.goalId!!
                 )
             )
+
+            updateGoal()
         }
 
         goal_button_save.setOnClickListener {
@@ -210,6 +214,8 @@ class GoalDetailFragment : BaseFragment() {
                         goalId = goal?.goalId!!
                     )
                 )
+
+                updateGoal()
 
                 goal_total_total.resetValue()
             } else {
@@ -291,7 +297,6 @@ class GoalDetailFragment : BaseFragment() {
 
     private fun updateTextAndGoal() {
         updateText(getTextViewFromGoalType())
-        updateGoal()
 
         viewModel.saveGoal(goal!!)
     }
@@ -551,6 +556,8 @@ class GoalDetailFragment : BaseFragment() {
                     viewModel.saveItem(item)
 
                     count--
+
+                    updateGoal()
                 } else {
                     item.done = true
                     item.doneDate = getCurrentTime()
@@ -558,6 +565,8 @@ class GoalDetailFragment : BaseFragment() {
                     viewModel.saveItem(item)
 
                     count++
+
+                    updateGoal()
                 }
             }
             ItemTouchHelper.LEFT -> {
