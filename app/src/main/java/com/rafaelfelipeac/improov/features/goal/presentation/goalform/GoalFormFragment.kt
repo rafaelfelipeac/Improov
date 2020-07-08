@@ -81,42 +81,6 @@ class GoalFormFragment : BaseFragment() {
         observeViewModel()
     }
 
-    private fun setupLayout() {
-        goal_form_divide_and_conquest_help.setOnClickListener {
-            hideSoftKeyboard()
-            setupBottomSheetTipsDivideAndConquer()
-            setupBottomSheetTip()
-            showBottomSheetTips()
-        }
-
-        goal_form_type_help.setOnClickListener {
-            hideSoftKeyboard()
-            setupBottomSheetTipsGoalType()
-            setupBottomSheetTip()
-            showBottomSheetTips()
-        }
-    }
-
-    private fun observeViewModel() {
-        viewModel.savedGoal.observe(this) {
-            navController.navigateUp()
-        }
-
-        viewModel.goal.observe(this) {
-            goal = it
-
-            setupGoal()
-        }
-
-        viewModel.goals.observe(this) {
-            goalsSize = it.size
-        }
-
-        viewModel.firstTimeAdd.observe(this) {
-            firstTimeAdd = it
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_save, menu)
 
@@ -154,6 +118,42 @@ class GoalFormFragment : BaseFragment() {
         }
 
         return false
+    }
+
+    private fun setupLayout() {
+        goal_form_divide_and_conquest_help.setOnClickListener {
+            hideSoftKeyboard()
+            setupBottomSheetTipsDivideAndConquer()
+            setupBottomSheetTip()
+            showBottomSheetTips()
+        }
+
+        goal_form_type_help.setOnClickListener {
+            hideSoftKeyboard()
+            setupBottomSheetTipsGoalType()
+            setupBottomSheetTip()
+            showBottomSheetTips()
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.savedGoal.observe(this) {
+            navController.navigateUp()
+        }
+
+        viewModel.goal.observe(this) {
+            goal = it
+
+            setupGoal()
+        }
+
+        viewModel.goals.observe(this) {
+            goalsSize = it.size
+        }
+
+        viewModel.firstTimeAdd.observe(this) {
+            firstTimeAdd = it
+        }
     }
 
     private fun setSwitchImproov() {
