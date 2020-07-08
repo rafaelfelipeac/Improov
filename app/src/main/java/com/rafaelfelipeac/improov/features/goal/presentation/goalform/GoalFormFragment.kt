@@ -93,14 +93,14 @@ class GoalFormFragment : BaseFragment() {
                 when {
                     checkIfAnyFieldsAreEmptyOrZero() -> { }
                     getGoalTypeSelected() == GoalType.GOAL_NONE -> {
-                        showSnackBarLong(getString(R.string.goal_form_empty_type_goal))
+                        showSnackBar(getString(R.string.goal_form_empty_type_goal))
 
                         hideSoftKeyboard()
                         goal_form_type_title.isFocusableInTouchMode = true
                         goal_form_type_title.requestFocus()
                     }
                     !validateDivideAndConquerValues() -> {
-                        showSnackBarLong(getString(R.string.goal_form_gold_silver_bronze_order))
+                        showSnackBar(getString(R.string.goal_form_gold_silver_bronze_order))
 
                         goal_form_bronze_value.requestFocus()
                     }

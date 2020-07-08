@@ -82,16 +82,9 @@ abstract class BaseFragment : Fragment() {
 
     fun showSnackBar(message: String) {
         Snackbar
-            .make(requireView(), message, Snackbar.LENGTH_SHORT)
-            .setMessageColor(R.color.colorPrimaryDarkOne)
-            .setIcon(resources, message == getString(R.string.goal_message_goal_done))
-            .show()
-    }
-
-    fun showSnackBarLong(message: String) {
-        Snackbar
             .make(requireView(), message, Snackbar.LENGTH_LONG)
             .setMessageColor(R.color.colorPrimaryDarkOne)
+            .setIcon(resources, message == getString(R.string.goal_message_goal_done))
             .show()
     }
 

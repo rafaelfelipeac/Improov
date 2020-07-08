@@ -219,7 +219,7 @@ class GoalDetailFragment : BaseFragment() {
 
                 goal_total_total.resetValue()
             } else {
-                showSnackBarLong(getString(R.string.goal_message_goal_value_invalid))
+                showSnackBar(getString(R.string.goal_message_goal_value_invalid))
             }
         }
     }
