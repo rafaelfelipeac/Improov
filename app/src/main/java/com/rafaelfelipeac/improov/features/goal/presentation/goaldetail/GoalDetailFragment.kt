@@ -25,7 +25,6 @@ import com.rafaelfelipeac.improov.core.extension.isNotEmpty
 import com.rafaelfelipeac.improov.core.extension.enableIcon
 import com.rafaelfelipeac.improov.core.extension.disableIcon
 import com.rafaelfelipeac.improov.core.extension.vibrate
-import com.rafaelfelipeac.improov.core.extension.isVisible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
@@ -50,6 +49,7 @@ class GoalDetailFragment : BaseFragment() {
     private var goal: Goal? = null
     private var item: Item? = null
     private var itemsSize: Int? = null
+    private var historicsSize: Int? = null
 
     private var count: Float = 0F
 
@@ -138,9 +138,6 @@ class GoalDetailFragment : BaseFragment() {
         viewModel.goal.observe(this) {
             goal = it
             setupGoal()
-
-            viewModel.getItems()
-            viewModel.getHistorics()
         }
 
         viewModel.savedItem.observe(this) {
@@ -153,7 +150,7 @@ class GoalDetailFragment : BaseFragment() {
             itemsSize = it.size
 
             it.let { itemsAdapter.setItems(it) }
-            setupItems(it.isNotEmpty())
+            setupItems()
         }
 
         viewModel.savedHistoric.observe(this) {
@@ -163,8 +160,10 @@ class GoalDetailFragment : BaseFragment() {
         }
 
         viewModel.historics.observe(this) {
+            historicsSize = it.size
+
             it.let { historicAdapter.setItems(it) }
-            setupHistoric(it.isNotEmpty())
+            setupHistoric()
         }
     }
 
@@ -299,6 +298,9 @@ class GoalDetailFragment : BaseFragment() {
             GoalType.GOAL_NONE -> { }
         }
 
+        setupItems()
+        setupHistoric()
+
         if (isTheFirstTime()) {
             resetSingleOrDivideAndConquer()
         }
@@ -341,21 +343,25 @@ class GoalDetailFragment : BaseFragment() {
         }
     }
 
-    private fun setupItems(visible: Boolean) {
+    private fun setupItems() {
         if (goal?.type == GoalType.GOAL_LIST) {
-            setItems()
-
-            goal_items_list.isVisible(visible)
-            goal_items_placeholder.isVisible(!visible)
+            if (itemsSize != null && itemsSize!! > 0) {
+                setItems()
+                goal_items_placeholder.invisible()
+            } else {
+                goal_items_placeholder.visible()
+            }
         }
     }
 
-    private fun setupHistoric(visible: Boolean) {
+    private fun setupHistoric() {
         if (goal?.type == GoalType.GOAL_FINAL || goal?.type == GoalType.GOAL_COUNTER) {
-            setHistory()
-
-            goal_historics_list.isVisible(visible)
-            goal_historics_placeholder.isVisible(!visible)
+            if (historicsSize != null && historicsSize!! > 0) {
+                setHistory()
+                goal_historics_placeholder.invisible()
+            } else {
+                goal_historics_placeholder.visible()
+            }
         }
     }
 

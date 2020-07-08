@@ -112,14 +112,6 @@ class GoalFormFragment : BaseFragment() {
             goalsSize = it.size
         }
 
-        viewModel.savedFirstTimeList.observe(this) {
-            // ???
-        }
-
-        viewModel.savedFirstTimeAdd.observe(this) {
-            // ???
-        }
-
         viewModel.firstTimeAdd.observe(this) {
             firstTimeAdd = it
         }

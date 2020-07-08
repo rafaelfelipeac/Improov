@@ -48,6 +48,9 @@ class GoalDetailViewModel @Inject constructor(
     override fun loadData() {
         if (goalId > 0L) {
             getGoal()
+
+            getItems()
+            getHistorics()
         }
     }
 
