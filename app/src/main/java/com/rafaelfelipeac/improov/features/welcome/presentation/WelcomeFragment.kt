@@ -63,12 +63,6 @@ class WelcomeFragment : BaseFragment() {
         viewModel.saved.observe(this) {
             navController.navigate(WelcomeFragmentDirections.welcomeToList())
         }
-
-        viewModel.welcome.observe(this) {
-            if (it) {
-                navController.navigate(WelcomeFragmentDirections.welcomeToList())
-            }
-        }
     }
 
     fun showStartButton() {

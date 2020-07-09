@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.welcome.data.repository
+package com.rafaelfelipeac.improov.features.splash.data.repository
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
@@ -6,8 +6,8 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.BDDMockito.given
 import org.mockito.Mock
-import org.mockito.Mockito.doNothing
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -24,18 +24,19 @@ class WelcomeRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a saved new boolean value WHEN Get is called THEN the new boolean value must be returned`() {
+    fun `GIVEN a boolean value WHEN Get is called THEN return the same boolean value`() {
         runBlocking {
             // given
-            val booleanValue = true
+            val booleanValue = false
 
-            doNothing().`when`(preferences).welcome = booleanValue
+            given(preferences.welcome)
+                .willReturn(booleanValue)
 
             // when
-            val resultOfSave = welcomeRepositoryImpl.save(booleanValue)
+            val result = welcomeRepositoryImpl.getWelcome()
 
             // then
-            resultOfSave shouldBeEqualTo Unit
+            result shouldBeEqualTo booleanValue
         }
     }
 }

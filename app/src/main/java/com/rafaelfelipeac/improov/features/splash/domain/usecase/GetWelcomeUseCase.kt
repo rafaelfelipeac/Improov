@@ -1,6 +1,6 @@
-package com.rafaelfelipeac.improov.features.welcome.domain.usecase
+package com.rafaelfelipeac.improov.features.splash.domain.usecase
 
-import com.rafaelfelipeac.improov.features.welcome.domain.repository.WelcomeRepository
+import com.rafaelfelipeac.improov.features.splash.domain.repository.WelcomeRepository
 import javax.inject.Inject
 
 class GetWelcomeUseCase @Inject constructor(

@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        app:startDestination="@id/navigation_welcome">
+        app:startDestination="@id/navigation_splash">
 
     <fragment
             android:id="@+id/navigation_welcome"
@@ -101,6 +101,7 @@
             android:id="@+id/navigation_settings"
             android:name="com.rafaelfelipeac.improov.features.settings.presentation.settings.SettingsFragment"
             android:label="fragment_settings">
+
         <action
                 android:id="@+id/settings_to_settings_language"
                 app:destination="@id/navigation_settings_language" />
@@ -110,5 +111,20 @@
             android:id="@+id/navigation_settings_language"
             android:name="com.rafaelfelipeac.improov.features.settings.presentation.settingslanguage.SettingsLanguageFragment"
             android:label="fragment_settings_language" />
+
+    <fragment
+            android:id="@+id/navigation_splash"
+            android:name="com.rafaelfelipeac.improov.features.splash.presentation.SplashFragment"
+            android:label="fragment_splash"
+            tools:layout="@layout/fragment_splash" >
+
+        <action
+                android:id="@+id/splash_to_welcome"
+                app:destination="@id/navigation_welcome" />
+        <action
+                android:id="@+id/splash_to_list"
+                app:destination="@id/navigation_list" />
+
+    </fragment>
 
 </navigation>

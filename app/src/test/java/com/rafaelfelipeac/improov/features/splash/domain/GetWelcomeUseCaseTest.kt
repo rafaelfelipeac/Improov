@@ -1,7 +1,8 @@
-package com.rafaelfelipeac.improov.features.welcome.domain.usecase
+package com.rafaelfelipeac.improov.features.splash.domain
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
-import com.rafaelfelipeac.improov.features.welcome.domain.repository.WelcomeRepository
+import com.rafaelfelipeac.improov.features.splash.domain.repository.WelcomeRepository
+import com.rafaelfelipeac.improov.features.splash.domain.usecase.GetWelcomeUseCase
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -20,7 +21,10 @@ class GetWelcomeUseCaseTest {
 
     @Before
     fun setup() {
-        getWelcomeUseCase = GetWelcomeUseCase(mockWelcomeRepository)
+        getWelcomeUseCase =
+            GetWelcomeUseCase(
+                mockWelcomeRepository
+            )
     }
 
     @Test

@@ -1,9 +1,9 @@
-package com.rafaelfelipeac.improov.features.welcome.presentation
+package com.rafaelfelipeac.improov.features.splash.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.rafaelfelipeac.improov.base.CoroutineRule
 import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
-import com.rafaelfelipeac.improov.features.welcome.domain.usecase.SaveWelcomeUseCase
+import com.rafaelfelipeac.improov.features.splash.domain.usecase.GetWelcomeUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -15,7 +15,7 @@ import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class WelcomeViewModelTest {
+class SplashViewModelTest {
 
     @ExperimentalCoroutinesApi
     @get:Rule
@@ -24,29 +24,29 @@ class WelcomeViewModelTest {
     @get:Rule
     var rule = InstantTaskExecutorRule()
 
-    private var mockSaveWelcomeUseCase = mock(SaveWelcomeUseCase::class.java)
+    private var mockGetWelcomeUseCase = mock(GetWelcomeUseCase::class.java)
 
-    private lateinit var welcomeViewModel: WelcomeViewModel
+    private lateinit var splashViewModel: SplashViewModel
 
     @Before
     fun setup() {
-        welcomeViewModel = WelcomeViewModel(
-            mockSaveWelcomeUseCase
+        splashViewModel = SplashViewModel(
+            mockGetWelcomeUseCase
         )
     }
 
     @Test
-    fun `GIVEN saveWelcome is successful WHEN onSaveWelcome is called THEN a Unit is returned`() {
+    fun `GIVEN getWelcome is successful WHEN loadData is called THEN false is returned`() {
         // given
-        val booleanValue = true
+        val booleanValue = false
 
-        given(runBlocking { mockSaveWelcomeUseCase(booleanValue) })
-            .willReturn(Unit)
+        given(runBlocking { mockGetWelcomeUseCase() })
+            .willReturn(booleanValue)
 
         // when
-        welcomeViewModel.saveWelcome(booleanValue)
+        splashViewModel.loadData()
 
         // then
-        welcomeViewModel.saved.value shouldBeEqualTo Unit
+        splashViewModel.welcome.value shouldBeEqualTo booleanValue
     }
 }
