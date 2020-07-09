@@ -33,15 +33,6 @@ class GoalListFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         injector.inject(this)
-
-        setHasOptionsMenu(true)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        main.closeToolbar()
-        hideBottomSheetTips()
     }
 
     override fun onCreateView(
@@ -50,10 +41,7 @@ class GoalListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        main.supportActionBar?.title = getString(R.string.list_title)
-
-        showNavigation()
+        setScreen()
 
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
@@ -66,6 +54,12 @@ class GoalListFragment : BaseFragment() {
         setupLayout()
         setupBottomSheetGoal()
         observeViewModel()
+    }
+
+    private fun setScreen() {
+        hideToolbar()
+        showNavigation()
+        hideBottomSheetTips()
     }
 
     private fun setupLayout() {

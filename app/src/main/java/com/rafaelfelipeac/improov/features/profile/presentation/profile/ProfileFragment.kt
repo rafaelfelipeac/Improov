@@ -21,23 +21,13 @@ class ProfileFragment : BaseFragment() {
         injector.inject(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        main.closeToolbar()
-        hideBottomSheetTips()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        main.supportActionBar?.title = getString(R.string.profile_title)
-
-        showNavigation()
+        setScreen()
 
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
@@ -49,6 +39,12 @@ class ProfileFragment : BaseFragment() {
 
         setupLayout()
         observeViewModel()
+    }
+
+    private fun setScreen() {
+        hideToolbar()
+        showNavigation()
+        hideBottomSheetTips()
     }
 
     private fun setupLayout() {

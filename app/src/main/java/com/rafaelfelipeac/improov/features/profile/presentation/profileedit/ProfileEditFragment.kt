@@ -19,8 +19,6 @@ class ProfileEditFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         injector.inject(this)
-
-        main.openToolbar()
     }
 
     override fun onCreateView(
@@ -29,10 +27,7 @@ class ProfileEditFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        main.supportActionBar?.title = getString(R.string.profile_edit_title)
-
-        hideNavigation()
+        setScreen()
 
         return inflater.inflate(R.layout.fragment_profile_edit, container, false)
     }
@@ -44,6 +39,12 @@ class ProfileEditFragment : BaseFragment() {
 
         setupLayout()
         observeViewModel()
+    }
+
+    private fun setScreen() {
+        setTitle(getString(R.string.profile_edit_title))
+        showBackArrow()
+        hideNavigation()
     }
 
     private fun setupLayout() {

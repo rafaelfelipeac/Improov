@@ -27,8 +27,8 @@ class SettingsLanguageFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        main.supportActionBar?.title = getString(R.string.settings_language_language_title)
+
+        setScreen()
 
         return inflater.inflate(R.layout.fragment_settings_language, container, false)
     }
@@ -37,6 +37,11 @@ class SettingsLanguageFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observeViewModel()
+    }
+
+    private fun setScreen() {
+        setTitle(getString(R.string.settings_language_language_title))
+        showBackArrow()
     }
 
     private fun observeViewModel() {

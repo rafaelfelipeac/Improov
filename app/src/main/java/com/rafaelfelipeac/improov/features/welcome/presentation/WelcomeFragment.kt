@@ -29,12 +29,7 @@ class WelcomeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        main.supportActionBar?.title = getString(R.string.welcome_title)
-
-        hideNavigation()
-
-        main.closeToolbar()
+        setScreen()
 
         return inflater.inflate(R.layout.fragment_welcome, container, false)
     }
@@ -44,6 +39,11 @@ class WelcomeFragment : BaseFragment() {
 
         setupLayout()
         observeViewModel()
+    }
+
+    private fun setScreen() {
+        hideToolbar()
+        hideNavigation()
     }
 
     private fun setupLayout() {

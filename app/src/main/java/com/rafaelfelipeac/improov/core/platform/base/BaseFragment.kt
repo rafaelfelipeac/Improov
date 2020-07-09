@@ -43,11 +43,8 @@ abstract class BaseFragment : Fragment() {
     val main get() = (activity as MainActivity)
 
     val fab get() = main.fab
-
     val navController get() = main.navController
-
     private val navLayout get() = main.navLayout
-
     private val fakeBottomNav get() = main.fakeBottomNav
 
     private lateinit var bottomSheetGoal: BottomSheetDialog
@@ -78,6 +75,23 @@ abstract class BaseFragment : Fragment() {
     fun hideNavigation() {
         navLayout.gone()
         fakeBottomNav.gone()
+    }
+
+    fun hideToolbar() = main.supportActionBar?.hide()
+
+    fun showBackArrow() {
+        main.supportActionBar?.show()
+        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    }
+
+    fun setTitle(title: String) {
+        main.supportActionBar?.show()
+        main.supportActionBar?.title = title
+    }
+
+    fun hasMenu() {
+        main.supportActionBar?.show()
+        setHasOptionsMenu(true)
     }
 
     fun showSnackBar(message: String) {

@@ -116,6 +116,9 @@
     <string name="settings_language_key_portuguese">pt_br</string>
     <string name="settings_language_key_english">en</string>
 
+    <!-- Splash -->
+    <string name="splash_title">Splash</string>
+
     <!-- Stats -->
 
     <!-- Today -->

@@ -60,10 +60,6 @@ class GoalDetailFragment : BaseFragment() {
 
         injector.inject(this)
 
-        setHasOptionsMenu(true)
-
-        main.openToolbar()
-
         goalId = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalId }
         goalNew = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalNew }
     }
@@ -79,10 +75,8 @@ class GoalDetailFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        main.supportActionBar?.title = getString(R.string.goal_title)
 
-        hideNavigation()
+        setScreen()
 
         return inflater.inflate(R.layout.fragment_goal, container, false)
     }
@@ -128,6 +122,13 @@ class GoalDetailFragment : BaseFragment() {
         }
 
         return false
+    }
+
+    private fun setScreen() {
+        setTitle(getString(R.string.goal_title))
+        showBackArrow()
+        hasMenu()
+        hideNavigation()
     }
 
     private fun observeViewModel() {

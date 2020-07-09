@@ -23,12 +23,8 @@ class SplashFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        main.supportActionBar?.title = ""
 
-        hideNavigation()
-
-        main.closeToolbar()
+        setScreen()
 
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
@@ -39,6 +35,11 @@ class SplashFragment : BaseFragment() {
         viewModel.loadData()
 
         observeViewModel()
+    }
+
+    private fun setScreen() {
+        hideToolbar()
+        hideNavigation()
     }
 
     private fun observeViewModel() {

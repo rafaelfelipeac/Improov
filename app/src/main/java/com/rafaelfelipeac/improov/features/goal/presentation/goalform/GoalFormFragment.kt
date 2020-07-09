@@ -43,8 +43,6 @@ class GoalFormFragment : BaseFragment() {
         injector.inject(this)
 
         goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goalId }
-
-        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -53,11 +51,7 @@ class GoalFormFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        main.supportActionBar?.title = getString(R.string.goal_form_title)
-        main.toolbar.inflateMenu(R.menu.menu_save)
-
-        hideNavigation()
+        setScreen()
 
         return inflater.inflate(R.layout.fragment_goal_form, container, false)
     }
@@ -74,8 +68,6 @@ class GoalFormFragment : BaseFragment() {
 
         setRadioButtonType()
         setSwitchImproov()
-
-        main.openToolbar()
 
         setupLayout()
         observeViewModel()
@@ -118,6 +110,13 @@ class GoalFormFragment : BaseFragment() {
         }
 
         return false
+    }
+
+    private fun setScreen() {
+        setTitle(getString(R.string.goal_form_title))
+        showBackArrow()
+        hasMenu()
+        hideNavigation()
     }
 
     private fun setupLayout() {
