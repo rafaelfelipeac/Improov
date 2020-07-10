@@ -113,7 +113,12 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setScreen() {
-        setTitle(getString(R.string.goal_form_title))
+        if (goalId!! == 0L) {
+            setTitle(getString(R.string.goal_form_title_new))
+        } else {
+            setTitle(getString(R.string.goal_form_title_update))
+        }
+
         showBackArrow()
         hasMenu()
         hideNavigation()
