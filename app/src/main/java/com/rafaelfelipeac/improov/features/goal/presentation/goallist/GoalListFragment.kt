@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.isVisible
+import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.vibrate
 import com.rafaelfelipeac.improov.core.extension.getPercentage
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import kotlinx.android.synthetic.main.fragment_list.*
+import kotlinx.android.synthetic.main.fragment_goal_list.*
 
 const val PERCENTAGE_MAX = 100
 const val SECONDS_BOTTOM_SHEET = 1000L
@@ -43,7 +44,7 @@ class GoalListFragment : BaseFragment() {
 
         setScreen()
 
-        return inflater.inflate(R.layout.fragment_list, container, false)
+        return inflater.inflate(R.layout.fragment_goal_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,10 +96,12 @@ class GoalListFragment : BaseFragment() {
     }
 
     private fun setupGoals(visible: Boolean = true) {
-        setGoals()
+            setGoals()
 
-        list_list.isVisible(visible)
-        list_placeholder.isVisible(!visible)
+            goal_list_loading.gone()
+
+            goal_list_list.isVisible(visible)
+            goal_list_placeholder.isVisible(!visible)
     }
 
     private fun setGoals() {
@@ -108,7 +111,7 @@ class GoalListFragment : BaseFragment() {
             )
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        touchHelper.attachToRecyclerView(list_list)
+        touchHelper.attachToRecyclerView(goal_list_list)
 
         goalsAdapter.touchHelper = touchHelper
         goalsAdapter.clickListener = {
@@ -116,7 +119,7 @@ class GoalListFragment : BaseFragment() {
             navController.navigate(action)
         }
 
-        list_list.apply {
+        goal_list_list.apply {
             setHasFixedSize(true)
 
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

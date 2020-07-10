@@ -8,6 +8,7 @@
         tools:context=".features.goal.presentation.goallist.GoalListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/goal_list_constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
@@ -18,13 +19,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/list_placeholder"
+                android:id="@+id/goal_list_placeholder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible">
+                android:visibility="gone">
 
             <ImageView
-                    android:id="@+id/list_placeholder_image"
+                    android:id="@+id/goal_list_placeholder_image"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginStart="8dp"
@@ -50,19 +51,19 @@
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/list_placeholder_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/goal_list_placeholder_image" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list_list"
+                android:id="@+id/goal_list_list"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
                 android:overScrollMode="never"
                 android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/list_placeholder"
-                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintBottom_toBottomOf="@+id/goal_list_placeholder"
+                app:layout_constraintBottom_toTopOf="@+id/goal_list_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +71,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
         <View
-                android:id="@+id/view"
+                android:id="@+id/goal_list_view"
                 android:layout_width="wrap_content"
                 android:layout_height="4dp"
                 android:layout_marginStart="4dp"
@@ -79,8 +80,17 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/list_list" />
+                app:layout_constraintTop_toBottomOf="@+id/goal_list_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+            android:id="@+id/goal_list_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/goal_list_constraintLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
