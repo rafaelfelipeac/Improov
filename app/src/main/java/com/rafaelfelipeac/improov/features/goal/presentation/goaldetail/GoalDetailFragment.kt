@@ -40,6 +40,8 @@ class GoalDetailFragment : BaseFragment() {
     private var itemsAdapter = ItemsAdapter(this)
     private var historicAdapter = HistoricAdapter()
 
+    private var swipedPosition: Int = 0
+
     private var seriesSingle: Int = 0
     private var seriesBronze: Int = 0
     private var seriesSilver: Int = 0
@@ -143,7 +145,7 @@ class GoalDetailFragment : BaseFragment() {
         }
 
         viewModel.savedItem.observe(this) {
-            viewModel.getItems()
+            reloadItemAfterSwipe()
 
             updateTextAndGoal()
         }
@@ -324,8 +326,7 @@ class GoalDetailFragment : BaseFragment() {
             GoalType.GOAL_COUNTER -> {
                 goal_detail_counter_total
             }
-            GoalType.GOAL_NONE -> TODO()
-            else -> TODO()
+            else -> goal_detail_count
         }
     }
 
@@ -553,22 +554,18 @@ class GoalDetailFragment : BaseFragment() {
     ) {
         val item = items[position]
 
+        swipedPosition = position
+
         when (direction) {
             ItemTouchHelper.RIGHT -> {
                 if (item.done) {
-                    item.done = false
-                    item.undoneDate = getCurrentTime()
-
-                    viewModel.saveItem(item)
+                    doneOrUndoneItem(item)
 
                     count--
 
                     updateGoal()
                 } else {
-                    item.done = true
-                    item.doneDate = getCurrentTime()
-
-                    viewModel.saveItem(item)
+                    doneOrUndoneItem(item)
 
                     count++
 
@@ -576,6 +573,7 @@ class GoalDetailFragment : BaseFragment() {
                 }
             }
             ItemTouchHelper.LEFT -> {
+                reloadItemAfterSwipe()
 //                setupItems()
 //                item.deleteDate = getCurrentTime()
 //
@@ -585,6 +583,17 @@ class GoalDetailFragment : BaseFragment() {
 //                    holder.itemView, getString(R.string.habit_item_swiped_deleted), item, ::deleteItem)
             }
         }
+    }
+
+    private fun doneOrUndoneItem(item: Item) {
+        item.done = !item.done
+        item.undoneDate = getCurrentTime()
+
+        viewModel.saveItem(item)
+    }
+
+    private fun reloadItemAfterSwipe() {
+        itemsAdapter.updateItem(swipedPosition)
     }
 
     private fun deleteItem(item: Any) {

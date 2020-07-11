@@ -154,7 +154,8 @@ abstract class BaseFragment : Fragment() {
 
     fun showBottomSheetGoal(
         goal: Goal,
-        functionYes: (goal: Goal) -> Unit
+        functionYes: (goal: Goal) -> Unit,
+        functionToReload: () -> Unit
     ) {
         bottomSheetGoal.show()
 
@@ -164,7 +165,12 @@ abstract class BaseFragment : Fragment() {
         }
 
         bottomSheetGoalNo.setOnClickListener {
+            functionToReload()
             hideBottomSheetGoal()
+        }
+
+        bottomSheetGoal.setOnDismissListener {
+            functionToReload()
         }
     }
 

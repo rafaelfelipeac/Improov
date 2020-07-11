@@ -27,6 +27,7 @@ class GoalListFragment : BaseFragment() {
     private var goalsAdapter = GoalListAdapter(this)
 
     private var swipeShown = false
+    private var swipedPosition: Int = 0
 
     private val viewModel by lazy { viewModelFactory.get<GoalListViewModel>(this) }
 
@@ -73,8 +74,7 @@ class GoalListFragment : BaseFragment() {
 
     private fun observeViewModel() {
         viewModel.savedGoal.observe(this) {
-            setupGoals()
-            // or update only the goal with the goalId (it)
+            reloadGoalAfterSwipe()
         }
 
         viewModel.goals.observe(this) {
@@ -158,16 +158,18 @@ class GoalListFragment : BaseFragment() {
     ) {
         val goal = items[position]
 
+        swipedPosition = position
+
         when (direction) {
             ItemTouchHelper.RIGHT -> {
                 if (goal.done || goal.getPercentage() >= PERCENTAGE_MAX) {
                     doneOrUndoneGoal(goal)
                 } else {
-                    setupGoals()
-                    showBottomSheetGoal(goal, ::doneOrUndoneGoal)
+                    showBottomSheetGoal(goal, ::doneOrUndoneGoal, ::reloadGoalAfterSwipe)
                 }
             }
             ItemTouchHelper.LEFT -> {
+                reloadGoalAfterSwipe()
 //                goal.archived = true
 //                        goal.archiveDate = getCurrentTime()
 //
@@ -184,6 +186,10 @@ class GoalListFragment : BaseFragment() {
         goal.undoneDate = getCurrentTime()
 
         viewModel.saveGoal(goal)
+    }
+
+    private fun reloadGoalAfterSwipe() {
+        goalsAdapter.updateGoal(swipedPosition)
     }
 
     private fun archiveGoal(goal: Any) {
