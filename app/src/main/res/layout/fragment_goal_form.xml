@@ -171,7 +171,7 @@
                                 android:layout_height="70dp"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginEnd="8dp"
-                                android:background="@mipmap/ic_bronze"
+                                android:background="@mipmap/ic_trophy_bronze"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -223,7 +223,7 @@
                                 android:layout_height="70dp"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginEnd="8dp"
-                                android:background="@mipmap/ic_silver"
+                                android:background="@mipmap/ic_trophy_silver"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -272,7 +272,7 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_marginEnd="8dp"
-                                android:background="@mipmap/ic_gold"
+                                android:background="@mipmap/ic_trophy_gold"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />

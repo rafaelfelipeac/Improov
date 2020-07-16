@@ -145,9 +145,11 @@ class GoalDetailFragment : BaseFragment() {
         }
 
         viewModel.savedItem.observe(this) {
-            reloadItemAfterSwipe()
+            viewModel.getItems()
 
             updateTextAndGoal()
+
+            reloadItemAfterSwipe()
         }
 
         viewModel.items.observe(this) {
@@ -426,23 +428,23 @@ class GoalDetailFragment : BaseFragment() {
                 resetDivideAndConquerSilver()
 
                 if (goal?.value == goal?.bronzeValue!!) {
-                    enableIcon(goal_detail_divide_and_conquer_bronze_image, R.mipmap.ic_bronze)
+                    enableIcon(goal_detail_divide_and_conquer_bronze_image, R.mipmap.ic_trophy_bronze)
                 } else {
-                    disableIcon(goal_detail_divide_and_conquer_bronze_image, R.mipmap.ic_bronze_dark)
+                    disableIcon(goal_detail_divide_and_conquer_bronze_image, R.mipmap.ic_trophy_bronze_dark)
                 }
             }
             goal?.value!! > 0 && goal?.value!! <= goal?.silverValue!! -> {
                 setDivideAndConquerBronzeValue(goal?.bronzeValue!!)
                 setDivideAndConquerSilverValue(goal?.value!!)
 
-                enableIcon(goal_detail_divide_and_conquer_bronze_image, R.mipmap.ic_bronze)
+                enableIcon(goal_detail_divide_and_conquer_bronze_image, R.mipmap.ic_trophy_bronze)
 
                 resetDivideAndConquerGold()
 
                 if (goal?.value == goal?.silverValue!!) {
-                    enableIcon(goal_detail_divide_and_conquer_silver_image, R.mipmap.ic_silver)
+                    enableIcon(goal_detail_divide_and_conquer_silver_image, R.mipmap.ic_trophy_silver)
                 } else {
-                    disableIcon(goal_detail_divide_and_conquer_silver_image, R.mipmap.ic_silver_dark)
+                    disableIcon(goal_detail_divide_and_conquer_silver_image, R.mipmap.ic_trophy_silver_dark)
                 }
             }
             goal?.value!! > 0 && goal?.value!! <= goal?.goldValue!! -> {
@@ -450,13 +452,13 @@ class GoalDetailFragment : BaseFragment() {
                 setDivideAndConquerSilverValue(goal?.silverValue!!)
                 setDivideAndConquerGoldValue(goal?.value!!)
 
-                enableIcon(goal_detail_divide_and_conquer_bronze_image, R.mipmap.ic_bronze)
-                enableIcon(goal_detail_divide_and_conquer_silver_image, R.mipmap.ic_silver)
+                enableIcon(goal_detail_divide_and_conquer_bronze_image, R.mipmap.ic_trophy_bronze)
+                enableIcon(goal_detail_divide_and_conquer_silver_image, R.mipmap.ic_trophy_silver)
 
                 if (goal?.value == goal?.goldValue!!) {
-                    enableIcon(goal_detail_divide_and_conquer_gold_image, R.mipmap.ic_gold)
+                    enableIcon(goal_detail_divide_and_conquer_gold_image, R.mipmap.ic_trophy_gold)
                 } else {
-                    disableIcon(goal_detail_divide_and_conquer_gold_image, R.mipmap.ic_gold_dark)
+                    disableIcon(goal_detail_divide_and_conquer_gold_image, R.mipmap.ic_trophy_gold_dark)
                 }
             }
         }

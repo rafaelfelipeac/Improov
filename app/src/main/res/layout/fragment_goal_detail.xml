@@ -183,7 +183,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="22dp"
                             android:layout_marginEnd="8dp"
-                            android:background="@mipmap/ic_bronze_dark"
+                            android:background="@mipmap/ic_trophy_bronze_dark"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -229,7 +229,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="22dp"
                             android:layout_marginEnd="8dp"
-                            android:background="@mipmap/ic_silver_dark"
+                            android:background="@mipmap/ic_trophy_silver_dark"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -273,7 +273,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="22dp"
                             android:layout_marginEnd="8dp"
-                            android:background="@mipmap/ic_gold_dark"
+                            android:background="@mipmap/ic_trophy_gold_dark"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintStart_toStartOf="parent"
@@ -447,7 +447,7 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/goal_detail_total_total_hint"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@mipmap/ic_update"
+                        app:srcCompat="@drawable/ic_update"
                         app:tint="@color/colorPrimaryDarkTwo" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
