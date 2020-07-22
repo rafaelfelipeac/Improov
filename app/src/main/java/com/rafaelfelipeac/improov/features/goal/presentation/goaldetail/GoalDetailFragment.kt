@@ -403,7 +403,7 @@ class GoalDetailFragment : BaseFragment() {
 
     private fun updateSingle() {
         when {
-            goal?.value!! == 0F -> {
+            goal?.value!! == 0F || goal?.value!! < 0 -> {
                 resetSingle()
             }
             goal?.value!! > 0 && goal?.value!! < goal?.singleValue!! -> {
