@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton
@@ -21,14 +20,18 @@ class ViewModelFactory @Inject constructor(
 
         return try {
             creator.get() as T
-        } catch (e: Exception) {
-            throw RuntimeException(e)
+        } catch (e: ClassCastException) {
+            throw ClassCastException()
+        } catch (e: TypeCastException) {
+            throw TypeCastException()
+        } catch (e: KotlinNullPointerException) {
+            throw KotlinNullPointerException()
         }
     }
 
     inline fun <reified T : ViewModel> get(activity: FragmentActivity): T =
-        ViewModelProviders.of(activity, this)[T::class.java]
+        ViewModelProvider(activity, this)[T::class.java]
 
     inline fun <reified T : ViewModel> get(fragment: Fragment): T =
-        ViewModelProviders.of(fragment, this)[T::class.java]
+        ViewModelProvider(fragment, this)[T::class.java]
 }

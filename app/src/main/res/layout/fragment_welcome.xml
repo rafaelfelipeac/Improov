@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        tools:context=".features.welcome.WelcomeFragment"
-        android:background="@color/colorPrimaryDarkOne">
+        android:background="@color/colorPrimaryDarkOne"
+        tools:context=".features.welcome.presentation.WelcomeFragment">
 
     <androidx.viewpager.widget.ViewPager
             android:id="@+id/welcome_viewpager"
@@ -43,8 +42,8 @@
             android:id="@+id/welcome_start_button"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/rounded_button"
             android:text="@string/welcome_start"

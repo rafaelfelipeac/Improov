@@ -6,12 +6,10 @@
     <string name="database_name">improov-db</string>
 
     <!-- Date -->
-    <string name="date_format_dmy">MM/dd/yyyy</string>
     <string name="date_format_dd_MMM">MMM dd</string>
     <string name="date_format_full">MM/dd/yyyy HH:mm:ss</string>
 
     <!-- Commons -->
-    <string name="empty_string"/>
     <string name="snackbar_action_undo">UNDO</string>
     <string name="dialog_action_positive">OK</string>
     <string name="dialog_action_negative">Cancel</string>
@@ -23,13 +21,9 @@
 
     <!-- Navigation -->
     <string name="navigation_goals">Goals</string>
-    <string name="navigation_today">Today</string>
-    <string name="navigation_stats">Statistics</string>
     <string name="navigation_profile">Profile</string>
 
     <!-- Add -->
-    <string name="add_goal">Goal</string>
-    <string name="add_habit">Habit</string>
 
     <!-- Goal -->
     <string name="goal_title">Goal</string>
@@ -41,17 +35,16 @@
     <string name="goal_message_empty_history">You do not have a history for this goal yet.</string>
     <string name="goal_count">0</string>
     <string name="goal_date">00/00/00</string>
-    <string name="goal_total_total_hint">0</string>
     <string name="goal_button_save">Save</string>
 
     <!-- GoalForm -->
-    <string name="goal_form_title">New Goal</string>
+    <string name="goal_form_title_new">New goal</string>
+    <string name="goal_form_title_update">Update goal</string>
     <string name="goal_form_single_value_empty">This value cannot be empty.</string>
     <string name="goal_form_single_value_zero">This value must be greater than 0.</string>
     <string name="goal_form_empty_type_goal">Choose the type of goal.</string>
     <string name="goal_form_gold_silver_bronze_order">Bronze, Silver and Gold values must be in ascending order.</string>
     <string name="goal_form_goal_name_hint">Title</string>
-    <string name="goal_form_set_date">Set date</string>
     <string name="goal_form_single_hint">Single</string>
     <string name="goal_form_bronze_hint">Bronze</string>
     <string name="goal_form_silver_hint">Silver</string>
@@ -64,42 +57,14 @@
     <string name="goal_form_goal_counter">Set the values:</string>
     <string name="goal_form_goal_counter_inc_value_hint">Increment</string>
     <string name="goal_form_goal_counter_dec_value_hint">Decrement</string>
-    <string name="goal_form_goal_dialog_one_button_message">If you want to change the goal type, the change history will be lost.</string>
+    <string name="goal_form_goal_dialog_no_goal_type_change">You can\'t change the type of a goal. Otherwise, the historic would be lost.</string>
 
     <!-- Habit -->
-    <string name="habit_title">Habit</string>
-    <string name="habit_next_ocurrence">Next occurrence:</string>
-    <string name="habit_last_day_cycle">Last day of the cycle:</string>
-    <string name="habit_value">0</string>
-    <string name="habit_next_date">Next occurrence: April 13.</string>
-    <string name="habit_last_date">Last day of the cycle: July 31st.</string>
-    <string name="habit_item_swiped_deleted">Item removed.</string>
 
     <!-- HabitForm -->
-    <string name="habit_form_title">New Habit</string>
-    <string name="habit_form_period_type_week">week</string>
-    <string name="habit_form_period_type_month">month</string>
-    <string name="habit_form_period_type_year">year</string>
-    <string name="habit_form_period_type_custom">custom</string>
-    <string name="habit_form_period_type_none">none</string>
-    <string name="habit_form_name_hint">Title</string>
-    <string name="habit_form_routine">Routine</string>
-    <string name="habit_form_everyday">Everyday</string>
-    <string name="habit_form_weekdays">A few days a week</string>
-    <string name="habit_form_week_sunday">Sunday</string>
-    <string name="habit_form_week_monday">Monday</string>
-    <string name="habit_form_week_tuesday">Tuesday</string>
-    <string name="habit_form_week_wednesday">Wednesday</string>
-    <string name="habit_form_week_thursday">Thursday</string>
-    <string name="habit_form_week_friday">Friday</string>
-    <string name="habit_form_week_saturday">Saturday</string>
-    <string name="habit_form_days">days by</string>
-    <string name="habit_form_custom_days">Every</string>
-    <string name="habit_form_custom_days_2">days</string>
 
     <!-- List -->
     <string name="list_title">List</string>
-    <string name="list_item_resolved_message">Archived goal.</string>
     <string name="list_placeholder_message">You have no goals in progress. \n\n Get started now!</string>
 
     <!-- Profile -->
@@ -109,12 +74,11 @@
     <string name="profile_edit_name_message">Edit your name</string>
     <string name="profile_show_welcome_message">See initial messages</string>
 
-    <!-- ProfileName -->
-    <string name="profile_name_title">Edit name</string>
-    <string name="profile_name_empty_fields">Your name cannot be empty.</string>
-    <string name="profile_name_success">Profile edited.</string>
-    <string name="profile_name_name_hint">Name</string>
-    <string name="profile_name_save_message">Save</string>
+    <!-- ProfileEdit -->
+    <string name="profile_edit_title">Edit name</string>
+    <string name="profile_edit_empty_fields">Your name cannot be empty.</string>
+    <string name="profile_edit_name_hint">Name</string>
+    <string name="profile_edit_save_message">Save</string>
 
     <!-- DialogOneButton-->
     <string name="dialog_one_button_message">Message</string>
@@ -142,7 +106,6 @@
     <string name="settings_pref_key_language_title">language category</string>
     <string name="settings_pref_key_language_message">language</string>
     <string name="settings_pref_key_about_title">about category</string>
-    <string name="settings_pref_key_about_message">about</string>
     <string name="settings_pref_key_about_rate">rate</string>
     <string name="settings_pref_key_about_contact">contact</string>
     <string name="settings_pref_key_about_version">version</string>
@@ -154,43 +117,22 @@
     <string name="settings_language_key_portuguese">pt_br</string>
     <string name="settings_language_key_english">en</string>
 
+    <!-- Splash -->
+    <string name="splash_title">Splash</string>
+
     <!-- Stats -->
-    <string name="stats_title">Statistics</string>
-    <string name="stats_message">You have already completed %d goals!</string>
-    <string name="stats_placeholder_message">Create goals to track statistics and progress information.</string>
-    <string name="stats_message_continue">Keep working on your goals! Your trophy room will never be full enough.</string>
-    <string name="stats_single_value">%dx</string>
-    <string name="stats_bronze_value">%dx</string>
-    <string name="stats_silver_value">%dx</string>
-    <string name="stats_gold_value">%dx</string>
 
     <!-- Today -->
-    <string name="today_title">Today</string>
-    <string name="today_next_occurrence">Next occurrence:</string>
-    <string name="today_day_message">NOV 9</string>
-    <string name="today_value_message">3/10</string>
-    <string name="today_late_title">LATE</string>
-    <string name="today_today_title">TODAY</string>
-    <string name="today_week_title">Next week</string>
-    <string name="today_placeholder_message">You have no goals in progress. \n\nGet started now!</string>
-    <string name="today_today_placeholder_message">Congratulations! :) Achieved all goals of the day!</string>
 
     <!-- Welcome -->
     <string name="welcome_title">Welcome</string>
-    <string name="welcome_sign_in">Log in</string>
     <string name="welcome_start">Start</string>
     <string name="welcome_a_message">Welcome to Improov! \n\nCreate goals and get ready to reach them.</string>
     <string name="welcome_b_message">Use Improov to quickly access your goals and update your progress.</string>
     <string name="welcome_c_message">Keep track of your achievements and keep your goals constantly evolving.</string>
 
     <!-- ListAdapter -->
-    <string name="list_adapter_habit_type_everyday">Everyday</string>
-    <string name="list_adapter_habit_type_weekdays">times a week</string>
-    <string name="list_adapter_habit_type_period">days by</string>
-    <string name="list_adapter_habit_type_custom_1">Every</string>
-    <string name="list_adapter_habit_type_custom_2">days</string>
     <string name="list_adapter_item_title">Goal or Habit title</string>
-    <string name="list_adapter_item_type">Routine: everyday.</string>
     <string name="list_adapter_date">Jul 25</string>
     <string name="list_adapter_score">1/5</string>
 
@@ -202,8 +144,6 @@
     <string name="item_adapter_item_title">New goal registered</string>
 
     <!-- DayOfWeekAdapter -->
-    <string name="day_of_week_month_day">JUL 25</string>
-    <string name="day_of_week_day">DAY</string>
 
     <!-- BottomSheet Goal Done -->
     <string name="goal_done_message">There are pending items in this goal. \nDo you want to complete it?</string>
@@ -211,8 +151,6 @@
     <string name="goal_done_no">NO</string>
 
     <!-- BottomSheet Habit Done -->
-    <string name="habit_done_message">Habits can only be completed within the Today screen.</string>
-    <string name="habit_done_ok">OK</string>
 
     <!-- BottomSheet Item -->
     <string name="bottom_sheet_item_name">Item Title</string>
@@ -224,30 +162,29 @@
     <string name="item_empty_name">Item name is empty.</string>
     <string name="item_date_format">Completed on %s.</string>
 
-    <!-- BottomSheet Tips One -->
-    <string name="tips_one_title">Divide And Conquer</string>
-    <string name="tips_one_message_1">Splitting a large and complex goal into smaller parts is a good tactic to keep that
+    <!-- BottomSheet Tips Divide And Conquer -->
+    <string name="tips_divide_and_conquer_title">Divide And Conquer</string>
+    <string name="tips_divide_and_conquer_message_1">Splitting a large and complex goal into smaller parts is a good tactic to keep that
         goal from being abandoned. \n\nThe sense of progress is greater and you will always be motivated to achieve what you want. \n\nTherefore your goal is divided into 3 parts:
         bronze, silver and gold.
     </string>
-    <string name="tips_one_message_2">The bronze value is the first challenge. With each part of the goal achieved, you will be closer to your achievement.
+    <string name="tips_divide_and_conquer_message_2">The bronze value is the first challenge. With each part of the goal achieved, you will be closer to your achievement.
     </string>
 
-    <!-- BottomSheet Tips Two -->
-    <string name="tips_two_title">Goals type</string>
-    <string name="tips_two_type_list_title">List</string>
-    <string name="tips_two_type_list_message">For goals that consist of completing different items on a list. Each completed item represents 1 point for the final goal.</string>
-    <string name="tips_two_type_counter_title">Counter</string>
-    <string name="tips_two_type_counter_message">Ideal for goals where the values to be added or subtracted are always the same.</string>
-    <string name="tips_two_type_final_title">Final value</string>
-    <string name="tips_two_type_final_message">Intended for goals where the values to be added or subtracted constantly change.</string>
+    <!-- BottomSheet Tips Goal Type -->
+    <string name="tips_goal_type_title">Goals type</string>
+    <string name="tips_goal_type_list_title">List</string>
+    <string name="tips_goal_type_list_message">For goals that consist of completing different items on a list. Each completed item represents 1 point for the final goal.</string>
+    <string name="tips_goal_type_counter_title">Counter</string>
+    <string name="tips_goal_type_counter_message">Ideal for goals where the values to be added or subtracted are always the same.</string>
+    <string name="tips_goal_type_final_title">Final value</string>
+    <string name="tips_goal_type_final_message">Intended for goals where the values to be added or subtracted constantly change.</string>
 
-    <!-- BottomSheet Tips Three -->
-    <string name="tips_three_title">Swipe</string>
-    <string name="tips_three_message_1">If you want to finish a goal immediately, even without reaching the full amount, slide the item aside to complete it.
+    <!-- BottomSheet Tips Swipe -->
+    <string name="tips_swipe_title">Swipe</string>
+    <string name="tips_swipe_message_1">If you want to finish a goal immediately, even without reaching the full amount, slide the item aside to complete it.
     </string>
-    <string name="tips_three_message_2">If you change your mind, just swipe again and the item will be ready to update again.
+    <string name="tips_swipe_message_2">If you change your mind, just swipe again and the item will be ready to update again.
     </string>
-
 
 </resources>

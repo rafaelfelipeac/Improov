@@ -1,29 +1,26 @@
 package com.rafaelfelipeac.improov.features.commons
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import androidx.fragment.app.DialogFragment
 import com.rafaelfelipeac.improov.R
+import com.rafaelfelipeac.improov.core.platform.base.BaseDialog
 import kotlinx.android.synthetic.main.fragment_dialog_two_buttons.*
 
-class DialogTwoButtons : DialogFragment() {
+class DialogTwoButtons : BaseDialog() {
 
     private var onClickListener: OnClickListener? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view =  inflater.inflate(R.layout.fragment_dialog_two_buttons, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        if (dialog != null && dialog?.window != null) {
-            dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
-        }
+        setScreen()
 
-        return view
+        return inflater.inflate(R.layout.fragment_dialog_two_buttons, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,6 +29,10 @@ class DialogTwoButtons : DialogFragment() {
         dialog_two_buttons_cancel_button.setOnClickListener { onClickListener?.onCancel() }
 
         dialog_two_buttons_ok_button.setOnClickListener { onClickListener?.onOK() }
+    }
+
+    private fun setScreen() {
+        hideTitle()
     }
 
     fun setOnClickListener(onOkClickListener: OnClickListener) {

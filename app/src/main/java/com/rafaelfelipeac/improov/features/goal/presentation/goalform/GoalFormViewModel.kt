@@ -2,70 +2,90 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goalform
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
-import com.rafaelfelipeac.improov.features.commons.Goal
-import com.rafaelfelipeac.improov.features.commons.GoalRepository
-import com.rafaelfelipeac.improov.features.commons.Habit
-import com.rafaelfelipeac.improov.features.commons.HabitRepository
-import com.rafaelfelipeac.improov.features.goal.Historic
-import com.rafaelfelipeac.improov.features.goal.HistoricRepository
-import com.rafaelfelipeac.improov.features.goal.Item
-import com.rafaelfelipeac.improov.features.goal.ItemRepository
+import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimeadd.GetFirstTimeAddUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimeadd.SaveFirstTimeAddUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.SaveFirstTimeListUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions", "LongParameterList")
 class GoalFormViewModel @Inject constructor(
-    private val goalRepository: GoalRepository,
-    private val itemRepository: ItemRepository,
-    private val historicRepository: HistoricRepository,
-    private val habitRepository: HabitRepository
+    private val saveGoalUseCase: SaveGoalUseCase,
+    private val getGoalUseCase: GetGoalUseCase,
+    private val getGoalListUseCase: GetGoalListUseCase,
+    private val saveFirstTimeListUseCase: SaveFirstTimeListUseCase,
+    private val saveFirstTimeAddUseCase: SaveFirstTimeAddUseCase,
+    private val getFirstTimeAddUseCase: GetFirstTimeAddUseCase
 ) : BaseViewModel() {
 
-    private var goal: LiveData<Goal>? = null
+    private var goalId = 0L
 
-    private var goals: LiveData<List<Goal>> = goalRepository.getGoals()
-    private var items: LiveData<List<Item>> = itemRepository.getItems()
-    private var history: LiveData<List<Historic>> = historicRepository.getHistory()
-    private var habits: LiveData<List<Habit>> = habitRepository.getHabits()
+    val savedGoal: LiveData<Long> get() = _savedGoal
+    private val _savedGoal = MutableLiveData<Long>()
+    val goal: LiveData<Goal> get() = _goal
+    private val _goal = MutableLiveData<Goal>()
+    val goals: LiveData<List<Goal>> get() = _goals
+    private val _goals = MutableLiveData<List<Goal>>()
+    val savedFirstTimeList: LiveData<Unit> get() = _savedFirstTimeList
+    private val _savedFirstTimeList = MutableLiveData<Unit>()
+    val savedFirstTimeAdd: LiveData<Unit> get() = _savedFirstTimeAdd
+    private val _savedFirstTimeAdd = MutableLiveData<Unit>()
+    val firstTimeAdd: LiveData<Boolean> get() = _firstTimeAdd
+    private val _firstTimeAdd = MutableLiveData<Boolean>()
 
-    var goalIdInserted: MutableLiveData<Long> = MutableLiveData()
-
-    fun init(goalId: Long) {
-        goal = goalRepository.getGoal(goalId)
+    fun setGoalId(goalId: Long) {
+        this.goalId = goalId
     }
 
-    // Goal
-    fun getGoals(): LiveData<List<Goal>>? {
-        return goals
-    }
+    override fun loadData() {
+        if (goalId > 0L) {
+            getGoal()
+        }
 
-    fun getGoal(): LiveData<Goal>? {
-        return goal
+        getGoals()
+
+        getFirstTimeAdd()
     }
 
     fun saveGoal(goal: Goal) {
-        goalIdInserted.value = goalRepository.save(goal)
+        viewModelScope.launch {
+            _savedGoal.postValue(saveGoalUseCase(goal))
+        }
     }
 
-    // Habit
-    fun getHabits(): LiveData<List<Habit>>? {
-        return habits
+    private fun getGoal() {
+        viewModelScope.launch {
+            _goal.postValue(getGoalUseCase(goalId))
+        }
     }
 
-    // Item
-    fun getItems(): LiveData<List<Item>>? {
-        return items
+    private fun getGoals() {
+        viewModelScope.launch {
+            _goals.postValue(getGoalListUseCase())
+        }
     }
 
-    fun deleteItem(item: Item) {
-        itemRepository.delete(item)
+    fun saveFirstTimeList(firstTimeList: Boolean) {
+        viewModelScope.launch {
+            _savedFirstTimeList.postValue(saveFirstTimeListUseCase(firstTimeList))
+        }
     }
 
-    // Historic
-    fun getHistory(): LiveData<List<Historic>>? {
-        return history
+    fun saveFirstTimeAdd(firstTimeAdd: Boolean) {
+        viewModelScope.launch {
+            _savedFirstTimeAdd.postValue(saveFirstTimeAddUseCase(firstTimeAdd))
+        }
     }
 
-    fun deleteHistoric(historic: Historic) {
-        historicRepository.delete(historic)
+    private fun getFirstTimeAdd() {
+        viewModelScope.launch {
+            _firstTimeAdd.postValue(getFirstTimeAddUseCase())
+        }
     }
 }

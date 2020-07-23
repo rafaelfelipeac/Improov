@@ -1,42 +1,41 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goalform
 
-import android.app.DatePickerDialog
 import android.os.Bundle
-import android.view.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.Observer
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.textfield.TextInputEditText
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
+import android.view.MenuItem
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.*
+import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.resetValue
+import com.rafaelfelipeac.improov.core.extension.visible
+import com.rafaelfelipeac.improov.core.extension.gone
+import com.rafaelfelipeac.improov.core.extension.invisible
+import com.rafaelfelipeac.improov.core.extension.fieldIsEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.checkIfFieldIsEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.toFloat
+import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
+import com.rafaelfelipeac.improov.core.extension.isNotEmpty
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.commons.DialogOneButton
-import com.rafaelfelipeac.improov.features.commons.Goal
-import com.rafaelfelipeac.improov.features.commons.GoalType
-import com.rafaelfelipeac.improov.features.commons.Habit
-import com.rafaelfelipeac.improov.features.goal.Historic
-import com.rafaelfelipeac.improov.features.goal.Item
-import com.rafaelfelipeac.improov.features.main.MainActivity
+import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
+import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import kotlinx.android.synthetic.main.fragment_goal_form.*
-import java.text.SimpleDateFormat
-import java.util.*
 
+@Suppress("TooManyFunctions")
 class GoalFormFragment : BaseFragment() {
 
-    private var goal: Goal = Goal()
+    private var goal: Goal =
+        Goal()
     private var goalId: Long? = null
-    private var goals: List<Goal> = listOf()
-    private var items: List<Item> = listOf()
-    private var history: List<Historic> = listOf()
-    private var habits: List<Habit> = listOf()
 
-    private var cal = Calendar.getInstance()
+    private var firstTimeAdd = false
 
-    private var bottomSheetTip: BottomSheetBehavior<*>? = null
-    private var bottomSheetTipClose: ConstraintLayout? = null
+    private var goalsSize: Int? = null
 
-    private val goalFormViewModel by lazy { viewModelFactory.get<GoalFormViewModel>(this) }
+    private val viewModel by lazy { viewModelFactory.get<GoalFormViewModel>(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,19 +43,15 @@ class GoalFormFragment : BaseFragment() {
         injector.inject(this)
 
         goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goalId }
-
-        setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.goal_form_title)
-        (activity as MainActivity).toolbar.inflateMenu(R.menu.menu_save)
-
-        hideNavigation()
-
-        if (goalId != 0L) { goalId?.let { goalFormViewModel.init(it) } }
+        setScreen()
 
         return inflater.inflate(R.layout.fragment_goal_form, container, false)
     }
@@ -64,92 +59,18 @@ class GoalFormFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeViewModel()
+        goalId.let {
+            if (it!! > 0L) {
+                viewModel.setGoalId(goalId!!)
+            }
+        }
+        viewModel.loadData()
 
         setRadioButtonType()
         setSwitchImproov()
 
-        (activity as MainActivity).openToolbar()
-
-        goal_form_divide_and_conquest_help.setOnClickListener {
-            hideSoftKeyboard()
-            (activity as MainActivity).setupBottomSheetTipsOne()
-            setupBottomSheetTip()
-            (activity as MainActivity).openBottomSheetTips()
-        }
-
-        goal_form_type_help.setOnClickListener {
-            hideSoftKeyboard()
-            (activity as MainActivity).setupBottomSheetTipsTwo()
-            setupBottomSheetTip()
-            (activity as MainActivity).openBottomSheetTips()
-        }
-
-        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            cal.set(Calendar.YEAR, year)
-            cal.set(Calendar.MONTH, monthOfYear)
-            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-//            val myFormat = getString(R.string.date_format_dmy)
-//            val sdf = SimpleDateFormat(myFormat, Locale.US)
-//            goal_form_set_date.text = sdf.format(cal.time)
-
-            goal.date = cal.time
-        }
-
-//        goal_form_set_date.setOnClickListener {
-//            val datePickerDialog = DatePickerDialog(context!!,
-//                R.style.DialogTheme,
-//                dateSetListener,
-//                cal.get(Calendar.YEAR),
-//                cal.get(Calendar.MONTH),
-//                cal.get(Calendar.DAY_OF_MONTH))
-//
-//            datePickerDialog.show()
-//
-//            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.colorPrimary))
-//            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setBackgroundColor(resources.getColor(android.R.color.transparent))
-//            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.colorPrimary))
-//            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setBackgroundColor(resources.getColor(android.R.color.transparent))
-//        }
-    }
-
-    private fun setupBottomSheetTip() {
-        bottomSheetTip = (activity as MainActivity).bottomSheetTip
-        bottomSheetTipClose = (activity as MainActivity).bottomSheetTipClose
-
-        bottomSheetTipClose?.setOnClickListener {
-            hideSoftKeyboard()
-            (activity as MainActivity).closeBottomSheetTips()
-        }
-    }
-
-    private fun observeViewModel() {
-        goalFormViewModel.getGoal()?.observe(this, Observer { goal ->
-            this.goal = goal as Goal
-
-            setupGoal()
-        })
-
-        goalFormViewModel.getGoals()?.observe(this, Observer { goals ->
-            this.goals = goals
-        })
-
-        goalFormViewModel.getHabits()?.observe(this, Observer { habits ->
-            this.habits = habits
-        })
-
-        goalFormViewModel.getItems()?.observe(this, Observer { items ->
-            this.items = items
-        })
-
-        goalFormViewModel.getHistory()?.observe(this, Observer { history ->
-            this.history = history
-        })
-
-        goalFormViewModel.goalIdInserted.observe(this, Observer {
-            navController.navigateUp()
-        })
+        setupLayout()
+        observeViewModel()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -164,21 +85,21 @@ class GoalFormFragment : BaseFragment() {
                 when {
                     checkIfAnyFieldsAreEmptyOrZero() -> { }
                     getGoalTypeSelected() == GoalType.GOAL_NONE -> {
-                        showSnackBarLong(getString(R.string.goal_form_empty_type_goal))
+                        showSnackBar(getString(R.string.goal_form_empty_type_goal))
 
                         hideSoftKeyboard()
                         goal_form_type_title.isFocusableInTouchMode = true
                         goal_form_type_title.requestFocus()
                     }
                     !validateDivideAndConquerValues() -> {
-                        showSnackBarLong(getString(R.string.goal_form_gold_silver_bronze_order))
+                        showSnackBar(getString(R.string.goal_form_gold_silver_bronze_order))
 
                         goal_form_bronze_value.requestFocus()
                     }
                     else -> {
                         val goalToSave = updateOrCreateGoal()
 
-                        goalFormViewModel.saveGoal(goalToSave)
+                        viewModel.saveGoal(goalToSave)
 
                         verifyFistTimeSaving()
 
@@ -189,6 +110,54 @@ class GoalFormFragment : BaseFragment() {
         }
 
         return false
+    }
+
+    private fun setScreen() {
+        if (goalId!! == 0L) {
+            setTitle(getString(R.string.goal_form_title_new))
+        } else {
+            setTitle(getString(R.string.goal_form_title_update))
+        }
+
+        showBackArrow()
+        hasMenu()
+        hideNavigation()
+    }
+
+    private fun setupLayout() {
+        goal_form_divide_and_conquest_help.setOnClickListener {
+            hideSoftKeyboard()
+            setupBottomSheetTipsDivideAndConquer()
+            setupBottomSheetTip()
+            showBottomSheetTips()
+        }
+
+        goal_form_type_help.setOnClickListener {
+            hideSoftKeyboard()
+            setupBottomSheetTipsGoalType()
+            setupBottomSheetTip()
+            showBottomSheetTips()
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.savedGoal.observe(this) {
+            navController.navigateUp()
+        }
+
+        viewModel.goal.observe(this) {
+            goal = it
+
+            setupGoal()
+        }
+
+        viewModel.goals.observe(this) {
+            goalsSize = it.size
+        }
+
+        viewModel.firstTimeAdd.observe(this) {
+            firstTimeAdd = it
+        }
     }
 
     private fun setSwitchImproov() {
@@ -203,41 +172,35 @@ class GoalFormFragment : BaseFragment() {
 
     private fun setRadioButtonType() {
         goal_form_radio_type_list.setOnClickListener {
-            if (goal_form_radio_type_list.isChecked) {
+            if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_LIST) {
+                showDialogNoGoalTypeChange()
+            } else if (goal_form_radio_type_list.isChecked) {
                 goal_form_radio_type_counter.isChecked = false
                 goal_form_radio_type_total.isChecked = false
 
                 goal_form_goal_counter.gone()
-
-                if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_LIST) {
-                    showDialogOneButton()
-                }
             }
         }
 
         goal_form_radio_type_counter.setOnClickListener {
-            if (goal_form_radio_type_counter.isChecked) {
+            if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_COUNTER) {
+                showDialogNoGoalTypeChange()
+            } else if (goal_form_radio_type_counter.isChecked) {
                 goal_form_radio_type_list.isChecked = false
                 goal_form_radio_type_total.isChecked = false
 
                 goal_form_goal_counter.visible()
-
-                if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_COUNTER) {
-                    showDialogOneButton()
-                }
             }
         }
 
         goal_form_radio_type_total.setOnClickListener {
-            if (goal_form_radio_type_total.isChecked) {
+            if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_FINAL) {
+                showDialogNoGoalTypeChange()
+            } else if (goal_form_radio_type_total.isChecked) {
                 goal_form_radio_type_counter.isChecked = false
                 goal_form_radio_type_list.isChecked = false
 
                 goal_form_goal_counter.gone()
-
-                if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_FINAL) {
-                    showDialogOneButton()
-                }
             }
         }
     }
@@ -270,30 +233,13 @@ class GoalFormFragment : BaseFragment() {
             goal.done = false
             goal.type = getGoalTypeSelected()
 
-            val order =
-                if (goals.isEmpty() && habits.isEmpty()) 0
-                else goals.size + habits.size + 1
-            //else goals!![goals!!.size-1].order + 1
-
-            goal.order = order
+            goal.order =
+                if (goalsSize == null || goalsSize == 0) {
+                    0
+                } else {
+                    goalsSize!! + 1
+                }
         } else {
-            val oldGoalType = goal.type
-            goal.type = getGoalTypeSelected()
-
-            if (oldGoalType != goal.type) {
-                items.forEach {
-                    if (it.goalId == goal.goalId) {
-                        goalFormViewModel.deleteItem(it)
-                    }
-                }
-
-                history.forEach {
-                    if (it.goalId == goal.goalId) {
-                        goalFormViewModel.deleteHistoric(it)
-                    }
-                }
-            }
-
             goal.updatedDate = getCurrentTime()
         }
 
@@ -314,23 +260,24 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun getGoalTypeSelected(): GoalType {
-        if (goal_form_radio_type_list.isChecked) return GoalType.GOAL_LIST
-        if (goal_form_radio_type_counter.isChecked) return GoalType.GOAL_COUNTER
-        if (goal_form_radio_type_total.isChecked) return GoalType.GOAL_FINAL
-
-        return GoalType.GOAL_NONE
+        return when {
+            goal_form_radio_type_list.isChecked -> {
+                GoalType.GOAL_LIST
+            }
+            goal_form_radio_type_counter.isChecked -> {
+                GoalType.GOAL_COUNTER
+            }
+            goal_form_radio_type_total.isChecked -> {
+                GoalType.GOAL_FINAL
+            }
+            else -> {
+                GoalType.GOAL_NONE
+            }
+        }
     }
 
     private fun setupGoal() {
         goal_form_goal_name.setText(goal.name)
-
-        if (goal.date != null) {
-            val myFormat = getString(R.string.date_format_dmy)
-            val sdf = SimpleDateFormat(myFormat, Locale.US)
-            //goal_form_set_date.text = sdf.format(goal.date)
-
-            cal.time = goal.date
-        }
 
         if (goal.divideAndConquer) {
             goal_form_divide_and_conquer.visible()
@@ -345,12 +292,20 @@ class GoalFormFragment : BaseFragment() {
             goal_form_single_value.setText(goal.singleValue.getNumberInRightFormat())
         }
 
+        setupGoalType()
+    }
+
+    private fun setupGoalType() {
         when (goal.type) {
             GoalType.GOAL_LIST -> {
                 goal_form_radio_type_list.isChecked = true
+                goal_form_radio_type_counter.isChecked = false
+                goal_form_radio_type_total.isChecked = false
             }
             GoalType.GOAL_COUNTER -> {
                 goal_form_radio_type_counter.isChecked = true
+                goal_form_radio_type_list.isChecked = false
+                goal_form_radio_type_total.isChecked = false
 
                 goal_form_goal_counter.visible()
 
@@ -359,38 +314,58 @@ class GoalFormFragment : BaseFragment() {
             }
             GoalType.GOAL_FINAL -> {
                 goal_form_radio_type_total.isChecked = true
+                goal_form_radio_type_list.isChecked = false
+                goal_form_radio_type_counter.isChecked = false
             }
             else -> { }
         }
     }
 
     private fun verifyFistTimeSaving() {
-        if (preferences.fistTimeAdd) {
-            preferences.fistTimeAdd = false
-            preferences.fistTimeList = true
+        if (firstTimeAdd) {
+            viewModel.saveFirstTimeAdd(false)
+            viewModel.saveFirstTimeList(true)
         }
     }
 
-    private fun showDialogOneButton() {
+    private fun showDialogNoGoalTypeChange() {
         val dialog = DialogOneButton()
 
-        dialog.setMessage(getString(R.string.goal_form_goal_dialog_one_button_message))
+        dialog.setMessage(getString(R.string.goal_form_goal_dialog_no_goal_type_change))
 
         dialog.setOnClickListener(object : DialogOneButton.OnClickListener {
             override fun onOK() {
+                setupGoalType()
+
                 dialog.dismiss()
             }
         })
 
-        dialog.show(fragmentManager!!, "")
+        dialog.show(parentFragmentManager, "")
     }
 
     private fun checkIfAnyFieldsAreEmptyOrZero(): Boolean {
+        return when {
+            checkIfNameFieldIsEmptyOrZero() || checkIfValuesFieldsAreEmptyOrZero() ||
+                    checkIfCounterFieldsAreEmptyOrZero() -> {
+                true
+            }
+            else -> false
+        }
+    }
+
+    private fun checkIfNameFieldIsEmptyOrZero(): Boolean {
         return when {
             goal_form_goal_name.checkIfFieldIsEmptyOrZero() -> {
                 goal_form_goal_name.fieldIsEmptyOrZero(this)
                 true
             }
+            else -> false
+        }
+    }
+
+    private fun checkIfValuesFieldsAreEmptyOrZero(): Boolean {
+        return when {
             goal_form_single_value.checkIfFieldIsEmptyOrZero() && !goal.divideAndConquer -> {
                 goal_form_single_value.fieldIsEmptyOrZero(this)
                 true
@@ -407,6 +382,12 @@ class GoalFormFragment : BaseFragment() {
                 goal_form_gold_value.fieldIsEmptyOrZero(this)
                 true
             }
+            else -> false
+        }
+    }
+
+    private fun checkIfCounterFieldsAreEmptyOrZero(): Boolean {
+        return when {
             goal_form_goal_counter_dec_value.checkIfFieldIsEmptyOrZero() &&
                     (goal.type == GoalType.GOAL_COUNTER ||
                             getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
@@ -430,10 +411,8 @@ class GoalFormFragment : BaseFragment() {
             val bronze = goal_form_bronze_value.toFloat()
 
             ((gold > silver) && (silver > bronze))
-        } catch (e: Exception) {
-            if (goal_form_single_value.isNotEmpty())
-                return true
-            false
+        } catch (e: NumberFormatException) {
+            return goal_form_single_value.isNotEmpty()
         }
     }
 }

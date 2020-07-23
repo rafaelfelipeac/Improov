@@ -1,32 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-        android:id="@+id/navigation_graph"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        app:startDestination="@id/navigation_welcome">
+        app:startDestination="@id/navigation_splash">
+
+    <fragment
+            android:id="@+id/navigation_splash"
+            android:name="com.rafaelfelipeac.improov.features.splash.presentation.SplashFragment"
+            android:label="fragment_splash"
+            tools:layout="@layout/fragment_splash" >
+
+        <action
+                android:id="@+id/splash_to_welcome"
+                app:destination="@id/navigation_welcome" />
+        <action
+                android:id="@+id/splash_to_list"
+                app:destination="@id/navigation_list" />
+
+    </fragment>
 
     <fragment
             android:id="@+id/navigation_welcome"
-            android:name="com.rafaelfelipeac.improov.features.welcome.WelcomeFragment"
+            android:name="com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeFragment"
             android:label="fragment_welcome"
             tools:layout="@layout/fragment_welcome">
 
-        <action android:id="@+id/action_navigation_welcome_to_navigation_list" app:destination="@id/navigation_list"/>
+        <action
+                android:id="@+id/welcome_to_list"
+                app:destination="@id/navigation_list" />
 
     </fragment>
 
     <fragment
             android:id="@+id/navigation_list"
-            android:name="com.rafaelfelipeac.improov.features.list.ListFragment"
+            android:name="com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListFragment"
             android:label="fragment_list"
-            tools:layout="@layout/fragment_list">
+            tools:layout="@layout/fragment_goal_list">
 
-        <action android:id="@+id/action_navigation_list_to_navigation_goal" app:destination="@id/navigation_goal"/>
-        <action android:id="@+id/action_navigation_list_to_navigation_habit" app:destination="@id/navigation_habit"/>
-        <action android:id="@+id/action_navigation_list_to_navigation_add" app:destination="@id/navigation_add"/>
         <action
-                android:id="@+id/action_navigation_list_to_navigation_goal_form"
+                android:id="@+id/list_to_goal"
+                app:destination="@id/navigation_goal" />
+        <action
+                android:id="@+id/list_to_add"
+                app:destination="@id/navigation_add" />
+        <action
+                android:id="@+id/list_to_goal_form"
                 app:destination="@id/navigation_goal_form" />
 
     </fragment>
@@ -37,110 +55,77 @@
             android:label="fragment_goal_form"
             tools:layout="@layout/fragment_goal_form">
 
-        <argument android:name="goalId" app:argType="long" android:defaultValue="0L"/>
+        <argument
+                android:name="goalId"
+                android:defaultValue="0L"
+                app:argType="long" />
 
     </fragment>
 
     <fragment
             android:id="@+id/navigation_goal"
-            android:name="com.rafaelfelipeac.improov.features.goal.presentation.goal.GoalFragment"
+            android:name="com.rafaelfelipeac.improov.features.goal.presentation.goaldetail.GoalDetailFragment"
             android:label="fragment_goal"
-            tools:layout="@layout/fragment_goal">
+            tools:layout="@layout/fragment_goal_detail">
 
-        <argument android:name="goalId" app:argType="long"/>
-        <argument android:name="goalNew" app:argType="boolean" android:defaultValue="false"/>
+        <argument
+                android:name="goalId"
+                app:argType="long" />
+        <argument
+                android:name="goalNew"
+                android:defaultValue="false"
+                app:argType="boolean" />
 
-        <action android:id="@+id/action_navigation_goal_to_navigation_goal_form" app:destination="@id/navigation_goal_form"/>
-
-    </fragment>
-
-    <fragment
-            android:id="@+id/navigation_stats"
-            android:name="com.rafaelfelipeac.improov.features.stats.StatsFragment"
-            android:label="fragment_stats"
-            tools:layout="@layout/fragment_stats">
-
-        <action android:id="@+id/action_navigation_stats_to_navigation_add" app:destination="@id/navigation_add"/>
         <action
-                android:id="@+id/action_navigation_stats_to_navigation_goal_form"
+                android:id="@+id/goal_to_goal_form"
                 app:destination="@id/navigation_goal_form" />
 
     </fragment>
 
     <fragment
             android:id="@+id/navigation_profile"
-            android:name="com.rafaelfelipeac.improov.features.profile.ProfileFragment"
+            android:name="com.rafaelfelipeac.improov.features.profile.presentation.profile.ProfileFragment"
             android:label="fragment_profile"
             tools:layout="@layout/fragment_profile">
 
-        <action android:id="@+id/action_navigation_profile_to_navigation_profile_edit" app:destination="@id/navigation_profile_edit"/>
-        <action android:id="@+id/action_navigation_profile_to_navigation_add" app:destination="@id/navigation_add"/>
-        <action android:id="@+id/action_navigation_profile_to_navigation_welcome" app:destination="@id/navigation_welcome"/>
-        <action android:id="@+id/action_navigation_profile_to_navigation_settings" app:destination="@id/navigation_settings"/>
         <action
-                android:id="@+id/action_navigation_profile_to_navigation_goal_form"
+                android:id="@+id/profile_to_profile_edit"
+                app:destination="@id/navigation_profile_edit" />
+        <action
+                android:id="@+id/profile_to_add"
+                app:destination="@id/navigation_add" />
+        <action
+                android:id="@+id/profile_to_welcome"
+                app:destination="@id/navigation_welcome" />
+        <action
+                android:id="@+id/profile_to_settings"
+                app:destination="@id/navigation_settings" />
+        <action
+                android:id="@+id/profile_to_goal_form"
                 app:destination="@id/navigation_goal_form" />
 
     </fragment>
 
     <fragment
             android:id="@+id/navigation_profile_edit"
-            android:name="com.rafaelfelipeac.improov.features.profilename.ProfileNameFragment"
+            android:name="com.rafaelfelipeac.improov.features.profile.presentation.profileedit.ProfileEditFragment"
             android:label="fragment_profile_edit"
-            tools:layout="@layout/fragment_profile_edit"/>
+            tools:layout="@layout/fragment_profile_edit" />
 
-    <fragment android:id="@+id/navigation_today"
-              android:name="com.rafaelfelipeac.improov.features.today.presentation.TodayFragment"
-              android:label="fragment_today"
-              tools:layout="@layout/fragment_today">
+    <fragment
+            android:id="@+id/navigation_settings"
+            android:name="com.rafaelfelipeac.improov.features.settings.presentation.settings.SettingsFragment"
+            android:label="fragment_settings">
 
-        <action android:id="@+id/action_navigation_today_to_navigation_goal" app:destination="@id/navigation_goal"/>
-        <action android:id="@+id/action_navigation_today_to_navigation_habit" app:destination="@id/navigation_habit"/>
-        <action android:id="@+id/action_navigation_today_to_navigation_add" app:destination="@id/navigation_add"/>
         <action
-                android:id="@+id/action_navigation_today_to_navigation_goal_form"
-                app:destination="@id/navigation_goal_form" />
+                android:id="@+id/settings_to_settings_language"
+                app:destination="@id/navigation_settings_language" />
 
     </fragment>
 
-    <fragment android:id="@+id/navigation_habit_form"
-              android:name="com.rafaelfelipeac.improov.features.habit.HabitFormFragment"
-              android:label="fragment_habit_form">
-
-        <argument android:name="habitId" app:argType="long" android:defaultValue="0L"/>
-
-    </fragment>
-
-    <fragment android:id="@+id/navigation_habit"
-              android:name="com.rafaelfelipeac.improov.features.habit.HabitFragment"
-              android:label="fragment_habit"
-              tools:layout="@layout/fragment_habit">
-
-        <argument android:name="habitId" app:argType="long"/>
-        <argument android:name="habitNew" app:argType="boolean" android:defaultValue="false"/>
-
-        <action android:id="@+id/action_navigation_habit_to_navigation_habit_form" app:destination="@id/navigation_habit_form"/>
-
-    </fragment>
-
-    <dialog android:id="@+id/navigation_add"
-              android:name="com.rafaelfelipeac.improov.features.add.AddFragment"
-              android:label="fragment_add"
-              tools:layout="@layout/bottom_sheet_add">
-
-        <action android:id="@+id/action_navigation_add_to_navigation_goal_form" app:destination="@id/navigation_goal_form"/>
-        <action android:id="@+id/action_navigation_add_to_navigation_habit_form" app:destination="@id/navigation_habit_form"/>
-
-    </dialog>
-
-    <fragment android:id="@+id/navigation_settings"
-              android:name="com.rafaelfelipeac.improov.features.settings.SettingsFragment"
-              android:label="fragment_settings">
-        <action android:id="@+id/action_navigation_settings_to_navigation_settings_language" app:destination="@id/navigation_settings_language"/>
-    </fragment>
-
-    <fragment android:id="@+id/navigation_settings_language"
-              android:name="com.rafaelfelipeac.improov.features.settings.SettingsLanguageFragment"
-              android:label="fragment_settings_language"/>
+    <fragment
+            android:id="@+id/navigation_settings_language"
+            android:name="com.rafaelfelipeac.improov.features.settings.presentation.settingslanguage.SettingsLanguageFragment"
+            android:label="fragment_settings_language" />
 
 </navigation>

@@ -28,10 +28,10 @@ fun TextInputEditText.emailIsInvalid(): Boolean {
 }
 
 fun TextInputEditText.showOrHidePassword() {
-    if (transformationMethod == HideReturnsTransformationMethod.getInstance()) {
-        transformationMethod = PasswordTransformationMethod.getInstance()
+    transformationMethod = if (transformationMethod == HideReturnsTransformationMethod.getInstance()) {
+        PasswordTransformationMethod.getInstance()
     } else {
-        transformationMethod = HideReturnsTransformationMethod.getInstance()
+        HideReturnsTransformationMethod.getInstance()
     }
 
     setSelection(text?.length!!)
@@ -42,12 +42,12 @@ fun TextInputEditText.checkIfFieldIsEmptyOrZero(): Boolean {
         isEmpty() -> true
         text.toString()[0] == '0' &&
                 inputType == (InputType.TYPE_NUMBER_FLAG_DECIMAL + InputType.TYPE_CLASS_NUMBER) -> {
-            return text.toString().toDouble() <= 0
+            text.toString().toDouble() <= 0
         }
         text.toString()[0] == ' ' -> {
             setText(text.toString().replaceFirst(" ", ""))
 
-            return checkIfFieldIsEmptyOrZero()
+            checkIfFieldIsEmptyOrZero()
         }
         else -> false
     }
@@ -57,14 +57,14 @@ fun TextInputEditText.fieldIsEmptyOrZero(fragment: BaseFragment, showSnackbar: B
     when {
         isEmpty() || text.toString() == "" -> {
             if (showSnackbar) {
-                fragment.showSnackBarLong(fragment.getString(R.string.goal_form_single_value_empty))
+                fragment.showSnackBar(fragment.getString(R.string.goal_form_single_value_empty))
             }
 
             requestFocus()
         }
         text.toString()[0] == '0' -> {
             if (showSnackbar) {
-                fragment.showSnackBarLong(fragment.getString(R.string.goal_form_single_value_zero))
+                fragment.showSnackBar(fragment.getString(R.string.goal_form_single_value_zero))
             }
 
             requestFocus()
