@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetGoalListUseCase @Inject constructor(
     private val goalRepository: GoalRepository
 ) {
-    suspend fun execute(): List<Goal> {
+    suspend operator fun invoke(): List<Goal> {
         return goalRepository.getGoals()
             .sortedBy { it.order }
     }

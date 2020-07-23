@@ -48,7 +48,7 @@ class GetItemListUseCaseTest {
                 .willReturn(items)
 
             // when
-            val result = getItemListUseCase.execute(goalIdCustom)
+            val result = getItemListUseCase(goalIdCustom)
 
             // then
             result shouldBeEqualTo filteredAndOrderedList

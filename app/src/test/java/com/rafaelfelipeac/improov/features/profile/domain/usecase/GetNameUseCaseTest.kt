@@ -33,7 +33,7 @@ class GetNameUseCaseTest {
                 .willReturn(name)
 
             // when
-            val result = getNameUseCase.execute()
+            val result = getNameUseCase()
 
             // then
             result shouldBeEqualTo name

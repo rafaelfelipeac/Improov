@@ -93,7 +93,7 @@ object DataProviderAndroidTest {
         )
     }
 
-    fun createHistoricDataModel(historicId: Long = 1L, goalId: Long = 1L, value: Float = 0f): HistoricDataModel {
+    fun createHistoricDataModel(historicId: Long = 1L, goalId: Long = 1L): HistoricDataModel {
         return HistoricDataModel(
             historicId = historicId,
             goalId = goalId,

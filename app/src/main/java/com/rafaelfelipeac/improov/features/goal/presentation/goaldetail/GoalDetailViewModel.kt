@@ -1,9 +1,9 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.rafaelfelipeac.improov.core.platform.base.BaseAction
 import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
-import com.rafaelfelipeac.improov.core.platform.base.BaseViewState
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
@@ -24,142 +24,73 @@ class GoalDetailViewModel @Inject constructor(
     private val getItemListUseCase: GetItemListUseCase,
     private val saveHistoricUseCCase: SaveHistoricUseCase,
     private val getHistoricListUseCase: GetHistoricListUseCase
-) : BaseViewModel<GoalDetailViewModel.ViewState, GoalDetailViewModel.Action>(
-    ViewState()
-) {
+) : BaseViewModel() {
+
     private var goalId = 0L
+
+    val savedGoal: LiveData<Long> get() = _savedGoal
+    private val _savedGoal = MutableLiveData<Long>()
+    val goal: LiveData<Goal> get() = _goal
+    private val _goal = MutableLiveData<Goal>()
+    val savedItem: LiveData<Long> get() = _savedItem
+    private val _savedItem = MutableLiveData<Long>()
+    val items: LiveData<List<Item>> get() = _items
+    private val _items = MutableLiveData<List<Item>>()
+    val savedHistoric: LiveData<Long> get() = _savedHistoric
+    private val _savedHistoric = MutableLiveData<Long>()
+    val historics: LiveData<List<Historic>> get() = _historics
+    private val _historics = MutableLiveData<List<Historic>>()
 
     fun setGoalId(goalId: Long) {
         this.goalId = goalId
     }
 
-    override fun onLoadData() {
-        getGoal()
-    }
+    override fun loadData() {
+        if (goalId > 0L) {
+            getGoal()
 
-    fun onSaveGoal(goal: Goal) {
-        saveGoal(goal)
-    }
-
-    fun onSaveItem(item: Item, isFromDragOnDrop: Boolean = false) {
-        saveItem(item, isFromDragOnDrop)
-    }
-
-    fun onSaveHistoric(historic: Historic) {
-        saveHistoric(historic)
-    }
-
-    private fun saveGoal(goal: Goal) {
-        viewModelScope.launch {
-            saveGoalUseCase.execute(goal).also {
-                if (it > 0) {
-                    sendAction(Action.GoalSaved)
-                }
-            }
+            getItems()
+            getHistorics()
         }
     }
 
-    private fun saveItem(item: Item, isFromDragOnDrop: Boolean) {
+    fun saveGoal(goal: Goal) {
         viewModelScope.launch {
-            saveItemUseCase.execute(item).also {
-                if (it > 0) {
-                    if (!isFromDragOnDrop) {
-                        sendAction(Action.ItemSaved)
-
-                        getItems() // for now
-                    }
-                }
-            }
-        }
-    }
-
-    private fun saveHistoric(historic: Historic) {
-        viewModelScope.launch {
-            saveHistoricUseCCase.execute(historic).also {
-                if (it > 0) {
-                    sendAction(Action.HistoricSaved)
-
-                    getHistorics() // for now
-                }
-            }
+            _savedGoal.postValue(saveGoalUseCase(goal))
         }
     }
 
     private fun getGoal() {
         viewModelScope.launch {
-            getGoalUseCase.execute(goalId).also {
-                if (it.goalId > 0) {
-                    getItems()
-                    getHistorics()
-
-                    sendAction(
-                        Action.GoalLoaded(it)
-                    )
-                }
-            }
+            _goal.postValue(getGoalUseCase(goalId))
         }
     }
 
-    private fun getItems() {
+    fun saveItem(item: Item, isFromDragOnDrop: Boolean = false) {
         viewModelScope.launch {
-            getItemListUseCase.execute(goalId).also {
-                if (it.isNotEmpty()) {
-                    sendAction(
-                        Action.ItemListLoaded(it)
-                    )
+            saveItemUseCase(item).also {
+                if (!isFromDragOnDrop) {
+                    _savedItem.postValue(it)
                 }
             }
         }
     }
 
-    private fun getHistorics() {
+    fun getItems() {
         viewModelScope.launch {
-            getHistoricListUseCase.execute(goalId).also {
-                if (it.isNotEmpty()) {
-                    sendAction(
-                        Action.HistoricListLoaded(it)
-                    )
-                }
-            }
+            _items.postValue(getItemListUseCase(goalId))
         }
     }
 
-    override fun onReduceState(viewAction: Action) = when (viewAction) {
-        is Action.GoalSaved -> state.copy(
-            goalSaved = true
-        )
-        is Action.GoalLoaded -> state.copy(
-            goal = viewAction.goal
-        )
-        is Action.ItemSaved -> state.copy(
-            itemSaved = true
-        )
-        is Action.ItemListLoaded -> state.copy(
-            items = viewAction.items
-        )
-        is Action.HistoricSaved -> state.copy(
-            historicSaved = true
-        )
-        is Action.HistoricListLoaded -> state.copy(
-            historics = viewAction.historics
-        )
+    fun saveHistoric(historic: Historic) {
+        viewModelScope.launch {
+            _savedHistoric.postValue(saveHistoricUseCCase(historic))
+        }
     }
 
-    data class ViewState(
-        val goalSaved: Boolean = false,
-        val goal: Goal = Goal(),
-        val itemSaved: Boolean = false,
-        val items: List<Item> = listOf(),
-        val historicSaved: Boolean = false,
-        val historics: List<Historic> = listOf()
-    ) : BaseViewState
-
-    sealed class Action : BaseAction {
-        object GoalSaved : Action()
-        class GoalLoaded(val goal: Goal) : Action()
-        object ItemSaved : Action()
-        class ItemListLoaded(val items: List<Item>) : Action()
-        object HistoricSaved : Action()
-        class HistoricListLoaded(val historics: List<Historic>) : Action()
+    fun getHistorics() {
+        viewModelScope.launch {
+            _historics.postValue(getHistoricListUseCase(goalId))
+        }
     }
 }

@@ -5,18 +5,18 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.getPercentage
 import com.rafaelfelipeac.improov.core.extension.isVisible
+import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.vibrate
+import com.rafaelfelipeac.improov.core.extension.getPercentage
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import kotlinx.android.synthetic.main.fragment_list.*
+import kotlinx.android.synthetic.main.fragment_goal_list.*
 
 const val PERCENTAGE_MAX = 100
 const val SECONDS_BOTTOM_SHEET = 1000L
@@ -27,32 +27,14 @@ class GoalListFragment : BaseFragment() {
     private var goalsAdapter = GoalListAdapter(this)
 
     private var swipeShown = false
+    private var swipedPosition: Int = 0
 
     private val viewModel by lazy { viewModelFactory.get<GoalListViewModel>(this) }
-
-    private val stateObserver = Observer<GoalListViewModel.ViewState> { response ->
-        response.goals
-            .let { goalsAdapter.setItems(it) }
-        setupGoals(response.goals.isNotEmpty())
-
-        if (response.firstTimeList && !swipeShown) {
-            showBottomSheetTipsSwipe()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         injector.inject(this)
-
-        setHasOptionsMenu(true)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        main.closeToolbar()
-        hideBottomSheetTips()
     }
 
     override fun onCreateView(
@@ -61,34 +43,65 @@ class GoalListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        main.supportActionBar?.title = getString(R.string.list_title)
+        setScreen()
 
-        showNavigation()
-
-        return inflater.inflate(R.layout.fragment_list, container, false)
+        return inflater.inflate(R.layout.fragment_goal_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observe(viewModel.stateLiveData, stateObserver)
         viewModel.loadData()
 
+        setupLayout()
+        setupBottomSheetGoal()
+        observeViewModel()
+    }
+
+    private fun setScreen() {
+        hideToolbar()
+        showNavigation()
+        hideBottomSheetTips()
+    }
+
+    private fun setupLayout() {
         fab.setOnClickListener {
             hideBottomSheetTips()
 
-            navController.navigate(GoalListFragmentDirections.actionNavigationListToNavigationGoalForm())
+            navController.navigate(GoalListFragmentDirections.listToGoalForm())
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.savedGoal.observe(this) {
+            reloadGoalAfterSwipe()
         }
 
-        setupBottomSheetGoal()
+        viewModel.goals.observe(this) {
+            it.let { goalsAdapter.setItems(it) }
+            setupGoals(it.isNotEmpty())
+        }
+
+        viewModel.savedFirstTimeList.observe(this) {
+            if (!swipeShown) {
+                showBottomSheetTipsSwipe()
+            }
+        }
+
+        viewModel.firstTimeList.observe(this) {
+            if (it) {
+                viewModel.saveFirstTimeList(false)
+            }
+        }
     }
 
     private fun setupGoals(visible: Boolean = true) {
-        setGoals()
+            setGoals()
 
-        list_list.isVisible(visible)
-        list_placeholder.isVisible(!visible)
+            goal_list_loading.gone()
+
+            goal_list_list.isVisible(visible)
+            goal_list_placeholder.isVisible(!visible)
     }
 
     private fun setGoals() {
@@ -98,15 +111,15 @@ class GoalListFragment : BaseFragment() {
             )
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        touchHelper.attachToRecyclerView(list_list)
+        touchHelper.attachToRecyclerView(goal_list_list)
 
         goalsAdapter.touchHelper = touchHelper
         goalsAdapter.clickListener = {
-            val action = GoalListFragmentDirections.actionNavigationListToNavigationGoal(it.goalId)
+            val action = GoalListFragmentDirections.listToGoal(it.goalId)
             navController.navigate(action)
         }
 
-        list_list.apply {
+        goal_list_list.apply {
             setHasFixedSize(true)
 
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -126,8 +139,8 @@ class GoalListFragment : BaseFragment() {
         target.order = toPosition
         other.order = fromPosition
 
-        viewModel.onSaveGoal(target, isFromDragAndDrop = true)
-        viewModel.onSaveGoal(other, isFromDragAndDrop = true)
+        viewModel.saveGoal(target, isFromDragAndDrop = true)
+        viewModel.saveGoal(other, isFromDragAndDrop = true)
 
         items.removeAt(fromPosition)
         items.add(toPosition, target)
@@ -145,16 +158,18 @@ class GoalListFragment : BaseFragment() {
     ) {
         val goal = items[position]
 
+        swipedPosition = position
+
         when (direction) {
             ItemTouchHelper.RIGHT -> {
                 if (goal.done || goal.getPercentage() >= PERCENTAGE_MAX) {
                     doneOrUndoneGoal(goal)
                 } else {
-                    setupGoals(true)
-                    showBottomSheetGoal(goal, ::doneOrUndoneGoal)
+                    showBottomSheetGoal(goal, ::doneOrUndoneGoal, ::reloadGoalAfterSwipe)
                 }
             }
             ItemTouchHelper.LEFT -> {
+                reloadGoalAfterSwipe()
 //                goal.archived = true
 //                        goal.archiveDate = getCurrentTime()
 //
@@ -170,17 +185,19 @@ class GoalListFragment : BaseFragment() {
         goal.done = !goal.done
         goal.undoneDate = getCurrentTime()
 
-        viewModel.onSaveGoal(goal)
+        viewModel.saveGoal(goal)
+    }
+
+    private fun reloadGoalAfterSwipe() {
+        goalsAdapter.updateGoal(swipedPosition)
     }
 
     private fun archiveGoal(goal: Any) {
         (goal as Goal).archived = false
-        viewModel.onSaveGoal(goal)
+        viewModel.saveGoal(goal)
     }
 
     private fun showBottomSheetTipsSwipe() {
-        viewModel.onSaveFirstTimeList(false)
-
         swipeShown = true
 
         Handler().postDelayed(

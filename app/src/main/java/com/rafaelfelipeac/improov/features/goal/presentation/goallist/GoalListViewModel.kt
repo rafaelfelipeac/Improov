@@ -1,12 +1,12 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goallist
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.rafaelfelipeac.improov.core.platform.base.BaseAction
 import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
-import com.rafaelfelipeac.improov.core.platform.base.BaseViewState
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.SaveFirstTimeListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.GetFirstTimeListUseCase
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.SaveFirstTimeListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
 import kotlinx.coroutines.launch
@@ -17,35 +17,27 @@ class GoalListViewModel @Inject constructor(
     private val getGoalListUseCase: GetGoalListUseCase,
     private val saveFirstTimeListUseCase: SaveFirstTimeListUseCase,
     private val getFirstTimeListUseCase: GetFirstTimeListUseCase
-) : BaseViewModel<GoalListViewModel.ViewState, GoalListViewModel.Action>(
-    ViewState()
-) {
+) : BaseViewModel() {
 
-    override fun onLoadData() {
+    val savedGoal: LiveData<Long> get() = _savedGoal
+    private val _savedGoal = MutableLiveData<Long>()
+    val goals: LiveData<List<Goal>> get() = _goals
+    private val _goals = MutableLiveData<List<Goal>>()
+    val savedFirstTimeList: LiveData<Unit> get() = _savedFirstTimeList
+    private val _savedFirstTimeList = MutableLiveData<Unit>()
+    val firstTimeList: LiveData<Boolean> get() = _firstTimeList
+    private val _firstTimeList = MutableLiveData<Boolean>()
+
+    override fun loadData() {
         getGoals()
-
         getFirstTimeList()
     }
 
-    fun onSaveGoal(goal: Goal, isFromDragAndDrop: Boolean = false) {
-        saveGoal(goal, isFromDragAndDrop)
-    }
-
-    fun onSaveFirstTimeList(firstTimeList: Boolean) {
-        saveFirstTimeList(firstTimeList)
-    }
-
-    private fun saveGoal(goal: Goal, isFromDragAndDrop: Boolean) {
+    fun saveGoal(goal: Goal, isFromDragAndDrop: Boolean = false) {
         viewModelScope.launch {
-            saveGoalUseCase.execute(goal).also {
-                if (it > 0) {
-                    if (!isFromDragAndDrop) {
-                        sendAction(
-                            Action.GoalSaved
-                        )
-
-                        getGoals() // for now
-                    }
+            saveGoalUseCase(goal).also {
+                if (!isFromDragAndDrop) {
+                    _savedGoal.postValue(it)
                 }
             }
         }
@@ -53,58 +45,19 @@ class GoalListViewModel @Inject constructor(
 
     private fun getGoals() {
         viewModelScope.launch {
-            getGoalListUseCase.execute().also {
-                if (it.isNotEmpty()) {
-                    sendAction(
-                        Action.GoalListLoaded(it)
-                    )
-                }
-            }
+            _goals.postValue(getGoalListUseCase())
         }
     }
 
-    private fun saveFirstTimeList(firstTimeList: Boolean) {
+    fun saveFirstTimeList(firstTimeList: Boolean) {
         viewModelScope.launch {
-            saveFirstTimeListUseCase.execute(firstTimeList).also {
-                sendAction(Action.FirstTimeListSaved)
-            }
+            _savedFirstTimeList.postValue(saveFirstTimeListUseCase(firstTimeList))
         }
     }
 
     private fun getFirstTimeList() {
         viewModelScope.launch {
-            getFirstTimeListUseCase.execute().also {
-                sendAction(Action.FirstTimeListLoaded(it))
-            }
+            _firstTimeList.postValue(getFirstTimeListUseCase())
         }
-    }
-
-    override fun onReduceState(viewAction: Action) = when (viewAction) {
-        is Action.GoalSaved -> state.copy(
-            goalSaved = true
-        )
-        is Action.GoalListLoaded -> state.copy(
-            goals = viewAction.goals
-        )
-        is Action.FirstTimeListSaved -> state.copy(
-            firstTimeListSaved = true
-        )
-        is Action.FirstTimeListLoaded -> state.copy(
-            firstTimeList = viewAction.firstTimeList
-        )
-    }
-
-    data class ViewState(
-        val goalSaved: Boolean = false,
-        val goals: List<Goal> = listOf(),
-        val firstTimeListSaved: Boolean = false,
-        val firstTimeList: Boolean = false
-    ) : BaseViewState
-
-    sealed class Action : BaseAction {
-        object GoalSaved : Action()
-        class GoalListLoaded(val goals: List<Goal>) : Action()
-        object FirstTimeListSaved : Action()
-        class FirstTimeListLoaded(val firstTimeList: Boolean) : Action()
     }
 }

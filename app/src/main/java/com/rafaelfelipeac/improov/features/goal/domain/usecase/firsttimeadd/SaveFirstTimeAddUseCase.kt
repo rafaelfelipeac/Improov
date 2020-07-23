@@ -6,7 +6,7 @@ import javax.inject.Inject
 class SaveFirstTimeAddUseCase @Inject constructor(
     private val firstTimeAddRepository: FirstTimeAddRepository
 ) {
-    suspend fun execute(firstTimeAdd: Boolean) {
+    suspend operator fun invoke(firstTimeAdd: Boolean) {
         return firstTimeAddRepository.save(firstTimeAdd)
     }
 }

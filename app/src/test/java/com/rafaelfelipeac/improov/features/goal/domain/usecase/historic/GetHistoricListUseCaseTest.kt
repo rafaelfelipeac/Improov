@@ -49,7 +49,7 @@ class GetHistoricListUseCaseTest {
                 .willReturn(historics)
 
             // when
-            val result = getHistoricListUseCase.execute(goalIdCustom)
+            val result = getHistoricListUseCase(goalIdCustom)
 
             // then
             result shouldBeEqualTo filteredAndReversedList

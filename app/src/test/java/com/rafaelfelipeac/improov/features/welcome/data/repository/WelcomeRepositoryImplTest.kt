@@ -6,7 +6,6 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.BDDMockito.given
 import org.mockito.Mock
 import org.mockito.Mockito.doNothing
 import org.mockito.junit.MockitoJUnitRunner
@@ -25,39 +24,18 @@ class WelcomeRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a boolean value WHEN Get is called THEN return the same boolean value`() {
-        runBlocking {
-            // given
-            val booleanValue = false
-
-            given(preferences.welcome)
-                .willReturn(booleanValue)
-
-            // when
-            val result = welcomeRepositoryImpl.getWelcome()
-
-            // then
-            result shouldBeEqualTo booleanValue
-        }
-    }
-
-    @Test
     fun `GIVEN a saved new boolean value WHEN Get is called THEN the new boolean value must be returned`() {
         runBlocking {
             // given
             val booleanValue = true
 
             doNothing().`when`(preferences).welcome = booleanValue
-            given(preferences.welcome)
-                .willReturn(booleanValue)
 
             // when
             val resultOfSave = welcomeRepositoryImpl.save(booleanValue)
-            val returnOfGet = welcomeRepositoryImpl.getWelcome()
 
             // then
             resultOfSave shouldBeEqualTo Unit
-            returnOfGet shouldBeEqualTo booleanValue
         }
     }
 }

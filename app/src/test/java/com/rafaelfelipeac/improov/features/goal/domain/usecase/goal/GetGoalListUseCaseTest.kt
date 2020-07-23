@@ -42,7 +42,7 @@ class GetGoalListUseCaseTest {
                 .willReturn(goals)
 
             // when
-            val result = getGoalListUseCase.execute()
+            val result = getGoalListUseCase()
 
             // then
             result shouldBeEqualTo orderedGoals

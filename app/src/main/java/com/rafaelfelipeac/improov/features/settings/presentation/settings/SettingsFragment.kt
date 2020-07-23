@@ -4,9 +4,11 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.preference.Preference
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.platform.AppConfig.MARKET_BASE_URL
 import com.rafaelfelipeac.improov.core.platform.AppConfig.PLAY_STORE_BASE_URL
 import com.rafaelfelipeac.improov.core.platform.base.BasePreferenceFragment
@@ -17,21 +19,22 @@ class SettingsFragment : BasePreferenceFragment() {
         setPreferencesFromResource(R.xml.preferences, rootKey)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        main.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        main.openToolbar()
-        main.navLayout.gone()
-        main.fakeBottomNav.gone()
-        main.supportActionBar?.title = getString(R.string.settings_title)
+        setScreen()
+
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
         return when (preference.key) {
             getString(R.string.settings_pref_key_language_message) -> {
                 navController.navigate(
-                    SettingsFragmentDirections.actionNavigationSettingsToNavigationSettingsLanguage()
+                    SettingsFragmentDirections.settingsToSettingsLanguage()
                 )
                 true
             }
@@ -80,5 +83,12 @@ class SettingsFragment : BasePreferenceFragment() {
                 super.onPreferenceTreeClick(preference)
             }
         }
+    }
+
+    private fun setScreen() {
+        setTitle(getString(R.string.settings_title))
+        showBackArrow()
+        hasMenu()
+        hideNavigation()
     }
 }

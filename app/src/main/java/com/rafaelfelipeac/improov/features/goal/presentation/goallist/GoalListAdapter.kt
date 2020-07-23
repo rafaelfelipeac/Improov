@@ -111,4 +111,9 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
     override fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder) {
         fragment.onViewSwiped(position, direction, items)
     }
+
+    fun updateGoal(position: Int) {
+        notifyItemRemoved(position)
+        notifyItemInserted(position)
+    }
 }

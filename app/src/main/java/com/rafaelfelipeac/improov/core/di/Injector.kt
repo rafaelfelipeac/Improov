@@ -8,9 +8,11 @@ import com.rafaelfelipeac.improov.features.profile.presentation.profile.ProfileF
 import com.rafaelfelipeac.improov.features.profile.presentation.profileedit.ProfileEditFragment
 import com.rafaelfelipeac.improov.features.settings.presentation.settings.SettingsFragment
 import com.rafaelfelipeac.improov.features.settings.presentation.settingslanguage.SettingsLanguageFragment
+import com.rafaelfelipeac.improov.features.splash.presentation.SplashFragment
 import com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeFragment
 import com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeItemFragment
 
+@Suppress("TooManyFunctions")
 interface Injector {
     fun inject(baseActivity: BaseActivity)
 
@@ -31,4 +33,6 @@ interface Injector {
     fun inject(settingsFragment: SettingsFragment)
 
     fun inject(settingsLanguageFragment: SettingsLanguageFragment)
+
+    fun inject(splashFragment: SplashFragment)
 }

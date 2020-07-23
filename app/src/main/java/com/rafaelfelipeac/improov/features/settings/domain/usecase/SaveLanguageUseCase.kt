@@ -6,7 +6,7 @@ import javax.inject.Inject
 class SaveLanguageUseCase @Inject constructor(
     private val languageRepository: LanguageRepository
 ) {
-    suspend fun execute(language: String) {
+    suspend operator fun invoke(language: String) {
         return languageRepository.save(language)
     }
 }

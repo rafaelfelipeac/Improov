@@ -35,7 +35,7 @@ class GetItemUseCaseTest {
                 .willReturn(item)
 
             // when
-            val result = getItemUseCase.execute(itemId)
+            val result = getItemUseCase(itemId)
 
             // then
             result shouldBeEqualTo item

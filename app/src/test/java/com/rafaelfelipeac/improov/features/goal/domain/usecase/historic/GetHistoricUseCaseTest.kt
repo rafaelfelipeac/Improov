@@ -35,7 +35,7 @@ class GetHistoricUseCaseTest {
                 .willReturn(historic)
 
             // when
-            val result = getHistoricUseCase.execute(historicId)
+            val result = getHistoricUseCase(historicId)
 
             // then
             result shouldBeEqualTo historic

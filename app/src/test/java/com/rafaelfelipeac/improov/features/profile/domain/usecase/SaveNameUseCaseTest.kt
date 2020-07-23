@@ -33,7 +33,7 @@ class SaveNameUseCaseTest {
                 .willReturn(Unit)
 
             // when
-            val result = saveNameUseCase.execute(name)
+            val result = saveNameUseCase(name)
 
             // then
             result shouldBeEqualTo Unit

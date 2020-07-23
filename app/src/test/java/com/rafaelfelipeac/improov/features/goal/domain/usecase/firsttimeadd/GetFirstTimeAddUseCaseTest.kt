@@ -32,7 +32,7 @@ class GetFirstTimeAddUseCaseTest {
                 .willReturn(booleanValue)
 
             // when
-            val result = getFirstTimeAddUseCase.execute()
+            val result = getFirstTimeAddUseCase()
 
             // then
             result shouldBeEqualTo booleanValue

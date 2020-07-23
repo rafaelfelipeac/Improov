@@ -9,6 +9,7 @@ import com.rafaelfelipeac.improov.core.di.modules.ProfileModule
 import com.rafaelfelipeac.improov.core.di.modules.WelcomeModule
 import com.rafaelfelipeac.improov.core.di.modules.PersistenceModule
 import com.rafaelfelipeac.improov.core.di.modules.SettingsModule
+import com.rafaelfelipeac.improov.core.di.modules.SplashModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -21,7 +22,8 @@ import javax.inject.Singleton
     ProfileModule::class,
     WelcomeModule::class,
     PersistenceModule::class,
-    SettingsModule::class
+    SettingsModule::class,
+    SplashModule::class
 ])
 @Singleton
 interface AppComponent : Injector {

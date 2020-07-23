@@ -21,6 +21,7 @@ import com.rafaelfelipeac.improov.core.di.modules.viewModel.ViewModelFactory
 import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.extension.setMessageColor
+import com.rafaelfelipeac.improov.core.extension.setIcon
 import com.rafaelfelipeac.improov.core.extension.isEmpty
 import com.rafaelfelipeac.improov.core.extension.resetValue
 import com.rafaelfelipeac.improov.core.extension.convertDateToString
@@ -42,11 +43,8 @@ abstract class BaseFragment : Fragment() {
     val main get() = (activity as MainActivity)
 
     val fab get() = main.fab
-
     val navController get() = main.navController
-
     private val navLayout get() = main.navLayout
-
     private val fakeBottomNav get() = main.fakeBottomNav
 
     private lateinit var bottomSheetGoal: BottomSheetDialog
@@ -79,17 +77,28 @@ abstract class BaseFragment : Fragment() {
         fakeBottomNav.gone()
     }
 
-    fun showSnackBar(message: String) {
-        Snackbar
-            .make(requireView(), message, Snackbar.LENGTH_SHORT)
-            .setMessageColor(R.color.colorPrimaryDarkOne)
-            .show()
+    fun hideToolbar() = main.supportActionBar?.hide()
+
+    fun showBackArrow() {
+        main.supportActionBar?.show()
+        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
-    fun showSnackBarLong(message: String) {
+    fun setTitle(title: String) {
+        main.supportActionBar?.show()
+        main.supportActionBar?.title = title
+    }
+
+    fun hasMenu() {
+        main.supportActionBar?.show()
+        setHasOptionsMenu(true)
+    }
+
+    fun showSnackBar(message: String) {
         Snackbar
             .make(requireView(), message, Snackbar.LENGTH_LONG)
             .setMessageColor(R.color.colorPrimaryDarkOne)
+            .setIcon(resources, message == getString(R.string.goal_message_goal_done))
             .show()
     }
 
@@ -145,7 +154,8 @@ abstract class BaseFragment : Fragment() {
 
     fun showBottomSheetGoal(
         goal: Goal,
-        functionYes: (goal: Goal) -> Unit
+        functionYes: (goal: Goal) -> Unit,
+        functionToReload: () -> Unit
     ) {
         bottomSheetGoal.show()
 
@@ -155,7 +165,12 @@ abstract class BaseFragment : Fragment() {
         }
 
         bottomSheetGoalNo.setOnClickListener {
+            functionToReload()
             hideBottomSheetGoal()
+        }
+
+        bottomSheetGoal.setOnDismissListener {
+            functionToReload()
         }
     }
 
@@ -205,6 +220,7 @@ abstract class BaseFragment : Fragment() {
         if (item != null) {
             bottomSheetItemTitle.text = getString(R.string.item_title_edit)
             bottomSheetItemName.setText(item.name)
+            bottomSheetItemName.setSelection(bottomSheetItemName.text?.length!!)
 
             if (item.done) {
                 bottomSheetItemDate.text = String.format(
