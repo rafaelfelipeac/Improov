@@ -5,6 +5,21 @@
         app:startDestination="@id/navigation_splash">
 
     <fragment
+            android:id="@+id/navigation_splash"
+            android:name="com.rafaelfelipeac.improov.features.splash.presentation.SplashFragment"
+            android:label="fragment_splash"
+            tools:layout="@layout/fragment_splash" >
+
+        <action
+                android:id="@+id/splash_to_welcome"
+                app:destination="@id/navigation_welcome" />
+        <action
+                android:id="@+id/splash_to_list"
+                app:destination="@id/navigation_list" />
+
+    </fragment>
+
+    <fragment
             android:id="@+id/navigation_welcome"
             android:name="com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeFragment"
             android:label="fragment_welcome"
@@ -105,26 +120,12 @@
         <action
                 android:id="@+id/settings_to_settings_language"
                 app:destination="@id/navigation_settings_language" />
+
     </fragment>
 
     <fragment
             android:id="@+id/navigation_settings_language"
             android:name="com.rafaelfelipeac.improov.features.settings.presentation.settingslanguage.SettingsLanguageFragment"
             android:label="fragment_settings_language" />
-
-    <fragment
-            android:id="@+id/navigation_splash"
-            android:name="com.rafaelfelipeac.improov.features.splash.presentation.SplashFragment"
-            android:label="fragment_splash"
-            tools:layout="@layout/fragment_splash" >
-
-        <action
-                android:id="@+id/splash_to_welcome"
-                app:destination="@id/navigation_welcome" />
-        <action
-                android:id="@+id/splash_to_list"
-                app:destination="@id/navigation_list" />
-
-    </fragment>
 
 </navigation>
