@@ -6,7 +6,7 @@ import javax.inject.Inject
 class SaveNameUseCase @Inject constructor(
     private val nameRepository: NameRepository
 ) {
-    suspend fun execute(name: String) {
+    suspend operator fun invoke(name: String) {
         return nameRepository.save(name)
     }
 }

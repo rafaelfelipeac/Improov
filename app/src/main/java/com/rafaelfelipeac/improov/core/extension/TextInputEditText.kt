@@ -57,14 +57,14 @@ fun TextInputEditText.fieldIsEmptyOrZero(fragment: BaseFragment, showSnackbar: B
     when {
         isEmpty() || text.toString() == "" -> {
             if (showSnackbar) {
-                fragment.showSnackBarLong(fragment.getString(R.string.goal_form_single_value_empty))
+                fragment.showSnackBar(fragment.getString(R.string.goal_form_single_value_empty))
             }
 
             requestFocus()
         }
         text.toString()[0] == '0' -> {
             if (showSnackbar) {
-                fragment.showSnackBarLong(fragment.getString(R.string.goal_form_single_value_zero))
+                fragment.showSnackBar(fragment.getString(R.string.goal_form_single_value_zero))
             }
 
             requestFocus()

@@ -10,13 +10,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.visible
+import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.invisible
 import com.rafaelfelipeac.improov.core.extension.setup
 import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
@@ -26,13 +26,12 @@ import com.rafaelfelipeac.improov.core.extension.isNotEmpty
 import com.rafaelfelipeac.improov.core.extension.enableIcon
 import com.rafaelfelipeac.improov.core.extension.disableIcon
 import com.rafaelfelipeac.improov.core.extension.vibrate
-import com.rafaelfelipeac.improov.core.extension.isVisible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
-import kotlinx.android.synthetic.main.fragment_goal.*
+import kotlinx.android.synthetic.main.fragment_goal_detail.*
 import java.util.Date
 
 @Suppress("TooManyFunctions")
@@ -40,6 +39,8 @@ class GoalDetailFragment : BaseFragment() {
 
     private var itemsAdapter = ItemsAdapter(this)
     private var historicAdapter = HistoricAdapter()
+
+    private var swipedPosition: Int = 0
 
     private var seriesSingle: Int = 0
     private var seriesBronze: Int = 0
@@ -51,50 +52,19 @@ class GoalDetailFragment : BaseFragment() {
     private var goal: Goal? = null
     private var item: Item? = null
     private var itemsSize: Int? = null
+    private var historicsSize: Int? = null
 
     private var count: Float = 0F
 
     private val viewModel by lazy { viewModelFactory.get<GoalDetailViewModel>(this) }
-
-    private val stateObserver = Observer<GoalDetailViewModel.ViewState> { response ->
-        goal = response.goal
-        setupGoal()
-
-        itemsSize = response.items.size
-
-        response.items
-            .let { itemsAdapter.setItems(it) }
-        setupItems(response.items.isNotEmpty())
-
-        response.historics
-            .let { historicAdapter.setItems(it) }
-        setupHistoric(response.historics.isNotEmpty())
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         injector.inject(this)
 
-        setHasOptionsMenu(true)
-
-        main.openToolbar()
-
         goalId = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalId }
         goalNew = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalNew }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        main.supportActionBar?.title = getString(R.string.goal_title)
-
-        hideNavigation()
-
-        return inflater.inflate(R.layout.fragment_goal, container, false)
     }
 
     override fun onResume() {
@@ -103,22 +73,30 @@ class GoalDetailFragment : BaseFragment() {
         resetFistTime()
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        setScreen()
+
+        return inflater.inflate(R.layout.fragment_goal_detail, container, false)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observe(viewModel.stateLiveData, stateObserver)
-
-        viewModel.setGoalId(goalId!!)
+        goalId.let {
+            if (it!! > 0L) {
+                viewModel.setGoalId(goalId!!)
+            }
+        }
         viewModel.loadData()
 
-        setupBottomSheetItem(::newItem, ::updateItem)
-    }
+        observeViewModel()
 
-    private fun resetFistTime() {
-        seriesSingle = 0
-        seriesBronze = 0
-        seriesSilver = 0
-        seriesGold = 0
+        setupBottomSheetItem(::newItem, ::updateItem)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -135,7 +113,7 @@ class GoalDetailFragment : BaseFragment() {
                 return true
             }
             R.id.menu_edit -> {
-                val action = GoalDetailFragmentDirections.actionNavigationGoalToNavigationGoalForm()
+                val action = GoalDetailFragmentDirections.goalToGoalForm()
                 action.goalId = goal?.goalId!!
                 navController.navigate(action)
             }
@@ -149,16 +127,64 @@ class GoalDetailFragment : BaseFragment() {
         return false
     }
 
+    private fun setScreen() {
+        setTitle(getString(R.string.goal_title))
+        showBackArrow()
+        hasMenu()
+        hideNavigation()
+    }
+
+    private fun observeViewModel() {
+        viewModel.savedGoal.observe(this) {
+            updateProgress()
+        }
+
+        viewModel.goal.observe(this) {
+            goal = it
+            setupGoal()
+        }
+
+        viewModel.savedItem.observe(this) {
+            viewModel.getItems()
+
+            updateTextAndGoal()
+
+            reloadItemAfterSwipe()
+        }
+
+        viewModel.items.observe(this) {
+            itemsSize = it.size
+
+            it.let { itemsAdapter.setItems(it) }
+            setupItems()
+        }
+
+        viewModel.savedHistoric.observe(this) {
+            viewModel.getHistorics()
+
+            updateTextAndGoal()
+        }
+
+        viewModel.historics.observe(this) {
+            historicsSize = it.size
+
+            it.let { historicAdapter.setItems(it) }
+            setupHistoric()
+        }
+    }
+
+    private fun resetFistTime() {
+        seriesSingle = 0
+        seriesBronze = 0
+        seriesSilver = 0
+        seriesGold = 0
+    }
+
     private fun setupButtons() {
-        goal_btn_counter_inc.setOnClickListener {
+        goal_detail_btn_counter_inc.setOnClickListener {
             count += goal?.incrementValue!!
 
-            val oldDone = goal!!.done
-            goal?.done = verifyIfGoalIsDone()
-
-            updateTextAndGoal(goal_counter_total)
-
-            viewModel.onSaveHistoric(
+            viewModel.saveHistoric(
                 Historic(
                     value = goal?.incrementValue!!,
                     date = Date(),
@@ -166,18 +192,13 @@ class GoalDetailFragment : BaseFragment() {
                 )
             )
 
-            verifyIfWasDone(oldDone)
+            updateGoal()
         }
 
-        goal_btn_counter_dec.setOnClickListener {
+        goal_detail_btn_counter_dec.setOnClickListener {
             count -= goal?.decrementValue!!
 
-            val oldDone = goal!!.done
-            goal?.done = verifyIfGoalIsDone()
-
-            updateTextAndGoal(goal_counter_total)
-
-            viewModel.onSaveHistoric(
+            viewModel.saveHistoric(
                 Historic(
                     value = goal?.decrementValue!! * -1,
                     date = Date(),
@@ -185,51 +206,35 @@ class GoalDetailFragment : BaseFragment() {
                 )
             )
 
-            verifyIfWasDone(oldDone)
+            updateGoal()
         }
 
-        goal_button_save.setOnClickListener {
-            if (goal_total_total.isNotEmpty()) {
-                count = goal?.value!! + goal_total_total.toFloat()
+        goal_detail_button_save.setOnClickListener {
+            if (goal_detail_total_total.isNotEmpty()) {
+                count = goal?.value!! + goal_detail_total_total.toFloat()
 
-                val oldDone = goal!!.done
-                goal?.done = verifyIfGoalIsDone()
-
-                updateTextAndGoal(goal_count)
-
-                viewModel.onSaveHistoric(
+                viewModel.saveHistoric(
                     Historic(
-                        value = goal_total_total.toFloat(),
+                        value = goal_detail_total_total.toFloat(),
                         date = Date(),
                         goalId = goal?.goalId!!
                     )
                 )
 
-                goal_total_total.resetValue()
+                updateGoal()
 
-                verifyIfWasDone(oldDone)
+                goal_detail_total_total.resetValue()
             } else {
-                showSnackBarLong(getString(R.string.goal_message_goal_value_invalid))
+                showSnackBar(getString(R.string.goal_message_goal_value_invalid))
             }
         }
-    }
-
-    private fun onScoreFromList(done: Boolean) {
-        if (done) count++ else count--
-
-        val oldDone = goal!!.done
-        goal?.done = verifyIfGoalIsDone()
-
-        updateTextAndGoal(goal_count)
-
-        verifyIfWasDone(oldDone)
     }
 
     private fun setupGoal() {
         count = goal?.value!!
 
-        goal_title.text = goal?.name
-        goal_count.text = count.getNumberInRightFormat()
+        goal_detail_title.text = goal?.name
+        goal_detail_count.text = count.getNumberInRightFormat()
 
 //        if (goal?.date != null) {
 //            val myFormat = getString(R.string.date_format_dmy)
@@ -240,52 +245,55 @@ class GoalDetailFragment : BaseFragment() {
 //        }
 
         if (goal?.divideAndConquer!!) {
-            goal_single.invisible()
-            goal_divide_and_conquer.visible()
+            goal_detail_single.invisible()
+            goal_detail_divide_and_conquer.visible()
 
-            goal_divide_and_conquer_bronze_text.text = goal?.bronzeValue?.getNumberInRightFormat()
-            goal_divide_and_conquer_silver_text.text = goal?.silverValue?.getNumberInRightFormat()
-            goal_divide_and_conquer_gold_text.text = goal?.goldValue?.getNumberInRightFormat()
+            goal_detail_divide_and_conquer_bronze_text.text = goal?.bronzeValue?.getNumberInRightFormat()
+            goal_detail_divide_and_conquer_silver_text.text = goal?.silverValue?.getNumberInRightFormat()
+            goal_detail_divide_and_conquer_gold_text.text = goal?.goldValue?.getNumberInRightFormat()
         } else {
-            goal_single_text.text = goal?.singleValue?.getNumberInRightFormat()
+            goal_detail_single_text.text = goal?.singleValue?.getNumberInRightFormat()
         }
 
         when (goal?.type) {
             GoalType.GOAL_LIST -> {
-                goal_cl_list.visible()
-                goal_cl_counter.invisible()
-                goal_cl_total.invisible()
+                goal_detail_cl_list.visible()
+                goal_detail_cl_counter.invisible()
+                goal_detail_cl_total.invisible()
 
-                goal_historics_list.invisible()
+                goal_detail_historics_list.invisible()
 
                 if (main.toolbar.menu.findItem(R.id.menu_add) == null) {
                     main.toolbar.inflateMenu(R.menu.menu_add)
                 }
             }
             GoalType.GOAL_COUNTER -> {
-                goal_cl_list.invisible()
-                goal_cl_counter.visible()
-                goal_cl_total.invisible()
+                goal_detail_cl_list.invisible()
+                goal_detail_cl_counter.visible()
+                goal_detail_cl_total.invisible()
 
-                goal_historics_list.visible()
+                goal_detail_historics_list.visible()
 
-                goal_counter_total.text = count.getNumberInRightFormat()
+                goal_detail_counter_total.text = count.getNumberInRightFormat()
             }
             GoalType.GOAL_FINAL -> {
-                goal_cl_list.invisible()
-                goal_cl_counter.invisible()
-                goal_cl_total.visible()
+                goal_detail_cl_list.invisible()
+                goal_detail_cl_counter.invisible()
+                goal_detail_cl_total.visible()
 
-                goal_historics_list.visible()
+                goal_detail_historics_list.visible()
             }
             GoalType.GOAL_NONE -> { }
         }
+
+        setupItems()
+        setupHistoric()
 
         if (isTheFirstTime()) {
             resetSingleOrDivideAndConquer()
         }
 
-        updateSingleOrDivideAndConquer()
+        updateProgress()
 
         setupButtons()
     }
@@ -293,40 +301,60 @@ class GoalDetailFragment : BaseFragment() {
     private fun isTheFirstTime() =
         seriesSingle == 0 && (seriesBronze == 0 || seriesSilver == 0 || seriesGold == 0)
 
-    private fun updateTextAndGoal(textView: TextView) {
-        updateText(textView)
-        updateGoal()
+    private fun updateTextAndGoal() {
+        updateText(getTextViewFromGoalType())
 
-        viewModel.onSaveGoal(goal!!)
+        viewModel.saveGoal(goal!!)
     }
 
     private fun updateText(textView: TextView) {
-        goal_count.text = count.getNumberInRightFormat()
+        goal_detail_count.text = count.getNumberInRightFormat()
         textView.text = count.getNumberInRightFormat()
     }
 
     private fun updateGoal() {
         goal?.value = count
-        goal?.done = verifyIfGoalIsDone()
 
-        updateSingleOrDivideAndConquer()
+        val oldDone = goal!!.done
+        goal?.done = verifyIfGoalIsDone()
+        verifyIfWasDone(oldDone)
     }
 
-    private fun setupItems(visible: Boolean) {
-        if (goal?.type == GoalType.GOAL_LIST) {
-            setItems()
-
-            goal_items_list.isVisible(visible)
-            goal_items_placeholder.isVisible(!visible)
+    private fun getTextViewFromGoalType(): TextView {
+        return when (goal?.type) {
+            GoalType.GOAL_LIST, GoalType.GOAL_FINAL -> {
+                goal_detail_count
+            }
+            GoalType.GOAL_COUNTER -> {
+                goal_detail_counter_total
+            }
+            else -> goal_detail_count
         }
     }
 
-    private fun setupHistoric(visible: Boolean) {
-        if (goal?.type == GoalType.GOAL_FINAL || goal?.type == GoalType.GOAL_COUNTER) {
-            setHistory()
+    private fun setupItems() {
+        if (goal?.type == GoalType.GOAL_LIST) {
+            if (itemsSize != null && itemsSize!! > 0) {
+                setItems()
+                goal_detail_items_placeholder.invisible()
+            } else {
+                goal_detail_items_placeholder.visible()
+            }
 
-            goal_historics_list.isVisible(visible)
-            goal_historics_placeholder.isVisible(!visible)
+            goal_detail_loading.gone()
+        }
+    }
+
+    private fun setupHistoric() {
+        if (goal?.type == GoalType.GOAL_FINAL || goal?.type == GoalType.GOAL_COUNTER) {
+            if (historicsSize != null && historicsSize!! > 0) {
+                setHistory()
+                goal_detail_historics_placeholder.invisible()
+            } else {
+                goal_detail_historics_placeholder.visible()
+            }
+
+            goal_detail_loading.gone()
         }
     }
 
@@ -341,23 +369,23 @@ class GoalDetailFragment : BaseFragment() {
 
         itemsAdapter.touchHelper = touchHelper
 
-        goal_items_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        goal_items_list.adapter = itemsAdapter
+        goal_detail_items_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        goal_detail_items_list.adapter = itemsAdapter
 
-        touchHelper.attachToRecyclerView(goal_items_list)
+        touchHelper.attachToRecyclerView(goal_detail_items_list)
     }
 
     private fun setHistory() {
-        goal_historics_list.layoutManager =
+        goal_detail_historics_list.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        goal_historics_list.adapter = historicAdapter
+        goal_detail_historics_list.adapter = historicAdapter
     }
 
     private fun verifyIfGoalIsDone() =
         ((goal!!.divideAndConquer && goal!!.value >= goal!!.goldValue) ||
                 (!goal!!.divideAndConquer && goal!!.value >= goal!!.singleValue))
 
-    private fun updateSingleOrDivideAndConquer() {
+    private fun updateProgress() {
         if (goal?.divideAndConquer!!) {
             updateDivideAndConquer()
         } else {
@@ -375,16 +403,16 @@ class GoalDetailFragment : BaseFragment() {
 
     private fun updateSingle() {
         when {
-            goal?.value!! == 0F -> {
+            goal?.value!! == 0F || goal?.value!! < 0 -> {
                 resetSingle()
             }
             goal?.value!! > 0 && goal?.value!! < goal?.singleValue!! -> {
                 setSingleValue(goal?.value!!)
-                disableIcon(goal_single_image, R.mipmap.ic_medal_dark)
+                disableIcon(goal_detail_single_image, R.mipmap.ic_medal_dark)
             }
             goal?.value!! > 0 && goal?.value!! >= goal?.singleValue!! -> {
                 setSingleValue(goal?.singleValue!!)
-                enableIcon(goal_single_image, R.mipmap.ic_medal)
+                enableIcon(goal_detail_single_image, R.mipmap.ic_medal)
             }
         }
     }
@@ -400,23 +428,23 @@ class GoalDetailFragment : BaseFragment() {
                 resetDivideAndConquerSilver()
 
                 if (goal?.value == goal?.bronzeValue!!) {
-                    enableIcon(goal_divide_and_conquer_bronze_image, R.mipmap.ic_bronze)
+                    enableIcon(goal_detail_divide_and_conquer_bronze_image, R.mipmap.ic_trophy_bronze)
                 } else {
-                    disableIcon(goal_divide_and_conquer_bronze_image, R.mipmap.ic_bronze_dark)
+                    disableIcon(goal_detail_divide_and_conquer_bronze_image, R.mipmap.ic_trophy_bronze_dark)
                 }
             }
             goal?.value!! > 0 && goal?.value!! <= goal?.silverValue!! -> {
                 setDivideAndConquerBronzeValue(goal?.bronzeValue!!)
                 setDivideAndConquerSilverValue(goal?.value!!)
 
-                enableIcon(goal_divide_and_conquer_bronze_image, R.mipmap.ic_bronze)
+                enableIcon(goal_detail_divide_and_conquer_bronze_image, R.mipmap.ic_trophy_bronze)
 
                 resetDivideAndConquerGold()
 
                 if (goal?.value == goal?.silverValue!!) {
-                    enableIcon(goal_divide_and_conquer_silver_image, R.mipmap.ic_silver)
+                    enableIcon(goal_detail_divide_and_conquer_silver_image, R.mipmap.ic_trophy_silver)
                 } else {
-                    disableIcon(goal_divide_and_conquer_silver_image, R.mipmap.ic_silver_dark)
+                    disableIcon(goal_detail_divide_and_conquer_silver_image, R.mipmap.ic_trophy_silver_dark)
                 }
             }
             goal?.value!! > 0 && goal?.value!! <= goal?.goldValue!! -> {
@@ -424,13 +452,13 @@ class GoalDetailFragment : BaseFragment() {
                 setDivideAndConquerSilverValue(goal?.silverValue!!)
                 setDivideAndConquerGoldValue(goal?.value!!)
 
-                enableIcon(goal_divide_and_conquer_bronze_image, R.mipmap.ic_bronze)
-                enableIcon(goal_divide_and_conquer_silver_image, R.mipmap.ic_silver)
+                enableIcon(goal_detail_divide_and_conquer_bronze_image, R.mipmap.ic_trophy_bronze)
+                enableIcon(goal_detail_divide_and_conquer_silver_image, R.mipmap.ic_trophy_silver)
 
                 if (goal?.value == goal?.goldValue!!) {
-                    enableIcon(goal_divide_and_conquer_gold_image, R.mipmap.ic_gold)
+                    enableIcon(goal_detail_divide_and_conquer_gold_image, R.mipmap.ic_trophy_gold)
                 } else {
-                    disableIcon(goal_divide_and_conquer_gold_image, R.mipmap.ic_gold_dark)
+                    disableIcon(goal_detail_divide_and_conquer_gold_image, R.mipmap.ic_trophy_gold_dark)
                 }
             }
         }
@@ -443,7 +471,7 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun resetDivideAndConquerBronze() {
-        seriesBronze = goal_bronze_arcView.resetValue(
+        seriesBronze = goal_detail_bronze_arcView.resetValue(
             minValue = 0F,
             maxValue = goal?.bronzeValue!!,
             initialValue = 0F,
@@ -452,7 +480,7 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun resetDivideAndConquerSilver() {
-        seriesSilver = goal_silver_arcView.resetValue(
+        seriesSilver = goal_detail_silver_arcView.resetValue(
             minValue = goal?.bronzeValue!!,
             maxValue = goal?.silverValue!!,
             initialValue = goal?.bronzeValue!!,
@@ -461,7 +489,7 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun resetDivideAndConquerGold() {
-        seriesGold = goal_gold_arcView.resetValue(
+        seriesGold = goal_detail_gold_arcView.resetValue(
             minValue = goal?.silverValue!!,
             maxValue = goal?.goldValue!!,
             initialValue = goal?.silverValue!!,
@@ -470,7 +498,7 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun resetSingle() {
-        seriesSingle = goal_single_arcView.resetValue(
+        seriesSingle = goal_detail_single_arcView.resetValue(
             minValue = 0F,
             maxValue = goal?.singleValue!!,
             initialValue = 0F,
@@ -479,15 +507,15 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun setDivideAndConquerBronzeValue(value: Float) =
-        goal_bronze_arcView.setup(value, seriesBronze)
+        goal_detail_bronze_arcView.setup(value, seriesBronze)
 
     private fun setDivideAndConquerSilverValue(value: Float) =
-        goal_silver_arcView.setup(value, seriesSilver)
+        goal_detail_silver_arcView.setup(value, seriesSilver)
 
     private fun setDivideAndConquerGoldValue(value: Float) =
-        goal_gold_arcView.setup(value, seriesGold)
+        goal_detail_gold_arcView.setup(value, seriesGold)
 
-    private fun setSingleValue(value: Float) = goal_single_arcView.setup(value, seriesSingle)
+    private fun setSingleValue(value: Float) = goal_detail_single_arcView.setup(value, seriesSingle)
 
     private fun enableIcon(image: ImageView, iconNormal: Int) {
         image.enableIcon(iconNormal, requireContext())
@@ -509,8 +537,8 @@ class GoalDetailFragment : BaseFragment() {
         targetItem.order = toPosition
         otherItem.order = fromPosition
 
-        viewModel.onSaveItem(targetItem, isFromDragOnDrop = true)
-        viewModel.onSaveItem(otherItem, isFromDragOnDrop = true)
+        viewModel.saveItem(targetItem, isFromDragOnDrop = true)
+        viewModel.saveItem(otherItem, isFromDragOnDrop = true)
 
         items.removeAt(fromPosition)
         items.add(toPosition, targetItem)
@@ -528,25 +556,26 @@ class GoalDetailFragment : BaseFragment() {
     ) {
         val item = items[position]
 
+        swipedPosition = position
+
         when (direction) {
             ItemTouchHelper.RIGHT -> {
                 if (item.done) {
-                    item.done = false
-                    item.undoneDate = getCurrentTime()
+                    doneOrUndoneItem(item)
 
-                    viewModel.onSaveItem(item)
+                    count--
 
-                    onScoreFromList(false)
+                    updateGoal()
                 } else {
-                    item.done = true
-                    item.doneDate = getCurrentTime()
+                    doneOrUndoneItem(item)
 
-                    viewModel.onSaveItem(item)
+                    count++
 
-                    onScoreFromList(true)
+                    updateGoal()
                 }
             }
             ItemTouchHelper.LEFT -> {
+                reloadItemAfterSwipe()
 //                setupItems()
 //                item.deleteDate = getCurrentTime()
 //
@@ -558,8 +587,19 @@ class GoalDetailFragment : BaseFragment() {
         }
     }
 
+    private fun doneOrUndoneItem(item: Item) {
+        item.done = !item.done
+        item.undoneDate = getCurrentTime()
+
+        viewModel.saveItem(item)
+    }
+
+    private fun reloadItemAfterSwipe() {
+        itemsAdapter.updateItem(swipedPosition)
+    }
+
     private fun deleteItem(item: Any) {
-        viewModel.onSaveItem(item as Item)
+        viewModel.saveItem(item as Item)
     }
 
     private fun verifyIfWasDone(oldDone: Boolean) {
@@ -582,7 +622,7 @@ class GoalDetailFragment : BaseFragment() {
                 createdDate = getCurrentTime()
             )
 
-        viewModel.onSaveItem(item)
+        viewModel.saveItem(item)
     }
 
     private fun updateItem(name: String) {
@@ -590,7 +630,7 @@ class GoalDetailFragment : BaseFragment() {
         item.name = name
         item.updatedDate = getCurrentTime()
 
-        viewModel.onSaveItem(item)
+        viewModel.saveItem(item)
     }
 
     private fun getScreenMultiplier(): Float {

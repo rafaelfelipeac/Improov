@@ -39,21 +39,18 @@ class SettingsLanguageViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveLanguage is successful WHEN onSaveLanguage is called THEN true is returned`() {
+    fun `GIVEN saveLanguage is successful WHEN onSaveLanguage is called THEN a Unit is returned`() {
         // given
         val language = "pt_br"
 
-        given(runBlocking { mockSaveLanguageUseCase.execute(language) })
+        given(runBlocking { mockSaveLanguageUseCase(language) })
             .willReturn(Unit)
 
         // when
-        settingsLanguageViewModel.onSaveLanguage(language)
+        settingsLanguageViewModel.saveLanguage(language)
 
         // then
-        settingsLanguageViewModel.stateLiveData.value shouldBeEqualTo SettingsLanguageViewModel.ViewState(
-            language = "",
-            languageSaved = true
-        )
+        settingsLanguageViewModel.saved.value shouldBeEqualTo Unit
     }
 
     @Test
@@ -61,16 +58,13 @@ class SettingsLanguageViewModelTest {
         // given
         val language = "pt_br"
 
-        given(runBlocking { mockGetLanguageUseCase.execute() })
+        given(runBlocking { mockGetLanguageUseCase() })
             .willReturn(language)
 
         // when
         settingsLanguageViewModel.loadData()
 
         // then
-        settingsLanguageViewModel.stateLiveData.value shouldBeEqualTo SettingsLanguageViewModel.ViewState(
-            language = language,
-            languageSaved = false
-        )
+        settingsLanguageViewModel.language.value shouldBeEqualTo language
     }
 }

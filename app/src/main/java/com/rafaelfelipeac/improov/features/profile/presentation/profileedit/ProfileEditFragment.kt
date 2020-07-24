@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.checkIfFieldIsEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.fieldIsEmptyOrZero
@@ -16,35 +15,10 @@ class ProfileEditFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelFactory.get<ProfileEditViewModel>(this) }
 
-    private val stateObserver = Observer<ProfileEditViewModel.ViewState> { response ->
-        profile_edit_name.setText(response.name)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         injector.inject(this)
-
-        main.openToolbar()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        observe(viewModel.stateLiveData, stateObserver)
-        viewModel.loadData()
-
-        profile_edit_save_button.setOnClickListener {
-            when {
-                verifyElements() -> {
-                }
-                else -> {
-                    hideSoftKeyboard()
-                    viewModel.onSaveName(profile_edit_name.text.toString())
-                    navController.navigateUp()
-                }
-            }
-        }
     }
 
     override fun onCreateView(
@@ -53,12 +27,47 @@ class ProfileEditFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        main.supportActionBar?.title = getString(R.string.profile_edit_title)
-
-        hideNavigation()
+        setScreen()
 
         return inflater.inflate(R.layout.fragment_profile_edit, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.loadData()
+
+        setupLayout()
+        observeViewModel()
+    }
+
+    private fun setScreen() {
+        setTitle(getString(R.string.profile_edit_title))
+        showBackArrow()
+        hideNavigation()
+    }
+
+    private fun setupLayout() {
+        profile_edit_save_button.setOnClickListener {
+            when {
+                verifyElements() -> {
+                }
+                else -> {
+                    hideSoftKeyboard()
+                    viewModel.saveName(profile_edit_name.text.toString())
+                }
+            }
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.saved.observe(this) {
+            navController.navigateUp()
+        }
+
+        viewModel.name.observe(this) {
+            profile_edit_name.setText(it)
+        }
     }
 
     private fun verifyElements(): Boolean {
@@ -71,10 +80,6 @@ class ProfileEditFragment : BaseFragment() {
             }
             else -> false
         }
-    }
-
-    private fun observeViewModel() {
-        TODO("Not yet implemented")
     }
 
     private fun setErrorMessage(message: String) {

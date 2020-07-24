@@ -35,7 +35,7 @@ class SaveItemUseCaseTest {
                 .willReturn(itemId)
 
             // when
-            val result = saveItemUseCase.execute(item)
+            val result = saveItemUseCase(item)
 
             // then
             result shouldBeEqualTo itemId

@@ -30,8 +30,8 @@ class HistoricDAOTest : BaseInstTest() {
     @Test
     fun givenTwoNewHistoricsWhenGetAllIsCalledThenAListWithTheTwoHistoricsAreReturned() {
         // given
-        val historicA = createHistoricDataModel(historicId = 1, value = 1f)
-        val historicB = createHistoricDataModel(historicId = 2, value = 2f)
+        val historicA = createHistoricDataModel(historicId = 1)
+        val historicB = createHistoricDataModel(historicId = 2)
         val list = listOf(historicA, historicB)
 
         historicDAO.save(historicA)
@@ -82,7 +82,7 @@ class HistoricDAOTest : BaseInstTest() {
     fun givenADatabaseWithDataAndSaveAHistoricWhenGetIsCalledThenItMustReturnedTheHistoricUpdated() {
         // given
         val historicId = 10L
-        val historic = createHistoricDataModel(historicId = historicId, value = 5f)
+        val historic = createHistoricDataModel(historicId = historicId)
         historicDAO.save(historic)
 
         historic.value = 10f

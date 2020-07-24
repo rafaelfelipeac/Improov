@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetGoalUseCase @Inject constructor(
     private val goalRepository: GoalRepository
 ) {
-    suspend fun execute(goalId: Long): Goal {
+    suspend operator fun invoke(goalId: Long): Goal {
         return goalRepository.getGoal(goalId)
     }
 }

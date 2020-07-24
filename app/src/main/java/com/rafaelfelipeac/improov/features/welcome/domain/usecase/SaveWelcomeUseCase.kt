@@ -6,7 +6,7 @@ import javax.inject.Inject
 class SaveWelcomeUseCase @Inject constructor(
     private val welcomeRepository: WelcomeRepository
 ) {
-    suspend fun execute(welcome: Boolean) {
+    suspend operator fun invoke(welcome: Boolean) {
         return welcomeRepository.save(welcome)
     }
 }

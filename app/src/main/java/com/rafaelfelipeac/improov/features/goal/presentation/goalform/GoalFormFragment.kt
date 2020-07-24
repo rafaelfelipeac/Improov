@@ -7,24 +7,21 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.MenuItem
-import androidx.lifecycle.Observer
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.observe
-import com.rafaelfelipeac.improov.core.extension.visible
-import com.rafaelfelipeac.improov.core.extension.invisible
-import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.resetValue
-import com.rafaelfelipeac.improov.core.extension.toFloat
+import com.rafaelfelipeac.improov.core.extension.visible
+import com.rafaelfelipeac.improov.core.extension.gone
+import com.rafaelfelipeac.improov.core.extension.invisible
 import com.rafaelfelipeac.improov.core.extension.fieldIsEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.checkIfFieldIsEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.toFloat
 import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
 import com.rafaelfelipeac.improov.core.extension.isNotEmpty
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.commons.DialogOneButton
 import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
-import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 
 @Suppress("TooManyFunctions")
@@ -33,8 +30,6 @@ class GoalFormFragment : BaseFragment() {
     private var goal: Goal =
         Goal()
     private var goalId: Long? = null
-    private var items: List<Item> = listOf()
-    private var historics: List<Historic> = listOf()
 
     private var firstTimeAdd = false
 
@@ -42,32 +37,12 @@ class GoalFormFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelFactory.get<GoalFormViewModel>(this) }
 
-    private val stateObserver = Observer<GoalFormViewModel.ViewState> { response ->
-        if (response.goalSaved) {
-            navController.navigateUp()
-        }
-
-        if (response.goal.goalId > 0) {
-            goal = response.goal
-            items = response.items
-            historics = response.historics
-
-            setupGoal()
-        }
-
-        goalsSize = response.goals.size
-
-        firstTimeAdd = response.firstTimeAddLoaded
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         injector.inject(this)
 
         goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goalId }
-
-        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -76,11 +51,7 @@ class GoalFormFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        main.supportActionBar?.title = getString(R.string.goal_form_title)
-        main.toolbar.inflateMenu(R.menu.menu_save)
-
-        hideNavigation()
+        setScreen()
 
         return inflater.inflate(R.layout.fragment_goal_form, container, false)
     }
@@ -88,21 +59,72 @@ class GoalFormFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observe(viewModel.stateLiveData, stateObserver)
-
         goalId.let {
-            if (goalId!! > 0L) {
+            if (it!! > 0L) {
                 viewModel.setGoalId(goalId!!)
             }
         }
-
         viewModel.loadData()
 
         setRadioButtonType()
         setSwitchImproov()
 
-        main.openToolbar()
+        setupLayout()
+        observeViewModel()
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_save, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_save -> {
+                when {
+                    checkIfAnyFieldsAreEmptyOrZero() -> { }
+                    getGoalTypeSelected() == GoalType.GOAL_NONE -> {
+                        showSnackBar(getString(R.string.goal_form_empty_type_goal))
+
+                        hideSoftKeyboard()
+                        goal_form_type_title.isFocusableInTouchMode = true
+                        goal_form_type_title.requestFocus()
+                    }
+                    !validateDivideAndConquerValues() -> {
+                        showSnackBar(getString(R.string.goal_form_gold_silver_bronze_order))
+
+                        goal_form_bronze_value.requestFocus()
+                    }
+                    else -> {
+                        val goalToSave = updateOrCreateGoal()
+
+                        viewModel.saveGoal(goalToSave)
+
+                        verifyFistTimeSaving()
+
+                        return true
+                    }
+                }
+            }
+        }
+
+        return false
+    }
+
+    private fun setScreen() {
+        if (goalId!! == 0L) {
+            setTitle(getString(R.string.goal_form_title_new))
+        } else {
+            setTitle(getString(R.string.goal_form_title_update))
+        }
+
+        showBackArrow()
+        hasMenu()
+        hideNavigation()
+    }
+
+    private fun setupLayout() {
         goal_form_divide_and_conquest_help.setOnClickListener {
             hideSoftKeyboard()
             setupBottomSheetTipsDivideAndConquer()
@@ -118,43 +140,24 @@ class GoalFormFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_save, menu)
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_save -> {
-                when {
-                    checkIfAnyFieldsAreEmptyOrZero() -> { }
-                    getGoalTypeSelected() == GoalType.GOAL_NONE -> {
-                        showSnackBarLong(getString(R.string.goal_form_empty_type_goal))
-
-                        hideSoftKeyboard()
-                        goal_form_type_title.isFocusableInTouchMode = true
-                        goal_form_type_title.requestFocus()
-                    }
-                    !validateDivideAndConquerValues() -> {
-                        showSnackBarLong(getString(R.string.goal_form_gold_silver_bronze_order))
-
-                        goal_form_bronze_value.requestFocus()
-                    }
-                    else -> {
-                        val goalToSave = updateOrCreateGoal()
-
-                        viewModel.onSaveGoal(goalToSave)
-
-                        verifyFistTimeSaving()
-
-                        return true
-                    }
-                }
-            }
+    private fun observeViewModel() {
+        viewModel.savedGoal.observe(this) {
+            navController.navigateUp()
         }
 
-        return false
+        viewModel.goal.observe(this) {
+            goal = it
+
+            setupGoal()
+        }
+
+        viewModel.goals.observe(this) {
+            goalsSize = it.size
+        }
+
+        viewModel.firstTimeAdd.observe(this) {
+            firstTimeAdd = it
+        }
     }
 
     private fun setSwitchImproov() {
@@ -320,8 +323,8 @@ class GoalFormFragment : BaseFragment() {
 
     private fun verifyFistTimeSaving() {
         if (firstTimeAdd) {
-            viewModel.onSaveFirstTimeAdd(false)
-            viewModel.onSaveFirstTimeList(true)
+            viewModel.saveFirstTimeAdd(false)
+            viewModel.saveFirstTimeList(true)
         }
     }
 

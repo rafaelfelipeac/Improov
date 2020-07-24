@@ -35,7 +35,7 @@ class DeleteItemUseCaseTest {
                 .willReturn(Unit)
 
             // when
-            val result = deleteItemUseCase.execute(item)
+            val result = deleteItemUseCase(item)
 
             // then
             result shouldBeEqualTo Unit

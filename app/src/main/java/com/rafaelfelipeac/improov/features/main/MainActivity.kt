@@ -64,13 +64,6 @@ class MainActivity : BaseActivity() {
         clearToolbarMenu()
     }
 
-    private fun lastFragment(): Boolean {
-        val currentFragment =
-            NavHostFragment.findNavController(nav_host_fragment).currentDestination!!.id
-
-        return currentFragment == R.id.navigation_list
-    }
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.menu_save -> false
@@ -81,6 +74,13 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
+
+    private fun lastFragment(): Boolean {
+        val currentFragment =
+            NavHostFragment.findNavController(nav_host_fragment).currentDestination!!.id
+
+        return currentFragment == R.id.navigation_list
+    }
 
     private fun setupElements() {
         toolbar = findViewById(R.id.toolbar)!!
@@ -104,8 +104,4 @@ class MainActivity : BaseActivity() {
     }
 
     private fun clearToolbarMenu() = toolbar.menu!!.clear()
-
-    fun closeToolbar() = supportActionBar?.hide()
-
-    fun openToolbar() = supportActionBar?.show()
 }

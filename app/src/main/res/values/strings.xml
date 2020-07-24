@@ -38,7 +38,8 @@
     <string name="goal_button_save">Save</string>
 
     <!-- GoalForm -->
-    <string name="goal_form_title">New Goal</string>
+    <string name="goal_form_title_new">New goal</string>
+    <string name="goal_form_title_update">Update goal</string>
     <string name="goal_form_single_value_empty">This value cannot be empty.</string>
     <string name="goal_form_single_value_zero">This value must be greater than 0.</string>
     <string name="goal_form_empty_type_goal">Choose the type of goal.</string>
@@ -115,6 +116,9 @@
     <string name="settings_language_radio_english">English</string>
     <string name="settings_language_key_portuguese">pt_br</string>
     <string name="settings_language_key_english">en</string>
+
+    <!-- Splash -->
+    <string name="splash_title">Splash</string>
 
     <!-- Stats -->
 

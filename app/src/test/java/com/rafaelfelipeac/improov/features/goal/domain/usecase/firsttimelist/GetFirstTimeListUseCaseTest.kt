@@ -33,7 +33,7 @@ class GetFirstTimeListUseCaseTest {
                 .willReturn(booleanValue)
 
             // when
-            val result = getFirstTimeListUseCase.execute()
+            val result = getFirstTimeListUseCase()
 
             // then
             result shouldBeEqualTo booleanValue

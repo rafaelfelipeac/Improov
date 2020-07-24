@@ -53,4 +53,9 @@ class ItemsAdapter(private val detailFragment: GoalDetailFragment) : BaseAdapter
     override fun onViewSwiped(position: Int, direction: Int, holder: RecyclerView.ViewHolder) {
         detailFragment.onViewSwiped(position, direction, items)
     }
+
+    fun updateItem(position: Int) {
+        notifyItemRemoved(position)
+        notifyItemInserted(position)
+    }
 }

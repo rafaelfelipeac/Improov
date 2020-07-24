@@ -7,7 +7,7 @@ import javax.inject.Inject
 class DeleteHistoricUseCase @Inject constructor(
     private val historicRepository: HistoricRepository
 ) {
-    suspend fun execute(historic: Historic) {
+    suspend operator fun invoke(historic: Historic) {
         return historicRepository.delete(historic)
     }
 }

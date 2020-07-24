@@ -1,9 +1,9 @@
 package com.rafaelfelipeac.improov.features.settings.presentation.settingslanguage
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.rafaelfelipeac.improov.core.platform.base.BaseAction
 import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
-import com.rafaelfelipeac.improov.core.platform.base.BaseViewState
 import com.rafaelfelipeac.improov.features.settings.domain.usecase.GetLanguageUseCase
 import com.rafaelfelipeac.improov.features.settings.domain.usecase.SaveLanguageUseCase
 import kotlinx.coroutines.launch
@@ -12,50 +12,26 @@ import javax.inject.Inject
 class SettingsLanguageViewModel @Inject constructor(
     private val saveLanguageUseCase: SaveLanguageUseCase,
     private val getLanguageUseCase: GetLanguageUseCase
-) : BaseViewModel<SettingsLanguageViewModel.ViewState, SettingsLanguageViewModel.Action>(
-    ViewState()
-) {
+) : BaseViewModel() {
 
-    override fun onLoadData() {
+    val saved: LiveData<Unit> get() = _saved
+    private val _saved = MutableLiveData<Unit>()
+    val language: LiveData<String> get() = _language
+    private val _language = MutableLiveData<String>()
+
+    override fun loadData() {
         getLanguage()
     }
 
-    fun onSaveLanguage(language: String) {
-        saveLanguage(language)
+    fun saveLanguage(language: String) {
+        viewModelScope.launch {
+            _saved.postValue(saveLanguageUseCase(language))
+        }
     }
 
     private fun getLanguage() {
         viewModelScope.launch {
-            getLanguageUseCase.execute().also {
-                sendAction(Action.LanguageLoaded(it))
-            }
+            _language.postValue(getLanguageUseCase())
         }
-    }
-
-    private fun saveLanguage(language: String) {
-        viewModelScope.launch {
-            saveLanguageUseCase.execute(language).also {
-                sendAction(Action.LanguageSaved)
-            }
-        }
-    }
-
-    override fun onReduceState(viewAction: Action) = when (viewAction) {
-        is Action.LanguageLoaded -> state.copy(
-            language = viewAction.language
-        )
-        is Action.LanguageSaved -> state.copy(
-            languageSaved = true
-        )
-    }
-
-    data class ViewState(
-        val language: String = "",
-        val languageSaved: Boolean = false
-    ) : BaseViewState
-
-    sealed class Action : BaseAction {
-        class LanguageLoaded(val language: String) : Action()
-        object LanguageSaved : Action()
     }
 }

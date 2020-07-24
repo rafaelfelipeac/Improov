@@ -46,91 +46,50 @@ class GoalListViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveGoal is successful WHEN onSaveGoal is called THEN true is returned`() {
+    fun `GIVEN saveGoal is successful WHEN onSaveGoal is called THEN the goalId is returned`() {
         // given
         val goalId = 1L
         val goal = createGoal(goalId)
 
-        given(runBlocking { mockSaveGoalUseCase.execute(goal) })
+        given(runBlocking { mockSaveGoalUseCase(goal) })
             .willReturn(goalId)
 
         // when
-        goalListViewModel.onSaveGoal(goal)
+        goalListViewModel.saveGoal(goal)
 
         // then
-        goalListViewModel.stateLiveData.value shouldBeEqualTo GoalListViewModel.ViewState(
-            goalSaved = true,
-            goals = listOf(),
-            firstTimeListSaved = false,
-            firstTimeList = false
-        )
+        goalListViewModel.savedGoal.value shouldBeEqualTo goalId
     }
 
     @Test
     fun `GIVEN getGoaList is successful WHEN loadData is called THEN a list of goals must be returned`() {
         // given
         val goal = createGoal()
-        given(runBlocking { mockGetGoalListUseCase.execute() })
-            .willReturn(listOf(goal, goal, goal))
+        val goals = listOf(goal, goal, goal)
+
+        given(runBlocking { mockGetGoalListUseCase() })
+            .willReturn(goals)
 
         // when
         goalListViewModel.loadData()
 
         // then
-        goalListViewModel.stateLiveData.value shouldBeEqualTo GoalListViewModel.ViewState(
-            goalSaved = false,
-            goals = listOf(
-                goal,
-                goal,
-                goal
-            ),
-            firstTimeListSaved = false,
-            firstTimeList = false
-        )
+        goalListViewModel.goals.value shouldBeEqualTo goals
     }
 
     @Test
-    fun `GIVEN saveGoal calling getGoalList WHEN onSaveGoal is called THEN true and a list of goals are returned`() {
-        // given
-        val goalId = 1L
-        val goal = createGoal(goalId)
-        val list = listOf(createGoal(1), createGoal(2), createGoal(3))
-
-        given(runBlocking { mockSaveGoalUseCase.execute(goal) })
-            .willReturn(goalId)
-        given(runBlocking { mockGetGoalListUseCase.execute() })
-            .willReturn(list)
-
-        // when
-        goalListViewModel.onSaveGoal(goal)
-
-        // then 
-        goalListViewModel.stateLiveData.value shouldBeEqualTo GoalListViewModel.ViewState(
-            goalSaved = true,
-            goals = list,
-            firstTimeListSaved = false,
-            firstTimeList = false
-        )
-    }
-
-    @Test
-    fun `GIVEN saveFirstTimeList is successful WHEN onSaveFirstTimeList is called THEN true is returned`() {
+    fun `GIVEN saveFirstTimeList is successful WHEN onSaveFirstTimeList is called THEN a Unit is returned`() {
         // given
         val booleanValue = false
 
-        given(runBlocking { mockSaveFirstTimeListUseCase.execute(booleanValue) })
+        given(runBlocking { mockSaveFirstTimeListUseCase(booleanValue) })
             .willReturn(Unit)
 
         // when
-        goalListViewModel.onSaveFirstTimeList(booleanValue)
+        goalListViewModel.saveFirstTimeList(booleanValue)
 
         // then
-        goalListViewModel.stateLiveData.value shouldBeEqualTo GoalListViewModel.ViewState(
-            goalSaved = false,
-            goals = listOf(),
-            firstTimeListSaved = true,
-            firstTimeList = false
-        )
+        goalListViewModel.savedFirstTimeList.value shouldBeEqualTo Unit
     }
 
     @Test
@@ -138,18 +97,13 @@ class GoalListViewModelTest {
         // given
         val booleanValue = false
 
-        given(runBlocking { mockGetFirstTimeListUseCase.execute() })
+        given(runBlocking { mockGetFirstTimeListUseCase() })
             .willReturn(booleanValue)
 
         // when
         goalListViewModel.loadData()
 
         // then
-        goalListViewModel.stateLiveData.value shouldBeEqualTo GoalListViewModel.ViewState(
-            goalSaved = false,
-            goals = listOf(),
-            firstTimeListSaved = false,
-            firstTimeList = booleanValue
-        )
+        goalListViewModel.firstTimeList.value shouldBeEqualTo booleanValue
     }
 }

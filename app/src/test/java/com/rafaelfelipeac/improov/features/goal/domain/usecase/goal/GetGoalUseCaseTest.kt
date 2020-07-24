@@ -35,7 +35,7 @@ class GetGoalUseCaseTest {
                 .willReturn(goal)
 
             // when
-            val result = getGoalUseCase.execute(goalId)
+            val result = getGoalUseCase(goalId)
 
             // then
             result shouldBeEqualTo goal

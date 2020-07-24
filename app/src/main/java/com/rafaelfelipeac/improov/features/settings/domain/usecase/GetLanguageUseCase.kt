@@ -6,7 +6,7 @@ import javax.inject.Inject
 class GetLanguageUseCase @Inject constructor(
     private val languageRepository: LanguageRepository
 ) {
-    suspend fun execute(): String {
+    suspend operator fun invoke(): String {
         return languageRepository.getLanguage()
     }
 }

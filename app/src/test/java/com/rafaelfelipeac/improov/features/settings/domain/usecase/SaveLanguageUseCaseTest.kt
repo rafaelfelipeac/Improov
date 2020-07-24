@@ -33,7 +33,7 @@ class SaveLanguageUseCaseTest {
                 .willReturn(Unit)
 
             // when
-            val result = saveLanguageUseCase.execute(language)
+            val result = saveLanguageUseCase(language)
 
             // then
             result shouldBeEqualTo Unit

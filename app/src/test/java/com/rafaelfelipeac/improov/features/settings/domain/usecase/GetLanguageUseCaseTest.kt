@@ -33,7 +33,7 @@ class GetLanguageUseCaseTest {
                 .willReturn(language)
 
             // when
-            val result = getLanguageUseCase.execute()
+            val result = getLanguageUseCase()
 
             // then
             result shouldBeEqualTo language

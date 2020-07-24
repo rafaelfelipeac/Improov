@@ -1,9 +1,9 @@
 package com.rafaelfelipeac.improov.features.profile.presentation.profileedit
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.rafaelfelipeac.improov.core.platform.base.BaseAction
 import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
-import com.rafaelfelipeac.improov.core.platform.base.BaseViewState
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.GetNameUseCase
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveNameUseCase
 import kotlinx.coroutines.launch
@@ -12,51 +12,26 @@ import javax.inject.Inject
 class ProfileEditViewModel @Inject constructor(
     private val saveNameUseCase: SaveNameUseCase,
     private val getNameUseCase: GetNameUseCase
-) :
-    BaseViewModel<ProfileEditViewModel.ViewState, ProfileEditViewModel.Action>(
-        ViewState()
-    ) {
+) : BaseViewModel() {
 
-    override fun onLoadData() {
+    val saved: LiveData<Unit> get() = _saved
+    private val _saved = MutableLiveData<Unit>()
+    val name: LiveData<String> get() = _name
+    private val _name = MutableLiveData<String>()
+
+    override fun loadData() {
         getName()
     }
 
-    fun onSaveName(name: String) {
-        saveName(name)
+    fun saveName(name: String) {
+        viewModelScope.launch {
+            _saved.postValue(saveNameUseCase(name))
+        }
     }
 
     private fun getName() {
         viewModelScope.launch {
-            getNameUseCase.execute().also {
-                sendAction(Action.NameLoaded(it))
-            }
+            _name.postValue(getNameUseCase())
         }
-    }
-
-    private fun saveName(name: String) {
-        viewModelScope.launch {
-            saveNameUseCase.execute(name).also {
-                sendAction(Action.NameSaved)
-            }
-        }
-    }
-
-    override fun onReduceState(viewAction: Action) = when (viewAction) {
-        is Action.NameLoaded -> state.copy(
-            name = viewAction.name
-        )
-        is Action.NameSaved -> state.copy(
-            nameSaved = true
-        )
-    }
-
-    data class ViewState(
-        val name: String = "",
-        val nameSaved: Boolean = false
-    ) : BaseViewState
-
-    sealed class Action : BaseAction {
-        class NameLoaded(val name: String) : Action()
-        object NameSaved : Action()
     }
 }

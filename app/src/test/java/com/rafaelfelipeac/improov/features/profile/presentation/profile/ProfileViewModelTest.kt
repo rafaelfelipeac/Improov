@@ -38,30 +38,55 @@ class ProfileViewModelTest {
     fun setup() {
         profileViewModel = ProfileViewModel(
             mockSaveWelcomeUseCase,
-            mockGetNameUseCase,
             mockSaveFirstTimeAddUseCase,
-            mockSaveFirsTimeListUseCass
+            mockSaveFirsTimeListUseCass,
+            mockGetNameUseCase
         )
     }
 
     @Test
-    fun `GIVEN saveWelcome is successful WHEN onSaveWelcome is called THEN true is returned`() {
+    fun `GIVEN saveWelcome is successful WHEN onSaveWelcome is called THEN a Unit is returned`() {
         // given
         val booleanValue = true
 
-        given(runBlocking { mockSaveWelcomeUseCase.execute(booleanValue) })
+        given(runBlocking { mockSaveWelcomeUseCase(booleanValue) })
             .willReturn(Unit)
 
         // when
-        profileViewModel.onSaveWelcome(booleanValue)
+        profileViewModel.saveWelcome(booleanValue)
 
         // then
-        profileViewModel.stateLiveData.value shouldBeEqualTo ProfileViewModel.ViewState(
-            name = "",
-            welcomeSaved = true,
-            firstTimeAddSaved = false,
-            firstTimeListSaved = false
-        )
+        profileViewModel.saved.value shouldBeEqualTo Unit
+    }
+
+    @Test
+    fun `GIVEN saveFirstTimeAdd is successful WHEN onSaveFirstTimeAdd is called THEN a Unit is returned`() {
+        // given
+        val booleanValue = true
+
+        given(runBlocking { mockSaveFirstTimeAddUseCase(booleanValue) })
+            .willReturn(Unit)
+
+        // when
+        profileViewModel.saveFirstTimeAdd(booleanValue)
+
+        // then
+        profileViewModel.saved.value shouldBeEqualTo Unit
+    }
+
+    @Test
+    fun `GIVEN saveFirstTimeList is successful WHEN onSaveFirstTimeList is called THEN a Unit is returned`() {
+        // given
+        val booleanValue = true
+
+        given(runBlocking { mockSaveFirsTimeListUseCass(booleanValue) })
+            .willReturn(Unit)
+
+        // when
+        profileViewModel.saveFirstTimeList(booleanValue)
+
+        // then
+        profileViewModel.saved.value shouldBeEqualTo Unit
     }
 
     @Test
@@ -69,58 +94,13 @@ class ProfileViewModelTest {
         // given
         val userName = "User Name"
 
-        given(runBlocking { mockGetNameUseCase.execute() })
+        given(runBlocking { mockGetNameUseCase() })
             .willReturn(userName)
 
         // when
         profileViewModel.loadData()
 
         // then
-        profileViewModel.stateLiveData.value shouldBeEqualTo ProfileViewModel.ViewState(
-            name = userName,
-            welcomeSaved = false,
-            firstTimeAddSaved = false,
-            firstTimeListSaved = false
-        )
-    }
-
-    @Test
-    fun `GIVEN saveFirstTimeAdd is successful WHEN onSaveFirstTimeAdd is called THEN true is returned`() {
-        // given
-        val booleanValue = true
-
-        given(runBlocking { mockSaveFirstTimeAddUseCase.execute(booleanValue) })
-            .willReturn(Unit)
-
-        // when
-        profileViewModel.onSaveFirstTimeAdd(booleanValue)
-
-        // then
-        profileViewModel.stateLiveData.value shouldBeEqualTo ProfileViewModel.ViewState(
-            name = "",
-            welcomeSaved = false,
-            firstTimeAddSaved = true,
-            firstTimeListSaved = false
-        )
-    }
-
-    @Test
-    fun `GIVEN saveFirstTimeList is successful WHEN onSaveFirstTimeList is called THEN true is returned`() {
-        // given
-        val booleanValue = true
-
-        given(runBlocking { mockSaveFirsTimeListUseCass.execute(booleanValue) })
-            .willReturn(Unit)
-
-        // when
-        profileViewModel.onSaveFirstTimeList(booleanValue)
-
-        // then
-        profileViewModel.stateLiveData.value shouldBeEqualTo ProfileViewModel.ViewState(
-            name = "",
-            welcomeSaved = false,
-            firstTimeAddSaved = false,
-            firstTimeListSaved = true
-        )
+        profileViewModel.name.value shouldBeEqualTo userName
     }
 }
