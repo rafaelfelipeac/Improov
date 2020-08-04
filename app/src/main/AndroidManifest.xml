@@ -3,7 +3,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         package="com.rafaelfelipeac.improov">
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -30,10 +29,6 @@
             </intent-filter>
 
         </activity>
-
-        <meta-data
-                android:name="io.fabric.ApiKey"
-                android:value="4aeff5248210d88652894b2baac392e625a725ef" />
 
     </application>
 

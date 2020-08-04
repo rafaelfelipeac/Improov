@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.goal.data.model
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoalDataModel
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
@@ -21,7 +21,7 @@ class GoalDataModelTest {
         val goal = goalDataModel.let { mapper.map(goalDataModel) }
 
         // then
-        goal shouldBeEqualTo createGoal()
+        goal equalTo createGoal()
     }
 
     @Test
@@ -33,7 +33,7 @@ class GoalDataModelTest {
         val goal = goalDataModel.let { mapper.map(goalDataModel) }
 
         // then
-        goal shouldBeEqualTo createGoal(goalId = 123, name = "goal123")
+        goal equalTo createGoal(goalId = 123, name = "goal123")
     }
 
     @Test
@@ -45,7 +45,7 @@ class GoalDataModelTest {
         val goalDataModel = goal.let { mapper.mapReverse(goal) }
 
         // then
-        goalDataModel shouldBeEqualTo createGoalDataModel()
+        goalDataModel equalTo createGoalDataModel()
     }
 
     @Test
@@ -57,6 +57,6 @@ class GoalDataModelTest {
         val goalDataModel = goal.let { mapper.mapReverse(goal) }
 
         // then
-        goalDataModel shouldBeEqualTo createGoalDataModel(goalId = 123, name = "goal123")
+        goalDataModel equalTo createGoalDataModel(goalId = 123, name = "goal123")
     }
 }

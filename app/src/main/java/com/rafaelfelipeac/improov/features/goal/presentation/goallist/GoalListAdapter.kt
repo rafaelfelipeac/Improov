@@ -34,7 +34,6 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
         val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_title)!!
         val date = viewHolder.itemView.findViewById<TextView>(R.id.goal_date)!!
         val score = viewHolder.itemView.findViewById<TextView>(R.id.goal_score)!!
-        // private val archiveImage = itemView.findViewById<ImageView>(R.id.goal_archive_image)
         val itemDrag = viewHolder.itemView.findViewById<ImageView>(R.id.goal_drag_icon)!!
         val progressDone = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress_done)
         val progressTotal = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress_total)

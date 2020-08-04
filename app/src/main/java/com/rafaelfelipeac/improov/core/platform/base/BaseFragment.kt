@@ -10,14 +10,18 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.di.modules.viewModel.ViewModelFactory
+import com.rafaelfelipeac.improov.core.di.AppComponent
+import com.rafaelfelipeac.improov.core.di.factory.ViewModelFactory
 import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.extension.setMessageColor
@@ -38,14 +42,14 @@ abstract class BaseFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    protected val injector by lazy { (activity as BaseActivity).injector }
+    protected val injector: AppComponent by lazy { (activity as BaseActivity).injector }
 
-    val main get() = (activity as MainActivity)
+    val main: MainActivity get() = (activity as MainActivity)
 
-    val fab get() = main.fab
-    val navController get() = main.navController
-    private val navLayout get() = main.navLayout
-    private val fakeBottomNav get() = main.fakeBottomNav
+    val fab: FloatingActionButton get() = main.fab
+    val navController: NavController get() = main.navController
+    private val navLayout: CoordinatorLayout get() = main.navLayout
+    private val fakeBottomNav: View get() = main.fakeBottomNav
 
     private lateinit var bottomSheetGoal: BottomSheetDialog
     private lateinit var bottomSheetGoalYes: Button

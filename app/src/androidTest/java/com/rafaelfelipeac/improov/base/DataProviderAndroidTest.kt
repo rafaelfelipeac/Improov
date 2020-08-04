@@ -36,49 +36,8 @@ object DataProviderAndroidTest {
         )
     }
 
-    fun createGoal(goalId: Long = 1L): Goal {
-        return Goal(
-            goalId = goalId,
-            name = "goal1",
-            value = 5f,
-            type = GoalType.GOAL_LIST,
-            done = false,
-            divideAndConquer = false,
-            singleValue = 10f,
-            bronzeValue = 0f,
-            silverValue = 0f,
-            goldValue = 0f,
-            order = 1,
-            archived = false,
-            incrementValue = 0f,
-            decrementValue = 0f,
-            createdDate = null,
-            updatedDate = null,
-            doneDate = null,
-            undoneDate = null,
-            archiveDate = null,
-            date = null
-        )
-    }
-
     fun createItemDataModel(itemId: Long = 1L, goalId: Long = 1L, name: String = "item"): ItemDataModel {
         return ItemDataModel(
-            itemId = itemId,
-            goalId = goalId,
-            name = name,
-            order = 1,
-            done = false,
-            createdDate = null,
-            updatedDate = null,
-            doneDate = null,
-            undoneDate = null,
-            deleteDate = null,
-            date = null
-        )
-    }
-
-    fun createItem(itemId: Long = 1L, goalId: Long = 1L, name: String = "item"): Item {
-        return Item(
             itemId = itemId,
             goalId = goalId,
             name = name,
@@ -99,22 +58,6 @@ object DataProviderAndroidTest {
             goalId = goalId,
             value = 0f,
             date = null
-        )
-    }
-
-    fun createHistoric(historicId: Long = 1L, goalId: Long = 1L): Historic {
-        return Historic(
-            historicId = historicId,
-            goalId = goalId,
-            value = 0f,
-            date = null
-        )
-    }
-
-    infix fun <T> T.shouldBeEqualTo(expected: T?): T = this.apply {
-        TestCase.assertEquals(
-            expected,
-            this
         )
     }
 }

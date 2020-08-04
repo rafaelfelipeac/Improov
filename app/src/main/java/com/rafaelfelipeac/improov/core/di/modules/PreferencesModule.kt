@@ -10,6 +10,5 @@ object PreferencesModule {
 
     @Provides
     @JvmStatic
-    fun provideSharedPreferences(context: Context): Preferences =
-        Preferences(context)
+    fun provideSharedPreferences(context: Context): Preferences = Preferences(context)
 }

@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.domain.usecase.item
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createItem
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.goal.domain.repository.ItemRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -38,7 +38,7 @@ class DeleteItemUseCaseTest {
             val result = deleteItemUseCase(item)
 
             // then
-            result shouldBeEqualTo Unit
+            result equalTo Unit
         }
     }
 }

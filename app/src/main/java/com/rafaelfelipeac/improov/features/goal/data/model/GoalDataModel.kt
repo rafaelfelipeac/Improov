@@ -12,26 +12,26 @@ import javax.inject.Inject
 @Entity(tableName = "goal")
 data class GoalDataModel(
     @PrimaryKey(autoGenerate = true)
-    var goalId: Long = 0,
-    var name: String = "",
-    var value: Float = 0F,
-    var type: GoalType = GoalType.GOAL_NONE,
-    var done: Boolean = false,
-    var divideAndConquer: Boolean = false,
-    var singleValue: Float = 0F,
-    var bronzeValue: Float = 0F,
-    var silverValue: Float = 0F,
-    var goldValue: Float = 0F,
-    var order: Int = 0,
-    var archived: Boolean = false,
-    var incrementValue: Float = 0F,
-    var decrementValue: Float = 0F,
-    var createdDate: Date? = null,
-    var updatedDate: Date? = null,
-    var doneDate: Date? = null,
-    var undoneDate: Date? = null,
-    var archiveDate: Date? = null,
-    var date: Date? = null
+    val goalId: Long,
+    var name: String,
+    val value: Float,
+    val type: GoalType,
+    val done: Boolean,
+    val divideAndConquer: Boolean,
+    val singleValue: Float,
+    val bronzeValue: Float,
+    val silverValue: Float,
+    val goldValue: Float,
+    val order: Int,
+    val archived: Boolean,
+    val incrementValue: Float,
+    val decrementValue: Float,
+    val createdDate: Date?,
+    val updatedDate: Date?,
+    val doneDate: Date?,
+    val undoneDate: Date?,
+    val archiveDate: Date?,
+    val date: Date?
 ) : Serializable
 
 class GoalDataModelMapper @Inject constructor() : TwoWayMapper<GoalDataModel, Goal> {

@@ -14,12 +14,10 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.crashlytics.android.Crashlytics
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.platform.base.BaseActivity
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -32,8 +30,6 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Fabric.with(this, Crashlytics())
 
         setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)

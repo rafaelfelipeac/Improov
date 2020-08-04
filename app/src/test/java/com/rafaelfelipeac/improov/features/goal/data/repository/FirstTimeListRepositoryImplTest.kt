@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.goal.data.repository
 
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -37,7 +37,7 @@ class FirstTimeListRepositoryImplTest {
             val result = firstTimeListRepositoryImp.getFirstTimeList()
 
             // then
-            result shouldBeEqualTo booleanValue
+            result equalTo booleanValue
         }
     }
 
@@ -56,8 +56,8 @@ class FirstTimeListRepositoryImplTest {
             val returnOfGet = firstTimeListRepositoryImp.getFirstTimeList()
 
             // then
-            resultOfSave shouldBeEqualTo Unit
-            returnOfGet shouldBeEqualTo booleanValue
+            resultOfSave equalTo Unit
+            returnOfGet equalTo booleanValue
         }
     }
 }

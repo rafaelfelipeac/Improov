@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.core.di.modules
 
 import androidx.lifecycle.ViewModelProvider
-import com.rafaelfelipeac.improov.core.di.modules.viewModel.ViewModelFactory
+import com.rafaelfelipeac.improov.core.di.factory.ViewModelFactory
 import dagger.Binds
 import dagger.Module
 

@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.domain.usecase.historic
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoric
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.goal.domain.repository.HistoricRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -52,7 +52,7 @@ class GetHistoricListUseCaseTest {
             val result = getHistoricListUseCase(goalIdCustom)
 
             // then
-            result shouldBeEqualTo filteredAndReversedList
+            result equalTo filteredAndReversedList
         }
     }
 }

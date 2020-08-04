@@ -5,7 +5,7 @@ import java.io.Serializable
 import java.util.Date
 
 data class Goal(
-    var goalId: Long = 0,
+    val goalId: Long = 0,
     var name: String = "",
     var value: Float = 0F,
     var type: GoalType = GoalType.GOAL_NONE,
@@ -21,8 +21,8 @@ data class Goal(
     var decrementValue: Float = 0F,
     var createdDate: Date? = null,
     var updatedDate: Date? = null,
-    var doneDate: Date? = null,
+    val doneDate: Date? = null,
     var undoneDate: Date? = null,
-    var archiveDate: Date? = null,
-    var date: Date? = null
+    val archiveDate: Date? = null,
+    val date: Date? = null
 ) : Serializable

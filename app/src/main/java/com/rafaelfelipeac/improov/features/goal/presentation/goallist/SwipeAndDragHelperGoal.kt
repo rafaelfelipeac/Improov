@@ -8,7 +8,7 @@ import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.platform.ActionCompleteContract
 import kotlin.math.abs
 
-class SwipeAndDragHelperList(private val contract: ActionCompleteContract) :
+class SwipeAndDragHelperGoal(private val contract: ActionCompleteContract) :
     ItemTouchHelper.Callback() {
 
     override fun getMovementFlags(
@@ -41,7 +41,7 @@ class SwipeAndDragHelperList(private val contract: ActionCompleteContract) :
     }
 
     override fun onChildDrawOver(
-        c: Canvas,
+        canvas: Canvas,
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
         dX: Float,
@@ -54,7 +54,7 @@ class SwipeAndDragHelperList(private val contract: ActionCompleteContract) :
 
         if (foregroundView != null) {
             getDefaultUIUtil()
-                .onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive)
+                .onDrawOver(canvas, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive)
         }
     }
 
@@ -68,7 +68,7 @@ class SwipeAndDragHelperList(private val contract: ActionCompleteContract) :
     }
 
     override fun onChildDraw(
-        c: Canvas,
+        canvas: Canvas,
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
         dX: Float,
@@ -86,9 +86,9 @@ class SwipeAndDragHelperList(private val contract: ActionCompleteContract) :
 
         if (foregroundView != null) {
             getDefaultUIUtil()
-                .onDraw(c, recyclerView, foregroundView, dX, 0f, actionState, isCurrentlyActive)
+                .onDraw(canvas, recyclerView, foregroundView, dX, 0f, actionState, isCurrentlyActive)
 
-            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
         }
     }
 

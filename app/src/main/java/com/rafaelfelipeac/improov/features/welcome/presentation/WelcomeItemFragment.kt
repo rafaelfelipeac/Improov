@@ -36,9 +36,21 @@ class WelcomeItemFragment(
         savedInstanceState: Bundle?
     ): View? {
         return when (welcomePosition) {
-            WelcomePosition.FIRST -> inflater.inflate(R.layout.fragment_welcome_item_a, container, false)
-            WelcomePosition.SECOND -> inflater.inflate(R.layout.fragment_welcome_item_b, container, false)
-            WelcomePosition.THIRD -> inflater.inflate(R.layout.fragment_welcome_item_c, container, false)
+            WelcomePosition.FIRST -> inflater.inflate(
+                R.layout.fragment_welcome_item_a,
+                container,
+                false
+            )
+            WelcomePosition.SECOND -> inflater.inflate(
+                R.layout.fragment_welcome_item_b,
+                container,
+                false
+            )
+            WelcomePosition.THIRD -> inflater.inflate(
+                R.layout.fragment_welcome_item_c,
+                container,
+                false
+            )
             else -> inflater.inflate(R.layout.fragment_welcome_item_a, container, false)
         }
     }

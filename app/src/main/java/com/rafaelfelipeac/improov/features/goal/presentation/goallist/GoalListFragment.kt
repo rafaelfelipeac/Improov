@@ -27,7 +27,7 @@ class GoalListFragment : BaseFragment() {
     private var goalsAdapter = GoalListAdapter(this)
 
     private var swipeShown = false
-    private var swipedPosition: Int = 0
+    private var swipedPosition = 0
 
     private val viewModel by lazy { viewModelFactory.get<GoalListViewModel>(this) }
 
@@ -96,17 +96,17 @@ class GoalListFragment : BaseFragment() {
     }
 
     private fun setupGoals(visible: Boolean = true) {
-            setGoals()
+        setGoals()
 
-            goal_list_loading.gone()
+        goal_list_loading.gone()
 
-            goal_list_list.isVisible(visible)
-            goal_list_placeholder.isVisible(!visible)
+        goal_list_list.isVisible(visible)
+        goal_list_placeholder.isVisible(!visible)
     }
 
     private fun setGoals() {
         val swipeAndDragHelper =
-            SwipeAndDragHelperList(
+            SwipeAndDragHelperGoal(
                 goalsAdapter
             )
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
@@ -153,7 +153,6 @@ class GoalListFragment : BaseFragment() {
     fun onViewSwiped(
         position: Int,
         direction: Int,
-        // holder: RecyclerView.ViewHolder,
         items: List<Goal>
     ) {
         val goal = items[position]
@@ -170,13 +169,6 @@ class GoalListFragment : BaseFragment() {
             }
             ItemTouchHelper.LEFT -> {
                 reloadGoalAfterSwipe()
-//                goal.archived = true
-//                        goal.archiveDate = getCurrentTime()
-//
-//                        listViewModel.saveGoal(goal)
-//
-//                        showSnackBarWithAction(holder.itemView,
-//                            getString(R.string.list_item_resolved_message), goal as Any, ::archiveGoal)
             }
         }
     }

@@ -236,14 +236,6 @@ class GoalDetailFragment : BaseFragment() {
         goal_detail_title.text = goal?.name
         goal_detail_count.text = count.getNumberInRightFormat()
 
-//        if (goal?.date != null) {
-//            val myFormat = getString(R.string.date_format_dmy)
-//            val sdf = SimpleDateFormat(myFormat, Locale.US)
-//
-//            goal_date.text = sdf.format(goal?.date)
-//            goal_date.visible()
-//        }
-
         if (goal?.divideAndConquer!!) {
             goal_detail_single.invisible()
             goal_detail_divide_and_conquer.visible()
@@ -515,7 +507,8 @@ class GoalDetailFragment : BaseFragment() {
     private fun setDivideAndConquerGoldValue(value: Float) =
         goal_detail_gold_arcView.setup(value, seriesGold)
 
-    private fun setSingleValue(value: Float) = goal_detail_single_arcView.setup(value, seriesSingle)
+    private fun setSingleValue(value: Float) =
+        goal_detail_single_arcView.setup(value, seriesSingle)
 
     private fun enableIcon(image: ImageView, iconNormal: Int) {
         image.enableIcon(iconNormal, requireContext())
@@ -551,7 +544,6 @@ class GoalDetailFragment : BaseFragment() {
     fun onViewSwiped(
         position: Int,
         direction: Int,
-        // holder: RecyclerView.ViewHolder,
         items: MutableList<Item>
     ) {
         val item = items[position]
@@ -576,13 +568,6 @@ class GoalDetailFragment : BaseFragment() {
             }
             ItemTouchHelper.LEFT -> {
                 reloadItemAfterSwipe()
-//                setupItems()
-//                item.deleteDate = getCurrentTime()
-//
-//                goalViewModel.deleteItem(item)
-//
-//                showSnackBarWithAction(
-//                    holder.itemView, getString(R.string.habit_item_swiped_deleted), item, ::deleteItem)
             }
         }
     }

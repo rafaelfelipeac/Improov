@@ -3,7 +3,7 @@ package com.rafaelfelipeac.improov.features.goal.data.dao
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.rafaelfelipeac.improov.base.BaseInstTest
 import com.rafaelfelipeac.improov.base.DataProviderAndroidTest.createHistoricDataModel
-import com.rafaelfelipeac.improov.base.DataProviderAndroidTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -24,7 +24,7 @@ class HistoricDAOTest : BaseInstTest() {
         val result = historicDAO.get(historicId)
 
         // then
-        result shouldBeEqualTo historic
+        result equalTo historic
     }
 
     @Test
@@ -41,7 +41,7 @@ class HistoricDAOTest : BaseInstTest() {
         val result = historicDAO.getAll()
 
         // then
-        result shouldBeEqualTo list
+        result equalTo list
     }
 
     @Test
@@ -55,7 +55,7 @@ class HistoricDAOTest : BaseInstTest() {
         val result = historicDAO.delete(historic)
 
         // then
-        result shouldBeEqualTo Unit
+        result equalTo Unit
     }
 
     @Test
@@ -75,7 +75,7 @@ class HistoricDAOTest : BaseInstTest() {
         val result = historicDAO.getAll()
 
         // then
-        result shouldBeEqualTo list
+        result equalTo list
     }
 
     @Test
@@ -92,6 +92,6 @@ class HistoricDAOTest : BaseInstTest() {
         val result = historicDAO.get(historicId)
 
         // then
-        result shouldBeEqualTo historic
+        result equalTo historic
     }
 }

@@ -23,8 +23,6 @@
     <string name="navigation_goals">Goals</string>
     <string name="navigation_profile">Profile</string>
 
-    <!-- Add -->
-
     <!-- Goal -->
     <string name="goal_title">Goal</string>
     <string name="goal_message_goal_done">Goal completed!</string>
@@ -58,10 +56,6 @@
     <string name="goal_form_goal_counter_inc_value_hint">Increment</string>
     <string name="goal_form_goal_counter_dec_value_hint">Decrement</string>
     <string name="goal_form_goal_dialog_no_goal_type_change">You can\'t change the type of a goal. Otherwise, the historic would be lost.</string>
-
-    <!-- Habit -->
-
-    <!-- HabitForm -->
 
     <!-- List -->
     <string name="list_title">List</string>
@@ -120,10 +114,6 @@
     <!-- Splash -->
     <string name="splash_title">Splash</string>
 
-    <!-- Stats -->
-
-    <!-- Today -->
-
     <!-- Welcome -->
     <string name="welcome_title">Welcome</string>
     <string name="welcome_start">Start</string>
@@ -143,14 +133,10 @@
     <!-- ItemAdapter -->
     <string name="item_adapter_item_title">New goal registered</string>
 
-    <!-- DayOfWeekAdapter -->
-
     <!-- BottomSheet Goal Done -->
     <string name="goal_done_message">There are pending items in this goal. \nDo you want to complete it?</string>
     <string name="goal_done_yes">YES</string>
     <string name="goal_done_no">NO</string>
-
-    <!-- BottomSheet Habit Done -->
 
     <!-- BottomSheet Item -->
     <string name="bottom_sheet_item_name">Item Title</string>

@@ -12,7 +12,7 @@ object LocaleHelper {
     fun onAttach(context: Context): Context {
         val preferences = Preferences(context)
 
-        val lang = preferences.language
+        val lang: String = preferences.language
 
         return setLocale(
             context,

@@ -3,7 +3,7 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goallist
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.rafaelfelipeac.improov.base.CoroutineRule
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.GetFirstTimeListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.SaveFirstTimeListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase
@@ -58,7 +58,7 @@ class GoalListViewModelTest {
         goalListViewModel.saveGoal(goal)
 
         // then
-        goalListViewModel.savedGoal.value shouldBeEqualTo goalId
+        goalListViewModel.savedGoal.value equalTo goalId
     }
 
     @Test
@@ -74,7 +74,7 @@ class GoalListViewModelTest {
         goalListViewModel.loadData()
 
         // then
-        goalListViewModel.goals.value shouldBeEqualTo goals
+        goalListViewModel.goals.value equalTo goals
     }
 
     @Test
@@ -89,7 +89,7 @@ class GoalListViewModelTest {
         goalListViewModel.saveFirstTimeList(booleanValue)
 
         // then
-        goalListViewModel.savedFirstTimeList.value shouldBeEqualTo Unit
+        goalListViewModel.savedFirstTimeList.value equalTo Unit
     }
 
     @Test
@@ -104,6 +104,6 @@ class GoalListViewModelTest {
         goalListViewModel.loadData()
 
         // then
-        goalListViewModel.firstTimeList.value shouldBeEqualTo booleanValue
+        goalListViewModel.firstTimeList.value equalTo booleanValue
     }
 }

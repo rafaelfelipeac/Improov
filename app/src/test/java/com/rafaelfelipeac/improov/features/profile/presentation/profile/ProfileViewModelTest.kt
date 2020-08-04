@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.profile.presentation.profile
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.rafaelfelipeac.improov.base.CoroutineRule
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.GetNameUseCase
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveFirstTimeAddUseCase
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveFirstTimeListUseCase
@@ -56,7 +56,7 @@ class ProfileViewModelTest {
         profileViewModel.saveWelcome(booleanValue)
 
         // then
-        profileViewModel.saved.value shouldBeEqualTo Unit
+        profileViewModel.saved.value equalTo Unit
     }
 
     @Test
@@ -71,7 +71,7 @@ class ProfileViewModelTest {
         profileViewModel.saveFirstTimeAdd(booleanValue)
 
         // then
-        profileViewModel.saved.value shouldBeEqualTo Unit
+        profileViewModel.saved.value equalTo Unit
     }
 
     @Test
@@ -86,7 +86,7 @@ class ProfileViewModelTest {
         profileViewModel.saveFirstTimeList(booleanValue)
 
         // then
-        profileViewModel.saved.value shouldBeEqualTo Unit
+        profileViewModel.saved.value equalTo Unit
     }
 
     @Test
@@ -101,6 +101,6 @@ class ProfileViewModelTest {
         profileViewModel.loadData()
 
         // then
-        profileViewModel.name.value shouldBeEqualTo userName
+        profileViewModel.name.value equalTo userName
     }
 }

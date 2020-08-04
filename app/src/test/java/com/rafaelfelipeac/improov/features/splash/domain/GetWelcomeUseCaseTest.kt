@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.splash.domain
 
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.splash.domain.repository.WelcomeRepository
 import com.rafaelfelipeac.improov.features.splash.domain.usecase.GetWelcomeUseCase
 import kotlinx.coroutines.runBlocking
@@ -40,7 +40,7 @@ class GetWelcomeUseCaseTest {
             val result = getWelcomeUseCase()
 
             // then
-            result shouldBeEqualTo booleanValue
+            result equalTo booleanValue
         }
     }
 }

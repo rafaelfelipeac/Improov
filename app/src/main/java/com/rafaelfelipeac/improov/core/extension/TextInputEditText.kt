@@ -23,20 +23,6 @@ fun TextInputEditText.isEmpty(): Boolean {
     return text?.isEmpty()!!
 }
 
-fun TextInputEditText.emailIsInvalid(): Boolean {
-    return !android.util.Patterns.EMAIL_ADDRESS.matcher(this.text.toString()).matches()
-}
-
-fun TextInputEditText.showOrHidePassword() {
-    transformationMethod = if (transformationMethod == HideReturnsTransformationMethod.getInstance()) {
-        PasswordTransformationMethod.getInstance()
-    } else {
-        HideReturnsTransformationMethod.getInstance()
-    }
-
-    setSelection(text?.length!!)
-}
-
 fun TextInputEditText.checkIfFieldIsEmptyOrZero(): Boolean {
     return when {
         isEmpty() -> true

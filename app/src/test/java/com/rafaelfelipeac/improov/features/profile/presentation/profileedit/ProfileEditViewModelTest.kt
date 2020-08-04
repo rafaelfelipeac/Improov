@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.profile.presentation.profileedit
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.rafaelfelipeac.improov.base.CoroutineRule
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.GetNameUseCase
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveNameUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -50,7 +50,7 @@ class ProfileEditViewModelTest {
         profileEditViewModel.saveName(name)
 
         // then
-        profileEditViewModel.saved.value shouldBeEqualTo Unit
+        profileEditViewModel.saved.value equalTo Unit
     }
 
     @Test
@@ -65,6 +65,6 @@ class ProfileEditViewModelTest {
         profileEditViewModel.loadData()
 
         // then
-        profileEditViewModel.name.value shouldBeEqualTo name
+        profileEditViewModel.name.value equalTo name
     }
 }

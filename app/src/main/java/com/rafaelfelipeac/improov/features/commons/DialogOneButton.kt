@@ -12,7 +12,7 @@ class DialogOneButton : BaseDialog() {
 
     private var onClickListener: OnClickListener? = null
 
-    private var message = ""
+    private var message: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,

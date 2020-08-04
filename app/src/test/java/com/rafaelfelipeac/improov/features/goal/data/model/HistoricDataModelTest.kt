@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.goal.data.model
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoric
 import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoricDataModel
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
@@ -21,7 +21,7 @@ class HistoricDataModelTest {
         val historic = historicDataModel.let { mapper.map(historicDataModel) }
 
         // then
-        historic shouldBeEqualTo createHistoric()
+        historic equalTo createHistoric()
     }
 
     @Test
@@ -33,7 +33,7 @@ class HistoricDataModelTest {
         val historic = historicDataModel.let { mapper.map(historicDataModel) }
 
         // then
-        historic shouldBeEqualTo createHistoric(historicId = 123, value = 5f)
+        historic equalTo createHistoric(historicId = 123, value = 5f)
     }
 
     @Test
@@ -45,7 +45,7 @@ class HistoricDataModelTest {
         val historicDataModel = historic.let { mapper.mapReverse(historic) }
 
         // then
-        historicDataModel shouldBeEqualTo createHistoricDataModel()
+        historicDataModel equalTo createHistoricDataModel()
     }
 
     @Test
@@ -57,7 +57,7 @@ class HistoricDataModelTest {
         val historicDataModel = historic.let { mapper.mapReverse(historic) }
 
         // then
-        historicDataModel shouldBeEqualTo createHistoricDataModel(
+        historicDataModel equalTo createHistoricDataModel(
             historicId = 123,
             value = 10f
         )

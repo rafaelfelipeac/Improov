@@ -27,8 +27,7 @@ import kotlinx.android.synthetic.main.fragment_goal_form.*
 @Suppress("TooManyFunctions")
 class GoalFormFragment : BaseFragment() {
 
-    private var goal: Goal =
-        Goal()
+    private var goal: Goal = Goal()
     private var goalId: Long? = null
 
     private var firstTimeAdd = false
