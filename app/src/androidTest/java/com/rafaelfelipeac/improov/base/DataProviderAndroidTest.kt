@@ -4,10 +4,6 @@ import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.goal.data.model.GoalDataModel
 import com.rafaelfelipeac.improov.features.goal.data.model.HistoricDataModel
 import com.rafaelfelipeac.improov.features.goal.data.model.ItemDataModel
-import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
-import com.rafaelfelipeac.improov.features.goal.domain.model.Item
-import junit.framework.TestCase
 
 object DataProviderAndroidTest {
 
