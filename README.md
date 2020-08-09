@@ -6,7 +6,9 @@
 </p>
 
 Improov  
----------  
+---------
+ [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
+  
 ![improov-screens](https://user-images.githubusercontent.com/9745110/89603551-c9e52b80-d83f-11ea-86a3-87fb02210497.png)
 
 Improov is a app that will help you achieve your goals.
