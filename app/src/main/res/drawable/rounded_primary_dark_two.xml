@@ -3,8 +3,8 @@
     <item>
         <shape>
             <corners
-                    android:topLeftRadius="25dp"
-                    android:topRightRadius="25dp" />
+                    android:topLeftRadius="@dimen/radius_regular"
+                    android:topRightRadius="@dimen/radius_regular" />
 
             <solid android:color="@color/colorPrimaryDarkTwo" />
         </shape>

@@ -22,7 +22,7 @@ class ItemsAdapter(private val detailFragment: GoalDetailFragment) : BaseAdapter
         setOnClickListener { clickListener(item) }
 
         val image = viewHolder.itemView.findViewById<ImageView>(R.id.item_progress)
-        val title = viewHolder.itemView.findViewById<TextView>(R.id.bottom_sheet_item_title)
+        val title = viewHolder.itemView.findViewById<TextView>(R.id.item_title)
 
         title.text = item.name
         image.background =

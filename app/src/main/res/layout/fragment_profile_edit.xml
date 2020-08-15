@@ -20,22 +20,22 @@
                     android:id="@+id/profile_edit_name_hint"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="60dp"
+                    android:layout_height="@dimen/text_input_height"
+                    android:layout_marginStart="@dimen/margin_larger"
+                    android:layout_marginTop="@dimen/margin_larger"
+                    android:layout_marginEnd="@dimen/margin_larger"
+                    android:layout_marginBottom="@dimen/margin_larger"
                     android:hint="@string/profile_edit_name_hint"
                     android:textColor="@color/colorPrimary"
-                    app:boxCornerRadiusBottomEnd="@dimen/dimens_radius_outline"
-                    app:boxCornerRadiusBottomStart="@dimen/dimens_radius_outline"
-                    app:boxCornerRadiusTopEnd="@dimen/dimens_radius_outline"
-                    app:boxCornerRadiusTopStart="@dimen/dimens_radius_outline"
+                    app:boxCornerRadiusBottomEnd="@dimen/radius_large"
+                    app:boxCornerRadiusBottomStart="@dimen/radius_large"
+                    app:boxCornerRadiusTopEnd="@dimen/radius_large"
+                    app:boxCornerRadiusTopStart="@dimen/radius_large"
                     app:layout_constraintBottom_toTopOf="@+id/profile_edit_save_button"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0">
+                    app:layout_constraintVertical_bias="0.9">
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/profile_edit_name"
@@ -43,7 +43,7 @@
                         android:layout_height="match_parent"
                         android:inputType="textCapSentences"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/text_size_regular" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,9 +51,9 @@
                     android:id="@+id/profile_edit_error_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="@dimen/margin_smaller"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_size_small"
                     app:layout_constraintEnd_toEndOf="@+id/profile_edit_name_hint"
                     app:layout_constraintHorizontal_bias="0.9"
                     app:layout_constraintStart_toStartOf="@+id/profile_edit_name_hint"
@@ -62,10 +62,10 @@
             <android.widget.Button
                     android:id="@+id/profile_edit_save_button"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="24dp"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginStart="@dimen/margin_larger"
+                    android:layout_marginEnd="@dimen/margin_larger"
+                    android:layout_marginBottom="@dimen/margin_large"
                     android:background="@drawable/rounded_button"
                     android:text="@string/profile_edit_save_message"
                     android:textColor="@color/colorPrimaryDarkOne"

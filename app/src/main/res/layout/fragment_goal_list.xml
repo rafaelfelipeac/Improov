@@ -11,7 +11,7 @@
             android:id="@+id/goal_list_constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/margin_small"
             android:background="@drawable/rounded_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,12 +26,12 @@
 
             <ImageView
                     android:id="@+id/goal_list_placeholder_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_width="@dimen/placeholder_image_size"
+                    android:layout_height="@dimen/placeholder_image_size"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_small"
                     android:background="@mipmap/ic_app_logo"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -40,15 +40,15 @@
                     app:layout_constraintVertical_bias="0.35" />
 
             <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="@dimen/margin_larger"
+                    android:layout_marginTop="@dimen/margin_regular"
+                    android:layout_marginEnd="@dimen/margin_larger"
                     android:text="@string/list_placeholder_message"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_size_large"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/goal_list_placeholder_image" />
@@ -58,29 +58,15 @@
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/goal_list_list"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_small"
                 android:overScrollMode="never"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/goal_list_placeholder"
-                app:layout_constraintBottom_toTopOf="@+id/goal_list_view"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
-
-        <View
-                android:id="@+id/goal_list_view"
-                android:layout_width="wrap_content"
-                android:layout_height="4dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/goal_list_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
