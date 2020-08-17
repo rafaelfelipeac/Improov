@@ -17,7 +17,7 @@
                 android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/profile_edit_name_hint"
+                    android:id="@+id/profileEditNameHint"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/text_input_height"
@@ -31,14 +31,14 @@
                     app:boxCornerRadiusBottomStart="@dimen/radius_large"
                     app:boxCornerRadiusTopEnd="@dimen/radius_large"
                     app:boxCornerRadiusTopStart="@dimen/radius_large"
-                    app:layout_constraintBottom_toTopOf="@+id/profile_edit_save_button"
+                    app:layout_constraintBottom_toTopOf="@+id/profileEditSaveButton"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.9">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/profile_edit_name"
+                        android:id="@+id/profileEditName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="textCapSentences"
@@ -48,19 +48,19 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                    android:id="@+id/profile_edit_error_message"
+                    android:id="@+id/profileEditErrorMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_smaller"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_small"
-                    app:layout_constraintEnd_toEndOf="@+id/profile_edit_name_hint"
+                    app:layout_constraintEnd_toEndOf="@+id/profileEditNameHint"
                     app:layout_constraintHorizontal_bias="0.9"
-                    app:layout_constraintStart_toStartOf="@+id/profile_edit_name_hint"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_edit_name_hint" />
+                    app:layout_constraintStart_toStartOf="@+id/profileEditNameHint"
+                    app:layout_constraintTop_toBottomOf="@+id/profileEditNameHint" />
 
             <android.widget.Button
-                    android:id="@+id/profile_edit_save_button"
+                    android:id="@+id/profileEditSaveButton"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:layout_marginStart="@dimen/margin_larger"

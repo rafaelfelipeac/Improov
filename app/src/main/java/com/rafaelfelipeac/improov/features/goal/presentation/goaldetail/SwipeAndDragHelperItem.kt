@@ -38,7 +38,7 @@ class SwipeAndDragHelperItem(private val contract: ActionCompleteContract) :
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         val foregroundView =
-            viewHolder?.itemView?.findViewById<ConstraintLayout>(R.id.item_normal_view)
+            viewHolder?.itemView?.findViewById<ConstraintLayout>(R.id.itemItemNormalView)
 
         if (foregroundView != null) {
             getDefaultUIUtil()
@@ -57,7 +57,7 @@ class SwipeAndDragHelperItem(private val contract: ActionCompleteContract) :
     ) {
 
         val foregroundView =
-            viewHolder.itemView.findViewById<ConstraintLayout>(R.id.item_normal_view)
+            viewHolder.itemView.findViewById<ConstraintLayout>(R.id.itemItemNormalView)
 
         if (foregroundView != null) {
             getDefaultUIUtil()
@@ -67,7 +67,7 @@ class SwipeAndDragHelperItem(private val contract: ActionCompleteContract) :
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
         val foregroundView =
-            viewHolder.itemView.findViewById<ConstraintLayout>(R.id.item_normal_view)
+            viewHolder.itemView.findViewById<ConstraintLayout>(R.id.itemItemNormalView)
 
         if (foregroundView != null) {
             getDefaultUIUtil().clearView(foregroundView)
@@ -90,7 +90,7 @@ class SwipeAndDragHelperItem(private val contract: ActionCompleteContract) :
         }
 
         val foregroundView =
-            viewHolder.itemView.findViewById<ConstraintLayout>(R.id.item_normal_view)
+            viewHolder.itemView.findViewById<ConstraintLayout>(R.id.itemItemNormalView)
 
         if (foregroundView != null) {
             getDefaultUIUtil()

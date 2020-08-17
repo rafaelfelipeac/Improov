@@ -98,10 +98,10 @@ class GoalListFragment : BaseFragment() {
     private fun setupGoals(visible: Boolean = true) {
         setGoals()
 
-        goal_list_loading.gone()
+        goalListLoading.gone()
 
-        goal_list_list.isVisible(visible)
-        goal_list_placeholder.isVisible(!visible)
+        goalListList.isVisible(visible)
+        goalListPlaceholder.isVisible(!visible)
     }
 
     private fun setGoals() {
@@ -111,7 +111,7 @@ class GoalListFragment : BaseFragment() {
             )
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        touchHelper.attachToRecyclerView(goal_list_list)
+        touchHelper.attachToRecyclerView(goalListList)
 
         goalsAdapter.touchHelper = touchHelper
         goalsAdapter.clickListener = {
@@ -119,7 +119,7 @@ class GoalListFragment : BaseFragment() {
             navController.navigate(action)
         }
 
-        goal_list_list.apply {
+        goalListList.apply {
             setHasFixedSize(true)
 
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

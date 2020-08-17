@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/tips_swipe"
+        android:id="@+id/tipsSwipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDarkOne"
@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/tips_swipe_button_close"
+                    android:id="@+id/tipsSwipeButtonClose"
                     android:layout_width="@dimen/button_close_size"
                     android:layout_height="@dimen/button_close_size"
                     android:layout_marginStart="@dimen/margin_small"
@@ -41,7 +41,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                    android:id="@+id/tips_swipe_title"
+                    android:id="@+id/tipsSwipeTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
@@ -54,10 +54,10 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_swipe_button_close" />
+                    app:layout_constraintTop_toBottomOf="@+id/tipsSwipeButtonClose" />
 
             <TextView
-                    android:id="@+id/tips_swipe_message_1"
+                    android:id="@+id/tipsSwipeMessage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
@@ -72,11 +72,11 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_swipe_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tipsSwipeTitle"
                     app:layout_constraintVertical_bias="0.0" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/tips_swipe_images"
+                    android:id="@+id/tipsSwipeImages"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
@@ -86,7 +86,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_swipe_message_1">
+                    app:layout_constraintTop_toBottomOf="@+id/tipsSwipeMessage">
 
                 <pl.droidsonroids.gif.GifImageView
                         android:layout_width="match_parent"
@@ -118,7 +118,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_swipe_images" />
+                    app:layout_constraintTop_toBottomOf="@+id/tipsSwipeImages" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

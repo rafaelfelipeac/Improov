@@ -80,20 +80,20 @@ class GoalFormFragment : BaseFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_save -> {
+            R.id.menuSave -> {
                 when {
                     checkIfAnyFieldsAreEmptyOrZero() -> { }
                     getGoalTypeSelected() == GoalType.GOAL_NONE -> {
                         showSnackBar(getString(R.string.goal_form_empty_type_goal))
 
                         hideSoftKeyboard()
-                        goal_form_type_title.isFocusableInTouchMode = true
-                        goal_form_type_title.requestFocus()
+                        goalFormTypeTitle.isFocusableInTouchMode = true
+                        goalFormTypeTitle.requestFocus()
                     }
                     !validateDivideAndConquerValues() -> {
                         showSnackBar(getString(R.string.goal_form_gold_silver_bronze_order))
 
-                        goal_form_bronze_value.requestFocus()
+                        goalFormBronzeValue.requestFocus()
                     }
                     else -> {
                         val goalToSave = updateOrCreateGoal()
@@ -124,14 +124,14 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setupLayout() {
-        goal_form_divide_and_conquest_help.setOnClickListener {
+        goalFormDivideAndConquerHelp.setOnClickListener {
             hideSoftKeyboard()
             setupBottomSheetTipsDivideAndConquer()
             setupBottomSheetTip()
             showBottomSheetTips()
         }
 
-        goal_form_type_help.setOnClickListener {
+        goalFormTypeHelp.setOnClickListener {
             hideSoftKeyboard()
             setupBottomSheetTipsGoalType()
             setupBottomSheetTip()
@@ -160,7 +160,7 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setSwitchImproov() {
-        goal_form_switch_divide_and_conquer.setOnCheckedChangeListener { _, isChecked ->
+        goalFormSwitchDivideAndConquer.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 isDivideAndConquer(true)
             } else {
@@ -170,36 +170,36 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setRadioButtonType() {
-        goal_form_radio_type_list.setOnClickListener {
+        goalFormRadioTypeList.setOnClickListener {
             if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_LIST) {
                 showDialogNoGoalTypeChange()
-            } else if (goal_form_radio_type_list.isChecked) {
-                goal_form_radio_type_counter.isChecked = false
-                goal_form_radio_type_total.isChecked = false
+            } else if (goalFormRadioTypeList.isChecked) {
+                goalFormRadioTypeCounter.isChecked = false
+                goalFormRadioTypeTotal.isChecked = false
 
-                goal_form_goal_counter.gone()
+                goalFormGoalCounter.gone()
             }
         }
 
-        goal_form_radio_type_counter.setOnClickListener {
+        goalFormRadioTypeCounter.setOnClickListener {
             if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_COUNTER) {
                 showDialogNoGoalTypeChange()
-            } else if (goal_form_radio_type_counter.isChecked) {
-                goal_form_radio_type_list.isChecked = false
-                goal_form_radio_type_total.isChecked = false
+            } else if (goalFormRadioTypeCounter.isChecked) {
+                goalFormRadioTypeList.isChecked = false
+                goalFormRadioTypeTotal.isChecked = false
 
-                goal_form_goal_counter.visible()
+                goalFormGoalCounter.visible()
             }
         }
 
-        goal_form_radio_type_total.setOnClickListener {
+        goalFormRadioTypeTotal.setOnClickListener {
             if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_FINAL) {
                 showDialogNoGoalTypeChange()
-            } else if (goal_form_radio_type_total.isChecked) {
-                goal_form_radio_type_counter.isChecked = false
-                goal_form_radio_type_list.isChecked = false
+            } else if (goalFormRadioTypeTotal.isChecked) {
+                goalFormRadioTypeCounter.isChecked = false
+                goalFormRadioTypeList.isChecked = false
 
-                goal_form_goal_counter.gone()
+                goalFormGoalCounter.gone()
             }
         }
     }
@@ -208,23 +208,23 @@ class GoalFormFragment : BaseFragment() {
         goal.divideAndConquer = isDivideAndConquer
 
         if (isDivideAndConquer) {
-            goal_form_single_value.resetValue()
+            goalFormSingleValue.resetValue()
 
-            goal_form_divide_and_conquer.visible()
-            goal_form_single.invisible()
+            goalFormDivideAndConquer.visible()
+            goalFormSingle.invisible()
         } else {
-            goal_form_bronze_value.resetValue()
-            goal_form_silver_value.resetValue()
-            goal_form_gold_value.resetValue()
+            goalFormBronzeValue.resetValue()
+            goalFormSilverValue.resetValue()
+            goalFormGoldValue.resetValue()
 
-            goal_form_divide_and_conquer.invisible()
-            goal_form_single.visible()
+            goalFormDivideAndConquer.invisible()
+            goalFormSingle.visible()
         }
     }
 
     private fun updateOrCreateGoal(): Goal {
-        goal.name = goal_form_goal_name.text.toString()
-        goal.divideAndConquer = goal_form_switch_divide_and_conquer.isChecked
+        goal.name = goalFormGoalName.text.toString()
+        goal.divideAndConquer = goalFormSwitchDivideAndConquer.isChecked
 
         if (goal.goalId == 0L) {
             goal.createdDate = getCurrentTime()
@@ -243,16 +243,16 @@ class GoalFormFragment : BaseFragment() {
         }
 
         if (getGoalTypeSelected() == GoalType.GOAL_COUNTER) {
-            goal.incrementValue = goal_form_goal_counter_inc_value.toFloat()
-            goal.decrementValue = goal_form_goal_counter_dec_value.toFloat()
+            goal.incrementValue = goalFormGoalCounterIncValue.toFloat()
+            goal.decrementValue = goalFormGoalCounterDecValue.toFloat()
         }
 
         if (goal.divideAndConquer) {
-            goal.bronzeValue = goal_form_bronze_value.toFloat()
-            goal.silverValue = goal_form_silver_value.toFloat()
-            goal.goldValue = goal_form_gold_value.toFloat()
+            goal.bronzeValue = goalFormBronzeValue.toFloat()
+            goal.silverValue = goalFormSilverValue.toFloat()
+            goal.goldValue = goalFormGoldValue.toFloat()
         } else {
-            goal.singleValue = goal_form_single_value.toFloat()
+            goal.singleValue = goalFormSingleValue.toFloat()
         }
 
         return goal
@@ -260,13 +260,13 @@ class GoalFormFragment : BaseFragment() {
 
     private fun getGoalTypeSelected(): GoalType {
         return when {
-            goal_form_radio_type_list.isChecked -> {
+            goalFormRadioTypeList.isChecked -> {
                 GoalType.GOAL_LIST
             }
-            goal_form_radio_type_counter.isChecked -> {
+            goalFormRadioTypeCounter.isChecked -> {
                 GoalType.GOAL_COUNTER
             }
-            goal_form_radio_type_total.isChecked -> {
+            goalFormRadioTypeTotal.isChecked -> {
                 GoalType.GOAL_FINAL
             }
             else -> {
@@ -276,19 +276,19 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setupGoal() {
-        goal_form_goal_name.setText(goal.name)
+        goalFormGoalName.setText(goal.name)
 
         if (goal.divideAndConquer) {
-            goal_form_divide_and_conquer.visible()
-            goal_form_single.invisible()
+            goalFormDivideAndConquer.visible()
+            goalFormSingle.invisible()
 
-            goal_form_bronze_value.setText(goal.bronzeValue.getNumberInRightFormat())
-            goal_form_silver_value.setText(goal.silverValue.getNumberInRightFormat())
-            goal_form_gold_value.setText(goal.goldValue.getNumberInRightFormat())
+            goalFormBronzeValue.setText(goal.bronzeValue.getNumberInRightFormat())
+            goalFormSilverValue.setText(goal.silverValue.getNumberInRightFormat())
+            goalFormGoldValue.setText(goal.goldValue.getNumberInRightFormat())
 
-            goal_form_switch_divide_and_conquer.isChecked = true
+            goalFormSwitchDivideAndConquer.isChecked = true
         } else {
-            goal_form_single_value.setText(goal.singleValue.getNumberInRightFormat())
+            goalFormSingleValue.setText(goal.singleValue.getNumberInRightFormat())
         }
 
         setupGoalType()
@@ -297,24 +297,24 @@ class GoalFormFragment : BaseFragment() {
     private fun setupGoalType() {
         when (goal.type) {
             GoalType.GOAL_LIST -> {
-                goal_form_radio_type_list.isChecked = true
-                goal_form_radio_type_counter.isChecked = false
-                goal_form_radio_type_total.isChecked = false
+                goalFormRadioTypeList.isChecked = true
+                goalFormRadioTypeCounter.isChecked = false
+                goalFormRadioTypeTotal.isChecked = false
             }
             GoalType.GOAL_COUNTER -> {
-                goal_form_radio_type_counter.isChecked = true
-                goal_form_radio_type_list.isChecked = false
-                goal_form_radio_type_total.isChecked = false
+                goalFormRadioTypeCounter.isChecked = true
+                goalFormRadioTypeList.isChecked = false
+                goalFormRadioTypeTotal.isChecked = false
 
-                goal_form_goal_counter.visible()
+                goalFormGoalCounter.visible()
 
-                goal_form_goal_counter_inc_value.setText(goal.incrementValue.getNumberInRightFormat())
-                goal_form_goal_counter_dec_value.setText(goal.decrementValue.getNumberInRightFormat())
+                goalFormGoalCounterIncValue.setText(goal.incrementValue.getNumberInRightFormat())
+                goalFormGoalCounterDecValue.setText(goal.decrementValue.getNumberInRightFormat())
             }
             GoalType.GOAL_FINAL -> {
-                goal_form_radio_type_total.isChecked = true
-                goal_form_radio_type_list.isChecked = false
-                goal_form_radio_type_counter.isChecked = false
+                goalFormRadioTypeTotal.isChecked = true
+                goalFormRadioTypeList.isChecked = false
+                goalFormRadioTypeCounter.isChecked = false
             }
             else -> { }
         }
@@ -355,8 +355,8 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfNameFieldIsEmptyOrZero(): Boolean {
         return when {
-            goal_form_goal_name.checkIfFieldIsEmptyOrZero() -> {
-                goal_form_goal_name.fieldIsEmptyOrZero(this)
+            goalFormGoalName.checkIfFieldIsEmptyOrZero() -> {
+                goalFormGoalName.fieldIsEmptyOrZero(this)
                 true
             }
             else -> false
@@ -365,20 +365,20 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfValuesFieldsAreEmptyOrZero(): Boolean {
         return when {
-            goal_form_single_value.checkIfFieldIsEmptyOrZero() && !goal.divideAndConquer -> {
-                goal_form_single_value.fieldIsEmptyOrZero(this)
+            goalFormSingleValue.checkIfFieldIsEmptyOrZero() && !goal.divideAndConquer -> {
+                goalFormSingleValue.fieldIsEmptyOrZero(this)
                 true
             }
-            goal_form_bronze_value.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
-                goal_form_bronze_value.fieldIsEmptyOrZero(this)
+            goalFormBronzeValue.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
+                goalFormBronzeValue.fieldIsEmptyOrZero(this)
                 true
             }
-            goal_form_silver_value.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
-                goal_form_silver_value.fieldIsEmptyOrZero(this)
+            goalFormSilverValue.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
+                goalFormSilverValue.fieldIsEmptyOrZero(this)
                 true
             }
-            goal_form_gold_value.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
-                goal_form_gold_value.fieldIsEmptyOrZero(this)
+            goalFormGoldValue.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
+                goalFormGoldValue.fieldIsEmptyOrZero(this)
                 true
             }
             else -> false
@@ -387,16 +387,16 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfCounterFieldsAreEmptyOrZero(): Boolean {
         return when {
-            goal_form_goal_counter_dec_value.checkIfFieldIsEmptyOrZero() &&
+            goalFormGoalCounterDecValue.checkIfFieldIsEmptyOrZero() &&
                     (goal.type == GoalType.GOAL_COUNTER ||
                             getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
-                goal_form_goal_counter_dec_value.fieldIsEmptyOrZero(this)
+                goalFormGoalCounterDecValue.fieldIsEmptyOrZero(this)
                 true
             }
-            goal_form_goal_counter_inc_value.checkIfFieldIsEmptyOrZero() &&
+            goalFormGoalCounterIncValue.checkIfFieldIsEmptyOrZero() &&
                     (goal.type == GoalType.GOAL_COUNTER ||
                             getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
-                goal_form_goal_counter_inc_value.fieldIsEmptyOrZero(this)
+                goalFormGoalCounterIncValue.fieldIsEmptyOrZero(this)
                 true
             }
             else -> false
@@ -405,13 +405,13 @@ class GoalFormFragment : BaseFragment() {
 
     private fun validateDivideAndConquerValues(): Boolean {
         return try {
-            val gold = goal_form_gold_value.toFloat()
-            val silver = goal_form_silver_value.toFloat()
-            val bronze = goal_form_bronze_value.toFloat()
+            val gold = goalFormGoldValue.toFloat()
+            val silver = goalFormSilverValue.toFloat()
+            val bronze = goalFormBronzeValue.toFloat()
 
             ((gold > silver) && (silver > bronze))
         } catch (e: NumberFormatException) {
-            return goal_form_single_value.isNotEmpty()
+            return goalFormSingleValue.isNotEmpty()
         }
     }
 }

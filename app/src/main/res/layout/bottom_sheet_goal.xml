@@ -9,7 +9,7 @@
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <View
-            android:id="@+id/goal_done_indicator"
+            android:id="@+id/goalDoneIndicator"
             android:layout_width="@dimen/indicator_width"
             android:layout_height="@dimen/indicator_height"
             android:layout_marginStart="@dimen/margin_small"
@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-            android:id="@+id/goal_done_message"
+            android:id="@+id/goalDoneMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_xlarger"
@@ -33,10 +33,10 @@
             android:textSize="@dimen/text_size_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/goal_done_indicator" />
+            app:layout_constraintTop_toBottomOf="@+id/goalDoneIndicator" />
 
     <android.widget.Button
-            android:id="@+id/goal_done_yes"
+            android:id="@+id/goalDoneYes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_larger"
@@ -46,12 +46,12 @@
             android:text="@string/goal_done_yes"
             android:textColor="@color/colorPrimaryDarkOne"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/goal_done_view"
-            app:layout_constraintTop_toBottomOf="@+id/goal_done_message"
+            app:layout_constraintEnd_toStartOf="@+id/itemGoalDoneView"
+            app:layout_constraintTop_toBottomOf="@+id/goalDoneMessage"
             app:layout_constraintVertical_bias="0.0" />
 
     <View
-            android:id="@+id/goal_done_view"
+            android:id="@+id/itemGoalDoneView"
             android:layout_width="@dimen/view_size"
             android:layout_height="@dimen/view_size"
             android:layout_marginStart="@dimen/margin_small"
@@ -61,10 +61,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/goal_done_message" />
+            app:layout_constraintTop_toBottomOf="@+id/goalDoneMessage" />
 
     <android.widget.Button
-            android:id="@+id/goal_done_no"
+            android:id="@+id/goalDoneNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_regular"
@@ -74,8 +74,8 @@
             android:text="@string/goal_done_no"
             android:textColor="@color/colorPrimaryDarkOne"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/goal_done_view"
-            app:layout_constraintTop_toBottomOf="@+id/goal_done_message"
+            app:layout_constraintStart_toEndOf="@+id/itemGoalDoneView"
+            app:layout_constraintTop_toBottomOf="@+id/goalDoneMessage"
             app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

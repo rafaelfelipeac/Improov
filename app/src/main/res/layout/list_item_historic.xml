@@ -7,7 +7,7 @@
         android:orientation="vertical">
 
     <TextView
-            android:id="@+id/historic_date"
+            android:id="@+id/itemHistoricDate"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginEnd="@dimen/margin_regular"
@@ -15,11 +15,11 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_smaller"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/historic_view"
+            app:layout_constraintEnd_toStartOf="@+id/itemHistoricView"
             app:layout_constraintTop_toTopOf="parent" />
 
     <View
-            android:id="@+id/historic_view"
+            android:id="@+id/itemHistoricView"
             android:layout_width="@dimen/view_size"
             android:layout_height="@dimen/view_size"
             android:layout_marginStart="@dimen/margin_small"
@@ -33,7 +33,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-            android:id="@+id/historic_value"
+            android:id="@+id/itemHistoricValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_regular"
@@ -43,7 +43,7 @@
             android:textSize="@dimen/text_size_smaller"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/historic_view"
+            app:layout_constraintStart_toEndOf="@+id/itemHistoricView"
             app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

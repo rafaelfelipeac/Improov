@@ -152,8 +152,8 @@ abstract class BaseFragment : Fragment() {
         val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_goal, null)
         bottomSheetGoal.setContentView(sheetView)
 
-        bottomSheetGoalYes = sheetView.findViewById(R.id.goal_done_yes)
-        bottomSheetGoalNo = sheetView.findViewById(R.id.goal_done_no)
+        bottomSheetGoalYes = sheetView.findViewById(R.id.goalDoneYes)
+        bottomSheetGoalNo = sheetView.findViewById(R.id.goalDoneNo)
     }
 
     fun showBottomSheetGoal(
@@ -187,11 +187,11 @@ abstract class BaseFragment : Fragment() {
         val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_item, null)
         bottomSheetItem.setContentView(sheetView)
 
-        bottomSheetItemSave = sheetView.findViewById(R.id.bottom_sheet_item_save)
-        bottomSheetItemName = sheetView.findViewById(R.id.bottom_sheet_item_name)
-        bottomSheetItemTitle = sheetView.findViewById(R.id.bottom_sheet_item_title)
-        bottomSheetItemDate = sheetView.findViewById(R.id.bottom_sheet_item_date)
-        bottomSheetItemEmptyName = sheetView.findViewById(R.id.bottom_sheet_item_empty_name)
+        bottomSheetItemSave = sheetView.findViewById(R.id.bottomSheetItemSave)
+        bottomSheetItemName = sheetView.findViewById(R.id.bottomSheetItemName)
+        bottomSheetItemTitle = sheetView.findViewById(R.id.bottomSheetItemTitle)
+        bottomSheetItemDate = sheetView.findViewById(R.id.bottomSheetItemDate)
+        bottomSheetItemEmptyName = sheetView.findViewById(R.id.bottomSheetItemEmptyName)
 
         bottomSheetItemSave.setOnClickListener {
             if (bottomSheetItemName.isEmpty()) {
@@ -255,18 +255,18 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun setupBottomSheetTipsDivideAndConquer() {
-        bottomSheetTip = BottomSheetBehavior.from(main.findViewById<LinearLayout>(R.id.tips_divide_and_conquer))
-        bottomSheetTipClose = main.findViewById(R.id.tips_divide_and_conquer_button_close)
+        bottomSheetTip = BottomSheetBehavior.from(main.findViewById<LinearLayout>(R.id.tipsDivideAndConquer))
+        bottomSheetTipClose = main.findViewById(R.id.tipsDivideAndConquerButtonClose)
     }
 
     fun setupBottomSheetTipsGoalType() {
-        bottomSheetTip = BottomSheetBehavior.from(main.findViewById<LinearLayout>(R.id.tips_goal_type))
-        bottomSheetTipClose = main.findViewById(R.id.tips_goal_type_button_close)
+        bottomSheetTip = BottomSheetBehavior.from(main.findViewById<LinearLayout>(R.id.tipsGoalType))
+        bottomSheetTipClose = main.findViewById(R.id.tipsGoalTypeButtonClose)
     }
 
     fun setupBottomSheetTipsSwipe() {
-        bottomSheetTip = BottomSheetBehavior.from(main.findViewById<LinearLayout>(R.id.tips_swipe))
-        bottomSheetTipClose = main.findViewById(R.id.tips_swipe_button_close)
+        bottomSheetTip = BottomSheetBehavior.from(main.findViewById<LinearLayout>(R.id.tipsSwipe))
+        bottomSheetTipClose = main.findViewById(R.id.tipsSwipeButtonClose)
     }
 
     fun showBottomSheetTips() {

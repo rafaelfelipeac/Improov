@@ -13,7 +13,7 @@
             android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/goal_detail_info"
+                android:id="@+id/goalDetailInfo"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/margin_small"
@@ -24,7 +24,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                    android:id="@+id/goal_detail_title"
+                    android:id="@+id/goalDetailTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
@@ -47,13 +47,13 @@
                     android:layout_marginEnd="@dimen/margin_xlarger"
                     android:layout_marginBottom="@dimen/margin_larger"
                     android:background="@drawable/rounded_primary"
-                    app:layout_constraintBottom_toTopOf="@+id/goal_detail_count"
+                    app:layout_constraintBottom_toTopOf="@+id/goalDetailCount"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/goal_detail_title" />
+                    app:layout_constraintTop_toBottomOf="@+id/goalDetailTitle" />
 
             <TextView
-                    android:id="@+id/goal_detail_count"
+                    android:id="@+id/goalDetailCount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
@@ -69,7 +69,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                    android:id="@+id/goal_detail_date"
+                    android:id="@+id/goalDetailDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
@@ -83,12 +83,12 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/goal_detail_count" />
+                    app:layout_constraintTop_toBottomOf="@+id/goalDetailCount" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/goal_detail_single_divide_and_conquer"
+                android:id="@+id/goalDetailSingleDivideAndConquer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_small"
@@ -98,11 +98,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/goal_detail_info"
+                app:layout_constraintTop_toBottomOf="@+id/goalDetailInfo"
                 app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goal_detail_single"
+                    android:id="@+id/goalDetailSingle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
@@ -116,7 +116,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                        android:id="@+id/goal_detail_single_image"
+                        android:id="@+id/goalDetailSingleImage"
                         android:layout_width="@dimen/goal_detail_image_size"
                         android:layout_height="@dimen/goal_detail_image_size"
                         android:layout_marginStart="@dimen/margin_small"
@@ -129,7 +129,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                        android:id="@+id/goal_detail_single_text"
+                        android:id="@+id/goalDetailSingleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_small"
@@ -139,21 +139,21 @@
                         android:textSize="@dimen/text_size_large"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/goal_detail_single_image" />
+                        app:layout_constraintTop_toBottomOf="@+id/goalDetailSingleImage" />
 
                 <com.hookedonplay.decoviewlib.DecoView
-                        android:id="@+id/goal_detail_single_arcView"
+                        android:id="@+id/goalDetailSingleArcView"
                         android:layout_width="@dimen/goal_detail_arc_view_size"
                         android:layout_height="@dimen/goal_detail_arc_view_size"
                         android:layout_marginTop="@dimen/margin_small"
-                        app:layout_constraintEnd_toEndOf="@+id/goal_detail_single_image"
-                        app:layout_constraintStart_toStartOf="@+id/goal_detail_single_image"
+                        app:layout_constraintEnd_toEndOf="@+id/goalDetailSingleImage"
+                        app:layout_constraintStart_toStartOf="@+id/goalDetailSingleImage"
                         app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goal_detail_divide_and_conquer"
+                    android:id="@+id/goalDetailDivideAndConquer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
@@ -168,15 +168,15 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/goal_detail_divide_and_conquer_bronze"
+                        android:id="@+id/goalDetailDivideAndConquerBronze"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toStartOf="@+id/goal_detail_divide_and_conquer_silver"
+                        app:layout_constraintEnd_toStartOf="@+id/goalDetailDivideAndConquerSilver"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                            android:id="@+id/goal_detail_divide_and_conquer_bronze_image"
+                            android:id="@+id/goalDetailDivideAndConquerBronzeImage"
                             android:layout_width="@dimen/goal_detail_image_size"
                             android:layout_height="@dimen/goal_detail_image_size"
                             android:layout_marginStart="@dimen/margin_small"
@@ -188,41 +188,41 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                            android:id="@+id/goal_detail_divide_and_conquer_bronze_text"
+                            android:id="@+id/goalDetailDivideAndConquerBronzeText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_regular"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/text_size_large"
-                            app:layout_constraintEnd_toEndOf="@+id/goal_detail_divide_and_conquer_bronze_image"
-                            app:layout_constraintStart_toStartOf="@+id/goal_detail_divide_and_conquer_bronze_image"
-                            app:layout_constraintTop_toBottomOf="@+id/goal_detail_divide_and_conquer_bronze_image" />
+                            app:layout_constraintEnd_toEndOf="@+id/goalDetailDivideAndConquerBronzeImage"
+                            app:layout_constraintStart_toStartOf="@+id/goalDetailDivideAndConquerBronzeImage"
+                            app:layout_constraintTop_toBottomOf="@+id/goalDetailDivideAndConquerBronzeImage" />
 
                     <com.hookedonplay.decoviewlib.DecoView
-                            android:id="@+id/goal_detail_bronze_arcView"
+                            android:id="@+id/goalDetailBronzeArcView"
                             android:layout_width="@dimen/goal_detail_arc_view_size"
                             android:layout_height="@dimen/goal_detail_arc_view_size"
                             android:layout_marginTop="@dimen/margin_small"
-                            app:layout_constraintEnd_toEndOf="@+id/goal_detail_divide_and_conquer_bronze_image"
-                            app:layout_constraintStart_toStartOf="@+id/goal_detail_divide_and_conquer_bronze_image"
+                            app:layout_constraintEnd_toEndOf="@+id/goalDetailDivideAndConquerBronzeImage"
+                            app:layout_constraintStart_toStartOf="@+id/goalDetailDivideAndConquerBronzeImage"
                             app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/goal_detail_divide_and_conquer_silver"
+                        android:id="@+id/goalDetailDivideAndConquerSilver"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_smaller"
                         android:layout_marginEnd="@dimen/margin_smaller"
                         android:layout_marginBottom="@dimen/margin_small"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/goal_detail_divide_and_conquer_gold"
-                        app:layout_constraintStart_toEndOf="@+id/goal_detail_divide_and_conquer_bronze"
+                        app:layout_constraintEnd_toStartOf="@+id/goalDetailDivideAndConquerGold"
+                        app:layout_constraintStart_toEndOf="@+id/goalDetailDivideAndConquerBronze"
                         app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                            android:id="@+id/goal_detail_divide_and_conquer_silver_image"
+                            android:id="@+id/goalDetailDivideAndConquerSilverImage"
                             android:layout_width="@dimen/goal_detail_image_size"
                             android:layout_height="@dimen/goal_detail_image_size"
                             android:layout_marginStart="@dimen/margin_small"
@@ -234,39 +234,39 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                            android:id="@+id/goal_detail_divide_and_conquer_silver_text"
+                            android:id="@+id/goalDetailDivideAndConquerSilverText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_regular"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/text_size_large"
-                            app:layout_constraintEnd_toEndOf="@+id/goal_detail_divide_and_conquer_silver_image"
-                            app:layout_constraintStart_toStartOf="@+id/goal_detail_divide_and_conquer_silver_image"
-                            app:layout_constraintTop_toBottomOf="@+id/goal_detail_divide_and_conquer_silver_image" />
+                            app:layout_constraintEnd_toEndOf="@+id/goalDetailDivideAndConquerSilverImage"
+                            app:layout_constraintStart_toStartOf="@+id/goalDetailDivideAndConquerSilverImage"
+                            app:layout_constraintTop_toBottomOf="@+id/goalDetailDivideAndConquerSilverImage" />
 
                     <com.hookedonplay.decoviewlib.DecoView
-                            android:id="@+id/goal_detail_silver_arcView"
+                            android:id="@+id/goalDetailSilverArcView"
                             android:layout_width="@dimen/goal_detail_arc_view_size"
                             android:layout_height="@dimen/goal_detail_arc_view_size"
                             android:layout_marginTop="@dimen/margin_small"
-                            app:layout_constraintEnd_toEndOf="@+id/goal_detail_divide_and_conquer_silver_image"
-                            app:layout_constraintStart_toStartOf="@+id/goal_detail_divide_and_conquer_silver_image"
+                            app:layout_constraintEnd_toEndOf="@+id/goalDetailDivideAndConquerSilverImage"
+                            app:layout_constraintStart_toStartOf="@+id/goalDetailDivideAndConquerSilverImage"
                             app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/goal_detail_divide_and_conquer_gold"
+                        android:id="@+id/goalDetailDivideAndConquerGold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/margin_small"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/goal_detail_divide_and_conquer_silver"
+                        app:layout_constraintStart_toEndOf="@+id/goalDetailDivideAndConquerSilver"
                         app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                            android:id="@+id/goal_detail_divide_and_conquer_gold_image"
+                            android:id="@+id/goalDetailDivideAndConquerGoldImage"
                             android:layout_width="@dimen/goal_detail_image_size"
                             android:layout_height="@dimen/goal_detail_image_size"
                             android:layout_marginStart="@dimen/margin_small"
@@ -279,23 +279,23 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                            android:id="@+id/goal_detail_divide_and_conquer_gold_text"
+                            android:id="@+id/goalDetailDivideAndConquerGoldText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_regular"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/text_size_large"
-                            app:layout_constraintEnd_toEndOf="@+id/goal_detail_divide_and_conquer_gold_image"
-                            app:layout_constraintStart_toStartOf="@+id/goal_detail_divide_and_conquer_gold_image"
-                            app:layout_constraintTop_toBottomOf="@+id/goal_detail_divide_and_conquer_gold_image" />
+                            app:layout_constraintEnd_toEndOf="@+id/goalDetailDivideAndConquerGoldImage"
+                            app:layout_constraintStart_toStartOf="@+id/goalDetailDivideAndConquerGoldImage"
+                            app:layout_constraintTop_toBottomOf="@+id/goalDetailDivideAndConquerGoldImage" />
 
                     <com.hookedonplay.decoviewlib.DecoView
-                            android:id="@+id/goal_detail_gold_arcView"
+                            android:id="@+id/goalDetailGoldArcView"
                             android:layout_width="@dimen/goal_detail_arc_view_size"
                             android:layout_height="@dimen/goal_detail_arc_view_size"
                             android:layout_marginTop="@dimen/margin_small"
-                            app:layout_constraintEnd_toEndOf="@+id/goal_detail_divide_and_conquer_gold_image"
-                            app:layout_constraintStart_toStartOf="@+id/goal_detail_divide_and_conquer_gold_image"
+                            app:layout_constraintEnd_toEndOf="@+id/goalDetailDivideAndConquerGoldImage"
+                            app:layout_constraintStart_toStartOf="@+id/goalDetailDivideAndConquerGoldImage"
                             app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -315,11 +315,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/goal_detail_single_divide_and_conquer"
+                app:layout_constraintTop_toBottomOf="@+id/goalDetailSingleDivideAndConquer"
                 app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goal_detail_cl_counter"
+                    android:id="@+id/goalDetailCLCounter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
@@ -328,10 +328,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/goal_detail_cl_total">
+                    app:layout_constraintTop_toTopOf="@+id/goalDetailCLTotal">
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/goal_detail_btn_counter_dec"
+                        android:id="@+id/goalDetailBtnCounterDec"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_small"
@@ -339,7 +339,7 @@
                         android:layout_marginEnd="@dimen/margin_large"
                         app:backgroundTint="@color/colorPrimary"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/goal_detail_counter_total"
+                        app:layout_constraintEnd_toStartOf="@+id/goalDetailCounterTotal"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -348,7 +348,7 @@
                         app:tint="@color/colorPrimaryDarkTwo" />
 
                 <TextView
-                        android:id="@+id/goal_detail_counter_total"
+                        android:id="@+id/goalDetailCounterTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_small"
@@ -364,7 +364,7 @@
                         app:layout_constraintVertical_bias="0.3" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/goal_detail_btn_counter_inc"
+                        android:id="@+id/goalDetailBtnCounterInc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_large"
@@ -374,7 +374,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toEndOf="@+id/goal_detail_counter_total"
+                        app:layout_constraintStart_toEndOf="@+id/goalDetailCounterTotal"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.3"
                         app:srcCompat="@drawable/ic_plus"
@@ -383,7 +383,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goal_detail_cl_total"
+                    android:id="@+id/goalDetailCLTotal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
@@ -395,7 +395,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/goal_detail_total_total_hint"
+                        android:id="@+id/goalDetailTotalTotalHint"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/text_input_height"
@@ -412,14 +412,14 @@
                         app:boxCornerRadiusTopEnd="@dimen/radius_large"
                         app:boxCornerRadiusTopStart="@dimen/radius_large"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/goal_detail_button_save"
+                        app:layout_constraintEnd_toStartOf="@+id/goalDetailButtonSave"
                         app:layout_constraintHorizontal_bias="0.24"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0">
 
                     <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/goal_detail_total_total"
+                            android:id="@+id/goalDetailTotalTotal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:inputType="numberDecimal|numberSigned"
@@ -429,7 +429,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/goal_detail_button_save"
+                        android:id="@+id/goalDetailButtonSave"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_small"
@@ -448,7 +448,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goal_detail_cl_list"
+                    android:id="@+id/goalDetailCLList"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/margin_small"
@@ -462,7 +462,7 @@
                     app:layout_constraintVertical_bias="0.0">
 
                 <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/goal_detail_items_list"
+                        android:id="@+id/goalDetailItemsList"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:overScrollMode="never"
@@ -476,7 +476,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goal_detail_items_placeholder"
+                    android:id="@+id/goalDetailItemsPlaceholder"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:visibility="gone"
@@ -486,7 +486,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                        android:id="@+id/goal_detail_items_placeholder_image"
+                        android:id="@+id/goalDetailItemsPlaceholderImage"
                         android:layout_width="@dimen/placeholder_image_size"
                         android:layout_height="@dimen/placeholder_image_size"
                         android:layout_marginStart="@dimen/margin_small"
@@ -514,23 +514,23 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/goal_detail_items_placeholder_image" />
+                        app:layout_constraintTop_toBottomOf="@+id/goalDetailItemsPlaceholderImage" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/goal_detail_historics_placeholder"
+                    android:id="@+id/goalDetailHistoricsPlaceholder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/goal_detail_cl_counter"
+                    app:layout_constraintTop_toBottomOf="@+id/goalDetailCLCounter"
                     app:layout_constraintVertical_bias="0.0">
 
                 <ImageView
-                        android:id="@+id/goal_detail_history_placeholder_image"
+                        android:id="@+id/goalDetailHistoryPlaceholderImage"
                         android:layout_width="@dimen/placeholder_image_size"
                         android:layout_height="@dimen/placeholder_image_size"
                         android:layout_marginStart="@dimen/margin_small"
@@ -558,13 +558,13 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/goal_detail_history_placeholder_image"
+                        app:layout_constraintTop_toBottomOf="@+id/goalDetailHistoryPlaceholderImage"
                         app:layout_constraintVertical_bias="0.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/goal_detail_historics_list"
+                    android:id="@+id/goalDetailHistoricsList"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginStart="@dimen/margin_small"
@@ -576,17 +576,17 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/goal_detail_cl_total"
+                    app:layout_constraintTop_toBottomOf="@+id/goalDetailCLTotal"
                     app:layout_constraintVertical_bias="0.0" />
 
             <ProgressBar
-                    android:id="@+id/goal_detail_loading"
+                    android:id="@+id/goalDetailLoading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/goal_detail_cl_list"
+                    app:layout_constraintBottom_toBottomOf="@+id/goalDetailCLList"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/goal_detail_cl_total"
+                    app:layout_constraintTop_toTopOf="@+id/goalDetailCLTotal"
                     app:layout_constraintVertical_bias="0.65" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

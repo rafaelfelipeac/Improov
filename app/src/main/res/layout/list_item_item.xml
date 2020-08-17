@@ -10,7 +10,7 @@
         android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/itemItemCL"
             android:layout_width="match_parent"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
@@ -21,12 +21,12 @@
             card_view:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/item_done_view"
+                android:id="@+id/itemItemDoneView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/rounded_cardview_primary"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintEnd_toStartOf="@+id/item_view"
+                card_view:layout_constraintEnd_toStartOf="@+id/itemItemView"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
                 card_view:layout_constraintVertical_bias="0.0">
@@ -45,27 +45,27 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
-                android:id="@+id/item_view"
+                android:id="@+id/itemItemView"
                 android:layout_width="@dimen/view_size"
                 android:layout_height="@dimen/view_size"
                 android:background="@color/colorPrimary"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintEnd_toStartOf="@+id/item_delete_view"
-                card_view:layout_constraintStart_toEndOf="@+id/item_done_view"
+                card_view:layout_constraintEnd_toStartOf="@+id/itemItemDeleteView"
+                card_view:layout_constraintStart_toEndOf="@+id/itemItemDoneView"
                 card_view:layout_constraintTop_toTopOf="parent"
                 card_view:layout_constraintVertical_bias="0.5" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/item_delete_view"
+                android:id="@+id/itemItemDeleteView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintStart_toEndOf="@+id/item_view"
+                card_view:layout_constraintStart_toEndOf="@+id/itemItemView"
                 card_view:layout_constraintTop_toTopOf="parent">
 
             <!--            <ImageView-->
-            <!--                    android:id="@+id/item_item_delete_image"-->
+            <!--                    android:id="@+id/itemItemDeleteImage"-->
             <!--                    android:layout_width="wrap_content"-->
             <!--                    android:layout_height="wrap_content"-->
             <!--                    card_view:srcCompat="@drawable/ic_delete"-->
@@ -81,20 +81,20 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/item_normal_view"
+            android:id="@+id/itemItemNormalView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/list_item_normal_view_height"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/margin_smaller"
             android:layout_marginRight="@dimen/margin_smaller"
             android:background="@drawable/rounded_cardview"
-            card_view:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+            card_view:layout_constraintBottom_toBottomOf="@+id/itemGoalCL"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="@+id/constraintLayout">
+            card_view:layout_constraintTop_toTopOf="@+id/itemItemCL">
 
         <ImageView
-                android:id="@+id/item_progress"
+                android:id="@+id/itemItemProgress"
                 android:layout_width="@dimen/list_item_icon_size"
                 android:layout_height="@dimen/list_item_icon_size"
                 android:layout_marginStart="@dimen/margin_smaller"
@@ -106,7 +106,7 @@
                 card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/item_title"
+                android:id="@+id/itemItemTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_small"
@@ -119,13 +119,13 @@
                 android:textSize="@dimen/text_size_large"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintEnd_toStartOf="@+id/item_image_view"
+                card_view:layout_constraintEnd_toStartOf="@+id/itemItemImageView"
                 card_view:layout_constraintHorizontal_bias="0.0"
-                card_view:layout_constraintStart_toEndOf="@+id/item_progress"
+                card_view:layout_constraintStart_toEndOf="@+id/itemItemProgress"
                 card_view:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-                android:id="@+id/item_image_view"
+                android:id="@+id/itemItemImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"

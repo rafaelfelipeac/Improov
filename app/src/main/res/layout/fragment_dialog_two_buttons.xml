@@ -6,7 +6,7 @@
         android:background="@drawable/rounded_background">
 
     <ImageView
-            android:id="@+id/dialog_two_buttons_image"
+            android:id="@+id/dialogTwoButtonsImage"
             android:layout_width="@dimen/dialog_image_size"
             android:layout_height="@dimen/dialog_image_size"
             android:layout_marginStart="@dimen/margin_small"
@@ -18,7 +18,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-            android:id="@+id/dialog_two_buttons_message"
+            android:id="@+id/dialogTwoButtonsMessage"
             android:layout_width="@dimen/dialog_message_width"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_larger"
@@ -30,10 +30,10 @@
             android:textSize="@dimen/text_size_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_two_buttons_image" />
+            app:layout_constraintTop_toBottomOf="@+id/dialogTwoButtonsImage" />
 
     <android.widget.Button
-            android:id="@+id/dialog_two_buttons_cancel_button"
+            android:id="@+id/dialogTwoButtonsCancelButton"
             android:layout_width="@dimen/button_dialog_width"
             android:layout_height="@dimen/button_dialog_height"
             android:layout_marginStart="@dimen/margin_larger"
@@ -46,13 +46,13 @@
             android:textColor="@color/colorPrimaryDarkOne"
             android:textSize="@dimen/text_size_regular"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/dialog_two_buttons_view"
+            app:layout_constraintEnd_toStartOf="@+id/dialogTwoButtonsView"
             app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_two_buttons_message" />
+            app:layout_constraintTop_toBottomOf="@+id/dialogTwoButtonsMessage" />
 
     <View
-            android:id="@+id/dialog_two_buttons_view"
+            android:id="@+id/dialogTwoButtonsView"
             android:layout_width="@dimen/view_size"
             android:layout_height="@dimen/view_size"
             android:layout_marginStart="@dimen/margin_small"
@@ -64,7 +64,7 @@
             app:layout_constraintVertical_bias="0.90999997" />
 
     <android.widget.Button
-            android:id="@+id/dialog_two_buttons_ok_button"
+            android:id="@+id/dialogTwoButtonsOKButton"
             android:layout_width="@dimen/button_dialog_width"
             android:layout_height="@dimen/button_dialog_height"
             android:layout_marginStart="@dimen/margin_small"
@@ -78,6 +78,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.2"
-            app:layout_constraintStart_toStartOf="@+id/dialog_two_buttons_view" />
+            app:layout_constraintStart_toStartOf="@+id/dialogTwoButtonsView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

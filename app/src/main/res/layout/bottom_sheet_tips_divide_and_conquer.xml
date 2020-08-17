@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/tips_divide_and_conquer"
+        android:id="@+id/tipsDivideAndConquer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDarkOne"
@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/tips_divide_and_conquer_button_close"
+                    android:id="@+id/tipsDivideAndConquerButtonClose"
                     android:layout_width="@dimen/button_close_size"
                     android:layout_height="@dimen/button_close_size"
                     android:layout_marginStart="@dimen/margin_small"
@@ -41,7 +41,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                    android:id="@+id/tips_divide_and_conquer_title"
+                    android:id="@+id/tipsDivideAndConquerTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
@@ -54,10 +54,10 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_divide_and_conquer_button_close" />
+                    app:layout_constraintTop_toBottomOf="@+id/tipsDivideAndConquerButtonClose" />
 
             <TextView
-                    android:id="@+id/tips_divide_and_conquer_message_1"
+                    android:id="@+id/tipsDivideAndConquerMessage1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
@@ -72,11 +72,11 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_divide_and_conquer_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tipsDivideAndConquerTitle"
                     app:layout_constraintVertical_bias="0.0" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/tips_divide_and_conquer_images"
+                    android:id="@+id/tipsDivideAndConquerImages"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_larger"
@@ -86,10 +86,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_divide_and_conquer_message_1">
+                    app:layout_constraintTop_toBottomOf="@+id/tipsDivideAndConquerMessage1">
 
                 <ImageView
-                        android:id="@+id/tips_divide_and_conquer_image_1"
+                        android:id="@+id/tipsDivideAndConquerImage1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_larger"
@@ -112,12 +112,12 @@
                         android:layout_marginBottom="@dimen/margin_small"
                         android:background="@mipmap/ic_trophy_silver"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tips_divide_and_conquer_image_3"
-                        app:layout_constraintStart_toEndOf="@+id/tips_divide_and_conquer_image_1"
+                        app:layout_constraintEnd_toStartOf="@+id/tipsDivideAndConquerImage3"
+                        app:layout_constraintStart_toEndOf="@+id/tipsDivideAndConquerImage1"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                        android:id="@+id/tips_divide_and_conquer_image_3"
+                        android:id="@+id/tipsDivideAndConquerImage3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_small"
@@ -148,7 +148,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_divide_and_conquer_images" />
+                    app:layout_constraintTop_toBottomOf="@+id/tipsDivideAndConquerImages" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

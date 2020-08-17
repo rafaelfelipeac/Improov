@@ -37,11 +37,11 @@ class MainActivity : BaseActivity() {
         setupElements()
         setupToolbar()
 
-        NavigationUI.setupWithNavController(bottom_nav, navController)
+        NavigationUI.setupWithNavController(bottomNav, navController)
     }
 
     override fun onBackPressed() {
-        val baseFragment = (nav_host_fragment.childFragmentManager.fragments[0] as BaseFragment)
+        val baseFragment = (navHostFragment.childFragmentManager.fragments[0] as BaseFragment)
 
         when {
             baseFragment.bottomSheetTipIsOpen() -> {
@@ -62,28 +62,28 @@ class MainActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
-            R.id.menu_save -> false
-            R.id.menu_add -> false
+            R.id.menuSave -> false
+            R.id.menuAdd -> false
             android.R.id.home -> false
             else -> false
         }
     }
 
-    override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
+    override fun onSupportNavigateUp() = findNavController(R.id.navHostFragment).navigateUp()
 
     private fun lastFragment(): Boolean {
         val currentFragment =
-            NavHostFragment.findNavController(nav_host_fragment).currentDestination!!.id
+            NavHostFragment.findNavController(navHostFragment).currentDestination!!.id
 
-        return currentFragment == R.id.navigation_list
+        return currentFragment == R.id.navigationList
     }
 
     private fun setupElements() {
         toolbar = findViewById(R.id.toolbar)!!
-        navController = findNavController(R.id.nav_host_fragment)
-        navLayout = nav_layout
-        fakeBottomNav = fake_bottom_nav
-        fab = fab_layout
+        navController = findNavController(R.id.navHostFragment)
+        navLayout = navLayout
+        fakeBottomNav = fakeBottomNav
+        fab = fabLayout
     }
 
     private fun setupToolbar() {

@@ -23,7 +23,7 @@
             app:layout_constraintVertical_bias="0.0">
 
         <ImageView
-                android:id="@+id/profile_settings_button"
+                android:id="@+id/profileSettingsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_regular"
@@ -33,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/profile_user_name"
+                android:id="@+id/profileUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_larger"
@@ -53,7 +53,7 @@
                 app:layout_constraintVertical_bias="0.100000000" />
 
         <android.widget.Button
-                android:id="@+id/profile_edit_profile_button"
+                android:id="@+id/profileEditProfileButton"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginStart="@dimen/margin_larger"
@@ -63,14 +63,14 @@
                 android:background="@drawable/rounded_button"
                 android:text="@string/profile_edit_name_message"
                 android:textColor="@color/colorPrimaryDarkOne"
-                app:layout_constraintBottom_toTopOf="@+id/profile_show_welcome_button"
+                app:layout_constraintBottom_toTopOf="@+id/profileShowWelcomeButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_user_name"
+                app:layout_constraintTop_toBottomOf="@+id/profileUserName"
                 app:layout_constraintVertical_bias="0.0" />
 
         <android.widget.Button
-                android:id="@+id/profile_show_welcome_button"
+                android:id="@+id/profileShowWelcomeButton"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginStart="@dimen/margin_larger"

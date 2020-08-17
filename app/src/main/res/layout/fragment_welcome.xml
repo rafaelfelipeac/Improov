@@ -9,29 +9,29 @@
         tools:context=".features.welcome.presentation.WelcomeFragment">
 
     <androidx.viewpager.widget.ViewPager
-            android:id="@+id/welcome_viewpager"
+            android:id="@+id/welcomeViewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_large"
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_xlarger"
-            app:layout_constraintBottom_toTopOf="@+id/welcome_start_button"
+            app:layout_constraintBottom_toTopOf="@+id/welcomeStartButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
-            android:id="@+id/welcome_dots"
+            android:id="@+id/welcomeDots"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_regular"
             android:layout_marginBottom="@dimen/margin_regular"
             android:background="@color/colorPrimaryDarkOne"
-            app:layout_constraintBottom_toTopOf="@+id/welcome_start_button"
-            app:layout_constraintEnd_toEndOf="@+id/welcome_viewpager"
-            app:layout_constraintStart_toStartOf="@+id/welcome_viewpager"
-            app:layout_constraintTop_toBottomOf="@+id/welcome_viewpager"
+            app:layout_constraintBottom_toTopOf="@+id/welcomeStartButton"
+            app:layout_constraintEnd_toEndOf="@+id/welcomeViewPager"
+            app:layout_constraintStart_toStartOf="@+id/welcomeViewPager"
+            app:layout_constraintTop_toBottomOf="@+id/welcomeViewPager"
             app:tabBackground="@drawable/dot_selector"
             app:tabGravity="center"
             app:tabIndicatorHeight="@dimen/welcome_tab_indicator_height"
@@ -39,7 +39,7 @@
             app:tabPaddingStart="@dimen/welcome_dots_padding" />
 
     <android.widget.Button
-            android:id="@+id/welcome_start_button"
+            android:id="@+id/welcomeStartButton"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
             android:layout_marginStart="@dimen/margin_larger"

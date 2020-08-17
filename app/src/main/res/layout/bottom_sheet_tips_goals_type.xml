@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/tips_goal_type"
+        android:id="@+id/tipsGoalType"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDarkOne"
@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/tips_goal_type_button_close"
+                    android:id="@+id/tipsGoalTypeButtonClose"
                     android:layout_width="@dimen/button_close_size"
                     android:layout_height="@dimen/button_close_size"
                     android:layout_marginStart="@dimen/margin_small"
@@ -40,7 +40,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                    android:id="@+id/tips_goal_type_title"
+                    android:id="@+id/tipsGoalTypeTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
@@ -55,11 +55,11 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_goal_type_button_close"
+                    app:layout_constraintTop_toBottomOf="@+id/tipsGoalTypeButtonClose"
                     app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                    android:id="@+id/tips_goal_type_list_title"
+                    android:id="@+id/tipsGoalTypeListTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_larger"
@@ -71,10 +71,10 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_goal_type_title" />
+                    app:layout_constraintTop_toBottomOf="@+id/tipsGoalTypeTitle" />
 
             <TextView
-                    android:id="@+id/tips_goal_type_list_message"
+                    android:id="@+id/tipsGoalTypeListMessage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_regular"
@@ -84,21 +84,21 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tips_goal_type_list_image"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_goal_type_list_title" />
+                    app:layout_constraintStart_toEndOf="@+id/tipsGoalTypeListImage"
+                    app:layout_constraintTop_toBottomOf="@+id/tipsGoalTypeListTitle" />
 
             <ImageView
-                    android:id="@+id/tips_goal_type_list_image"
+                    android:id="@+id/tipsGoalTypeListImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_larger"
                     android:background="@mipmap/ic_trophy_gold"
-                    app:layout_constraintBottom_toBottomOf="@+id/tips_goal_type_list_message"
+                    app:layout_constraintBottom_toBottomOf="@+id/tipsGoalTypeListMessage"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tips_goal_type_list_message" />
+                    app:layout_constraintTop_toTopOf="@+id/tipsGoalTypeListMessage" />
 
             <TextView
-                    android:id="@+id/tips_goal_type_counter_title"
+                    android:id="@+id/tipsGoalTypeCounterTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_larger"
@@ -111,10 +111,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_goal_type_list_message" />
+                    app:layout_constraintTop_toBottomOf="@+id/tipsGoalTypeListMessage" />
 
             <TextView
-                    android:id="@+id/tips_goal_type_counter_message"
+                    android:id="@+id/tipsGoalTypeCounterMessage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_regular"
@@ -124,21 +124,21 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tips_goal_type_counter_image"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_goal_type_counter_title" />
+                    app:layout_constraintStart_toEndOf="@+id/tipsGoalTypeCounterImage"
+                    app:layout_constraintTop_toBottomOf="@+id/tipsGoalTypeCounterTitle" />
 
             <ImageView
-                    android:id="@+id/tips_goal_type_counter_image"
+                    android:id="@+id/tipsGoalTypeCounterImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_larger"
                     android:background="@mipmap/ic_trophy_silver"
-                    app:layout_constraintBottom_toBottomOf="@+id/tips_goal_type_counter_message"
+                    app:layout_constraintBottom_toBottomOf="@+id/tipsGoalTypeCounterMessage"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tips_goal_type_counter_message" />
+                    app:layout_constraintTop_toTopOf="@+id/tipsGoalTypeCounterMessage" />
 
             <TextView
-                    android:id="@+id/tips_goal_type_final_title"
+                    android:id="@+id/tipsGoalTypeFinalTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_larger"
@@ -151,10 +151,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_goal_type_counter_message" />
+                    app:layout_constraintTop_toBottomOf="@+id/tipsGoalTypeCounterMessage" />
 
             <TextView
-                    android:id="@+id/tips_goal_type_final_message"
+                    android:id="@+id/tipsGoalTypeFinalMessage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_regular"
@@ -166,18 +166,18 @@
                     android:textSize="@dimen/text_size_large"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tips_goal_type_final_image"
-                    app:layout_constraintTop_toBottomOf="@+id/tips_goal_type_final_title" />
+                    app:layout_constraintStart_toEndOf="@+id/tipsGoalTypeFinalImage"
+                    app:layout_constraintTop_toBottomOf="@+id/tipsGoalTypeFinalTitle" />
 
             <ImageView
-                    android:id="@+id/tips_goal_type_final_image"
+                    android:id="@+id/tipsGoalTypeFinalImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_larger"
                     android:background="@mipmap/ic_trophy_bronze"
-                    app:layout_constraintBottom_toBottomOf="@+id/tips_goal_type_final_message"
+                    app:layout_constraintBottom_toBottomOf="@+id/tipsGoalTypeFinalMessage"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tips_goal_type_final_message" />
+                    app:layout_constraintTop_toTopOf="@+id/tipsGoalTypeFinalMessage" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

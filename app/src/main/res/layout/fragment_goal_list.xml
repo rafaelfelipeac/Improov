@@ -8,7 +8,7 @@
         tools:context=".features.goal.presentation.goallist.GoalListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/goal_list_constraintLayout"
+            android:id="@+id/goalListCL"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/margin_small"
@@ -19,13 +19,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/goal_list_placeholder"
+                android:id="@+id/goalListPlaceholder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone">
 
             <ImageView
-                    android:id="@+id/goal_list_placeholder_image"
+                    android:id="@+id/goalListPlaceholderImage"
                     android:layout_width="@dimen/placeholder_image_size"
                     android:layout_height="@dimen/placeholder_image_size"
                     android:layout_marginStart="@dimen/margin_small"
@@ -51,12 +51,12 @@
                     android:textSize="@dimen/text_size_large"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/goal_list_placeholder_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/goalListPlaceholderImage" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/goal_list_list"
+                android:id="@+id/goalListList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/margin_small"
@@ -71,12 +71,12 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar
-            android:id="@+id/goal_list_loading"
+            android:id="@+id/goalListLoading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/goal_list_constraintLayout" />
+            app:layout_constraintTop_toTopOf="@+id/goalListCL" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

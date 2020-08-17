@@ -28,9 +28,9 @@ class DialogOneButton : BaseDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dialog_one_button_ok_button.setOnClickListener { onClickListener?.onOK() }
+        dialogOneButtonOKButton.setOnClickListener { onClickListener?.onOK() }
 
-        dialog_one_button_message.text = message
+        dialogOneButtonMessage.text = message
     }
 
     private fun setScreen() {

@@ -18,7 +18,7 @@
             tools:context=".features.welcome.presentation.WelcomeItemFragment">
 
         <ImageView
-                android:id="@+id/welcome_b_image"
+                android:id="@+id/welcomeBImage"
                 android:layout_width="@dimen/welcome_image_size"
                 android:layout_height="@dimen/welcome_image_size"
                 android:layout_marginStart="@dimen/margin_small"
@@ -45,7 +45,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/welcome_b_image"
+                app:layout_constraintTop_toBottomOf="@+id/welcomeBImage"
                 app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

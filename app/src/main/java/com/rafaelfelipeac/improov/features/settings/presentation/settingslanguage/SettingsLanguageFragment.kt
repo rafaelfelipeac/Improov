@@ -59,10 +59,10 @@ class SettingsLanguageFragment : BaseFragment() {
     private fun setupLanguage(language: String) {
         when (language) {
             getString(R.string.settings_language_key_portuguese) -> {
-                settings_language_radio_portuguese.isChecked = true
+                settingsLanguageRadioPortuguese.isChecked = true
             }
             getString(R.string.settings_language_key_english) -> {
-                settings_language_radio_english.isChecked = true
+                settingsLanguageRadioEnglish.isChecked = true
             }
         }
 
@@ -70,12 +70,12 @@ class SettingsLanguageFragment : BaseFragment() {
     }
 
     private fun setupLayout() {
-        settings_language_radio_group.setOnCheckedChangeListener { _, checkedId ->
+        settingsLanguageRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.settings_language_radio_portuguese -> {
+                R.id.settingsLanguageRadioPortuguese -> {
                     viewModel.saveLanguage(getString(R.string.settings_language_key_portuguese))
                 }
-                R.id.settings_language_radio_english -> {
+                R.id.settingsLanguageRadioEnglish -> {
                     viewModel.saveLanguage(getString(R.string.settings_language_key_english))
                 }
             }
