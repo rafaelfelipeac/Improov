@@ -88,7 +88,7 @@
             android:layout_marginLeft="@dimen/margin_smaller"
             android:layout_marginRight="@dimen/margin_smaller"
             android:background="@drawable/rounded_cardview"
-            card_view:layout_constraintBottom_toBottomOf="@+id/itemGoalCL"
+            card_view:layout_constraintBottom_toBottomOf="@+id/itemItemCL"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="@+id/itemItemCL">

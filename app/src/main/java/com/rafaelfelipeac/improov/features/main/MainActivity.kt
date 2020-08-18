@@ -81,8 +81,8 @@ class MainActivity : BaseActivity() {
     private fun setupElements() {
         toolbar = findViewById(R.id.toolbar)!!
         navController = findNavController(R.id.navHostFragment)
-        navLayout = navLayout
-        fakeBottomNav = fakeBottomNav
+        navLayout = navigationLayout
+        fakeBottomNav = fakeBottomNavigation
         fab = fabLayout
     }
 
