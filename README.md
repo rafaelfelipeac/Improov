@@ -7,7 +7,7 @@
 
 Improov  
 ---------
- [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
+[![Android CI](https://github.com/rafaelfelipeac/improov/workflows/Android%20CI/badge.svg)](https://github.com/rafaelfelipeac/improov/actions?query=workflow%3A%22Android+CI%22) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
   
 ![improov-screens](https://user-images.githubusercontent.com/9745110/89603551-c9e52b80-d83f-11ea-86a3-87fb02210497.png)
 
@@ -53,3 +53,4 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
     See the License for the specific language governing permissions and  
     limitations under the License.
+    
