@@ -2,8 +2,8 @@ package com.rafaelfelipeac.improov.core.di.modules
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import com.rafaelfelipeac.improov.core.di.modules.viewModel.FragmentKey
-import com.rafaelfelipeac.improov.core.di.modules.viewModel.ViewModelKey
+import com.rafaelfelipeac.improov.core.di.key.FragmentKey
+import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
 import com.rafaelfelipeac.improov.features.welcome.data.repository.WelcomeRepositoryImpl
 import com.rafaelfelipeac.improov.features.welcome.domain.repository.WelcomeRepository
 import com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeFragment

@@ -17,8 +17,8 @@ class HistoricAdapter : BaseAdapter<Historic>() {
     override fun View.bindView(item: Historic, viewHolder: ViewHolder) {
         setOnClickListener { clickListener(item) }
 
-        val date = viewHolder.itemView.findViewById<TextView>(R.id.historic_date)
-        val value = viewHolder.itemView.findViewById<TextView>(R.id.historic_value)
+        val date = viewHolder.itemView.findViewById<TextView>(R.id.itemHistoricDate)
+        val value = viewHolder.itemView.findViewById<TextView>(R.id.itemHistoricValue)
 
         date.text = item.date?.convertDateToString(context)
         value.text = item.value.getValueWithSymbol()

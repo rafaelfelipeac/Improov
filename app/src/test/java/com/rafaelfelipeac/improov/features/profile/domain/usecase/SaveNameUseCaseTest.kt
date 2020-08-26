@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.profile.domain.usecase
 
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.profile.domain.repository.NameRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -36,7 +36,7 @@ class SaveNameUseCaseTest {
             val result = saveNameUseCase(name)
 
             // then
-            result shouldBeEqualTo Unit
+            result equalTo Unit
         }
     }
 }

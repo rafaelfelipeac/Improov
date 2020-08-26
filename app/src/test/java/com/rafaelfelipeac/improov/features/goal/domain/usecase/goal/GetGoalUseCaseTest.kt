@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.domain.usecase.goal
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -38,7 +38,7 @@ class GetGoalUseCaseTest {
             val result = getGoalUseCase(goalId)
 
             // then
-            result shouldBeEqualTo goal
+            result equalTo goal
         }
     }
 }

@@ -7,7 +7,6 @@ import com.rafaelfelipeac.improov.features.goal.data.model.ItemDataModel
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
-import junit.framework.TestCase
 
 object DataProviderTest {
 
@@ -108,13 +107,6 @@ object DataProviderTest {
             goalId = goalId,
             value = value,
             date = null
-        )
-    }
-
-    infix fun <T> T.shouldBeEqualTo(expected: T?): T = this.apply {
-        TestCase.assertEquals(
-            expected,
-            this
         )
     }
 }

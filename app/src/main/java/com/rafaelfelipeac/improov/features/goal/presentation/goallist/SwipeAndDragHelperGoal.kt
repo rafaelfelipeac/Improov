@@ -8,7 +8,7 @@ import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.platform.ActionCompleteContract
 import kotlin.math.abs
 
-class SwipeAndDragHelperList(private val contract: ActionCompleteContract) :
+class SwipeAndDragHelperGoal(private val contract: ActionCompleteContract) :
     ItemTouchHelper.Callback() {
 
     override fun getMovementFlags(
@@ -37,11 +37,11 @@ class SwipeAndDragHelperList(private val contract: ActionCompleteContract) :
     }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-        getDefaultUIUtil().onSelected(viewHolder?.itemView?.findViewById<ConstraintLayout>(R.id.normal_view))
+        getDefaultUIUtil().onSelected(viewHolder?.itemView?.findViewById<ConstraintLayout>(R.id.itemGoalNormalView))
     }
 
     override fun onChildDrawOver(
-        c: Canvas,
+        canvas: Canvas,
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
         dX: Float,
@@ -50,16 +50,16 @@ class SwipeAndDragHelperList(private val contract: ActionCompleteContract) :
         isCurrentlyActive: Boolean
     ) {
 
-        val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.normal_view)
+        val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.itemGoalNormalView)
 
         if (foregroundView != null) {
             getDefaultUIUtil()
-                .onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive)
+                .onDrawOver(canvas, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive)
         }
     }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
-        val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.normal_view)
+        val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.itemGoalNormalView)
 
         if (foregroundView != null) {
             getDefaultUIUtil()
@@ -68,7 +68,7 @@ class SwipeAndDragHelperList(private val contract: ActionCompleteContract) :
     }
 
     override fun onChildDraw(
-        c: Canvas,
+        canvas: Canvas,
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
         dX: Float,
@@ -82,13 +82,13 @@ class SwipeAndDragHelperList(private val contract: ActionCompleteContract) :
             viewHolder.itemView.alpha = alpha
         }
 
-        val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.normal_view)
+        val foregroundView = viewHolder.itemView.findViewById<ConstraintLayout>(R.id.itemGoalNormalView)
 
         if (foregroundView != null) {
             getDefaultUIUtil()
-                .onDraw(c, recyclerView, foregroundView, dX, 0f, actionState, isCurrentlyActive)
+                .onDraw(canvas, recyclerView, foregroundView, dX, 0f, actionState, isCurrentlyActive)
 
-            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
         }
     }
 

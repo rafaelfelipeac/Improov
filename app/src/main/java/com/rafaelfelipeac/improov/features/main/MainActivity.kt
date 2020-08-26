@@ -14,12 +14,10 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.crashlytics.android.Crashlytics
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.platform.base.BaseActivity
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -33,19 +31,17 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Fabric.with(this, Crashlytics())
-
         setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
 
         setupElements()
         setupToolbar()
 
-        NavigationUI.setupWithNavController(bottom_nav, navController)
+        NavigationUI.setupWithNavController(bottomNav, navController)
     }
 
     override fun onBackPressed() {
-        val baseFragment = (nav_host_fragment.childFragmentManager.fragments[0] as BaseFragment)
+        val baseFragment = (navHostFragment.childFragmentManager.fragments[0] as BaseFragment)
 
         when {
             baseFragment.bottomSheetTipIsOpen() -> {
@@ -66,28 +62,28 @@ class MainActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
-            R.id.menu_save -> false
-            R.id.menu_add -> false
+            R.id.menuSave -> false
+            R.id.menuAdd -> false
             android.R.id.home -> false
             else -> false
         }
     }
 
-    override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
+    override fun onSupportNavigateUp() = findNavController(R.id.navHostFragment).navigateUp()
 
     private fun lastFragment(): Boolean {
         val currentFragment =
-            NavHostFragment.findNavController(nav_host_fragment).currentDestination!!.id
+            NavHostFragment.findNavController(navHostFragment).currentDestination!!.id
 
-        return currentFragment == R.id.navigation_list
+        return currentFragment == R.id.navigationList
     }
 
     private fun setupElements() {
         toolbar = findViewById(R.id.toolbar)!!
-        navController = findNavController(R.id.nav_host_fragment)
-        navLayout = nav_layout
-        fakeBottomNav = fake_bottom_nav
-        fab = fab_layout
+        navController = findNavController(R.id.navHostFragment)
+        navLayout = navigationLayout
+        fakeBottomNav = fakeBottomNavigation
+        fab = fabLayout
     }
 
     private fun setupToolbar() {

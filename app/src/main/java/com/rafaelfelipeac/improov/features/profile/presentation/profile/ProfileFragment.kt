@@ -54,17 +54,17 @@ class ProfileFragment : BaseFragment() {
             navController.navigate(ProfileFragmentDirections.profileToGoalForm())
         }
 
-        profile_show_welcome_button.setOnClickListener {
+        profileShowWelcomeButton.setOnClickListener {
             viewModel.saveWelcome(false)
             viewModel.saveFirstTimeAdd(true)
             viewModel.saveFirstTimeList(false)
         }
 
-        profile_edit_profile_button.setOnClickListener {
+        profileEditProfileButton.setOnClickListener {
             navController.navigate(ProfileFragmentDirections.profileToProfileEdit())
         }
 
-        profile_settings_button.setOnClickListener {
+        profileSettingsButton.setOnClickListener {
             navController.navigate(ProfileFragmentDirections.profileToSettings())
         }
     }
@@ -76,12 +76,12 @@ class ProfileFragment : BaseFragment() {
 
         viewModel.name.observe(this) {
             if (it.isNotEmpty()) {
-                profile_user_name.text = it
-                profile_user_name.visible()
-                profile_edit_profile_button.text = getString(R.string.profile_edit_name_message)
+                profileUserName.text = it
+                profileUserName.visible()
+                profileEditProfileButton.text = getString(R.string.profile_edit_name_message)
             } else {
-                profile_user_name.gone()
-                profile_edit_profile_button.text = getString(R.string.profile_add_name_message)
+                profileUserName.gone()
+                profileEditProfileButton.text = getString(R.string.profile_add_name_message)
             }
         }
     }

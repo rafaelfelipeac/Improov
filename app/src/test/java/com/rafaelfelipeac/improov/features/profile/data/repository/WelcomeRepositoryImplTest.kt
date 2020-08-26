@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.profile.data.repository
 
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import com.rafaelfelipeac.improov.features.profile.data.respository.WelcomeRepositoryImpl
 import kotlinx.coroutines.runBlocking
@@ -38,7 +38,7 @@ class WelcomeRepositoryImplTest {
             val result = welcomeRepositoryImpl.getWelcome()
 
             // then
-            result shouldBeEqualTo booleanValue
+            result equalTo booleanValue
         }
     }
 
@@ -57,8 +57,8 @@ class WelcomeRepositoryImplTest {
             val returnOfGet = welcomeRepositoryImpl.getWelcome()
 
             // then
-            resultOfSave shouldBeEqualTo Unit
-            returnOfGet shouldBeEqualTo booleanValue
+            resultOfSave equalTo Unit
+            returnOfGet equalTo booleanValue
         }
     }
 }

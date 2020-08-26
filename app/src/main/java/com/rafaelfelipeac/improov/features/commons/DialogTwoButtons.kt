@@ -26,9 +26,9 @@ class DialogTwoButtons : BaseDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dialog_two_buttons_cancel_button.setOnClickListener { onClickListener?.onCancel() }
+        dialogTwoButtonsCancelButton.setOnClickListener { onClickListener?.onCancel() }
 
-        dialog_two_buttons_ok_button.setOnClickListener { onClickListener?.onOK() }
+        dialogTwoButtonsOKButton.setOnClickListener { onClickListener?.onOK() }
     }
 
     private fun setScreen() {

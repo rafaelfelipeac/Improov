@@ -11,17 +11,17 @@ import javax.inject.Inject
 @Entity(tableName = "item")
 data class ItemDataModel(
     @PrimaryKey(autoGenerate = true)
-    var itemId: Long = 0,
-    var goalId: Long,
+    val itemId: Long,
+    val goalId: Long,
     var name: String,
-    var order: Int,
-    var done: Boolean,
-    var createdDate: Date? = null,
-    var updatedDate: Date? = null,
-    var doneDate: Date? = null,
-    var undoneDate: Date? = null,
-    var deleteDate: Date? = null,
-    var date: Date? = null
+    val order: Int,
+    val done: Boolean,
+    val createdDate: Date?,
+    val updatedDate: Date?,
+    val doneDate: Date?,
+    val undoneDate: Date?,
+    val deleteDate: Date?,
+    val date: Date?
 ) : Serializable
 
 class ItemDataModelMapper @Inject constructor() : TwoWayMapper<ItemDataModel, Item> {

@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.profile.data.repository
 
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import com.rafaelfelipeac.improov.features.profile.data.respository.NameRepositoryImpl
 import kotlinx.coroutines.runBlocking
@@ -38,7 +38,7 @@ class NameRepositoryImplTest {
             val result = nameRepositoryImpl.getName()
 
             // then
-            result shouldBeEqualTo name
+            result equalTo name
         }
     }
 
@@ -57,8 +57,8 @@ class NameRepositoryImplTest {
             val returnOfGet = nameRepositoryImpl.getName()
 
             // then
-            resultOfSave shouldBeEqualTo Unit
-            returnOfGet shouldBeEqualTo name
+            resultOfSave equalTo Unit
+            returnOfGet equalTo name
         }
     }
 }

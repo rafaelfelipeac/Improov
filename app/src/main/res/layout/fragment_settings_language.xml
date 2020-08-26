@@ -10,40 +10,40 @@
             android:layout_height="match_parent">
 
         <RadioGroup
-                android:id="@+id/settings_language_radio_group"
+                android:id="@+id/settingsLanguageRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginStart="@dimen/margin_larger"
+                android:layout_marginTop="@dimen/margin_larger"
+                android:layout_marginEnd="@dimen/margin_larger"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
             <RadioButton
-                    android:id="@+id/settings_language_radio_portuguese"
+                    android:id="@+id/settingsLanguageRadioPortuguese"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_language_radio_portuguese"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_size_small"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             <RadioButton
-                    android:id="@+id/settings_language_radio_english"
+                    android:id="@+id/settingsLanguageRadioEnglish"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:text="@string/settings_language_radio_english"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_size_small"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_language_radio_portuguese" />
+                    app:layout_constraintTop_toBottomOf="@+id/settingsLanguageRadioPortuguese" />
 
         </RadioGroup>
 

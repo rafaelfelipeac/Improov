@@ -23,8 +23,6 @@
     <string name="navigation_goals">Objetivos</string>
     <string name="navigation_profile">Perfil</string>
 
-    <!-- Add -->
-
     <!-- Goal -->
     <string name="goal_title">Objetivo</string>
     <string name="goal_message_goal_done">Objetivo concluído!</string>
@@ -58,10 +56,6 @@
     <string name="goal_form_goal_counter_inc_value_hint">Incrementar</string>
     <string name="goal_form_goal_counter_dec_value_hint">Decrementar</string>
     <string name="goal_form_goal_dialog_no_goal_type_change">Você não pode alterar o tipo de um objetivo. Caso contrário, o histórico seria perdido.</string>
-
-    <!-- Habit -->
-
-    <!-- HabitForm -->
 
     <!-- List -->
     <string name="list_title">Lista</string>
@@ -120,10 +114,6 @@
     <!-- Splash -->
     <string name="splash_title">Splash</string>
 
-    <!-- Stats -->
-
-    <!-- Today -->
-
     <!-- Welcome -->
     <string name="welcome_title">Bem-vindo</string>
     <string name="welcome_start">Começar</string>
@@ -143,14 +133,10 @@
     <!-- ItemAdapter -->
     <string name="item_adapter_item_title">Novo objetivo cadastrado</string>
 
-    <!-- DayOfWeekAdapter -->
-
     <!-- BottomSheet Goal Done -->
     <string name="goal_done_message">Há itens pendentes nesse objetivo. \nDeseja concluído-lo?</string>
     <string name="goal_done_yes">SIM</string>
     <string name="goal_done_no">NÃO</string>
-
-    <!-- BottomSheet Habit Done -->
 
     <!-- BottomSheet Item -->
     <string name="bottom_sheet_item_name">Título do Item</string>

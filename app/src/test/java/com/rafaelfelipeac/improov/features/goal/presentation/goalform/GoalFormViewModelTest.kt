@@ -3,7 +3,7 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goalform
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.rafaelfelipeac.improov.base.CoroutineRule
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimeadd.GetFirstTimeAddUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimeadd.SaveFirstTimeAddUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.SaveFirstTimeListUseCase
@@ -64,7 +64,7 @@ class GoalFormViewModelTest {
         goalFormViewModel.saveGoal(goal)
 
         // then
-        goalFormViewModel.savedGoal.value shouldBeEqualTo goalId
+        goalFormViewModel.savedGoal.value equalTo goalId
     }
 
     @Test
@@ -81,7 +81,7 @@ class GoalFormViewModelTest {
         goalFormViewModel.loadData()
 
         // then
-        goalFormViewModel.goal.value shouldBeEqualTo goal
+        goalFormViewModel.goal.value equalTo goal
     }
 
     @Test
@@ -96,7 +96,7 @@ class GoalFormViewModelTest {
         goalFormViewModel.loadData()
 
         // then
-        goalFormViewModel.goals.value shouldBeEqualTo goals
+        goalFormViewModel.goals.value equalTo goals
     }
 
     @Test
@@ -111,7 +111,7 @@ class GoalFormViewModelTest {
         goalFormViewModel.saveFirstTimeList(booleanValue)
 
         // then
-        goalFormViewModel.savedFirstTimeList.value shouldBeEqualTo Unit
+        goalFormViewModel.savedFirstTimeList.value equalTo Unit
     }
 
     @Test
@@ -126,7 +126,7 @@ class GoalFormViewModelTest {
         goalFormViewModel.saveFirstTimeAdd(booleanValue)
 
         // then
-        goalFormViewModel.savedFirstTimeAdd.value shouldBeEqualTo Unit
+        goalFormViewModel.savedFirstTimeAdd.value equalTo Unit
     }
 
     @Test
@@ -141,6 +141,6 @@ class GoalFormViewModelTest {
         goalFormViewModel.loadData()
 
         // then
-        goalFormViewModel.firstTimeAdd.value shouldBeEqualTo booleanValue
+        goalFormViewModel.firstTimeAdd.value equalTo booleanValue
     }
 }

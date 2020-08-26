@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.data.repository
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.goal.data.dao.GoalDAO
 import com.rafaelfelipeac.improov.features.goal.data.model.GoalDataModelMapper
 import kotlinx.coroutines.runBlocking
@@ -43,7 +43,7 @@ class GoalRepositoryImplTest {
             val result = goalRepositoryImp.getGoal(goalId)
 
             // then
-            result shouldBeEqualTo goal
+            result equalTo goal
         }
     }
 
@@ -59,7 +59,7 @@ class GoalRepositoryImplTest {
             val result = goalRepositoryImp.getGoals()
 
             // then
-            result shouldBeEqualTo goals
+            result equalTo goals
         }
     }
 
@@ -75,7 +75,7 @@ class GoalRepositoryImplTest {
             val result = goalRepositoryImp.save(goal)
 
             // then
-            result shouldBeEqualTo goalId
+            result equalTo goalId
         }
     }
 
@@ -91,7 +91,7 @@ class GoalRepositoryImplTest {
             val result = goalRepositoryImp.delete(goal)
 
             // then
-            result shouldBeEqualTo Unit
+            result equalTo Unit
         }
     }
 }

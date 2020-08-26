@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.settings.presentation.settingslangua
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.rafaelfelipeac.improov.base.CoroutineRule
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.settings.domain.usecase.GetLanguageUseCase
 import com.rafaelfelipeac.improov.features.settings.domain.usecase.SaveLanguageUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -50,7 +50,7 @@ class SettingsLanguageViewModelTest {
         settingsLanguageViewModel.saveLanguage(language)
 
         // then
-        settingsLanguageViewModel.saved.value shouldBeEqualTo Unit
+        settingsLanguageViewModel.saved.value equalTo Unit
     }
 
     @Test
@@ -65,6 +65,6 @@ class SettingsLanguageViewModelTest {
         settingsLanguageViewModel.loadData()
 
         // then
-        settingsLanguageViewModel.language.value shouldBeEqualTo language
+        settingsLanguageViewModel.language.value equalTo language
     }
 }

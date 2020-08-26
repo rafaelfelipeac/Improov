@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.domain.usecase.historic
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoric
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.goal.domain.repository.HistoricRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -38,7 +38,7 @@ class SaveHistoricUseCaseTest {
             val result = saveHistoricUseCase(historic)
 
             // then
-            result shouldBeEqualTo historicId
+            result equalTo historicId
         }
     }
 }

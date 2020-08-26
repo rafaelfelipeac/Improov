@@ -30,14 +30,13 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
     override fun View.bindView(item: Goal, viewHolder: ViewHolder) {
         setOnClickListener { clickListener(item) }
 
-        val typeIcon = viewHolder.itemView.findViewById<ImageView>(R.id.goal_type_icon)
-        val title = viewHolder.itemView.findViewById<TextView>(R.id.goal_title)!!
-        val date = viewHolder.itemView.findViewById<TextView>(R.id.goal_date)!!
-        val score = viewHolder.itemView.findViewById<TextView>(R.id.goal_score)!!
-        // private val archiveImage = itemView.findViewById<ImageView>(R.id.goal_archive_image)
-        val itemDrag = viewHolder.itemView.findViewById<ImageView>(R.id.goal_drag_icon)!!
-        val progressDone = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress_done)
-        val progressTotal = viewHolder.itemView.findViewById<ImageView>(R.id.goal_progress_total)
+        val typeIcon = viewHolder.itemView.findViewById<ImageView>(R.id.itemGoalTypeIcon)
+        val title = viewHolder.itemView.findViewById<TextView>(R.id.itemGoalTitle)!!
+        val date = viewHolder.itemView.findViewById<TextView>(R.id.itemGoalDate)!!
+        val score = viewHolder.itemView.findViewById<TextView>(R.id.itemGoalScore)!!
+        val itemDrag = viewHolder.itemView.findViewById<ImageView>(R.id.itemGoalDragIcon)!!
+        val progressDone = viewHolder.itemView.findViewById<ImageView>(R.id.itemGoalProgressDone)
+        val progressTotal = viewHolder.itemView.findViewById<ImageView>(R.id.itemGoalProgressTotal)
 
         title.text = item.name
 

@@ -5,7 +5,7 @@ import com.rafaelfelipeac.improov.base.CoroutineRule
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
 import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoric
 import com.rafaelfelipeac.improov.base.DataProviderTest.createItem
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.GetHistoricListUseCase
@@ -66,7 +66,7 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.saveGoal(goal)
 
         // then
-        goalDetailViewModel.savedGoal.value shouldBeEqualTo goalId
+        goalDetailViewModel.savedGoal.value equalTo goalId
     }
 
     @Test
@@ -83,7 +83,7 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.loadData()
 
         // then
-        goalDetailViewModel.goal.value shouldBeEqualTo goal
+        goalDetailViewModel.goal.value equalTo goal
     }
 
     @Test
@@ -99,7 +99,7 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.saveItem(item)
 
         // then
-        goalDetailViewModel.savedItem.value shouldBeEqualTo itemId
+        goalDetailViewModel.savedItem.value equalTo itemId
     }
 
     @Test
@@ -120,7 +120,7 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.loadData()
 
         // then
-        goalDetailViewModel.items.value shouldBeEqualTo items
+        goalDetailViewModel.items.value equalTo items
     }
 
     @Test
@@ -136,7 +136,7 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.saveHistoric(historic)
 
         // then
-        goalDetailViewModel.savedHistoric.value shouldBeEqualTo historicId
+        goalDetailViewModel.savedHistoric.value equalTo historicId
     }
 
     @Test
@@ -157,6 +157,6 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.loadData()
 
         // then
-        goalDetailViewModel.historics.value shouldBeEqualTo historics
+        goalDetailViewModel.historics.value equalTo historics
     }
 }

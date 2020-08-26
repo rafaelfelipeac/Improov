@@ -21,7 +21,7 @@ fun Snackbar.setIcon(resources: Resources, hasIcon: Boolean): Snackbar {
         snackbarTextView.setCompoundDrawablesWithIntrinsicBounds(
             R.drawable.ic_snackbar_trophy, 0, 0, 0)
         snackbarTextView
-            .compoundDrawablePadding = resources.getDimensionPixelOffset(R.dimen.dimens_snackbar_icon)
+            .compoundDrawablePadding = resources.getDimensionPixelOffset(R.dimen.snackbar_offset)
     }
 
     return this

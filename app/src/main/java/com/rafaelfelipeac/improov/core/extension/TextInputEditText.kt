@@ -1,8 +1,6 @@
 package com.rafaelfelipeac.improov.core.extension
 
 import android.text.InputType
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
@@ -21,20 +19,6 @@ fun TextInputEditText.isNotEmpty(): Boolean {
 
 fun TextInputEditText.isEmpty(): Boolean {
     return text?.isEmpty()!!
-}
-
-fun TextInputEditText.emailIsInvalid(): Boolean {
-    return !android.util.Patterns.EMAIL_ADDRESS.matcher(this.text.toString()).matches()
-}
-
-fun TextInputEditText.showOrHidePassword() {
-    transformationMethod = if (transformationMethod == HideReturnsTransformationMethod.getInstance()) {
-        PasswordTransformationMethod.getInstance()
-    } else {
-        HideReturnsTransformationMethod.getInstance()
-    }
-
-    setSelection(text?.length!!)
 }
 
 fun TextInputEditText.checkIfFieldIsEmptyOrZero(): Boolean {

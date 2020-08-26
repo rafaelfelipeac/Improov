@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.settings.data.repository
 
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -37,7 +37,7 @@ class LanguageRepositoryImplTest {
             val result = languageRepositoryImpl.getLanguage()
 
             // then
-            result shouldBeEqualTo language
+            result equalTo language
         }
     }
 
@@ -56,8 +56,8 @@ class LanguageRepositoryImplTest {
             val returnOfGet = languageRepositoryImpl.getLanguage()
 
             // then
-            resultOfSave shouldBeEqualTo Unit
-            returnOfGet shouldBeEqualTo language
+            resultOfSave equalTo Unit
+            returnOfGet equalTo language
         }
     }
 }
