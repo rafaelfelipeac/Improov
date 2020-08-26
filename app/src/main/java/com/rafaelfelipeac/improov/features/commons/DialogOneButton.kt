@@ -37,6 +37,10 @@ class DialogOneButton : BaseDialog() {
         hideTitle()
     }
 
+    private fun setScreen() {
+        hideTitle()
+    }
+
     fun setOnClickListener(onOkClickListener: OnClickListener) {
         this.onClickListener = onOkClickListener
     }

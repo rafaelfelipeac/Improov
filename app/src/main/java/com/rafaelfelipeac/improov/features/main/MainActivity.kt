@@ -78,6 +78,13 @@ class MainActivity : BaseActivity() {
         return currentFragment == R.id.navigationList
     }
 
+    private fun lastFragment(): Boolean {
+        val currentFragment =
+            NavHostFragment.findNavController(nav_host_fragment).currentDestination!!.id
+
+        return currentFragment == R.id.navigation_list
+    }
+
     private fun setupElements() {
         toolbar = findViewById(R.id.toolbar)!!
         navController = findNavController(R.id.navHostFragment)
