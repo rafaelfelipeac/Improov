@@ -106,12 +106,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_regular"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_small"
                     android:layout_marginBottom="@dimen/margin_regular"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -274,7 +274,6 @@
                             android:layout_marginEnd="@dimen/margin_small"
                             android:background="@mipmap/ic_trophy_gold_dark"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
