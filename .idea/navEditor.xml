@@ -8,6 +8,18 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="navigationExportImport">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="navigationGoal">
                     <value>
                       <LayoutPositions>
@@ -84,6 +96,11 @@
                         <option name="myPositions">
                           <map>
                             <entry key="profileToAdd">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="profileToExportImport">
                               <value>
                                 <LayoutPositions />
                               </value>
