@@ -1,6 +1,7 @@
 package com.rafaelfelipeac.improov.core.di
 
 import com.rafaelfelipeac.improov.core.platform.base.BaseActivity
+import com.rafaelfelipeac.improov.features.backup.presentation.BackupFragment
 import com.rafaelfelipeac.improov.features.goal.presentation.goaldetail.GoalDetailFragment
 import com.rafaelfelipeac.improov.features.goal.presentation.goalform.GoalFormFragment
 import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListFragment
@@ -35,4 +36,6 @@ interface Injector {
     fun inject(settingsLanguageFragment: SettingsLanguageFragment)
 
     fun inject(splashFragment: SplashFragment)
+
+    fun inject(backupFragment: BackupFragment)
 }

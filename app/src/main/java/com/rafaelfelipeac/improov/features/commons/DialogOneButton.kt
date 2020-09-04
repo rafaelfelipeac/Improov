@@ -8,11 +8,9 @@ import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.platform.base.BaseDialog
 import kotlinx.android.synthetic.main.fragment_dialog_one_button.*
 
-class DialogOneButton : BaseDialog() {
+class DialogOneButton(private val message: String) : BaseDialog() {
 
     private var onClickListener: OnClickListener? = null
-
-    private var message: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,10 +37,6 @@ class DialogOneButton : BaseDialog() {
 
     fun setOnClickListener(onOkClickListener: OnClickListener) {
         this.onClickListener = onOkClickListener
-    }
-
-    fun setMessage(message: String) {
-        this.message = message
     }
 
     interface OnClickListener {
