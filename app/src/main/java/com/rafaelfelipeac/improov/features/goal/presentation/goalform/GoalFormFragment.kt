@@ -328,9 +328,7 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun showDialogNoGoalTypeChange() {
-        val dialog = DialogOneButton()
-
-        dialog.setMessage(getString(R.string.goal_form_goal_dialog_no_goal_type_change))
+        val dialog = DialogOneButton(getString(R.string.goal_form_goal_dialog_no_goal_type_change))
 
         dialog.setOnClickListener(object : DialogOneButton.OnClickListener {
             override fun onOK() {

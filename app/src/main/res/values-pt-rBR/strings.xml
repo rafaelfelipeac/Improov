@@ -66,7 +66,7 @@
     <string name="profile_user_name">Nome do usuário</string>
     <string name="profile_add_name_message">Cadastre seu nome</string>
     <string name="profile_edit_name_message">Altere seu nome</string>
-    <string name="profile_button_export_import">Exportar/Importar</string>
+    <string name="profile_button_backup">Backup</string>
     <string name="profile_show_welcome_message">Ver mensagens iniciais</string>
 
     <!-- ProfileEdit -->
@@ -122,13 +122,13 @@
     <string name="welcome_b_message">Use o Improov para acessar rapidamente seus objetivos e atualizar seu progresso.</string>
     <string name="welcome_c_message">Acompanhe suas conquistas e mantenha seus objetivos sempre em desenvolvimento.</string>
 
-    <!-- ExportImport -->
-    <string name="export_import_title">Exportar/Importar</string>
-    <string name="export_import_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut aliquam tortor. Ut sit amet tortor vehicula eros convallis cursus commodo at nisi. Aenean nec gravida dui. Quisque mattis, metus at aliquam bibendum, nisi elit euismod lacus, et cursus lectus diam vitae ex. Duis bibendum elementum accumsan. Donec ut bibendum purus. In consequat viverra augue, in pulvinar felis sodales sed.</string>
-    <string name="export_import_button_export">Exportar</string>
-    <string name="export_import_date_export">Última data de exportação: 00/00/00</string>
-    <string name="export_import_button_import">Importação</string>
-    <string name="export_import_date_import">Última data de importação: 00/00/00</string>
+    <!-- Backup -->
+    <string name="backup_title">Backup</string>
+    <string name="backup_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut aliquam tortor. Ut sit amet tortor vehicula eros convallis cursus commodo at nisi. Aenean nec gravida dui. Quisque mattis, metus at aliquam bibendum, nisi elit euismod lacus, et cursus lectus diam vitae ex. Duis bibendum elementum accumsan. Donec ut bibendum purus. In consequat viverra augue, in pulvinar felis sodales sed.</string>
+    <string name="backup_button_export">Exportar</string>
+    <string name="backup_date_export">Última data de exportação: 00/00/00</string>
+    <string name="backup_button_import">Importação</string>
+    <string name="backup_date_import">Última data de importação: 00/00/00</string>
 
     <!-- ListAdapter -->
     <string name="list_adapter_item_title">Título do objetivo ou hábito</string>

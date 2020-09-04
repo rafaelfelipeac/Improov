@@ -104,8 +104,8 @@
                 android:id="@+id/profileToGoalForm"
                 app:destination="@id/navigationGoalForm" />
         <action
-                android:id="@+id/profileToExportImport"
-                app:destination="@id/navigationExportImport" />
+                android:id="@+id/profileToBackup"
+                app:destination="@id/navigationBackup" />
 
     </fragment>
 
@@ -132,9 +132,9 @@
             android:label="fragment_settings_language" />
 
     <fragment
-            android:id="@+id/navigationExportImport"
-            android:name="com.rafaelfelipeac.improov.features.exportimport.presentation.ExportImportFragment"
-            android:label="fragment_export_import"
-            tools:layout="@layout/fragment_export_import" />
+            android:id="@+id/navigationBackup"
+            android:name="com.rafaelfelipeac.improov.features.backup.presentation.BackupFragment"
+            android:label="fragment_backup"
+            tools:layout="@layout/fragment_backup" />
 
 </navigation>

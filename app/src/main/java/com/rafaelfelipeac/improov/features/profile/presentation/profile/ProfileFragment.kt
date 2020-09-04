@@ -60,8 +60,8 @@ class ProfileFragment : BaseFragment() {
             viewModel.saveFirstTimeList(false)
         }
 
-        profileExportImport.setOnClickListener {
-            navController.navigate(ProfileFragmentDirections.profileToExportImport())
+        profileBackup.setOnClickListener {
+            navController.navigate(ProfileFragmentDirections.profileToBackup())
         }
 
         profileEditProfileButton.setOnClickListener {

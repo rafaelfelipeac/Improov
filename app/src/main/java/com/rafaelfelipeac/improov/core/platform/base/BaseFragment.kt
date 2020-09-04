@@ -269,6 +269,11 @@ abstract class BaseFragment : Fragment() {
         bottomSheetTipClose = main.findViewById(R.id.tipsSwipeButtonClose)
     }
 
+    fun setupBottomSheetTipsBackup() {
+        bottomSheetTip = BottomSheetBehavior.from(main.findViewById<LinearLayout>(R.id.tipsBackup))
+        bottomSheetTipClose = main.findViewById(R.id.tipsBackupButtonClose)
+    }
+
     fun showBottomSheetTips() {
         bottomSheetTip?.state = BottomSheetBehavior.STATE_EXPANDED
     }

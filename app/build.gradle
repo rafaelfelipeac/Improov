@@ -32,9 +32,9 @@ android {
         }
     }
 
-    kotlinOptions {
-        kotlinOptions.allWarningsAsErrors = true
-    }
+//    kotlinOptions {
+//        kotlinOptions.allWarningsAsErrors = true
+//    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -64,8 +64,8 @@ android {
         detekt
     }
 
-    preBuild.dependsOn ':detekt'
-    preBuild.dependsOn ':ktlint'
+//    preBuild.dependsOn ':detekt'
+//    preBuild.dependsOn ':ktlint'
 
     dependencies {
         implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -116,6 +116,9 @@ android {
 
         // GifView
         implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+
+        // gson
+        implementation 'com.google.code.gson:gson:2.8.6'
     }
 }
 

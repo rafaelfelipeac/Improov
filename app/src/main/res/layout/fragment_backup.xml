@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDarkOne"
         android:fillViewport="true"
-        tools:context=".features.exportimport.presentation.ExportImportFragment">
+        tools:context=".features.backup.presentation.BackupFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/exportImportHelp"
+                    android:id="@+id/backupHelp"
                     android:layout_width="@dimen/button_help_width"
                     android:layout_height="@dimen/button_help_height"
                     android:layout_marginTop="@dimen/margin_regular"
@@ -46,75 +46,75 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                    android:id="@+id/exportImportMessage"
+                    android:id="@+id/backupMessage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_larger"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_larger"
                     android:layout_marginBottom="@dimen/margin_larger"
-                    android:text="@string/export_import_message"
+                    android:text="@string/backup_message"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
                     android:textSize="22sp"
-                    app:layout_constraintBottom_toTopOf="@+id/exportImportButtonExport"
+                    app:layout_constraintBottom_toTopOf="@+id/backupButtonExport"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/exportImportHelp" />
+                    app:layout_constraintTop_toBottomOf="@+id/backupHelp" />
 
             <android.widget.Button
-                    android:id="@+id/exportImportButtonExport"
+                    android:id="@+id/backupButtonExport"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:layout_marginStart="@dimen/margin_larger"
                     android:layout_marginEnd="@dimen/margin_larger"
                     android:layout_marginBottom="@dimen/margin_small"
                     android:background="@drawable/rounded_button"
-                    android:text="@string/export_import_button_export"
+                    android:text="@string/backup_button_export"
                     android:textColor="@color/colorPrimaryDarkOne"
-                    app:layout_constraintBottom_toTopOf="@+id/exportImportDateExport"
+                    app:layout_constraintBottom_toTopOf="@+id/backupDateExport"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                    android:id="@+id/exportImportDateExport"
+                    android:id="@+id/backupDateExport"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_regular"
-                    android:text="@string/export_import_date_export"
+                    android:text="@string/backup_date_export"
                     android:textColor="@color/colorPrimary"
-                    app:layout_constraintBottom_toTopOf="@+id/exportImportButtonImport"
-                    app:layout_constraintEnd_toEndOf="@+id/exportImportButtonExport"
+                    app:layout_constraintBottom_toTopOf="@+id/backupButtonImport"
+                    app:layout_constraintEnd_toEndOf="@+id/backupButtonExport"
                     app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="@+id/exportImportButtonExport" />
+                    app:layout_constraintStart_toStartOf="@+id/backupButtonExport" />
 
             <android.widget.Button
-                    android:id="@+id/exportImportButtonImport"
+                    android:id="@+id/backupButtonImport"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:layout_marginStart="@dimen/margin_larger"
                     android:layout_marginEnd="@dimen/margin_larger"
                     android:layout_marginBottom="@dimen/margin_small"
                     android:background="@drawable/rounded_button"
-                    android:text="@string/export_import_button_import"
+                    android:text="@string/backup_button_import"
                     android:textColor="@color/colorPrimaryDarkOne"
-                    app:layout_constraintBottom_toTopOf="@+id/exportImportDateImport"
+                    app:layout_constraintBottom_toTopOf="@+id/backupDateImport"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                    android:id="@+id/exportImportDateImport"
+                    android:id="@+id/backupDateImport"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_regular"
-                    android:text="@string/export_import_date_import"
+                    android:text="@string/backup_date_import"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/exportImportButtonImport"
+                    app:layout_constraintEnd_toEndOf="@+id/backupButtonImport"
                     app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="@+id/exportImportButtonImport" />
+                    app:layout_constraintStart_toStartOf="@+id/backupButtonImport" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
