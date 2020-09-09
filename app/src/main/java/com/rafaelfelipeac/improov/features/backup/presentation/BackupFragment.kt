@@ -1,7 +1,10 @@
 package com.rafaelfelipeac.improov.features.backup.presentation
 
 import android.Manifest
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -10,15 +13,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.commons.DialogOneButton
 import kotlinx.android.synthetic.main.fragment_backup.*
 import java.io.File
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 const val REQUEST_EXPORT = 1
 const val REQUEST_IMPORT = 2
+
+const val REQUEST_FILE = 1
 
 class BackupFragment : BaseFragment() {
 
@@ -54,6 +64,30 @@ class BackupFragment : BaseFragment() {
         observeViewModel()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_FILE && resultCode == RESULT_OK) {
+            viewModel.importDatabase(getDatabase(data?.data!!))
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
+        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            when (requestCode) {
+                REQUEST_EXPORT -> {
+                    viewModel.exportDatabase()
+                }
+                REQUEST_IMPORT -> {
+                    openFile()
+                }
+            }
+        }
+    }
+
     private fun setBehaviours() {
         backupHelp.setOnClickListener {
             hideSoftKeyboard()
@@ -72,7 +106,7 @@ class BackupFragment : BaseFragment() {
 
         backupButtonImport.setOnClickListener {
             if (checkPermissions()) {
-                viewModel.importDatabase(openFile())
+                openFile()
             } else {
                 requestPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, REQUEST_IMPORT)
             }
@@ -83,36 +117,75 @@ class BackupFragment : BaseFragment() {
         viewModel.export.observe(this) {
             Log.d("CORINTHIANS", "JSON = $it")
 
-            createFile(it)
+            val file = saveFile(it)
 
-            Toast.makeText(requireContext(), "Backup exported.", Toast.LENGTH_SHORT).show()
-
-            // snackbar with button to open path?
+            showSnackBarWithAction(
+                requireView(),
+                getString(R.string.backup_exported),
+                getString(R.string.backup_snackbar_action_share),
+                file, ::shareFile
+            )
+            // update screen with file path
         }
 
         viewModel.import.observe(this) {
             if (it) {
-                Toast.makeText(requireContext(), "Backup imported with success.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.backup_imported),
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
-                Toast.makeText(requireContext(), "Error in import.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.backup_imported_error),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>, grantResults: IntArray
-    ) {
-        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            when (requestCode) {
-                REQUEST_EXPORT -> {
-                    viewModel.exportDatabase()
-                }
-                REQUEST_IMPORT -> {
-                    viewModel.importDatabase(openFile())
-                }
+    private fun shareFile(file: Any) {
+        val path = FileProvider.getUriForFile(
+            requireContext(),
+            getString(R.string.file_provider_path),
+            (file as File)
+        )
+
+        val intentShareFile = Intent(Intent.ACTION_SEND)
+        intentShareFile.putExtra(Intent.EXTRA_STREAM, path)
+        intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        intentShareFile.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.backup_sharing_file_title))
+        intentShareFile.putExtra(Intent.EXTRA_TEXT, getString(R.string.backup_sharing_file_description))
+        intentShareFile.type = getString(R.string.backup_file_type)
+
+        startActivity(intentShareFile)
+    }
+
+
+    private fun getDatabase(data: Uri?): String {
+        val path: Uri = data!!
+        val text = StringBuilder()
+
+        try {
+            val bufferedReader = BufferedReader(
+                InputStreamReader(
+                    activity?.contentResolver?.openInputStream(path)!!
+                )
+            )
+
+            var line: String?
+
+            while (bufferedReader.readLine().also { line = it } != null) {
+                text.append(line)
             }
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
+
+        return text.toString()
     }
 
     private fun checkPermissions(): Boolean {
@@ -129,7 +202,7 @@ class BackupFragment : BaseFragment() {
 
     private fun requestPermissions(permission: String, requestCode: Int) {
         if (shouldShowRequestPermissionRationale(permission)) {
-            val dialog = DialogOneButton("Storage permission")
+            val dialog = DialogOneButton(getString(R.string.backup_permission_storage_message))
 
             dialog.setOnClickListener(object : DialogOneButton.OnClickListener {
                 override fun onOK() {
@@ -151,14 +224,23 @@ class BackupFragment : BaseFragment() {
         }
     }
 
-    private fun createFile(jsonDatabase: String) {
-        val file = File(Environment.getExternalStorageDirectory().path + "/Improov/Backup/backup.txt")
+    @Suppress("DEPRECATION")
+    private fun saveFile(jsonDatabase: String): File {
+        val file = File(
+                Environment.getExternalStorageDirectory()?.path!! + getString(R.string.backup_file_path),
+                getString(R.string.backup_file_name))
         file.parentFile?.mkdirs()
 
         file.writeText(jsonDatabase)
+
+        return file
     }
 
-    private fun openFile() : String {
-        return ""
+    private fun openFile() {
+        var intentChooseFile = Intent(Intent.ACTION_GET_CONTENT)
+        intentChooseFile.type = getString(R.string.backup_file_type)
+        intentChooseFile = Intent.createChooser(intentChooseFile, getString(R.string.backup_open_file_title))
+
+        startActivityForResult(intentChooseFile, REQUEST_FILE)
     }
 }

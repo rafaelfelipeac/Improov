@@ -4,8 +4,8 @@
         package="com.rafaelfelipeac.improov">
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
             android:name="com.rafaelfelipeac.improov.app.App"
@@ -14,7 +14,18 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            tools:ignore="GoogleAppIndexingWarning">
+            tools:ignore="GoogleAppIndexingWarning"
+            android:requestLegacyExternalStorage="true">
+
+        <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="com.rafaelfelipeac.improov.fileprovider"
+                android:grantUriPermissions="true"
+                android:exported="false">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/filepaths" />
+        </provider>
 
         <activity
                 android:name="com.rafaelfelipeac.improov.features.main.MainActivity"

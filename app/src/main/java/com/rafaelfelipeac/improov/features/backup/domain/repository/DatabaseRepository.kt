@@ -4,5 +4,5 @@ interface DatabaseRepository {
 
     suspend fun export(): String
 
-    suspend fun import(database: String): Boolean
+    suspend fun import(databaseBackup: String): Boolean
 }

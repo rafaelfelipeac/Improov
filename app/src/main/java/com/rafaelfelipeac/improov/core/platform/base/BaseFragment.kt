@@ -109,13 +109,14 @@ abstract class BaseFragment : Fragment() {
     fun showSnackBarWithAction(
         view: View,
         message: String,
+        actionMessage: String,
         obj: Any,
         function: (obj: Any) -> Unit
     ) {
         Snackbar
             .make(view, message, Snackbar.LENGTH_LONG)
             .setMessageColor(R.color.colorPrimaryDarkOne)
-            .setAction(getString(R.string.snackbar_action_undo)) { function(obj) }
+            .setAction(actionMessage) { function(obj) }
             .setActionTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDarkOne))
             .show()
     }

@@ -1,6 +1,5 @@
 package com.rafaelfelipeac.improov.features.backup.data.repository
 
-import android.util.Log
 import com.google.gson.Gson
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import com.rafaelfelipeac.improov.features.backup.data.model.Database
@@ -20,8 +19,6 @@ class DatabaseRepositoryImpl @Inject constructor(
 ) : DatabaseRepository {
 
     override suspend fun export(): String {
-        Log.d("CORINTHIANS", "DatabaseRepositoryImpl - export")
-
         return withContext(Dispatchers.IO) {
             Gson().toJson(
                 Database(

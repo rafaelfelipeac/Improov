@@ -4,13 +4,13 @@
     <string name="app_name_release">Improov</string>
     <string name="app_name_debug">Improov Debug</string>
     <string name="database_name">improov-db</string>
+    <string name="file_provider_path">com.rafaelfelipeac.improov.fileprovider</string>
 
     <!-- Date -->
     <string name="date_format_dd_MMM">MMM dd</string>
     <string name="date_format_full">MM/dd/yyyy HH:mm:ss</string>
 
     <!-- Commons -->
-    <string name="snackbar_action_undo">UNDO</string>
     <string name="dialog_action_positive">OK</string>
     <string name="dialog_action_negative">Cancel</string>
 
@@ -129,6 +129,17 @@
     <string name="backup_date_export">Last export date: 00/00/00</string>
     <string name="backup_button_import">Import</string>
     <string name="backup_date_import">Last import date: 00/00/00</string>
+    <string name="backup_permission_storage_message">Storage permission message</string>
+    <string name="backup_exported">Backup exported.</string>
+    <string name="backup_imported">Backup imported.</string>
+    <string name="backup_imported_error">Error when import backup.</string>
+    <string name="backup_file_path">/Improov/Backup/</string>
+    <string name="backup_file_name">Backup.txt</string>
+    <string name="backup_file_type">text/plain</string>
+    <string name="backup_snackbar_action_share">SHARE</string>
+    <string name="backup_open_file_title">Choose a file</string>
+    <string name="backup_sharing_file_title">Sharing File Subject 123</string>
+    <string name="backup_sharing_file_description">Sharing File Description 123</string>
 
     <!-- ListAdapter -->
     <string name="list_adapter_item_title">Goal or Habit title</string>
