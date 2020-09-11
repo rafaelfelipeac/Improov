@@ -17,7 +17,7 @@ import androidx.core.content.FileProvider
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.commons.DialogOneButton
+import com.rafaelfelipeac.improov.features.dialog.DialogOneButton
 import kotlinx.android.synthetic.main.fragment_backup.*
 import java.io.File
 import java.io.FileNotFoundException
@@ -30,6 +30,7 @@ const val REQUEST_IMPORT = 2
 
 const val REQUEST_FILE = 1
 
+@Suppress("TooManyFunctions")
 class BackupFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelFactory.get<BackupViewModel>(this) }
@@ -74,7 +75,8 @@ class BackupFragment : BaseFragment() {
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
-        permissions: Array<String>, grantResults: IntArray
+        permissions: Array<String>,
+        grantResults: IntArray
     ) {
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             when (requestCode) {
@@ -161,7 +163,6 @@ class BackupFragment : BaseFragment() {
 
         startActivity(intentShareFile)
     }
-
 
     private fun getDatabase(data: Uri?): String {
         val path: Uri = data!!

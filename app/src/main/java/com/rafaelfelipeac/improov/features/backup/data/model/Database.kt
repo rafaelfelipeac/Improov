@@ -1,8 +1,8 @@
 package com.rafaelfelipeac.improov.features.backup.data.model
 
-import com.rafaelfelipeac.improov.features.goal.data.model.GoalDataModel
-import com.rafaelfelipeac.improov.features.goal.data.model.HistoricDataModel
-import com.rafaelfelipeac.improov.features.goal.data.model.ItemDataModel
+import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModel
+import com.rafaelfelipeac.improov.features.commons.data.model.HistoricDataModel
+import com.rafaelfelipeac.improov.features.commons.data.model.ItemDataModel
 
 data class Database(
     val language: String,

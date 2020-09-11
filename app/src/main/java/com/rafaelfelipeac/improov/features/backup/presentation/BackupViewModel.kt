@@ -12,7 +12,7 @@ import javax.inject.Inject
 class BackupViewModel @Inject constructor(
     private val exportDatabaseUseCase: ExportDatabaseUseCase,
     private val importDatabaseUseCase: ImportDatabaseUseCase
-): BaseViewModel() {
+) : BaseViewModel() {
     val export: LiveData<String> get() = _export
     private val _export = MutableLiveData<String>()
     val import: LiveData<Boolean> get() = _import

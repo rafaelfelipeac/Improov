@@ -1,12 +1,12 @@
 package com.rafaelfelipeac.improov.base
 
-import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
-import com.rafaelfelipeac.improov.features.goal.data.model.GoalDataModel
-import com.rafaelfelipeac.improov.features.goal.data.model.HistoricDataModel
-import com.rafaelfelipeac.improov.features.goal.data.model.ItemDataModel
-import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
-import com.rafaelfelipeac.improov.features.goal.domain.model.Item
+import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
+import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModel
+import com.rafaelfelipeac.improov.features.commons.data.model.HistoricDataModel
+import com.rafaelfelipeac.improov.features.commons.data.model.ItemDataModel
+import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
+import com.rafaelfelipeac.improov.features.commons.domain.model.Historic
+import com.rafaelfelipeac.improov.features.commons.domain.model.Item
 
 object DataProviderTest {
 

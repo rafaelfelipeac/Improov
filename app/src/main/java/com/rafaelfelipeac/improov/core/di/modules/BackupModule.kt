@@ -26,5 +26,5 @@ abstract class BackupModule {
     @Binds
     @IntoMap
     @ViewModelKey(BackupViewModel::class)
-    abstract fun bindBackupViewModel(BackupViewModel: BackupViewModel): ViewModel
+    abstract fun bindBackupViewModel(backupViewModel: BackupViewModel): ViewModel
 }

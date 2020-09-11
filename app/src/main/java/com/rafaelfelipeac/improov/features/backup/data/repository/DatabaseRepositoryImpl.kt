@@ -1,12 +1,13 @@
 package com.rafaelfelipeac.improov.features.backup.data.repository
 
 import com.google.gson.Gson
+import com.google.gson.JsonParseException
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import com.rafaelfelipeac.improov.features.backup.data.model.Database
 import com.rafaelfelipeac.improov.features.backup.domain.repository.DatabaseRepository
-import com.rafaelfelipeac.improov.features.goal.data.dao.GoalDAO
-import com.rafaelfelipeac.improov.features.goal.data.dao.HistoricDAO
-import com.rafaelfelipeac.improov.features.goal.data.dao.ItemDAO
+import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDAO
+import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDAO
+import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDAO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -51,7 +52,7 @@ class DatabaseRepositoryImpl @Inject constructor(
                 preferences.firstTimeAdd = database.firstTimeAdd
 
                 true
-            } catch (e: Exception) {
+            } catch (e: JsonParseException) {
                 e.printStackTrace()
 
                 false

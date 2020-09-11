@@ -6,7 +6,7 @@ import javax.inject.Inject
 class ExportDatabaseUseCase @Inject constructor(
     private val databaseRepository: DatabaseRepository
 ) {
-    suspend operator fun invoke() : String{
+    suspend operator fun invoke(): String {
         return databaseRepository.export()
     }
 }

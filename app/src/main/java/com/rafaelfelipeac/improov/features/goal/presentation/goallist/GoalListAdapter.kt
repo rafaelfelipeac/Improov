@@ -15,7 +15,7 @@ import com.rafaelfelipeac.improov.core.extension.setWidthForProgress
 import com.rafaelfelipeac.improov.core.extension.format
 import com.rafaelfelipeac.improov.core.platform.ActionCompleteContract
 import com.rafaelfelipeac.improov.core.platform.base.BaseAdapter
-import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 
 const val MARGIN_START = 10
 const val LOGICAL_DENSITY_MULTIPLIER = 4

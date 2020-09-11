@@ -19,9 +19,9 @@ import com.rafaelfelipeac.improov.core.extension.toFloat
 import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
 import com.rafaelfelipeac.improov.core.extension.isNotEmpty
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.commons.DialogOneButton
-import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
-import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.dialog.DialogOneButton
+import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
+import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 
 @Suppress("TooManyFunctions")

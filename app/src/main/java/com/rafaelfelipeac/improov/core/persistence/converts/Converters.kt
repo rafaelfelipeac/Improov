@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.core.persistence.converts
 
 import androidx.room.TypeConverter
-import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
+import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
 import java.util.Date
 
 class Converters {

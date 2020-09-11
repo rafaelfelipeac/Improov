@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.goal.domain.repository
 
-import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
+import com.rafaelfelipeac.improov.features.commons.domain.model.Historic
 
 interface HistoricRepository {
 
