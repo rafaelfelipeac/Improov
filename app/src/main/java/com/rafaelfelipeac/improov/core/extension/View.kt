@@ -14,6 +14,7 @@ fun View.gone() {
     visibility = View.GONE
 }
 
+// Esse nome é um pouco confuso visto que segue o padrão de getter pra boolean, mas isso não é um getter
 fun View.isVisible(isVisible: Boolean) {
     if (isVisible) {
         visible()

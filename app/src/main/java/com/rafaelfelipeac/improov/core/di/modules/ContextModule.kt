@@ -8,6 +8,8 @@ import dagger.Module
 @Module
 abstract class ContextModule {
 
+    // Fazer bind do context não é muito bom porque é melhor ser explicito em qual context você
+    // tá obtendo, visto que eles não são compativeis
     @Binds
     abstract fun bindContext(app: App): Context
 }

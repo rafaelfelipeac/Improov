@@ -22,20 +22,22 @@ import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.di.AppComponent
 import com.rafaelfelipeac.improov.core.di.factory.ViewModelFactory
+import com.rafaelfelipeac.improov.core.extension.convertDateToString
 import com.rafaelfelipeac.improov.core.extension.gone
-import com.rafaelfelipeac.improov.core.extension.visible
-import com.rafaelfelipeac.improov.core.extension.setMessageColor
-import com.rafaelfelipeac.improov.core.extension.setIcon
 import com.rafaelfelipeac.improov.core.extension.isEmpty
 import com.rafaelfelipeac.improov.core.extension.resetValue
-import com.rafaelfelipeac.improov.core.extension.convertDateToString
+import com.rafaelfelipeac.improov.core.extension.setIcon
+import com.rafaelfelipeac.improov.core.extension.setMessageColor
+import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.model.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
-import java.util.Date
 import java.util.Calendar
+import java.util.Date
 import javax.inject.Inject
 
+// Essa classe aqui é treza em, vou confessar que não tive muito pique pra olhar ela toda não
+// Dá pra extrair algumas coisas daqui usando composição, tem um monte de coisa de dialog, bottom sheet...
 @Suppress("TooManyFunctions")
 abstract class BaseFragment : Fragment() {
 
@@ -85,7 +87,7 @@ abstract class BaseFragment : Fragment() {
 
     fun showBackArrow() {
         main.supportActionBar?.show()
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        main.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     fun setTitle(title: String) {
@@ -102,7 +104,7 @@ abstract class BaseFragment : Fragment() {
         Snackbar
             .make(requireView(), message, Snackbar.LENGTH_LONG)
             .setMessageColor(R.color.colorPrimaryDarkOne)
-            .setIcon(resources, message == getString(R.string.goal_message_goal_done))
+            .setIcon(message == getString(R.string.goal_message_goal_done))
             .show()
     }
 
@@ -130,19 +132,19 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun showSoftKeyboard() {
-        val inputMethodManager =
-            activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
-        inputMethodManager!!.toggleSoftInputFromWindow(
-            view?.windowToken,
-            InputMethodManager.SHOW_FORCED,
-            0
-        )
+        (activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as? InputMethodManager)?.run {
+            toggleSoftInputFromWindow(
+                view?.windowToken,
+                InputMethodManager.SHOW_FORCED,
+                0
+            )
+        }
     }
 
     fun hideSoftKeyboard() {
-        val inputMethodManager =
-            this.activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
-        inputMethodManager?.hideSoftInputFromWindow(this.view?.windowToken, 0)
+        (activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as? InputMethodManager)?.run {
+            hideSoftInputFromWindow(this@BaseFragment.view?.windowToken, 0)
+        }
     }
 
     fun getCurrentTime(): Date = Calendar.getInstance().time
@@ -214,7 +216,7 @@ abstract class BaseFragment : Fragment() {
 
         bottomSheetItem.window?.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE or
-                    WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
         )
 
         val bottomSheet =

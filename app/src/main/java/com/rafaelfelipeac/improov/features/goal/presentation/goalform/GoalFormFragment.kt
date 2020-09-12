@@ -13,8 +13,8 @@ import com.rafaelfelipeac.improov.core.extension.resetValue
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.invisible
-import com.rafaelfelipeac.improov.core.extension.fieldIsEmptyOrZero
-import com.rafaelfelipeac.improov.core.extension.checkIfFieldIsEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.focusOnEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.isEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.toFloat
 import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
 import com.rafaelfelipeac.improov.core.extension.isNotEmpty
@@ -355,8 +355,8 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfNameFieldIsEmptyOrZero(): Boolean {
         return when {
-            goalFormGoalName.checkIfFieldIsEmptyOrZero() -> {
-                goalFormGoalName.fieldIsEmptyOrZero(this)
+            goalFormGoalName.isEmptyOrZero() -> {
+                goalFormGoalName.focusOnEmptyOrZero(this)
                 true
             }
             else -> false
@@ -365,20 +365,20 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfValuesFieldsAreEmptyOrZero(): Boolean {
         return when {
-            goalFormSingleValue.checkIfFieldIsEmptyOrZero() && !goal.divideAndConquer -> {
-                goalFormSingleValue.fieldIsEmptyOrZero(this)
+            goalFormSingleValue.isEmptyOrZero() && !goal.divideAndConquer -> {
+                goalFormSingleValue.focusOnEmptyOrZero(this)
                 true
             }
-            goalFormBronzeValue.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
-                goalFormBronzeValue.fieldIsEmptyOrZero(this)
+            goalFormBronzeValue.isEmptyOrZero() && goal.divideAndConquer -> {
+                goalFormBronzeValue.focusOnEmptyOrZero(this)
                 true
             }
-            goalFormSilverValue.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
-                goalFormSilverValue.fieldIsEmptyOrZero(this)
+            goalFormSilverValue.isEmptyOrZero() && goal.divideAndConquer -> {
+                goalFormSilverValue.focusOnEmptyOrZero(this)
                 true
             }
-            goalFormGoldValue.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
-                goalFormGoldValue.fieldIsEmptyOrZero(this)
+            goalFormGoldValue.isEmptyOrZero() && goal.divideAndConquer -> {
+                goalFormGoldValue.focusOnEmptyOrZero(this)
                 true
             }
             else -> false
@@ -387,16 +387,16 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfCounterFieldsAreEmptyOrZero(): Boolean {
         return when {
-            goalFormGoalCounterDecValue.checkIfFieldIsEmptyOrZero() &&
+            goalFormGoalCounterDecValue.isEmptyOrZero() &&
                     (goal.type == GoalType.GOAL_COUNTER ||
                             getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
-                goalFormGoalCounterDecValue.fieldIsEmptyOrZero(this)
+                goalFormGoalCounterDecValue.focusOnEmptyOrZero(this)
                 true
             }
-            goalFormGoalCounterIncValue.checkIfFieldIsEmptyOrZero() &&
+            goalFormGoalCounterIncValue.isEmptyOrZero() &&
                     (goal.type == GoalType.GOAL_COUNTER ||
                             getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
-                goalFormGoalCounterIncValue.fieldIsEmptyOrZero(this)
+                goalFormGoalCounterIncValue.focusOnEmptyOrZero(this)
                 true
             }
             else -> false

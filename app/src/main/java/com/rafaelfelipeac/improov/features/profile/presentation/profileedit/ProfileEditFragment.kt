@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.checkIfFieldIsEmptyOrZero
-import com.rafaelfelipeac.improov.core.extension.fieldIsEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.isEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.focusOnEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
@@ -72,8 +72,8 @@ class ProfileEditFragment : BaseFragment() {
 
     private fun verifyElements(): Boolean {
         return when {
-            profileEditName.checkIfFieldIsEmptyOrZero() -> {
-                profileEditName.fieldIsEmptyOrZero(this, false)
+            profileEditName.isEmptyOrZero() -> {
+                profileEditName.focusOnEmptyOrZero(this, false)
 
                 setErrorMessage(getString(R.string.profile_edit_empty_fields))
                 true

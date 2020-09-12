@@ -8,6 +8,7 @@ import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton
 
+// Tem um jeito melhor de fazer isso agora, depois dá uma olhada no Pinkt
 @Singleton
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory @Inject constructor(

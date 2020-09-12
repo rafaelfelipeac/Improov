@@ -28,6 +28,7 @@ import javax.inject.Singleton
 @Singleton
 interface AppComponent : Injector {
 
+    // É melhor usar o @Component.Factory, dá uma olhada no Pinkt
     @Component.Builder
     interface Builder {
         fun build(): AppComponent

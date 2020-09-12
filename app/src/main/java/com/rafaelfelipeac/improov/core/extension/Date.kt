@@ -6,29 +6,37 @@ import android.text.format.DateFormat
 import android.text.format.DateUtils
 import com.rafaelfelipeac.improov.R
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Calendar
+import java.util.Date
 
 @SuppressLint("SimpleDateFormat")
-fun Date.convertDateToString(context: Context): String {
-    val format = SimpleDateFormat(context.getString(R.string.date_format_full))
+fun Date.convertDateToString(context: Context): String = SimpleDateFormat(
+    context.getString(R.string.date_format_full)
+).format(this)
 
-    return format.format(this)
+fun Date?.isToday() = this?.time?.let(DateUtils::isToday) ?: false
+
+fun Date?.isLate(): Boolean {
+    this ?: return false
+    return this < Calendar.getInstance().time
 }
 
-fun Date?.isToday() = DateUtils.isToday(this!!.time)
+fun Date?.isFuture(): Boolean {
+    this ?: return false
+    return this > Calendar.getInstance().time
+}
 
-fun Date?.isLate() = this!! < Calendar.getInstance().time
-
-fun Date?.isFuture() = this!! > Calendar.getInstance().time
-
-fun Date?.format(context: Context) =
-    DateFormat.format(context.getString(R.string.date_format_dd_MMM), this)!!
+fun Date?.format(context: Context) = DateFormat.format(
+    context.getString(R.string.date_format_dd_MMM),
+    this
+) ?: ""
 
 fun Date?.addDays(days: Int) {
-    val calendar = getCalendar(this?.time!!)
+    this ?: return
 
-    calendar.add(Calendar.DAY_OF_YEAR, days)
+    val calendar = getCalendar(time).apply {
+        add(Calendar.DAY_OF_YEAR, days)
+    }
 
     time = getTime(calendar)
 
@@ -36,23 +44,20 @@ fun Date?.addDays(days: Int) {
 }
 
 fun Date?.setToMidnight() {
-    val calendar = getCalendar(this?.time!!)
+    this ?: return
 
-    calendar.set(Calendar.HOUR_OF_DAY, 0)
-    calendar.set(Calendar.MINUTE, 0)
-    calendar.set(Calendar.SECOND, 0)
-    calendar.set(Calendar.MILLISECOND, 0)
+    val calendar = getCalendar(time).apply {
+        set(Calendar.HOUR_OF_DAY, 0)
+        set(Calendar.MINUTE, 0)
+        set(Calendar.SECOND, 0)
+        set(Calendar.MILLISECOND, 0)
+    }
 
     time = getTime(calendar)
 }
 
-fun getCalendar(time: Long): Calendar {
-    val calendar = Calendar.getInstance()
-    calendar.timeInMillis = time
-
-    return calendar
+fun getCalendar(time: Long): Calendar = Calendar.getInstance().apply {
+    timeInMillis = time
 }
 
-fun getTime(calendar: Calendar): Long {
-    return calendar.timeInMillis
-}
+fun getTime(calendar: Calendar): Long = calendar.timeInMillis

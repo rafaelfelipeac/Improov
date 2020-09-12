@@ -17,7 +17,7 @@ object PersistenceModule {
 
     @Provides
     @Singleton
-    @JvmStatic
+    @JvmStatic // Não precisa mais usar @JvmStatic quando é object
     fun providesDatabase(context: Context): RoomDatabase =
         Room.databaseBuilder(context, RoomDatabase::class.java, context.getString(R.string.database_name))
             .allowMainThreadQueries()
