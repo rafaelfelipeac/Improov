@@ -44,8 +44,7 @@ android {
         variant.resValue "string", "versionName", variant.versionName
     }
 
-    preBuild.dependsOn ':detekt'
-    preBuild.dependsOn ':ktlint'
+    preBuild.dependsOn(':detekt', ':ktlint')
 
     dependencies {
         implementation fileTree(dir: 'libs', include: ['*.jar'])
