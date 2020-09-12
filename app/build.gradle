@@ -44,11 +44,6 @@ android {
         variant.resValue "string", "versionName", variant.versionName
     }
 
-    configurations {
-        ktlint
-        detekt
-    }
-
     preBuild.dependsOn ':detekt'
     preBuild.dependsOn ':ktlint'
 
