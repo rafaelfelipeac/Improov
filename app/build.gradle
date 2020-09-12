@@ -44,10 +44,6 @@ android {
         variant.resValue "string", "versionName", variant.versionName
     }
 
-    repositories {
-        jcenter()
-    }
-
     configurations {
         ktlint
         detekt
