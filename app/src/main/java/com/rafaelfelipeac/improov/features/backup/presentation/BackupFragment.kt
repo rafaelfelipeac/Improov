@@ -7,15 +7,15 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.rafaelfelipeac.improov.R
+import com.rafaelfelipeac.improov.core.extension.formatToDate
 import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.dialog.DialogOneButton
 import kotlinx.android.synthetic.main.fragment_backup.*
@@ -24,6 +24,7 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.util.Date
 
 const val REQUEST_EXPORT = 1
 const val REQUEST_IMPORT = 2
@@ -61,6 +62,8 @@ class BackupFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.loadData()
+
         setBehaviours()
         observeViewModel()
     }
@@ -87,6 +90,16 @@ class BackupFragment : BaseFragment() {
                     openFile()
                 }
             }
+        } else {
+            val dialog = DialogOneButton(getString(R.string.backup_permission_storage_settings_message))
+
+            dialog.setOnClickListener(object : DialogOneButton.OnClickListener {
+                override fun onOK() {
+                    dialog.dismiss()
+                }
+            })
+
+            dialog.show(parentFragmentManager, "")
         }
     }
 
@@ -98,7 +111,7 @@ class BackupFragment : BaseFragment() {
             showBottomSheetTips()
         }
 
-        backupButtonExport.setOnClickListener {
+        backupExportButton.setOnClickListener {
             if (checkPermissions()) {
                 viewModel.exportDatabase()
             } else {
@@ -106,7 +119,7 @@ class BackupFragment : BaseFragment() {
             }
         }
 
-        backupButtonImport.setOnClickListener {
+        backupImportButton.setOnClickListener {
             if (checkPermissions()) {
                 openFile()
             } else {
@@ -116,33 +129,47 @@ class BackupFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
+        viewModel.exportDate.observe(this) {
+            if (it > 0) {
+                backupExportDate.text = String.format(
+                    getString(R.string.backup_date_export), Date(it).formatToDate(requireContext()))
+                backupExportDate.visible()
+            }
+        }
+
+        viewModel.importDate.observe(this) {
+            if (it > 0) {
+                backupImportDate.text = String.format(
+                    getString(R.string.backup_date_import), Date(it).formatToDate(requireContext()))
+                backupImportDate.visible()
+            }
+        }
+
         viewModel.export.observe(this) {
-            Log.d("CORINTHIANS", "JSON = $it")
+            if (it.isNotEmpty()) {
+                viewModel.getExportDate()
 
-            val file = saveFile(it)
+                val file = saveFile(it)
 
-            showSnackBarWithAction(
-                requireView(),
-                getString(R.string.backup_exported),
-                getString(R.string.backup_snackbar_action_share),
-                file, ::shareFile
-            )
-            // update screen with file path
+                showSnackBarWithAction(
+                    requireView(),
+                    getString(R.string.backup_export_success),
+                    getString(R.string.backup_snackbar_action_share),
+                    file,
+                    ::shareFile
+                )
+            } else {
+                showSnackBar(getString(R.string.backup_export_error))
+            }
         }
 
         viewModel.import.observe(this) {
             if (it) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.backup_imported),
-                    Toast.LENGTH_SHORT
-                ).show()
+                viewModel.getImportDate()
+
+                showSnackBar(getString(R.string.backup_import_success))
             } else {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.backup_imported_error),
-                    Toast.LENGTH_SHORT
-                ).show()
+                showSnackBar(getString(R.string.backup_import_error))
             }
         }
     }

@@ -7,8 +7,9 @@
     <string name="file_provider_path">com.rafaelfelipeac.improov.fileprovider</string>
 
     <!-- Date -->
-    <string name="date_format_dd_MMM">MMM dd</string>
-    <string name="date_format_full">MM/dd/yyyy HH:mm:ss</string>
+    <string name="date_format_day_month">MMM dd</string>
+    <string name="date_format_date">MM/dd/yyyy</string>
+    <string name="date_format_date_time">MM/dd/yyyy HH:mm:ss</string>
 
     <!-- Commons -->
     <string name="dialog_action_positive">OK</string>
@@ -126,13 +127,15 @@
     <string name="backup_title">Backup</string>
     <string name="backup_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut aliquam tortor. Ut sit amet tortor vehicula eros convallis cursus commodo at nisi. Aenean nec gravida dui. Quisque mattis, metus at aliquam bibendum, nisi elit euismod lacus, et cursus lectus diam vitae ex. Duis bibendum elementum accumsan. Donec ut bibendum purus. In consequat viverra augue, in pulvinar felis sodales sed.</string>
     <string name="backup_button_export">Export</string>
-    <string name="backup_date_export">Last export date: 00/00/00</string>
+    <string name="backup_date_export">Last export date: %s</string>
     <string name="backup_button_import">Import</string>
-    <string name="backup_date_import">Last import date: 00/00/00</string>
+    <string name="backup_date_import">Last import date: %s</string>
     <string name="backup_permission_storage_message">Storage permission message</string>
-    <string name="backup_exported">Backup exported.</string>
-    <string name="backup_imported">Backup imported.</string>
-    <string name="backup_imported_error">Error when import backup.</string>
+    <string name="backup_permission_storage_settings_message">Storage permission settings message</string>
+    <string name="backup_export_success">Backup exported.</string>
+    <string name="backup_export_error">Error when export backup.</string>
+    <string name="backup_import_success">Backup imported.</string>
+    <string name="backup_import_error">Error when import backup.</string>
     <string name="backup_file_path">/Improov/Backup/</string>
     <string name="backup_file_name">Backup.txt</string>
     <string name="backup_file_type">text/plain</string>

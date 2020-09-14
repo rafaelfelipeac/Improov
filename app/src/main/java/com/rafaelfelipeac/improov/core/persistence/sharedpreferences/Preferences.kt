@@ -10,6 +10,8 @@ const val KEY_NAME = "KEY_NAME"
 const val KEY_LANGUAGE = "KEY_LANGUAGE"
 const val KEY_FIRST_TIME_ADD = "KEY_FIRST_TIME_ADD"
 const val KEY_FIRST_TIME_LIST = "KEY_FIRST_TIME_LIST"
+const val KEY_EXPORT_DATE = "KEY_EXPORT_DATE"
+const val KEY_IMPORT_DATE = "KEY_IMPORT_DATE"
 
 class Preferences(context: Context) {
 
@@ -34,4 +36,12 @@ class Preferences(context: Context) {
     var firstTimeList: Boolean
         get() = prefs.getBoolean(KEY_FIRST_TIME_LIST, false)
         set(value) = prefs.edit().putBoolean(KEY_FIRST_TIME_LIST, value).apply()
+
+    var exportDate: Long
+        get() = prefs.getLong(KEY_EXPORT_DATE, 0L)
+        set(value) = prefs.edit().putLong(KEY_EXPORT_DATE, value).apply()
+
+    var importDate: Long
+        get() = prefs.getLong(KEY_IMPORT_DATE, 0L)
+        set(value) = prefs.edit().putLong(KEY_IMPORT_DATE, value).apply()
 }

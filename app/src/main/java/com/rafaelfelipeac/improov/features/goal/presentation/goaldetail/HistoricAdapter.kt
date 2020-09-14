@@ -3,7 +3,7 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 import android.view.View
 import android.widget.TextView
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.convertDateToString
+import com.rafaelfelipeac.improov.core.extension.formatToDateTime
 import com.rafaelfelipeac.improov.core.extension.getValueWithSymbol
 import com.rafaelfelipeac.improov.features.commons.domain.model.Historic
 import com.rafaelfelipeac.improov.core.platform.base.BaseAdapter
@@ -20,7 +20,7 @@ class HistoricAdapter : BaseAdapter<Historic>() {
         val date = viewHolder.itemView.findViewById<TextView>(R.id.itemHistoricDate)
         val value = viewHolder.itemView.findViewById<TextView>(R.id.itemHistoricValue)
 
-        date.text = item.date?.convertDateToString(context)
+        date.text = item.date?.formatToDateTime(context)
         value.text = item.value.getValueWithSymbol()
     }
 

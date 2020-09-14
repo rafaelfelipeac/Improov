@@ -5,25 +5,25 @@ import android.content.Context
 import android.text.format.DateFormat
 import android.text.format.DateUtils
 import com.rafaelfelipeac.improov.R
-import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Calendar
 
 @SuppressLint("SimpleDateFormat")
-fun Date.convertDateToString(context: Context): String {
-    val format = SimpleDateFormat(context.getString(R.string.date_format_full))
 
-    return format.format(this)
-}
+fun Date?.formatToDayMonth(context: Context) =
+    DateFormat.format(context.getString(R.string.date_format_day_month), this)!!
+
+fun Date?.formatToDate(context: Context) =
+    DateFormat.format(context.getString(R.string.date_format_date), this)!!
+
+fun Date.formatToDateTime(context: Context) =
+    DateFormat.format(context.getString(R.string.date_format_date_time), this)!!
 
 fun Date?.isToday() = DateUtils.isToday(this!!.time)
 
 fun Date?.isLate() = this!! < Calendar.getInstance().time
 
 fun Date?.isFuture() = this!! > Calendar.getInstance().time
-
-fun Date?.format(context: Context) =
-    DateFormat.format(context.getString(R.string.date_format_dd_MMM), this)!!
 
 fun Date?.addDays(days: Int) {
     val calendar = getCalendar(this?.time!!)

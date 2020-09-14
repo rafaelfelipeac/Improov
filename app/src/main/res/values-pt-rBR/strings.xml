@@ -7,8 +7,9 @@
     <string name="file_provider_path">com.rafaelfelipeac.improov.fileprovider</string>
 
     <!-- Date -->
-    <string name="date_format_dd_MMM">dd MMM</string>
-    <string name="date_format_full">dd/MM/yyyy HH:mm:ss</string>
+    <string name="date_format_day_month">dd MMM</string>
+    <string name="date_format_date">dd/MM/yyyy</string>
+    <string name="date_format_date_time">dd/MM/yyyy HH:mm:ss</string>
 
     <!-- Commons -->
     <string name="dialog_action_positive">OK</string>
@@ -130,9 +131,11 @@
     <string name="backup_button_import">Importação</string>
     <string name="backup_date_import">Última data de importação: 00/00/00</string>
     <string name="backup_permission_storage_message">Mensagem da permissão de armazenamento</string>
-    <string name="backup_exported">Backup exportado.</string>
-    <string name="backup_imported">Backup importado.</string>
-    <string name="backup_imported_error">Erro ao importar o backup.</string>
+    <string name="backup_permission_storage_settings_message">Mensagem da permissão de armazenamento nas configurações</string>
+    <string name="backup_export_success">Backup exportado.</string>
+    <string name="backup_export_error">Erro ao exportar o backup.</string>
+    <string name="backup_import_success">Backup importado.</string>
+    <string name="backup_import_error">Erro ao importar o backup.</string>
     <string name="backup_file_path">/Improov/Backup/</string>
     <string name="backup_file_name">Backup.txt</string>
     <string name="backup_file_type">text/plain</string>

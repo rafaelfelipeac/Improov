@@ -11,6 +11,7 @@ import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDAO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import java.util.Calendar
 
 class DatabaseRepositoryImpl @Inject constructor(
     private val goalsDao: GoalDAO,
@@ -21,18 +22,28 @@ class DatabaseRepositoryImpl @Inject constructor(
 
     override suspend fun export(): String {
         return withContext(Dispatchers.IO) {
-            Gson().toJson(
-                Database(
-                    preferences.language,
-                    preferences.welcome,
-                    preferences.name,
-                    preferences.firstTimeList,
-                    preferences.firstTimeAdd,
-                    goalsDao.getAll(),
-                    itemDao.getAll(),
-                    historicDao.getAll()
+            try {
+                val json = Gson().toJson(
+                    Database(
+                        preferences.language,
+                        preferences.welcome,
+                        preferences.name,
+                        preferences.firstTimeList,
+                        preferences.firstTimeAdd,
+                        goalsDao.getAll(),
+                        itemDao.getAll(),
+                        historicDao.getAll()
+                    )
                 )
-            )
+
+                preferences.exportDate = Calendar.getInstance().timeInMillis
+
+                json
+            } catch (e: JsonParseException) {
+                e.printStackTrace()
+
+                ""
+            }
         }
     }
 
@@ -51,12 +62,26 @@ class DatabaseRepositoryImpl @Inject constructor(
                 preferences.firstTimeList = database.firstTimeList
                 preferences.firstTimeAdd = database.firstTimeAdd
 
+                preferences.importDate = Calendar.getInstance().timeInMillis
+
                 true
             } catch (e: JsonParseException) {
                 e.printStackTrace()
 
                 false
             }
+        }
+    }
+
+    override suspend fun getExportDate(): Long {
+        return withContext(Dispatchers.IO) {
+            preferences.exportDate
+        }
+    }
+
+    override suspend fun getImportDate(): Long {
+        return withContext(Dispatchers.IO) {
+            preferences.importDate
         }
     }
 }

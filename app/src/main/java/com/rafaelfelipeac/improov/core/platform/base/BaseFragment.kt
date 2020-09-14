@@ -28,7 +28,7 @@ import com.rafaelfelipeac.improov.core.extension.setMessageColor
 import com.rafaelfelipeac.improov.core.extension.setIcon
 import com.rafaelfelipeac.improov.core.extension.isEmpty
 import com.rafaelfelipeac.improov.core.extension.resetValue
-import com.rafaelfelipeac.improov.core.extension.convertDateToString
+import com.rafaelfelipeac.improov.core.extension.formatToDateTime
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import com.rafaelfelipeac.improov.features.commons.domain.model.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
@@ -230,7 +230,7 @@ abstract class BaseFragment : Fragment() {
             if (item.done) {
                 bottomSheetItemDate.text = String.format(
                     getString(R.string.item_date_format),
-                    context?.let { item.doneDate?.convertDateToString(it) }
+                    context?.let { item.doneDate?.formatToDateTime(it) }
                 )
                 bottomSheetItemDate.visible()
             } else {
