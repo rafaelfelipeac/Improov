@@ -82,8 +82,8 @@
 
     <!-- DialogTwoButtons -->
     <string name="dialog_two_buttons_message">Tem certeza que deseja sair do app?</string>
-    <string name="dialog_two_buttons_cancel_message">Cancelar</string>
-    <string name="dialog_two_buttons_ok_message">OK</string>
+    <string name="dialog_two_buttons_negative_message">Cancelar</string>
+    <string name="dialog_two_buttons_positive_message">OK</string>
 
     <!-- Settings -->
     <string name="settings_title">Configurações</string>
@@ -125,13 +125,15 @@
 
     <!-- Backup -->
     <string name="backup_title">Backup</string>
-    <string name="backup_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut aliquam tortor. Ut sit amet tortor vehicula eros convallis cursus commodo at nisi. Aenean nec gravida dui. Quisque mattis, metus at aliquam bibendum, nisi elit euismod lacus, et cursus lectus diam vitae ex. Duis bibendum elementum accumsan. Donec ut bibendum purus. In consequat viverra augue, in pulvinar felis sodales sed.</string>
+    <string name="backup_message">Caso queira mais segurança com seus dados e assim evitar perder todo o seu progresso no Improov, você pode clicar em "exportar", salvar todas as suas informações em um arquivo de texto e guardá-lo como quiser. \n\nSe você já tiver um arquivo de backup e quiser usar essas informações no Improov, clique em "importar" e escolha o arquivo desejado.</string>
     <string name="backup_button_export">Exportar</string>
     <string name="backup_date_export">Última data de exportação: 00/00/00</string>
     <string name="backup_button_import">Importação</string>
     <string name="backup_date_import">Última data de importação: 00/00/00</string>
-    <string name="backup_permission_storage_message">Mensagem da permissão de armazenamento</string>
-    <string name="backup_permission_storage_settings_message">Mensagem da permissão de armazenamento nas configurações</string>
+    <string name="backup_permission_storage_message">Para ser possível acessar o armazenamento do seu aparelho, é necessário que você forneça permissões para isso.</string>
+    <string name="backup_permission_storage_settings_message">Para realizar essa função, é necessário que o app recebe permissão para isso. \n\nVocê pode conceder essa permissão nas configurações do aplicativo.</string>
+    <string name="backup_permission_storage_settings_negative">Fechar</string>
+    <string name="backup_permission_storage_settings_positive">Config</string>
     <string name="backup_export_success">Backup exportado.</string>
     <string name="backup_export_error">Erro ao exportar o backup.</string>
     <string name="backup_import_success">Backup importado.</string>
@@ -175,10 +177,8 @@
     <string name="tips_divide_and_conquer_title">Dividir e Conquistar</string>
     <string name="tips_divide_and_conquer_message_1">Dividir um objetivo grande e complexo em partes menores é uma boa tática para evitar que esse objetivo seja
         abandonado. \n\nA sensação de progresso é maior e você estará sempre motivado para alcançar aquilo que deseja. \n\nNesse modo seu objetivo é dividido em 3 partes:
-        bronze, prata e ouro.
-    </string>
-    <string name="tips_divide_and_conquer_message_2">O valor bronze é o primeiro desafio. A cada parte do objetivo atingida, você estará mais perto da sua conquista.
-    </string>
+        bronze, prata e ouro.</string>
+    <string name="tips_divide_and_conquer_message_2">O valor bronze é o primeiro desafio. A cada parte do objetivo atingida, você estará mais perto da sua conquista.</string>
 
     <!-- BottomSheet Tips Goal Type -->
     <string name="tips_goal_type_title">Tipos de objetivo</string>
@@ -191,9 +191,12 @@
 
     <!-- BottomSheet Tips Swipe -->
     <string name="tips_swipe_title">Deslize</string>
-    <string name="tips_swipe_message_1">Se desejar finalizar um objetivo imediatamente, mesmo sem ter atingido o valor total, deslize o item para o lado para concluí-lo.
-    </string>
-    <string name="tips_swipe_message_2">Se mudar de ideia, apenas deslize novamente e o item voltará a estar pronto para ser atualizado.
-    </string>
+    <string name="tips_swipe_message_1">Se desejar finalizar um objetivo imediatamente, mesmo sem ter atingido o valor total, deslize o item para o lado para concluí-lo.</string>
+    <string name="tips_swipe_message_2">Se mudar de ideia, apenas deslize novamente e o item voltará a estar pronto para ser atualizado.</string>
+
+    <!-- BottomSheet Tips Backup -->
+    <string name="tips_backup_title">Backup</string>
+    <string name="tips_backup_message_1">Ao fazer uso da funcionalidade de backup, você tem o controle do histórico de suas conquistas em um arquivo de texto e pode salvá-lo como quiser.</string>
+    <string name="tips_backup_message_2">Dessa forma, ao trocar de dispositivo, por exemplo, você não perderá o progresso já feito e pode se dedicar a conquistar mais coisas.</string>
 
 </resources>

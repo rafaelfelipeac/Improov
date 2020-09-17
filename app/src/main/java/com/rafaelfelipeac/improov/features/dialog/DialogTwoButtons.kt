@@ -8,7 +8,11 @@ import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.platform.base.BaseDialog
 import kotlinx.android.synthetic.main.fragment_dialog_two_buttons.*
 
-class DialogTwoButtons : BaseDialog() {
+class DialogTwoButtons(
+    private val message: String,
+    private val negativeText: String = "",
+    private val positiveText: String = ""
+) : BaseDialog() {
 
     private var onClickListener: OnClickListener? = null
 
@@ -26,9 +30,26 @@ class DialogTwoButtons : BaseDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dialogTwoButtonsCancelButton.setOnClickListener { onClickListener?.onCancel() }
+        setupLayout()
+        setupBehaviours()
+    }
 
-        dialogTwoButtonsOKButton.setOnClickListener { onClickListener?.onOK() }
+    private fun setupLayout() {
+        dialogTwoButtonsMessage.text = message
+
+        if (negativeText.isNotEmpty()) {
+            dialogTwoButtonsNegativeButton.text = negativeText
+        }
+
+        if (positiveText.isNotEmpty()) {
+            dialogTwoButtonsPositiveButton.text = positiveText
+        }
+    }
+
+    private fun setupBehaviours() {
+        dialogTwoButtonsNegativeButton.setOnClickListener { onClickListener?.onNegative() }
+
+        dialogTwoButtonsPositiveButton.setOnClickListener { onClickListener?.onPositive() }
     }
 
     private fun setScreen() {
@@ -40,7 +61,7 @@ class DialogTwoButtons : BaseDialog() {
     }
 
     interface OnClickListener {
-        fun onCancel()
-        fun onOK()
+        fun onNegative()
+        fun onPositive()
     }
 }

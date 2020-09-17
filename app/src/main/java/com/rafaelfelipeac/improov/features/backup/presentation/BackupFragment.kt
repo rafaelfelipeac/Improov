@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.dialog.DialogOneButton
+import com.rafaelfelipeac.improov.features.dialog.DialogTwoButtons
 import kotlinx.android.synthetic.main.fragment_backup.*
 import java.io.File
 import java.io.FileNotFoundException
@@ -91,10 +93,24 @@ class BackupFragment : BaseFragment() {
                 }
             }
         } else {
-            val dialog = DialogOneButton(getString(R.string.backup_permission_storage_settings_message))
+            val dialog = DialogTwoButtons(
+                getString(R.string.backup_permission_storage_settings_message),
+                getString(R.string.backup_permission_storage_settings_negative),
+                getString(R.string.backup_permission_storage_settings_positive)
+            )
 
-            dialog.setOnClickListener(object : DialogOneButton.OnClickListener {
-                override fun onOK() {
+            dialog.setOnClickListener(object : DialogTwoButtons.OnClickListener {
+                override fun onNegative() {
+                    dialog.dismiss()
+                }
+
+                override fun onPositive() {
+                    val intentDetails = Intent()
+                    val uri = Uri.fromParts("package", activity?.packageName, null)
+                    intentDetails.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                    intentDetails.data = uri
+                    startActivity(intentDetails)
+
                     dialog.dismiss()
                 }
             })
@@ -132,7 +148,8 @@ class BackupFragment : BaseFragment() {
         viewModel.exportDate.observe(this) {
             if (it > 0) {
                 backupExportDate.text = String.format(
-                    getString(R.string.backup_date_export), Date(it).formatToDate(requireContext()))
+                    getString(R.string.backup_date_export), Date(it).formatToDate(requireContext())
+                )
                 backupExportDate.visible()
             }
         }
@@ -140,7 +157,8 @@ class BackupFragment : BaseFragment() {
         viewModel.importDate.observe(this) {
             if (it > 0) {
                 backupImportDate.text = String.format(
-                    getString(R.string.backup_date_import), Date(it).formatToDate(requireContext()))
+                    getString(R.string.backup_date_import), Date(it).formatToDate(requireContext())
+                )
                 backupImportDate.visible()
             }
         }
@@ -184,8 +202,14 @@ class BackupFragment : BaseFragment() {
         val intentShareFile = Intent(Intent.ACTION_SEND)
         intentShareFile.putExtra(Intent.EXTRA_STREAM, path)
         intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        intentShareFile.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.backup_sharing_file_title))
-        intentShareFile.putExtra(Intent.EXTRA_TEXT, getString(R.string.backup_sharing_file_description))
+        intentShareFile.putExtra(
+            Intent.EXTRA_SUBJECT,
+            getString(R.string.backup_sharing_file_title)
+        )
+        intentShareFile.putExtra(
+            Intent.EXTRA_TEXT,
+            getString(R.string.backup_sharing_file_description)
+        )
         intentShareFile.type = getString(R.string.backup_file_type)
 
         startActivity(intentShareFile)
@@ -255,8 +279,9 @@ class BackupFragment : BaseFragment() {
     @Suppress("DEPRECATION")
     private fun saveFile(jsonDatabase: String): File {
         val file = File(
-                Environment.getExternalStorageDirectory()?.path!! + getString(R.string.backup_file_path),
-                getString(R.string.backup_file_name))
+            Environment.getExternalStorageDirectory()?.path!! + getString(R.string.backup_file_path),
+            getString(R.string.backup_file_name)
+        )
         file.parentFile?.mkdirs()
 
         file.writeText(jsonDatabase)
@@ -267,7 +292,10 @@ class BackupFragment : BaseFragment() {
     private fun openFile() {
         var intentChooseFile = Intent(Intent.ACTION_GET_CONTENT)
         intentChooseFile.type = getString(R.string.backup_file_type)
-        intentChooseFile = Intent.createChooser(intentChooseFile, getString(R.string.backup_open_file_title))
+        intentChooseFile = Intent.createChooser(
+            intentChooseFile,
+            getString(R.string.backup_open_file_title)
+        )
 
         startActivityForResult(intentChooseFile, REQUEST_FILE)
     }

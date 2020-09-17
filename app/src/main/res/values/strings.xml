@@ -82,8 +82,8 @@
 
     <!-- DialogTwoButtons -->
     <string name="dialog_two_buttons_message">Are you sure you want to exit the app?</string>
-    <string name="dialog_two_buttons_cancel_message">Cancel</string>
-    <string name="dialog_two_buttons_ok_message">OK</string>
+    <string name="dialog_two_buttons_negative_message">Cancel</string>
+    <string name="dialog_two_buttons_positive_message">OK</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
@@ -125,13 +125,15 @@
 
     <!-- Backup -->
     <string name="backup_title">Backup</string>
-    <string name="backup_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut aliquam tortor. Ut sit amet tortor vehicula eros convallis cursus commodo at nisi. Aenean nec gravida dui. Quisque mattis, metus at aliquam bibendum, nisi elit euismod lacus, et cursus lectus diam vitae ex. Duis bibendum elementum accumsan. Donec ut bibendum purus. In consequat viverra augue, in pulvinar felis sodales sed.</string>
+    <string name="backup_message">If you want more security with your data and thus avoid losing all your progress in Improov, you can click on "export", save all your information in a text file and save it as you wish. \n\nIf you already have a backup file and want to use this information in Improov, click on "import" and choose the desired file.</string>
     <string name="backup_button_export">Export</string>
     <string name="backup_date_export">Last export date: %s</string>
     <string name="backup_button_import">Import</string>
     <string name="backup_date_import">Last import date: %s</string>
-    <string name="backup_permission_storage_message">Storage permission message</string>
-    <string name="backup_permission_storage_settings_message">Storage permission settings message</string>
+    <string name="backup_permission_storage_message">To be able to access your device\'s storage, you need to provide permissions to do so.</string>
+    <string name="backup_permission_storage_settings_message">To perform this function, it is necessary that the app receives permission to do so. \n\nYou can grant this permission in the application settings.</string>
+    <string name="backup_permission_storage_settings_negative">Close</string>
+    <string name="backup_permission_storage_settings_positive">Config</string>
     <string name="backup_export_success">Backup exported.</string>
     <string name="backup_export_error">Error when export backup.</string>
     <string name="backup_import_success">Backup imported.</string>
@@ -175,10 +177,8 @@
     <string name="tips_divide_and_conquer_title">Divide And Conquer</string>
     <string name="tips_divide_and_conquer_message_1">Splitting a large and complex goal into smaller parts is a good tactic to keep that
         goal from being abandoned. \n\nThe sense of progress is greater and you will always be motivated to achieve what you want. \n\nTherefore your goal is divided into 3 parts:
-        bronze, silver and gold.
-    </string>
-    <string name="tips_divide_and_conquer_message_2">The bronze value is the first challenge. With each part of the goal achieved, you will be closer to your achievement.
-    </string>
+        bronze, silver and gold.</string>
+    <string name="tips_divide_and_conquer_message_2">The bronze value is the first challenge. With each part of the goal achieved, you will be closer to your achievement.</string>
 
     <!-- BottomSheet Tips Goal Type -->
     <string name="tips_goal_type_title">Goals type</string>
@@ -191,9 +191,12 @@
 
     <!-- BottomSheet Tips Swipe -->
     <string name="tips_swipe_title">Swipe</string>
-    <string name="tips_swipe_message_1">If you want to finish a goal immediately, even without reaching the full amount, slide the item aside to complete it.
-    </string>
-    <string name="tips_swipe_message_2">If you change your mind, just swipe again and the item will be ready to update again.
-    </string>
+    <string name="tips_swipe_message_1">If you want to finish a goal immediately, even without reaching the full amount, slide the item aside to complete it.</string>
+    <string name="tips_swipe_message_2">If you change your mind, just swipe again and the item will be ready to update again.</string>
+
+    <!-- BottomSheet Tips Backup -->
+    <string name="tips_backup_title">Backup</string>
+    <string name="tips_backup_message_1">By making use of the backup functionality, you have control of the history of your achievements in a text file and can save as you wish.</string>
+    <string name="tips_backup_message_2">That way, when switching devices, for example, you will not lose the progress already made and can dedicate yourself to achieving more.</string>
 
 </resources>
