@@ -13,4 +13,6 @@
 
     <include layout="@layout/bottom_sheet_tips_swipe" />
 
+    <include layout="@layout/bottom_sheet_tips_backup" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.core.extension
 
-import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 
 const val PERCENTAGE_MAX = 100
 

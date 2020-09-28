@@ -27,10 +27,10 @@ import com.rafaelfelipeac.improov.core.extension.enableIcon
 import com.rafaelfelipeac.improov.core.extension.disableIcon
 import com.rafaelfelipeac.improov.core.extension.vibrate
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
-import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
-import com.rafaelfelipeac.improov.features.goal.domain.model.Item
+import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
+import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
+import com.rafaelfelipeac.improov.features.commons.domain.model.Historic
+import com.rafaelfelipeac.improov.features.commons.domain.model.Item
 import kotlinx.android.synthetic.main.fragment_goal_detail.*
 import java.util.Date
 

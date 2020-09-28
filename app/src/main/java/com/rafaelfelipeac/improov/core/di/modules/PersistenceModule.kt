@@ -5,9 +5,9 @@ import androidx.room.Room
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.persistence.database.MIGRATION_48_49
 import com.rafaelfelipeac.improov.core.persistence.database.RoomDatabase
-import com.rafaelfelipeac.improov.features.goal.data.dao.GoalDAO
-import com.rafaelfelipeac.improov.features.goal.data.dao.HistoricDAO
-import com.rafaelfelipeac.improov.features.goal.data.dao.ItemDAO
+import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDAO
+import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDAO
+import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDAO
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

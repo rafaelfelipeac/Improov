@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.goal.domain.repository
 
-import com.rafaelfelipeac.improov.features.goal.domain.model.Item
+import com.rafaelfelipeac.improov.features.commons.domain.model.Item
 
 interface ItemRepository {
 

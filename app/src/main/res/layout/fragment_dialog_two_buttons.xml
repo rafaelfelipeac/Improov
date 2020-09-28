@@ -33,7 +33,7 @@
             app:layout_constraintTop_toBottomOf="@+id/dialogTwoButtonsImage" />
 
     <android.widget.Button
-            android:id="@+id/dialogTwoButtonsCancelButton"
+            android:id="@+id/dialogTwoButtonsNegativeButton"
             android:layout_width="@dimen/button_dialog_width"
             android:layout_height="@dimen/button_dialog_height"
             android:layout_marginStart="@dimen/margin_larger"
@@ -41,7 +41,7 @@
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_larger"
             android:background="@drawable/rounded_button"
-            android:text="@string/dialog_two_buttons_cancel_message"
+            android:text="@string/dialog_two_buttons_negative_message"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimaryDarkOne"
             android:textSize="@dimen/text_size_regular"
@@ -64,14 +64,14 @@
             app:layout_constraintVertical_bias="0.90999997" />
 
     <android.widget.Button
-            android:id="@+id/dialogTwoButtonsOKButton"
+            android:id="@+id/dialogTwoButtonsPositiveButton"
             android:layout_width="@dimen/button_dialog_width"
             android:layout_height="@dimen/button_dialog_height"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginEnd="@dimen/margin_larger"
             android:layout_marginBottom="@dimen/margin_larger"
             android:background="@drawable/rounded_button"
-            android:text="@string/dialog_two_buttons_ok_message"
+            android:text="@string/dialog_two_buttons_positive_message"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimaryDarkOne"
             android:textSize="@dimen/text_size_regular"

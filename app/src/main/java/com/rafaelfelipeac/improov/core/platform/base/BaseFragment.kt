@@ -28,9 +28,9 @@ import com.rafaelfelipeac.improov.core.extension.setMessageColor
 import com.rafaelfelipeac.improov.core.extension.setIcon
 import com.rafaelfelipeac.improov.core.extension.isEmpty
 import com.rafaelfelipeac.improov.core.extension.resetValue
-import com.rafaelfelipeac.improov.core.extension.convertDateToString
-import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-import com.rafaelfelipeac.improov.features.goal.domain.model.Item
+import com.rafaelfelipeac.improov.core.extension.formatToDateTime
+import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
+import com.rafaelfelipeac.improov.features.commons.domain.model.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
 import java.util.Date
 import java.util.Calendar
@@ -109,13 +109,14 @@ abstract class BaseFragment : Fragment() {
     fun showSnackBarWithAction(
         view: View,
         message: String,
+        actionMessage: String,
         obj: Any,
         function: (obj: Any) -> Unit
     ) {
         Snackbar
             .make(view, message, Snackbar.LENGTH_LONG)
             .setMessageColor(R.color.colorPrimaryDarkOne)
-            .setAction(getString(R.string.snackbar_action_undo)) { function(obj) }
+            .setAction(actionMessage) { function(obj) }
             .setActionTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDarkOne))
             .show()
     }
@@ -229,7 +230,7 @@ abstract class BaseFragment : Fragment() {
             if (item.done) {
                 bottomSheetItemDate.text = String.format(
                     getString(R.string.item_date_format),
-                    context?.let { item.doneDate?.convertDateToString(it) }
+                    context?.let { item.doneDate?.formatToDateTime(it) }
                 )
                 bottomSheetItemDate.visible()
             } else {
@@ -267,6 +268,11 @@ abstract class BaseFragment : Fragment() {
     fun setupBottomSheetTipsSwipe() {
         bottomSheetTip = BottomSheetBehavior.from(main.findViewById<LinearLayout>(R.id.tipsSwipe))
         bottomSheetTipClose = main.findViewById(R.id.tipsSwipeButtonClose)
+    }
+
+    fun setupBottomSheetTipsBackup() {
+        bottomSheetTip = BottomSheetBehavior.from(main.findViewById<LinearLayout>(R.id.tipsBackup))
+        bottomSheetTipClose = main.findViewById(R.id.tipsBackupButtonClose)
     }
 
     fun showBottomSheetTips() {

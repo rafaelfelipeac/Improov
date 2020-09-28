@@ -15,7 +15,7 @@ import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.vibrate
 import com.rafaelfelipeac.improov.core.extension.getPercentage
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import kotlinx.android.synthetic.main.fragment_goal_list.*
 
 const val PERCENTAGE_MAX = 100

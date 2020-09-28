@@ -4,13 +4,14 @@
     <string name="app_name_release">Improov</string>
     <string name="app_name_debug">Improov Debug</string>
     <string name="database_name">improov-db</string>
+    <string name="file_provider_path">com.rafaelfelipeac.improov.fileprovider</string>
 
     <!-- Date -->
-    <string name="date_format_dd_MMM">dd MMM</string>
-    <string name="date_format_full">dd/MM/yyyy HH:mm:ss</string>
+    <string name="date_format_day_month">dd MMM</string>
+    <string name="date_format_date">dd/MM/yyyy</string>
+    <string name="date_format_date_time">dd/MM/yyyy HH:mm:ss</string>
 
     <!-- Commons -->
-    <string name="snackbar_action_undo">DESFAZER</string>
     <string name="dialog_action_positive">OK</string>
     <string name="dialog_action_negative">Cancelar</string>
 
@@ -66,6 +67,7 @@
     <string name="profile_user_name">Nome do usuário</string>
     <string name="profile_add_name_message">Cadastre seu nome</string>
     <string name="profile_edit_name_message">Altere seu nome</string>
+    <string name="profile_button_backup">Backup</string>
     <string name="profile_show_welcome_message">Ver mensagens iniciais</string>
 
     <!-- ProfileEdit -->
@@ -80,8 +82,8 @@
 
     <!-- DialogTwoButtons -->
     <string name="dialog_two_buttons_message">Tem certeza que deseja sair do app?</string>
-    <string name="dialog_two_buttons_cancel_message">Cancelar</string>
-    <string name="dialog_two_buttons_ok_message">OK</string>
+    <string name="dialog_two_buttons_negative_message">Cancelar</string>
+    <string name="dialog_two_buttons_positive_message">OK</string>
 
     <!-- Settings -->
     <string name="settings_title">Configurações</string>
@@ -121,6 +123,29 @@
     <string name="welcome_b_message">Use o Improov para acessar rapidamente seus objetivos e atualizar seu progresso.</string>
     <string name="welcome_c_message">Acompanhe suas conquistas e mantenha seus objetivos sempre em desenvolvimento.</string>
 
+    <!-- Backup -->
+    <string name="backup_title">Backup</string>
+    <string name="backup_message">Caso queira mais segurança com seus dados e assim evitar perder todo o seu progresso no Improov, você pode exportar todas as suas informações em um arquivo e guardá-lo como quiser. \n\nSe você já tiver um arquivo de backup e quiser usar essas informações, pode importá-lo e continuar com seu progresso.</string>
+    <string name="backup_button_export">Exportar</string>
+    <string name="backup_date_export">Última data de exportação: %s</string>
+    <string name="backup_button_import">Importação</string>
+    <string name="backup_date_import">Última data de importação: %s</string>
+    <string name="backup_permission_storage_message">É necessário que você forneça algumas permissões para que o Improov consiga acessar o armazenamento do seu aparelho e realizar as funções de backup.</string>
+    <string name="backup_permission_storage_settings_message">Para realizar essa função é necessário que você forneça algumas permissões. \n\nVocê pode fazer isso nas configurações do aplicativo. \n\nDeseja fazer isso agora?</string>
+    <string name="backup_permission_storage_settings_negative">Não</string>
+    <string name="backup_permission_storage_settings_positive">Sim</string>
+    <string name="backup_export_success">Backup exportado.</string>
+    <string name="backup_export_error">Erro ao exportar o backup.</string>
+    <string name="backup_import_success">Backup importado.</string>
+    <string name="backup_import_error">Erro ao importar o backup.</string>
+    <string name="backup_file_path">/Improov/Backup/</string>
+    <string name="backup_file_name">Backup.txt</string>
+    <string name="backup_file_type">text/plain</string>
+    <string name="backup_snackbar_action_share">COMPARTILHAR</string>
+    <string name="backup_open_file_title">Escolha um arquivo</string>
+    <string name="backup_sharing_file_title">Compartilhar Arquivo Título 123</string>
+    <string name="backup_sharing_file_description">Compartilhar Arquivo Descrição 123</string>
+
     <!-- ListAdapter -->
     <string name="list_adapter_item_title">Título do objetivo ou hábito</string>
     <string name="list_adapter_date">25 Jul</string>
@@ -152,10 +177,8 @@
     <string name="tips_divide_and_conquer_title">Dividir e Conquistar</string>
     <string name="tips_divide_and_conquer_message_1">Dividir um objetivo grande e complexo em partes menores é uma boa tática para evitar que esse objetivo seja
         abandonado. \n\nA sensação de progresso é maior e você estará sempre motivado para alcançar aquilo que deseja. \n\nNesse modo seu objetivo é dividido em 3 partes:
-        bronze, prata e ouro.
-    </string>
-    <string name="tips_divide_and_conquer_message_2">O valor bronze é o primeiro desafio. A cada parte do objetivo atingida, você estará mais perto da sua conquista.
-    </string>
+        bronze, prata e ouro.</string>
+    <string name="tips_divide_and_conquer_message_2">O valor bronze é o primeiro desafio. A cada parte do objetivo atingida, você estará mais perto da sua conquista.</string>
 
     <!-- BottomSheet Tips Goal Type -->
     <string name="tips_goal_type_title">Tipos de objetivo</string>
@@ -168,9 +191,11 @@
 
     <!-- BottomSheet Tips Swipe -->
     <string name="tips_swipe_title">Deslize</string>
-    <string name="tips_swipe_message_1">Se desejar finalizar um objetivo imediatamente, mesmo sem ter atingido o valor total, deslize o item para o lado para concluí-lo.
-    </string>
-    <string name="tips_swipe_message_2">Se mudar de ideia, apenas deslize novamente e o item voltará a estar pronto para ser atualizado.
-    </string>
+    <string name="tips_swipe_message_1">Se desejar finalizar um objetivo imediatamente, mesmo sem ter atingido o valor total, deslize o item para o lado para concluí-lo.</string>
+    <string name="tips_swipe_message_2">Se mudar de ideia, apenas deslize novamente e o item voltará a estar pronto para ser atualizado.</string>
+
+    <!-- BottomSheet Tips Backup -->
+    <string name="tips_backup_title">Backup</string>
+    <string name="tips_backup_message">Ao fazer uso da funcionalidade de backup, você tem o controle do histórico de suas conquistas e pode salvar isso como quiser. \n\nAo trocar de dispositivo, por exemplo, você não perderá o progresso já realizado e poderá se dedicar a novas conquistas.</string>
 
 </resources>

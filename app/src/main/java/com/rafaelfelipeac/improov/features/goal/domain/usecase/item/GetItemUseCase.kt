@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.goal.domain.usecase.item
 
-import com.rafaelfelipeac.improov.features.goal.domain.model.Item
+import com.rafaelfelipeac.improov.features.commons.domain.model.Item
 import com.rafaelfelipeac.improov.features.goal.domain.repository.ItemRepository
 import javax.inject.Inject
 

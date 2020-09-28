@@ -37,7 +37,7 @@ class ProfileFragment : BaseFragment() {
 
         viewModel.loadData()
 
-        setupLayout()
+        setupBehaviours()
         observeViewModel()
     }
 
@@ -47,7 +47,7 @@ class ProfileFragment : BaseFragment() {
         hideBottomSheetTips()
     }
 
-    private fun setupLayout() {
+    private fun setupBehaviours() {
         fab.setOnClickListener {
             hideBottomSheetTips()
 
@@ -58,6 +58,10 @@ class ProfileFragment : BaseFragment() {
             viewModel.saveWelcome(false)
             viewModel.saveFirstTimeAdd(true)
             viewModel.saveFirstTimeList(false)
+        }
+
+        profileBackup.setOnClickListener {
+            navController.navigate(ProfileFragmentDirections.profileToBackup())
         }
 
         profileEditProfileButton.setOnClickListener {

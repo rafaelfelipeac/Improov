@@ -70,6 +70,23 @@
                 app:layout_constraintVertical_bias="0.0" />
 
         <android.widget.Button
+                android:id="@+id/profileBackup"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginStart="@dimen/margin_larger"
+                android:layout_marginEnd="@dimen/margin_larger"
+                android:layout_marginBottom="@dimen/margin_larger"
+                android:background="@drawable/rounded_button"
+                android:text="@string/profile_button_backup"
+                android:textColor="@color/colorPrimaryDarkOne"
+                app:layout_constraintBottom_toTopOf="@+id/profileShowWelcomeButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileEditProfileButton"
+                app:layout_constraintVertical_bias="1.0" />
+
+        <android.widget.Button
                 android:id="@+id/profileShowWelcomeButton"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
