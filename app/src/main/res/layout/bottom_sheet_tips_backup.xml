@@ -64,7 +64,7 @@
                     android:layout_marginTop="@dimen/margin_regular"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:layout_marginBottom="@dimen/margin_small"
-                    android:text="@string/tips_backup_message_1"
+                    android:text="@string/tips_backup_message"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large"
@@ -74,81 +74,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tipsBackupTitle"
                     app:layout_constraintVertical_bias="0.0" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/tipsBackupImages"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_larger"
-                    android:layout_marginTop="@dimen/margin_large"
-                    android:layout_marginEnd="@dimen/margin_larger"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tipsBackupMessage1">
-
-                <ImageView
-                        android:id="@+id/tipsBackupImage1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_larger"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:layout_marginEnd="@dimen/margin_small"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:background="@mipmap/ic_trophy_bronze"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_small"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:layout_marginEnd="@dimen/margin_small"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:background="@mipmap/ic_trophy_silver"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tipsBackupImage3"
-                        app:layout_constraintStart_toEndOf="@+id/tipsBackupImage1"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                        android:id="@+id/tipsBackupImage3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_small"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:layout_marginEnd="@dimen/margin_larger"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:background="@mipmap/ic_trophy_gold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.9"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_large"
-                    android:layout_marginTop="@dimen/margin_large"
-                    android:layout_marginEnd="@dimen/margin_large"
-                    android:layout_marginBottom="@dimen/margin_large"
-                    android:text="@string/tips_backup_message_2"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tipsBackupImages" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

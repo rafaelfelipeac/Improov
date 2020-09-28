@@ -125,15 +125,15 @@
 
     <!-- Backup -->
     <string name="backup_title">Backup</string>
-    <string name="backup_message">If you want more security with your data and thus avoid losing all your progress in Improov, you can click on "export", save all your information in a text file and save it as you wish. \n\nIf you already have a backup file and want to use this information in Improov, click on "import" and choose the desired file.</string>
+    <string name="backup_message">If you want more security with your data and thus avoid losing all your progress in Improov, you can export all your information in a file and save it as you like. \n\nIf you already have a backup file and want to use this information, you can import it and continue with your progress.</string>
     <string name="backup_button_export">Export</string>
     <string name="backup_date_export">Last export date: %s</string>
     <string name="backup_button_import">Import</string>
     <string name="backup_date_import">Last import date: %s</string>
-    <string name="backup_permission_storage_message">To be able to access your device\'s storage, you need to provide permissions to do so.</string>
-    <string name="backup_permission_storage_settings_message">To perform this function, it is necessary that the app receives permission to do so. \n\nYou can grant this permission in the application settings.</string>
-    <string name="backup_permission_storage_settings_negative">Close</string>
-    <string name="backup_permission_storage_settings_positive">Config</string>
+    <string name="backup_permission_storage_message">You need to provide some permissions for Improov to be able to access your device\'s storage and perform backup functions.</string>
+    <string name="backup_permission_storage_settings_message">To perform this function, you must provide some permissions. \n\nYou can do this in the application settings. \n\nDo you want to do this now?</string>
+    <string name="backup_permission_storage_settings_negative">No</string>
+    <string name="backup_permission_storage_settings_positive">Yes</string>
     <string name="backup_export_success">Backup exported.</string>
     <string name="backup_export_error">Error when export backup.</string>
     <string name="backup_import_success">Backup imported.</string>
@@ -196,7 +196,6 @@
 
     <!-- BottomSheet Tips Backup -->
     <string name="tips_backup_title">Backup</string>
-    <string name="tips_backup_message_1">By making use of the backup functionality, you have control of the history of your achievements in a text file and can save as you wish.</string>
-    <string name="tips_backup_message_2">That way, when switching devices, for example, you will not lose the progress already made and can dedicate yourself to achieving more.</string>
+    <string name="tips_backup_message">By making use of the backup functionality, you have control over the history of your achievements and can save this as you wish. \n\nWhen switching devices, for example, you will not lose the progress already made and will be able to dedicate yourself to new achievements.</string>
 
 </resources>
