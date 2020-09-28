@@ -5,14 +5,14 @@ import java.util.Date
 
 data class Item(
     val itemId: Long = 0,
-    var goalId: Long,
+    val goalId: Long,
     var name: String,
     var order: Int,
     var done: Boolean,
-    var createdDate: Date? = null,
+    val createdDate: Date?,
     var updatedDate: Date? = null,
-    var doneDate: Date? = null,
+    val doneDate: Date? = null,
     var undoneDate: Date? = null,
-    var deleteDate: Date? = null,
+    val deleteDate: Date? = null,
     val date: Date? = null
 ) : Serializable

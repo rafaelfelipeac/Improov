@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 
 class WelcomeAdapter(val fragment: WelcomeFragment, fm: FragmentManager) :
     FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
     override fun getCount(): Int = 3
 
     override fun getItem(position: Int): Fragment {

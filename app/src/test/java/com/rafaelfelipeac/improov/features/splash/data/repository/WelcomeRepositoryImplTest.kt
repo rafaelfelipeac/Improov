@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.splash.data.repository
 
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -36,7 +36,7 @@ class WelcomeRepositoryImplTest {
             val result = welcomeRepositoryImpl.getWelcome()
 
             // then
-            result shouldBeEqualTo booleanValue
+            result equalTo booleanValue
         }
     }
 }

@@ -12,7 +12,7 @@ class DialogOneButton : BaseDialog() {
 
     private var onClickListener: OnClickListener? = null
 
-    private var message = ""
+    private var message: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,9 +28,13 @@ class DialogOneButton : BaseDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        one_button_ok_button.setOnClickListener { onClickListener?.onOK() }
+        dialogOneButtonOKButton.setOnClickListener { onClickListener?.onOK() }
 
-        one_button_message.text = message
+        dialogOneButtonMessage.text = message
+    }
+
+    private fun setScreen() {
+        hideTitle()
     }
 
     private fun setScreen() {

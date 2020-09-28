@@ -6,10 +6,11 @@ import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.rafaelfelipeac.improov.app.App
 import com.rafaelfelipeac.improov.core.LocaleHelper
+import com.rafaelfelipeac.improov.core.di.AppComponent
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    val injector get() = (application as App).appComponent
+    val injector: AppComponent get() = (application as App).appComponent
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         injector.inject(this)

@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.data.repository
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoric
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.goal.data.dao.HistoricDAO
 import com.rafaelfelipeac.improov.features.goal.data.model.HistoricDataModelMapper
 import kotlinx.coroutines.runBlocking
@@ -43,7 +43,7 @@ class HistoricRepositoryImplTest {
             val result = historicRepositoryImp.getHistoric(historicId)
 
             // then
-            result shouldBeEqualTo historic
+            result equalTo historic
         }
     }
 
@@ -60,7 +60,7 @@ class HistoricRepositoryImplTest {
             val result = historicRepositoryImp.getHistorics()
 
             // then
-            result shouldBeEqualTo historics
+            result equalTo historics
         }
     }
 
@@ -76,7 +76,7 @@ class HistoricRepositoryImplTest {
             val result = historicRepositoryImp.save(historic)
 
             // then
-            result shouldBeEqualTo historicId
+            result equalTo historicId
         }
     }
 
@@ -92,7 +92,7 @@ class HistoricRepositoryImplTest {
             val result = historicRepositoryImp.delete(historic)
 
             // then
-            result shouldBeEqualTo Unit
+            result equalTo Unit
         }
     }
 }

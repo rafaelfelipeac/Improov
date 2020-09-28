@@ -48,13 +48,13 @@ class ProfileEditFragment : BaseFragment() {
     }
 
     private fun setupLayout() {
-        profile_edit_save_button.setOnClickListener {
+        profileEditSaveButton.setOnClickListener {
             when {
                 verifyElements() -> {
                 }
                 else -> {
                     hideSoftKeyboard()
-                    viewModel.saveName(profile_edit_name.text.toString())
+                    viewModel.saveName(profileEditName.text.toString())
                 }
             }
         }
@@ -66,14 +66,14 @@ class ProfileEditFragment : BaseFragment() {
         }
 
         viewModel.name.observe(this) {
-            profile_edit_name.setText(it)
+            profileEditName.setText(it)
         }
     }
 
     private fun verifyElements(): Boolean {
         return when {
-            profile_edit_name.checkIfFieldIsEmptyOrZero() -> {
-                profile_edit_name.fieldIsEmptyOrZero(this, false)
+            profileEditName.checkIfFieldIsEmptyOrZero() -> {
+                profileEditName.fieldIsEmptyOrZero(this, false)
 
                 setErrorMessage(getString(R.string.profile_edit_empty_fields))
                 true
@@ -83,6 +83,6 @@ class ProfileEditFragment : BaseFragment() {
     }
 
     private fun setErrorMessage(message: String) {
-        profile_edit_error_message.text = message
+        profileEditErrorMessage.text = message
     }
 }

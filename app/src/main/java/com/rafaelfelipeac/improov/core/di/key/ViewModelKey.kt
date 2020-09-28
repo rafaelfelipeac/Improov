@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.core.di.modules.viewModel
+package com.rafaelfelipeac.improov.core.di.key
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

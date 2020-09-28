@@ -47,16 +47,16 @@ class WelcomeFragment : BaseFragment() {
     }
 
     private fun setupLayout() {
-        welcome_start_button.setOnClickListener {
+        welcomeStartButton.setOnClickListener {
             viewModel.saveWelcome(true)
         }
 
-        welcome_viewpager.adapter =
+        welcomeViewPager.adapter =
             WelcomeAdapter(
                 this,
                 parentFragmentManager
             )
-        welcome_dots.setupWithViewPager(welcome_viewpager, true)
+        welcomeDots.setupWithViewPager(welcomeViewPager, true)
     }
 
     private fun observeViewModel() {
@@ -66,10 +66,10 @@ class WelcomeFragment : BaseFragment() {
     }
 
     fun showStartButton() {
-        welcome_start_button?.visible()
+        welcomeStartButton?.visible()
     }
 
     fun hideStartButton() {
-        welcome_start_button?.invisible()
+        welcomeStartButton?.invisible()
     }
 }

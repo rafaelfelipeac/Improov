@@ -21,8 +21,8 @@ class ItemsAdapter(private val detailFragment: GoalDetailFragment) : BaseAdapter
     override fun View.bindView(item: Item, viewHolder: ViewHolder) {
         setOnClickListener { clickListener(item) }
 
-        val image = viewHolder.itemView.findViewById<ImageView>(R.id.item_progress)
-        val title = viewHolder.itemView.findViewById<TextView>(R.id.bottom_sheet_item_title)
+        val image = viewHolder.itemView.findViewById<ImageView>(R.id.itemItemProgress)
+        val title = viewHolder.itemView.findViewById<TextView>(R.id.itemItemTitle)
 
         title.text = item.name
         image.background =
@@ -39,7 +39,7 @@ class ItemsAdapter(private val detailFragment: GoalDetailFragment) : BaseAdapter
 
         holder.setIsRecyclable(false)
 
-        val itemDrag = holder.itemView.findViewById<ImageView>(R.id.item_image_view)
+        val itemDrag = holder.itemView.findViewById<ImageView>(R.id.itemItemImageView)
             itemDrag.setOnTouchListener { _, _ ->
                 touchHelper?.startDrag(holder)
             false

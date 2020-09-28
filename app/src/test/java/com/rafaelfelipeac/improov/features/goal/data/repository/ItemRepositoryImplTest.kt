@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.data.repository
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createItem
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.goal.data.dao.ItemDAO
 import com.rafaelfelipeac.improov.features.goal.data.model.ItemDataModelMapper
 import kotlinx.coroutines.runBlocking
@@ -43,7 +43,7 @@ class ItemRepositoryImplTest {
             val result = itemRepositoryImp.getItem(itemId)
 
             // then
-            result shouldBeEqualTo item
+            result equalTo item
         }
     }
 
@@ -60,7 +60,7 @@ class ItemRepositoryImplTest {
             val result = itemRepositoryImp.getItems()
 
             // then
-            result shouldBeEqualTo items
+            result equalTo items
         }
     }
 
@@ -76,7 +76,7 @@ class ItemRepositoryImplTest {
             val result = itemRepositoryImp.save(item)
 
             // then
-            result shouldBeEqualTo itemId
+            result equalTo itemId
         }
     }
 
@@ -92,7 +92,7 @@ class ItemRepositoryImplTest {
             val result = itemRepositoryImp.delete(item)
 
             // then
-            result shouldBeEqualTo Unit
+            result equalTo Unit
         }
     }
 }

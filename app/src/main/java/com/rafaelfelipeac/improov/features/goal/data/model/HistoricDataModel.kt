@@ -11,10 +11,10 @@ import javax.inject.Inject
 @Entity(tableName = "historic")
 data class HistoricDataModel(
     @PrimaryKey(autoGenerate = true)
-    var historicId: Long = 0,
-    var goalId: Long,
+    val historicId: Long,
+    val goalId: Long,
     var value: Float,
-    var date: Date?
+    val date: Date?
 ) : Serializable
 
 class HistoricDataModelMapper @Inject constructor() : TwoWayMapper<HistoricDataModel, Historic> {

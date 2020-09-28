@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimeadd
 
-import com.rafaelfelipeac.improov.base.DataProviderTest.shouldBeEqualTo
+import com.rafaelfelipeac.improov.core.extension.equalTo
 import com.rafaelfelipeac.improov.features.goal.domain.repository.FirstTimeAddRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -35,7 +35,7 @@ class GetFirstTimeAddUseCaseTest {
             val result = getFirstTimeAddUseCase()
 
             // then
-            result shouldBeEqualTo booleanValue
+            result equalTo booleanValue
         }
     }
 }
