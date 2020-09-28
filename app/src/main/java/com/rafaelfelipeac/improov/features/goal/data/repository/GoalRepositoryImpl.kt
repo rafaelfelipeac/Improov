@@ -1,8 +1,8 @@
 package com.rafaelfelipeac.improov.features.goal.data.repository
 
-import com.rafaelfelipeac.improov.features.goal.data.dao.GoalDAO
-import com.rafaelfelipeac.improov.features.goal.data.model.GoalDataModelMapper
-import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDAO
+import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModelMapper
+import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

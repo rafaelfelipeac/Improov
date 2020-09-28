@@ -1,9 +1,9 @@
 package com.rafaelfelipeac.improov.base
 
-import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
-import com.rafaelfelipeac.improov.features.goal.data.model.GoalDataModel
-import com.rafaelfelipeac.improov.features.goal.data.model.HistoricDataModel
-import com.rafaelfelipeac.improov.features.goal.data.model.ItemDataModel
+import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
+import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModel
+import com.rafaelfelipeac.improov.features.commons.data.model.HistoricDataModel
+import com.rafaelfelipeac.improov.features.commons.data.model.ItemDataModel
 
 object DataProviderAndroidTest {
 

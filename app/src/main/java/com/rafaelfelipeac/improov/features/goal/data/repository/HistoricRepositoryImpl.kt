@@ -1,8 +1,8 @@
 package com.rafaelfelipeac.improov.features.goal.data.repository
 
-import com.rafaelfelipeac.improov.features.goal.data.dao.HistoricDAO
-import com.rafaelfelipeac.improov.features.goal.data.model.HistoricDataModelMapper
-import com.rafaelfelipeac.improov.features.goal.domain.model.Historic
+import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDAO
+import com.rafaelfelipeac.improov.features.commons.data.model.HistoricDataModelMapper
+import com.rafaelfelipeac.improov.features.commons.domain.model.Historic
 import com.rafaelfelipeac.improov.features.goal.domain.repository.HistoricRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

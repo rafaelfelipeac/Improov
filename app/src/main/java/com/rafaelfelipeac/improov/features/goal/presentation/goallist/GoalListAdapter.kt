@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
 import com.rafaelfelipeac.improov.core.extension.setWidthForProgress
-import com.rafaelfelipeac.improov.core.extension.format
+import com.rafaelfelipeac.improov.core.extension.formatToDayMonth
 import com.rafaelfelipeac.improov.core.platform.ActionCompleteContract
 import com.rafaelfelipeac.improov.core.platform.base.BaseAdapter
-import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 
 const val MARGIN_START = 10
 const val LOGICAL_DENSITY_MULTIPLIER = 4
@@ -86,7 +86,7 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
         })
 
         if (item.date != null) {
-            date.text = item.date.format(fragment.requireContext())
+            date.text = item.date.formatToDayMonth(fragment.requireContext())
         } else {
             date.text = ""
         }

@@ -4,12 +4,12 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.rafaelfelipeac.improov.core.persistence.converts.Converters
-import com.rafaelfelipeac.improov.features.goal.data.dao.GoalDAO
-import com.rafaelfelipeac.improov.features.goal.data.dao.HistoricDAO
-import com.rafaelfelipeac.improov.features.goal.data.dao.ItemDAO
-import com.rafaelfelipeac.improov.features.goal.data.model.GoalDataModel
-import com.rafaelfelipeac.improov.features.goal.data.model.HistoricDataModel
-import com.rafaelfelipeac.improov.features.goal.data.model.ItemDataModel
+import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDAO
+import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDAO
+import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDAO
+import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModel
+import com.rafaelfelipeac.improov.features.commons.data.model.HistoricDataModel
+import com.rafaelfelipeac.improov.features.commons.data.model.ItemDataModel
 
 const val DATABASE_VERSION_48 = 48 // 1.4.0
 const val DATABASE_VERSION_49 = 49 // 1.5.0

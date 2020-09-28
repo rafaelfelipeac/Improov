@@ -4,13 +4,14 @@
     <string name="app_name_release">Improov</string>
     <string name="app_name_debug">Improov Debug</string>
     <string name="database_name">improov-db</string>
+    <string name="file_provider_path">com.rafaelfelipeac.improov.fileprovider</string>
 
     <!-- Date -->
-    <string name="date_format_dd_MMM">MMM dd</string>
-    <string name="date_format_full">MM/dd/yyyy HH:mm:ss</string>
+    <string name="date_format_day_month">MMM dd</string>
+    <string name="date_format_date">MM/dd/yyyy</string>
+    <string name="date_format_date_time">MM/dd/yyyy HH:mm:ss</string>
 
     <!-- Commons -->
-    <string name="snackbar_action_undo">UNDO</string>
     <string name="dialog_action_positive">OK</string>
     <string name="dialog_action_negative">Cancel</string>
 
@@ -66,6 +67,7 @@
     <string name="profile_user_name">User name </string>
     <string name="profile_add_name_message">Register your name</string>
     <string name="profile_edit_name_message">Edit your name</string>
+    <string name="profile_button_backup">Backup</string>
     <string name="profile_show_welcome_message">See initial messages</string>
 
     <!-- ProfileEdit -->
@@ -80,8 +82,8 @@
 
     <!-- DialogTwoButtons -->
     <string name="dialog_two_buttons_message">Are you sure you want to exit the app?</string>
-    <string name="dialog_two_buttons_cancel_message">Cancel</string>
-    <string name="dialog_two_buttons_ok_message">OK</string>
+    <string name="dialog_two_buttons_negative_message">Cancel</string>
+    <string name="dialog_two_buttons_positive_message">OK</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
@@ -121,6 +123,29 @@
     <string name="welcome_b_message">Use Improov to quickly access your goals and update your progress.</string>
     <string name="welcome_c_message">Keep track of your achievements and keep your goals constantly evolving.</string>
 
+    <!-- Backup -->
+    <string name="backup_title">Backup</string>
+    <string name="backup_message">If you want more security with your data and thus avoid losing all your progress in Improov, you can export all your information in a file and save it as you like. \n\nIf you already have a backup file and want to use this information, you can import it and continue with your progress.</string>
+    <string name="backup_button_export">Export</string>
+    <string name="backup_date_export">Last export date: %s</string>
+    <string name="backup_button_import">Import</string>
+    <string name="backup_date_import">Last import date: %s</string>
+    <string name="backup_permission_storage_message">You need to provide some permissions for Improov to be able to access your device\'s storage and perform backup functions.</string>
+    <string name="backup_permission_storage_settings_message">To perform this function, you must provide some permissions. \n\nYou can do this in the application settings. \n\nDo you want to do this now?</string>
+    <string name="backup_permission_storage_settings_negative">No</string>
+    <string name="backup_permission_storage_settings_positive">Yes</string>
+    <string name="backup_export_success">Backup exported.</string>
+    <string name="backup_export_error">Error when export backup.</string>
+    <string name="backup_import_success">Backup imported.</string>
+    <string name="backup_import_error">Error when import backup.</string>
+    <string name="backup_file_path">/Improov/Backup/</string>
+    <string name="backup_file_name">Backup.txt</string>
+    <string name="backup_file_type">text/plain</string>
+    <string name="backup_snackbar_action_share">SHARE</string>
+    <string name="backup_open_file_title">Choose a file</string>
+    <string name="backup_sharing_file_title">Sharing File Subject 123</string>
+    <string name="backup_sharing_file_description">Sharing File Description 123</string>
+
     <!-- ListAdapter -->
     <string name="list_adapter_item_title">Goal or Habit title</string>
     <string name="list_adapter_date">Jul 25</string>
@@ -152,10 +177,8 @@
     <string name="tips_divide_and_conquer_title">Divide And Conquer</string>
     <string name="tips_divide_and_conquer_message_1">Splitting a large and complex goal into smaller parts is a good tactic to keep that
         goal from being abandoned. \n\nThe sense of progress is greater and you will always be motivated to achieve what you want. \n\nTherefore your goal is divided into 3 parts:
-        bronze, silver and gold.
-    </string>
-    <string name="tips_divide_and_conquer_message_2">The bronze value is the first challenge. With each part of the goal achieved, you will be closer to your achievement.
-    </string>
+        bronze, silver and gold.</string>
+    <string name="tips_divide_and_conquer_message_2">The bronze value is the first challenge. With each part of the goal achieved, you will be closer to your achievement.</string>
 
     <!-- BottomSheet Tips Goal Type -->
     <string name="tips_goal_type_title">Goals type</string>
@@ -168,9 +191,11 @@
 
     <!-- BottomSheet Tips Swipe -->
     <string name="tips_swipe_title">Swipe</string>
-    <string name="tips_swipe_message_1">If you want to finish a goal immediately, even without reaching the full amount, slide the item aside to complete it.
-    </string>
-    <string name="tips_swipe_message_2">If you change your mind, just swipe again and the item will be ready to update again.
-    </string>
+    <string name="tips_swipe_message_1">If you want to finish a goal immediately, even without reaching the full amount, slide the item aside to complete it.</string>
+    <string name="tips_swipe_message_2">If you change your mind, just swipe again and the item will be ready to update again.</string>
+
+    <!-- BottomSheet Tips Backup -->
+    <string name="tips_backup_title">Backup</string>
+    <string name="tips_backup_message">By making use of the backup functionality, you have control over the history of your achievements and can save this as you wish. \n\nWhen switching devices, for example, you will not lose the progress already made and will be able to dedicate yourself to new achievements.</string>
 
 </resources>

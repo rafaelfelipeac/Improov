@@ -2,8 +2,8 @@ package com.rafaelfelipeac.improov.features.goal.data.repository
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
 import com.rafaelfelipeac.improov.core.extension.equalTo
-import com.rafaelfelipeac.improov.features.goal.data.dao.GoalDAO
-import com.rafaelfelipeac.improov.features.goal.data.model.GoalDataModelMapper
+import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDAO
+import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModelMapper
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test

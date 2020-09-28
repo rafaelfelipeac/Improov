@@ -116,6 +116,9 @@ android {
 
         // GifView
         implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+
+        // gson
+        implementation 'com.google.code.gson:gson:2.8.6'
     }
 }
 

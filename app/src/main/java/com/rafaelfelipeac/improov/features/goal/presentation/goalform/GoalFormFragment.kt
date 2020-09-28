@@ -19,9 +19,9 @@ import com.rafaelfelipeac.improov.core.extension.toFloat
 import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
 import com.rafaelfelipeac.improov.core.extension.isNotEmpty
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.commons.DialogOneButton
-import com.rafaelfelipeac.improov.features.goal.data.enums.GoalType
-import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
+import com.rafaelfelipeac.improov.features.dialog.DialogOneButton
+import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
+import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 
 @Suppress("TooManyFunctions")
@@ -328,9 +328,7 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun showDialogNoGoalTypeChange() {
-        val dialog = DialogOneButton()
-
-        dialog.setMessage(getString(R.string.goal_form_goal_dialog_no_goal_type_change))
+        val dialog = DialogOneButton(getString(R.string.goal_form_goal_dialog_no_goal_type_change))
 
         dialog.setOnClickListener(object : DialogOneButton.OnClickListener {
             override fun onOK() {
