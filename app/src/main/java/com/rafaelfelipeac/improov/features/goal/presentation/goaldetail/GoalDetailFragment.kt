@@ -210,12 +210,12 @@ class GoalDetailFragment : BaseFragment() {
         }
 
         goalDetailButtonSave.setOnClickListener {
-            if (goalDetailTotalTotal.isNotEmpty()) {
-                count = goal?.value!! + goalDetailTotalTotal.toFloat()
+            if (goalDetailTotalValue.isNotEmpty()) {
+                count = goal?.value!! + goalDetailTotalValue.toFloat()
 
                 viewModel.saveHistoric(
                     Historic(
-                        value = goalDetailTotalTotal.toFloat(),
+                        value = goalDetailTotalValue.toFloat(),
                         date = Date(),
                         goalId = goal?.goalId!!
                     )
@@ -223,7 +223,7 @@ class GoalDetailFragment : BaseFragment() {
 
                 updateGoal()
 
-                goalDetailTotalTotal.resetValue()
+                goalDetailTotalValue.resetValue()
             } else {
                 showSnackBar(getString(R.string.goal_message_goal_value_invalid))
             }

@@ -52,7 +52,7 @@
     <string name="goal_form_type_title">Goal type</string>
     <string name="goal_form_radio_type_list">List</string>
     <string name="goal_form_radio_type_counter">Counter</string>
-    <string name="goal_form_radio_type_total">Final value</string>
+    <string name="goal_form_radio_type_final">Final value</string>
     <string name="goal_form_goal_counter">Set the values:</string>
     <string name="goal_form_goal_counter_inc_value_hint">Increment</string>
     <string name="goal_form_goal_counter_dec_value_hint">Decrement</string>

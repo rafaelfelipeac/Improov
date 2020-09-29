@@ -394,7 +394,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/goalDetailTotalTotalHint"
+                        android:id="@+id/goalDetailTotalValueHint"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/text_input_height"
@@ -418,7 +418,7 @@
                         app:layout_constraintVertical_bias="0.0">
 
                     <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/goalDetailTotalTotal"
+                            android:id="@+id/goalDetailTotalValue"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:inputType="numberDecimal|numberSigned"

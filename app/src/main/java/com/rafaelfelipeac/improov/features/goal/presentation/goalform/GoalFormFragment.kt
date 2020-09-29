@@ -175,7 +175,7 @@ class GoalFormFragment : BaseFragment() {
                 showDialogNoGoalTypeChange()
             } else if (goalFormRadioTypeList.isChecked) {
                 goalFormRadioTypeCounter.isChecked = false
-                goalFormRadioTypeTotal.isChecked = false
+                goalFormRadioTypeFinal.isChecked = false
 
                 goalFormGoalCounter.gone()
             }
@@ -186,16 +186,16 @@ class GoalFormFragment : BaseFragment() {
                 showDialogNoGoalTypeChange()
             } else if (goalFormRadioTypeCounter.isChecked) {
                 goalFormRadioTypeList.isChecked = false
-                goalFormRadioTypeTotal.isChecked = false
+                goalFormRadioTypeFinal.isChecked = false
 
                 goalFormGoalCounter.visible()
             }
         }
 
-        goalFormRadioTypeTotal.setOnClickListener {
+        goalFormRadioTypeFinal.setOnClickListener {
             if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_FINAL) {
                 showDialogNoGoalTypeChange()
-            } else if (goalFormRadioTypeTotal.isChecked) {
+            } else if (goalFormRadioTypeFinal.isChecked) {
                 goalFormRadioTypeCounter.isChecked = false
                 goalFormRadioTypeList.isChecked = false
 
@@ -266,7 +266,7 @@ class GoalFormFragment : BaseFragment() {
             goalFormRadioTypeCounter.isChecked -> {
                 GoalType.GOAL_COUNTER
             }
-            goalFormRadioTypeTotal.isChecked -> {
+            goalFormRadioTypeFinal.isChecked -> {
                 GoalType.GOAL_FINAL
             }
             else -> {
@@ -299,12 +299,12 @@ class GoalFormFragment : BaseFragment() {
             GoalType.GOAL_LIST -> {
                 goalFormRadioTypeList.isChecked = true
                 goalFormRadioTypeCounter.isChecked = false
-                goalFormRadioTypeTotal.isChecked = false
+                goalFormRadioTypeFinal.isChecked = false
             }
             GoalType.GOAL_COUNTER -> {
                 goalFormRadioTypeCounter.isChecked = true
                 goalFormRadioTypeList.isChecked = false
-                goalFormRadioTypeTotal.isChecked = false
+                goalFormRadioTypeFinal.isChecked = false
 
                 goalFormGoalCounter.visible()
 
@@ -312,7 +312,7 @@ class GoalFormFragment : BaseFragment() {
                 goalFormGoalCounterDecValue.setText(goal.decrementValue.getNumberInRightFormat())
             }
             GoalType.GOAL_FINAL -> {
-                goalFormRadioTypeTotal.isChecked = true
+                goalFormRadioTypeFinal.isChecked = true
                 goalFormRadioTypeList.isChecked = false
                 goalFormRadioTypeCounter.isChecked = false
             }
