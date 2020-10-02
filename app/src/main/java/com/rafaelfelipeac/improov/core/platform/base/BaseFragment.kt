@@ -1,5 +1,6 @@
 package com.rafaelfelipeac.improov.core.platform.base
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.View
 import android.view.WindowManager
@@ -35,6 +36,8 @@ import com.rafaelfelipeac.improov.features.main.MainActivity
 import java.util.Date
 import java.util.Calendar
 import javax.inject.Inject
+
+const val DURATION_SNACKBAR = 10000
 
 @Suppress("TooManyFunctions")
 abstract class BaseFragment : Fragment() {
@@ -106,6 +109,7 @@ abstract class BaseFragment : Fragment() {
             .show()
     }
 
+    @SuppressLint("WrongConstant")
     fun showSnackBarWithAction(
         view: View,
         message: String,
@@ -114,10 +118,11 @@ abstract class BaseFragment : Fragment() {
         function: (obj: Any) -> Unit
     ) {
         Snackbar
-            .make(view, message, Snackbar.LENGTH_LONG)
+            .make(view, message, Snackbar.LENGTH_INDEFINITE)
             .setMessageColor(R.color.colorPrimaryDarkOne)
             .setAction(actionMessage) { function(obj) }
             .setActionTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDarkOne))
+            .setDuration(DURATION_SNACKBAR)
             .show()
     }
 

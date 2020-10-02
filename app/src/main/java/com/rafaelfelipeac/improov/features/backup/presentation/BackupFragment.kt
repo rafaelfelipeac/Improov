@@ -172,7 +172,7 @@ class BackupFragment : BaseFragment() {
                 showSnackBarWithAction(
                     requireView(),
                     getString(R.string.backup_export_success),
-                    getString(R.string.backup_snackbar_action_share),
+                    getString(R.string.backup_snackbar_action_save),
                     file,
                     ::shareFile
                 )
@@ -200,6 +200,7 @@ class BackupFragment : BaseFragment() {
         )
 
         val intentShareFile = Intent(Intent.ACTION_SEND)
+        intentShareFile.type = getString(R.string.backup_file_type)
         intentShareFile.putExtra(Intent.EXTRA_STREAM, path)
         intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         intentShareFile.putExtra(
@@ -210,9 +211,8 @@ class BackupFragment : BaseFragment() {
             Intent.EXTRA_TEXT,
             getString(R.string.backup_sharing_file_description)
         )
-        intentShareFile.type = getString(R.string.backup_file_type)
 
-        startActivity(intentShareFile)
+        startActivity(Intent.createChooser(intentShareFile, getString(R.string.backup_sharing_file_choose)))
     }
 
     private fun getDatabase(data: Uri?): String {
