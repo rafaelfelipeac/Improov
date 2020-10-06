@@ -4,9 +4,9 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.rafaelfelipeac.improov.core.persistence.converts.Converters
-import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDAO
-import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDAO
-import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDAO
+import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
+import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDao
+import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDao
 import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModel
 import com.rafaelfelipeac.improov.features.commons.data.model.HistoricDataModel
 import com.rafaelfelipeac.improov.features.commons.data.model.ItemDataModel
@@ -21,7 +21,7 @@ const val DATABASE_VERSION_49 = 49 // 1.5.0
 )
 @TypeConverters(Converters::class)
 abstract class RoomDatabase : RoomDatabase() {
-    abstract fun goalDAO(): GoalDAO
-    abstract fun itemDAO(): ItemDAO
-    abstract fun historicDAO(): HistoricDAO
+    abstract fun goalDao(): GoalDao
+    abstract fun itemDao(): ItemDao
+    abstract fun historicDao(): HistoricDao
 }

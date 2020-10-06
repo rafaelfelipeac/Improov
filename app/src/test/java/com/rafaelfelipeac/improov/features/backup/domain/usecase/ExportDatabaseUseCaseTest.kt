@@ -26,7 +26,7 @@ class ExportDatabaseUseCaseTest {
     }
 
     @Test
-    fun `GIVEN information in DAO and Preferences WHEN use exportDatabaseUseCase THEN return a json`() {
+    fun `GIVEN information in Dao and Preferences WHEN use exportDatabaseUseCase THEN return a json`() {
         runBlocking {
             // given
             val goals = listOf(DataProviderTest.createGoalDataModel())

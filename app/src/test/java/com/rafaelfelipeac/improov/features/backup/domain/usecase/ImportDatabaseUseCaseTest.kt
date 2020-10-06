@@ -25,7 +25,7 @@ class ImportDatabaseUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a json with information for DAO and Preferences WHEN import is called THEN return true`() {
+    fun `GIVEN a json with information for Dao and Preferences WHEN import is called THEN return true`() {
         runBlocking {
             // given
             val goals = listOf(DataProviderTest.createGoalDataModel())

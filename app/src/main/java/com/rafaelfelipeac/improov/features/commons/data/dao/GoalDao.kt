@@ -8,7 +8,7 @@ import androidx.room.Query
 import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModel
 
 @Dao
-interface GoalDAO {
+interface GoalDao {
 
     @Query("SELECT * FROM goal")
     fun getAll(): List<GoalDataModel>

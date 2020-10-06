@@ -8,9 +8,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class ItemDAOTest : BaseInstTest() {
+class ItemDaoTest : BaseInstTest() {
 
-    private val itemDAO get() = roomDatabase.itemDAO()
+    private val itemDao get() = roomDatabase.itemDao()
 
     @Test
     fun givenANewItemWhenGetIsCalledThenTheSameItemIsReturned() {
@@ -18,10 +18,10 @@ class ItemDAOTest : BaseInstTest() {
         val itemId = 1L
         val item = createItemDataModel(itemId)
 
-        itemDAO.save(item)
+        itemDao.save(item)
 
         // when
-        val result = itemDAO.get(itemId)
+        val result = itemDao.get(itemId)
 
         // then
         result equalTo item
@@ -34,11 +34,11 @@ class ItemDAOTest : BaseInstTest() {
         val itemB = createItemDataModel(itemId = 2, name = "itemB")
         val list = listOf(itemA, itemB)
 
-        itemDAO.save(itemA)
-        itemDAO.save(itemB)
+        itemDao.save(itemA)
+        itemDao.save(itemB)
 
         // when
-        val result = itemDAO.getAll()
+        val result = itemDao.getAll()
 
         // then
         result equalTo list
@@ -49,10 +49,10 @@ class ItemDAOTest : BaseInstTest() {
         // given
         val item = createItemDataModel()
 
-        itemDAO.save(item)
+        itemDao.save(item)
 
         // when
-        val result = itemDAO.delete(item)
+        val result = itemDao.delete(item)
 
         // then
         result equalTo Unit
@@ -65,14 +65,14 @@ class ItemDAOTest : BaseInstTest() {
         val itemB = createItemDataModel(itemId = 2, name = "itemB")
         val list = mutableListOf(itemA, itemB)
 
-        itemDAO.save(itemA)
-        itemDAO.save(itemB)
+        itemDao.save(itemA)
+        itemDao.save(itemB)
 
         list.remove(itemA)
-        itemDAO.delete(itemA)
+        itemDao.delete(itemA)
 
         // when
-        val result = itemDAO.getAll()
+        val result = itemDao.getAll()
 
         // then
         result equalTo list
@@ -83,13 +83,13 @@ class ItemDAOTest : BaseInstTest() {
         // given
         val itemId = 10L
         val item = createItemDataModel(itemId = itemId, name = "itemA")
-        itemDAO.save(item)
+        itemDao.save(item)
 
         item.name = "itemB"
-        itemDAO.save(item)
+        itemDao.save(item)
 
         // when
-        val result = itemDAO.get(itemId)
+        val result = itemDao.get(itemId)
 
         // then
         result equalTo item

@@ -5,9 +5,9 @@ import androidx.room.Room
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.persistence.database.MIGRATION_48_49
 import com.rafaelfelipeac.improov.core.persistence.database.RoomDatabase
-import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDAO
-import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDAO
-import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDAO
+import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
+import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDao
+import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -27,13 +27,13 @@ object PersistenceModule {
 
     @Provides
     @JvmStatic
-    fun provideGoalDAO(appDatabase: RoomDatabase): GoalDAO = appDatabase.goalDAO()
+    fun provideGoalDao(appDatabase: RoomDatabase): GoalDao = appDatabase.goalDao()
 
     @Provides
     @JvmStatic
-    fun provideItemDAO(appDatabase: RoomDatabase): ItemDAO = appDatabase.itemDAO()
+    fun provideItemDao(appDatabase: RoomDatabase): ItemDao = appDatabase.itemDao()
 
     @Provides
     @JvmStatic
-    fun provideHistoricDAO(appDatabase: RoomDatabase): HistoricDAO = appDatabase.historicDAO()
+    fun provideHistoricDao(appDatabase: RoomDatabase): HistoricDao = appDatabase.historicDao()
 }
