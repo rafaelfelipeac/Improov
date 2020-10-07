@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.commons.data.model
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createItem
 import com.rafaelfelipeac.improov.base.DataProviderTest.createItemDataModel
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equalTo
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner

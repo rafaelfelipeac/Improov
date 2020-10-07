@@ -3,7 +3,7 @@ package com.rafaelfelipeac.improov.features.commons.data.dao
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.rafaelfelipeac.improov.base.BaseInstTest
 import com.rafaelfelipeac.improov.base.DataProviderAndroidTest.createItemDataModel
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equal
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -24,7 +24,7 @@ class ItemDaoTest : BaseInstTest() {
         val result = itemDao.get(itemId)
 
         // then
-        result equalTo item
+        result equal item
     }
 
     @Test
@@ -41,7 +41,7 @@ class ItemDaoTest : BaseInstTest() {
         val result = itemDao.getAll()
 
         // then
-        result equalTo list
+        result equal list
     }
 
     @Test
@@ -55,7 +55,7 @@ class ItemDaoTest : BaseInstTest() {
         val result = itemDao.delete(item)
 
         // then
-        result equalTo Unit
+        result equal Unit
     }
 
     @Test
@@ -75,7 +75,7 @@ class ItemDaoTest : BaseInstTest() {
         val result = itemDao.getAll()
 
         // then
-        result equalTo list
+        result equal list
     }
 
     @Test
@@ -92,6 +92,6 @@ class ItemDaoTest : BaseInstTest() {
         val result = itemDao.get(itemId)
 
         // then
-        result equalTo item
+        result equal item
     }
 }

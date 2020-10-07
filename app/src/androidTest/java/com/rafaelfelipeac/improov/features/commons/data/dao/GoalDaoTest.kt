@@ -3,7 +3,7 @@ package com.rafaelfelipeac.improov.features.commons.data.dao
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.rafaelfelipeac.improov.base.BaseInstTest
 import com.rafaelfelipeac.improov.base.DataProviderAndroidTest.createGoalDataModel
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equal
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -24,7 +24,7 @@ class GoalDaoTest : BaseInstTest() {
         val result = goalDao.get(goalId)
 
         // then
-        result equalTo goal
+        result equal goal
     }
 
     @Test
@@ -41,7 +41,7 @@ class GoalDaoTest : BaseInstTest() {
         val result = goalDao.getAll()
 
         // then
-        result equalTo list
+        result equal list
     }
 
     @Test
@@ -55,7 +55,7 @@ class GoalDaoTest : BaseInstTest() {
         val result = goalDao.delete(goal)
 
         // then
-        result equalTo Unit
+        result equal Unit
     }
 
     @Test
@@ -75,7 +75,7 @@ class GoalDaoTest : BaseInstTest() {
         val result = goalDao.getAll()
 
         // then
-        result equalTo list
+        result equal list
     }
 
     @Test
@@ -92,6 +92,6 @@ class GoalDaoTest : BaseInstTest() {
         val result = goalDao.get(goalId)
 
         // then
-        result equalTo goalA
+        result equal goalA
     }
 }

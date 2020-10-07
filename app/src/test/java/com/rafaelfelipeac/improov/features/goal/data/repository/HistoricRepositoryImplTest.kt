@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.goal.data.repository
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoric
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDao
 import com.rafaelfelipeac.improov.features.commons.data.model.HistoricDataModelMapper
 import kotlinx.coroutines.runBlocking

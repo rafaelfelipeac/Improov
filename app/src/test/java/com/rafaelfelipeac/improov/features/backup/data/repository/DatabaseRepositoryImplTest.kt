@@ -5,7 +5,7 @@ import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoricDataModel
 import com.rafaelfelipeac.improov.base.DataProviderTest.createItemDataModel
 import com.rafaelfelipeac.improov.base.DataProviderTest.createJson
 import com.rafaelfelipeac.improov.base.DataProviderTest.getDate
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
 import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDao
