@@ -141,10 +141,11 @@
     <string name="backup_file_path">/Improov/Backup/</string>
     <string name="backup_file_name">Backup.txt</string>
     <string name="backup_file_type">text/plain</string>
-    <string name="backup_snackbar_action_share">SHARE</string>
+    <string name="backup_snackbar_action_save">Save backup</string>
     <string name="backup_open_file_title">Choose a file</string>
-    <string name="backup_sharing_file_title">Sharing File Subject 123</string>
-    <string name="backup_sharing_file_description">Sharing File Description 123</string>
+    <string name="backup_sharing_file_title">Improov - Backup</string>
+    <string name="backup_sharing_file_description">My backup from Improov app.</string>
+    <string name="backup_sharing_file_choose">Save your backup!</string>
 
     <!-- ListAdapter -->
     <string name="list_adapter_item_title">Goal or Habit title</string>
