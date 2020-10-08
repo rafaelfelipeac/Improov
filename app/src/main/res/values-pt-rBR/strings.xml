@@ -4,7 +4,7 @@
     <string name="app_name_release">Improov</string>
     <string name="app_name_debug">Improov Debug</string>
     <string name="database_name">improov-db</string>
-    <string name="file_provider_path">com.rafaelfelipeac.improov.fileprovider</string>
+    <string name="file_provider_path">com.rafaelfelipeac.improovdebug.fileprovider</string>
 
     <!-- Date -->
     <string name="date_format_day_month">dd MMM</string>

@@ -4,6 +4,8 @@ import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
 import java.io.Serializable
 import java.util.Date
 
+const val PERCENTAGE_MAX = 100
+
 data class Goal(
     val goalId: Long = 0,
     var name: String = "",
@@ -25,4 +27,11 @@ data class Goal(
     var undoneDate: Date? = null,
     val archiveDate: Date? = null,
     val date: Date? = null
-) : Serializable
+) : Serializable {
+
+    fun getPercentage() = if (divideAndConquer) {
+        (value / goldValue) * PERCENTAGE_MAX
+    } else {
+        (value / singleValue) * PERCENTAGE_MAX
+    }
+}
