@@ -10,7 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
+import com.rafaelfelipeac.improov.core.extension.getNumberInExhibitionFormat
 import com.rafaelfelipeac.improov.core.extension.setWidthForProgress
 import com.rafaelfelipeac.improov.core.extension.formatToDayMonth
 import com.rafaelfelipeac.improov.core.platform.ActionCompleteContract
@@ -57,14 +57,14 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
         if (item.divideAndConquer) {
             score.text = String.format(
                 "%s/%s",
-                item.value.getNumberInRightFormat(),
-                item.goldValue.getNumberInRightFormat()
+                item.value.getNumberInExhibitionFormat(),
+                item.goldValue.getNumberInExhibitionFormat()
             )
         } else {
             score.text = String.format(
                 "%s/%s",
-                item.value.getNumberInRightFormat(),
-                item.singleValue.getNumberInRightFormat()
+                item.value.getNumberInExhibitionFormat(),
+                item.singleValue.getNumberInExhibitionFormat()
             )
         }
 

@@ -6,23 +6,21 @@ import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.rafaelfelipeac.improov.R
 
-fun Snackbar.setMessageColor(color: Int): Snackbar {
+fun Snackbar.setMessageColor(color: Int): Snackbar = apply {
     val textView = view.findViewById(R.id.snackbar_text) as TextView
     textView.setTextColor(color)
-
-    return this
 }
 
-fun Snackbar.setIcon(resources: Resources, hasIcon: Boolean): Snackbar {
+fun Snackbar.setIcon(resources: Resources, hasIcon: Boolean): Snackbar = apply {
     if (hasIcon) {
-        val snackbarView = view
-        val snackbarTextView = snackbarView
-            .findViewById<View>(com.google.android.material.R.id.snackbar_text) as TextView
+        val snackbarTextView = view.findViewById<View>(
+            com.google.android.material.R.id.snackbar_text
+        ) as TextView
         snackbarTextView.setCompoundDrawablesWithIntrinsicBounds(
-            R.drawable.ic_snackbar_trophy, 0, 0, 0)
-        snackbarTextView
-            .compoundDrawablePadding = resources.getDimensionPixelOffset(R.dimen.snackbar_offset)
+            R.drawable.ic_snackbar_trophy, 0, 0, 0
+        )
+        snackbarTextView.compoundDrawablePadding = resources.getDimensionPixelOffset(
+            R.dimen.snackbar_offset
+        )
     }
-
-    return this
 }

@@ -19,7 +19,7 @@
 
         <provider
                 android:name="androidx.core.content.FileProvider"
-                android:authorities="com.rafaelfelipeac.improovdebug.fileprovider"
+                android:authorities="com.rafaelfelipeac.improov.fileprovider"
                 android:grantUriPermissions="true"
                 android:exported="false">
             <meta-data

@@ -19,7 +19,7 @@ import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.invisible
 import com.rafaelfelipeac.improov.core.extension.setup
-import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
+import com.rafaelfelipeac.improov.core.extension.getNumberInExhibitionFormat
 import com.rafaelfelipeac.improov.core.extension.toFloat
 import com.rafaelfelipeac.improov.core.extension.resetValue
 import com.rafaelfelipeac.improov.core.extension.isNotEmpty
@@ -234,17 +234,17 @@ class GoalDetailFragment : BaseFragment() {
         count = goal?.value!!
 
         goalDetailTitle.text = goal?.name
-        goalDetailCount.text = count.getNumberInRightFormat()
+        goalDetailCount.text = count.getNumberInExhibitionFormat()
 
         if (goal?.divideAndConquer!!) {
             goalDetailSingle.invisible()
             goalDetailDivideAndConquer.visible()
 
-            goalDetailDivideAndConquerBronzeText.text = goal?.bronzeValue?.getNumberInRightFormat()
-            goalDetailDivideAndConquerSilverText.text = goal?.silverValue?.getNumberInRightFormat()
-            goalDetailDivideAndConquerGoldText.text = goal?.goldValue?.getNumberInRightFormat()
+            goalDetailDivideAndConquerBronzeText.text = goal?.bronzeValue?.getNumberInExhibitionFormat()
+            goalDetailDivideAndConquerSilverText.text = goal?.silverValue?.getNumberInExhibitionFormat()
+            goalDetailDivideAndConquerGoldText.text = goal?.goldValue?.getNumberInExhibitionFormat()
         } else {
-            goalDetailSingleText.text = goal?.singleValue?.getNumberInRightFormat()
+            goalDetailSingleText.text = goal?.singleValue?.getNumberInExhibitionFormat()
         }
 
         when (goal?.type) {
@@ -266,7 +266,7 @@ class GoalDetailFragment : BaseFragment() {
 
                 goalDetailHistoricsList.visible()
 
-                goalDetailCounterTotal.text = count.getNumberInRightFormat()
+                goalDetailCounterTotal.text = count.getNumberInExhibitionFormat()
             }
             GoalType.GOAL_FINAL -> {
                 goalDetailCLList.invisible()
@@ -300,8 +300,8 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun updateText(textView: TextView) {
-        goalDetailCount.text = count.getNumberInRightFormat()
-        textView.text = count.getNumberInRightFormat()
+        goalDetailCount.text = count.getNumberInExhibitionFormat()
+        textView.text = count.getNumberInExhibitionFormat()
     }
 
     private fun updateGoal() {

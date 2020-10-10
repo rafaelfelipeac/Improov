@@ -19,8 +19,6 @@ class WelcomeFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         injector.inject(this)
-
-        viewModel.loadData()
     }
 
     override fun onCreateView(

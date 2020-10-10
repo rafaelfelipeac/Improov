@@ -2,8 +2,8 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goallist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.GetFirstTimeListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.SaveFirstTimeListUseCase
@@ -17,7 +17,7 @@ class GoalListViewModel @Inject constructor(
     private val getGoalListUseCase: GetGoalListUseCase,
     private val saveFirstTimeListUseCase: SaveFirstTimeListUseCase,
     private val getFirstTimeListUseCase: GetFirstTimeListUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     val savedGoal: LiveData<Long> get() = _savedGoal
     private val _savedGoal = MutableLiveData<Long>()
@@ -28,7 +28,7 @@ class GoalListViewModel @Inject constructor(
     val firstTimeList: LiveData<Boolean> get() = _firstTimeList
     private val _firstTimeList = MutableLiveData<Boolean>()
 
-    override fun loadData() {
+    fun loadData() {
         getGoals()
         getFirstTimeList()
     }
