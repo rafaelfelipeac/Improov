@@ -1,9 +1,8 @@
 package com.rafaelfelipeac.improov.core.di
 
-import com.rafaelfelipeac.improov.app.App
+import android.app.Application
 import com.rafaelfelipeac.improov.core.di.modules.ContextModule
 import com.rafaelfelipeac.improov.core.di.modules.PreferencesModule
-import com.rafaelfelipeac.improov.core.di.modules.ViewModelModule
 import com.rafaelfelipeac.improov.core.di.modules.GoalModule
 import com.rafaelfelipeac.improov.core.di.modules.ProfileModule
 import com.rafaelfelipeac.improov.core.di.modules.WelcomeModule
@@ -11,6 +10,7 @@ import com.rafaelfelipeac.improov.core.di.modules.PersistenceModule
 import com.rafaelfelipeac.improov.core.di.modules.SettingsModule
 import com.rafaelfelipeac.improov.core.di.modules.SplashModule
 import com.rafaelfelipeac.improov.core.di.modules.BackupModule
+import com.rafaelfelipeac.improov.core.di.provider.ViewModelProvider
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -18,7 +18,6 @@ import javax.inject.Singleton
 @Component(modules = [
     ContextModule::class,
     PreferencesModule::class,
-    ViewModelModule::class,
     GoalModule::class,
     ProfileModule::class,
     WelcomeModule::class,
@@ -28,15 +27,17 @@ import javax.inject.Singleton
     BackupModule::class
 ])
 @Singleton
-interface AppComponent : Injector {
+interface AppComponent : ViewModelProvider {
 
-    @Component.Builder
-    interface Builder {
-        fun build(): AppComponent
+    @Component.Factory
+    interface Factory {
 
-        @BindsInstance
-        fun application(application: App): Builder
+        fun create(
+            @BindsInstance application: Application
+        ): AppComponent
     }
+}
 
-    fun inject(application: App)
+interface AppComponentProvider {
+    val appComponent: AppComponent
 }

@@ -19,9 +19,9 @@ import com.rafaelfelipeac.improov.core.extension.toFloat
 import com.rafaelfelipeac.improov.core.extension.getNumberInExhibitionFormat
 import com.rafaelfelipeac.improov.core.extension.isNotEmpty
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.dialog.DialogOneButton
 import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
+import com.rafaelfelipeac.improov.features.dialog.DialogOneButton
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 
 @Suppress("TooManyFunctions")
@@ -34,12 +34,10 @@ class GoalFormFragment : BaseFragment() {
 
     private var goalsSize: Int? = null
 
-    private val viewModel by lazy { viewModelFactory.get<GoalFormViewModel>(this) }
+    private val viewModel by lazy { viewModelProvider.goalFormViewModel() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        injector.inject(this)
 
         goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goalId }
     }
@@ -82,7 +80,8 @@ class GoalFormFragment : BaseFragment() {
         when (item.itemId) {
             R.id.menuSave -> {
                 when {
-                    checkIfAnyFieldsAreEmptyOrZero() -> { }
+                    checkIfAnyFieldsAreEmptyOrZero() -> {
+                    }
                     getGoalTypeSelected() == GoalType.GOAL_NONE -> {
                         showSnackBar(getString(R.string.goal_form_empty_type_goal))
 
@@ -316,7 +315,8 @@ class GoalFormFragment : BaseFragment() {
                 goalFormRadioTypeList.isChecked = false
                 goalFormRadioTypeCounter.isChecked = false
             }
-            else -> { }
+            else -> {
+            }
         }
     }
 

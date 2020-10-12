@@ -28,13 +28,7 @@ class GoalListFragment : BaseFragment() {
     private var swipeShown = false
     private var swipedPosition = 0
 
-    private val viewModel by lazy { viewModelFactory.get<GoalListViewModel>(this) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        injector.inject(this)
-    }
+    private val viewModel by lazy { viewModelProvider.goalListViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater,

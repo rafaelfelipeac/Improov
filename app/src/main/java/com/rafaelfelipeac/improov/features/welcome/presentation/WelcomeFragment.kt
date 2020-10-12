@@ -13,13 +13,7 @@ import kotlinx.android.synthetic.main.fragment_welcome.*
 
 class WelcomeFragment : BaseFragment() {
 
-    private val viewModel by lazy { viewModelFactory.get<WelcomeViewModel>(this) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        injector.inject(this)
-    }
+    private val viewModel by lazy { viewModelProvider.welcomeViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater,

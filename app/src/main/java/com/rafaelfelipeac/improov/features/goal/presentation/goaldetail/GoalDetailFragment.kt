@@ -56,12 +56,10 @@ class GoalDetailFragment : BaseFragment() {
 
     private var count: Float = 0F
 
-    private val viewModel by lazy { viewModelFactory.get<GoalDetailViewModel>(this) }
+    private val viewModel by lazy { viewModelProvider.goalDetailViewModel() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        injector.inject(this)
 
         goalId = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalId }
         goalNew = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalNew }

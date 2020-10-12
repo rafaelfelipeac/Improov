@@ -10,13 +10,7 @@ import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 
 class SplashFragment : BaseFragment() {
 
-    private val viewModel by lazy { viewModelFactory.get<SplashViewModel>(this) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        injector.inject(this)
-    }
+    private val viewModel by lazy { viewModelProvider.splashViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater,

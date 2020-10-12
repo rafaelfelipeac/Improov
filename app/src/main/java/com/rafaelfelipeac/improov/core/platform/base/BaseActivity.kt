@@ -1,22 +1,18 @@
 package com.rafaelfelipeac.improov.core.platform.base
 
 import android.content.Context
-import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
-import com.rafaelfelipeac.improov.app.App
 import com.rafaelfelipeac.improov.core.LocaleHelper
 import com.rafaelfelipeac.improov.core.di.AppComponent
+import com.rafaelfelipeac.improov.core.di.AppComponentProvider
+import com.rafaelfelipeac.improov.core.di.provider.ViewModelProvider
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    val injector: AppComponent get() = (application as App).appComponent
-
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        injector.inject(this)
-
-        super.onCreate(savedInstanceState, persistentState)
-    }
+    private val appComponent: AppComponent
+        get() = (application as AppComponentProvider).appComponent
+    val viewModelProvider: ViewModelProvider
+        get() = appComponent
 
     override fun attachBaseContext(context: Context) {
         super.attachBaseContext(LocaleHelper.onAttach(context))

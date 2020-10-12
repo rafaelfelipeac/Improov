@@ -17,7 +17,6 @@ object PersistenceModule {
 
     @Provides
     @Singleton
-    @JvmStatic
     fun providesDatabase(context: Context): RoomDatabase =
         Room.databaseBuilder(context, RoomDatabase::class.java, context.getString(R.string.database_name))
             .allowMainThreadQueries()
@@ -26,14 +25,11 @@ object PersistenceModule {
             .build()
 
     @Provides
-    @JvmStatic
     fun provideGoalDao(appDatabase: RoomDatabase): GoalDao = appDatabase.goalDao()
 
     @Provides
-    @JvmStatic
     fun provideItemDao(appDatabase: RoomDatabase): ItemDao = appDatabase.itemDao()
 
     @Provides
-    @JvmStatic
     fun provideHistoricDao(appDatabase: RoomDatabase): HistoricDao = appDatabase.historicDao()
 }

@@ -13,13 +13,7 @@ import kotlinx.android.synthetic.main.fragment_profile_edit.*
 
 class ProfileEditFragment : BaseFragment() {
 
-    private val viewModel by lazy { viewModelFactory.get<ProfileEditViewModel>(this) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        injector.inject(this)
-    }
+    private val viewModel by lazy { viewModelProvider.profileEditViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater,

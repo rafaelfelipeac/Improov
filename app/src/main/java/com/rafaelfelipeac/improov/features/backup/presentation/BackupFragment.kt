@@ -36,13 +36,7 @@ const val REQUEST_FILE = 1
 @Suppress("TooManyFunctions")
 class BackupFragment : BaseFragment() {
 
-    private val viewModel by lazy { viewModelFactory.get<BackupViewModel>(this) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        injector.inject(this)
-    }
+    private val viewModel by lazy { viewModelProvider.backupViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -21,8 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.di.AppComponent
-import com.rafaelfelipeac.improov.core.di.factory.ViewModelFactory
+import com.rafaelfelipeac.improov.core.di.provider.ViewModelProvider
 import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.extension.setMessageColor
@@ -35,17 +34,14 @@ import com.rafaelfelipeac.improov.features.commons.domain.model.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
 import java.util.Date
 import java.util.Calendar
-import javax.inject.Inject
 
 const val DURATION_SNACKBAR = 10000
 
 @Suppress("TooManyFunctions")
 abstract class BaseFragment : Fragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    protected val injector: AppComponent by lazy { (activity as BaseActivity).injector }
+    protected val viewModelProvider: ViewModelProvider
+        get() = (activity as BaseActivity).viewModelProvider
 
     val main: MainActivity get() = (activity as MainActivity)
 
