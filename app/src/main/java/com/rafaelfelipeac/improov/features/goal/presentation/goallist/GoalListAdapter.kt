@@ -31,10 +31,10 @@ class GoalListAdapter(private val fragment: GoalListFragment) : BaseAdapter<Goal
         setOnClickListener { clickListener(item) }
 
         val typeIcon = viewHolder.itemView.findViewById<ImageView>(R.id.itemGoalTypeIcon)
-        val title = viewHolder.itemView.findViewById<TextView>(R.id.itemGoalTitle)!!
-        val date = viewHolder.itemView.findViewById<TextView>(R.id.itemGoalDate)!!
-        val score = viewHolder.itemView.findViewById<TextView>(R.id.itemGoalScore)!!
-        val itemDrag = viewHolder.itemView.findViewById<ImageView>(R.id.itemGoalDragIcon)!!
+        val title = viewHolder.itemView.findViewById<TextView>(R.id.itemGoalTitle)
+        val date = viewHolder.itemView.findViewById<TextView>(R.id.itemGoalDate)
+        val score = viewHolder.itemView.findViewById<TextView>(R.id.itemGoalScore)
+        val itemDrag = viewHolder.itemView.findViewById<ImageView>(R.id.itemGoalDragIcon)
         val progressDone = viewHolder.itemView.findViewById<ImageView>(R.id.itemGoalProgressDone)
         val progressTotal = viewHolder.itemView.findViewById<ImageView>(R.id.itemGoalProgressTotal)
 

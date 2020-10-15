@@ -27,9 +27,9 @@ class ItemsAdapter(private val detailFragment: GoalDetailFragment) : BaseAdapter
         title.text = item.name
         image.background =
             if (item.done) {
-                ContextCompat.getDrawable(context!!, R.mipmap.ic_item_done)
+                ContextCompat.getDrawable(context, R.mipmap.ic_item_done)
             } else {
-                ContextCompat.getDrawable(context!!, R.mipmap.ic_item_undone)
+                ContextCompat.getDrawable(context, R.mipmap.ic_item_undone)
             }
     }
 

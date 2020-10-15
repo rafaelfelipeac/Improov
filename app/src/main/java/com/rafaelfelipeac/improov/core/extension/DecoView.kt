@@ -15,10 +15,10 @@ const val MAX_VALUE_DEFAULT = 100F
 const val INITIAL_VALUE_DEFAULT = 100F
 
 fun DecoView.resetValue(
-    minValue: Float,
-    maxValue: Float,
-    initialValue: Float,
-    screenMultiplier: Float
+    minValue: Float?,
+    maxValue: Float?,
+    initialValue: Float?,
+    screenMultiplier: Float?
 ): Int {
     configureAngles(TOTAL_ANGLE, ROTATE_ANGLE)
 
@@ -26,29 +26,29 @@ fun DecoView.resetValue(
 }
 
 fun DecoView.setupArcViewAndSeriesItem(
-    minValue: Float,
-    maxValue: Float,
-    initialValue: Float,
-    screenMultiplier: Float
+    minValue: Float?,
+    maxValue: Float?,
+    initialValue: Float?,
+    screenMultiplier: Float?
 ): SeriesItem {
     addSeries(
         SeriesItem.Builder(ContextCompat.getColor(context, R.color.colorPrimaryAnother))
             .setRange(MIN_VALUE_DEFAULT, MAX_VALUE_DEFAULT, INITIAL_VALUE_DEFAULT)
             .setInitialVisibility(true)
-            .setLineWidth(screenMultiplier * LINE_WIDTH)
+            .setLineWidth(screenMultiplier?.times(LINE_WIDTH) ?: 0F)
             .build()
     )
 
     return SeriesItem.Builder(ContextCompat.getColor(context, R.color.colorPrimary))
-        .setRange(minValue, maxValue, initialValue)
+        .setRange(minValue ?: 0F, maxValue ?: 0F, initialValue ?: 0F)
         .setInitialVisibility(false)
-        .setLineWidth(screenMultiplier * LINE_WIDTH)
+        .setLineWidth(screenMultiplier?.times(LINE_WIDTH) ?: 0F)
         .build()
 }
 
-fun DecoView.setup(value: Float, index: Int) {
+fun DecoView.setup(value: Float?, index: Int) {
     addEvent(
-        DecoEvent.Builder(value)
+        DecoEvent.Builder(value ?: 0F)
             .setIndex(index)
             .setDuration(DURATION_ANIMATION)
             .build()

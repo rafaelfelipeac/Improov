@@ -28,18 +28,18 @@ import kotlinx.android.synthetic.main.fragment_goal_form.*
 class GoalFormFragment : BaseFragment() {
 
     private var goal: Goal = Goal()
-    private var goalId: Long? = null
+    private var goalId: Long = 0L
 
     private var firstTimeAdd = false
 
-    private var goalsSize: Int? = null
+    private var goalsSize: Int = 0
 
     private val viewModel by lazy { viewModelProvider.goalFormViewModel() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goalId }
+        goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goalId } ?: 0L
     }
 
     override fun onCreateView(
@@ -57,8 +57,8 @@ class GoalFormFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         goalId.let {
-            if (it!! > 0L) {
-                viewModel.setGoalId(goalId!!)
+            if (it > 0L) {
+                viewModel.setGoalId(goalId)
             }
         }
         viewModel.loadData()
@@ -111,7 +111,7 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setScreen() {
-        if (goalId!! == 0L) {
+        if (goalId == 0L) {
             setTitle(getString(R.string.goal_form_title_new))
         } else {
             setTitle(getString(R.string.goal_form_title_update))
@@ -231,12 +231,7 @@ class GoalFormFragment : BaseFragment() {
             goal.done = false
             goal.type = getGoalTypeSelected()
 
-            goal.order =
-                if (goalsSize == null || goalsSize == 0) {
-                    0
-                } else {
-                    goalsSize!! + 1
-                }
+            goal.order = if (goalsSize == 0) 0 else goalsSize + 1
         } else {
             goal.updatedDate = getCurrentTime()
         }

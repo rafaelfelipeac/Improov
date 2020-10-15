@@ -72,14 +72,13 @@ class MainActivity : BaseActivity() {
     override fun onSupportNavigateUp() = findNavController(R.id.navHostFragment).navigateUp()
 
     private fun lastFragment(): Boolean {
-        val currentFragment =
-            NavHostFragment.findNavController(navHostFragment).currentDestination!!.id
+        val currentFragment = NavHostFragment.findNavController(navHostFragment).currentDestination?.id
 
         return currentFragment == R.id.navigationList
     }
 
     private fun setupElements() {
-        toolbar = findViewById(R.id.toolbar)!!
+        toolbar = findViewById(R.id.toolbar)
         navController = findNavController(R.id.navHostFragment)
         navLayout = navigationLayout
         fakeBottomNav = fakeBottomNavigation
@@ -99,5 +98,5 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun clearToolbarMenu() = toolbar.menu!!.clear()
+    private fun clearToolbarMenu() = toolbar.menu.clear()
 }
