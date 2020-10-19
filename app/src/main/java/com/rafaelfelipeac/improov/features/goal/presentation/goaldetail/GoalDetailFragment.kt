@@ -647,7 +647,12 @@ class GoalDetailFragment : BaseFragment() {
 
     private fun doneOrUndoneItem(item: Item) {
         item.done = !item.done
-        item.undoneDate = getCurrentTime()
+
+        if (item.done) {
+            item.doneDate = getCurrentTime()
+        } else {
+            item.undoneDate = getCurrentTime()
+        }
 
         viewModel.saveItem(item)
     }

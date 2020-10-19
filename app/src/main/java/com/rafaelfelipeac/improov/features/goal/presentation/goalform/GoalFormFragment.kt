@@ -89,7 +89,7 @@ class GoalFormFragment : BaseFragment() {
                         goalFormTypeTitle.isFocusableInTouchMode = true
                         goalFormTypeTitle.requestFocus()
                     }
-                    !validateDivideAndConquerValues() -> {
+                    goalFormSwitchDivideAndConquer.isChecked && !validateDivideAndConquerValues() -> {
                         showSnackBar(getString(R.string.goal_form_gold_silver_bronze_order))
 
                         goalFormBronzeValue.requestFocus()

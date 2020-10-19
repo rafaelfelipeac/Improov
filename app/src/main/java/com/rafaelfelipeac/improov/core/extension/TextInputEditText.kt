@@ -1,5 +1,6 @@
 package com.rafaelfelipeac.improov.core.extension
 
+import android.text.InputType
 import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
@@ -16,7 +17,8 @@ fun TextInputEditText.isEmpty(): Boolean = text?.isEmpty() ?: false
 
 fun TextInputEditText.isEmptyOrZero(): Boolean {
     return text.toString().trim().let {
-        it.isEmpty() || it.firstOrNull() == '0' || (it.toDoubleOrNull() ?: 0.0) <= 0
+        it.isEmpty() || (it.firstOrNull() == '0' && (it.toDoubleOrNull() ?: 0.0) <= 0 &&
+                inputType == (InputType.TYPE_NUMBER_FLAG_DECIMAL + InputType.TYPE_CLASS_NUMBER))
     }
 }
 
