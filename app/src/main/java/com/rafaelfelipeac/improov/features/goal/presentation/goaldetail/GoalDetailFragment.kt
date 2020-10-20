@@ -530,12 +530,6 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun resetDivideAndConquer() {
-        resetDivideAndConquerBronze()
-        resetDivideAndConquerSilver()
-        resetDivideAndConquerGold()
-    }
-
-    private fun resetDivideAndConquerBronze() {
         disableIcon(
             goalDetailDivideAndConquerBronzeImage,
             R.mipmap.ic_trophy_bronze_dark
@@ -551,6 +545,12 @@ class GoalDetailFragment : BaseFragment() {
             R.mipmap.ic_trophy_gold_dark
         )
 
+        resetDivideAndConquerBronze()
+        resetDivideAndConquerSilver()
+        resetDivideAndConquerGold()
+    }
+
+    private fun resetDivideAndConquerBronze() {
         seriesBronze = goalDetailBronzeArcView.resetValue(
             minValue = 0F,
             maxValue = goal?.bronzeValue,
