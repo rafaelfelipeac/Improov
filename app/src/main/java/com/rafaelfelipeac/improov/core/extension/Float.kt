@@ -1,17 +1,20 @@
 package com.rafaelfelipeac.improov.core.extension
 
-fun Float.getNumberInRightFormat(): String {
-    if (this.toString().endsWith(".0")) {
-        return this.toString().replace(".0", "")
+fun Float.getNumberInExhibitionFormat(): String {
+    return this.toString().let { string ->
+        when {
+            string.endsWith(".0") -> {
+                string.replace(".0", "")
+            }
+            else -> {
+                ("%.2f".format(this)).replace(",", ".")
+            }
+        }
     }
-
-    return ("%.2f".format(this.toString().toFloat())).replace(",", ".")
 }
 
-fun Float.getValueWithSymbol(): String {
-    if (this > 0) {
-        return String.format("%s%s", "+", this.getNumberInRightFormat())
-    }
-
-    return String.format(" %s", this.getNumberInRightFormat())
+fun Float.getValueWithSymbol(): String = if (this > 0) {
+    "+ ${getNumberInExhibitionFormat()}"
+} else {
+    " ${getNumberInExhibitionFormat()}"
 }

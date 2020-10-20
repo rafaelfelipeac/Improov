@@ -12,15 +12,7 @@ import kotlinx.android.synthetic.main.fragment_settings_language.*
 
 class SettingsLanguageFragment : BaseFragment() {
 
-    private val viewModel by lazy { viewModelFactory.get<SettingsLanguageViewModel>(this) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        injector.inject(this)
-
-        viewModel.loadData()
-    }
+    private val viewModel by lazy { viewModelProvider.settingsLanguageViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +27,8 @@ class SettingsLanguageFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.loadData()
 
         observeViewModel()
     }

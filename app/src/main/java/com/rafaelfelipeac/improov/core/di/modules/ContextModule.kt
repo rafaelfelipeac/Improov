@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.core.di.modules
 
+import android.app.Application
 import android.content.Context
-import com.rafaelfelipeac.improov.app.App
 import dagger.Binds
 import dagger.Module
 
@@ -9,5 +9,5 @@ import dagger.Module
 abstract class ContextModule {
 
     @Binds
-    abstract fun bindContext(app: App): Context
+    abstract fun Application.context(): Context
 }

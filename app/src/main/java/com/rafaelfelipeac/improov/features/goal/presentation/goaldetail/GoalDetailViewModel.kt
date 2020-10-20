@@ -2,8 +2,8 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import com.rafaelfelipeac.improov.features.commons.domain.model.Historic
 import com.rafaelfelipeac.improov.features.commons.domain.model.Item
@@ -24,7 +24,7 @@ class GoalDetailViewModel @Inject constructor(
     private val getItemListUseCase: GetItemListUseCase,
     private val saveHistoricUseCCase: SaveHistoricUseCase,
     private val getHistoricListUseCase: GetHistoricListUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     private var goalId = 0L
 
@@ -45,7 +45,7 @@ class GoalDetailViewModel @Inject constructor(
         this.goalId = goalId
     }
 
-    override fun loadData() {
+    fun loadData() {
         if (goalId > 0L) {
             getGoal()
 

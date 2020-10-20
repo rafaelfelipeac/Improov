@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.gone
+import com.rafaelfelipeac.improov.core.extension.invisible
 import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
@@ -13,13 +13,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment() {
 
-    private val viewModel by lazy { viewModelFactory.get<ProfileViewModel>(this) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        injector.inject(this)
-    }
+    private val viewModel by lazy { viewModelProvider.profileViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,7 +78,7 @@ class ProfileFragment : BaseFragment() {
                 profileUserName.visible()
                 profileEditProfileButton.text = getString(R.string.profile_edit_name_message)
             } else {
-                profileUserName.gone()
+                profileUserName.invisible()
                 profileEditProfileButton.text = getString(R.string.profile_add_name_message)
             }
         }

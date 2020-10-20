@@ -3,8 +3,9 @@
     <!-- App -->
     <string name="app_name_release">Improov</string>
     <string name="app_name_debug">Improov Debug</string>
+    <string name="file_provider_release">com.rafaelfelipeac.improov.fileprovider</string>
+    <string name="file_provider_debug">com.rafaelfelipeac.improov.debug.fileprovider</string>
     <string name="database_name">improov-db</string>
-    <string name="file_provider_path">com.rafaelfelipeac.improov.fileprovider</string>
 
     <!-- Date -->
     <string name="date_format_day_month">dd MMM</string>
@@ -52,7 +53,7 @@
     <string name="goal_form_type_title">Tipo de objetivo</string>
     <string name="goal_form_radio_type_list">Lista</string>
     <string name="goal_form_radio_type_counter">Contador</string>
-    <string name="goal_form_radio_type_total">Valor final</string>
+    <string name="goal_form_radio_type_final">Valor final</string>
     <string name="goal_form_goal_counter">Defina os valores:</string>
     <string name="goal_form_goal_counter_inc_value_hint">Incrementar</string>
     <string name="goal_form_goal_counter_dec_value_hint">Decrementar</string>

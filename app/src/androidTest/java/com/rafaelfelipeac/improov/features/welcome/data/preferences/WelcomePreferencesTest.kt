@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.welcome.data.preferences
 
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.rafaelfelipeac.improov.base.BaseInstTest
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equal
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,6 +23,6 @@ class WelcomePreferencesTest : BaseInstTest() {
         val result = preferences.welcome
 
         // then
-        result equalTo welcome
+        result equal welcome
     }
 }

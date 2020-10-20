@@ -13,35 +13,33 @@ import com.rafaelfelipeac.improov.core.extension.resetValue
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.invisible
-import com.rafaelfelipeac.improov.core.extension.fieldIsEmptyOrZero
-import com.rafaelfelipeac.improov.core.extension.checkIfFieldIsEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.focusOnEmptyOrZero
+import com.rafaelfelipeac.improov.core.extension.isEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.toFloat
-import com.rafaelfelipeac.improov.core.extension.getNumberInRightFormat
+import com.rafaelfelipeac.improov.core.extension.getNumberInExhibitionFormat
 import com.rafaelfelipeac.improov.core.extension.isNotEmpty
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.dialog.DialogOneButton
 import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
+import com.rafaelfelipeac.improov.features.dialog.DialogOneButton
 import kotlinx.android.synthetic.main.fragment_goal_form.*
 
 @Suppress("TooManyFunctions")
 class GoalFormFragment : BaseFragment() {
 
     private var goal: Goal = Goal()
-    private var goalId: Long? = null
+    private var goalId: Long = 0L
 
     private var firstTimeAdd = false
 
-    private var goalsSize: Int? = null
+    private var goalsSize: Int = 0
 
-    private val viewModel by lazy { viewModelFactory.get<GoalFormViewModel>(this) }
+    private val viewModel by lazy { viewModelProvider.goalFormViewModel() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        injector.inject(this)
-
-        goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goalId }
+        goalId = arguments?.let { GoalFormFragmentArgs.fromBundle(it).goalId } ?: 0L
     }
 
     override fun onCreateView(
@@ -59,8 +57,8 @@ class GoalFormFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         goalId.let {
-            if (it!! > 0L) {
-                viewModel.setGoalId(goalId!!)
+            if (it > 0L) {
+                viewModel.setGoalId(goalId)
             }
         }
         viewModel.loadData()
@@ -82,7 +80,8 @@ class GoalFormFragment : BaseFragment() {
         when (item.itemId) {
             R.id.menuSave -> {
                 when {
-                    checkIfAnyFieldsAreEmptyOrZero() -> { }
+                    checkIfAnyFieldsAreEmptyOrZero() -> {
+                    }
                     getGoalTypeSelected() == GoalType.GOAL_NONE -> {
                         showSnackBar(getString(R.string.goal_form_empty_type_goal))
 
@@ -90,7 +89,7 @@ class GoalFormFragment : BaseFragment() {
                         goalFormTypeTitle.isFocusableInTouchMode = true
                         goalFormTypeTitle.requestFocus()
                     }
-                    !validateDivideAndConquerValues() -> {
+                    goalFormSwitchDivideAndConquer.isChecked && !validateDivideAndConquerValues() -> {
                         showSnackBar(getString(R.string.goal_form_gold_silver_bronze_order))
 
                         goalFormBronzeValue.requestFocus()
@@ -112,7 +111,7 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setScreen() {
-        if (goalId!! == 0L) {
+        if (goalId == 0L) {
             setTitle(getString(R.string.goal_form_title_new))
         } else {
             setTitle(getString(R.string.goal_form_title_update))
@@ -175,7 +174,7 @@ class GoalFormFragment : BaseFragment() {
                 showDialogNoGoalTypeChange()
             } else if (goalFormRadioTypeList.isChecked) {
                 goalFormRadioTypeCounter.isChecked = false
-                goalFormRadioTypeTotal.isChecked = false
+                goalFormRadioTypeFinal.isChecked = false
 
                 goalFormGoalCounter.gone()
             }
@@ -186,16 +185,16 @@ class GoalFormFragment : BaseFragment() {
                 showDialogNoGoalTypeChange()
             } else if (goalFormRadioTypeCounter.isChecked) {
                 goalFormRadioTypeList.isChecked = false
-                goalFormRadioTypeTotal.isChecked = false
+                goalFormRadioTypeFinal.isChecked = false
 
                 goalFormGoalCounter.visible()
             }
         }
 
-        goalFormRadioTypeTotal.setOnClickListener {
+        goalFormRadioTypeFinal.setOnClickListener {
             if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_FINAL) {
                 showDialogNoGoalTypeChange()
-            } else if (goalFormRadioTypeTotal.isChecked) {
+            } else if (goalFormRadioTypeFinal.isChecked) {
                 goalFormRadioTypeCounter.isChecked = false
                 goalFormRadioTypeList.isChecked = false
 
@@ -232,12 +231,7 @@ class GoalFormFragment : BaseFragment() {
             goal.done = false
             goal.type = getGoalTypeSelected()
 
-            goal.order =
-                if (goalsSize == null || goalsSize == 0) {
-                    0
-                } else {
-                    goalsSize!! + 1
-                }
+            goal.order = if (goalsSize == 0) 0 else goalsSize + 1
         } else {
             goal.updatedDate = getCurrentTime()
         }
@@ -266,7 +260,7 @@ class GoalFormFragment : BaseFragment() {
             goalFormRadioTypeCounter.isChecked -> {
                 GoalType.GOAL_COUNTER
             }
-            goalFormRadioTypeTotal.isChecked -> {
+            goalFormRadioTypeFinal.isChecked -> {
                 GoalType.GOAL_FINAL
             }
             else -> {
@@ -282,13 +276,13 @@ class GoalFormFragment : BaseFragment() {
             goalFormDivideAndConquer.visible()
             goalFormSingle.invisible()
 
-            goalFormBronzeValue.setText(goal.bronzeValue.getNumberInRightFormat())
-            goalFormSilverValue.setText(goal.silverValue.getNumberInRightFormat())
-            goalFormGoldValue.setText(goal.goldValue.getNumberInRightFormat())
+            goalFormBronzeValue.setText(goal.bronzeValue.getNumberInExhibitionFormat())
+            goalFormSilverValue.setText(goal.silverValue.getNumberInExhibitionFormat())
+            goalFormGoldValue.setText(goal.goldValue.getNumberInExhibitionFormat())
 
             goalFormSwitchDivideAndConquer.isChecked = true
         } else {
-            goalFormSingleValue.setText(goal.singleValue.getNumberInRightFormat())
+            goalFormSingleValue.setText(goal.singleValue.getNumberInExhibitionFormat())
         }
 
         setupGoalType()
@@ -299,24 +293,25 @@ class GoalFormFragment : BaseFragment() {
             GoalType.GOAL_LIST -> {
                 goalFormRadioTypeList.isChecked = true
                 goalFormRadioTypeCounter.isChecked = false
-                goalFormRadioTypeTotal.isChecked = false
+                goalFormRadioTypeFinal.isChecked = false
             }
             GoalType.GOAL_COUNTER -> {
                 goalFormRadioTypeCounter.isChecked = true
                 goalFormRadioTypeList.isChecked = false
-                goalFormRadioTypeTotal.isChecked = false
+                goalFormRadioTypeFinal.isChecked = false
 
                 goalFormGoalCounter.visible()
 
-                goalFormGoalCounterIncValue.setText(goal.incrementValue.getNumberInRightFormat())
-                goalFormGoalCounterDecValue.setText(goal.decrementValue.getNumberInRightFormat())
+                goalFormGoalCounterIncValue.setText(goal.incrementValue.getNumberInExhibitionFormat())
+                goalFormGoalCounterDecValue.setText(goal.decrementValue.getNumberInExhibitionFormat())
             }
             GoalType.GOAL_FINAL -> {
-                goalFormRadioTypeTotal.isChecked = true
+                goalFormRadioTypeFinal.isChecked = true
                 goalFormRadioTypeList.isChecked = false
                 goalFormRadioTypeCounter.isChecked = false
             }
-            else -> { }
+            else -> {
+            }
         }
     }
 
@@ -353,8 +348,8 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfNameFieldIsEmptyOrZero(): Boolean {
         return when {
-            goalFormGoalName.checkIfFieldIsEmptyOrZero() -> {
-                goalFormGoalName.fieldIsEmptyOrZero(this)
+            goalFormGoalName.isEmptyOrZero() -> {
+                goalFormGoalName.focusOnEmptyOrZero(this)
                 true
             }
             else -> false
@@ -363,20 +358,20 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfValuesFieldsAreEmptyOrZero(): Boolean {
         return when {
-            goalFormSingleValue.checkIfFieldIsEmptyOrZero() && !goal.divideAndConquer -> {
-                goalFormSingleValue.fieldIsEmptyOrZero(this)
+            goalFormSingleValue.isEmptyOrZero() && !goal.divideAndConquer -> {
+                goalFormSingleValue.focusOnEmptyOrZero(this)
                 true
             }
-            goalFormBronzeValue.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
-                goalFormBronzeValue.fieldIsEmptyOrZero(this)
+            goalFormBronzeValue.isEmptyOrZero() && goal.divideAndConquer -> {
+                goalFormBronzeValue.focusOnEmptyOrZero(this)
                 true
             }
-            goalFormSilverValue.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
-                goalFormSilverValue.fieldIsEmptyOrZero(this)
+            goalFormSilverValue.isEmptyOrZero() && goal.divideAndConquer -> {
+                goalFormSilverValue.focusOnEmptyOrZero(this)
                 true
             }
-            goalFormGoldValue.checkIfFieldIsEmptyOrZero() && goal.divideAndConquer -> {
-                goalFormGoldValue.fieldIsEmptyOrZero(this)
+            goalFormGoldValue.isEmptyOrZero() && goal.divideAndConquer -> {
+                goalFormGoldValue.focusOnEmptyOrZero(this)
                 true
             }
             else -> false
@@ -385,16 +380,16 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfCounterFieldsAreEmptyOrZero(): Boolean {
         return when {
-            goalFormGoalCounterDecValue.checkIfFieldIsEmptyOrZero() &&
+            goalFormGoalCounterDecValue.isEmptyOrZero() &&
                     (goal.type == GoalType.GOAL_COUNTER ||
                             getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
-                goalFormGoalCounterDecValue.fieldIsEmptyOrZero(this)
+                goalFormGoalCounterDecValue.focusOnEmptyOrZero(this)
                 true
             }
-            goalFormGoalCounterIncValue.checkIfFieldIsEmptyOrZero() &&
+            goalFormGoalCounterIncValue.isEmptyOrZero() &&
                     (goal.type == GoalType.GOAL_COUNTER ||
                             getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
-                goalFormGoalCounterIncValue.fieldIsEmptyOrZero(this)
+                goalFormGoalCounterIncValue.focusOnEmptyOrZero(this)
                 true
             }
             else -> false

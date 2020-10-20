@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.welcome.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.rafaelfelipeac.improov.base.CoroutineRule
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.welcome.domain.usecase.SaveWelcomeUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking

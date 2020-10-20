@@ -36,11 +36,11 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/margin_regular"
-                    android:tint="@color/colorPrimaryDarkOne"
                     card_view:layout_constraintBottom_toBottomOf="parent"
                     card_view:layout_constraintStart_toStartOf="parent"
                     card_view:layout_constraintTop_toTopOf="parent"
-                    card_view:srcCompat="@drawable/ic_done" />
+                    card_view:srcCompat="@drawable/ic_done"
+                    card_view:tint="@color/colorPrimaryDarkOne" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

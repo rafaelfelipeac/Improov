@@ -2,8 +2,8 @@ package com.rafaelfelipeac.improov.features.goal.presentation.goalform
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimeadd.GetFirstTimeAddUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimeadd.SaveFirstTimeAddUseCase
@@ -22,7 +22,7 @@ class GoalFormViewModel @Inject constructor(
     private val saveFirstTimeListUseCase: SaveFirstTimeListUseCase,
     private val saveFirstTimeAddUseCase: SaveFirstTimeAddUseCase,
     private val getFirstTimeAddUseCase: GetFirstTimeAddUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     private var goalId = 0L
 
@@ -43,7 +43,7 @@ class GoalFormViewModel @Inject constructor(
         this.goalId = goalId
     }
 
-    override fun loadData() {
+    fun loadData() {
         if (goalId > 0L) {
             getGoal()
         }

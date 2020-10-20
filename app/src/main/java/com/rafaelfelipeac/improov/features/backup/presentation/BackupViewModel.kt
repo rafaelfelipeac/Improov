@@ -2,8 +2,8 @@ package com.rafaelfelipeac.improov.features.backup.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
 import com.rafaelfelipeac.improov.features.backup.domain.usecase.ExportDatabaseUseCase
 import com.rafaelfelipeac.improov.features.backup.domain.usecase.GetExportDateUseCase
 import com.rafaelfelipeac.improov.features.backup.domain.usecase.GetImportDateUseCase
@@ -16,7 +16,7 @@ class BackupViewModel @Inject constructor(
     private val importDatabaseUseCase: ImportDatabaseUseCase,
     private val getExportDateUseCase: GetExportDateUseCase,
     private val getImportDateUseCase: GetImportDateUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     val export: LiveData<String> get() = _export
     private val _export = MutableLiveData<String>()
@@ -27,7 +27,7 @@ class BackupViewModel @Inject constructor(
     val importDate: LiveData<Long> get() = _importDate
     private val _importDate = MutableLiveData<Long>()
 
-    override fun loadData() {
+    fun loadData() {
         getExportDate()
         getImportDate()
     }

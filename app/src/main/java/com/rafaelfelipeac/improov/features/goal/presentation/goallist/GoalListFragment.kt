@@ -9,11 +9,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.isVisible
+import com.rafaelfelipeac.improov.core.extension.setVisibility
 import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.vibrate
-import com.rafaelfelipeac.improov.core.extension.getPercentage
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import kotlinx.android.synthetic.main.fragment_goal_list.*
@@ -29,13 +28,7 @@ class GoalListFragment : BaseFragment() {
     private var swipeShown = false
     private var swipedPosition = 0
 
-    private val viewModel by lazy { viewModelFactory.get<GoalListViewModel>(this) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        injector.inject(this)
-    }
+    private val viewModel by lazy { viewModelProvider.goalListViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -100,8 +93,8 @@ class GoalListFragment : BaseFragment() {
 
         goalListLoading.gone()
 
-        goalListList.isVisible(visible)
-        goalListPlaceholder.isVisible(!visible)
+        goalListList.setVisibility(visible)
+        goalListPlaceholder.setVisibility(!visible)
     }
 
     private fun setGoals() {

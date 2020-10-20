@@ -1,8 +1,8 @@
 package com.rafaelfelipeac.improov.features.goal.data.repository
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createItem
-import com.rafaelfelipeac.improov.core.extension.equalTo
-import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDAO
+import com.rafaelfelipeac.improov.base.equalTo
+import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDao
 import com.rafaelfelipeac.improov.features.commons.data.model.ItemDataModelMapper
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class ItemRepositoryImplTest {
 
     @Mock
-    internal lateinit var itemDAO: ItemDAO
+    internal lateinit var itemDao: ItemDao
 
     @Mock
     internal lateinit var itemDataModelMapper: ItemDataModelMapper
@@ -28,7 +28,7 @@ class ItemRepositoryImplTest {
 
     @Before
     fun setup() {
-        itemRepositoryImp = ItemRepositoryImpl(itemDAO, itemDataModelMapper)
+        itemRepositoryImp = ItemRepositoryImpl(itemDao, itemDataModelMapper)
     }
 
     @Test
@@ -36,7 +36,7 @@ class ItemRepositoryImplTest {
         runBlocking {
             // given
             val item = createItem(itemId).let { itemDataModelMapper.mapReverse(it) }
-            given(itemDAO.get(itemId))
+            given(itemDao.get(itemId))
                 .willReturn(item)
 
             // when
@@ -53,7 +53,7 @@ class ItemRepositoryImplTest {
             // given
             val items = listOf(createItem(), createItem(), createItem())
                 .let { itemDataModelMapper.mapListReverse(it) }
-            given(itemDAO.getAll())
+            given(itemDao.getAll())
                 .willReturn(items)
 
             // when
@@ -69,7 +69,7 @@ class ItemRepositoryImplTest {
         runBlocking {
             // given
             val item = createItem(itemId)
-            given(itemDAO.save(item.let { itemDataModelMapper.mapReverse(it) }))
+            given(itemDao.save(item.let { itemDataModelMapper.mapReverse(it) }))
                 .willReturn(itemId)
 
             // when
@@ -86,7 +86,7 @@ class ItemRepositoryImplTest {
             // given
             val item = createItem(itemId)
             val itemReverse = item.let { itemDataModelMapper.mapReverse(it) }
-            doNothing().`when`(itemDAO).delete(itemReverse)
+            doNothing().`when`(itemDao).delete(itemReverse)
 
             // when
             val result = itemRepositoryImp.delete(item)

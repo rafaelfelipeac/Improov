@@ -9,6 +9,5 @@ import dagger.Provides
 object PreferencesModule {
 
     @Provides
-    @JvmStatic
     fun provideSharedPreferences(context: Context): Preferences = Preferences(context)
 }

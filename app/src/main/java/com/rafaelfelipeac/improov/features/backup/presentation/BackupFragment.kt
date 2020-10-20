@@ -36,13 +36,7 @@ const val REQUEST_FILE = 1
 @Suppress("TooManyFunctions")
 class BackupFragment : BaseFragment() {
 
-    private val viewModel by lazy { viewModelFactory.get<BackupViewModel>(this) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        injector.inject(this)
-    }
+    private val viewModel by lazy { viewModelProvider.backupViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,7 +68,7 @@ class BackupFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == REQUEST_FILE && resultCode == RESULT_OK) {
-            viewModel.importDatabase(getDatabase(data?.data!!))
+            viewModel.importDatabase(getDatabase(data?.data))
         }
     }
 
@@ -216,13 +210,13 @@ class BackupFragment : BaseFragment() {
     }
 
     private fun getDatabase(data: Uri?): String {
-        val path: Uri = data!!
+        val path: Uri? = data
         val text = StringBuilder()
 
         try {
             val bufferedReader = BufferedReader(
                 InputStreamReader(
-                    activity?.contentResolver?.openInputStream(path)!!
+                    path?.let { activity?.contentResolver?.openInputStream(it) }
                 )
             )
 
@@ -279,7 +273,7 @@ class BackupFragment : BaseFragment() {
     @Suppress("DEPRECATION")
     private fun saveFile(jsonDatabase: String): File {
         val file = File(
-            Environment.getExternalStorageDirectory()?.path!! + getString(R.string.backup_file_path),
+            Environment.getExternalStorageDirectory()?.path + getString(R.string.backup_file_path),
             getString(R.string.backup_file_name)
         )
         file.parentFile?.mkdirs()

@@ -5,11 +5,11 @@ import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoricDataModel
 import com.rafaelfelipeac.improov.base.DataProviderTest.createItemDataModel
 import com.rafaelfelipeac.improov.base.DataProviderTest.createJson
 import com.rafaelfelipeac.improov.base.DataProviderTest.getDate
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
-import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDAO
-import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDAO
-import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDAO
+import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
+import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDao
+import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDao
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -22,13 +22,13 @@ import org.mockito.junit.MockitoJUnitRunner
 class DatabaseRepositoryImplTest {
 
     @Mock
-    internal lateinit var goalsDao: GoalDAO
+    internal lateinit var goalDao: GoalDao
 
     @Mock
-    internal lateinit var historicDao: HistoricDAO
+    internal lateinit var historicDao: HistoricDao
 
     @Mock
-    internal lateinit var itemsDao: ItemDAO
+    internal lateinit var itemDao: ItemDao
 
     @Mock
     internal lateinit var preferences: Preferences
@@ -37,11 +37,11 @@ class DatabaseRepositoryImplTest {
 
     @Before
     fun setup() {
-        databaseRepositoryImp = DatabaseRepositoryImpl(goalsDao, historicDao, itemsDao, preferences)
+        databaseRepositoryImp = DatabaseRepositoryImpl(goalDao, historicDao, itemDao, preferences)
     }
 
     @Test
-    fun `GIVEN information in DAO and Preferences WHEN export is called THEN return a json for that information`() {
+    fun `GIVEN information in Dao and Preferences WHEN export is called THEN return a json for that information`() {
         runBlocking {
             // given
             val goals = listOf(createGoalDataModel())
@@ -64,11 +64,11 @@ class DatabaseRepositoryImplTest {
                 firstTimeList
             )
 
-            given(goalsDao.getAll())
+            given(goalDao.getAll())
                 .willReturn(goals)
             given(historicDao.getAll())
                 .willReturn(historics)
-            given(itemsDao.getAll())
+            given(itemDao.getAll())
                 .willReturn(items)
             given(preferences.firstTimeAdd)
                 .willReturn(firstTimeAdd)
@@ -90,7 +90,7 @@ class DatabaseRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a json with information for DAO and Preferences WHEN import is called THEN return true`() {
+    fun `GIVEN a json with information for Dao and Preferences WHEN import is called THEN return true`() {
         runBlocking {
             // given
             val goals = listOf(createGoalDataModel())

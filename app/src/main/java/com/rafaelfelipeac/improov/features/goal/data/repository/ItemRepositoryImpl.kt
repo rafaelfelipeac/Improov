@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.goal.data.repository
 
-import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDAO
+import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDao
 import com.rafaelfelipeac.improov.features.commons.data.model.ItemDataModelMapper
 import com.rafaelfelipeac.improov.features.commons.domain.model.Item
 import com.rafaelfelipeac.improov.features.goal.domain.repository.ItemRepository
@@ -9,34 +9,34 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ItemRepositoryImpl @Inject constructor(
-    private val itemDAO: ItemDAO,
+    private val itemDao: ItemDao,
     private val itemDataModelMapper: ItemDataModelMapper
 ) : ItemRepository {
 
     override suspend fun getItems(): List<Item> {
         return withContext(Dispatchers.IO) {
-            itemDAO.getAll()
+            itemDao.getAll()
                 .map { itemDataModelMapper.map(it) }
         }
     }
 
     override suspend fun getItem(itemId: Long): Item {
         return withContext(Dispatchers.IO) {
-            itemDAO.get(itemId)
+            itemDao.get(itemId)
                 .let { itemDataModelMapper.map(it) }
         }
     }
 
     override suspend fun save(item: Item): Long {
         return withContext(Dispatchers.IO) {
-            itemDAO.save(item
+            itemDao.save(item
                 .let { itemDataModelMapper.mapReverse(it) })
         }
     }
 
     override suspend fun delete(item: Item) {
         return withContext(Dispatchers.IO) {
-            itemDAO.delete(item
+            itemDao.delete(item
                 .let { itemDataModelMapper.mapReverse(it) })
         }
     }

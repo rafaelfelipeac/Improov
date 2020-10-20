@@ -2,8 +2,8 @@ package com.rafaelfelipeac.improov.features.settings.presentation.settingslangua
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
 import com.rafaelfelipeac.improov.features.settings.domain.usecase.GetLanguageUseCase
 import com.rafaelfelipeac.improov.features.settings.domain.usecase.SaveLanguageUseCase
 import kotlinx.coroutines.launch
@@ -12,14 +12,14 @@ import javax.inject.Inject
 class SettingsLanguageViewModel @Inject constructor(
     private val saveLanguageUseCase: SaveLanguageUseCase,
     private val getLanguageUseCase: GetLanguageUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     val saved: LiveData<Unit> get() = _saved
     private val _saved = MutableLiveData<Unit>()
     val language: LiveData<String> get() = _language
     private val _language = MutableLiveData<String>()
 
-    override fun loadData() {
+    fun loadData() {
         getLanguage()
     }
 

@@ -22,7 +22,7 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
 
     fun showBackArrow() {
         main.supportActionBar?.show()
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        main.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     fun setTitle(title: String) {

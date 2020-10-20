@@ -11,7 +11,7 @@ data class Item(
     var done: Boolean,
     val createdDate: Date?,
     var updatedDate: Date? = null,
-    val doneDate: Date? = null,
+    var doneDate: Date? = null,
     var undoneDate: Date? = null,
     val deleteDate: Date? = null,
     val date: Date? = null

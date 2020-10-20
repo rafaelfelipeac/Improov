@@ -21,8 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.di.AppComponent
-import com.rafaelfelipeac.improov.core.di.factory.ViewModelFactory
+import com.rafaelfelipeac.improov.core.di.provider.ViewModelProvider
 import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.extension.setMessageColor
@@ -35,17 +34,14 @@ import com.rafaelfelipeac.improov.features.commons.domain.model.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
 import java.util.Date
 import java.util.Calendar
-import javax.inject.Inject
 
 const val DURATION_SNACKBAR = 10000
 
 @Suppress("TooManyFunctions")
 abstract class BaseFragment : Fragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    protected val injector: AppComponent by lazy { (activity as BaseActivity).injector }
+    protected val viewModelProvider: ViewModelProvider
+        get() = (activity as BaseActivity).viewModelProvider
 
     val main: MainActivity get() = (activity as MainActivity)
 
@@ -88,7 +84,7 @@ abstract class BaseFragment : Fragment() {
 
     fun showBackArrow() {
         main.supportActionBar?.show()
-        main.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        main.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     fun setTitle(title: String) {
@@ -105,7 +101,7 @@ abstract class BaseFragment : Fragment() {
         Snackbar
             .make(requireView(), message, Snackbar.LENGTH_LONG)
             .setMessageColor(R.color.colorPrimaryDarkOne)
-            .setIcon(resources, message == getString(R.string.goal_message_goal_done))
+            .setIcon(message == getString(R.string.goal_message_goal_done))
             .show()
     }
 
@@ -121,7 +117,12 @@ abstract class BaseFragment : Fragment() {
             .make(view, message, Snackbar.LENGTH_INDEFINITE)
             .setMessageColor(R.color.colorPrimaryDarkOne)
             .setAction(actionMessage) { function(obj) }
-            .setActionTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDarkOne))
+            .setActionTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.colorPrimaryDarkOne
+                )
+            )
             .setDuration(DURATION_SNACKBAR)
             .show()
     }
@@ -136,19 +137,19 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun showSoftKeyboard() {
-        val inputMethodManager =
-            activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
-        inputMethodManager!!.toggleSoftInputFromWindow(
-            view?.windowToken,
-            InputMethodManager.SHOW_FORCED,
-            0
-        )
+        (activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as? InputMethodManager)?.run {
+            toggleSoftInputFromWindow(
+                view?.windowToken,
+                InputMethodManager.SHOW_FORCED,
+                0
+            )
+        }
     }
 
     fun hideSoftKeyboard() {
-        val inputMethodManager =
-            this.activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
-        inputMethodManager?.hideSoftInputFromWindow(this.view?.windowToken, 0)
+        (activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as? InputMethodManager?)?.run {
+            hideSoftInputFromWindow(this@BaseFragment.view?.windowToken, 0)
+        }
     }
 
     fun getCurrentTime(): Date = Calendar.getInstance().time
@@ -225,12 +226,15 @@ abstract class BaseFragment : Fragment() {
 
         val bottomSheet =
             bottomSheetItem.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
-        BottomSheetBehavior.from(bottomSheet!!).state = BottomSheetBehavior.STATE_EXPANDED
+
+        bottomSheet?.let {
+            BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
+        }
 
         if (item != null) {
             bottomSheetItemTitle.text = getString(R.string.item_title_edit)
             bottomSheetItemName.setText(item.name)
-            bottomSheetItemName.setSelection(bottomSheetItemName.text?.length!!)
+            bottomSheetItemName.setSelection(bottomSheetItemName.text?.length ?: 0)
 
             if (item.done) {
                 bottomSheetItemDate.text = String.format(

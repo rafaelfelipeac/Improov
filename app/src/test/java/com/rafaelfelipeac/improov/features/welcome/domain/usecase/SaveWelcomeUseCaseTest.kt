@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.welcome.domain.usecase
 
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.welcome.domain.repository.WelcomeRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

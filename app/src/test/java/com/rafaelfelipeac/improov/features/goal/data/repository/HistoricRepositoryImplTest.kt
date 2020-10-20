@@ -1,8 +1,8 @@
 package com.rafaelfelipeac.improov.features.goal.data.repository
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoric
-import com.rafaelfelipeac.improov.core.extension.equalTo
-import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDAO
+import com.rafaelfelipeac.improov.base.equalTo
+import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDao
 import com.rafaelfelipeac.improov.features.commons.data.model.HistoricDataModelMapper
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class HistoricRepositoryImplTest {
 
     @Mock
-    internal lateinit var historicDAO: HistoricDAO
+    internal lateinit var historicDao: HistoricDao
 
     @Mock
     internal lateinit var historicDataModelMapper: HistoricDataModelMapper
@@ -28,7 +28,7 @@ class HistoricRepositoryImplTest {
 
     @Before
     fun setup() {
-        historicRepositoryImp = HistoricRepositoryImpl(historicDAO, historicDataModelMapper)
+        historicRepositoryImp = HistoricRepositoryImpl(historicDao, historicDataModelMapper)
     }
 
     @Test
@@ -36,7 +36,7 @@ class HistoricRepositoryImplTest {
         runBlocking {
             // given
             val historic = createHistoric(historicId).let { historicDataModelMapper.mapReverse(it) }
-            given(historicDAO.get(historicId))
+            given(historicDao.get(historicId))
                 .willReturn(historic)
 
             // when
@@ -53,7 +53,7 @@ class HistoricRepositoryImplTest {
             // given
             val historics = listOf(createHistoric(), createHistoric(), createHistoric())
                 .let { historicDataModelMapper.mapListReverse(it) }
-            given(historicDAO.getAll())
+            given(historicDao.getAll())
                 .willReturn(historics)
 
             // when
@@ -69,7 +69,7 @@ class HistoricRepositoryImplTest {
         runBlocking {
             // given
             val historic = createHistoric(historicId)
-            given(historicDAO.save(historic.let { historicDataModelMapper.mapReverse(it) }))
+            given(historicDao.save(historic.let { historicDataModelMapper.mapReverse(it) }))
                 .willReturn(historicId)
 
             // when
@@ -86,7 +86,7 @@ class HistoricRepositoryImplTest {
             // given
             val historic = createHistoric(historicId)
             val historicReverse = historic.let { historicDataModelMapper.mapReverse(it) }
-            doNothing().`when`(historicDAO).delete(historicReverse)
+            doNothing().`when`(historicDao).delete(historicReverse)
 
             // when
             val result = historicRepositoryImp.delete(historic)

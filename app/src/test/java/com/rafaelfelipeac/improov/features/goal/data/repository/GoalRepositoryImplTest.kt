@@ -1,8 +1,8 @@
 package com.rafaelfelipeac.improov.features.goal.data.repository
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
-import com.rafaelfelipeac.improov.core.extension.equalTo
-import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDAO
+import com.rafaelfelipeac.improov.base.equalTo
+import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
 import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModelMapper
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class GoalRepositoryImplTest {
 
     @Mock
-    internal lateinit var goalsDao: GoalDAO
+    internal lateinit var goalDao: GoalDao
 
     @Mock
     internal lateinit var goalDataModelMapper: GoalDataModelMapper
@@ -28,7 +28,7 @@ class GoalRepositoryImplTest {
 
     @Before
     fun setup() {
-        goalRepositoryImp = GoalRepositoryImpl(goalsDao, goalDataModelMapper)
+        goalRepositoryImp = GoalRepositoryImpl(goalDao, goalDataModelMapper)
     }
 
     @Test
@@ -36,7 +36,7 @@ class GoalRepositoryImplTest {
         runBlocking {
             // given
             val goal = createGoal(goalId).let { goalDataModelMapper.mapReverse(it) }
-            given(goalsDao.get(goalId))
+            given(goalDao.get(goalId))
                 .willReturn(goal)
 
             // when
@@ -52,7 +52,7 @@ class GoalRepositoryImplTest {
         runBlocking {
             // given
             val goals = listOf(createGoal(), createGoal(), createGoal()).let { goalDataModelMapper.mapListReverse(it) }
-            given(goalsDao.getAll())
+            given(goalDao.getAll())
                 .willReturn(goals)
 
             // when
@@ -68,7 +68,7 @@ class GoalRepositoryImplTest {
         runBlocking {
             // given
             val goal = createGoal(goalId)
-            given(goalsDao.save(goal.let { goalDataModelMapper.mapReverse(it) }))
+            given(goalDao.save(goal.let { goalDataModelMapper.mapReverse(it) }))
                 .willReturn(goalId)
 
             // when
@@ -85,7 +85,7 @@ class GoalRepositoryImplTest {
             // given
             val goal = createGoal(goalId)
             val goalReverse = goal.let { goalDataModelMapper.mapReverse(it) }
-            doNothing().`when`(goalsDao).delete(goalReverse)
+            doNothing().`when`(goalDao).delete(goalReverse)
 
             // when
             val result = goalRepositoryImp.delete(goal)

@@ -8,7 +8,7 @@ import androidx.room.Query
 import com.rafaelfelipeac.improov.features.commons.data.model.ItemDataModel
 
 @Dao
-interface ItemDAO {
+interface ItemDao {
 
     @Query("SELECT * FROM item")
     fun getAll(): List<ItemDataModel>
