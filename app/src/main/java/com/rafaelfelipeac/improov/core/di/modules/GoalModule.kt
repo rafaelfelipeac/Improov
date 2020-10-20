@@ -2,8 +2,8 @@ package com.rafaelfelipeac.improov.core.di.modules
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
 import com.rafaelfelipeac.improov.core.di.key.FragmentKey
+import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
 import com.rafaelfelipeac.improov.features.goal.data.repository.GoalRepositoryImpl
 import com.rafaelfelipeac.improov.features.goal.data.repository.ItemRepositoryImpl
 import com.rafaelfelipeac.improov.features.goal.data.repository.HistoricRepositoryImpl
@@ -38,12 +38,14 @@ abstract class GoalModule {
     abstract fun historicRepository(historicRepositoryImpl: HistoricRepositoryImpl): HistoricRepository
 
     @Binds
-    abstract fun firstTimeAddRepository
-                (firstTimeAddRepositoryImpl: FirstTimeAddRepositoryImpl): FirstTimeAddRepository
+    abstract fun firstTimeAddRepository(
+        firstTimeAddRepositoryImpl: FirstTimeAddRepositoryImpl
+    ): FirstTimeAddRepository
 
     @Binds
-    abstract fun firstTimeListRepository
-                (firstTimeListRepositoryImpl: FirstTimeListRepositoryImpl): FirstTimeListRepository
+    abstract fun firstTimeListRepository(
+        firstTimeListRepositoryImpl: FirstTimeListRepositoryImpl
+    ): FirstTimeListRepository
 
     @Binds
     @IntoMap

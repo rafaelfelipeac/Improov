@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.rafaelfelipeac.improov.base.CoroutineRule
 import com.rafaelfelipeac.improov.base.DataProviderTest
 import com.rafaelfelipeac.improov.base.DataProviderTest.getDate
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.backup.domain.usecase.ExportDatabaseUseCase
 import com.rafaelfelipeac.improov.features.backup.domain.usecase.GetExportDateUseCase
 import com.rafaelfelipeac.improov.features.backup.domain.usecase.GetImportDateUseCase

@@ -3,14 +3,14 @@ package com.rafaelfelipeac.improov.features.commons.data.dao
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.rafaelfelipeac.improov.base.BaseInstTest
 import com.rafaelfelipeac.improov.base.DataProviderAndroidTest.createHistoricDataModel
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equal
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class HistoricDAOTest : BaseInstTest() {
+class HistoricDaoTest : BaseInstTest() {
 
-    private val historicDAO get() = roomDatabase.historicDAO()
+    private val historicDao get() = roomDatabase.historicDao()
 
     @Test
     fun givenANewHistoricWhenGetIsCalledThenTheSameHistoricIsReturned() {
@@ -18,13 +18,13 @@ class HistoricDAOTest : BaseInstTest() {
         val historicId = 1L
         val historic = createHistoricDataModel(historicId)
 
-        historicDAO.save(historic)
+        historicDao.save(historic)
 
         // when
-        val result = historicDAO.get(historicId)
+        val result = historicDao.get(historicId)
 
         // then
-        result equalTo historic
+        result equal historic
     }
 
     @Test
@@ -34,14 +34,14 @@ class HistoricDAOTest : BaseInstTest() {
         val historicB = createHistoricDataModel(historicId = 2)
         val list = listOf(historicA, historicB)
 
-        historicDAO.save(historicA)
-        historicDAO.save(historicB)
+        historicDao.save(historicA)
+        historicDao.save(historicB)
 
         // when
-        val result = historicDAO.getAll()
+        val result = historicDao.getAll()
 
         // then
-        result equalTo list
+        result equal list
     }
 
     @Test
@@ -49,13 +49,13 @@ class HistoricDAOTest : BaseInstTest() {
         // given
         val historic = createHistoricDataModel()
 
-        historicDAO.save(historic)
+        historicDao.save(historic)
 
         // when
-        val result = historicDAO.delete(historic)
+        val result = historicDao.delete(historic)
 
         // then
-        result equalTo Unit
+        result equal Unit
     }
 
     @Test
@@ -65,17 +65,17 @@ class HistoricDAOTest : BaseInstTest() {
         val historicB = createHistoricDataModel(historicId = 2)
         val list = mutableListOf(historicA, historicB)
 
-        historicDAO.save(historicA)
-        historicDAO.save(historicB)
+        historicDao.save(historicA)
+        historicDao.save(historicB)
 
         list.remove(historicA)
-        historicDAO.delete(historicA)
+        historicDao.delete(historicA)
 
         // when
-        val result = historicDAO.getAll()
+        val result = historicDao.getAll()
 
         // then
-        result equalTo list
+        result equal list
     }
 
     @Test
@@ -83,15 +83,15 @@ class HistoricDAOTest : BaseInstTest() {
         // given
         val historicId = 10L
         val historic = createHistoricDataModel(historicId = historicId)
-        historicDAO.save(historic)
+        historicDao.save(historic)
 
         historic.value = 10f
-        historicDAO.save(historic)
+        historicDao.save(historic)
 
         // when
-        val result = historicDAO.get(historicId)
+        val result = historicDao.get(historicId)
 
         // then
-        result equalTo historic
+        result equal historic
     }
 }

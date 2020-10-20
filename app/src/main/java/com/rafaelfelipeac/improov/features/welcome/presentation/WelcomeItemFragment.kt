@@ -14,12 +14,6 @@ class WelcomeItemFragment(
 
     constructor() : this(WelcomeFragment(), WelcomePosition.FIRST)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        injector.inject(this)
-
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onResume() {
         super.onResume()
 

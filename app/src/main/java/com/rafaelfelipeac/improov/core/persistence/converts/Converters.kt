@@ -8,14 +8,10 @@ class Converters {
 
     // date
     @TypeConverter
-    fun timestampToDate(value: Long?): Date? {
-        return value?.let { Date(it) }
-    }
+    fun timestampToDate(value: Long?): Date? = value?.let(::Date)
 
     @TypeConverter
-    fun dateToTimestamp(date: Date?): Long? {
-        return date?.time
-    }
+    fun dateToTimestamp(date: Date?): Long? = date?.time
 
     // goalType
     @TypeConverter

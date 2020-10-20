@@ -8,7 +8,7 @@ import androidx.room.Query
 import com.rafaelfelipeac.improov.features.commons.data.model.HistoricDataModel
 
 @Dao
-interface HistoricDAO {
+interface HistoricDao {
 
     @Query("SELECT * FROM historic")
     fun getAll(): List<HistoricDataModel>

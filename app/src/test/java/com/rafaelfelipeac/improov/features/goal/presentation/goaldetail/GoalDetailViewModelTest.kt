@@ -5,7 +5,7 @@ import com.rafaelfelipeac.improov.base.CoroutineRule
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
 import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoric
 import com.rafaelfelipeac.improov.base.DataProviderTest.createItem
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.GetHistoricListUseCase

@@ -433,12 +433,12 @@
                         app:layout_constraintVertical_bias="0.0" />
 
                 <RadioButton
-                        android:id="@+id/goalFormRadioTypeTotal"
+                        android:id="@+id/goalFormRadioTypeFinal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_small"
                         android:layout_marginEnd="@dimen/margin_small"
-                        android:text="@string/goal_form_radio_type_total"
+                        android:text="@string/goal_form_radio_type_final"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/text_size_large"
                         app:layout_constraintBottom_toTopOf="@+id/goalFormGoalCounter"

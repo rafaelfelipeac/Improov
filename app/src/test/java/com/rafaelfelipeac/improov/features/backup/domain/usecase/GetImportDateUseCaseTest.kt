@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.backup.domain.usecase
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.getDate
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.backup.domain.repository.DatabaseRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

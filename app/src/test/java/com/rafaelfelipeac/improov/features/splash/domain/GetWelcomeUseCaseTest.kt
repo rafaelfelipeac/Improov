@@ -1,6 +1,6 @@
 package com.rafaelfelipeac.improov.features.splash.domain
 
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.splash.domain.repository.WelcomeRepository
 import com.rafaelfelipeac.improov.features.splash.domain.usecase.GetWelcomeUseCase
 import kotlinx.coroutines.runBlocking

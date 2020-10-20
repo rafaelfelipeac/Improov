@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.profile.data.preferences
 
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.rafaelfelipeac.improov.base.BaseInstTest
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equal
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,7 +23,7 @@ class ProfilePreferencesTest : BaseInstTest() {
         val result = preferences.firstTimeAdd
 
         // then
-        result equalTo firstTimeAdd
+        result equal firstTimeAdd
     }
 
     @Test
@@ -37,7 +37,7 @@ class ProfilePreferencesTest : BaseInstTest() {
         val result = preferences.firstTimeList
 
         // then
-        result equalTo firstTimeList
+        result equal firstTimeList
     }
 
     @Test
@@ -51,7 +51,7 @@ class ProfilePreferencesTest : BaseInstTest() {
         val result = preferences.name
 
         // then
-        result equalTo name
+        result equal name
     }
 
     @Test
@@ -65,6 +65,6 @@ class ProfilePreferencesTest : BaseInstTest() {
         val result = preferences.welcome
 
         // then
-        result equalTo welcome
+        result equal welcome
     }
 }

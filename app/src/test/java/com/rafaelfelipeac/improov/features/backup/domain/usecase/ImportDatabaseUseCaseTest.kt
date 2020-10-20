@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.features.backup.domain.usecase
 
 import com.rafaelfelipeac.improov.base.DataProviderTest
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.backup.domain.repository.DatabaseRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -25,7 +25,7 @@ class ImportDatabaseUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a json with information for DAO and Preferences WHEN import is called THEN return true`() {
+    fun `GIVEN a json with information for Dao and Preferences WHEN import is called THEN return true`() {
         runBlocking {
             // given
             val goals = listOf(DataProviderTest.createGoalDataModel())

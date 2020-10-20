@@ -3,14 +3,14 @@ package com.rafaelfelipeac.improov.features.commons.data.dao
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.rafaelfelipeac.improov.base.BaseInstTest
 import com.rafaelfelipeac.improov.base.DataProviderAndroidTest.createGoalDataModel
-import com.rafaelfelipeac.improov.core.extension.equalTo
+import com.rafaelfelipeac.improov.base.equal
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4ClassRunner::class)
-class GoalDAOTest : BaseInstTest() {
+class GoalDaoTest : BaseInstTest() {
 
-    private val goalDAO get() = roomDatabase.goalDAO()
+    private val goalDao get() = roomDatabase.goalDao()
 
     @Test
     fun givenANewGoalWhenGetIsCalledThenTheSameGoalIsReturned() {
@@ -18,13 +18,13 @@ class GoalDAOTest : BaseInstTest() {
         val goalId = 1L
         val goal = createGoalDataModel(goalId)
 
-        goalDAO.save(goal)
+        goalDao.save(goal)
 
         // when
-        val result = goalDAO.get(goalId)
+        val result = goalDao.get(goalId)
 
         // then
-        result equalTo goal
+        result equal goal
     }
 
     @Test
@@ -34,14 +34,14 @@ class GoalDAOTest : BaseInstTest() {
         val goalB = createGoalDataModel(goalId = 2, name = "goalB")
         val list = listOf(goalA, goalB)
 
-        goalDAO.save(goalA)
-        goalDAO.save(goalB)
+        goalDao.save(goalA)
+        goalDao.save(goalB)
 
         // when
-        val result = goalDAO.getAll()
+        val result = goalDao.getAll()
 
         // then
-        result equalTo list
+        result equal list
     }
 
     @Test
@@ -49,13 +49,13 @@ class GoalDAOTest : BaseInstTest() {
         // given
         val goal = createGoalDataModel()
 
-        goalDAO.save(goal)
+        goalDao.save(goal)
 
         // when
-        val result = goalDAO.delete(goal)
+        val result = goalDao.delete(goal)
 
         // then
-        result equalTo Unit
+        result equal Unit
     }
 
     @Test
@@ -65,17 +65,17 @@ class GoalDAOTest : BaseInstTest() {
         val goalB = createGoalDataModel(goalId = 2, name = "goalB")
         val list = mutableListOf(goalA, goalB)
 
-        goalDAO.save(goalA)
-        goalDAO.save(goalB)
+        goalDao.save(goalA)
+        goalDao.save(goalB)
 
         list.remove(goalA)
-        goalDAO.delete(goalA)
+        goalDao.delete(goalA)
 
         // when
-        val result = goalDAO.getAll()
+        val result = goalDao.getAll()
 
         // then
-        result equalTo list
+        result equal list
     }
 
     @Test
@@ -83,15 +83,15 @@ class GoalDAOTest : BaseInstTest() {
         // given
         val goalId = 10L
         val goalA = createGoalDataModel(goalId = goalId, name = "goalA")
-        goalDAO.save(goalA)
+        goalDao.save(goalA)
 
         goalA.name = "goalAUpdated"
-        goalDAO.save(goalA)
+        goalDao.save(goalA)
 
         // when
-        val result = goalDAO.get(goalId)
+        val result = goalDao.get(goalId)
 
         // then
-        result equalTo goalA
+        result equal goalA
     }
 }

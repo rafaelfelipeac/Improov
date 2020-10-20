@@ -5,18 +5,18 @@ import com.google.gson.JsonParseException
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import com.rafaelfelipeac.improov.features.backup.data.model.Database
 import com.rafaelfelipeac.improov.features.backup.domain.repository.DatabaseRepository
-import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDAO
-import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDAO
-import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDAO
+import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
+import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDao
+import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import java.util.Calendar
 
 class DatabaseRepositoryImpl @Inject constructor(
-    private val goalsDao: GoalDAO,
-    private val historicDao: HistoricDAO,
-    private val itemDao: ItemDAO,
+    private val goalDao: GoalDao,
+    private val historicDao: HistoricDao,
+    private val itemDao: ItemDao,
     private val preferences: Preferences
 ) : DatabaseRepository {
 
@@ -30,7 +30,7 @@ class DatabaseRepositoryImpl @Inject constructor(
                         preferences.name,
                         preferences.firstTimeList,
                         preferences.firstTimeAdd,
-                        goalsDao.getAll(),
+                        goalDao.getAll(),
                         itemDao.getAll(),
                         historicDao.getAll()
                     )
@@ -52,7 +52,7 @@ class DatabaseRepositoryImpl @Inject constructor(
             try {
                 val database = Gson().fromJson(databaseBackup, Database::class.java)
 
-                database.goals.forEach { goalsDao.save(it) }
+                database.goals.forEach { goalDao.save(it) }
                 database.items.forEach { itemDao.save(it) }
                 database.historics.forEach { historicDao.save(it) }
 
