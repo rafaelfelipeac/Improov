@@ -52,6 +52,10 @@ class DatabaseRepositoryImpl @Inject constructor(
             try {
                 val database = Gson().fromJson(databaseBackup, Database::class.java)
 
+                goalDao.getAll().forEach { goalDao.delete(it) }
+                itemDao.getAll().forEach { itemDao.delete(it) }
+                historicDao.getAll().forEach { historicDao.delete(it) }
+
                 database.goals.forEach { goalDao.save(it) }
                 database.items.forEach { itemDao.save(it) }
                 database.historics.forEach { historicDao.save(it) }
