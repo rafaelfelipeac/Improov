@@ -69,7 +69,9 @@ class ProfileFragment : BaseFragment() {
 
     private fun observeViewModel() {
         viewModel.saved.observe(this) {
-            navController.navigate(ProfileFragmentDirections.profileToWelcome())
+            if (navController.currentDestination?.id == R.id.navigationProfile) {
+                navController.navigate(ProfileFragmentDirections.profileToWelcome())
+            }
         }
 
         viewModel.name.observe(this) {

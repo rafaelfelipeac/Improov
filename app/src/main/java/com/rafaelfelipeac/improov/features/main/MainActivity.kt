@@ -74,7 +74,7 @@ class MainActivity : BaseActivity() {
     private fun lastFragment(): Boolean {
         val currentFragment = NavHostFragment.findNavController(navHostFragment).currentDestination?.id
 
-        return currentFragment == R.id.navigationList
+        return currentFragment == R.id.navigationList  || currentFragment == R.id.navigationWelcome
     }
 
     private fun setupElements() {
