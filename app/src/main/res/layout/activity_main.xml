@@ -61,7 +61,7 @@
                 android:id="@+id/fabLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_larger"
+                android:layout_marginBottom="@dimen/fab_offset"
                 android:src="@drawable/ic_plus"
                 app:backgroundTint="@color/colorPrimary"
                 app:layout_anchor="@id/bottomAppBar"
