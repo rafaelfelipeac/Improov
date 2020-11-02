@@ -10,7 +10,7 @@ data class Database(
     val name: String,
     val firstTimeList: Boolean,
     val firstTimeAdd: Boolean,
-    val goals: List<GoalDataModel>,
-    val items: List<ItemDataModel>,
-    val historics: List<HistoricDataModel>
+    val goals: List<GoalDataModel>?,
+    val items: List<ItemDataModel>?,
+    val historics: List<HistoricDataModel>?
 )
