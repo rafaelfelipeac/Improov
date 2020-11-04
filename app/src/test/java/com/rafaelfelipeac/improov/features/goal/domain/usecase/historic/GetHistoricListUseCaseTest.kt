@@ -25,7 +25,7 @@ class GetHistoricListUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a list of historics WHEN use getHistoricListUseCase THEN return a filtered and reversed list`() {
+    fun `GIVEN a list of historics WHEN getHistoricListUseCase is called THEN return a filtered and reversed list`() {
         runBlocking {
             // given
             val goalIdCustom = 3L

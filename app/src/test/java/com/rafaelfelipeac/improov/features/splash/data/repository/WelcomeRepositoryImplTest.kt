@@ -24,7 +24,7 @@ class WelcomeRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a boolean value WHEN Get is called THEN return the same boolean value`() {
+    fun `GIVEN a boolean value WHEN getWelcome is called THEN return the same boolean value`() {
         runBlocking {
             // given
             val booleanValue = false

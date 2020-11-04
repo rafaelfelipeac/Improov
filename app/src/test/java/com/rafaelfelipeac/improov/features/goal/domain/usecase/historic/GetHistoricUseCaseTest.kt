@@ -27,7 +27,7 @@ class GetHistoricUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a historicId WHEN use getHistoricUseCase THEN return a historic with the specific historicId`() {
+    fun `GIVEN a historicId WHEN getHistoricUseCase is called THEN return a historic with the specific historicId`() {
         runBlocking {
             // given
             val historic = createHistoric(historicId)

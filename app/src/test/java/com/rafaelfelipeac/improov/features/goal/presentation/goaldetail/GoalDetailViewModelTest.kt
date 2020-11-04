@@ -54,7 +54,7 @@ class GoalDetailViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveGoal is successful WHEN onSaveGoal is called THEN true is returned`() {
+    fun `GIVEN saveGoal is successful WHEN saveGoal is called THEN goalId is returned`() {
         // given
         val goalId = 1L
         val goal = createGoal(goalId)
@@ -70,7 +70,7 @@ class GoalDetailViewModelTest {
     }
 
     @Test
-    fun `GIVEN getGoal is successful WHEN getGoal is called THEN return the specific goal`() {
+    fun `GIVEN getGoal is successful WHEN loadData is called THEN return the specific goal`() {
         // given
         val goalId = 1L
         val goal = createGoal(goalId)
@@ -87,7 +87,7 @@ class GoalDetailViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveItem is successful WHEN onSaveItem is called THEN true is returned`() {
+    fun `GIVEN saveItem is successful WHEN saveItem is called THEN itemId is returned`() {
         // given
         val itemId = 1L
         val item = createItem(itemId)
@@ -103,7 +103,7 @@ class GoalDetailViewModelTest {
     }
 
     @Test
-    fun `GIVEN getItemList is successful WHEN getItems is called THEN return a list of items`() {
+    fun `GIVEN getItemList is successful WHEN loadData is called THEN return a list of items`() {
         // given
         val goalId = 1L
         val items = listOf(
@@ -124,7 +124,7 @@ class GoalDetailViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveHistoric is successful WHEN onSaveHistoric is called THEN true is returned`() {
+    fun `GIVEN saveHistoric is successful WHEN saveHistoric is called THEN historicId is returned`() {
         // given
         val historicId = 1L
         val historic = createHistoric(historicId)
@@ -140,7 +140,7 @@ class GoalDetailViewModelTest {
     }
 
     @Test
-    fun `GIVEN getHistoricList is successful WHEN getHistoric is called THEN return a list of historics`() {
+    fun `GIVEN getHistoricList is successful WHEN loadData is called THEN return a list of historics`() {
         // given
         val goalId = 1L
         val historics = listOf(

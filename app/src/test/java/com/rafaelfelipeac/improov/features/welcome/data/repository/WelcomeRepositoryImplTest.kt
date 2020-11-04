@@ -24,7 +24,7 @@ class WelcomeRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a saved new boolean value WHEN Get is called THEN the new boolean value must be returned`() {
+    fun `GIVEN a saved new boolean value WHEN save is called THEN a Unit must be returned`() {
         runBlocking {
             // given
             val booleanValue = true

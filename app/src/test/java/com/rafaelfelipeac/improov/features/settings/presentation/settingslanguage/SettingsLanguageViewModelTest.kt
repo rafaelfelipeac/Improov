@@ -39,7 +39,7 @@ class SettingsLanguageViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveLanguage is successful WHEN onSaveLanguage is called THEN a Unit is returned`() {
+    fun `GIVEN saveLanguage is successful WHEN saveLanguage is called THEN a Unit is returned`() {
         // given
         val language = "pt_br"
 

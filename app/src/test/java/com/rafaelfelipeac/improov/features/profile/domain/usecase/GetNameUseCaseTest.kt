@@ -24,7 +24,7 @@ class GetNameUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a name WHEN use getNameUseCase THEN return the same name`() {
+    fun `GIVEN a name WHEN getNameUseCase is called THEN return the same name`() {
         runBlocking {
             // given
             val name = "User Name"

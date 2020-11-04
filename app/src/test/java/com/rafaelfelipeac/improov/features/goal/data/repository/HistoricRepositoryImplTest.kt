@@ -32,7 +32,7 @@ class HistoricRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a historicId WHEN getHistoric is called THEN historicRepositoryImpl return a historic`() {
+    fun `GIVEN a historicId WHEN getHistoric is called THEN return a historic with the specific historicId`() {
         runBlocking {
             // given
             val historic = createHistoric(historicId).let { historicDataModelMapper.mapReverse(it) }
@@ -48,7 +48,7 @@ class HistoricRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a list of historics WHEN getHistorics is called THEN historicRepositoryImpl return the list`() {
+    fun `GIVEN a list of historics WHEN getHistorics is called THEN return the same historics`() {
         runBlocking {
             // given
             val historics = listOf(createHistoric(), createHistoric(), createHistoric())
@@ -65,7 +65,7 @@ class HistoricRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a historic WHEN save is called THEN historicRepositoryImp return the historicId as a confirmation`() {
+    fun `GIVEN a historic WHEN save is called THEN return the historicId as a confirmation`() {
         runBlocking {
             // given
             val historic = createHistoric(historicId)
@@ -81,7 +81,7 @@ class HistoricRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a historic WHEN delete is called THEN historicRepositoryImp return just a Unit value`() {
+    fun `GIVEN a historic WHEN delete is called THEN return just a Unit value`() {
         runBlocking {
             // given
             val historic = createHistoric(historicId)

@@ -27,7 +27,7 @@ class DeleteGoalUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a goalId WHEN use deleteGoalUseCase THEN return just a Unit value`() {
+    fun `GIVEN a goalId WHEN deleteGoalUseCase is called THEN return just a Unit value`() {
         runBlocking {
             // given
             val goal = createGoal(goalId)

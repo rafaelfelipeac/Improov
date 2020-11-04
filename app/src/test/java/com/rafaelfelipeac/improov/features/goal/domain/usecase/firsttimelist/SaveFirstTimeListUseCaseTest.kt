@@ -24,7 +24,7 @@ class SaveFirstTimeListUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a boolean value WHEN use saveFirstTimeListUseCase THEN return just a Unit value`() {
+    fun `GIVEN a boolean value WHEN saveFirstTimeListUseCase is called THEN return just a Unit value`() {
         runBlocking {
             // given
             val booleanValue = false

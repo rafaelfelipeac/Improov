@@ -25,7 +25,7 @@ class FirstTimeAddRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a boolean value WHEN Get is called THEN return the same boolean value`() {
+    fun `GIVEN a boolean value WHEN getFirstTimeAdd is called THEN return the same boolean value`() {
         runBlocking {
             // given
             val booleanValue = false
@@ -42,7 +42,7 @@ class FirstTimeAddRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a saved new boolean value WHEN Get is called THEN the new boolean value must be returned`() {
+    fun `GIVEN a saved boolean value WHEN getFirstTimeAdd is called THEN the same boolean value must be returned`() {
         runBlocking {
             // given
             val booleanValue = true

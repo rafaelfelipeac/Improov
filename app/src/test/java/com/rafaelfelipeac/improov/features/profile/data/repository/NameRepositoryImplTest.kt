@@ -26,7 +26,7 @@ class NameRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a certain name WHEN GetName is called THEN return the same name`() {
+    fun `GIVEN a certain name WHEN getName is called THEN return the same name`() {
         runBlocking {
             // given
             val name = "User Name"
@@ -43,7 +43,7 @@ class NameRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a saved new name WHEN GetName is called THEN the new name must be returned`() {
+    fun `GIVEN a saved new name WHEN getName is called THEN the new name must be returned`() {
         runBlocking {
             // given
             val name = "New User Name"

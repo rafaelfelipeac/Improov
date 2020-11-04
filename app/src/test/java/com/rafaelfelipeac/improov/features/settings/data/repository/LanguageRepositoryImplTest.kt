@@ -25,7 +25,7 @@ class LanguageRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a certain language WHEN GetLanguage is called THEN return the same language`() {
+    fun `GIVEN a certain language WHEN getLanguage is called THEN return the same language`() {
         runBlocking {
             // given
             val language = "pt_br"
@@ -42,7 +42,7 @@ class LanguageRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a saved new language WHEN GetLanguage is called THEN the new language must be returned`() {
+    fun `GIVEN a saved new language WHEN getLanguage is called THEN the new language must be returned`() {
         runBlocking {
             // given
             val language = "en"

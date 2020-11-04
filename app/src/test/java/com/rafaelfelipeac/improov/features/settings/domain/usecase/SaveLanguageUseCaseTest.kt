@@ -24,7 +24,7 @@ class SaveLanguageUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a language WHEN use saveLanguageUseCase THEN return just a Unit value`() {
+    fun `GIVEN a language WHEN saveLanguageUseCase is called THEN return just a Unit value`() {
         runBlocking {
             // given
             val language = "pt_br"

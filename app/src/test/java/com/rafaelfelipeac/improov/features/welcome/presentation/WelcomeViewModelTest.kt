@@ -36,7 +36,7 @@ class WelcomeViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveWelcome is successful WHEN onSaveWelcome is called THEN a Unit is returned`() {
+    fun `GIVEN saveWelcome is successful WHEN saveWelcome is called THEN a Unit is returned`() {
         // given
         val booleanValue = true
 

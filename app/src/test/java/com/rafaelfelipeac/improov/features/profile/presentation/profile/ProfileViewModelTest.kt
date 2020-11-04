@@ -45,7 +45,7 @@ class ProfileViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveWelcome is successful WHEN onSaveWelcome is called THEN a Unit is returned`() {
+    fun `GIVEN saveWelcome is successful WHEN saveWelcome is called THEN a Unit is returned`() {
         // given
         val booleanValue = true
 
@@ -60,7 +60,7 @@ class ProfileViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveFirstTimeAdd is successful WHEN onSaveFirstTimeAdd is called THEN a Unit is returned`() {
+    fun `GIVEN saveFirstTimeAdd is successful WHEN saveFirstTimeAdd is called THEN a Unit is returned`() {
         // given
         val booleanValue = true
 
@@ -75,7 +75,7 @@ class ProfileViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveFirstTimeList is successful WHEN onSaveFirstTimeList is called THEN a Unit is returned`() {
+    fun `GIVEN saveFirstTimeList is successful WHEN saveFirstTimeList is called THEN a Unit is returned`() {
         // given
         val booleanValue = true
 

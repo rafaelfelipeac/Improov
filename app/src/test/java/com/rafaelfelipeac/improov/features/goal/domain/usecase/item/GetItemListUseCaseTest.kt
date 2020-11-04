@@ -25,7 +25,7 @@ class GetItemListUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a list of items WHEN use getItemListUseCase THEN return a filtered and ordered list of items`() {
+    fun `GIVEN a list of items WHEN getItemListUseCase is called THEN return a filtered and ordered list of items`() {
         runBlocking {
             // given
             val goalIdCustom = 3L

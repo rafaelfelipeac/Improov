@@ -27,7 +27,7 @@ class DeleteItemUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a itemId WHEN use deleteItemUseCase THEN return just a Unit value`() {
+    fun `GIVEN a itemId WHEN deleteItemUseCase is called THEN return just a Unit value`() {
         runBlocking {
             // given
             val item = createItem(itemId)
