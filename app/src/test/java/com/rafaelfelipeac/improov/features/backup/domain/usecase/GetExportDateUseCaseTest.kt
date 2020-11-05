@@ -25,7 +25,7 @@ class GetExportDateUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a Long value WHEN use getExportDateUseCase THEN return the same Long value`() {
+    fun `GIVEN a Long value WHEN getExportDateUseCase is called THEN return the same Long value`() {
         runBlocking {
             // given
             val exportDate = getDate()

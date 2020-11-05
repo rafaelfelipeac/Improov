@@ -41,10 +41,15 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        val baseFragment = (navHostFragment.childFragmentManager.fragments[0] as BaseFragment)
+        val baseFragment: BaseFragment? = try {
+            navHostFragment.childFragmentManager.fragments[0] as BaseFragment
+        } catch (e: ClassCastException) {
+            e.printStackTrace()
+            null
+        }
 
         when {
-            baseFragment.bottomSheetTipIsOpen() -> {
+            baseFragment != null && baseFragment.bottomSheetTipIsOpen() -> {
                 baseFragment.hideBottomSheetTips()
 
                 setupToolbar()
@@ -74,7 +79,7 @@ class MainActivity : BaseActivity() {
     private fun lastFragment(): Boolean {
         val currentFragment = NavHostFragment.findNavController(navHostFragment).currentDestination?.id
 
-        return currentFragment == R.id.navigationList
+        return currentFragment == R.id.navigationList || currentFragment == R.id.navigationWelcome
     }
 
     private fun setupElements() {

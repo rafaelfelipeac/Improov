@@ -27,7 +27,7 @@ class SaveGoalUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a goalId WHEN use saveGoalUseCase THEN return the same goalId as a confirmation`() {
+    fun `GIVEN a goalId WHEN saveGoalUseCase is called THEN return the same goalId as a confirmation`() {
         runBlocking {
             // given
             val goal = createGoal(goalId)

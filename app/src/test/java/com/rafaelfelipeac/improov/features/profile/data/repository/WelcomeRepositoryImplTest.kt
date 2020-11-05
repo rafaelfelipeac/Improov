@@ -26,7 +26,7 @@ class WelcomeRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a boolean value WHEN Get is called THEN return the same boolean value`() {
+    fun `GIVEN a boolean value WHEN getWelcome is called THEN return the same boolean value`() {
         runBlocking {
             // given
             val booleanValue = false
@@ -43,7 +43,7 @@ class WelcomeRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a saved new boolean value WHEN Get is called THEN the new boolean value must be returned`() {
+    fun `GIVEN a saved new boolean value WHEN getWelcome is called THEN the boolean value must be returned`() {
         runBlocking {
             // given
             val booleanValue = true

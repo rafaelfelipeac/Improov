@@ -27,7 +27,7 @@ class GetItemUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a itemId WHEN use getItemUseCase THEN return a item with the specific itemId`() {
+    fun `GIVEN a itemId WHEN getItemUseCase is called THEN return a item with the specific itemId`() {
         runBlocking {
             // given
             val item = createItem(itemId)

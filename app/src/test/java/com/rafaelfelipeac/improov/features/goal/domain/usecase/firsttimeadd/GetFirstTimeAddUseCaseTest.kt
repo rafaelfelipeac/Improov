@@ -24,7 +24,7 @@ class GetFirstTimeAddUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a boolean value WHEN use getFirstTimeAddUseCase THEN return the boolean value`() {
+    fun `GIVEN a boolean value WHEN getFirstTimeAddUseCase is called THEN return the boolean value`() {
         runBlocking {
             // given
             val booleanValue = true

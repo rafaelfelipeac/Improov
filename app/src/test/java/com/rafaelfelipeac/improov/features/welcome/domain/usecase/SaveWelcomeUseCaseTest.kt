@@ -24,7 +24,7 @@ class SaveWelcomeUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a boolean value WHEN use saveWelcomeUseCase THEN return just a Unit value`() {
+    fun `GIVEN a boolean value WHEN saveWelcomeUseCase is called THEN return just a Unit value`() {
         runBlocking {
             // given
             val booleanValue = false

@@ -24,7 +24,7 @@ class GetLanguageUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a language WHEN use getLanguageUseCase THEN return the same language`() {
+    fun `GIVEN a language WHEN getLanguageUseCase is called THEN return the same language`() {
         runBlocking {
             // given
             val language = "en"

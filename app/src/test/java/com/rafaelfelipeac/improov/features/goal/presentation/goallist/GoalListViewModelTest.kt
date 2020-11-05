@@ -46,7 +46,7 @@ class GoalListViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveGoal is successful WHEN onSaveGoal is called THEN the goalId is returned`() {
+    fun `GIVEN saveGoal is successful WHEN saveGoal is called THEN the goalId is returned`() {
         // given
         val goalId = 1L
         val goal = createGoal(goalId)
@@ -78,7 +78,7 @@ class GoalListViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveFirstTimeList is successful WHEN onSaveFirstTimeList is called THEN a Unit is returned`() {
+    fun `GIVEN saveFirstTimeList is successful WHEN saveFirstTimeList is called THEN a Unit is returned`() {
         // given
         val booleanValue = false
 

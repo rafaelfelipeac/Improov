@@ -25,7 +25,7 @@ class GetGoalListUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a custom list of goals WHEN use getGoalListUseCase THEN return a ordered list of goals`() {
+    fun `GIVEN a custom list of goals WHEN getGoalListUseCase is called THEN return a ordered list of goals`() {
         runBlocking {
             // given
             val goals = listOf(

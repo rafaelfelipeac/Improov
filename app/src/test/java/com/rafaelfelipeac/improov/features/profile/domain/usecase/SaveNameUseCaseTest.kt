@@ -24,7 +24,7 @@ class SaveNameUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a name WHEN use saveNameUseCase THEN return just a Unit value`() {
+    fun `GIVEN a name WHEN saveNameUseCase is called THEN return just a Unit value`() {
         runBlocking {
             // given
             val name = "User Name"

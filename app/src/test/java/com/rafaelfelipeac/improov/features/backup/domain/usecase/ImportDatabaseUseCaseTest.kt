@@ -25,7 +25,7 @@ class ImportDatabaseUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a json with information for Dao and Preferences WHEN import is called THEN return true`() {
+    fun `GIVEN a json with valid information WHEN importDatabaseUseCase is called THEN return true`() {
         runBlocking {
             // given
             val goals = listOf(DataProviderTest.createGoalDataModel())
@@ -60,7 +60,7 @@ class ImportDatabaseUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a json with invalid information WHEN import is called THEN return a false Boolean value`() {
+    fun `GIVEN a json with invalid information WHEN importDatabaseUseCase is called THEN return a false`() {
         runBlocking {
             // given
             val json = "invalid json"

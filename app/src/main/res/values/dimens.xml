@@ -69,6 +69,8 @@
 
     <dimen name="snackbar_offset">8dp</dimen>
 
+    <dimen name="fab_offset">30dp</dimen>
+
     <dimen name="fake_bottom_nav_height">60dp</dimen>
 
     <dimen name="bottom_sheet_peek_height">0dp</dimen>

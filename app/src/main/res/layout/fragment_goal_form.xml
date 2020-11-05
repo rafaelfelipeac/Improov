@@ -118,6 +118,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:inputType="numberDecimal"
+                                android:imeOptions="actionDone"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_regular" />
 
@@ -282,6 +283,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:inputType="numberDecimal"
+                                    android:imeOptions="actionDone"
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="@dimen/text_size_regular"/>
 

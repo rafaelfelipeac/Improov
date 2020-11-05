@@ -32,7 +32,7 @@ class ItemRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a itemId WHEN getItem is called THEN itemRepositoryImpl return a item with the specific itemId`() {
+    fun `GIVEN a itemId WHEN getItem is called THEN return a item with the specific itemId`() {
         runBlocking {
             // given
             val item = createItem(itemId).let { itemDataModelMapper.mapReverse(it) }
@@ -48,7 +48,7 @@ class ItemRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a list of items WHEN getItems is called THEN itemRepositoryImpl return a list with the same items`() {
+    fun `GIVEN a list of items WHEN getItems is called THEN return a list with the same items`() {
         runBlocking {
             // given
             val items = listOf(createItem(), createItem(), createItem())
@@ -65,7 +65,7 @@ class ItemRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a item WHEN save is called THEN itemRepositoryImp return the itemId as a confirmation`() {
+    fun `GIVEN a item WHEN save is called THEN return the itemId as a confirmation`() {
         runBlocking {
             // given
             val item = createItem(itemId)
@@ -81,7 +81,7 @@ class ItemRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a item with a specific itemId WHEN delete is called THEN itemRepositoryImp return just a Unit value`() {
+    fun `GIVEN a item with a specific itemId WHEN delete is called THEN return just a Unit value`() {
         runBlocking {
             // given
             val item = createItem(itemId)

@@ -17,13 +17,14 @@ class DatabaseRepositoryImpl @Inject constructor(
     private val goalDao: GoalDao,
     private val historicDao: HistoricDao,
     private val itemDao: ItemDao,
-    private val preferences: Preferences
+    private val preferences: Preferences,
+    private val gson: Gson
 ) : DatabaseRepository {
 
     override suspend fun export(): String {
         return withContext(Dispatchers.IO) {
             try {
-                val json = Gson().toJson(
+                val json = gson.toJson(
                     Database(
                         preferences.language,
                         preferences.welcome,
@@ -50,11 +51,23 @@ class DatabaseRepositoryImpl @Inject constructor(
     override suspend fun import(databaseBackup: String): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                val database = Gson().fromJson(databaseBackup, Database::class.java)
+                val database = gson.fromJson(databaseBackup, Database::class.java)
 
-                database.goals.forEach { goalDao.save(it) }
-                database.items.forEach { itemDao.save(it) }
-                database.historics.forEach { historicDao.save(it) }
+                goalDao.getAll().forEach { goalDao.delete(it) }
+                itemDao.getAll().forEach { itemDao.delete(it) }
+                historicDao.getAll().forEach { historicDao.delete(it) }
+
+                if (database.goals != null) {
+                    database.goals.forEach { goalDao.save(it) }
+                }
+
+                if (database.items != null) {
+                    database.items.forEach { itemDao.save(it) }
+                }
+
+                if (database.historics != null) {
+                    database.historics.forEach { historicDao.save(it) }
+                }
 
                 preferences.language = database.language
                 preferences.welcome = database.welcome

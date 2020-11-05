@@ -27,7 +27,7 @@ class SaveHistoricUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a historicId WHEN use saveHistoricUseCase THEN return the same historicId as a confirmation`() {
+    fun `GIVEN a historicId WHEN saveHistoricUseCase is called THEN return the same historicId as a confirmation`() {
         runBlocking {
             // given
             val historic = createHistoric(historicId)

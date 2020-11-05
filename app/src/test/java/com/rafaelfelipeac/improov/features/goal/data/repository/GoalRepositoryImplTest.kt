@@ -32,7 +32,7 @@ class GoalRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a goalId WHEN getGoal is called THEN goalRepositoryImpl return a goal with the specific goalId`() {
+    fun `GIVEN a goalId WHEN getGoal is called THEN return a goal with the specific goalId`() {
         runBlocking {
             // given
             val goal = createGoal(goalId).let { goalDataModelMapper.mapReverse(it) }
@@ -48,7 +48,7 @@ class GoalRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a list of goals WHEN getGoals is called THEN goalRepositoryImpl return a list with the same goals`() {
+    fun `GIVEN a list of goals WHEN getGoals is called THEN return a list with the same goals`() {
         runBlocking {
             // given
             val goals = listOf(createGoal(), createGoal(), createGoal()).let { goalDataModelMapper.mapListReverse(it) }
@@ -64,7 +64,7 @@ class GoalRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a goal WHEN save is called THEN goalRepositoryImp return the goalId as a confirmation`() {
+    fun `GIVEN a goal WHEN save is called THEN return the goalId as a confirmation`() {
         runBlocking {
             // given
             val goal = createGoal(goalId)
@@ -80,7 +80,7 @@ class GoalRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a goal with a specific goalId WHEN delete is called THEN goalRepositoryImp return just a Unit value`() {
+    fun `GIVEN a goal with a specific goalId WHEN delete is called THEN return just a Unit value`() {
         runBlocking {
             // given
             val goal = createGoal(goalId)

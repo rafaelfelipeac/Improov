@@ -39,7 +39,7 @@ class ProfileEditViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveName is successful WHEN onSaveName is called THEN a Unit is returned`() {
+    fun `GIVEN saveName is successful WHEN saveName is called THEN a Unit is returned`() {
         // given
         val name = "User Name"
 

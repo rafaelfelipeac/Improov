@@ -52,7 +52,7 @@ class GoalFormViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveGoal is successful WHEN onSaveGoal is called THEN true is returned`() {
+    fun `GIVEN saveGoal is successful WHEN saveGoal is called THEN goalId is returned`() {
         // given
         val goalId = 1L
         val goal = createGoal(goalId)
@@ -68,7 +68,7 @@ class GoalFormViewModelTest {
     }
 
     @Test
-    fun `GIVEN getGoal is successful WHEN getGoal is called THEN return the specific goal`() {
+    fun `GIVEN getGoal is successful WHEN loadData is called THEN return the specific goal`() {
         // given
         val goalId = 1L
         val goal = createGoal(goalId)
@@ -85,7 +85,7 @@ class GoalFormViewModelTest {
     }
 
     @Test
-    fun `GIVEN getGoalList is successful WHEN getGoals is called THEN return a list of goals`() {
+    fun `GIVEN getGoalList is successful WHEN loadData is called THEN return a list of goals`() {
         // given
         val goals = listOf(createGoal(1), createGoal(2), createGoal(3))
 
@@ -100,7 +100,7 @@ class GoalFormViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveFirstTimeList is successful WHEN onSaveFirstTimeList is called THEN a Unit is returned`() {
+    fun `GIVEN saveFirstTimeList is successful WHEN saveFirstTimeList is called THEN a Unit is returned`() {
         // given
         val booleanValue = true
 
@@ -115,7 +115,7 @@ class GoalFormViewModelTest {
     }
 
     @Test
-    fun `GIVEN saveFirstTimeAdd is successful WHEN onSaveFirstTimeAdd is called THEN a Unit is returned`() {
+    fun `GIVEN saveFirstTimeAdd is successful WHEN saveFirstTimeAdd is called THEN a Unit is returned`() {
         // given
         val booleanValue = true
 
@@ -130,7 +130,7 @@ class GoalFormViewModelTest {
     }
 
     @Test
-    fun `GIVEN getFirstTimeAdd is successful WHEN getFirstTimeAdd is called THEN a boolean value is returned`() {
+    fun `GIVEN getFirstTimeAdd is successful WHEN loadData is called THEN a boolean is returned`() {
         // given
         val booleanValue = true
 

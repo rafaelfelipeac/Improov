@@ -1,7 +1,7 @@
 package com.rafaelfelipeac.improov.core.di
 
 import android.app.Application
-import com.rafaelfelipeac.improov.core.di.modules.ContextModule
+import com.rafaelfelipeac.improov.core.di.modules.CoreModule
 import com.rafaelfelipeac.improov.core.di.modules.PreferencesModule
 import com.rafaelfelipeac.improov.core.di.modules.GoalModule
 import com.rafaelfelipeac.improov.core.di.modules.ProfileModule
@@ -16,7 +16,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Component(modules = [
-    ContextModule::class,
+    CoreModule::class,
     PreferencesModule::class,
     GoalModule::class,
     ProfileModule::class,

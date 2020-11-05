@@ -1,5 +1,6 @@
 package com.rafaelfelipeac.improov.features.backup.data.repository
 
+import com.google.gson.Gson
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoalDataModel
 import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoricDataModel
 import com.rafaelfelipeac.improov.base.DataProviderTest.createItemDataModel
@@ -37,7 +38,7 @@ class DatabaseRepositoryImplTest {
 
     @Before
     fun setup() {
-        databaseRepositoryImp = DatabaseRepositoryImpl(goalDao, historicDao, itemDao, preferences)
+        databaseRepositoryImp = DatabaseRepositoryImpl(goalDao, historicDao, itemDao, preferences, Gson())
     }
 
     @Test

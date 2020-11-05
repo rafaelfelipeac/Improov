@@ -27,7 +27,7 @@ class DeleteHistoricUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a historicId WHEN use deleteHistoricUseCase THEN return just a Unit value`() {
+    fun `GIVEN a historicId WHEN deleteHistoricUseCase is called THEN return just a Unit value`() {
         runBlocking {
             // given
             val historic = createHistoric(historicId)

@@ -27,7 +27,7 @@ class GetGoalUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a goalId WHEN use getGoalUseCase THEN return a goal with the specific goalId`() {
+    fun `GIVEN a goalId WHEN getGoalUseCase is called THEN return a goal with the specific goalId`() {
         runBlocking {
             // given
             val goal = createGoal(goalId)

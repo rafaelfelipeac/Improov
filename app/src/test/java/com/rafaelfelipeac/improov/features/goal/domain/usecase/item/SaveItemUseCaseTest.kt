@@ -27,7 +27,7 @@ class SaveItemUseCaseTest {
     }
 
     @Test
-    fun `GIVEN a itemId WHEN use saveItemUseCase THEN return the same itemId as a confirmation`() {
+    fun `GIVEN a itemId WHEN saveItemUseCase is called THEN return the same itemId as a confirmation`() {
         runBlocking {
             // given
             val item = createItem(itemId)
