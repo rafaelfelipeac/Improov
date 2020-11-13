@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rafaelfelipeac.improov.R
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.platform.base.BaseDialog
-import kotlinx.android.synthetic.main.fragment_dialog_one_button.*
+import com.rafaelfelipeac.improov.databinding.FragmentDialogOneButtonBinding
 
 class DialogOneButton(private val message: String) : BaseDialog() {
+
+    private var binding by viewBinding<FragmentDialogOneButtonBinding>()
 
     private var onClickListener: OnClickListener? = null
 
@@ -20,7 +22,10 @@ class DialogOneButton(private val message: String) : BaseDialog() {
 
         setScreen()
 
-        return inflater.inflate(R.layout.fragment_dialog_one_button, container, false)
+        return FragmentDialogOneButtonBinding.inflate(inflater, container, false).run {
+            binding = this
+            binding.root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,11 +36,11 @@ class DialogOneButton(private val message: String) : BaseDialog() {
     }
 
     private fun setupLayout() {
-        dialogOneButtonMessage.text = message
+        binding.dialogOneButtonMessage.text = message
     }
 
     private fun setBehaviours() {
-        dialogOneButtonOKButton.setOnClickListener { onClickListener?.onOK() }
+        binding.dialogOneButtonOKButton.setOnClickListener { onClickListener?.onOK() }
     }
 
     private fun setScreen() {

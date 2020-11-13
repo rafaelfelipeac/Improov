@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.invisible
 import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_welcome.*
+import com.rafaelfelipeac.improov.databinding.FragmentWelcomeBinding
 
 class WelcomeFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelProvider.welcomeViewModel() }
+
+    private var binding by viewBinding<FragmentWelcomeBinding>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +25,10 @@ class WelcomeFragment : BaseFragment() {
 
         setScreen()
 
-        return inflater.inflate(R.layout.fragment_welcome, container, false)
+        return FragmentWelcomeBinding.inflate(inflater, container, false).run {
+            binding = this
+            binding.root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,16 +44,16 @@ class WelcomeFragment : BaseFragment() {
     }
 
     private fun setupLayout() {
-        welcomeStartButton.setOnClickListener {
+        binding.welcomeStartButton.setOnClickListener {
             viewModel.saveWelcome(true)
         }
 
-        welcomeViewPager.adapter =
+        binding.welcomeViewPager.adapter =
             WelcomeAdapter(
                 this,
                 parentFragmentManager
             )
-        welcomeDots.setupWithViewPager(welcomeViewPager, true)
+        binding.welcomeDots.setupWithViewPager(binding.welcomeViewPager, true)
     }
 
     private fun observeViewModel() {
@@ -58,10 +63,10 @@ class WelcomeFragment : BaseFragment() {
     }
 
     fun showStartButton() {
-        welcomeStartButton?.visible()
+        binding.welcomeStartButton.visible()
     }
 
     fun hideStartButton() {
-        welcomeStartButton?.invisible()
+        binding.welcomeStartButton.invisible()
     }
 }

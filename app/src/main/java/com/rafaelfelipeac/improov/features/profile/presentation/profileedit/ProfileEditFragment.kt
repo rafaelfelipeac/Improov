@@ -8,12 +8,15 @@ import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.isEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.focusOnEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_profile_edit.*
+import com.rafaelfelipeac.improov.databinding.FragmentProfileEditBinding
 
 class ProfileEditFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelProvider.profileEditViewModel() }
+
+    private var binding by viewBinding<FragmentProfileEditBinding>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +26,10 @@ class ProfileEditFragment : BaseFragment() {
 
         setScreen()
 
-        return inflater.inflate(R.layout.fragment_profile_edit, container, false)
+        return FragmentProfileEditBinding.inflate(inflater, container, false).run {
+            binding = this
+            binding.root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,13 +48,13 @@ class ProfileEditFragment : BaseFragment() {
     }
 
     private fun setupLayout() {
-        profileEditSaveButton.setOnClickListener {
+        binding.profileEditSaveButton.setOnClickListener {
             when {
                 verifyElements() -> {
                 }
                 else -> {
                     hideSoftKeyboard()
-                    viewModel.saveName(profileEditName.text.toString())
+                    viewModel.saveName(binding.profileEditName.text.toString())
                 }
             }
         }
@@ -60,14 +66,14 @@ class ProfileEditFragment : BaseFragment() {
         }
 
         viewModel.name.observe(this) {
-            profileEditName.setText(it)
+            binding.profileEditName.setText(it)
         }
     }
 
     private fun verifyElements(): Boolean {
         return when {
-            profileEditName.isEmptyOrZero() -> {
-                profileEditName.focusOnEmptyOrZero(this, false)
+            binding.profileEditName.isEmptyOrZero() -> {
+                binding.profileEditName.focusOnEmptyOrZero(this, false)
 
                 setErrorMessage(getString(R.string.profile_edit_empty_fields))
                 true
@@ -77,6 +83,6 @@ class ProfileEditFragment : BaseFragment() {
     }
 
     private fun setErrorMessage(message: String) {
-        profileEditErrorMessage.text = message
+        binding.profileEditErrorMessage.text = message
     }
 }

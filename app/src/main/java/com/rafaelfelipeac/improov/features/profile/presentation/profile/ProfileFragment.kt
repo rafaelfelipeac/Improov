@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.invisible
 import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_profile.*
+import com.rafaelfelipeac.improov.databinding.FragmentProfileBinding
 
 class ProfileFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelProvider.profileViewModel() }
+
+    private var binding by viewBinding<FragmentProfileBinding>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +26,10 @@ class ProfileFragment : BaseFragment() {
 
         setScreen()
 
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        return FragmentProfileBinding.inflate(inflater, container, false).run {
+            binding = this
+            binding.root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,21 +54,21 @@ class ProfileFragment : BaseFragment() {
             navController.navigate(ProfileFragmentDirections.profileToGoalForm())
         }
 
-        profileShowWelcomeButton.setOnClickListener {
+        binding.profileShowWelcomeButton.setOnClickListener {
             viewModel.saveWelcome(false)
             viewModel.saveFirstTimeAdd(true)
             viewModel.saveFirstTimeList(false)
         }
 
-        profileBackup.setOnClickListener {
+        binding.profileBackup.setOnClickListener {
             navController.navigate(ProfileFragmentDirections.profileToBackup())
         }
 
-        profileEditProfileButton.setOnClickListener {
+        binding.profileEditProfileButton.setOnClickListener {
             navController.navigate(ProfileFragmentDirections.profileToProfileEdit())
         }
 
-        profileSettingsButton.setOnClickListener {
+        binding.profileSettingsButton.setOnClickListener {
             navController.navigate(ProfileFragmentDirections.profileToSettings())
         }
     }
@@ -76,12 +82,12 @@ class ProfileFragment : BaseFragment() {
 
         viewModel.name.observe(this) {
             if (it.isNotEmpty()) {
-                profileUserName.text = it
-                profileUserName.visible()
-                profileEditProfileButton.text = getString(R.string.profile_edit_name_message)
+                binding.profileUserName.text = it
+                binding.profileUserName.visible()
+                binding.profileEditProfileButton.text = getString(R.string.profile_edit_name_message)
             } else {
-                profileUserName.invisible()
-                profileEditProfileButton.text = getString(R.string.profile_add_name_message)
+                binding.profileUserName.invisible()
+                binding.profileEditProfileButton.text = getString(R.string.profile_add_name_message)
             }
         }
     }

@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.setVisibility
 import com.rafaelfelipeac.improov.core.extension.gone
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.vibrate
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
+import com.rafaelfelipeac.improov.databinding.FragmentGoalListBinding
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
-import kotlinx.android.synthetic.main.fragment_goal_list.*
 
 const val PERCENTAGE_MAX = 100
 const val SECONDS_BOTTOM_SHEET = 1000L
@@ -30,6 +30,8 @@ class GoalListFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelProvider.goalListViewModel() }
 
+    private var binding by viewBinding<FragmentGoalListBinding>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,7 +40,10 @@ class GoalListFragment : BaseFragment() {
 
         setScreen()
 
-        return inflater.inflate(R.layout.fragment_goal_list, container, false)
+        return FragmentGoalListBinding.inflate(inflater, container, false).run {
+            binding = this
+            binding.root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,10 +96,10 @@ class GoalListFragment : BaseFragment() {
     private fun setupGoals(visible: Boolean = true) {
         setGoals()
 
-        goalListLoading.gone()
+        binding.goalListLoading.gone()
 
-        goalListList.setVisibility(visible)
-        goalListPlaceholder.setVisibility(!visible)
+        binding.goalListList.setVisibility(visible)
+        binding.goalListPlaceholder.setVisibility(!visible)
     }
 
     private fun setGoals() {
@@ -104,7 +109,7 @@ class GoalListFragment : BaseFragment() {
             )
         val touchHelper = ItemTouchHelper(swipeAndDragHelper)
 
-        touchHelper.attachToRecyclerView(goalListList)
+        touchHelper.attachToRecyclerView(binding.goalListList)
 
         goalsAdapter.touchHelper = touchHelper
         goalsAdapter.clickListener = {
@@ -112,7 +117,7 @@ class GoalListFragment : BaseFragment() {
             navController.navigate(action)
         }
 
-        goalListList.apply {
+        binding.goalListList.apply {
             setHasFixedSize(true)
 
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

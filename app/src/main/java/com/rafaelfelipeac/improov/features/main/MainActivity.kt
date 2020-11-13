@@ -12,13 +12,13 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.rafaelfelipeac.improov.R
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.platform.base.BaseActivity
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import com.rafaelfelipeac.improov.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
 
@@ -28,21 +28,23 @@ class MainActivity : BaseActivity() {
     lateinit var navLayout: CoordinatorLayout
     lateinit var fab: FloatingActionButton
 
+    private val binding by viewBinding(ActivityMainBinding::inflate)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setTheme(R.style.AppTheme)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         setupElements()
         setupToolbar()
 
-        NavigationUI.setupWithNavController(bottomNav, navController)
+        NavigationUI.setupWithNavController(binding.bottomNav, navController)
     }
 
     override fun onBackPressed() {
         val baseFragment: BaseFragment? = try {
-            navHostFragment.childFragmentManager.fragments[0] as BaseFragment
+            supportFragmentManager.fragments[0] as BaseFragment
         } catch (e: ClassCastException) {
             e.printStackTrace()
             null
@@ -77,7 +79,7 @@ class MainActivity : BaseActivity() {
     override fun onSupportNavigateUp() = findNavController(R.id.navHostFragment).navigateUp()
 
     private fun lastFragment(): Boolean {
-        val currentFragment = NavHostFragment.findNavController(navHostFragment).currentDestination?.id
+        val currentFragment = navController.currentDestination?.id
 
         return currentFragment == R.id.navigationList || currentFragment == R.id.navigationWelcome
     }
@@ -85,9 +87,9 @@ class MainActivity : BaseActivity() {
     private fun setupElements() {
         toolbar = findViewById(R.id.toolbar)
         navController = findNavController(R.id.navHostFragment)
-        navLayout = navigationLayout
-        fakeBottomNav = fakeBottomNavigation
-        fab = fabLayout
+        navLayout = binding.navigationLayout
+        fakeBottomNav = binding.fakeBottomNavigation
+        fab = binding.fabLayout
     }
 
     private fun setupToolbar() {
