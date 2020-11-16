@@ -1,10 +1,10 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goallist
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +16,9 @@ import com.rafaelfelipeac.improov.core.extension.vibrate
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.databinding.FragmentGoalListBinding
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 const val PERCENTAGE_MAX = 100
 const val SECONDS_BOTTOM_SHEET = 1000L
@@ -82,7 +85,7 @@ class GoalListFragment : BaseFragment() {
 
         viewModel.savedFirstTimeList.observe(this) {
             if (!swipeShown) {
-                showBottomSheetTipsSwipe()
+                viewModel.viewModelScope.showBottomSheetTipsSwipe()
             }
         }
 
@@ -187,15 +190,15 @@ class GoalListFragment : BaseFragment() {
         viewModel.saveGoal(goal)
     }
 
-    private fun showBottomSheetTipsSwipe() {
+    private fun CoroutineScope.showBottomSheetTipsSwipe() {
         swipeShown = true
 
-        Handler().postDelayed(
-            {
-                setupBottomSheetTipsSwipe()
-                setupBottomSheetTip()
-                showBottomSheetTips()
-            }, SECONDS_BOTTOM_SHEET
-        )
+        launch {
+            delay(SECONDS_BOTTOM_SHEET)
+
+            setupBottomSheetTipsSwipe()
+            setupBottomSheetTip()
+            showBottomSheetTips()
+        }
     }
 }
