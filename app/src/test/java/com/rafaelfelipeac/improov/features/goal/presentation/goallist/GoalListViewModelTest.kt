@@ -9,6 +9,7 @@ import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.Sav
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
@@ -58,7 +59,9 @@ class GoalListViewModelTest {
         goalListViewModel.saveGoal(goal)
 
         // then
-        goalListViewModel.savedGoal.value equalTo goalId
+        runBlocking {
+            goalListViewModel.savedGoal.first() equalTo goalId
+        }
     }
 
     @Test
@@ -74,7 +77,9 @@ class GoalListViewModelTest {
         goalListViewModel.loadData()
 
         // then
-        goalListViewModel.goals.value equalTo goals
+        runBlocking {
+            goalListViewModel.goals.first() equalTo goals
+        }
     }
 
     @Test
@@ -89,7 +94,9 @@ class GoalListViewModelTest {
         goalListViewModel.saveFirstTimeList(booleanValue)
 
         // then
-        goalListViewModel.savedFirstTimeList.value equalTo Unit
+        runBlocking {
+            goalListViewModel.savedFirstTimeList.first() equalTo Unit
+        }
     }
 
     @Test
@@ -104,6 +111,8 @@ class GoalListViewModelTest {
         goalListViewModel.loadData()
 
         // then
-        goalListViewModel.firstTimeList.value equalTo booleanValue
+        runBlocking {
+            goalListViewModel.firstTimeList.first() equalTo booleanValue
+        }
     }
 }

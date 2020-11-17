@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.LocaleHelper
-import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.databinding.FragmentSettingsLanguageBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class SettingsLanguageFragment : BaseFragment() {
 
@@ -45,14 +47,18 @@ class SettingsLanguageFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.saved.observe(this) {
-            recreateFragment()
+        lifecycleScope.launch {
+            viewModel.saved.collect {
+                recreateFragment()
+            }
         }
 
-        viewModel.language.observe(this) {
-            LocaleHelper.setLocale(requireContext(), it)
+        lifecycleScope.launch {
+            viewModel.language.collect {
+                LocaleHelper.setLocale(requireContext(), it)
 
-            setupLanguage(it)
+                setupLanguage(it)
+            }
         }
     }
 

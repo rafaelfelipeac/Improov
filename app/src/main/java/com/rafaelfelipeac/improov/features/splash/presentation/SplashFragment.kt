@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rafaelfelipeac.improov.core.extension.observe
+import androidx.lifecycle.lifecycleScope
 import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.databinding.FragmentSplashBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class SplashFragment : BaseFragment() {
 
@@ -43,11 +45,13 @@ class SplashFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.welcome.observe(this) {
-            if (it) {
-                navController.navigate(SplashFragmentDirections.splashToList())
-            } else {
-                navController.navigate(SplashFragmentDirections.splashToWelcome())
+        lifecycleScope.launch {
+            viewModel.welcome.collect {
+                if (it) {
+                    navController.navigate(SplashFragmentDirections.splashToList())
+                } else {
+                    navController.navigate(SplashFragmentDirections.splashToWelcome())
+                }
             }
         }
     }

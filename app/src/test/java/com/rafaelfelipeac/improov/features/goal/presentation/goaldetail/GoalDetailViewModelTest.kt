@@ -13,6 +13,7 @@ import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.SaveHist
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.GetItemListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.SaveItemUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
@@ -66,7 +67,9 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.saveGoal(goal)
 
         // then
-        goalDetailViewModel.savedGoal.value equalTo goalId
+        runBlocking {
+            goalDetailViewModel.savedGoal.first() equalTo goalId
+        }
     }
 
     @Test
@@ -83,7 +86,9 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.loadData()
 
         // then
-        goalDetailViewModel.goal.value equalTo goal
+        runBlocking {
+            goalDetailViewModel.goal.first() equalTo goal
+        }
     }
 
     @Test
@@ -99,7 +104,9 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.saveItem(item)
 
         // then
-        goalDetailViewModel.savedItem.value equalTo itemId
+        runBlocking {
+            goalDetailViewModel.savedItem.first() equalTo itemId
+        }
     }
 
     @Test
@@ -120,7 +127,9 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.loadData()
 
         // then
-        goalDetailViewModel.items.value equalTo items
+        runBlocking {
+            goalDetailViewModel.items.first() equalTo items
+        }
     }
 
     @Test
@@ -136,7 +145,9 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.saveHistoric(historic)
 
         // then
-        goalDetailViewModel.savedHistoric.value equalTo historicId
+        runBlocking {
+            goalDetailViewModel.savedHistoric.first() equalTo historicId
+        }
     }
 
     @Test
@@ -157,6 +168,8 @@ class GoalDetailViewModelTest {
         goalDetailViewModel.loadData()
 
         // then
-        goalDetailViewModel.historics.value equalTo historics
+        runBlocking {
+            goalDetailViewModel.historics.first() equalTo historics
+        }
     }
 }

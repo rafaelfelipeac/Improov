@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.invisible
-import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.databinding.FragmentProfileBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class ProfileFragment : BaseFragment() {
 
@@ -74,20 +76,24 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.saved.observe(this) {
-            if (navController.currentDestination?.id == R.id.navigationProfile) {
-                navController.navigate(ProfileFragmentDirections.profileToWelcome())
+        lifecycleScope.launch {
+            viewModel.saved.collect {
+                if (navController.currentDestination?.id == R.id.navigationProfile) {
+                    navController.navigate(ProfileFragmentDirections.profileToWelcome())
+                }
             }
         }
 
-        viewModel.name.observe(this) {
-            if (it.isNotEmpty()) {
-                binding.profileUserName.text = it
-                binding.profileUserName.visible()
-                binding.profileEditProfileButton.text = getString(R.string.profile_edit_name_message)
-            } else {
-                binding.profileUserName.invisible()
-                binding.profileEditProfileButton.text = getString(R.string.profile_add_name_message)
+        lifecycleScope.launch {
+            viewModel.name.collect {
+                if (it.isNotEmpty()) {
+                    binding.profileUserName.text = it
+                    binding.profileUserName.visible()
+                    binding.profileEditProfileButton.text = getString(R.string.profile_edit_name_message)
+                } else {
+                    binding.profileUserName.invisible()
+                    binding.profileEditProfileButton.text = getString(R.string.profile_add_name_message)
+                }
             }
         }
     }

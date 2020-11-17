@@ -1,7 +1,5 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
@@ -13,6 +11,9 @@ import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.GetHisto
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.historic.SaveHistoricUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.GetItemListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.item.SaveItemUseCase
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,18 +29,18 @@ class GoalDetailViewModel @Inject constructor(
 
     private var goalId = 0L
 
-    val savedGoal: LiveData<Long> get() = _savedGoal
-    private val _savedGoal = MutableLiveData<Long>()
-    val goal: LiveData<Goal> get() = _goal
-    private val _goal = MutableLiveData<Goal>()
-    val savedItem: LiveData<Long> get() = _savedItem
-    private val _savedItem = MutableLiveData<Long>()
-    val items: LiveData<List<Item>> get() = _items
-    private val _items = MutableLiveData<List<Item>>()
-    val savedHistoric: LiveData<Long> get() = _savedHistoric
-    private val _savedHistoric = MutableLiveData<Long>()
-    val historics: LiveData<List<Historic>> get() = _historics
-    private val _historics = MutableLiveData<List<Historic>>()
+    val savedGoal: Flow<Long> get() = _savedGoal.filterNotNull()
+    private val _savedGoal = MutableStateFlow<Long?>(null)
+    val goal: Flow<Goal> get() = _goal.filterNotNull()
+    private val _goal = MutableStateFlow<Goal?>(null)
+    val savedItem: Flow<Long> get() = _savedItem.filterNotNull()
+    private val _savedItem = MutableStateFlow<Long?>(null)
+    val items: Flow<List<Item>> get() = _items.filterNotNull()
+    private val _items = MutableStateFlow<List<Item>?>(null)
+    val savedHistoric: Flow<Long> get() = _savedHistoric.filterNotNull()
+    private val _savedHistoric = MutableStateFlow<Long?>(null)
+    val historics: Flow<List<Historic>> get() = _historics.filterNotNull()
+    private val _historics = MutableStateFlow<List<Historic>?>(null)
 
     fun setGoalId(goalId: Long) {
         this.goalId = goalId
@@ -56,13 +57,13 @@ class GoalDetailViewModel @Inject constructor(
 
     fun saveGoal(goal: Goal) {
         viewModelScope.launch {
-            _savedGoal.postValue(saveGoalUseCase(goal))
+            _savedGoal.value = saveGoalUseCase(goal)
         }
     }
 
     private fun getGoal() {
         viewModelScope.launch {
-            _goal.postValue(getGoalUseCase(goalId))
+            _goal.value = getGoalUseCase(goalId)
         }
     }
 
@@ -70,7 +71,7 @@ class GoalDetailViewModel @Inject constructor(
         viewModelScope.launch {
             saveItemUseCase(item).also {
                 if (!isFromDragOnDrop) {
-                    _savedItem.postValue(it)
+                    _savedItem.value = it
                 }
             }
         }
@@ -78,19 +79,19 @@ class GoalDetailViewModel @Inject constructor(
 
     fun getItems() {
         viewModelScope.launch {
-            _items.postValue(getItemListUseCase(goalId))
+            _items.value = getItemListUseCase(goalId)
         }
     }
 
     fun saveHistoric(historic: Historic) {
         viewModelScope.launch {
-            _savedHistoric.postValue(saveHistoricUseCCase(historic))
+            _savedHistoric.value = saveHistoricUseCCase(historic)
         }
     }
 
     fun getHistorics() {
         viewModelScope.launch {
-            _historics.postValue(getHistoricListUseCase(goalId))
+            _historics.value = getHistoricListUseCase(goalId)
         }
     }
 }

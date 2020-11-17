@@ -1,7 +1,5 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goalform
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
@@ -11,6 +9,9 @@ import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.Sav
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,18 +27,18 @@ class GoalFormViewModel @Inject constructor(
 
     private var goalId = 0L
 
-    val savedGoal: LiveData<Long> get() = _savedGoal
-    private val _savedGoal = MutableLiveData<Long>()
-    val goal: LiveData<Goal> get() = _goal
-    private val _goal = MutableLiveData<Goal>()
-    val goals: LiveData<List<Goal>> get() = _goals
-    private val _goals = MutableLiveData<List<Goal>>()
-    val savedFirstTimeList: LiveData<Unit> get() = _savedFirstTimeList
-    private val _savedFirstTimeList = MutableLiveData<Unit>()
-    val savedFirstTimeAdd: LiveData<Unit> get() = _savedFirstTimeAdd
-    private val _savedFirstTimeAdd = MutableLiveData<Unit>()
-    val firstTimeAdd: LiveData<Boolean> get() = _firstTimeAdd
-    private val _firstTimeAdd = MutableLiveData<Boolean>()
+    val savedGoal: Flow<Long> get() = _savedGoal.filterNotNull()
+    private val _savedGoal = MutableStateFlow<Long?>(null)
+    val goal: Flow<Goal> get() = _goal.filterNotNull()
+    private val _goal = MutableStateFlow<Goal?>(null)
+    val goals: Flow<List<Goal>> get() = _goals.filterNotNull()
+    private val _goals = MutableStateFlow<List<Goal>?>(null)
+    val savedFirstTimeList: Flow<Unit> get() = _savedFirstTimeList.filterNotNull()
+    private val _savedFirstTimeList = MutableStateFlow<Unit?>(null)
+    val savedFirstTimeAdd: Flow<Unit> get() = _savedFirstTimeAdd.filterNotNull()
+    private val _savedFirstTimeAdd = MutableStateFlow<Unit?>(null)
+    val firstTimeAdd: Flow<Boolean> get() = _firstTimeAdd.filterNotNull()
+    private val _firstTimeAdd = MutableStateFlow<Boolean?>(null)
 
     fun setGoalId(goalId: Long) {
         this.goalId = goalId
@@ -55,37 +56,37 @@ class GoalFormViewModel @Inject constructor(
 
     fun saveGoal(goal: Goal) {
         viewModelScope.launch {
-            _savedGoal.postValue(saveGoalUseCase(goal))
+            _savedGoal.value = saveGoalUseCase(goal)
         }
     }
 
     private fun getGoal() {
         viewModelScope.launch {
-            _goal.postValue(getGoalUseCase(goalId))
+            _goal.value = getGoalUseCase(goalId)
         }
     }
 
     private fun getGoals() {
         viewModelScope.launch {
-            _goals.postValue(getGoalListUseCase())
+            _goals.value = getGoalListUseCase()
         }
     }
 
     fun saveFirstTimeList(firstTimeList: Boolean) {
         viewModelScope.launch {
-            _savedFirstTimeList.postValue(saveFirstTimeListUseCase(firstTimeList))
+            _savedFirstTimeList.value = saveFirstTimeListUseCase(firstTimeList)
         }
     }
 
     fun saveFirstTimeAdd(firstTimeAdd: Boolean) {
         viewModelScope.launch {
-            _savedFirstTimeAdd.postValue(saveFirstTimeAddUseCase(firstTimeAdd))
+            _savedFirstTimeAdd.value = saveFirstTimeAddUseCase(firstTimeAdd)
         }
     }
 
     private fun getFirstTimeAdd() {
         viewModelScope.launch {
-            _firstTimeAdd.postValue(getFirstTimeAddUseCase())
+            _firstTimeAdd.value = getFirstTimeAddUseCase()
         }
     }
 }

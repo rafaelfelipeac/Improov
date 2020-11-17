@@ -1,7 +1,5 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goallist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
@@ -9,6 +7,9 @@ import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.Get
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.firsttimelist.SaveFirstTimeListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,14 +20,14 @@ class GoalListViewModel @Inject constructor(
     private val getFirstTimeListUseCase: GetFirstTimeListUseCase
 ) : ViewModel() {
 
-    val savedGoal: LiveData<Long> get() = _savedGoal
-    private val _savedGoal = MutableLiveData<Long>()
-    val goals: LiveData<List<Goal>> get() = _goals
-    private val _goals = MutableLiveData<List<Goal>>()
-    val savedFirstTimeList: LiveData<Unit> get() = _savedFirstTimeList
-    private val _savedFirstTimeList = MutableLiveData<Unit>()
-    val firstTimeList: LiveData<Boolean> get() = _firstTimeList
-    private val _firstTimeList = MutableLiveData<Boolean>()
+    val savedGoal: Flow<Long> get() = _savedGoal.filterNotNull()
+    private val _savedGoal = MutableStateFlow<Long?>(null)
+    val goals: Flow<List<Goal>> get() = _goals.filterNotNull()
+    private val _goals = MutableStateFlow<List<Goal>?>(null)
+    val savedFirstTimeList: Flow<Unit> get() = _savedFirstTimeList.filterNotNull()
+    private val _savedFirstTimeList = MutableStateFlow<Unit?>(null)
+    val firstTimeList: Flow<Boolean> get() = _firstTimeList.filterNotNull()
+    private val _firstTimeList = MutableStateFlow<Boolean?>(null)
 
     fun loadData() {
         getGoals()
@@ -37,7 +38,7 @@ class GoalListViewModel @Inject constructor(
         viewModelScope.launch {
             saveGoalUseCase(goal).also {
                 if (!isFromDragAndDrop) {
-                    _savedGoal.postValue(it)
+                    _savedGoal.value = it
                 }
             }
         }
@@ -45,19 +46,19 @@ class GoalListViewModel @Inject constructor(
 
     private fun getGoals() {
         viewModelScope.launch {
-            _goals.postValue(getGoalListUseCase())
+            _goals.value = getGoalListUseCase()
         }
     }
 
     fun saveFirstTimeList(firstTimeList: Boolean) {
         viewModelScope.launch {
-            _savedFirstTimeList.postValue(saveFirstTimeListUseCase(firstTimeList))
+            _savedFirstTimeList.value = saveFirstTimeListUseCase(firstTimeList)
         }
     }
 
     private fun getFirstTimeList() {
         viewModelScope.launch {
-            _firstTimeList.postValue(getFirstTimeListUseCase())
+            _firstTimeList.value = getFirstTimeListUseCase()
         }
     }
 }

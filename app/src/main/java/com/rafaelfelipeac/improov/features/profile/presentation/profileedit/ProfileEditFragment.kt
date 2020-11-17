@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.isEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.focusOnEmptyOrZero
-import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.databinding.FragmentProfileEditBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class ProfileEditFragment : BaseFragment() {
 
@@ -61,12 +63,16 @@ class ProfileEditFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.saved.observe(this) {
-            navController.navigateUp()
+        lifecycleScope.launch {
+            viewModel.saved.collect {
+                navController.navigateUp()
+            }
         }
 
-        viewModel.name.observe(this) {
-            binding.profileEditName.setText(it)
+        lifecycleScope.launch {
+            viewModel.name.collect {
+                binding.profileEditName.setText(it)
+            }
         }
     }
 

@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.rafaelfelipeac.improov.core.extension.invisible
-import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.databinding.FragmentWelcomeBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class WelcomeFragment : BaseFragment() {
 
@@ -57,8 +59,10 @@ class WelcomeFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.saved.observe(this) {
-            navController.navigate(WelcomeFragmentDirections.welcomeToList())
+        lifecycleScope.launch {
+            viewModel.saved.collect {
+                navController.navigate(WelcomeFragmentDirections.welcomeToList())
+            }
         }
     }
 

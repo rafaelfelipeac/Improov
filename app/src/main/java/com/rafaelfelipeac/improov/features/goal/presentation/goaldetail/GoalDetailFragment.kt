@@ -10,11 +10,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.invisible
@@ -33,6 +33,8 @@ import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import com.rafaelfelipeac.improov.features.commons.domain.model.Historic
 import com.rafaelfelipeac.improov.features.commons.domain.model.Item
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.Date
 
 @Suppress("TooManyFunctions")
@@ -141,41 +143,53 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.savedGoal.observe(this) {
-            updateProgress()
+        lifecycleScope.launch {
+            viewModel.savedGoal.collect {
+                updateProgress()
+            }
         }
 
-        viewModel.goal.observe(this) {
-            goal = it
-            setupGoal()
+        lifecycleScope.launch {
+            viewModel.goal.collect {
+                goal = it
+                setupGoal()
+            }
         }
 
-        viewModel.savedItem.observe(this) {
-            viewModel.getItems()
+        lifecycleScope.launch {
+            viewModel.savedItem.collect {
+                viewModel.getItems()
 
-            updateTextAndGoal()
+                updateTextAndGoal()
 
-            reloadItemAfterSwipe()
+                reloadItemAfterSwipe()
+            }
         }
 
-        viewModel.items.observe(this) {
-            itemsSize = it.size
+        lifecycleScope.launch {
+            viewModel.items.collect {
+                itemsSize = it.size
 
-            it.let { itemsAdapter.setItems(it) }
-            setupItems()
+                it.let { itemsAdapter.setItems(it) }
+                setupItems()
+            }
         }
 
-        viewModel.savedHistoric.observe(this) {
-            viewModel.getHistorics()
+        lifecycleScope.launch {
+            viewModel.savedHistoric.collect {
+                viewModel.getHistorics()
 
-            updateTextAndGoal()
+                updateTextAndGoal()
+            }
         }
 
-        viewModel.historics.observe(this) {
-            historicsSize = it.size
+        lifecycleScope.launch {
+            viewModel.historics.collect {
+                historicsSize = it.size
 
-            it.let { historicAdapter.setItems(it) }
-            setupHistoric()
+                it.let { historicAdapter.setItems(it) }
+                setupHistoric()
+            }
         }
     }
 

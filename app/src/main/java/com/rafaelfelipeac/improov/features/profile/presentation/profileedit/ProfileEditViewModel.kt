@@ -1,11 +1,12 @@
 package com.rafaelfelipeac.improov.features.profile.presentation.profileedit
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.GetNameUseCase
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveNameUseCase
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,10 +15,10 @@ class ProfileEditViewModel @Inject constructor(
     private val getNameUseCase: GetNameUseCase
 ) : ViewModel() {
 
-    val saved: LiveData<Unit> get() = _saved
-    private val _saved = MutableLiveData<Unit>()
-    val name: LiveData<String> get() = _name
-    private val _name = MutableLiveData<String>()
+    val saved: Flow<Unit> get() = _saved.filterNotNull()
+    private val _saved = MutableStateFlow<Unit?>(null)
+    val name: Flow<String> get() = _name.filterNotNull()
+    private val _name = MutableStateFlow<String?>(null)
 
     fun loadData() {
         getName()
@@ -25,13 +26,13 @@ class ProfileEditViewModel @Inject constructor(
 
     fun saveName(name: String) {
         viewModelScope.launch {
-            _saved.postValue(saveNameUseCase(name))
+            _saved.value = saveNameUseCase(name)
         }
     }
 
     private fun getName() {
         viewModelScope.launch {
-            _name.postValue(getNameUseCase())
+            _name.value = getNameUseCase()
         }
     }
 }

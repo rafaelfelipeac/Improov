@@ -7,8 +7,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.MenuItem
+import androidx.lifecycle.lifecycleScope
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.resetValue
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.extension.gone
@@ -24,6 +24,8 @@ import com.rafaelfelipeac.improov.databinding.FragmentGoalFormBinding
 import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import com.rafaelfelipeac.improov.features.dialog.DialogOneButton
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @Suppress("TooManyFunctions")
 class GoalFormFragment : BaseFragment() {
@@ -145,22 +147,30 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.savedGoal.observe(this) {
-            navController.navigateUp()
+        lifecycleScope.launch {
+            viewModel.savedGoal.collect {
+                navController.navigateUp()
+            }
         }
 
-        viewModel.goal.observe(this) {
-            goal = it
+        lifecycleScope.launch {
+            viewModel.goal.collect {
+                goal = it
 
-            setupGoal()
+                setupGoal()
+            }
         }
 
-        viewModel.goals.observe(this) {
-            goalsSize = it.size
+        lifecycleScope.launch {
+            viewModel.goals.collect {
+                goalsSize = it.size
+            }
         }
 
-        viewModel.firstTimeAdd.observe(this) {
-            firstTimeAdd = it
+        lifecycleScope.launch {
+            viewModel.firstTimeAdd.collect {
+                firstTimeAdd = it
+            }
         }
     }
 

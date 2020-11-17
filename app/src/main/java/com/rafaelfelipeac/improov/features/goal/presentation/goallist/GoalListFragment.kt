@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.core.extension.setVisibility
 import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.viewBinding
-import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.vibrate
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.databinding.FragmentGoalListBinding
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 const val PERCENTAGE_MAX = 100
@@ -73,24 +73,32 @@ class GoalListFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.savedGoal.observe(this) {
-            reloadGoalAfterSwipe()
-        }
-
-        viewModel.goals.observe(this) {
-            it.let { goalsAdapter.setItems(it) }
-            setupGoals(it.isNotEmpty())
-        }
-
-        viewModel.savedFirstTimeList.observe(this) {
-            if (!swipeShown) {
-                showBottomSheetTipsSwipe()
+        lifecycleScope.launch {
+            viewModel.savedGoal.collect {
+                reloadGoalAfterSwipe()
             }
         }
 
-        viewModel.firstTimeList.observe(this) {
-            if (it) {
-                viewModel.saveFirstTimeList(false)
+        lifecycleScope.launch {
+            viewModel.goals.collect {
+                it.let { goalsAdapter.setItems(it) }
+                setupGoals(it.isNotEmpty())
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.savedFirstTimeList.collect {
+                if (!swipeShown) {
+                    showBottomSheetTipsSwipe()
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.firstTimeList.collect {
+                if (it) {
+                    viewModel.saveFirstTimeList(false)
+                }
             }
         }
     }
