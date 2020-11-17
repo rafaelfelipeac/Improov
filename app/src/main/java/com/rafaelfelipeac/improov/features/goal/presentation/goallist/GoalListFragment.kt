@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +16,6 @@ import com.rafaelfelipeac.improov.core.extension.vibrate
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.databinding.FragmentGoalListBinding
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -85,7 +84,7 @@ class GoalListFragment : BaseFragment() {
 
         viewModel.savedFirstTimeList.observe(this) {
             if (!swipeShown) {
-                viewModel.viewModelScope.showBottomSheetTipsSwipe()
+                showBottomSheetTipsSwipe()
             }
         }
 
@@ -190,10 +189,10 @@ class GoalListFragment : BaseFragment() {
         viewModel.saveGoal(goal)
     }
 
-    private fun CoroutineScope.showBottomSheetTipsSwipe() {
+    private fun showBottomSheetTipsSwipe() {
         swipeShown = true
 
-        launch {
+        lifecycleScope.launch {
             delay(SECONDS_BOTTOM_SHEET)
 
             setupBottomSheetTipsSwipe()
