@@ -4,6 +4,7 @@ import com.rafaelfelipeac.improov.base.DataProviderTest.createItem
 import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDao
 import com.rafaelfelipeac.improov.features.commons.data.model.ItemDataModelMapper
+import com.rafaelfelipeac.improov.features.goal.data.ItemDataSource
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -14,7 +15,7 @@ import org.mockito.Mockito.doNothing
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class ItemRepositoryImplTest {
+class ItemDataSourceTest {
 
     @Mock
     internal lateinit var itemDao: ItemDao
@@ -22,13 +23,13 @@ class ItemRepositoryImplTest {
     @Mock
     internal lateinit var itemDataModelMapper: ItemDataModelMapper
 
-    private lateinit var itemRepositoryImp: ItemRepositoryImpl
+    private lateinit var itemRepositoryImp: ItemDataSource
 
     private val itemId = 1L
 
     @Before
     fun setup() {
-        itemRepositoryImp = ItemRepositoryImpl(itemDao, itemDataModelMapper)
+        itemRepositoryImp = ItemDataSource(itemDao, itemDataModelMapper)
     }
 
     @Test

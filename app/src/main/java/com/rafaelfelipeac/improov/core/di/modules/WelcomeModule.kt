@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.key.FragmentKey
 import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
-import com.rafaelfelipeac.improov.features.welcome.data.repository.WelcomeRepositoryImpl
+import com.rafaelfelipeac.improov.features.welcome.data.WelcomeDataSource
 import com.rafaelfelipeac.improov.features.welcome.domain.repository.WelcomeRepository
 import com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeFragment
 import com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeItemFragment
@@ -17,7 +17,7 @@ import dagger.multibindings.IntoMap
 abstract class WelcomeModule {
 
     @Binds
-    abstract fun welcomeRepository(welcomeRepositoryImpl: WelcomeRepositoryImpl): WelcomeRepository
+    abstract fun welcomeRepository(welcomeDataSource: WelcomeDataSource): WelcomeRepository
 
     @Binds
     @IntoMap

@@ -4,6 +4,7 @@ import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
 import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
 import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModelMapper
+import com.rafaelfelipeac.improov.features.goal.data.GoalDataSource
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -14,7 +15,7 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class GoalRepositoryImplTest {
+class GoalDataSourceTest {
 
     @Mock
     internal lateinit var goalDao: GoalDao
@@ -22,13 +23,13 @@ class GoalRepositoryImplTest {
     @Mock
     internal lateinit var goalDataModelMapper: GoalDataModelMapper
 
-    private lateinit var goalRepositoryImp: GoalRepositoryImpl
+    private lateinit var goalRepositoryImp: GoalDataSource
 
     private val goalId = 1L
 
     @Before
     fun setup() {
-        goalRepositoryImp = GoalRepositoryImpl(goalDao, goalDataModelMapper)
+        goalRepositoryImp = GoalDataSource(goalDao, goalDataModelMapper)
     }
 
     @Test

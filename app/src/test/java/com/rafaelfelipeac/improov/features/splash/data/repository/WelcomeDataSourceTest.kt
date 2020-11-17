@@ -2,6 +2,7 @@ package com.rafaelfelipeac.improov.features.splash.data.repository
 
 import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
+import com.rafaelfelipeac.improov.features.splash.data.WelcomeDataSource
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -11,16 +12,16 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class WelcomeRepositoryImplTest {
+class WelcomeDataSourceTest {
 
     @Mock
     internal lateinit var preferences: Preferences
 
-    private lateinit var welcomeRepositoryImpl: WelcomeRepositoryImpl
+    private lateinit var welcomeDataSource: WelcomeDataSource
 
     @Before
     fun setup() {
-        welcomeRepositoryImpl = WelcomeRepositoryImpl(preferences)
+        welcomeDataSource = WelcomeDataSource(preferences)
     }
 
     @Test
@@ -33,7 +34,7 @@ class WelcomeRepositoryImplTest {
                 .willReturn(booleanValue)
 
             // when
-            val result = welcomeRepositoryImpl.getWelcome()
+            val result = welcomeDataSource.getWelcome()
 
             // then
             result equalTo booleanValue

@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.profile.data.repository
 
 import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
-import com.rafaelfelipeac.improov.features.profile.data.respository.NameRepositoryImpl
+import com.rafaelfelipeac.improov.features.profile.data.NameDataSource
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -13,16 +13,16 @@ import org.mockito.Mockito.doNothing
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class NameRepositoryImplTest {
+class NameDataSourceTest {
 
     @Mock
     internal lateinit var preferences: Preferences
 
-    private lateinit var nameRepositoryImpl: NameRepositoryImpl
+    private lateinit var nameDataSource: NameDataSource
 
     @Before
     fun setup() {
-        nameRepositoryImpl = NameRepositoryImpl(preferences)
+        nameDataSource = NameDataSource(preferences)
     }
 
     @Test
@@ -35,7 +35,7 @@ class NameRepositoryImplTest {
                 .willReturn(name)
 
             // when
-            val result = nameRepositoryImpl.getName()
+            val result = nameDataSource.getName()
 
             // then
             result equalTo name
@@ -53,8 +53,8 @@ class NameRepositoryImplTest {
                 .willReturn(name)
 
             // when
-            val resultOfSave = nameRepositoryImpl.save(name)
-            val returnOfGet = nameRepositoryImpl.getName()
+            val resultOfSave = nameDataSource.save(name)
+            val returnOfGet = nameDataSource.getName()
 
             // then
             resultOfSave equalTo Unit

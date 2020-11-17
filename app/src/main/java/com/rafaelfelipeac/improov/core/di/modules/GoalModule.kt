@@ -4,11 +4,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.key.FragmentKey
 import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
-import com.rafaelfelipeac.improov.features.goal.data.repository.GoalRepositoryImpl
-import com.rafaelfelipeac.improov.features.goal.data.repository.ItemRepositoryImpl
-import com.rafaelfelipeac.improov.features.goal.data.repository.HistoricRepositoryImpl
-import com.rafaelfelipeac.improov.features.goal.data.repository.FirstTimeAddRepositoryImpl
-import com.rafaelfelipeac.improov.features.goal.data.repository.FirstTimeListRepositoryImpl
+import com.rafaelfelipeac.improov.features.goal.data.GoalDataSource
+import com.rafaelfelipeac.improov.features.goal.data.ItemDataSource
+import com.rafaelfelipeac.improov.features.goal.data.HistoricDataSource
+import com.rafaelfelipeac.improov.features.goal.data.FirstTimeAddDataSource
+import com.rafaelfelipeac.improov.features.goal.data.FirstTimeListDataSource
 import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
 import com.rafaelfelipeac.improov.features.goal.domain.repository.ItemRepository
 import com.rafaelfelipeac.improov.features.goal.domain.repository.HistoricRepository
@@ -29,22 +29,22 @@ import dagger.multibindings.IntoMap
 abstract class GoalModule {
 
     @Binds
-    abstract fun goalRepository(goalRepositoryImpl: GoalRepositoryImpl): GoalRepository
+    abstract fun goalRepository(goalDataSource: GoalDataSource): GoalRepository
 
     @Binds
-    abstract fun itemRepository(itemRepositoryImpl: ItemRepositoryImpl): ItemRepository
+    abstract fun itemRepository(itemDataSource: ItemDataSource): ItemRepository
 
     @Binds
-    abstract fun historicRepository(historicRepositoryImpl: HistoricRepositoryImpl): HistoricRepository
+    abstract fun historicRepository(historicDataSource: HistoricDataSource): HistoricRepository
 
     @Binds
     abstract fun firstTimeAddRepository(
-        firstTimeAddRepositoryImpl: FirstTimeAddRepositoryImpl
+        firstTimeAddDataSource: FirstTimeAddDataSource
     ): FirstTimeAddRepository
 
     @Binds
     abstract fun firstTimeListRepository(
-        firstTimeListRepositoryImpl: FirstTimeListRepositoryImpl
+        firstTimeListDataSource: FirstTimeListDataSource
     ): FirstTimeListRepository
 
     @Binds

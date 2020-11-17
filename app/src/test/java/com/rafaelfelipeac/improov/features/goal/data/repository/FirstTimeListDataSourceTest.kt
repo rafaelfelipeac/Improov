@@ -1,8 +1,8 @@
-package com.rafaelfelipeac.improov.features.profile.data.repository
+package com.rafaelfelipeac.improov.features.goal.data.repository
 
 import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
-import com.rafaelfelipeac.improov.features.profile.data.respository.FirstTimeAddRepositoryImpl
+import com.rafaelfelipeac.improov.features.goal.data.FirstTimeListDataSource
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -13,29 +13,29 @@ import org.mockito.Mockito.doNothing
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class FirstTimeAddRepositoryImplTest {
+class FirstTimeListDataSourceTest {
 
     @Mock
     internal lateinit var preferences: Preferences
 
-    private lateinit var firstTimeAddRepositoryImp: FirstTimeAddRepositoryImpl
+    private lateinit var firstTimeListRepositoryImp: FirstTimeListDataSource
 
     @Before
     fun setup() {
-        firstTimeAddRepositoryImp = FirstTimeAddRepositoryImpl(preferences)
+        firstTimeListRepositoryImp = FirstTimeListDataSource(preferences)
     }
 
     @Test
-    fun `GIVEN a boolean value WHEN getFirstTimeAdd is called THEN return the same boolean value`() {
+    fun `GIVEN a boolean value WHEN getFirstTimeList is called THEN return the same boolean value`() {
         runBlocking {
             // given
             val booleanValue = false
 
-            given(preferences.firstTimeAdd)
+            given(preferences.firstTimeList)
                 .willReturn(booleanValue)
 
             // when
-            val result = firstTimeAddRepositoryImp.getFirstTimeAdd()
+            val result = firstTimeListRepositoryImp.getFirstTimeList()
 
             // then
             result equalTo booleanValue
@@ -43,18 +43,18 @@ class FirstTimeAddRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a saved new boolean value WHEN getFirstTimeAdd is called THEN the boolean value must be returned`() {
+    fun `GIVEN a saved boolean value WHEN getFirstTimeList is called THEN the same value must be returned`() {
         runBlocking {
             // given
             val booleanValue = true
 
-            doNothing().`when`(preferences).firstTimeAdd = booleanValue
-            given(preferences.firstTimeAdd)
+            doNothing().`when`(preferences).firstTimeList = booleanValue
+            given(preferences.firstTimeList)
                 .willReturn(booleanValue)
 
             // when
-            val resultOfSave = firstTimeAddRepositoryImp.save(booleanValue)
-            val returnOfGet = firstTimeAddRepositoryImp.getFirstTimeAdd()
+            val resultOfSave = firstTimeListRepositoryImp.save(booleanValue)
+            val returnOfGet = firstTimeListRepositoryImp.getFirstTimeList()
 
             // then
             resultOfSave equalTo Unit

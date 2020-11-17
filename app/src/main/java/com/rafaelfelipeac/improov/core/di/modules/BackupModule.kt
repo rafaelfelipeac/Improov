@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.key.FragmentKey
 import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
-import com.rafaelfelipeac.improov.features.backup.data.repository.DatabaseRepositoryImpl
+import com.rafaelfelipeac.improov.features.backup.data.DatabaseDataSource
 import com.rafaelfelipeac.improov.features.backup.domain.repository.DatabaseRepository
 import com.rafaelfelipeac.improov.features.backup.presentation.BackupFragment
 import com.rafaelfelipeac.improov.features.backup.presentation.BackupViewModel
@@ -16,7 +16,7 @@ import dagger.multibindings.IntoMap
 abstract class BackupModule {
 
     @Binds
-    abstract fun databaseRepository(databaseRepositoryImpl: DatabaseRepositoryImpl): DatabaseRepository
+    abstract fun databaseRepository(databaseDataSource: DatabaseDataSource): DatabaseRepository
 
     @Binds
     @IntoMap

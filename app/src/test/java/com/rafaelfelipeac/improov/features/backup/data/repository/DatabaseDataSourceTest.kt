@@ -8,6 +8,7 @@ import com.rafaelfelipeac.improov.base.DataProviderTest.createJson
 import com.rafaelfelipeac.improov.base.DataProviderTest.getDate
 import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
+import com.rafaelfelipeac.improov.features.backup.data.DatabaseDataSource
 import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
 import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDao
 import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDao
@@ -20,7 +21,7 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class DatabaseRepositoryImplTest {
+class DatabaseDataSourceTest {
 
     @Mock
     internal lateinit var goalDao: GoalDao
@@ -34,11 +35,11 @@ class DatabaseRepositoryImplTest {
     @Mock
     internal lateinit var preferences: Preferences
 
-    private lateinit var databaseRepositoryImp: DatabaseRepositoryImpl
+    private lateinit var databaseRepositoryImp: DatabaseDataSource
 
     @Before
     fun setup() {
-        databaseRepositoryImp = DatabaseRepositoryImpl(goalDao, historicDao, itemDao, preferences, Gson())
+        databaseRepositoryImp = DatabaseDataSource(goalDao, historicDao, itemDao, preferences, Gson())
     }
 
     @Test

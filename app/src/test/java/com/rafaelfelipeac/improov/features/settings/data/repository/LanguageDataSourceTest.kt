@@ -2,6 +2,7 @@ package com.rafaelfelipeac.improov.features.settings.data.repository
 
 import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
+import com.rafaelfelipeac.improov.features.settings.data.LanguageDataSource
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -12,16 +13,16 @@ import org.mockito.Mockito.doNothing
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class LanguageRepositoryImplTest {
+class LanguageDataSourceTest {
 
     @Mock
     internal lateinit var preferences: Preferences
 
-    private lateinit var languageRepositoryImpl: LanguageRepositoryImpl
+    private lateinit var languageDataSource: LanguageDataSource
 
     @Before
     fun setup() {
-        languageRepositoryImpl = LanguageRepositoryImpl(preferences)
+        languageDataSource = LanguageDataSource(preferences)
     }
 
     @Test
@@ -34,7 +35,7 @@ class LanguageRepositoryImplTest {
                 .willReturn(language)
 
             // when
-            val result = languageRepositoryImpl.getLanguage()
+            val result = languageDataSource.getLanguage()
 
             // then
             result equalTo language
@@ -52,8 +53,8 @@ class LanguageRepositoryImplTest {
                 .willReturn(language)
 
             // when
-            val resultOfSave = languageRepositoryImpl.save(language)
-            val returnOfGet = languageRepositoryImpl.getLanguage()
+            val resultOfSave = languageDataSource.save(language)
+            val returnOfGet = languageDataSource.getLanguage()
 
             // then
             resultOfSave equalTo Unit

@@ -4,10 +4,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.key.FragmentKey
 import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
-import com.rafaelfelipeac.improov.features.profile.data.respository.FirstTimeAddRepositoryImpl
-import com.rafaelfelipeac.improov.features.profile.data.respository.FirstTimeListRepositoryImpl
-import com.rafaelfelipeac.improov.features.profile.data.respository.NameRepositoryImpl
-import com.rafaelfelipeac.improov.features.profile.data.respository.WelcomeRepositoryImpl
+import com.rafaelfelipeac.improov.features.profile.data.FirstTimeAddDataSource
+import com.rafaelfelipeac.improov.features.profile.data.FirstTimeListDataSource
+import com.rafaelfelipeac.improov.features.profile.data.NameDataSource
+import com.rafaelfelipeac.improov.features.profile.data.WelcomeDataSource
 import com.rafaelfelipeac.improov.features.profile.domain.repository.FirstTimeAddRepository
 import com.rafaelfelipeac.improov.features.profile.domain.repository.FirstTimeListRepository
 import com.rafaelfelipeac.improov.features.profile.domain.repository.NameRepository
@@ -24,19 +24,19 @@ import dagger.multibindings.IntoMap
 abstract class ProfileModule {
 
     @Binds
-    abstract fun nameRepository(nameRepositoryImpl: NameRepositoryImpl): NameRepository
+    abstract fun nameRepository(nameDataSource: NameDataSource): NameRepository
 
     @Binds
-    abstract fun welcomeRepository(welcomeRepositoryImpl: WelcomeRepositoryImpl): WelcomeRepository
+    abstract fun welcomeRepository(welcomeDataSource: WelcomeDataSource): WelcomeRepository
 
     @Binds
     abstract fun firstTimeAddRepository(
-        firstTimeAddRepositoryImpl: FirstTimeAddRepositoryImpl
+        firstTimeAddDataSource: FirstTimeAddDataSource
     ): FirstTimeAddRepository
 
     @Binds
     abstract fun firstTimeListRepository(
-        firstTimeListRepositoryImpl: FirstTimeListRepositoryImpl
+        firstTimeListDataSource: FirstTimeListDataSource
     ): FirstTimeListRepository
 
     @Binds

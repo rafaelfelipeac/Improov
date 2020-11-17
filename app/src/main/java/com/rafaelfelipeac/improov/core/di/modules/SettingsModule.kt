@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.key.FragmentKey
 import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
-import com.rafaelfelipeac.improov.features.settings.data.repository.LanguageRepositoryImpl
+import com.rafaelfelipeac.improov.features.settings.data.LanguageDataSource
 import com.rafaelfelipeac.improov.features.settings.domain.repository.LanguageRepository
 import com.rafaelfelipeac.improov.features.settings.presentation.settings.SettingsFragment
 import com.rafaelfelipeac.improov.features.settings.presentation.settings.SettingsViewModel
@@ -18,7 +18,7 @@ import dagger.multibindings.IntoMap
 abstract class SettingsModule {
 
     @Binds
-    abstract fun languageRepository(languageRepositoryImpl: LanguageRepositoryImpl): LanguageRepository
+    abstract fun languageRepository(languageDataSource: LanguageDataSource): LanguageRepository
 
     @Binds
     @IntoMap

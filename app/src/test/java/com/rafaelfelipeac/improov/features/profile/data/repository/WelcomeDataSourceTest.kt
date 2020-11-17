@@ -1,7 +1,8 @@
-package com.rafaelfelipeac.improov.features.goal.data.repository
+package com.rafaelfelipeac.improov.features.profile.data.repository
 
 import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
+import com.rafaelfelipeac.improov.features.profile.data.WelcomeDataSource
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -12,29 +13,29 @@ import org.mockito.Mockito.doNothing
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class FirstTimeListRepositoryImplTest {
+class WelcomeDataSourceTest {
 
     @Mock
     internal lateinit var preferences: Preferences
 
-    private lateinit var firstTimeListRepositoryImp: FirstTimeListRepositoryImpl
+    private lateinit var welcomeDataSource: WelcomeDataSource
 
     @Before
     fun setup() {
-        firstTimeListRepositoryImp = FirstTimeListRepositoryImpl(preferences)
+        welcomeDataSource = WelcomeDataSource(preferences)
     }
 
     @Test
-    fun `GIVEN a boolean value WHEN getFirstTimeList is called THEN return the same boolean value`() {
+    fun `GIVEN a boolean value WHEN getWelcome is called THEN return the same boolean value`() {
         runBlocking {
             // given
             val booleanValue = false
 
-            given(preferences.firstTimeList)
+            given(preferences.welcome)
                 .willReturn(booleanValue)
 
             // when
-            val result = firstTimeListRepositoryImp.getFirstTimeList()
+            val result = welcomeDataSource.getWelcome()
 
             // then
             result equalTo booleanValue
@@ -42,18 +43,18 @@ class FirstTimeListRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN a saved boolean value WHEN getFirstTimeList is called THEN the same value must be returned`() {
+    fun `GIVEN a saved new boolean value WHEN getWelcome is called THEN the boolean value must be returned`() {
         runBlocking {
             // given
             val booleanValue = true
 
-            doNothing().`when`(preferences).firstTimeList = booleanValue
-            given(preferences.firstTimeList)
+            doNothing().`when`(preferences).welcome = booleanValue
+            given(preferences.welcome)
                 .willReturn(booleanValue)
 
             // when
-            val resultOfSave = firstTimeListRepositoryImp.save(booleanValue)
-            val returnOfGet = firstTimeListRepositoryImp.getFirstTimeList()
+            val resultOfSave = welcomeDataSource.save(booleanValue)
+            val returnOfGet = welcomeDataSource.getWelcome()
 
             // then
             resultOfSave equalTo Unit

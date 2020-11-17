@@ -4,6 +4,7 @@ import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoric
 import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDao
 import com.rafaelfelipeac.improov.features.commons.data.model.HistoricDataModelMapper
+import com.rafaelfelipeac.improov.features.goal.data.HistoricDataSource
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -14,7 +15,7 @@ import org.mockito.Mockito.doNothing
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class HistoricRepositoryImplTest {
+class HistoricDataSourceTest {
 
     @Mock
     internal lateinit var historicDao: HistoricDao
@@ -22,13 +23,13 @@ class HistoricRepositoryImplTest {
     @Mock
     internal lateinit var historicDataModelMapper: HistoricDataModelMapper
 
-    private lateinit var historicRepositoryImp: HistoricRepositoryImpl
+    private lateinit var historicRepositoryImp: HistoricDataSource
 
     private val historicId = 1L
 
     @Before
     fun setup() {
-        historicRepositoryImp = HistoricRepositoryImpl(historicDao, historicDataModelMapper)
+        historicRepositoryImp = HistoricDataSource(historicDao, historicDataModelMapper)
     }
 
     @Test

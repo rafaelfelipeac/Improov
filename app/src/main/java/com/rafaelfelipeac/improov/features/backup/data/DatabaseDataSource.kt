@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.backup.data.repository
+package com.rafaelfelipeac.improov.features.backup.data
 
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import java.util.Calendar
 
-class DatabaseRepositoryImpl @Inject constructor(
+class DatabaseDataSource @Inject constructor(
     private val goalDao: GoalDao,
     private val historicDao: HistoricDao,
     private val itemDao: ItemDao,

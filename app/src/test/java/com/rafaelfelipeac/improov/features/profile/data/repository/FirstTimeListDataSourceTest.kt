@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.profile.data.repository
 
 import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
-import com.rafaelfelipeac.improov.features.profile.data.respository.FirstTimeListRepositoryImpl
+import com.rafaelfelipeac.improov.features.profile.data.FirstTimeListDataSource
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -13,16 +13,16 @@ import org.mockito.Mockito.doNothing
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class FirstTimeListRepositoryImplTest {
+class FirstTimeListDataSourceTest {
 
     @Mock
     internal lateinit var preferences: Preferences
 
-    private lateinit var firstTimeListRepositoryImp: FirstTimeListRepositoryImpl
+    private lateinit var firstTimeListRepositoryImp: FirstTimeListDataSource
 
     @Before
     fun setup() {
-        firstTimeListRepositoryImp = FirstTimeListRepositoryImpl(preferences)
+        firstTimeListRepositoryImp = FirstTimeListDataSource(preferences)
     }
 
     @Test
