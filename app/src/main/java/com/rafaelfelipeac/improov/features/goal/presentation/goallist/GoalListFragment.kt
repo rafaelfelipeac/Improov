@@ -74,12 +74,6 @@ class GoalListFragment : BaseFragment() {
 
     private fun observeViewModel() {
         lifecycleScope.launch {
-            viewModel.savedGoal.collect {
-                reloadGoalAfterSwipe()
-            }
-        }
-
-        lifecycleScope.launch {
             viewModel.goals.collect {
                 it.let { goalsAdapter.setItems(it) }
                 setupGoals(it.isNotEmpty())
@@ -184,6 +178,8 @@ class GoalListFragment : BaseFragment() {
     private fun doneOrUndoneGoal(goal: Goal) {
         goal.done = !goal.done
         goal.undoneDate = getCurrentTime()
+
+        reloadGoalAfterSwipe()
 
         viewModel.saveGoal(goal)
     }

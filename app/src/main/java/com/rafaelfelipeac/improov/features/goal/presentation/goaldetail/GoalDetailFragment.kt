@@ -160,9 +160,7 @@ class GoalDetailFragment : BaseFragment() {
             viewModel.savedItem.collect {
                 viewModel.getItems()
 
-                updateTextAndGoal()
-
-                reloadItemAfterSwipe()
+                updateTextAndProgress()
             }
         }
 
@@ -179,7 +177,7 @@ class GoalDetailFragment : BaseFragment() {
             viewModel.savedHistoric.collect {
                 viewModel.getHistorics()
 
-                updateTextAndGoal()
+                updateTextAndProgress()
             }
         }
 
@@ -319,8 +317,9 @@ class GoalDetailFragment : BaseFragment() {
     private fun isTheFirstTime() =
         seriesSingle == 0 && (seriesBronze == 0 || seriesSilver == 0 || seriesGold == 0)
 
-    private fun updateTextAndGoal() {
+    private fun updateTextAndProgress() {
         updateText(getTextViewFromGoalType())
+        updateProgress()
 
         goal?.let { viewModel.saveGoal(it) }
     }
@@ -688,6 +687,9 @@ class GoalDetailFragment : BaseFragment() {
         } else {
             item.undoneDate = getCurrentTime()
         }
+
+        reloadItemAfterSwipe()
+        updateTextAndProgress()
 
         viewModel.saveItem(item)
     }
