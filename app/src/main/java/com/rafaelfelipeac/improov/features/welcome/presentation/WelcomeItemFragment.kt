@@ -10,26 +10,13 @@ import com.rafaelfelipeac.improov.databinding.FragmentWelcomeFirstBinding
 import com.rafaelfelipeac.improov.databinding.FragmentWelcomeSecondBinding
 import com.rafaelfelipeac.improov.databinding.FragmentWelcomeThirdBinding
 
-class WelcomeItemFragment(
-    private val fragment: WelcomeFragment,
-    private val welcomePosition: WelcomePosition
-) : BaseFragment() {
+class WelcomeItemFragment(private val welcomePosition: WelcomePosition) : BaseFragment() {
 
-    constructor() : this(WelcomeFragment(), WelcomePosition.FIRST)
+    constructor() : this(WelcomePosition.FIRST)
 
     private var bindingFirst by viewBinding<FragmentWelcomeFirstBinding>()
     private var bindingSecond by viewBinding<FragmentWelcomeSecondBinding>()
     private var bindingThird by viewBinding<FragmentWelcomeThirdBinding>()
-
-    override fun onResume() {
-        super.onResume()
-
-        if (welcomePosition == WelcomePosition.THIRD) {
-            fragment.showStartButton()
-        } else {
-            fragment.hideStartButton()
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

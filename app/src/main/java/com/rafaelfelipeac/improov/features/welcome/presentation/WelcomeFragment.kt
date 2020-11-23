@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager.widget.ViewPager
 import com.rafaelfelipeac.improov.core.extension.invisible
 import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.extension.visible
@@ -12,6 +13,8 @@ import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.databinding.FragmentWelcomeBinding
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+
+const val INDEX_LAST_WELCOME = 2
 
 class WelcomeFragment : BaseFragment() {
 
@@ -50,11 +53,18 @@ class WelcomeFragment : BaseFragment() {
             viewModel.saveWelcome(true)
         }
 
-        binding.welcomeViewPager.adapter =
-            WelcomeAdapter(
-                this,
-                parentFragmentManager
-            )
+        binding.welcomeViewPager.adapter = WelcomeAdapter(parentFragmentManager)
+
+        binding.welcomeViewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+            override fun onPageSelected(position: Int) {
+                if (position == INDEX_LAST_WELCOME) {
+                    showStartButton()
+                } else {
+                    hideStartButton()
+                }
+            }
+        })
+
         binding.welcomeDots.setupWithViewPager(binding.welcomeViewPager, true)
     }
 

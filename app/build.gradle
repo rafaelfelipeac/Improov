@@ -34,8 +34,8 @@ android {
             applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
 
-            resValue "string", "app_name", "Improov Debug"//"@string/app_name_debug"
-            resValue "string", "file_provider_path", "com.rafaelfelipeac.improov.debug.fileprovider"//"@string/file_provider_debug"
+            resValue "string", "app_name", "@string/app_name_debug"
+            resValue "string", "file_provider_path", "@string/file_provider_debug"
         }
     }
 
