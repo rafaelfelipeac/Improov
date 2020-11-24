@@ -22,7 +22,7 @@ class WelcomeItemFragment(private val welcomePosition: WelcomePosition) : BaseFr
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return when (welcomePosition) {
             WelcomePosition.FIRST -> FragmentWelcomeFirstBinding.inflate(
                 inflater,

@@ -18,7 +18,7 @@ class DialogOneButton(private val message: String) : BaseDialog() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         setScreen()
 
