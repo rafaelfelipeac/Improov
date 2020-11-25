@@ -232,7 +232,7 @@ class GoalFormFragment : BaseFragment() {
             binding.goalFormSilverValue.resetValue()
             binding.goalFormGoldValue.resetValue()
 
-            binding.goalFormDivideAndConquer.invisible()
+            binding.goalFormDivideAndConquer.gone()
             binding.goalFormSingle.visible()
         }
     }

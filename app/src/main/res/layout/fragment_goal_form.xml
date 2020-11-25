@@ -70,17 +70,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/goalFormTitle">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                         android:id="@+id/goalFormSingle"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_small"
                         android:layout_marginTop="@dimen/margin_regular"
-                        android:layout_marginEnd="@dimen/margin_small"
-                        android:layout_marginBottom="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_regular"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/goalFormDivideAndConquerInfo">
 
@@ -90,11 +89,7 @@
                             android:layout_height="@dimen/goal_form_image_size"
                             android:layout_marginStart="@dimen/margin_small"
                             android:layout_marginEnd="@dimen/margin_small"
-                            android:background="@mipmap/ic_medal"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.501"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:background="@mipmap/ic_medal" />
 
                     <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -103,51 +98,41 @@
                             android:layout_marginTop="@dimen/margin_regular"
                             android:layout_marginBottom="@dimen/margin_small"
                             android:hint="@string/goal_form_single_hint"
-                            android:inputType="numberDecimal|numberSigned"
-                            app:boxCornerRadiusBottomEnd="@dimen/radius_large"
-                            app:boxCornerRadiusBottomStart="@dimen/radius_large"
-                            app:boxCornerRadiusTopEnd="@dimen/radius_large"
-                            app:boxCornerRadiusTopStart="@dimen/radius_large"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/goalFormSingleImage"
-                            app:layout_constraintStart_toStartOf="@+id/goalFormSingleImage"
-                            app:layout_constraintTop_toBottomOf="@+id/goalFormSingleImage">
+                            android:inputType="numberDecimal|numberSigned">
 
                         <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/goalFormSingleValue"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:inputType="numberDecimal"
                                 android:imeOptions="actionDone"
+                                android:inputType="numberDecimal"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_regular" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                         android:id="@+id/goalFormDivideAndConquer"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_small"
                         android:layout_marginTop="@dimen/margin_regular"
                         android:layout_marginEnd="@dimen/margin_small"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:visibility="invisible"
+                        android:layout_marginBottom="@dimen/margin_regular"
+                        android:gravity="center_horizontal"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/goalFormDivideAndConquerInfo">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_small"
-                            app:layout_constraintEnd_toStartOf="@+id/goalFormDivideAndConquerSilver"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            android:orientation="vertical">
 
                         <ImageView
                                 android:id="@+id/goalFormDivideAndConquerBronzeImage"
@@ -155,10 +140,7 @@
                                 android:layout_height="@dimen/goal_form_image_size"
                                 android:layout_marginStart="@dimen/margin_small"
                                 android:layout_marginEnd="@dimen/margin_small"
-                                android:background="@mipmap/ic_trophy_bronze"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                android:background="@mipmap/ic_trophy_bronze" />
 
                         <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -168,14 +150,11 @@
                                 android:layout_marginBottom="@dimen/margin_small"
                                 android:hint="@string/goal_form_bronze_hint"
                                 android:inputType="numberDecimal|numberSigned"
+                                android:layout_gravity="center"
                                 app:boxCornerRadiusBottomEnd="@dimen/radius_large"
                                 app:boxCornerRadiusBottomStart="@dimen/radius_large"
                                 app:boxCornerRadiusTopEnd="@dimen/radius_large"
-                                app:boxCornerRadiusTopStart="@dimen/radius_large"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/goalFormDivideAndConquerBronzeImage"
-                                app:layout_constraintStart_toStartOf="@+id/goalFormDivideAndConquerBronzeImage"
-                                app:layout_constraintTop_toBottomOf="@+id/goalFormDivideAndConquerBronzeImage">
+                                app:boxCornerRadiusTopStart="@dimen/radius_large">
 
                             <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/goalFormBronzeValue"
@@ -185,21 +164,19 @@
                                     android:inputType="numberDecimal"
                                     android:nextFocusForward="@id/goalFormSilverValue"
                                     android:textColor="@color/colorPrimary"
-                                    android:textSize="@dimen/text_size_regular"/>
+                                    android:textSize="@dimen/text_size_regular" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                             android:id="@+id/goalFormDivideAndConquerSilver"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_small"
                             android:layout_marginEnd="@dimen/margin_small"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            android:orientation="vertical">
 
                         <ImageView
                                 android:id="@+id/goalFormDivideAndConquerSilverImage"
@@ -207,10 +184,7 @@
                                 android:layout_height="@dimen/goal_form_image_size"
                                 android:layout_marginStart="@dimen/margin_small"
                                 android:layout_marginEnd="@dimen/margin_small"
-                                android:background="@mipmap/ic_trophy_silver"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                android:background="@mipmap/ic_trophy_silver" />
 
                         <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -220,14 +194,11 @@
                                 android:layout_marginBottom="@dimen/margin_small"
                                 android:hint="@string/goal_form_silver_hint"
                                 android:inputType="numberDecimal|numberSigned"
+                                android:layout_gravity="center"
                                 app:boxCornerRadiusBottomEnd="@dimen/radius_large"
                                 app:boxCornerRadiusBottomStart="@dimen/radius_large"
                                 app:boxCornerRadiusTopEnd="@dimen/radius_large"
-                                app:boxCornerRadiusTopStart="@dimen/radius_large"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/goalFormDivideAndConquerSilverImage"
-                                app:layout_constraintStart_toStartOf="@+id/goalFormDivideAndConquerSilverImage"
-                                app:layout_constraintTop_toBottomOf="@+id/goalFormDivideAndConquerSilverImage">
+                                app:boxCornerRadiusTopStart="@dimen/radius_large">
 
                             <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/goalFormSilverValue"
@@ -235,31 +206,25 @@
                                     android:layout_height="match_parent"
                                     android:imeOptions="actionNext"
                                     android:inputType="numberDecimal"
-                                    android:nextFocusForward="@id/goalFormGoldValue"
                                     android:textColor="@color/colorPrimary"
-                                    android:textSize="@dimen/text_size_regular"/>
+                                    android:textSize="@dimen/text_size_regular" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/margin_small"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/goalFormDivideAndConquerSilver"
-                            app:layout_constraintTop_toTopOf="parent">
+                            android:orientation="vertical">
 
                         <ImageView
                                 android:id="@+id/goalFormDivideAndConquerGoldImage"
                                 android:layout_width="@dimen/goal_form_image_size"
                                 android:layout_height="@dimen/goal_form_image_size"
+                                android:layout_marginStart="@dimen/margin_small"
                                 android:layout_marginEnd="@dimen/margin_small"
-                                android:background="@mipmap/ic_trophy_gold"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                android:background="@mipmap/ic_trophy_gold" />
 
                         <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -269,29 +234,26 @@
                                 android:layout_marginBottom="@dimen/margin_small"
                                 android:hint="@string/goal_form_gold_hint"
                                 android:inputType="numberDecimal|numberSigned"
+                                android:layout_gravity="center"
                                 app:boxCornerRadiusBottomEnd="@dimen/radius_large"
                                 app:boxCornerRadiusBottomStart="@dimen/radius_large"
                                 app:boxCornerRadiusTopEnd="@dimen/radius_large"
-                                app:boxCornerRadiusTopStart="@dimen/radius_large"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/goalFormDivideAndConquerGoldImage"
-                                app:layout_constraintStart_toStartOf="@+id/goalFormDivideAndConquerGoldImage"
-                                app:layout_constraintTop_toBottomOf="@+id/goalFormDivideAndConquerGoldImage">
+                                app:boxCornerRadiusTopStart="@dimen/radius_large">
 
                             <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/goalFormGoldValue"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:inputType="numberDecimal"
                                     android:imeOptions="actionDone"
+                                    android:inputType="numberDecimal"
                                     android:textColor="@color/colorPrimary"
-                                    android:textSize="@dimen/text_size_regular"/>
+                                    android:textSize="@dimen/text_size_regular" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/goalFormDivideAndConquerInfo"

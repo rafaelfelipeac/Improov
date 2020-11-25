@@ -256,7 +256,7 @@ class GoalDetailFragment : BaseFragment() {
 
         goal?.divideAndConquer?.let {
             if (it) {
-                binding.goalDetailSingle.invisible()
+                binding.goalDetailSingle.gone()
                 binding.goalDetailDivideAndConquer.visible()
 
                 binding.goalDetailDivideAndConquerBronzeText.text =
