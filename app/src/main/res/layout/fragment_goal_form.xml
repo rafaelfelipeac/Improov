@@ -98,7 +98,11 @@
                             android:layout_marginTop="@dimen/margin_regular"
                             android:layout_marginBottom="@dimen/margin_small"
                             android:hint="@string/goal_form_single_hint"
-                            android:inputType="numberDecimal|numberSigned">
+                            android:inputType="numberDecimal|numberSigned"
+                            app:boxCornerRadiusBottomEnd="@dimen/radius_large"
+                            app:boxCornerRadiusBottomStart="@dimen/radius_large"
+                            app:boxCornerRadiusTopEnd="@dimen/radius_large"
+                            app:boxCornerRadiusTopStart="@dimen/radius_large">
 
                         <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/goalFormSingleValue"
