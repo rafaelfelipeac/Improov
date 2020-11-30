@@ -8,14 +8,26 @@
         android:orientation="vertical"
         tools:context=".features.main.MainActivity">
 
-    <include
+    <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/include"
-            layout="@layout/app_bar_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:elevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimaryDark"
+                android:theme="@style/ToolbarColoredBackArrow"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextColor="@color/colorPrimary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <fragment
             android:id="@+id/navHostFragment"

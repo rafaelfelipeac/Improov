@@ -149,7 +149,7 @@ class GoalFormFragment : BaseFragment() {
     private fun observeViewModel() {
         lifecycleScope.launch {
             viewModel.savedGoal.collect {
-                navController.navigateUp()
+                navController.navigate(GoalFormFragmentDirections.goalFormToGoal(it))
             }
         }
 

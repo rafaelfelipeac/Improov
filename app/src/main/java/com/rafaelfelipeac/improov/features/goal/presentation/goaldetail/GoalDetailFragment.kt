@@ -50,7 +50,6 @@ class GoalDetailFragment : BaseFragment() {
     private var seriesSilver: Int = 0
     private var seriesGold: Int = 0
 
-    private var goalNew: Boolean = false
     private var goalId: Long = 0L
 
     private var goal: Goal? = null
@@ -69,7 +68,6 @@ class GoalDetailFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         goalId = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalId } ?: 0L
-        goalNew = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalNew } ?: false
     }
 
     override fun onResume() {
@@ -120,25 +118,26 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.menuAdd -> {
                 showBottomSheetItem(null)
 
-                return true
+                true
             }
             R.id.menuEdit -> {
                 val action = GoalDetailFragmentDirections.goalToGoalForm()
                 action.goalId = goal?.goalId ?: 0L
                 navController.navigate(action)
+
+                true
             }
             android.R.id.home -> {
-                if (goalNew) {
-                    navController.navigateUp()
-                }
-            }
-        }
+                navController.navigate(GoalDetailFragmentDirections.goalToList())
 
-        return false
+                true
+            }
+            else -> false
+        }
     }
 
     private fun setScreen() {

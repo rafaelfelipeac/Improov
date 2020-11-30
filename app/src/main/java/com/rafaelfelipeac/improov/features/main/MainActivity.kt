@@ -19,6 +19,7 @@ import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.platform.base.BaseActivity
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.databinding.ActivityMainBinding
+import com.rafaelfelipeac.improov.features.goal.presentation.goaldetail.GoalDetailFragmentDirections
 
 class MainActivity : BaseActivity() {
 
@@ -59,6 +60,9 @@ class MainActivity : BaseActivity() {
             lastFragment() -> {
                 finish()
             }
+            isDetailFragment() -> {
+                navController.navigate(GoalDetailFragmentDirections.goalToList())
+            }
             else -> {
                 super.onBackPressed()
             }
@@ -84,12 +88,19 @@ class MainActivity : BaseActivity() {
         return currentFragment == R.id.navigationList || currentFragment == R.id.navigationWelcome
     }
 
+    private fun isDetailFragment(): Boolean {
+        val currentFragment = navController.currentDestination?.id
+
+        return currentFragment == R.id.navigationGoal
+    }
+
     private fun setupElements() {
         toolbar = findViewById(R.id.toolbar)
         navController = findNavController(R.id.navHostFragment)
         navLayout = binding.navigationLayout
         fakeBottomNav = binding.fakeBottomNavigation
         fab = binding.fabLayout
+        toolbar = binding.toolbar
     }
 
     private fun setupToolbar() {

@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
@@ -29,6 +30,8 @@ import com.rafaelfelipeac.improov.core.extension.setIcon
 import com.rafaelfelipeac.improov.core.extension.isEmpty
 import com.rafaelfelipeac.improov.core.extension.resetValue
 import com.rafaelfelipeac.improov.core.extension.formatToDateTime
+import com.rafaelfelipeac.improov.core.extension.show
+import com.rafaelfelipeac.improov.core.extension.hide
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import com.rafaelfelipeac.improov.features.commons.domain.model.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
@@ -47,6 +50,7 @@ abstract class BaseFragment : Fragment() {
 
     val fab: FloatingActionButton get() = main.fab
     val navController: NavController get() = main.navController
+    private val toolbar: Toolbar get() = main.toolbar
     private val navLayout: CoordinatorLayout get() = main.navLayout
     private val fakeBottomNav: View get() = main.fakeBottomNav
 
@@ -80,20 +84,20 @@ abstract class BaseFragment : Fragment() {
         fakeBottomNav.gone()
     }
 
-    fun hideToolbar() = main.supportActionBar?.hide()
+    fun hideToolbar() = toolbar.hide(main.supportActionBar)
 
     fun showBackArrow() {
-        main.supportActionBar?.show()
+        toolbar.show(main.supportActionBar)
         main.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     fun setTitle(title: String) {
-        main.supportActionBar?.show()
+        toolbar.show(main.supportActionBar)
         main.supportActionBar?.title = title
     }
 
     fun hasMenu() {
-        main.supportActionBar?.show()
+        toolbar.show(main.supportActionBar)
         setHasOptionsMenu(true)
     }
 

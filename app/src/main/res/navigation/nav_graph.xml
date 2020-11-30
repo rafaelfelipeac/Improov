@@ -44,10 +44,10 @@
         <action
                 android:id="@+id/listToGoal"
                 app:destination="@id/navigationGoal"
-                app:enterAnim="@anim/from_top"
-                app:exitAnim="@anim/to_bottom"
-                app:popEnterAnim="@anim/from_bottom"
-                app:popExitAnim="@anim/to_top" />
+                app:enterAnim="@anim/from_bottom"
+                app:exitAnim="@anim/to_top"
+                app:popEnterAnim="@anim/from_top"
+                app:popExitAnim="@anim/to_bottom" />
         <action
                 android:id="@+id/listToAdd"
                 app:destination="@id/navigationAdd" />
@@ -72,6 +72,12 @@
                 android:defaultValue="0L"
                 app:argType="long" />
 
+        <action
+                android:id="@+id/goalFormToGoal"
+                app:destination="@id/navigationGoal"
+                app:enterAnim="@anim/from_left"
+                app:exitAnim="@anim/to_right"/>
+
     </fragment>
 
     <fragment
@@ -83,10 +89,6 @@
         <argument
                 android:name="goalId"
                 app:argType="long" />
-        <argument
-                android:name="goalNew"
-                android:defaultValue="false"
-                app:argType="boolean" />
 
         <action
                 android:id="@+id/goalToGoalForm"
@@ -95,6 +97,11 @@
                 app:exitAnim="@anim/to_left"
                 app:popEnterAnim="@anim/from_left"
                 app:popExitAnim="@anim/to_right" />
+        <action
+                android:id="@+id/goalToList"
+                app:destination="@id/navigationList"
+                app:enterAnim="@anim/from_top"
+                app:exitAnim="@anim/to_bottom"/>
 
     </fragment>
 
