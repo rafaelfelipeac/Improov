@@ -51,8 +51,8 @@ abstract class BaseFragment : Fragment() {
     val fab: FloatingActionButton get() = main.fab
     val navController: NavController get() = main.navController
     private val toolbar: Toolbar get() = main.toolbar
-    private val navLayout: CoordinatorLayout get() = main.navLayout
-    private val fakeBottomNav: View get() = main.fakeBottomNav
+    private val navigation: CoordinatorLayout get() = main.navigation
+    private val navigationFake: View get() = main.navigationFake
 
     private lateinit var bottomSheetGoal: BottomSheetDialog
     private lateinit var bottomSheetGoalYes: Button
@@ -74,30 +74,26 @@ abstract class BaseFragment : Fragment() {
         hideSoftKeyboard()
     }
 
-    fun showNavigation() {
-        navLayout.visible()
-        fakeBottomNav.visible()
-    }
-
-    fun hideNavigation() {
-        navLayout.gone()
-        fakeBottomNav.gone()
-    }
+    fun showToolbar() = toolbar.show(main.supportActionBar)
 
     fun hideToolbar() = toolbar.hide(main.supportActionBar)
 
+    fun showNavigation() = navigation.show(navigationFake)
+
+    fun hideNavigation() = navigation.hide(navigationFake)
+
     fun showBackArrow() {
-        toolbar.show(main.supportActionBar)
+        showToolbar()
         main.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     fun setTitle(title: String) {
-        toolbar.show(main.supportActionBar)
+        showToolbar()
         main.supportActionBar?.title = title
     }
 
     fun hasMenu() {
-        toolbar.show(main.supportActionBar)
+        showToolbar()
         setHasOptionsMenu(true)
     }
 

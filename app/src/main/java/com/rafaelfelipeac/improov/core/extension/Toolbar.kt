@@ -8,90 +8,75 @@ import androidx.appcompat.widget.Toolbar
 import com.google.android.material.appbar.AppBarLayout
 
 const val TOOLBAR_HEIGHT = 224
-const val TOOLBAR_ANIMATION_DURATION: Int = 2000
+const val TOOLBAR_ANIMATION_DURATION: Int = 700
 
-var valueAnimator: ValueAnimator? = null
+var animatorToolbar: ValueAnimator? = null
 
-var hiden = false
-var showing = false
-
-fun Toolbar.hide(supportActionBar: ActionBar?) {
-    if ((valueAnimator?.isRunning == true) || showing || !needToHidden(
-            supportActionBar
-        )
-    ) {
-        return
-    }
-
-    valueAnimator = ValueAnimator.ofInt(TOOLBAR_HEIGHT, 0)
-
-    valueAnimator?.addUpdateListener { animation ->
-        if (!showing) {
-            (layoutParams as AppBarLayout.LayoutParams).height = (animation?.animatedValue as Int)
-            requestLayout()
-        }
-    }
-
-    valueAnimator?.addListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationStart(animation: Animator?) {
-            super.onAnimationStart(animation)
-
-            hiden = true
-        }
-
-        override fun onAnimationEnd(animation: Animator) {
-            super.onAnimationEnd(animation)
-
-            hiden = false
-
-            supportActionBar?.hide()
-        }
-    })
-
-    valueAnimator?.duration = TOOLBAR_ANIMATION_DURATION.toLong()
-    valueAnimator?.start()
-}
+var hidingToolbar = false
+var showingToolbar = false
 
 fun Toolbar.show(supportActionBar: ActionBar?) {
-    if ((valueAnimator?.isRunning == true) || hiden || !needToShow(
-            supportActionBar
-        )
-    ) {
+    if ((animatorToolbar?.isRunning == true) || hidingToolbar || (supportActionBar?.isShowing != false))
         return
-    }
-    valueAnimator = ValueAnimator.ofInt(0, TOOLBAR_HEIGHT)
 
-    valueAnimator?.addUpdateListener { animation ->
-        if (!hiden) {
+    animatorToolbar = ValueAnimator.ofInt(0, TOOLBAR_HEIGHT)
+
+    animatorToolbar?.addUpdateListener { animation ->
+        if (!hidingToolbar) {
             (layoutParams as AppBarLayout.LayoutParams).height = (animation?.animatedValue as Int)
             requestLayout()
         }
     }
 
-    valueAnimator?.addListener(object : AnimatorListenerAdapter() {
+    animatorToolbar?.addListener(object : AnimatorListenerAdapter() {
         override fun onAnimationStart(animation: Animator?) {
             super.onAnimationStart(animation)
 
-            showing = true
+            showingToolbar = true
 
-            supportActionBar?.show()
+            supportActionBar.show()
         }
 
         override fun onAnimationEnd(animation: Animator?) {
             super.onAnimationEnd(animation)
 
-            showing = false
+            showingToolbar = false
         }
     })
 
-    valueAnimator?.duration = TOOLBAR_ANIMATION_DURATION.toLong()
-    valueAnimator?.start()
+    animatorToolbar?.duration = TOOLBAR_ANIMATION_DURATION.toLong()
+    animatorToolbar?.start()
 }
 
-private fun needToHidden(supportActionBar: ActionBar?): Boolean {
-    return supportActionBar?.isShowing == true
-}
+fun Toolbar.hide(supportActionBar: ActionBar?) {
+    if ((animatorToolbar?.isRunning == true) || showingToolbar || (supportActionBar?.isShowing != true))
+        return
 
-private fun needToShow(supportActionBar: ActionBar?): Boolean {
-    return supportActionBar?.isShowing == false
+    animatorToolbar = ValueAnimator.ofInt(TOOLBAR_HEIGHT, 0)
+
+    animatorToolbar?.addUpdateListener { animation ->
+        if (!showingToolbar) {
+            (layoutParams as AppBarLayout.LayoutParams).height = (animation?.animatedValue as Int)
+            requestLayout()
+        }
+    }
+
+    animatorToolbar?.addListener(object : AnimatorListenerAdapter() {
+        override fun onAnimationStart(animation: Animator?) {
+            super.onAnimationStart(animation)
+
+            hidingToolbar = true
+        }
+
+        override fun onAnimationEnd(animation: Animator) {
+            super.onAnimationEnd(animation)
+
+            hidingToolbar = false
+
+            supportActionBar.hide()
+        }
+    })
+
+    animatorToolbar?.duration = TOOLBAR_ANIMATION_DURATION.toLong()
+    animatorToolbar?.start()
 }

@@ -25,8 +25,8 @@ class MainActivity : BaseActivity() {
 
     lateinit var toolbar: Toolbar
     lateinit var navController: NavController
-    lateinit var fakeBottomNav: View
-    lateinit var navLayout: CoordinatorLayout
+    lateinit var navigation: CoordinatorLayout
+    lateinit var navigationFake: View
     lateinit var fab: FloatingActionButton
 
     private val binding by viewBinding(ActivityMainBinding::inflate)
@@ -95,11 +95,10 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupElements() {
-        toolbar = findViewById(R.id.toolbar)
         navController = findNavController(R.id.navHostFragment)
-        navLayout = binding.navigationLayout
-        fakeBottomNav = binding.fakeBottomNavigation
-        fab = binding.fabLayout
+        navigation = binding.navigation
+        navigationFake = binding.navigationFake
+        fab = binding.fab
         toolbar = binding.toolbar
     }
 
