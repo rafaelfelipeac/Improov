@@ -9,6 +9,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
 
 const val CL_ANIMATION_DURATION: Int = 700
+const val HEIGHT_MULTIPLIER = 0.66
 
 var animatorNavigation: ValueAnimator? = null
 var animatorNavigationFake: ValueAnimator? = null
@@ -24,7 +25,7 @@ fun CoordinatorLayout.show(fakeBottomNav: View) {
 
     if (navigationHeight == 0 && fakeNavigationHeight == 0 && height > 0) {
         navigationHeight = height
-        fakeNavigationHeight = (height * 0.66).toInt()
+        fakeNavigationHeight = (height * HEIGHT_MULTIPLIER).toInt()
     }
 
     animatorNavigation = ValueAnimator.ofInt(0, navigationHeight)
@@ -80,7 +81,7 @@ fun CoordinatorLayout.hide(fakeBottomNav: View) {
 
     if (navigationHeight == 0 && fakeNavigationHeight == 0 && height > 0) {
         navigationHeight = height
-        fakeNavigationHeight = (height * 0.66).toInt()
+        fakeNavigationHeight = (height * HEIGHT_MULTIPLIER).toInt()
     }
 
     animatorNavigation = ValueAnimator.ofInt(navigationHeight, 0)
