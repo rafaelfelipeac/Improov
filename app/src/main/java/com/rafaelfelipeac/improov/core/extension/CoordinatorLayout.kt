@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 
 const val CL_ANIMATION_DURATION: Int = 700
 const val HEIGHT_MULTIPLIER = 0.66
+const val MINIMUM_HEIGHT = 1
 
 var animatorNavigation: ValueAnimator? = null
 var animatorNavigationFake: ValueAnimator? = null
@@ -33,6 +34,10 @@ fun CoordinatorLayout.show(fakeBottomNav: View) {
 
     animatorNavigation?.addUpdateListener { animation ->
         if (!hidingNavigation) {
+            if (height < navigationHeight) {
+                visible()
+            }
+
             (layoutParams as ViewGroup.LayoutParams).height = (animation?.animatedValue as Int)
             requestLayout()
         }
@@ -51,7 +56,12 @@ fun CoordinatorLayout.show(fakeBottomNav: View) {
 
             showingNavigation = true
 
-            visible()
+            if (height == MINIMUM_HEIGHT) {
+                (layoutParams as ViewGroup.LayoutParams).height = navigationHeight
+                requestLayout()
+            }
+
+            invisible()
         }
 
         override fun onAnimationEnd(animation: Animator?) {
@@ -113,7 +123,7 @@ fun CoordinatorLayout.hide(fakeBottomNav: View) {
 
             hidingNavigation = false
 
-            gone()
+            invisible()
         }
     })
 
