@@ -23,8 +23,6 @@ class SplashFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        setScreen()
-
         return FragmentSplashBinding.inflate(inflater, container, false).run {
             binding = this
             binding.root
@@ -37,11 +35,6 @@ class SplashFragment : BaseFragment() {
         viewModel.loadData()
 
         observeViewModel()
-    }
-
-    private fun setScreen() {
-        hideToolbar()
-        hideNavigation()
     }
 
     private fun observeViewModel() {
