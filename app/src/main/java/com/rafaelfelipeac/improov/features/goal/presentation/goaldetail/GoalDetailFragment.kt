@@ -70,12 +70,6 @@ class GoalDetailFragment : BaseFragment() {
         goalId = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalId } ?: 0L
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        resetFistTime()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -83,6 +77,8 @@ class GoalDetailFragment : BaseFragment() {
     ): View {
 
         setScreen()
+
+        resetFirstTime()
 
         return FragmentGoalDetailBinding.inflate(inflater, container, false).run {
             binding = this
@@ -196,7 +192,7 @@ class GoalDetailFragment : BaseFragment() {
         }
     }
 
-    private fun resetFistTime() {
+    private fun resetFirstTime() {
         seriesSingle = 0
         seriesBronze = 0
         seriesSilver = 0
@@ -435,7 +431,7 @@ class GoalDetailFragment : BaseFragment() {
     private fun updateSingle() {
         val value = goal?.value?.let { it } ?: 0F
 
-        if (value <= 0F) {
+        if (value <= 0F || isTheFirstTime()) {
             resetSingle()
         } else {
             goal?.singleValue?.let { singleValue ->
@@ -452,7 +448,7 @@ class GoalDetailFragment : BaseFragment() {
 
     private fun updateDivideAndConquer() {
         goal?.value?.let { value ->
-            if (value <= 0) {
+            if (value <= 0 || isTheFirstTime()) {
                 resetDivideAndConquer()
             } else {
                 val bronzeValue = goal?.bronzeValue?.let { it } ?: 0F

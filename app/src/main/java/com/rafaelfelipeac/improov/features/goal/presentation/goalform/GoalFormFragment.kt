@@ -107,7 +107,7 @@ class GoalFormFragment : BaseFragment() {
 
                         viewModel.saveGoal(goalToSave)
 
-                        verifyFistTimeSaving()
+                        verifyFirstTimeSaving()
 
                         return true
                     }
@@ -331,7 +331,7 @@ class GoalFormFragment : BaseFragment() {
         }
     }
 
-    private fun verifyFistTimeSaving() {
+    private fun verifyFirstTimeSaving() {
         if (firstTimeAdd) {
             viewModel.saveFirstTimeAdd(false)
             viewModel.saveFirstTimeList(true)
