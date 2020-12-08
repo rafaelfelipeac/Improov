@@ -733,7 +733,11 @@ class GoalDetailFragment : BaseFragment() {
         item?.name = name
         item?.updatedDate = getCurrentTime()
 
-        item?.let { viewModel.saveItem(it) }
+        item?.let {
+            viewModel.saveItem(it)
+
+            itemsAdapter.updateItem(it)
+        }
     }
 
     private fun getScreenMultiplier(): Float {

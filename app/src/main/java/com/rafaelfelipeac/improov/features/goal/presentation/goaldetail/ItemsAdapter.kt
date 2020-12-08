@@ -58,4 +58,9 @@ class ItemsAdapter(private val detailFragment: GoalDetailFragment) : BaseAdapter
         notifyItemRemoved(position)
         notifyItemInserted(position)
     }
+
+    fun updateItem(item: Item) {
+        items.find { it.itemId == item.itemId }?.name = item.name
+        notifyDataSetChanged()
+    }
 }
