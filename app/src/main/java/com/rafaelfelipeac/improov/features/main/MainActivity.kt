@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.viewBinding
@@ -24,6 +25,7 @@ import com.rafaelfelipeac.improov.features.goal.presentation.goaldetail.GoalDeta
 class MainActivity : BaseActivity() {
 
     lateinit var toolbar: Toolbar
+    lateinit var appBarLayout: AppBarLayout
     lateinit var navController: NavController
     lateinit var navigation: CoordinatorLayout
     lateinit var navigationFake: View
@@ -100,6 +102,7 @@ class MainActivity : BaseActivity() {
         navigationFake = binding.navigationFake
         fab = binding.fab
         toolbar = binding.toolbar
+        appBarLayout = binding.appBarLayout
     }
 
     private fun setupToolbar() {

@@ -14,10 +14,12 @@ var animatorToolbar: ValueAnimator? = null
 var hidingToolbar = false
 var showingToolbar = false
 
+var isShowing = true
+
 var toolbarHeight = 0
 
 fun Toolbar.show(supportActionBar: ActionBar?) {
-    if ((animatorToolbar?.isRunning == true) || hidingToolbar || (supportActionBar?.isShowing != false))
+    if ((animatorToolbar?.isRunning == true) || hidingToolbar || (isShowing))
         return
 
     if (toolbarHeight == 0 && height > 0) {
@@ -39,13 +41,15 @@ fun Toolbar.show(supportActionBar: ActionBar?) {
 
             showingToolbar = true
 
-            supportActionBar.show()
+            supportActionBar?.show()
         }
 
         override fun onAnimationEnd(animation: Animator?) {
             super.onAnimationEnd(animation)
 
             showingToolbar = false
+
+            isShowing = true
         }
     })
 
@@ -54,7 +58,7 @@ fun Toolbar.show(supportActionBar: ActionBar?) {
 }
 
 fun Toolbar.hide(supportActionBar: ActionBar?) {
-    if ((animatorToolbar?.isRunning == true) || showingToolbar || (supportActionBar?.isShowing != true))
+    if ((animatorToolbar?.isRunning == true) || showingToolbar || (!isShowing))
         return
 
     if (toolbarHeight == 0 && height > 0) {
@@ -82,7 +86,9 @@ fun Toolbar.hide(supportActionBar: ActionBar?) {
 
             hidingToolbar = false
 
-            supportActionBar.hide()
+            supportActionBar?.hide()
+
+            isShowing = false
         }
     })
 

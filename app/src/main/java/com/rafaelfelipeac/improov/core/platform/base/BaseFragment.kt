@@ -16,6 +16,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -50,6 +51,7 @@ abstract class BaseFragment : Fragment() {
 
     val fab: FloatingActionButton get() = main.fab
     val navController: NavController get() = main.navController
+    private val appBarLayout: AppBarLayout get() = main.appBarLayout
     private val toolbar: Toolbar get() = main.toolbar
     private val navigation: CoordinatorLayout get() = main.navigation
     private val navigationFake: View get() = main.navigationFake
@@ -74,9 +76,15 @@ abstract class BaseFragment : Fragment() {
         hideSoftKeyboard()
     }
 
-    fun showToolbar() = toolbar.show(main.supportActionBar)
+    fun showToolbar() {
+        appBarLayout.visible()
+        toolbar.show(main.supportActionBar)
+    }
 
-    fun hideToolbar() = toolbar.hide(main.supportActionBar)
+    fun hideToolbar() {
+        appBarLayout.gone()
+        toolbar.hide(main.supportActionBar)
+    }
 
     fun showNavigation() = navigation.show(navigationFake)
 

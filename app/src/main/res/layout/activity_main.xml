@@ -9,14 +9,16 @@
         tools:context=".features.main.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/include"
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay"
             app:elevation="0dp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
 
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -39,7 +41,7 @@
             app:layout_constraintBottom_toTopOf="@+id/navigation_fake"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
             app:navGraph="@navigation/nav_graph" />
 
     <include layout="@layout/bottom_sheet" />
@@ -58,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="@dimen/elevation_regular"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:visibility="visible">
 
