@@ -7,8 +7,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.MenuItem
+import androidx.lifecycle.lifecycleScope
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.resetValue
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.extension.gone
@@ -16,13 +16,16 @@ import com.rafaelfelipeac.improov.core.extension.invisible
 import com.rafaelfelipeac.improov.core.extension.focusOnEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.isEmptyOrZero
 import com.rafaelfelipeac.improov.core.extension.toFloat
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.extension.getNumberInExhibitionFormat
 import com.rafaelfelipeac.improov.core.extension.isNotEmpty
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
+import com.rafaelfelipeac.improov.databinding.FragmentGoalFormBinding
 import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import com.rafaelfelipeac.improov.features.dialog.DialogOneButton
-import kotlinx.android.synthetic.main.fragment_goal_form.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @Suppress("TooManyFunctions")
 class GoalFormFragment : BaseFragment() {
@@ -36,6 +39,8 @@ class GoalFormFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelProvider.goalFormViewModel() }
 
+    private var binding by viewBinding<FragmentGoalFormBinding>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,11 +51,14 @@ class GoalFormFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         setScreen()
 
-        return inflater.inflate(R.layout.fragment_goal_form, container, false)
+        return FragmentGoalFormBinding.inflate(inflater, container, false).run {
+            binding = this
+            binding.root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -86,20 +94,20 @@ class GoalFormFragment : BaseFragment() {
                         showSnackBar(getString(R.string.goal_form_empty_type_goal))
 
                         hideSoftKeyboard()
-                        goalFormTypeTitle.isFocusableInTouchMode = true
-                        goalFormTypeTitle.requestFocus()
+                        binding.goalFormTypeTitle.isFocusableInTouchMode = true
+                        binding.goalFormTypeTitle.requestFocus()
                     }
-                    goalFormSwitchDivideAndConquer.isChecked && !validateDivideAndConquerValues() -> {
+                    binding.goalFormSwitchDivideAndConquer.isChecked && !validateDivideAndConquerValues() -> {
                         showSnackBar(getString(R.string.goal_form_gold_silver_bronze_order))
 
-                        goalFormBronzeValue.requestFocus()
+                        binding.goalFormBronzeValue.requestFocus()
                     }
                     else -> {
                         val goalToSave = updateOrCreateGoal()
 
                         viewModel.saveGoal(goalToSave)
 
-                        verifyFistTimeSaving()
+                        verifyFirstTimeSaving()
 
                         return true
                     }
@@ -123,14 +131,14 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setupLayout() {
-        goalFormDivideAndConquerHelp.setOnClickListener {
+        binding.goalFormDivideAndConquerHelp.setOnClickListener {
             hideSoftKeyboard()
             setupBottomSheetTipsDivideAndConquer()
             setupBottomSheetTip()
             showBottomSheetTips()
         }
 
-        goalFormTypeHelp.setOnClickListener {
+        binding.goalFormTypeHelp.setOnClickListener {
             hideSoftKeyboard()
             setupBottomSheetTipsGoalType()
             setupBottomSheetTip()
@@ -139,27 +147,35 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.savedGoal.observe(this) {
-            navController.navigateUp()
+        lifecycleScope.launch {
+            viewModel.savedGoal.collect {
+                navController.navigate(GoalFormFragmentDirections.goalFormToGoal(it))
+            }
         }
 
-        viewModel.goal.observe(this) {
-            goal = it
+        lifecycleScope.launch {
+            viewModel.goal.collect {
+                goal = it
 
-            setupGoal()
+                setupGoal()
+            }
         }
 
-        viewModel.goals.observe(this) {
-            goalsSize = it.size
+        lifecycleScope.launch {
+            viewModel.goals.collect {
+                goalsSize = it.size
+            }
         }
 
-        viewModel.firstTimeAdd.observe(this) {
-            firstTimeAdd = it
+        lifecycleScope.launch {
+            viewModel.firstTimeAdd.collect {
+                firstTimeAdd = it
+            }
         }
     }
 
     private fun setSwitchImproov() {
-        goalFormSwitchDivideAndConquer.setOnCheckedChangeListener { _, isChecked ->
+        binding.goalFormSwitchDivideAndConquer.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 isDivideAndConquer(true)
             } else {
@@ -169,36 +185,36 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setRadioButtonType() {
-        goalFormRadioTypeList.setOnClickListener {
+        binding.goalFormRadioTypeList.setOnClickListener {
             if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_LIST) {
                 showDialogNoGoalTypeChange()
-            } else if (goalFormRadioTypeList.isChecked) {
-                goalFormRadioTypeCounter.isChecked = false
-                goalFormRadioTypeFinal.isChecked = false
+            } else if (binding.goalFormRadioTypeList.isChecked) {
+                binding.goalFormRadioTypeCounter.isChecked = false
+                binding.goalFormRadioTypeFinal.isChecked = false
 
-                goalFormGoalCounter.gone()
+                binding.goalFormGoalCounter.gone()
             }
         }
 
-        goalFormRadioTypeCounter.setOnClickListener {
+        binding.goalFormRadioTypeCounter.setOnClickListener {
             if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_COUNTER) {
                 showDialogNoGoalTypeChange()
-            } else if (goalFormRadioTypeCounter.isChecked) {
-                goalFormRadioTypeList.isChecked = false
-                goalFormRadioTypeFinal.isChecked = false
+            } else if (binding.goalFormRadioTypeCounter.isChecked) {
+                binding.goalFormRadioTypeList.isChecked = false
+                binding.goalFormRadioTypeFinal.isChecked = false
 
-                goalFormGoalCounter.visible()
+                binding.goalFormGoalCounter.visible()
             }
         }
 
-        goalFormRadioTypeFinal.setOnClickListener {
+        binding.goalFormRadioTypeFinal.setOnClickListener {
             if (goal.type != GoalType.GOAL_NONE && goal.type != GoalType.GOAL_FINAL) {
                 showDialogNoGoalTypeChange()
-            } else if (goalFormRadioTypeFinal.isChecked) {
-                goalFormRadioTypeCounter.isChecked = false
-                goalFormRadioTypeList.isChecked = false
+            } else if (binding.goalFormRadioTypeFinal.isChecked) {
+                binding.goalFormRadioTypeCounter.isChecked = false
+                binding.goalFormRadioTypeList.isChecked = false
 
-                goalFormGoalCounter.gone()
+                binding.goalFormGoalCounter.gone()
             }
         }
     }
@@ -207,23 +223,23 @@ class GoalFormFragment : BaseFragment() {
         goal.divideAndConquer = isDivideAndConquer
 
         if (isDivideAndConquer) {
-            goalFormSingleValue.resetValue()
+            binding.goalFormSingleValue.resetValue()
 
-            goalFormDivideAndConquer.visible()
-            goalFormSingle.invisible()
+            binding.goalFormDivideAndConquer.visible()
+            binding.goalFormSingle.invisible()
         } else {
-            goalFormBronzeValue.resetValue()
-            goalFormSilverValue.resetValue()
-            goalFormGoldValue.resetValue()
+            binding.goalFormBronzeValue.resetValue()
+            binding.goalFormSilverValue.resetValue()
+            binding.goalFormGoldValue.resetValue()
 
-            goalFormDivideAndConquer.invisible()
-            goalFormSingle.visible()
+            binding.goalFormDivideAndConquer.gone()
+            binding.goalFormSingle.visible()
         }
     }
 
     private fun updateOrCreateGoal(): Goal {
-        goal.name = goalFormGoalName.text.toString()
-        goal.divideAndConquer = goalFormSwitchDivideAndConquer.isChecked
+        goal.name = binding.goalFormGoalName.text.toString()
+        goal.divideAndConquer = binding.goalFormSwitchDivideAndConquer.isChecked
 
         if (goal.goalId == 0L) {
             goal.createdDate = getCurrentTime()
@@ -237,16 +253,16 @@ class GoalFormFragment : BaseFragment() {
         }
 
         if (getGoalTypeSelected() == GoalType.GOAL_COUNTER) {
-            goal.incrementValue = goalFormGoalCounterIncValue.toFloat()
-            goal.decrementValue = goalFormGoalCounterDecValue.toFloat()
+            goal.incrementValue = binding.goalFormGoalCounterIncValue.toFloat()
+            goal.decrementValue = binding.goalFormGoalCounterDecValue.toFloat()
         }
 
         if (goal.divideAndConquer) {
-            goal.bronzeValue = goalFormBronzeValue.toFloat()
-            goal.silverValue = goalFormSilverValue.toFloat()
-            goal.goldValue = goalFormGoldValue.toFloat()
+            goal.bronzeValue = binding.goalFormBronzeValue.toFloat()
+            goal.silverValue = binding.goalFormSilverValue.toFloat()
+            goal.goldValue = binding.goalFormGoldValue.toFloat()
         } else {
-            goal.singleValue = goalFormSingleValue.toFloat()
+            goal.singleValue = binding.goalFormSingleValue.toFloat()
         }
 
         return goal
@@ -254,13 +270,13 @@ class GoalFormFragment : BaseFragment() {
 
     private fun getGoalTypeSelected(): GoalType {
         return when {
-            goalFormRadioTypeList.isChecked -> {
+            binding.goalFormRadioTypeList.isChecked -> {
                 GoalType.GOAL_LIST
             }
-            goalFormRadioTypeCounter.isChecked -> {
+            binding.goalFormRadioTypeCounter.isChecked -> {
                 GoalType.GOAL_COUNTER
             }
-            goalFormRadioTypeFinal.isChecked -> {
+            binding.goalFormRadioTypeFinal.isChecked -> {
                 GoalType.GOAL_FINAL
             }
             else -> {
@@ -270,19 +286,19 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun setupGoal() {
-        goalFormGoalName.setText(goal.name)
+        binding.goalFormGoalName.setText(goal.name)
 
         if (goal.divideAndConquer) {
-            goalFormDivideAndConquer.visible()
-            goalFormSingle.invisible()
+            binding.goalFormDivideAndConquer.visible()
+            binding.goalFormSingle.invisible()
 
-            goalFormBronzeValue.setText(goal.bronzeValue.getNumberInExhibitionFormat())
-            goalFormSilverValue.setText(goal.silverValue.getNumberInExhibitionFormat())
-            goalFormGoldValue.setText(goal.goldValue.getNumberInExhibitionFormat())
+            binding.goalFormBronzeValue.setText(goal.bronzeValue.getNumberInExhibitionFormat())
+            binding.goalFormSilverValue.setText(goal.silverValue.getNumberInExhibitionFormat())
+            binding.goalFormGoldValue.setText(goal.goldValue.getNumberInExhibitionFormat())
 
-            goalFormSwitchDivideAndConquer.isChecked = true
+            binding.goalFormSwitchDivideAndConquer.isChecked = true
         } else {
-            goalFormSingleValue.setText(goal.singleValue.getNumberInExhibitionFormat())
+            binding.goalFormSingleValue.setText(goal.singleValue.getNumberInExhibitionFormat())
         }
 
         setupGoalType()
@@ -291,31 +307,31 @@ class GoalFormFragment : BaseFragment() {
     private fun setupGoalType() {
         when (goal.type) {
             GoalType.GOAL_LIST -> {
-                goalFormRadioTypeList.isChecked = true
-                goalFormRadioTypeCounter.isChecked = false
-                goalFormRadioTypeFinal.isChecked = false
+                binding.goalFormRadioTypeList.isChecked = true
+                binding.goalFormRadioTypeCounter.isChecked = false
+                binding.goalFormRadioTypeFinal.isChecked = false
             }
             GoalType.GOAL_COUNTER -> {
-                goalFormRadioTypeCounter.isChecked = true
-                goalFormRadioTypeList.isChecked = false
-                goalFormRadioTypeFinal.isChecked = false
+                binding.goalFormRadioTypeCounter.isChecked = true
+                binding.goalFormRadioTypeList.isChecked = false
+                binding.goalFormRadioTypeFinal.isChecked = false
 
-                goalFormGoalCounter.visible()
+                binding.goalFormGoalCounter.visible()
 
-                goalFormGoalCounterIncValue.setText(goal.incrementValue.getNumberInExhibitionFormat())
-                goalFormGoalCounterDecValue.setText(goal.decrementValue.getNumberInExhibitionFormat())
+                binding.goalFormGoalCounterIncValue.setText(goal.incrementValue.getNumberInExhibitionFormat())
+                binding.goalFormGoalCounterDecValue.setText(goal.decrementValue.getNumberInExhibitionFormat())
             }
             GoalType.GOAL_FINAL -> {
-                goalFormRadioTypeFinal.isChecked = true
-                goalFormRadioTypeList.isChecked = false
-                goalFormRadioTypeCounter.isChecked = false
+                binding.goalFormRadioTypeFinal.isChecked = true
+                binding.goalFormRadioTypeList.isChecked = false
+                binding.goalFormRadioTypeCounter.isChecked = false
             }
             else -> {
             }
         }
     }
 
-    private fun verifyFistTimeSaving() {
+    private fun verifyFirstTimeSaving() {
         if (firstTimeAdd) {
             viewModel.saveFirstTimeAdd(false)
             viewModel.saveFirstTimeList(true)
@@ -348,8 +364,8 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfNameFieldIsEmptyOrZero(): Boolean {
         return when {
-            goalFormGoalName.isEmptyOrZero() -> {
-                goalFormGoalName.focusOnEmptyOrZero(this)
+            binding.goalFormGoalName.isEmptyOrZero() -> {
+                binding.goalFormGoalName.focusOnEmptyOrZero(this)
                 true
             }
             else -> false
@@ -358,20 +374,20 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfValuesFieldsAreEmptyOrZero(): Boolean {
         return when {
-            goalFormSingleValue.isEmptyOrZero() && !goal.divideAndConquer -> {
-                goalFormSingleValue.focusOnEmptyOrZero(this)
+            binding.goalFormSingleValue.isEmptyOrZero() && !goal.divideAndConquer -> {
+                binding.goalFormSingleValue.focusOnEmptyOrZero(this)
                 true
             }
-            goalFormBronzeValue.isEmptyOrZero() && goal.divideAndConquer -> {
-                goalFormBronzeValue.focusOnEmptyOrZero(this)
+            binding.goalFormBronzeValue.isEmptyOrZero() && goal.divideAndConquer -> {
+                binding.goalFormBronzeValue.focusOnEmptyOrZero(this)
                 true
             }
-            goalFormSilverValue.isEmptyOrZero() && goal.divideAndConquer -> {
-                goalFormSilverValue.focusOnEmptyOrZero(this)
+            binding.goalFormSilverValue.isEmptyOrZero() && goal.divideAndConquer -> {
+                binding.goalFormSilverValue.focusOnEmptyOrZero(this)
                 true
             }
-            goalFormGoldValue.isEmptyOrZero() && goal.divideAndConquer -> {
-                goalFormGoldValue.focusOnEmptyOrZero(this)
+            binding.goalFormGoldValue.isEmptyOrZero() && goal.divideAndConquer -> {
+                binding.goalFormGoldValue.focusOnEmptyOrZero(this)
                 true
             }
             else -> false
@@ -380,16 +396,16 @@ class GoalFormFragment : BaseFragment() {
 
     private fun checkIfCounterFieldsAreEmptyOrZero(): Boolean {
         return when {
-            goalFormGoalCounterDecValue.isEmptyOrZero() &&
+            binding.goalFormGoalCounterDecValue.isEmptyOrZero() &&
                     (goal.type == GoalType.GOAL_COUNTER ||
                             getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
-                goalFormGoalCounterDecValue.focusOnEmptyOrZero(this)
+                binding.goalFormGoalCounterDecValue.focusOnEmptyOrZero(this)
                 true
             }
-            goalFormGoalCounterIncValue.isEmptyOrZero() &&
+            binding.goalFormGoalCounterIncValue.isEmptyOrZero() &&
                     (goal.type == GoalType.GOAL_COUNTER ||
                             getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
-                goalFormGoalCounterIncValue.focusOnEmptyOrZero(this)
+                binding.goalFormGoalCounterIncValue.focusOnEmptyOrZero(this)
                 true
             }
             else -> false
@@ -398,13 +414,13 @@ class GoalFormFragment : BaseFragment() {
 
     private fun validateDivideAndConquerValues(): Boolean {
         return try {
-            val gold = goalFormGoldValue.toFloat()
-            val silver = goalFormSilverValue.toFloat()
-            val bronze = goalFormBronzeValue.toFloat()
+            val gold = binding.goalFormGoldValue.toFloat()
+            val silver = binding.goalFormSilverValue.toFloat()
+            val bronze = binding.goalFormBronzeValue.toFloat()
 
             ((gold > silver) && (silver > bronze))
         } catch (e: NumberFormatException) {
-            return goalFormSingleValue.isNotEmpty()
+            return binding.goalFormSingleValue.isNotEmpty()
         }
     }
 }

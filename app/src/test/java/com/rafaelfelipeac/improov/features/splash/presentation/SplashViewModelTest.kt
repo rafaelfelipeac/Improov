@@ -5,6 +5,7 @@ import com.rafaelfelipeac.improov.base.CoroutineRule
 import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.splash.domain.usecase.GetWelcomeUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
@@ -47,6 +48,8 @@ class SplashViewModelTest {
         splashViewModel.loadData()
 
         // then
-        splashViewModel.welcome.value equalTo booleanValue
+        runBlocking {
+            splashViewModel.welcome.first() equalTo booleanValue
+        }
     }
 }

@@ -101,32 +101,41 @@
                 app:layout_constraintTop_toBottomOf="@+id/goalDetailInfo"
                 app:layout_constraintVertical_bias="0.0">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                     android:id="@+id/goalDetailSingle"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_regular"
                     android:layout_marginBottom="@dimen/margin_regular"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                        android:id="@+id/goalDetailSingleImage"
-                        android:layout_width="@dimen/goal_detail_image_size"
-                        android:layout_height="@dimen/goal_detail_image_size"
+                <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_small"
-                        android:layout_marginTop="@dimen/margin_large"
                         android:layout_marginEnd="@dimen/margin_small"
-                        android:background="@mipmap/ic_medal_dark"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.500"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:gravity="center">
+
+                    <com.hookedonplay.decoviewlib.DecoView
+                            android:id="@+id/goalDetailSingleArcView"
+                            android:layout_width="@dimen/goal_detail_arc_view_size"
+                            android:layout_height="@dimen/goal_detail_arc_view_size"
+                            android:layout_marginTop="@dimen/margin_small" />
+
+                    <ImageView
+                            android:id="@+id/goalDetailSingleImage"
+                            android:layout_width="@dimen/goal_detail_image_size"
+                            android:layout_height="@dimen/goal_detail_image_size"
+                            android:layout_marginTop="@dimen/margin_large"
+                            android:layout_centerHorizontal="true"
+                            android:background="@mipmap/ic_medal_dark" />
+
+                </RelativeLayout>
 
                 <TextView
                         android:id="@+id/goalDetailSingleText"
@@ -135,169 +144,160 @@
                         android:layout_marginStart="@dimen/margin_small"
                         android:layout_marginTop="@dimen/margin_regular"
                         android:layout_marginEnd="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_regular"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_large"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/goalDetailSingleImage" />
+                        android:textSize="@dimen/text_size_large" />
 
-                <com.hookedonplay.decoviewlib.DecoView
-                        android:id="@+id/goalDetailSingleArcView"
-                        android:layout_width="@dimen/goal_detail_arc_view_size"
-                        android:layout_height="@dimen/goal_detail_arc_view_size"
-                        android:layout_marginTop="@dimen/margin_small"
-                        app:layout_constraintEnd_toEndOf="@+id/goalDetailSingleImage"
-                        app:layout_constraintStart_toStartOf="@+id/goalDetailSingleImage"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/goalDetailDivideAndConquer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginTop="@dimen/margin_regular"
-                    android:layout_marginEnd="@dimen/margin_small"
                     android:layout_marginBottom="@dimen/margin_regular"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                         android:id="@+id/goalDetailDivideAndConquerBronze"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/goalDetailDivideAndConquerSilver"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                            android:id="@+id/goalDetailDivideAndConquerBronzeImage"
-                            android:layout_width="@dimen/goal_detail_image_size"
-                            android:layout_height="@dimen/goal_detail_image_size"
-                            android:layout_marginStart="@dimen/margin_small"
-                            android:layout_marginTop="@dimen/margin_large"
-                            android:layout_marginEnd="@dimen/margin_small"
-                            android:background="@mipmap/ic_trophy_bronze_dark"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        <com.hookedonplay.decoviewlib.DecoView
+                                android:id="@+id/goalDetailBronzeArcView"
+                                android:layout_width="@dimen/goal_detail_arc_view_size"
+                                android:layout_height="@dimen/goal_detail_arc_view_size"
+                                android:layout_marginTop="@dimen/margin_small" />
+
+                        <ImageView
+                                android:id="@+id/goalDetailDivideAndConquerBronzeImage"
+                                android:layout_width="@dimen/goal_detail_image_size"
+                                android:layout_height="@dimen/goal_detail_image_size"
+                                android:layout_marginStart="@dimen/margin_small"
+                                android:layout_marginTop="@dimen/margin_large"
+                                android:layout_centerHorizontal="true"
+                                android:background="@mipmap/ic_trophy_bronze_dark" />
+
+                    </RelativeLayout>
 
                     <TextView
                             android:id="@+id/goalDetailDivideAndConquerBronzeText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_small"
                             android:layout_marginTop="@dimen/margin_regular"
+                            android:layout_marginEnd="@dimen/margin_small"
+                            android:layout_marginBottom="@dimen/margin_regular"
+                            android:layout_gravity="center_horizontal"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/text_size_large"
-                            app:layout_constraintEnd_toEndOf="@+id/goalDetailDivideAndConquerBronzeImage"
-                            app:layout_constraintStart_toStartOf="@+id/goalDetailDivideAndConquerBronzeImage"
-                            app:layout_constraintTop_toBottomOf="@+id/goalDetailDivideAndConquerBronzeImage" />
+                            android:textSize="@dimen/text_size_large" />
 
-                    <com.hookedonplay.decoviewlib.DecoView
-                            android:id="@+id/goalDetailBronzeArcView"
-                            android:layout_width="@dimen/goal_detail_arc_view_size"
-                            android:layout_height="@dimen/goal_detail_arc_view_size"
-                            android:layout_marginTop="@dimen/margin_small"
-                            app:layout_constraintEnd_toEndOf="@+id/goalDetailDivideAndConquerBronzeImage"
-                            app:layout_constraintStart_toStartOf="@+id/goalDetailDivideAndConquerBronzeImage"
-                            app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                         android:id="@+id/goalDetailDivideAndConquerSilver"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_smaller"
-                        android:layout_marginEnd="@dimen/margin_smaller"
-                        android:layout_marginBottom="@dimen/margin_small"
+                        android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/goalDetailDivideAndConquerGold"
-                        app:layout_constraintStart_toEndOf="@+id/goalDetailDivideAndConquerBronze"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                            android:id="@+id/goalDetailDivideAndConquerSilverImage"
-                            android:layout_width="@dimen/goal_detail_image_size"
-                            android:layout_height="@dimen/goal_detail_image_size"
-                            android:layout_marginStart="@dimen/margin_small"
-                            android:layout_marginTop="@dimen/margin_large"
-                            android:layout_marginEnd="@dimen/margin_small"
-                            android:background="@mipmap/ic_trophy_silver_dark"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        <com.hookedonplay.decoviewlib.DecoView
+                                android:id="@+id/goalDetailSilverArcView"
+                                android:layout_width="@dimen/goal_detail_arc_view_size"
+                                android:layout_height="@dimen/goal_detail_arc_view_size"
+                                android:layout_marginTop="@dimen/margin_small" />
+
+                        <ImageView
+                                android:id="@+id/goalDetailDivideAndConquerSilverImage"
+                                android:layout_width="@dimen/goal_detail_image_size"
+                                android:layout_height="@dimen/goal_detail_image_size"
+                                android:layout_marginStart="@dimen/margin_small"
+                                android:layout_marginTop="@dimen/margin_large"
+                                android:layout_marginEnd="@dimen/margin_small"
+                                android:layout_centerHorizontal="true"
+                                android:background="@mipmap/ic_trophy_silver_dark" />
+
+                    </RelativeLayout>
 
                     <TextView
                             android:id="@+id/goalDetailDivideAndConquerSilverText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_small"
                             android:layout_marginTop="@dimen/margin_regular"
+                            android:layout_marginEnd="@dimen/margin_small"
+                            android:layout_marginBottom="@dimen/margin_regular"
+                            android:layout_gravity="center_horizontal"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/text_size_large"
-                            app:layout_constraintEnd_toEndOf="@+id/goalDetailDivideAndConquerSilverImage"
-                            app:layout_constraintStart_toStartOf="@+id/goalDetailDivideAndConquerSilverImage"
-                            app:layout_constraintTop_toBottomOf="@+id/goalDetailDivideAndConquerSilverImage" />
+                            android:textSize="@dimen/text_size_large" />
 
-                    <com.hookedonplay.decoviewlib.DecoView
-                            android:id="@+id/goalDetailSilverArcView"
-                            android:layout_width="@dimen/goal_detail_arc_view_size"
-                            android:layout_height="@dimen/goal_detail_arc_view_size"
-                            android:layout_marginTop="@dimen/margin_small"
-                            app:layout_constraintEnd_toEndOf="@+id/goalDetailDivideAndConquerSilverImage"
-                            app:layout_constraintStart_toStartOf="@+id/goalDetailDivideAndConquerSilverImage"
-                            app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                         android:id="@+id/goalDetailDivideAndConquerGold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_small"
+                        android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/goalDetailDivideAndConquerSilver"
                         app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                            android:id="@+id/goalDetailDivideAndConquerGoldImage"
-                            android:layout_width="@dimen/goal_detail_image_size"
-                            android:layout_height="@dimen/goal_detail_image_size"
-                            android:layout_marginStart="@dimen/margin_small"
-                            android:layout_marginTop="@dimen/margin_large"
-                            android:layout_marginEnd="@dimen/margin_small"
-                            android:background="@mipmap/ic_trophy_gold_dark"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        <com.hookedonplay.decoviewlib.DecoView
+                                android:id="@+id/goalDetailGoldArcView"
+                                android:layout_width="@dimen/goal_detail_arc_view_size"
+                                android:layout_height="@dimen/goal_detail_arc_view_size"
+                                android:layout_marginTop="@dimen/margin_small" />
+
+                        <ImageView
+                                android:id="@+id/goalDetailDivideAndConquerGoldImage"
+                                android:layout_width="@dimen/goal_detail_image_size"
+                                android:layout_height="@dimen/goal_detail_image_size"
+                                android:layout_marginStart="@dimen/margin_small"
+                                android:layout_marginTop="@dimen/margin_large"
+                                android:layout_marginEnd="@dimen/margin_small"
+                                android:layout_centerHorizontal="true"
+                                android:background="@mipmap/ic_trophy_gold_dark" />
+
+                    </RelativeLayout>
 
                     <TextView
                             android:id="@+id/goalDetailDivideAndConquerGoldText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_small"
                             android:layout_marginTop="@dimen/margin_regular"
+                            android:layout_marginEnd="@dimen/margin_small"
+                            android:layout_marginBottom="@dimen/margin_regular"
+                            android:layout_gravity="center_horizontal"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/text_size_large"
-                            app:layout_constraintEnd_toEndOf="@+id/goalDetailDivideAndConquerGoldImage"
-                            app:layout_constraintStart_toStartOf="@+id/goalDetailDivideAndConquerGoldImage"
-                            app:layout_constraintTop_toBottomOf="@+id/goalDetailDivideAndConquerGoldImage" />
+                            android:textSize="@dimen/text_size_large" />
 
-                    <com.hookedonplay.decoviewlib.DecoView
-                            android:id="@+id/goalDetailGoldArcView"
-                            android:layout_width="@dimen/goal_detail_arc_view_size"
-                            android:layout_height="@dimen/goal_detail_arc_view_size"
-                            android:layout_marginTop="@dimen/margin_small"
-                            app:layout_constraintEnd_toEndOf="@+id/goalDetailDivideAndConquerGoldImage"
-                            app:layout_constraintStart_toStartOf="@+id/goalDetailDivideAndConquerGoldImage"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

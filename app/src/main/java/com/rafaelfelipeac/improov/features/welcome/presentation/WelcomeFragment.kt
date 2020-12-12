@@ -4,26 +4,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rafaelfelipeac.improov.R
+import androidx.lifecycle.lifecycleScope
+import androidx.viewpager.widget.ViewPager
 import com.rafaelfelipeac.improov.core.extension.invisible
-import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_welcome.*
+import com.rafaelfelipeac.improov.databinding.FragmentWelcomeBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+
+const val INDEX_LAST_WELCOME = 2
 
 class WelcomeFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelProvider.welcomeViewModel() }
 
+    private var binding by viewBinding<FragmentWelcomeBinding>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         setScreen()
 
-        return inflater.inflate(R.layout.fragment_welcome, container, false)
+        return FragmentWelcomeBinding.inflate(inflater, container, false).run {
+            binding = this
+            binding.root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,29 +49,38 @@ class WelcomeFragment : BaseFragment() {
     }
 
     private fun setupLayout() {
-        welcomeStartButton.setOnClickListener {
+        binding.welcomeStartButton.setOnClickListener {
             viewModel.saveWelcome(true)
         }
 
-        welcomeViewPager.adapter =
-            WelcomeAdapter(
-                this,
-                parentFragmentManager
-            )
-        welcomeDots.setupWithViewPager(welcomeViewPager, true)
+        binding.welcomeViewPager.adapter = WelcomeAdapter(parentFragmentManager)
+
+        binding.welcomeViewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+            override fun onPageSelected(position: Int) {
+                if (position == INDEX_LAST_WELCOME) {
+                    showStartButton()
+                } else {
+                    hideStartButton()
+                }
+            }
+        })
+
+        binding.welcomeDots.setupWithViewPager(binding.welcomeViewPager, true)
     }
 
     private fun observeViewModel() {
-        viewModel.saved.observe(this) {
-            navController.navigate(WelcomeFragmentDirections.welcomeToList())
+        lifecycleScope.launch {
+            viewModel.saved.collect {
+                navController.navigate(WelcomeFragmentDirections.welcomeToList())
+            }
         }
     }
 
     fun showStartButton() {
-        welcomeStartButton?.visible()
+        binding.welcomeStartButton.visible()
     }
 
     fun hideStartButton() {
-        welcomeStartButton?.invisible()
+        binding.welcomeStartButton.invisible()
     }
 }

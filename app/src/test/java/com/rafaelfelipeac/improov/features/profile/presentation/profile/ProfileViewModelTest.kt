@@ -8,6 +8,7 @@ import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveFirstTimeA
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveFirstTimeListUseCase
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveWelcomeUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
@@ -56,7 +57,9 @@ class ProfileViewModelTest {
         profileViewModel.saveWelcome(booleanValue)
 
         // then
-        profileViewModel.saved.value equalTo Unit
+        runBlocking {
+            profileViewModel.saved.first() equalTo Unit
+        }
     }
 
     @Test
@@ -71,7 +74,9 @@ class ProfileViewModelTest {
         profileViewModel.saveFirstTimeAdd(booleanValue)
 
         // then
-        profileViewModel.saved.value equalTo Unit
+        runBlocking {
+            profileViewModel.saved.first() equalTo Unit
+        }
     }
 
     @Test
@@ -86,7 +91,9 @@ class ProfileViewModelTest {
         profileViewModel.saveFirstTimeList(booleanValue)
 
         // then
-        profileViewModel.saved.value equalTo Unit
+        runBlocking {
+            profileViewModel.saved.first() equalTo Unit
+        }
     }
 
     @Test
@@ -101,6 +108,8 @@ class ProfileViewModelTest {
         profileViewModel.loadData()
 
         // then
-        profileViewModel.name.value equalTo userName
+        runBlocking {
+            profileViewModel.name.first() equalTo userName
+        }
     }
 }

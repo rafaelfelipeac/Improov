@@ -6,6 +6,7 @@ import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.settings.domain.usecase.GetLanguageUseCase
 import com.rafaelfelipeac.improov.features.settings.domain.usecase.SaveLanguageUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
@@ -50,7 +51,9 @@ class SettingsLanguageViewModelTest {
         settingsLanguageViewModel.saveLanguage(language)
 
         // then
-        settingsLanguageViewModel.saved.value equalTo Unit
+        runBlocking {
+            settingsLanguageViewModel.saved.first() equalTo Unit
+        }
     }
 
     @Test
@@ -65,6 +68,8 @@ class SettingsLanguageViewModelTest {
         settingsLanguageViewModel.loadData()
 
         // then
-        settingsLanguageViewModel.language.value equalTo language
+        runBlocking {
+            settingsLanguageViewModel.language.first() equalTo language
+        }
     }
 }

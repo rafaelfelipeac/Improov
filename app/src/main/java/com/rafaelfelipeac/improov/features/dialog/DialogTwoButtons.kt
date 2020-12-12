@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rafaelfelipeac.improov.R
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.platform.base.BaseDialog
-import kotlinx.android.synthetic.main.fragment_dialog_two_buttons.*
+import com.rafaelfelipeac.improov.databinding.FragmentDialogTwoButtonsBinding
 
 class DialogTwoButtons(
     private val message: String,
@@ -14,17 +14,22 @@ class DialogTwoButtons(
     private val positiveText: String = ""
 ) : BaseDialog() {
 
+    private var binding by viewBinding<FragmentDialogTwoButtonsBinding>()
+
     private var onClickListener: OnClickListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         setScreen()
 
-        return inflater.inflate(R.layout.fragment_dialog_two_buttons, container, false)
+        return FragmentDialogTwoButtonsBinding.inflate(inflater, container, false).run {
+            binding = this
+            binding.root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,21 +40,21 @@ class DialogTwoButtons(
     }
 
     private fun setupLayout() {
-        dialogTwoButtonsMessage.text = message
+        binding.dialogTwoButtonsMessage.text = message
 
         if (negativeText.isNotEmpty()) {
-            dialogTwoButtonsNegativeButton.text = negativeText
+            binding.dialogTwoButtonsNegativeButton.text = negativeText
         }
 
         if (positiveText.isNotEmpty()) {
-            dialogTwoButtonsPositiveButton.text = positiveText
+            binding.dialogTwoButtonsPositiveButton.text = positiveText
         }
     }
 
     private fun setupBehaviours() {
-        dialogTwoButtonsNegativeButton.setOnClickListener { onClickListener?.onNegative() }
+        binding.dialogTwoButtonsNegativeButton.setOnClickListener { onClickListener?.onNegative() }
 
-        dialogTwoButtonsPositiveButton.setOnClickListener { onClickListener?.onPositive() }
+        binding.dialogTwoButtonsPositiveButton.setOnClickListener { onClickListener?.onPositive() }
     }
 
     private fun setScreen() {

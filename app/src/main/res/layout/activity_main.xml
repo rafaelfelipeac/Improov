@@ -8,14 +8,28 @@
         android:orientation="vertical"
         tools:context=".features.main.MainActivity">
 
-    <include
-            android:id="@+id/include"
-            layout="@layout/app_bar_main"
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:elevation="0dp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimaryDark"
+                android:theme="@style/ToolbarColoredBackArrow"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextColor="@color/colorPrimary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <fragment
             android:id="@+id/navHostFragment"
@@ -24,16 +38,16 @@
             android:layout_height="0dp"
             app:defaultNavHost="true"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-            app:layout_constraintBottom_toTopOf="@+id/fakeBottomNavigation"
+            app:layout_constraintBottom_toTopOf="@+id/navigation_fake"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
             app:navGraph="@navigation/nav_graph" />
 
     <include layout="@layout/bottom_sheet" />
 
     <View
-            android:id="@+id/fakeBottomNavigation"
+            android:id="@+id/navigation_fake"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/fake_bottom_nav_height"
             android:layout_gravity="bottom"
@@ -42,10 +56,11 @@
             app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/navigationLayout"
+            android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="@dimen/elevation_regular"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:visibility="visible">
 
@@ -58,7 +73,7 @@
                 app:fabAlignmentMode="center" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabLayout"
+                android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/fab_offset"

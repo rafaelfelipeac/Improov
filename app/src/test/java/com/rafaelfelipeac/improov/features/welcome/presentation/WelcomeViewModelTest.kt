@@ -5,6 +5,7 @@ import com.rafaelfelipeac.improov.base.CoroutineRule
 import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.welcome.domain.usecase.SaveWelcomeUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
@@ -47,6 +48,8 @@ class WelcomeViewModelTest {
         welcomeViewModel.saveWelcome(booleanValue)
 
         // then
-        welcomeViewModel.saved.value equalTo Unit
+        runBlocking {
+            welcomeViewModel.saved.first() equalTo Unit
+        }
     }
 }

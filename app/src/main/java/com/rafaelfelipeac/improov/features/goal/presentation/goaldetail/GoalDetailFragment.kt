@@ -10,11 +10,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.observe
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.extension.gone
 import com.rafaelfelipeac.improov.core.extension.invisible
@@ -23,15 +23,18 @@ import com.rafaelfelipeac.improov.core.extension.getNumberInExhibitionFormat
 import com.rafaelfelipeac.improov.core.extension.toFloat
 import com.rafaelfelipeac.improov.core.extension.resetValue
 import com.rafaelfelipeac.improov.core.extension.isNotEmpty
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.extension.enableIcon
 import com.rafaelfelipeac.improov.core.extension.disableIcon
 import com.rafaelfelipeac.improov.core.extension.vibrate
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
+import com.rafaelfelipeac.improov.databinding.FragmentGoalDetailBinding
 import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import com.rafaelfelipeac.improov.features.commons.domain.model.Historic
 import com.rafaelfelipeac.improov.features.commons.domain.model.Item
-import kotlinx.android.synthetic.main.fragment_goal_detail.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.Date
 
 @Suppress("TooManyFunctions")
@@ -47,7 +50,6 @@ class GoalDetailFragment : BaseFragment() {
     private var seriesSilver: Int = 0
     private var seriesGold: Int = 0
 
-    private var goalNew: Boolean = false
     private var goalId: Long = 0L
 
     private var goal: Goal? = null
@@ -60,28 +62,28 @@ class GoalDetailFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelProvider.goalDetailViewModel() }
 
+    private var binding by viewBinding<FragmentGoalDetailBinding>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         goalId = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalId } ?: 0L
-        goalNew = arguments?.let { GoalDetailFragmentArgs.fromBundle(it).goalNew } ?: false
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        resetFistTime()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         setScreen()
 
-        return inflater.inflate(R.layout.fragment_goal_detail, container, false)
+        resetFirstTime()
+
+        return FragmentGoalDetailBinding.inflate(inflater, container, false).run {
+            binding = this
+            binding.root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -102,29 +104,36 @@ class GoalDetailFragment : BaseFragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_edit, menu)
 
+        if (goal?.type == GoalType.GOAL_LIST) {
+            if (main.toolbar.menu.findItem(R.id.menuAdd) == null) {
+                main.toolbar.inflateMenu(R.menu.menu_add)
+            }
+        }
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.menuAdd -> {
                 showBottomSheetItem(null)
 
-                return true
+                true
             }
             R.id.menuEdit -> {
                 val action = GoalDetailFragmentDirections.goalToGoalForm()
                 action.goalId = goal?.goalId ?: 0L
                 navController.navigate(action)
+
+                true
             }
             android.R.id.home -> {
-                if (goalNew) {
-                    navController.navigateUp()
-                }
-            }
-        }
+                navController.navigate(GoalDetailFragmentDirections.goalToList())
 
-        return false
+                true
+            }
+            else -> false
+        }
     }
 
     private fun setScreen() {
@@ -135,45 +144,55 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.savedGoal.observe(this) {
-            updateProgress()
+        lifecycleScope.launch {
+            viewModel.savedGoal.collect {
+                updateProgress()
+            }
         }
 
-        viewModel.goal.observe(this) {
-            goal = it
-            setupGoal()
+        lifecycleScope.launch {
+            viewModel.goal.collect {
+                goal = it
+                setupGoal()
+            }
         }
 
-        viewModel.savedItem.observe(this) {
-            viewModel.getItems()
+        lifecycleScope.launch {
+            viewModel.savedItem.collect {
+                viewModel.getItems()
 
-            updateTextAndGoal()
-
-            reloadItemAfterSwipe()
+                updateTextAndProgress()
+            }
         }
 
-        viewModel.items.observe(this) {
-            itemsSize = it.size
+        lifecycleScope.launch {
+            viewModel.items.collect {
+                itemsSize = it.size
 
-            it.let { itemsAdapter.setItems(it) }
-            setupItems()
+                it.let { itemsAdapter.setItems(it) }
+                setupItems()
+            }
         }
 
-        viewModel.savedHistoric.observe(this) {
-            viewModel.getHistorics()
+        lifecycleScope.launch {
+            viewModel.savedHistoric.collect {
+                viewModel.getHistorics()
 
-            updateTextAndGoal()
+                updateTextAndProgress()
+            }
         }
 
-        viewModel.historics.observe(this) {
-            historicsSize = it.size
+        lifecycleScope.launch {
+            viewModel.historics.collect {
+                historicsSize = it.size
 
-            it.let { historicAdapter.setItems(it) }
-            setupHistoric()
+                it.let { historicAdapter.setItems(it) }
+                setupHistoric()
+            }
         }
     }
 
-    private fun resetFistTime() {
+    private fun resetFirstTime() {
         seriesSingle = 0
         seriesBronze = 0
         seriesSilver = 0
@@ -181,7 +200,7 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun setupButtons() {
-        goalDetailBtnCounterInc.setOnClickListener {
+        binding.goalDetailBtnCounterInc.setOnClickListener {
             count += goal?.incrementValue ?: 0F
 
             viewModel.saveHistoric(
@@ -195,7 +214,7 @@ class GoalDetailFragment : BaseFragment() {
             updateGoal()
         }
 
-        goalDetailBtnCounterDec.setOnClickListener {
+        binding.goalDetailBtnCounterDec.setOnClickListener {
             count -= goal?.decrementValue ?: 0F
 
             viewModel.saveHistoric(
@@ -209,13 +228,13 @@ class GoalDetailFragment : BaseFragment() {
             updateGoal()
         }
 
-        goalDetailButtonSave.setOnClickListener {
-            if (goalDetailTotalValue.isNotEmpty()) {
-                count = goal?.value?.plus(goalDetailTotalValue.toFloat()) ?: 0F
+        binding.goalDetailButtonSave.setOnClickListener {
+            if (binding.goalDetailTotalValue.isNotEmpty()) {
+                count = goal?.value?.plus(binding.goalDetailTotalValue.toFloat()) ?: 0F
 
                 viewModel.saveHistoric(
                     Historic(
-                        value = goalDetailTotalValue.toFloat(),
+                        value = binding.goalDetailTotalValue.toFloat(),
                         date = Date(),
                         goalId = goal?.goalId ?: goalId
                     )
@@ -223,7 +242,7 @@ class GoalDetailFragment : BaseFragment() {
 
                 updateGoal()
 
-                goalDetailTotalValue.resetValue()
+                binding.goalDetailTotalValue.resetValue()
             } else {
                 showSnackBar(getString(R.string.goal_message_goal_value_invalid))
             }
@@ -233,52 +252,52 @@ class GoalDetailFragment : BaseFragment() {
     private fun setupGoal() {
         count = goal?.value ?: 0F
 
-        goalDetailTitle.text = goal?.name
-        goalDetailCount.text = count.getNumberInExhibitionFormat()
+        binding.goalDetailTitle.text = goal?.name
+        binding.goalDetailCount.text = count.getNumberInExhibitionFormat()
 
         goal?.divideAndConquer?.let {
             if (it) {
-                goalDetailSingle.invisible()
-                goalDetailDivideAndConquer.visible()
+                binding.goalDetailSingle.gone()
+                binding.goalDetailDivideAndConquer.visible()
 
-                goalDetailDivideAndConquerBronzeText.text =
+                binding.goalDetailDivideAndConquerBronzeText.text =
                     goal?.bronzeValue?.getNumberInExhibitionFormat()
-                goalDetailDivideAndConquerSilverText.text =
+                binding.goalDetailDivideAndConquerSilverText.text =
                     goal?.silverValue?.getNumberInExhibitionFormat()
-                goalDetailDivideAndConquerGoldText.text =
+                binding.goalDetailDivideAndConquerGoldText.text =
                     goal?.goldValue?.getNumberInExhibitionFormat()
             } else {
-                goalDetailSingleText.text = goal?.singleValue?.getNumberInExhibitionFormat()
+                binding.goalDetailSingleText.text = goal?.singleValue?.getNumberInExhibitionFormat()
             }
         }
 
         when (goal?.type) {
             GoalType.GOAL_LIST -> {
-                goalDetailCLList.visible()
-                goalDetailCLCounter.invisible()
-                goalDetailCLTotal.invisible()
+                binding.goalDetailCLList.visible()
+                binding.goalDetailCLCounter.invisible()
+                binding.goalDetailCLTotal.invisible()
 
-                goalDetailHistoricsList.invisible()
+                binding.goalDetailHistoricsList.invisible()
 
                 if (main.toolbar.menu.findItem(R.id.menuAdd) == null) {
                     main.toolbar.inflateMenu(R.menu.menu_add)
                 }
             }
             GoalType.GOAL_COUNTER -> {
-                goalDetailCLList.invisible()
-                goalDetailCLCounter.visible()
-                goalDetailCLTotal.invisible()
+                binding.goalDetailCLList.invisible()
+                binding.goalDetailCLCounter.visible()
+                binding.goalDetailCLTotal.invisible()
 
-                goalDetailHistoricsList.visible()
+                binding.goalDetailHistoricsList.visible()
 
-                goalDetailCounterTotal.text = count.getNumberInExhibitionFormat()
+                binding.goalDetailCounterTotal.text = count.getNumberInExhibitionFormat()
             }
             GoalType.GOAL_FINAL -> {
-                goalDetailCLList.invisible()
-                goalDetailCLCounter.invisible()
-                goalDetailCLTotal.visible()
+                binding.goalDetailCLList.invisible()
+                binding.goalDetailCLCounter.invisible()
+                binding.goalDetailCLTotal.visible()
 
-                goalDetailHistoricsList.visible()
+                binding.goalDetailHistoricsList.visible()
             }
             GoalType.GOAL_NONE -> {
             }
@@ -299,14 +318,15 @@ class GoalDetailFragment : BaseFragment() {
     private fun isTheFirstTime() =
         seriesSingle == 0 && (seriesBronze == 0 || seriesSilver == 0 || seriesGold == 0)
 
-    private fun updateTextAndGoal() {
+    private fun updateTextAndProgress() {
         updateText(getTextViewFromGoalType())
+        updateProgress()
 
         goal?.let { viewModel.saveGoal(it) }
     }
 
     private fun updateText(textView: TextView) {
-        goalDetailCount.text = count.getNumberInExhibitionFormat()
+        binding.goalDetailCount.text = count.getNumberInExhibitionFormat()
         textView.text = count.getNumberInExhibitionFormat()
     }
 
@@ -321,12 +341,12 @@ class GoalDetailFragment : BaseFragment() {
     private fun getTextViewFromGoalType(): TextView {
         return when (goal?.type) {
             GoalType.GOAL_LIST, GoalType.GOAL_FINAL -> {
-                goalDetailCount
+                binding.goalDetailCount
             }
             GoalType.GOAL_COUNTER -> {
-                goalDetailCounterTotal
+                binding.goalDetailCounterTotal
             }
-            else -> goalDetailCount
+            else -> binding.goalDetailCount
         }
     }
 
@@ -334,12 +354,12 @@ class GoalDetailFragment : BaseFragment() {
         if (goal?.type == GoalType.GOAL_LIST) {
             if (itemsSize > 0) {
                 setItems()
-                goalDetailItemsPlaceholder.invisible()
+                binding.goalDetailItemsPlaceholder.invisible()
             } else {
-                goalDetailItemsPlaceholder.visible()
+                binding.goalDetailItemsPlaceholder.visible()
             }
 
-            goalDetailLoading.gone()
+            binding.goalDetailLoading.gone()
         }
     }
 
@@ -347,12 +367,12 @@ class GoalDetailFragment : BaseFragment() {
         if (goal?.type == GoalType.GOAL_FINAL || goal?.type == GoalType.GOAL_COUNTER) {
             if (historicsSize > 0) {
                 setHistory()
-                goalDetailHistoricsPlaceholder.invisible()
+                binding.goalDetailHistoricsPlaceholder.invisible()
             } else {
-                goalDetailHistoricsPlaceholder.visible()
+                binding.goalDetailHistoricsPlaceholder.visible()
             }
 
-            goalDetailLoading.gone()
+            binding.goalDetailLoading.gone()
         }
     }
 
@@ -367,17 +387,17 @@ class GoalDetailFragment : BaseFragment() {
 
         itemsAdapter.touchHelper = touchHelper
 
-        goalDetailItemsList.layoutManager =
+        binding.goalDetailItemsList.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        goalDetailItemsList.adapter = itemsAdapter
+        binding.goalDetailItemsList.adapter = itemsAdapter
 
-        touchHelper.attachToRecyclerView(goalDetailItemsList)
+        touchHelper.attachToRecyclerView(binding.goalDetailItemsList)
     }
 
     private fun setHistory() {
-        goalDetailHistoricsList.layoutManager =
+        binding.goalDetailHistoricsList.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        goalDetailHistoricsList.adapter = historicAdapter
+        binding.goalDetailHistoricsList.adapter = historicAdapter
     }
 
     private fun verifyIfGoalIsDone(): Boolean {
@@ -411,16 +431,16 @@ class GoalDetailFragment : BaseFragment() {
     private fun updateSingle() {
         val value = goal?.value?.let { it } ?: 0F
 
-        if (value <= 0F) {
+        if (value <= 0F || isTheFirstTime()) {
             resetSingle()
         } else {
             goal?.singleValue?.let { singleValue ->
                 if (value < singleValue) {
                     setSingleValue(value)
-                    disableIcon(goalDetailSingleImage, R.mipmap.ic_medal_dark)
+                    disableIcon(binding.goalDetailSingleImage, R.mipmap.ic_medal_dark)
                 } else {
                     setSingleValue(singleValue)
-                    enableIcon(goalDetailSingleImage, R.mipmap.ic_medal)
+                    enableIcon(binding.goalDetailSingleImage, R.mipmap.ic_medal)
                 }
             }
         }
@@ -428,7 +448,7 @@ class GoalDetailFragment : BaseFragment() {
 
     private fun updateDivideAndConquer() {
         goal?.value?.let { value ->
-            if (value <= 0) {
+            if (value <= 0 || isTheFirstTime()) {
                 resetDivideAndConquer()
             } else {
                 val bronzeValue = goal?.bronzeValue?.let { it } ?: 0F
@@ -454,15 +474,25 @@ class GoalDetailFragment : BaseFragment() {
         setDivideAndConquerBronzeValue(value)
 
         resetDivideAndConquerSilver()
+        disableIcon(
+            binding.goalDetailDivideAndConquerSilverImage,
+            R.mipmap.ic_trophy_silver_dark
+        )
+
+        resetDivideAndConquerGold()
+        disableIcon(
+            binding.goalDetailDivideAndConquerGoldImage,
+            R.mipmap.ic_trophy_gold_dark
+        )
 
         if (value >= bronzeValue) {
             enableIcon(
-                goalDetailDivideAndConquerBronzeImage,
+                binding.goalDetailDivideAndConquerBronzeImage,
                 R.mipmap.ic_trophy_bronze
             )
         } else {
             disableIcon(
-                goalDetailDivideAndConquerBronzeImage,
+                binding.goalDetailDivideAndConquerBronzeImage,
                 R.mipmap.ic_trophy_bronze_dark
             )
         }
@@ -477,20 +507,24 @@ class GoalDetailFragment : BaseFragment() {
         setDivideAndConquerSilverValue(value)
 
         enableIcon(
-            goalDetailDivideAndConquerBronzeImage,
+            binding.goalDetailDivideAndConquerBronzeImage,
             R.mipmap.ic_trophy_bronze
         )
 
         resetDivideAndConquerGold()
+        disableIcon(
+            binding.goalDetailDivideAndConquerGoldImage,
+            R.mipmap.ic_trophy_gold_dark
+        )
 
         if (value >= silverValue) {
             enableIcon(
-                goalDetailDivideAndConquerSilverImage,
+                binding.goalDetailDivideAndConquerSilverImage,
                 R.mipmap.ic_trophy_silver
             )
         } else {
             disableIcon(
-                goalDetailDivideAndConquerSilverImage,
+                binding.goalDetailDivideAndConquerSilverImage,
                 R.mipmap.ic_trophy_silver_dark
             )
         }
@@ -506,24 +540,24 @@ class GoalDetailFragment : BaseFragment() {
         setDivideAndConquerSilverValue(silverValue)
 
         enableIcon(
-            goalDetailDivideAndConquerBronzeImage,
+            binding.goalDetailDivideAndConquerBronzeImage,
             R.mipmap.ic_trophy_bronze
         )
         enableIcon(
-            goalDetailDivideAndConquerSilverImage,
+            binding.goalDetailDivideAndConquerSilverImage,
             R.mipmap.ic_trophy_silver
         )
 
         if (value >= goldValue) {
             setDivideAndConquerGoldValue(goldValue)
             enableIcon(
-                goalDetailDivideAndConquerGoldImage,
+                binding.goalDetailDivideAndConquerGoldImage,
                 R.mipmap.ic_trophy_gold
             )
         } else {
             setDivideAndConquerGoldValue(value)
             disableIcon(
-                goalDetailDivideAndConquerGoldImage,
+                binding.goalDetailDivideAndConquerGoldImage,
                 R.mipmap.ic_trophy_gold_dark
             )
         }
@@ -531,17 +565,17 @@ class GoalDetailFragment : BaseFragment() {
 
     private fun resetDivideAndConquer() {
         disableIcon(
-            goalDetailDivideAndConquerBronzeImage,
+            binding.goalDetailDivideAndConquerBronzeImage,
             R.mipmap.ic_trophy_bronze_dark
         )
 
         disableIcon(
-            goalDetailDivideAndConquerSilverImage,
+            binding.goalDetailDivideAndConquerSilverImage,
             R.mipmap.ic_trophy_silver_dark
         )
 
         disableIcon(
-            goalDetailDivideAndConquerGoldImage,
+            binding.goalDetailDivideAndConquerGoldImage,
             R.mipmap.ic_trophy_gold_dark
         )
 
@@ -551,7 +585,7 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun resetDivideAndConquerBronze() {
-        seriesBronze = goalDetailBronzeArcView.resetValue(
+        seriesBronze = binding.goalDetailBronzeArcView.resetValue(
             minValue = 0F,
             maxValue = goal?.bronzeValue,
             initialValue = 0F,
@@ -560,7 +594,7 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun resetDivideAndConquerSilver() {
-        seriesSilver = goalDetailSilverArcView.resetValue(
+        seriesSilver = binding.goalDetailSilverArcView.resetValue(
             minValue = goal?.bronzeValue,
             maxValue = goal?.silverValue,
             initialValue = goal?.bronzeValue,
@@ -569,7 +603,7 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun resetDivideAndConquerGold() {
-        seriesGold = goalDetailGoldArcView.resetValue(
+        seriesGold = binding.goalDetailGoldArcView.resetValue(
             minValue = goal?.silverValue,
             maxValue = goal?.goldValue,
             initialValue = goal?.silverValue,
@@ -578,7 +612,7 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun resetSingle() {
-        seriesSingle = goalDetailSingleArcView.resetValue(
+        seriesSingle = binding.goalDetailSingleArcView.resetValue(
             minValue = 0F,
             maxValue = goal?.singleValue,
             initialValue = 0F,
@@ -587,16 +621,16 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun setDivideAndConquerBronzeValue(value: Float?) =
-        goalDetailBronzeArcView.setup(value, seriesBronze)
+        binding.goalDetailBronzeArcView.setup(value, seriesBronze)
 
     private fun setDivideAndConquerSilverValue(value: Float?) =
-        goalDetailSilverArcView.setup(value, seriesSilver)
+        binding.goalDetailSilverArcView.setup(value, seriesSilver)
 
     private fun setDivideAndConquerGoldValue(value: Float?) =
-        goalDetailGoldArcView.setup(value, seriesGold)
+        binding.goalDetailGoldArcView.setup(value, seriesGold)
 
     private fun setSingleValue(value: Float) =
-        goalDetailSingleArcView.setup(value, seriesSingle)
+        binding.goalDetailSingleArcView.setup(value, seriesSingle)
 
     private fun enableIcon(image: ImageView, iconNormal: Int) {
         image.enableIcon(iconNormal, requireContext())
@@ -669,6 +703,9 @@ class GoalDetailFragment : BaseFragment() {
             item.undoneDate = getCurrentTime()
         }
 
+        reloadItemAfterSwipe()
+        updateTextAndProgress()
+
         viewModel.saveItem(item)
     }
 
@@ -710,7 +747,11 @@ class GoalDetailFragment : BaseFragment() {
         item?.name = name
         item?.updatedDate = getCurrentTime()
 
-        item?.let { viewModel.saveItem(it) }
+        item?.let {
+            viewModel.saveItem(it)
+
+            itemsAdapter.updateItem(it)
+        }
     }
 
     private fun getScreenMultiplier(): Float {

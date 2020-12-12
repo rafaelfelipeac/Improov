@@ -4,48 +4,58 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rafaelfelipeac.improov.R
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
+import com.rafaelfelipeac.improov.databinding.FragmentWelcomeFirstBinding
+import com.rafaelfelipeac.improov.databinding.FragmentWelcomeSecondBinding
+import com.rafaelfelipeac.improov.databinding.FragmentWelcomeThirdBinding
 
-class WelcomeItemFragment(
-    private val fragment: WelcomeFragment,
-    private val welcomePosition: WelcomePosition
-) : BaseFragment() {
+class WelcomeItemFragment(private val welcomePosition: WelcomePosition) : BaseFragment() {
 
-    constructor() : this(WelcomeFragment(), WelcomePosition.FIRST)
+    constructor() : this(WelcomePosition.FIRST)
 
-    override fun onResume() {
-        super.onResume()
-
-        if (welcomePosition == WelcomePosition.THIRD) {
-            fragment.showStartButton()
-        } else {
-            fragment.hideStartButton()
-        }
-    }
+    private var bindingFirst by viewBinding<FragmentWelcomeFirstBinding>()
+    private var bindingSecond by viewBinding<FragmentWelcomeSecondBinding>()
+    private var bindingThird by viewBinding<FragmentWelcomeThirdBinding>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return when (welcomePosition) {
-            WelcomePosition.FIRST -> inflater.inflate(
-                R.layout.fragment_welcome_item_a,
+            WelcomePosition.FIRST -> FragmentWelcomeFirstBinding.inflate(
+                inflater,
                 container,
                 false
-            )
-            WelcomePosition.SECOND -> inflater.inflate(
-                R.layout.fragment_welcome_item_b,
+            ).run {
+                bindingFirst = this
+                bindingFirst.root
+            }
+            WelcomePosition.SECOND -> FragmentWelcomeSecondBinding.inflate(
+                inflater,
                 container,
                 false
-            )
-            WelcomePosition.THIRD -> inflater.inflate(
-                R.layout.fragment_welcome_item_c,
+            ).run {
+                bindingSecond = this
+                bindingSecond.root
+            }
+            WelcomePosition.THIRD -> FragmentWelcomeThirdBinding.inflate(
+                inflater,
                 container,
                 false
-            )
-            else -> inflater.inflate(R.layout.fragment_welcome_item_a, container, false)
+            ).run {
+                bindingThird = this
+                bindingThird.root
+            }
+            else -> FragmentWelcomeFirstBinding.inflate(
+                inflater,
+                container,
+                false
+            ).run {
+                bindingFirst = this
+                bindingFirst.root
+            }
         }
     }
 }

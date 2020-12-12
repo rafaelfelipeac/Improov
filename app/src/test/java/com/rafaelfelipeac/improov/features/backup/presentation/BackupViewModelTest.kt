@@ -10,6 +10,7 @@ import com.rafaelfelipeac.improov.features.backup.domain.usecase.GetExportDateUs
 import com.rafaelfelipeac.improov.features.backup.domain.usecase.GetImportDateUseCase
 import com.rafaelfelipeac.improov.features.backup.domain.usecase.ImportDatabaseUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
@@ -76,7 +77,9 @@ class BackupViewModelTest {
         backupViewModel.exportDatabase()
 
         // then
-        backupViewModel.export.value equalTo json
+        runBlocking {
+            backupViewModel.export.first() equalTo json
+        }
     }
 
     @Test
@@ -109,7 +112,9 @@ class BackupViewModelTest {
         backupViewModel.importDatabase(json)
 
         // then
-        backupViewModel.import.value equalTo true
+        runBlocking {
+            backupViewModel.import.first() equalTo true
+        }
     }
 
     @Test
@@ -124,7 +129,9 @@ class BackupViewModelTest {
         backupViewModel.importDatabase(json)
 
         // then
-        backupViewModel.import.value equalTo false
+        runBlocking {
+            backupViewModel.import.first() equalTo false
+        }
     }
 
     @Test
@@ -139,7 +146,9 @@ class BackupViewModelTest {
         backupViewModel.getExportDate()
 
         // then
-        backupViewModel.exportDate.value equalTo exportDate
+        runBlocking {
+            backupViewModel.exportDate.first() equalTo exportDate
+        }
     }
 
     @Test
@@ -154,6 +163,8 @@ class BackupViewModelTest {
         backupViewModel.getImportDate()
 
         // then
-        backupViewModel.importDate.value equalTo importDate
+        runBlocking {
+            backupViewModel.importDate.first() equalTo importDate
+        }
     }
 }

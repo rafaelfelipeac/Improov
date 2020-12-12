@@ -13,14 +13,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.lifecycleScope
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.formatToDate
-import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
+import com.rafaelfelipeac.improov.databinding.FragmentBackupBinding
 import com.rafaelfelipeac.improov.features.dialog.DialogOneButton
 import com.rafaelfelipeac.improov.features.dialog.DialogTwoButtons
-import kotlinx.android.synthetic.main.fragment_backup.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -38,15 +41,20 @@ class BackupFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelProvider.backupViewModel() }
 
+    private var binding by viewBinding<FragmentBackupBinding>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         setScreen()
 
-        return inflater.inflate(R.layout.fragment_backup, container, false)
+        return FragmentBackupBinding.inflate(inflater, container, false).run {
+            binding = this
+            binding.root
+        }
     }
 
     private fun setScreen() {
@@ -114,14 +122,14 @@ class BackupFragment : BaseFragment() {
     }
 
     private fun setBehaviours() {
-        backupHelp.setOnClickListener {
+        binding.backupHelp.setOnClickListener {
             hideSoftKeyboard()
             setupBottomSheetTipsBackup()
             setupBottomSheetTip()
             showBottomSheetTips()
         }
 
-        backupExportButton.setOnClickListener {
+        binding.backupExportButton.setOnClickListener {
             if (checkPermissions()) {
                 viewModel.exportDatabase()
             } else {
@@ -129,7 +137,7 @@ class BackupFragment : BaseFragment() {
             }
         }
 
-        backupImportButton.setOnClickListener {
+        binding.backupImportButton.setOnClickListener {
             if (checkPermissions()) {
                 openFile()
             } else {
@@ -139,49 +147,57 @@ class BackupFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.exportDate.observe(this) {
-            if (it > 0) {
-                backupExportDate.text = String.format(
-                    getString(R.string.backup_date_export), Date(it).formatToDate(requireContext())
-                )
-                backupExportDate.visible()
+        lifecycleScope.launch {
+            viewModel.exportDate.collect {
+                if (it > 0) {
+                    binding.backupExportDate.text = String.format(
+                        getString(R.string.backup_date_export), Date(it).formatToDate(requireContext())
+                    )
+                    binding.backupExportDate.visible()
+                }
             }
         }
 
-        viewModel.importDate.observe(this) {
-            if (it > 0) {
-                backupImportDate.text = String.format(
-                    getString(R.string.backup_date_import), Date(it).formatToDate(requireContext())
-                )
-                backupImportDate.visible()
+        lifecycleScope.launch {
+            viewModel.importDate.collect {
+                if (it > 0) {
+                    binding.backupImportDate.text = String.format(
+                        getString(R.string.backup_date_import), Date(it).formatToDate(requireContext())
+                    )
+                    binding.backupImportDate.visible()
+                }
             }
         }
 
-        viewModel.export.observe(this) {
-            if (it.isNotEmpty()) {
-                viewModel.getExportDate()
+        lifecycleScope.launch {
+            viewModel.export.collect {
+                if (it.isNotEmpty()) {
+                    viewModel.getExportDate()
 
-                val file = saveFile(it)
+                    val file = saveFile(it)
 
-                showSnackBarWithAction(
-                    requireView(),
-                    getString(R.string.backup_export_success),
-                    getString(R.string.backup_snackbar_action_save),
-                    file,
-                    ::shareFile
-                )
-            } else {
-                showSnackBar(getString(R.string.backup_export_error))
+                    showSnackBarWithAction(
+                        requireView(),
+                        getString(R.string.backup_export_success),
+                        getString(R.string.backup_snackbar_action_save),
+                        file,
+                        ::shareFile
+                    )
+                } else {
+                    showSnackBar(getString(R.string.backup_export_error))
+                }
             }
         }
 
-        viewModel.import.observe(this) {
-            if (it) {
-                viewModel.getImportDate()
+        lifecycleScope.launch {
+            viewModel.import.collect {
+                if (it) {
+                    viewModel.getImportDate()
 
-                showSnackBar(getString(R.string.backup_import_success))
-            } else {
-                showSnackBar(getString(R.string.backup_import_error))
+                    showSnackBar(getString(R.string.backup_import_success))
+                } else {
+                    showSnackBar(getString(R.string.backup_import_error))
+                }
             }
         }
     }

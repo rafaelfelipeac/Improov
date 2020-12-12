@@ -4,25 +4,33 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.LocaleHelper
-import com.rafaelfelipeac.improov.core.extension.observe
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_settings_language.*
+import com.rafaelfelipeac.improov.databinding.FragmentSettingsLanguageBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class SettingsLanguageFragment : BaseFragment() {
 
     private val viewModel by lazy { viewModelProvider.settingsLanguageViewModel() }
 
+    private var binding by viewBinding<FragmentSettingsLanguageBinding>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         setScreen()
 
-        return inflater.inflate(R.layout.fragment_settings_language, container, false)
+        return FragmentSettingsLanguageBinding.inflate(inflater, container, false).run {
+            binding = this
+            binding.root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,24 +47,28 @@ class SettingsLanguageFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.saved.observe(this) {
-            recreateFragment()
+        lifecycleScope.launch {
+            viewModel.saved.collect {
+                recreateFragment()
+            }
         }
 
-        viewModel.language.observe(this) {
-            LocaleHelper.setLocale(requireContext(), it)
+        lifecycleScope.launch {
+            viewModel.language.collect {
+                LocaleHelper.setLocale(requireContext(), it)
 
-            setupLanguage(it)
+                setupLanguage(it)
+            }
         }
     }
 
     private fun setupLanguage(language: String) {
         when (language) {
             getString(R.string.settings_language_key_portuguese) -> {
-                settingsLanguageRadioPortuguese.isChecked = true
+                binding.settingsLanguageRadioPortuguese.isChecked = true
             }
             getString(R.string.settings_language_key_english) -> {
-                settingsLanguageRadioEnglish.isChecked = true
+                binding.settingsLanguageRadioEnglish.isChecked = true
             }
         }
 
@@ -64,7 +76,7 @@ class SettingsLanguageFragment : BaseFragment() {
     }
 
     private fun setupLayout() {
-        settingsLanguageRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+        binding.settingsLanguageRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.settingsLanguageRadioPortuguese -> {
                     viewModel.saveLanguage(getString(R.string.settings_language_key_portuguese))

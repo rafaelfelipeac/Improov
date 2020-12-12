@@ -6,7 +6,7 @@ import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
 import com.rafaelfelipeac.improov.R
 
-const val DURATION_ANIMATION = 400L
+const val DURATION_ANIMATION = 500L
 const val LINE_WIDTH = 11f
 const val TOTAL_ANGLE = 300
 const val ROTATE_ANGLE = 0

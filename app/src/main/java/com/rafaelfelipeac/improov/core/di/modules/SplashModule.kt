@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.key.FragmentKey
 import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
-import com.rafaelfelipeac.improov.features.splash.data.repository.WelcomeRepositoryImpl
+import com.rafaelfelipeac.improov.features.splash.data.WelcomeDataSource
 import com.rafaelfelipeac.improov.features.splash.domain.repository.WelcomeRepository
 import com.rafaelfelipeac.improov.features.splash.presentation.SplashFragment
 import com.rafaelfelipeac.improov.features.splash.presentation.SplashViewModel
@@ -16,7 +16,7 @@ import dagger.multibindings.IntoMap
 abstract class SplashModule {
 
     @Binds
-    abstract fun welcomeRepository(welcomeRepositoryImpl: WelcomeRepositoryImpl): WelcomeRepository
+    abstract fun welcomeRepository(welcomeDataSource: WelcomeDataSource): WelcomeRepository
 
     @Binds
     @IntoMap

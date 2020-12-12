@@ -11,6 +11,7 @@ import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListU
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalUseCase
 import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.SaveGoalUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
@@ -64,7 +65,9 @@ class GoalFormViewModelTest {
         goalFormViewModel.saveGoal(goal)
 
         // then
-        goalFormViewModel.savedGoal.value equalTo goalId
+        runBlocking {
+            goalFormViewModel.savedGoal.first() equalTo goalId
+        }
     }
 
     @Test
@@ -81,7 +84,9 @@ class GoalFormViewModelTest {
         goalFormViewModel.loadData()
 
         // then
-        goalFormViewModel.goal.value equalTo goal
+        runBlocking {
+            goalFormViewModel.goal.first() equalTo goal
+        }
     }
 
     @Test
@@ -96,7 +101,9 @@ class GoalFormViewModelTest {
         goalFormViewModel.loadData()
 
         // then
-        goalFormViewModel.goals.value equalTo goals
+        runBlocking {
+            goalFormViewModel.goals.first() equalTo goals
+        }
     }
 
     @Test
@@ -111,7 +118,9 @@ class GoalFormViewModelTest {
         goalFormViewModel.saveFirstTimeList(booleanValue)
 
         // then
-        goalFormViewModel.savedFirstTimeList.value equalTo Unit
+        runBlocking {
+            goalFormViewModel.savedFirstTimeList.first() equalTo Unit
+        }
     }
 
     @Test
@@ -126,7 +135,9 @@ class GoalFormViewModelTest {
         goalFormViewModel.saveFirstTimeAdd(booleanValue)
 
         // then
-        goalFormViewModel.savedFirstTimeAdd.value equalTo Unit
+        runBlocking {
+            goalFormViewModel.savedFirstTimeAdd.first() equalTo Unit
+        }
     }
 
     @Test
@@ -141,6 +152,8 @@ class GoalFormViewModelTest {
         goalFormViewModel.loadData()
 
         // then
-        goalFormViewModel.firstTimeAdd.value equalTo booleanValue
+        runBlocking {
+            goalFormViewModel.firstTimeAdd.first() equalTo booleanValue
+        }
     }
 }

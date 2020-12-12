@@ -10,11 +10,13 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -29,6 +31,8 @@ import com.rafaelfelipeac.improov.core.extension.setIcon
 import com.rafaelfelipeac.improov.core.extension.isEmpty
 import com.rafaelfelipeac.improov.core.extension.resetValue
 import com.rafaelfelipeac.improov.core.extension.formatToDateTime
+import com.rafaelfelipeac.improov.core.extension.show
+import com.rafaelfelipeac.improov.core.extension.hide
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import com.rafaelfelipeac.improov.features.commons.domain.model.Item
 import com.rafaelfelipeac.improov.features.main.MainActivity
@@ -47,8 +51,10 @@ abstract class BaseFragment : Fragment() {
 
     val fab: FloatingActionButton get() = main.fab
     val navController: NavController get() = main.navController
-    private val navLayout: CoordinatorLayout get() = main.navLayout
-    private val fakeBottomNav: View get() = main.fakeBottomNav
+    private val appBarLayout: AppBarLayout get() = main.appBarLayout
+    private val toolbar: Toolbar get() = main.toolbar
+    private val navigation: CoordinatorLayout get() = main.navigation
+    private val navigationFake: View get() = main.navigationFake
 
     private lateinit var bottomSheetGoal: BottomSheetDialog
     private lateinit var bottomSheetGoalYes: Button
@@ -70,30 +76,32 @@ abstract class BaseFragment : Fragment() {
         hideSoftKeyboard()
     }
 
-    fun showNavigation() {
-        navLayout.visible()
-        fakeBottomNav.visible()
+    fun showToolbar() {
+        appBarLayout.visible()
+        toolbar.show(main.supportActionBar)
     }
 
-    fun hideNavigation() {
-        navLayout.gone()
-        fakeBottomNav.gone()
+    fun hideToolbar() {
+        appBarLayout.gone()
+        toolbar.hide(main.supportActionBar)
     }
 
-    fun hideToolbar() = main.supportActionBar?.hide()
+    fun showNavigation() = navigation.show(navigationFake)
+
+    fun hideNavigation() = navigation.hide(navigationFake)
 
     fun showBackArrow() {
-        main.supportActionBar?.show()
+        showToolbar()
         main.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     fun setTitle(title: String) {
-        main.supportActionBar?.show()
+        showToolbar()
         main.supportActionBar?.title = title
     }
 
     fun hasMenu() {
-        main.supportActionBar?.show()
+        showToolbar()
         setHasOptionsMenu(true)
     }
 
