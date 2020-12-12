@@ -474,6 +474,16 @@ class GoalDetailFragment : BaseFragment() {
         setDivideAndConquerBronzeValue(value)
 
         resetDivideAndConquerSilver()
+        disableIcon(
+            binding.goalDetailDivideAndConquerSilverImage,
+            R.mipmap.ic_trophy_silver_dark
+        )
+
+        resetDivideAndConquerGold()
+        disableIcon(
+            binding.goalDetailDivideAndConquerGoldImage,
+            R.mipmap.ic_trophy_gold_dark
+        )
 
         if (value >= bronzeValue) {
             enableIcon(
@@ -502,6 +512,10 @@ class GoalDetailFragment : BaseFragment() {
         )
 
         resetDivideAndConquerGold()
+        disableIcon(
+            binding.goalDetailDivideAndConquerGoldImage,
+            R.mipmap.ic_trophy_gold_dark
+        )
 
         if (value >= silverValue) {
             enableIcon(
