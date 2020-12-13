@@ -15,7 +15,7 @@ Improov is a app that will help you achieve your goals.
 
 By choosing to add a goal to the app and not keep it lost in thought, you will have an easier time viewing the steps necessary to achieve it.
 
-Created with ❤️ to study topics related to Android such as Kotlin, MVVM, Coroutines, Jetpack (Room, ViewModel, LiveData, Navigation) and Dagger2.
+Created with ❤️ to study topics related to Android such as Kotlin, MVVM, Coroutines, Kotlin Flow, Jetpack (Room, ViewModel, Navigation) and Dagger2.
 
 <a href="https://play.google.com/store/apps/details?id=com.rafaelfelipeac.improov">
     <img 
@@ -29,9 +29,11 @@ Developed with:
 - Kotlin;  
 - MVVM;
 - Coroutines;
+- Kotlin Flow;
 - Room;
-- ViewModel and LiveData;
+- ViewModel;
 - Navigation Component;
+- View Binding;
 - Dagger 2;
 - Detekt;
 - Ktlint;
