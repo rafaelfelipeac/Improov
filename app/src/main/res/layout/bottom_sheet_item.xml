@@ -69,6 +69,7 @@
                     android:id="@+id/bottomSheetItemName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:imeOptions="actionDone"
                     android:inputType="textCapSentences"
                     android:maxLines="1"
                     android:textColor="@color/colorPrimary"

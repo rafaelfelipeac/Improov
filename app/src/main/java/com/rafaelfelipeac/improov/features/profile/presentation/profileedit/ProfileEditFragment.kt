@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.lifecycleScope
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.isEmptyOrZero
@@ -51,13 +52,17 @@ class ProfileEditFragment : BaseFragment() {
 
     private fun setupLayout() {
         binding.profileEditSaveButton.setOnClickListener {
-            when {
-                verifyElements() -> {
+            checkIfCanSaveName()
+        }
+
+        binding.profileEditName.setOnEditorActionListener() { _, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    checkIfCanSaveName()
+
+                    true
                 }
-                else -> {
-                    hideSoftKeyboard()
-                    viewModel.saveName(binding.profileEditName.text.toString())
-                }
+                else -> false
             }
         }
     }
@@ -90,5 +95,16 @@ class ProfileEditFragment : BaseFragment() {
 
     private fun setErrorMessage(message: String) {
         binding.profileEditErrorMessage.text = message
+    }
+
+    private fun checkIfCanSaveName() {
+        when {
+            verifyElements() -> {
+            }
+            else -> {
+                hideSoftKeyboard()
+                viewModel.saveName(binding.profileEditName.text.toString())
+            }
+        }
     }
 }

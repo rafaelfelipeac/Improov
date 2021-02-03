@@ -503,6 +503,7 @@
                                 android:id="@+id/goalFormGoalCounterIncValue"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:imeOptions="actionDone"
                                 android:inputType="numberDecimal"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_regular" />
