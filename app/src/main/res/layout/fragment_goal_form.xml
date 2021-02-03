@@ -50,6 +50,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:inputType="textCapSentences"
+                            android:gravity="center"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/text_size_regular" />
 
@@ -110,6 +111,7 @@
                                 android:layout_height="match_parent"
                                 android:imeOptions="actionDone"
                                 android:inputType="numberDecimal"
+                                android:gravity="center"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_regular" />
 
@@ -167,6 +169,7 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="numberDecimal"
                                     android:nextFocusForward="@id/goalFormSilverValue"
+                                    android:gravity="center"
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="@dimen/text_size_regular" />
 
@@ -210,6 +213,7 @@
                                     android:layout_height="match_parent"
                                     android:imeOptions="actionNext"
                                     android:inputType="numberDecimal"
+                                    android:gravity="center"
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="@dimen/text_size_regular" />
 
@@ -250,6 +254,7 @@
                                     android:layout_height="match_parent"
                                     android:imeOptions="actionDone"
                                     android:inputType="numberDecimal"
+                                    android:gravity="center"
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="@dimen/text_size_regular" />
 
@@ -464,6 +469,7 @@
                                 android:imeOptions="actionNext"
                                 android:inputType="numberDecimal"
                                 android:nextFocusForward="@id/goalFormGoalCounterIncValue"
+                                android:gravity="center"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_regular" />
 
@@ -503,7 +509,9 @@
                                 android:id="@+id/goalFormGoalCounterIncValue"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:imeOptions="actionDone"
                                 android:inputType="numberDecimal"
+                                android:gravity="center"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/text_size_regular" />
 

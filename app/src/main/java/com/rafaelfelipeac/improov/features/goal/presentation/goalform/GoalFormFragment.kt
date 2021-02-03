@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.MenuItem
+import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.lifecycleScope
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.resetValue
@@ -85,37 +86,12 @@ class GoalFormFragment : BaseFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.menuSave -> {
-                when {
-                    checkIfAnyFieldsAreEmptyOrZero() -> {
-                    }
-                    getGoalTypeSelected() == GoalType.GOAL_NONE -> {
-                        showSnackBar(getString(R.string.goal_form_empty_type_goal))
-
-                        hideSoftKeyboard()
-                        binding.goalFormTypeTitle.isFocusableInTouchMode = true
-                        binding.goalFormTypeTitle.requestFocus()
-                    }
-                    binding.goalFormSwitchDivideAndConquer.isChecked && !validateDivideAndConquerValues() -> {
-                        showSnackBar(getString(R.string.goal_form_gold_silver_bronze_order))
-
-                        binding.goalFormBronzeValue.requestFocus()
-                    }
-                    else -> {
-                        val goalToSave = updateOrCreateGoal()
-
-                        viewModel.saveGoal(goalToSave)
-
-                        verifyFirstTimeSaving()
-
-                        return true
-                    }
-                }
+                checkIfCanSaveGoal()
             }
+            else -> false
         }
-
-        return false
     }
 
     private fun setScreen() {
@@ -143,6 +119,33 @@ class GoalFormFragment : BaseFragment() {
             setupBottomSheetTipsGoalType()
             setupBottomSheetTip()
             showBottomSheetTips()
+        }
+
+        binding.goalFormSingleValue.setOnEditorActionListener() { _, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    checkIfCanSaveGoal()
+                }
+                else -> false
+            }
+        }
+
+        binding.goalFormGoldValue.setOnEditorActionListener() { _, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    checkIfCanSaveGoal()
+                }
+                else -> false
+            }
+        }
+
+        binding.goalFormGoalCounterIncValue.setOnEditorActionListener() { _, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    checkIfCanSaveGoal()
+                }
+                else -> false
+            }
         }
     }
 
@@ -235,6 +238,36 @@ class GoalFormFragment : BaseFragment() {
             binding.goalFormDivideAndConquer.gone()
             binding.goalFormSingle.visible()
         }
+    }
+
+    private fun checkIfCanSaveGoal(): Boolean {
+        when {
+            checkIfAnyFieldsAreEmptyOrZero() -> {
+            }
+            getGoalTypeSelected() == GoalType.GOAL_NONE -> {
+                showSnackBar(getString(R.string.goal_form_empty_type_goal))
+
+                hideSoftKeyboard()
+                binding.goalFormTypeTitle.isFocusableInTouchMode = true
+                binding.goalFormTypeTitle.requestFocus()
+            }
+            binding.goalFormSwitchDivideAndConquer.isChecked && !validateDivideAndConquerValues() -> {
+                showSnackBar(getString(R.string.goal_form_gold_silver_bronze_order))
+
+                binding.goalFormBronzeValue.requestFocus()
+            }
+            else -> {
+                val goalToSave = updateOrCreateGoal()
+
+                viewModel.saveGoal(goalToSave)
+
+                verifyFirstTimeSaving()
+
+                return true
+            }
+        }
+
+        return false
     }
 
     private fun updateOrCreateGoal(): Goal {

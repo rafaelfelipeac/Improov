@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.View
 import android.view.WindowManager
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.FrameLayout
@@ -208,19 +209,37 @@ abstract class BaseFragment : Fragment() {
         bottomSheetItemDate = sheetView.findViewById(R.id.bottomSheetItemDate)
         bottomSheetItemEmptyName = sheetView.findViewById(R.id.bottomSheetItemEmptyName)
 
-        bottomSheetItemSave.setOnClickListener {
-            if (bottomSheetItemName.isEmpty()) {
-                bottomSheetItemEmptyName.text = getString(R.string.item_empty_name)
-            } else {
-                if (bottomSheetItemTitle.text == getString(R.string.item_title_add)) {
-                    newItem(bottomSheetItemName.text.toString())
-                } else {
-                    updateItem(bottomSheetItemName.text.toString())
-                }
+        bottomSheetItemName.setOnEditorActionListener() { _, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    checkIfCanSaveItem(newItem, updateItem)
 
-                bottomSheetItemName.resetValue()
-                hideBottomSheetItem()
+                    true
+                }
+                else -> false
             }
+        }
+
+        bottomSheetItemSave.setOnClickListener {
+            checkIfCanSaveItem(newItem, updateItem)
+        }
+    }
+
+    private fun checkIfCanSaveItem(
+        newItem: (name: String) -> Unit,
+        updateItem: (name: String) -> Unit
+    ) {
+        if (bottomSheetItemName.isEmpty()) {
+            bottomSheetItemEmptyName.text = getString(R.string.item_empty_name)
+        } else {
+            if (bottomSheetItemTitle.text == getString(R.string.item_title_add)) {
+                newItem(bottomSheetItemName.text.toString())
+            } else {
+                updateItem(bottomSheetItemName.text.toString())
+            }
+
+            bottomSheetItemName.resetValue()
+            hideBottomSheetItem()
         }
     }
 
