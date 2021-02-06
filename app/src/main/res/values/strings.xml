@@ -158,7 +158,7 @@
     <string name="historic_adapter_value">+ 0.00</string>
 
     <!-- ItemAdapter -->
-    <string name="item_adapter_item_title">New goal registered</string>
+    <string name="item_adapter_item_title">New item registered</string>
 
     <!-- BottomSheet Goal Done -->
     <string name="goal_done_message">There are pending items in this goal. \nDo you want to complete it?</string>

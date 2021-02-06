@@ -158,7 +158,7 @@
     <string name="historic_adapter_value">+ 0.00</string>
 
     <!-- ItemAdapter -->
-    <string name="item_adapter_item_title">Novo objetivo cadastrado</string>
+    <string name="item_adapter_item_title">Novo item cadastrado</string>
 
     <!-- BottomSheet Goal Done -->
     <string name="goal_done_message">Há itens pendentes nesse objetivo. \nDeseja concluído-lo?</string>

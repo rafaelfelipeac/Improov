@@ -99,16 +99,29 @@
                 android:id="@+id/itemGoalTypeIcon"
                 android:layout_width="@dimen/list_item_icon_size"
                 android:layout_height="@dimen/list_item_icon_size"
-                android:layout_marginStart="@dimen/margin_regular"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginStart="@dimen/list_item_offset"
+                android:layout_marginTop="@dimen/margin_regular"
                 android:layout_marginEnd="@dimen/margin_small"
-                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_regular"
+                android:background="@drawable/rounded_cardview_primary"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintHorizontal_bias="0.0"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_habit" />
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+                android:id="@+id/itemGoalDoneIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                card_view:srcCompat="@drawable/ic_done"
+                card_view:tint="@color/colorPrimaryDarkTwo"
+                android:visibility="gone"
+                card_view:layout_constraintBottom_toBottomOf="@+id/itemGoalTypeIcon"
+                card_view:layout_constraintEnd_toEndOf="@+id/itemGoalTypeIcon"
+                card_view:layout_constraintStart_toStartOf="@+id/itemGoalTypeIcon"
+                card_view:layout_constraintTop_toTopOf="@+id/itemGoalTypeIcon"
+                tools:visibility="visible" />
 
         <ImageView
                 android:id="@+id/itemGoalDragIcon"
