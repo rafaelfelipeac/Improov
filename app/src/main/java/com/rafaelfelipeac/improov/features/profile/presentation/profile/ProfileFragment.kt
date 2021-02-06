@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import com.rafaelfelipeac.improov.BuildConfig
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.invisible
 import com.rafaelfelipeac.improov.core.extension.viewBinding
@@ -39,8 +40,16 @@ class ProfileFragment : BaseFragment() {
 
         viewModel.loadData()
 
+        setupLayout()
         setupBehaviours()
         observeViewModel()
+    }
+
+    private fun setupLayout() {
+        if (BuildConfig.DEBUG) {
+            binding.profileGenerateData.visible()
+            binding.profileClearData.visible()
+        }
     }
 
     private fun setScreen() {
@@ -60,6 +69,14 @@ class ProfileFragment : BaseFragment() {
             viewModel.saveWelcome(false)
             viewModel.saveFirstTimeAdd(true)
             viewModel.saveFirstTimeList(false)
+        }
+
+        binding.profileGenerateData.setOnClickListener {
+            viewModel.generateData()
+        }
+
+        binding.profileClearData.setOnClickListener {
+            viewModel.clearData()
         }
 
         binding.profileBackup.setOnClickListener {
@@ -94,6 +111,18 @@ class ProfileFragment : BaseFragment() {
                     binding.profileUserName.invisible()
                     binding.profileEditProfileButton.text = getString(R.string.profile_add_name_message)
                 }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.created.collect {
+                showSnackBar(getString(R.string.profile_data_created))
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.cleared.collect {
+                showSnackBar(getString(R.string.profile_data_cleared))
             }
         }
     }

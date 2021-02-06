@@ -70,6 +70,10 @@
     <string name="profile_edit_name_message">Edit your name</string>
     <string name="profile_button_backup">Backup</string>
     <string name="profile_show_welcome_message">See initial messages</string>
+    <string name="profile_generate_data">Generate data</string>
+    <string name="profile_clear_data">Clear data</string>
+    <string name="profile_data_created">Data created.</string>
+    <string name="profile_data_cleared">Data cleared.</string>
 
     <!-- ProfileEdit -->
     <string name="profile_edit_title">Edit name</string>

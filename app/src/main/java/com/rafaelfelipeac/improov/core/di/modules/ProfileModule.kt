@@ -4,14 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.key.FragmentKey
 import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
-import com.rafaelfelipeac.improov.features.profile.data.FirstTimeAddDataSource
-import com.rafaelfelipeac.improov.features.profile.data.FirstTimeListDataSource
-import com.rafaelfelipeac.improov.features.profile.data.NameDataSource
-import com.rafaelfelipeac.improov.features.profile.data.WelcomeDataSource
-import com.rafaelfelipeac.improov.features.profile.domain.repository.FirstTimeAddRepository
-import com.rafaelfelipeac.improov.features.profile.domain.repository.FirstTimeListRepository
-import com.rafaelfelipeac.improov.features.profile.domain.repository.NameRepository
-import com.rafaelfelipeac.improov.features.profile.domain.repository.WelcomeRepository
+import com.rafaelfelipeac.improov.features.profile.data.*
+import com.rafaelfelipeac.improov.features.profile.domain.repository.*
 import com.rafaelfelipeac.improov.features.profile.presentation.profile.ProfileFragment
 import com.rafaelfelipeac.improov.features.profile.presentation.profile.ProfileViewModel
 import com.rafaelfelipeac.improov.features.profile.presentation.profileedit.ProfileEditFragment
@@ -38,6 +32,11 @@ abstract class ProfileModule {
     abstract fun firstTimeListRepository(
         firstTimeListDataSource: FirstTimeListDataSource
     ): FirstTimeListRepository
+
+    @Binds
+    abstract fun goalRepository(
+        goalDataSource: DataDataSource
+    ): DataRepository
 
     @Binds
     @IntoMap
