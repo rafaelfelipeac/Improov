@@ -23,13 +23,13 @@ class ItemDataSourceTest {
     @Mock
     internal lateinit var itemDataModelMapper: ItemDataModelMapper
 
-    private lateinit var itemRepositoryImp: ItemDataSource
+    private lateinit var itemDataSource: ItemDataSource
 
     private val itemId = 1L
 
     @Before
     fun setup() {
-        itemRepositoryImp = ItemDataSource(itemDao, itemDataModelMapper)
+        itemDataSource = ItemDataSource(itemDao, itemDataModelMapper)
     }
 
     @Test
@@ -41,7 +41,7 @@ class ItemDataSourceTest {
                 .willReturn(item)
 
             // when
-            val result = itemRepositoryImp.getItem(itemId)
+            val result = itemDataSource.getItem(itemId)
 
             // then
             result equalTo item
@@ -58,7 +58,7 @@ class ItemDataSourceTest {
                 .willReturn(items)
 
             // when
-            val result = itemRepositoryImp.getItems()
+            val result = itemDataSource.getItems()
 
             // then
             result equalTo items
@@ -74,7 +74,7 @@ class ItemDataSourceTest {
                 .willReturn(itemId)
 
             // when
-            val result = itemRepositoryImp.save(item)
+            val result = itemDataSource.save(item)
 
             // then
             result equalTo itemId
@@ -90,7 +90,7 @@ class ItemDataSourceTest {
             doNothing().`when`(itemDao).delete(itemReverse)
 
             // when
-            val result = itemRepositoryImp.delete(item)
+            val result = itemDataSource.delete(item)
 
             // then
             result equalTo Unit

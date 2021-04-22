@@ -35,11 +35,11 @@ class DatabaseDataSourceTest {
     @Mock
     internal lateinit var preferences: Preferences
 
-    private lateinit var databaseRepositoryImp: DatabaseDataSource
+    private lateinit var databaseDataSource: DatabaseDataSource
 
     @Before
     fun setup() {
-        databaseRepositoryImp = DatabaseDataSource(goalDao, historicDao, itemDao, preferences, Gson())
+        databaseDataSource = DatabaseDataSource(goalDao, historicDao, itemDao, preferences, Gson())
     }
 
     @Test
@@ -84,7 +84,7 @@ class DatabaseDataSourceTest {
                 .willReturn(welcome)
 
             // when
-            val result = databaseRepositoryImp.export()
+            val result = databaseDataSource.export()
 
             // then
             result equalTo json
@@ -116,7 +116,7 @@ class DatabaseDataSourceTest {
             )
 
             // when
-            val result = databaseRepositoryImp.import(json)
+            val result = databaseDataSource.import(json)
 
             // then
             result equalTo true
@@ -130,7 +130,7 @@ class DatabaseDataSourceTest {
             val json = "invalid json"
 
             // when
-            val result = databaseRepositoryImp.import(json)
+            val result = databaseDataSource.import(json)
 
             // then
             result equalTo false
@@ -147,7 +147,7 @@ class DatabaseDataSourceTest {
                 .willReturn(date)
 
             // when
-            val result = databaseRepositoryImp.getExportDate()
+            val result = databaseDataSource.getExportDate()
 
             // then
             result equalTo date
@@ -164,7 +164,7 @@ class DatabaseDataSourceTest {
                 .willReturn(date)
 
             // when
-            val result = databaseRepositoryImp.getImportDate()
+            val result = databaseDataSource.getImportDate()
 
             // then
             result equalTo date

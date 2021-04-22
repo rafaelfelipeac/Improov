@@ -18,11 +18,11 @@ class FirstTimeListDataSourceTest {
     @Mock
     internal lateinit var preferences: Preferences
 
-    private lateinit var firstTimeListRepositoryImp: FirstTimeListDataSource
+    private lateinit var firstTimeListDataSource: FirstTimeListDataSource
 
     @Before
     fun setup() {
-        firstTimeListRepositoryImp = FirstTimeListDataSource(preferences)
+        firstTimeListDataSource = FirstTimeListDataSource(preferences)
     }
 
     @Test
@@ -35,7 +35,7 @@ class FirstTimeListDataSourceTest {
                 .willReturn(booleanValue)
 
             // when
-            val result = firstTimeListRepositoryImp.getFirstTimeList()
+            val result = firstTimeListDataSource.getFirstTimeList()
 
             // then
             result equalTo booleanValue
@@ -53,8 +53,8 @@ class FirstTimeListDataSourceTest {
                 .willReturn(booleanValue)
 
             // when
-            val resultOfSave = firstTimeListRepositoryImp.save(booleanValue)
-            val returnOfGet = firstTimeListRepositoryImp.getFirstTimeList()
+            val resultOfSave = firstTimeListDataSource.save(booleanValue)
+            val returnOfGet = firstTimeListDataSource.getFirstTimeList()
 
             // then
             resultOfSave equalTo Unit
