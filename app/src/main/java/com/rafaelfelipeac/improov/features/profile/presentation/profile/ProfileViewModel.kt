@@ -21,10 +21,10 @@ class ProfileViewModel @Inject constructor(
 
     val saved: Flow<Unit> get() = _saved.filterNotNull()
     private val _saved = MutableStateFlow<Unit?>(null)
-    val created: Flow<Unit> get() = _created.filterNotNull()
-    private val _created = MutableStateFlow<Unit?>(null)
-    val cleared: Flow<Unit> get() = _cleared.filterNotNull()
-    private val _cleared = MutableStateFlow<Unit?>(null)
+    val generated: Flow<Unit> get() = _generated.filterNotNull()
+    private val _generated = MutableStateFlow<Unit?>(null)
+    val clean: Flow<Unit> get() = _clean.filterNotNull()
+    private val _clean = MutableStateFlow<Unit?>(null)
     val name: Flow<String> get() = _name.filterNotNull()
     private val _name = MutableStateFlow<String?>(null)
 
@@ -58,13 +58,13 @@ class ProfileViewModel @Inject constructor(
 
     fun generateData() {
         viewModelScope.launch {
-            _created.value = generateDataUseCase()
+            _generated.value = generateDataUseCase()
         }
     }
 
     fun clearData() {
         viewModelScope.launch {
-            _cleared.value = clearDataUseCase()
+            _clean.value = clearDataUseCase()
         }
     }
 }

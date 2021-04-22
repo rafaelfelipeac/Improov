@@ -115,13 +115,13 @@ class ProfileFragment : BaseFragment() {
         }
 
         lifecycleScope.launch {
-            viewModel.created.collect {
+            viewModel.generated.collect {
                 showSnackBar(getString(R.string.profile_data_created))
             }
         }
 
         lifecycleScope.launch {
-            viewModel.cleared.collect {
+            viewModel.clean.collect {
                 showSnackBar(getString(R.string.profile_data_cleared))
             }
         }
