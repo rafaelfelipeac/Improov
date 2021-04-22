@@ -2,7 +2,12 @@ package com.rafaelfelipeac.improov.features.profile.presentation.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rafaelfelipeac.improov.features.profile.domain.usecase.*
+import com.rafaelfelipeac.improov.features.profile.domain.usecase.GenerateDataUseCase
+import com.rafaelfelipeac.improov.features.profile.domain.usecase.ClearDataUseCase
+import com.rafaelfelipeac.improov.features.profile.domain.usecase.GetNameUseCase
+import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveFirstTimeAddUseCase
+import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveFirstTimeListUseCase
+import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveWelcomeUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
