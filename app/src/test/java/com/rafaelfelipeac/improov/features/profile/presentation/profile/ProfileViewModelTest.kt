@@ -7,6 +7,8 @@ import com.rafaelfelipeac.improov.features.profile.domain.usecase.GetNameUseCase
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveFirstTimeAddUseCase
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveFirstTimeListUseCase
 import com.rafaelfelipeac.improov.features.profile.domain.usecase.SaveWelcomeUseCase
+import com.rafaelfelipeac.improov.features.profile.domain.usecase.GenerateDataUseCase
+import com.rafaelfelipeac.improov.features.profile.domain.usecase.ClearDataUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -31,7 +33,9 @@ class ProfileViewModelTest {
     private var mockSaveWelcomeUseCase = mock(SaveWelcomeUseCase::class.java)
     private var mockGetNameUseCase = mock(GetNameUseCase::class.java)
     private var mockSaveFirstTimeAddUseCase = mock(SaveFirstTimeAddUseCase::class.java)
-    private var mockSaveFirsTimeListUseCass = mock(SaveFirstTimeListUseCase::class.java)
+    private var mockSaveFirsTimeListUseCase = mock(SaveFirstTimeListUseCase::class.java)
+    private var mockGenerateDataUseCase = mock(GenerateDataUseCase::class.java)
+    private var mockClearDataUseCase = mock(ClearDataUseCase::class.java)
 
     private lateinit var profileViewModel: ProfileViewModel
 
@@ -40,8 +44,10 @@ class ProfileViewModelTest {
         profileViewModel = ProfileViewModel(
             mockSaveWelcomeUseCase,
             mockSaveFirstTimeAddUseCase,
-            mockSaveFirsTimeListUseCass,
-            mockGetNameUseCase
+            mockSaveFirsTimeListUseCase,
+            mockGetNameUseCase,
+            mockGenerateDataUseCase,
+            mockClearDataUseCase
         )
     }
 
@@ -84,7 +90,7 @@ class ProfileViewModelTest {
         // given
         val booleanValue = true
 
-        given(runBlocking { mockSaveFirsTimeListUseCass(booleanValue) })
+        given(runBlocking { mockSaveFirsTimeListUseCase(booleanValue) })
             .willReturn(Unit)
 
         // when
@@ -110,6 +116,36 @@ class ProfileViewModelTest {
         // then
         runBlocking {
             profileViewModel.name.first() equalTo userName
+        }
+    }
+
+    @Test
+    fun `GIVEN generateData is successful WHEN generateData is called THEN a Unit is returned`() {
+        // given
+        given(runBlocking { mockGenerateDataUseCase() })
+            .willReturn(Unit)
+
+        // when
+        profileViewModel.generateData()
+
+        // then
+        runBlocking {
+            profileViewModel.generated.first() equalTo Unit
+        }
+    }
+
+    @Test
+    fun `GIVEN clearData is successful WHEN clearData is called THEN a Unit is returned`() {
+        // given
+        given(runBlocking { mockClearDataUseCase() })
+            .willReturn(Unit)
+
+        // when
+        profileViewModel.clearData()
+
+        // then
+        runBlocking {
+            profileViewModel.clean.first() equalTo Unit
         }
     }
 }

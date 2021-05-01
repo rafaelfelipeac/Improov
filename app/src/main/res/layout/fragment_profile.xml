@@ -69,6 +69,40 @@
                 app:layout_constraintTop_toBottomOf="@+id/profileUserName"
                 app:layout_constraintVertical_bias="0.0" />
 
+        <Button
+                android:id="@+id/profileGenerateData"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginStart="@dimen/margin_larger"
+                android:layout_marginTop="@dimen/margin_regular"
+                android:layout_marginEnd="@dimen/margin_larger"
+                android:visibility="gone"
+                android:background="@drawable/rounded_button"
+                android:text="@string/profile_generate_data"
+                android:textColor="@color/colorPrimaryDarkOne"
+                app:layout_constraintBottom_toTopOf="@+id/profileBackup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileEditProfileButton"
+                app:layout_constraintVertical_bias="0.4"
+                tools:visibility="visible"/>
+
+        <Button
+                android:id="@+id/profileClearData"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginStart="@dimen/margin_larger"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_larger"
+                android:visibility="gone"
+                android:background="@drawable/rounded_button"
+                android:text="@string/profile_clear_data"
+                android:textColor="@color/colorPrimaryDarkOne"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileGenerateData"
+                tools:visibility="visible"/>
+
         <android.widget.Button
                 android:id="@+id/profileBackup"
                 android:layout_width="match_parent"
