@@ -23,13 +23,13 @@ class GoalDataSourceTest {
     @Mock
     internal lateinit var goalDataModelMapper: GoalDataModelMapper
 
-    private lateinit var goalRepositoryImp: GoalDataSource
+    private lateinit var goalDataSource: GoalDataSource
 
     private val goalId = 1L
 
     @Before
     fun setup() {
-        goalRepositoryImp = GoalDataSource(goalDao, goalDataModelMapper)
+        goalDataSource = GoalDataSource(goalDao, goalDataModelMapper)
     }
 
     @Test
@@ -41,7 +41,7 @@ class GoalDataSourceTest {
                 .willReturn(goal)
 
             // when
-            val result = goalRepositoryImp.getGoal(goalId)
+            val result = goalDataSource.getGoal(goalId)
 
             // then
             result equalTo goal
@@ -57,7 +57,7 @@ class GoalDataSourceTest {
                 .willReturn(goals)
 
             // when
-            val result = goalRepositoryImp.getGoals()
+            val result = goalDataSource.getGoals()
 
             // then
             result equalTo goals
@@ -73,7 +73,7 @@ class GoalDataSourceTest {
                 .willReturn(goalId)
 
             // when
-            val result = goalRepositoryImp.save(goal)
+            val result = goalDataSource.save(goal)
 
             // then
             result equalTo goalId
@@ -89,7 +89,7 @@ class GoalDataSourceTest {
             doNothing().`when`(goalDao).delete(goalReverse)
 
             // when
-            val result = goalRepositoryImp.delete(goal)
+            val result = goalDataSource.delete(goal)
 
             // then
             result equalTo Unit
