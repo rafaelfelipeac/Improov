@@ -23,13 +23,13 @@ class HistoricDataSourceTest {
     @Mock
     internal lateinit var historicDataModelMapper: HistoricDataModelMapper
 
-    private lateinit var historicRepositoryImp: HistoricDataSource
+    private lateinit var historicDataSource: HistoricDataSource
 
     private val historicId = 1L
 
     @Before
     fun setup() {
-        historicRepositoryImp = HistoricDataSource(historicDao, historicDataModelMapper)
+        historicDataSource = HistoricDataSource(historicDao, historicDataModelMapper)
     }
 
     @Test
@@ -41,7 +41,7 @@ class HistoricDataSourceTest {
                 .willReturn(historic)
 
             // when
-            val result = historicRepositoryImp.getHistoric(historicId)
+            val result = historicDataSource.getHistoric(historicId)
 
             // then
             result equalTo historic
@@ -58,7 +58,7 @@ class HistoricDataSourceTest {
                 .willReturn(historics)
 
             // when
-            val result = historicRepositoryImp.getHistorics()
+            val result = historicDataSource.getHistorics()
 
             // then
             result equalTo historics
@@ -74,7 +74,7 @@ class HistoricDataSourceTest {
                 .willReturn(historicId)
 
             // when
-            val result = historicRepositoryImp.save(historic)
+            val result = historicDataSource.save(historic)
 
             // then
             result equalTo historicId
@@ -90,7 +90,7 @@ class HistoricDataSourceTest {
             doNothing().`when`(historicDao).delete(historicReverse)
 
             // when
-            val result = historicRepositoryImp.delete(historic)
+            val result = historicDataSource.delete(historic)
 
             // then
             result equalTo Unit

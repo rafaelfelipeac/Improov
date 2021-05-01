@@ -3,6 +3,7 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_marginStart="@dimen/margin_small"
         android:layout_marginEnd="@dimen/margin_small"
         android:layout_marginBottom="@dimen/margin_smaller"
@@ -97,13 +98,26 @@
                 android:id="@+id/itemItemProgress"
                 android:layout_width="@dimen/list_item_icon_size"
                 android:layout_height="@dimen/list_item_icon_size"
-                android:layout_marginStart="@dimen/margin_smaller"
-                android:layout_marginTop="@dimen/margin_small"
-                android:layout_marginBottom="@dimen/margin_small"
-                android:background="@mipmap/ic_item_undone"
+                android:layout_marginStart="@dimen/list_item_offset"
+                android:layout_marginTop="@dimen/margin_regular"
+                android:layout_marginBottom="@dimen/margin_regular"
+                android:background="@drawable/rounded_cardview_primary"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+                android:id="@+id/itemItemDoneIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                card_view:layout_constraintBottom_toBottomOf="@+id/itemItemProgress"
+                card_view:layout_constraintEnd_toEndOf="@+id/itemItemProgress"
+                card_view:layout_constraintStart_toStartOf="@+id/itemItemProgress"
+                card_view:layout_constraintTop_toTopOf="@+id/itemItemProgress"
+                card_view:srcCompat="@drawable/ic_done"
+                card_view:tint="@color/colorPrimaryDarkTwo"
+                tools:visibility="visible" />
 
         <TextView
                 android:id="@+id/itemItemTitle"

@@ -1,15 +1,15 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.rafaelfelipeac.improov.R
+import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.features.commons.domain.model.Item
 import com.rafaelfelipeac.improov.core.platform.base.BaseAdapter
 import com.rafaelfelipeac.improov.core.platform.ActionCompleteContract
+import com.rafaelfelipeac.improov.databinding.ListItemItemBinding
 
 class ItemsAdapter(private val detailFragment: GoalDetailFragment) : BaseAdapter<Item>(),
     ActionCompleteContract {
@@ -18,19 +18,24 @@ class ItemsAdapter(private val detailFragment: GoalDetailFragment) : BaseAdapter
 
     override fun getLayoutRes(): Int = R.layout.list_item_item
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun View.bindView(item: Item, viewHolder: ViewHolder) {
+        val binding = ListItemItemBinding.bind(this)
+
         setOnClickListener { clickListener(item) }
 
-        val image = viewHolder.itemView.findViewById<ImageView>(R.id.itemItemProgress)
-        val title = viewHolder.itemView.findViewById<TextView>(R.id.itemItemTitle)
+        binding.itemItemTitle.text = item.name
 
-        title.text = item.name
-        image.background =
-            if (item.done) {
-                ContextCompat.getDrawable(context, R.mipmap.ic_item_done)
-            } else {
-                ContextCompat.getDrawable(context, R.mipmap.ic_item_undone)
-            }
+        if (item.done) {
+            binding.itemItemDoneIcon.visible()
+
+            binding.itemItemTitle.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+        }
+
+        binding.itemItemImageView.setOnTouchListener { _, _ ->
+            touchHelper?.startDrag(viewHolder)
+            false
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -38,12 +43,6 @@ class ItemsAdapter(private val detailFragment: GoalDetailFragment) : BaseAdapter
         super.onBindViewHolder(holder, position)
 
         holder.setIsRecyclable(false)
-
-        val itemDrag = holder.itemView.findViewById<ImageView>(R.id.itemItemImageView)
-            itemDrag.setOnTouchListener { _, _ ->
-                touchHelper?.startDrag(holder)
-            false
-        }
     }
 
     override fun onViewMoved(fromPosition: Int, toPosition: Int) {

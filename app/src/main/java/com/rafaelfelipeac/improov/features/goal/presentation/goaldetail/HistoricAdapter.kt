@@ -1,12 +1,12 @@
 package com.rafaelfelipeac.improov.features.goal.presentation.goaldetail
 
 import android.view.View
-import android.widget.TextView
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.formatToDateTime
 import com.rafaelfelipeac.improov.core.extension.getValueWithSymbol
-import com.rafaelfelipeac.improov.features.commons.domain.model.Historic
 import com.rafaelfelipeac.improov.core.platform.base.BaseAdapter
+import com.rafaelfelipeac.improov.databinding.ListItemHistoricBinding
+import com.rafaelfelipeac.improov.features.commons.domain.model.Historic
 
 class HistoricAdapter : BaseAdapter<Historic>() {
 
@@ -15,13 +15,12 @@ class HistoricAdapter : BaseAdapter<Historic>() {
     override fun getLayoutRes(): Int = R.layout.list_item_historic
 
     override fun View.bindView(item: Historic, viewHolder: ViewHolder) {
+        val binding = ListItemHistoricBinding.bind(this)
+
         setOnClickListener { clickListener(item) }
 
-        val date = viewHolder.itemView.findViewById<TextView>(R.id.itemHistoricDate)
-        val value = viewHolder.itemView.findViewById<TextView>(R.id.itemHistoricValue)
-
-        date.text = item.date?.formatToDateTime(context)
-        value.text = item.value.getValueWithSymbol()
+        binding.itemHistoricDate.text = item.date?.formatToDateTime(context)
+        binding.itemHistoricValue.text = item.value.getValueWithSymbol()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
