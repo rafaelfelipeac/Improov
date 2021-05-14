@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:layout_marginTop="-8dp"
+        android:layout_marginBottom="-8dp"
+        android:id="@+id/item_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardCornerRadius="30dp"
+        android:focusable="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/habit_done_delete_view"
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/habit_done_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintVertical_bias="0.0"
+                android:background="@color/colorPrimary"
+                card_view:layout_constraintEnd_toStartOf="@+id/view">
+
+            <ImageView
+                    android:id="@+id/habit_done_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    card_view:srcCompat="@drawable/ic_done"
+                    android:tint="@color/colorPrimaryDarkTwo"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="14dp"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp"
+                    card_view:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+                android:id="@+id/view"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintVertical_bias="0.491"
+                card_view:layout_constraintStart_toEndOf="@+id/habit_done_view"
+                card_view:layout_constraintEnd_toStartOf="@+id/habit_archive_view"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/habit_archive_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/colorPrimary"
+                card_view:layout_constraintStart_toEndOf="@+id/view">
+
+            <!--            <ImageView-->
+            <!--                    android:id="@+id/habit_archive_image"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    card_view:srcCompat="@drawable/ic_archive"-->
+            <!--                    android:tint="@color/colorPrimaryDarkOne"-->
+            <!--                    android:layout_centerVertical="true"-->
+            <!--                    card_view:layout_constraintTop_toTopOf="parent"-->
+            <!--                    android:layout_marginBottom="14dp"-->
+            <!--                    card_view:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                    android:layout_marginEnd="16dp"-->
+            <!--                    card_view:layout_constraintEnd_toEndOf="parent"/>-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/normal_view"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/rounded_cardview"
+            tools:visibility="visible">
+
+        <ImageView
+                android:id="@+id/habit_type_icon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                card_view:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                card_view:layout_constraintHorizontal_bias="0.0"
+                tools:src="@drawable/ic_habit"/>
+
+        <ImageView
+                android:id="@+id/habit_drag_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                card_view:srcCompat="@drawable/ic_drag_indicator"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                card_view:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="8dp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                tools:visibility="visible"
+                card_view:layout_constraintEnd_toStartOf="@+id/habit_drag_icon"
+                android:layout_marginStart="56dp"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"
+                card_view:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                    android:id="@+id/habit_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="@string/list_adapter_item_title"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="8dp"
+                    card_view:layout_constraintHorizontal_bias="0.0"
+                    card_view:layout_constraintBottom_toTopOf="@+id/habit_type"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    card_view:layout_constraintVertical_bias="0.3"
+                    card_view:layout_constraintEnd_toStartOf="@+id/habit_late_date"/>
+
+            <TextView
+                    android:id="@+id/habit_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/list_adapter_item_type"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    card_view:layout_constraintStart_toStartOf="@+id/habit_title"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"/>
+
+            <TextView
+                    android:id="@+id/habit_late_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/list_adapter_date"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    card_view:layout_constraintBottom_toTopOf="@+id/habit_score"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="16dp"/>
+
+            <TextView
+                    android:id="@+id/habit_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/list_adapter_score"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    card_view:layout_constraintTop_toTopOf="@+id/habit_type"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="16dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
