@@ -87,13 +87,13 @@ class MainActivity : BaseActivity() {
     private fun lastFragment(): Boolean {
         val currentFragment = navController.currentDestination?.id
 
-        return currentFragment == R.id.navigationList || currentFragment == R.id.navigationWelcome
+        return currentFragment == R.id.navList || currentFragment == R.id.navWelcome
     }
 
     private fun isDetailFragment(): Boolean {
         val currentFragment = navController.currentDestination?.id
 
-        return currentFragment == R.id.navigationGoal
+        return currentFragment == R.id.navGoal
     }
 
     private fun setupElements() {

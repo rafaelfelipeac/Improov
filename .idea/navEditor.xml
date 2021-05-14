@@ -8,35 +8,23 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="navigationBackup">
+                  <entry key="addFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="688" />
-                            <option name="y" value="-368" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="navigationGoal">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="565" />
-                            <option name="y" value="747" />
+                            <option name="x" value="599" />
+                            <option name="y" value="-88" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="goalToGoalForm">
+                            <entry key="action_addFragment_to_habitFragment2">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="goalToList">
+                            <entry key="action_addFragment_to_navigationGoalForm">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -46,18 +34,50 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigationGoalForm">
+                  <entry key="navBackup">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="699" />
-                            <option name="y" value="286" />
+                            <option name="x" value="1026" />
+                            <option name="y" value="1303" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navCenter">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-81" />
+                            <option name="y" value="25" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="goalFormToGoal">
+                            <entry key="centerToAdd">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="centerToList">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="centerToProfile">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="centerToStats">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="centerToToday">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -67,13 +87,49 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigationList">
+                  <entry key="navGoal">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="257" />
-                            <option name="y" value="635" />
+                            <option name="x" value="990" />
+                            <option name="y" value="-835" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navGoalForm">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1307" />
+                            <option name="y" value="-268" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navHabitForm">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1307" />
+                            <option name="y" value="41" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navList">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="611" />
+                            <option name="y" value="-829" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -88,23 +144,18 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="listToGoalForm">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigationProfile">
+                  <entry key="navProfile">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-20" />
-                            <option name="y" value="-37" />
+                            <option name="x" value="601" />
+                            <option name="y" value="640" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -119,11 +170,6 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="profileToGoalForm">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="profileToProfileEdit">
                               <value>
                                 <LayoutPositions />
@@ -134,35 +180,30 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="profileToWelcome">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigationProfileEdit">
+                  <entry key="navProfileEdit">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="693" />
-                            <option name="y" value="-43" />
+                            <option name="x" value="1014" />
+                            <option name="y" value="669" />
                           </Point>
                         </option>
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigationSettings">
+                  <entry key="navSettings">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="90" />
-                            <option name="y" value="-432" />
+                            <option name="x" value="1019" />
+                            <option name="y" value="982" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -177,30 +218,30 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigationSettingsLanguage">
+                  <entry key="navSettingsLanguage">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="284" />
-                            <option name="y" value="-516" />
+                            <option name="x" value="1272" />
+                            <option name="y" value="985" />
                           </Point>
                         </option>
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigationSplash">
+                  <entry key="navSplash">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-295" />
-                            <option name="y" value="354" />
+                            <option name="x" value="-633" />
+                            <option name="y" value="26" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="splashToList">
+                            <entry key="splashToCenter">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -215,18 +256,42 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="navigationWelcome">
+                  <entry key="navStats">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="76" />
-                            <option name="y" value="357" />
+                            <option name="x" value="600" />
+                            <option name="y" value="276" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navToday">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="610" />
+                            <option name="y" value="-458" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navWelcome">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-352" />
+                            <option name="y" value="-203" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="welcomeToList">
+                            <entry key="welcomeToCenter">
                               <value>
                                 <LayoutPositions />
                               </value>

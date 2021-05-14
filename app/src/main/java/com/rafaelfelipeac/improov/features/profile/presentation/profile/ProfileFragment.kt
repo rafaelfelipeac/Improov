@@ -95,7 +95,7 @@ class ProfileFragment : BaseFragment() {
     private fun observeViewModel() {
         lifecycleScope.launch {
             viewModel.saved.collect {
-                if (navController.currentDestination?.id == R.id.navigationProfile) {
+                if (navController.currentDestination?.id == R.id.navProfile) {
                     navController.navigate(ProfileFragmentDirections.profileToWelcome())
                 }
             }

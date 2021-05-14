@@ -2,58 +2,72 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        app:startDestination="@id/navigationSplash">
+        app:startDestination="@id/navSplash">
 
     <fragment
-            android:id="@+id/navigationSplash"
+            android:id="@+id/navSplash"
             android:name="com.rafaelfelipeac.improov.features.splash.presentation.SplashFragment"
             android:label="fragment_splash"
             tools:layout="@layout/fragment_splash" >
 
         <action
                 android:id="@+id/splashToWelcome"
-                app:destination="@id/navigationWelcome" />
+                app:destination="@id/navWelcome" />
         <action
-                android:id="@+id/splashToList"
-                app:destination="@id/navigationList"
+                android:id="@+id/splashToCenter"
+                app:destination="@id/navCenter"
                 app:enterAnim="@anim/from_top"
                 app:exitAnim="@anim/to_bottom" />
 
     </fragment>
 
     <fragment
-            android:id="@+id/navigationWelcome"
+            android:id="@+id/navWelcome"
             android:name="com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeFragment"
             android:label="fragment_welcome"
             tools:layout="@layout/fragment_welcome">
 
         <action
-                android:id="@+id/welcomeToList"
-                app:destination="@id/navigationList"
+                android:id="@+id/welcomeToCenter"
+                app:destination="@id/navCenter"
                 app:enterAnim="@anim/from_top"
                 app:exitAnim="@anim/to_bottom" />
 
     </fragment>
 
     <fragment
-            android:id="@+id/navigationList"
+            android:id="@+id/navCenter"
+            android:name="com.rafaelfelipeac.improov.future.center.CenterFragment"
+            android:label="fragment_center"
+            tools:layout="@layout/fragment_center" >
+
+        <action
+                android:id="@+id/centerToList"
+                app:destination="@id/navList" />
+        <action
+                android:id="@+id/centerToToday"
+                app:destination="@id/navToday" />
+        <action
+                android:id="@+id/centerToAdd"
+                app:destination="@id/addFragment" />
+        <action
+                android:id="@+id/centerToStats"
+                app:destination="@id/navStats" />
+        <action
+                android:id="@+id/centerToProfile"
+                app:destination="@id/navProfile" />
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/navList"
             android:name="com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListFragment"
             android:label="fragment_list"
             tools:layout="@layout/fragment_goal_list">
 
         <action
                 android:id="@+id/listToGoal"
-                app:destination="@id/navigationGoal"
-                app:enterAnim="@anim/from_bottom"
-                app:exitAnim="@anim/to_top"
-                app:popEnterAnim="@anim/from_top"
-                app:popExitAnim="@anim/to_bottom" />
-        <action
-                android:id="@+id/listToAdd"
-                app:destination="@id/navigationAdd" />
-        <action
-                android:id="@+id/listToGoalForm"
-                app:destination="@id/navigationGoalForm"
+                app:destination="@id/navGoal"
                 app:enterAnim="@anim/from_bottom"
                 app:exitAnim="@anim/to_top"
                 app:popEnterAnim="@anim/from_top"
@@ -62,7 +76,47 @@
     </fragment>
 
     <fragment
-            android:id="@+id/navigationGoalForm"
+            android:id="@+id/navGoal"
+            android:name="com.rafaelfelipeac.improov.features.goal.presentation.goaldetail.GoalDetailFragment"
+            android:label="fragment_goal"
+            tools:layout="@layout/fragment_goal_detail">
+
+        <argument
+                android:name="goalId"
+                app:argType="long" />
+        <action
+                android:id="@+id/goalToGoalForm"
+                app:destination="@id/navGoalForm" />
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/navToday"
+            android:name="com.rafaelfelipeac.improov.future.today.presentation.TodayFragment"
+            android:label="fragment_today"
+            tools:layout="@layout/fragment_today" />
+
+    <dialog
+            android:id="@+id/addFragment"
+            android:name="com.rafaelfelipeac.improov.future.add.AddFragment"
+            android:label="AddFragment"
+            tools:layout="@layout/bottom_sheet_add">
+
+        <action
+                android:id="@+id/addToGoalForm"
+                app:destination="@id/navGoalForm"
+                app:enterAnim="@anim/from_bottom"
+                app:exitAnim="@anim/to_top"
+                app:popEnterAnim="@anim/from_top"
+                app:popExitAnim="@anim/to_bottom"/>
+        <action
+                android:id="@+id/addToHabitForm"
+                app:destination="@id/navHabitForm" />
+
+    </dialog>
+
+    <fragment
+            android:id="@+id/navGoalForm"
             android:name="com.rafaelfelipeac.improov.features.goal.presentation.goalform.GoalFormFragment"
             android:label="fragment_goal_form"
             tools:layout="@layout/fragment_goal_form">
@@ -72,77 +126,43 @@
                 android:defaultValue="0L"
                 app:argType="long" />
 
-        <action
-                android:id="@+id/goalFormToGoal"
-                app:destination="@id/navigationGoal"
-                app:enterAnim="@anim/from_left"
-                app:exitAnim="@anim/to_right"/>
-
     </fragment>
 
     <fragment
-            android:id="@+id/navigationGoal"
-            android:name="com.rafaelfelipeac.improov.features.goal.presentation.goaldetail.GoalDetailFragment"
-            android:label="fragment_goal"
-            tools:layout="@layout/fragment_goal_detail">
-
-        <argument
-                android:name="goalId"
-                app:argType="long" />
-
-        <action
-                android:id="@+id/goalToGoalForm"
-                app:destination="@id/navigationGoalForm"
-                app:enterAnim="@anim/from_right"
-                app:exitAnim="@anim/to_left"
-                app:popEnterAnim="@anim/from_left"
-                app:popExitAnim="@anim/to_right" />
-        <action
-                android:id="@+id/goalToList"
-                app:destination="@id/navigationList"
-                app:enterAnim="@anim/from_top"
-                app:exitAnim="@anim/to_bottom"/>
-
-    </fragment>
+            android:id="@+id/navHabitForm"
+            android:name="com.rafaelfelipeac.improov.future.habit.HabitFragment"
+            android:label="fragment_habit_form"
+            tools:layout="@layout/fragment_habit_form" />
 
     <fragment
-            android:id="@+id/navigationProfile"
+            android:id="@+id/navStats"
+            android:name="com.rafaelfelipeac.improov.future.stats.StatsFragment"
+            android:label="fragment_stats"
+            tools:layout="@layout/fragment_stats" />
+
+    <fragment
+            android:id="@+id/navProfile"
             android:name="com.rafaelfelipeac.improov.features.profile.presentation.profile.ProfileFragment"
             android:label="fragment_profile"
             tools:layout="@layout/fragment_profile">
 
         <action
                 android:id="@+id/profileToProfileEdit"
-                app:destination="@id/navigationProfileEdit"
+                app:destination="@id/navProfileEdit"
                 app:enterAnim="@anim/from_right"
                 app:exitAnim="@anim/to_left"
                 app:popEnterAnim="@anim/from_left"
                 app:popExitAnim="@anim/to_right" />
-        <action
-                android:id="@+id/profileToAdd"
-                app:destination="@id/navigationAdd" />
-        <action
-                android:id="@+id/profileToWelcome"
-                app:destination="@id/navigationWelcome"
-                app:enterAnim="@anim/from_bottom"
-                app:exitAnim="@anim/to_top" />
         <action
                 android:id="@+id/profileToSettings"
-                app:destination="@id/navigationSettings"
+                app:destination="@id/navSettings"
                 app:enterAnim="@anim/from_right"
                 app:exitAnim="@anim/to_left"
                 app:popEnterAnim="@anim/from_left"
                 app:popExitAnim="@anim/to_right" />
         <action
-                android:id="@+id/profileToGoalForm"
-                app:destination="@id/navigationGoalForm"
-                app:enterAnim="@anim/from_bottom"
-                app:exitAnim="@anim/to_top"
-                app:popEnterAnim="@anim/from_top"
-                app:popExitAnim="@anim/to_bottom" />
-        <action
                 android:id="@+id/profileToBackup"
-                app:destination="@id/navigationBackup"
+                app:destination="@id/navBackup"
                 app:enterAnim="@anim/from_right"
                 app:exitAnim="@anim/to_left"
                 app:popEnterAnim="@anim/from_left"
@@ -151,19 +171,19 @@
     </fragment>
 
     <fragment
-            android:id="@+id/navigationProfileEdit"
+            android:id="@+id/navProfileEdit"
             android:name="com.rafaelfelipeac.improov.features.profile.presentation.profileedit.ProfileEditFragment"
             android:label="fragment_profile_edit"
             tools:layout="@layout/fragment_profile_edit" />
 
     <fragment
-            android:id="@+id/navigationSettings"
+            android:id="@+id/navSettings"
             android:name="com.rafaelfelipeac.improov.features.settings.presentation.settings.SettingsFragment"
             android:label="fragment_settings">
 
         <action
                 android:id="@+id/settingsToSettingsLanguage"
-                app:destination="@id/navigationSettingsLanguage"
+                app:destination="@id/navSettingsLanguage"
                 app:enterAnim="@anim/from_right"
                 app:exitAnim="@anim/to_left"
                 app:popEnterAnim="@anim/from_left"
@@ -172,12 +192,12 @@
     </fragment>
 
     <fragment
-            android:id="@+id/navigationSettingsLanguage"
+            android:id="@+id/navSettingsLanguage"
             android:name="com.rafaelfelipeac.improov.features.settings.presentation.settingslanguage.SettingsLanguageFragment"
             android:label="fragment_settings_language" />
 
     <fragment
-            android:id="@+id/navigationBackup"
+            android:id="@+id/navBackup"
             android:name="com.rafaelfelipeac.improov.features.backup.presentation.BackupFragment"
             android:label="fragment_backup"
             tools:layout="@layout/fragment_backup" />
