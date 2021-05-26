@@ -14,8 +14,8 @@
                 android:id="@+id/splashToWelcome"
                 app:destination="@id/navWelcome" />
         <action
-                android:id="@+id/splashToCenter"
-                app:destination="@id/navCenter"
+                android:id="@+id/splashToList"
+                app:destination="@id/navList"
                 app:enterAnim="@anim/from_top"
                 app:exitAnim="@anim/to_bottom" />
 
@@ -28,34 +28,10 @@
             tools:layout="@layout/fragment_welcome">
 
         <action
-                android:id="@+id/welcomeToCenter"
-                app:destination="@id/navCenter"
+                android:id="@+id/welcomeToList"
+                app:destination="@id/navList"
                 app:enterAnim="@anim/from_top"
                 app:exitAnim="@anim/to_bottom" />
-
-    </fragment>
-
-    <fragment
-            android:id="@+id/navCenter"
-            android:name="com.rafaelfelipeac.improov.future.center.CenterFragment"
-            android:label="fragment_center"
-            tools:layout="@layout/fragment_center" >
-
-        <action
-                android:id="@+id/centerToList"
-                app:destination="@id/navList" />
-        <action
-                android:id="@+id/centerToToday"
-                app:destination="@id/navToday" />
-        <action
-                android:id="@+id/centerToAdd"
-                app:destination="@id/addFragment" />
-        <action
-                android:id="@+id/centerToStats"
-                app:destination="@id/navStats" />
-        <action
-                android:id="@+id/centerToProfile"
-                app:destination="@id/navProfile" />
 
     </fragment>
 
@@ -72,6 +48,10 @@
                 app:exitAnim="@anim/to_top"
                 app:popEnterAnim="@anim/from_top"
                 app:popExitAnim="@anim/to_bottom" />
+
+        <action
+                android:id="@+id/listToAdd"
+                app:destination="@id/addFragment" />
 
     </fragment>
 
@@ -94,7 +74,13 @@
             android:id="@+id/navToday"
             android:name="com.rafaelfelipeac.improov.future.today.presentation.TodayFragment"
             android:label="fragment_today"
-            tools:layout="@layout/fragment_today" />
+            tools:layout="@layout/fragment_today" >
+
+        <action
+                android:id="@+id/todayToAdd"
+                app:destination="@id/addFragment" />
+
+    </fragment>
 
     <dialog
             android:id="@+id/addFragment"
@@ -125,6 +111,9 @@
                 android:name="goalId"
                 android:defaultValue="0L"
                 app:argType="long" />
+        <action
+                android:id="@+id/goalFormToGoal"
+                app:destination="@id/navGoal" />
 
     </fragment>
 
@@ -138,7 +127,13 @@
             android:id="@+id/navStats"
             android:name="com.rafaelfelipeac.improov.future.stats.StatsFragment"
             android:label="fragment_stats"
-            tools:layout="@layout/fragment_stats" />
+            tools:layout="@layout/fragment_stats" >
+
+        <action
+                android:id="@+id/statsToAdd"
+                app:destination="@id/addFragment" />
+
+    </fragment>
 
     <fragment
             android:id="@+id/navProfile"
@@ -167,6 +162,12 @@
                 app:exitAnim="@anim/to_left"
                 app:popEnterAnim="@anim/from_left"
                 app:popExitAnim="@anim/to_right" />
+        <action
+                android:id="@+id/profileToAdd"
+                app:destination="@id/addFragment" />
+        <action
+                android:id="@+id/profileToWelcome"
+                app:destination="@id/navWelcome" />
 
     </fragment>
 

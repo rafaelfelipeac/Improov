@@ -35,13 +35,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     card_view:srcCompat="@drawable/ic_done"
-                    android:tint="@color/colorPrimaryDarkTwo"
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="14dp"
                     card_view:layout_constraintBottom_toBottomOf="parent"
                     card_view:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="16dp"
-                    card_view:layout_constraintTop_toTopOf="parent"/>
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    card_view:tint="@color/colorPrimaryDarkTwo" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -156,7 +156,7 @@
                     android:id="@+id/habit_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/list_adapter_item_type"
+                    android:text="string/list_adapter_item_type"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:textColor="@color/colorWhite"

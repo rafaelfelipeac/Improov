@@ -62,7 +62,7 @@ class ProfileFragment : BaseFragment() {
         fab.setOnClickListener {
             hideBottomSheetTips()
 
-            navController.navigate(ProfileFragmentDirections.profileToGoalForm())
+            navController.navigate(ProfileFragmentDirections.profileToAdd())
         }
 
         binding.profileShowWelcomeButton.setOnClickListener {

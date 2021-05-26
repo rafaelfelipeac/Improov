@@ -7,23 +7,23 @@
             android:icon="@drawable/ic_list"
             android:title="@string/navigation_goals" />
 
-    <!--    <item-->
-    <!--            android:id="@+id/navigationToday"-->
-    <!--            android:icon="@drawable/ic_today"-->
-    <!--            android:title="@string/navigation_today"/>-->
+    <item
+            android:id="@+id/navToday"
+            android:icon="@drawable/ic_list"
+            android:title="@string/navigation_today" />
 
     <item
-            android:id="@+id/navigationAdd"
+            android:id="@+id/navAdd"
             android:checkable="false"
             android:checked="false"
             android:enabled="false"
             android:title=""
             app:showAsAction="always" />
 
-    <!--    <item-->
-    <!--            android:id="@+id/navigationStats"-->
-    <!--            android:icon="@drawable/ic_chart"-->
-    <!--            android:title="@string/navigation_stats"/>-->
+    <item
+            android:id="@+id/navStats"
+            android:icon="@drawable/ic_list"
+            android:title="@string/navigation_stats" />
 
     <item
             android:id="@+id/navProfile"

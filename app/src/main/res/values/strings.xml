@@ -23,6 +23,9 @@
 
     <!-- Navigation -->
     <string name="navigation_goals">Goals</string>
+    <string name="navigation_today">Today</string>
+    <string name="navigation_add">Add</string>
+    <string name="navigation_stats">Stats</string>
     <string name="navigation_profile">Profile</string>
 
     <!-- Goal -->
