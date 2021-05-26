@@ -66,10 +66,16 @@
                 app:argType="long" />
         <action
                 android:id="@+id/goalToGoalForm"
-                app:destination="@id/navGoalForm" />
+                app:destination="@id/navGoalForm"
+                app:enterAnim="@anim/from_right"
+                app:exitAnim="@anim/to_left"
+                app:popEnterAnim="@anim/from_left"
+                app:popExitAnim="@anim/to_right" />
         <action
                 android:id="@+id/goalToList"
-                app:destination="@id/navList" />
+                app:destination="@id/navList"
+                app:enterAnim="@anim/from_top"
+                app:exitAnim="@anim/to_bottom"/>
 
     </fragment>
 
@@ -100,7 +106,11 @@
                 app:popExitAnim="@anim/to_bottom"/>
         <action
                 android:id="@+id/addToHabitForm"
-                app:destination="@id/navHabitForm" />
+                app:destination="@id/navHabitForm"
+                app:enterAnim="@anim/from_bottom"
+                app:exitAnim="@anim/to_top"
+                app:popEnterAnim="@anim/from_top"
+                app:popExitAnim="@anim/to_bottom"/>
 
     </dialog>
 
@@ -116,7 +126,9 @@
                 app:argType="long" />
         <action
                 android:id="@+id/goalFormToGoal"
-                app:destination="@id/navGoal" />
+                app:destination="@id/navGoal"
+                app:enterAnim="@anim/from_left"
+                app:exitAnim="@anim/to_right"/>
 
     </fragment>
 
@@ -170,7 +182,9 @@
                 app:destination="@id/addFragment" />
         <action
                 android:id="@+id/profileToWelcome"
-                app:destination="@id/navWelcome" />
+                app:destination="@id/navWelcome"
+                app:enterAnim="@anim/from_bottom"
+                app:exitAnim="@anim/to_top" />
 
     </fragment>
 
