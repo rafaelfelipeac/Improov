@@ -67,6 +67,9 @@
         <action
                 android:id="@+id/goalToGoalForm"
                 app:destination="@id/navGoalForm" />
+        <action
+                android:id="@+id/goalToList"
+                app:destination="@id/navList" />
 
     </fragment>
 
