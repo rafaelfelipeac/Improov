@@ -10,6 +10,9 @@ import com.rafaelfelipeac.improov.core.di.modules.PersistenceModule
 import com.rafaelfelipeac.improov.core.di.modules.SettingsModule
 import com.rafaelfelipeac.improov.core.di.modules.SplashModule
 import com.rafaelfelipeac.improov.core.di.modules.BackupModule
+import com.rafaelfelipeac.improov.core.di.modules.HabitModule
+import com.rafaelfelipeac.improov.core.di.modules.StatsModule
+import com.rafaelfelipeac.improov.core.di.modules.TodayModule
 import com.rafaelfelipeac.improov.core.di.provider.ViewModelProvider
 import dagger.BindsInstance
 import dagger.Component
@@ -24,7 +27,10 @@ import javax.inject.Singleton
     PersistenceModule::class,
     SettingsModule::class,
     SplashModule::class,
-    BackupModule::class
+    BackupModule::class,
+    HabitModule::class,
+    StatsModule::class,
+    TodayModule::class
 ])
 @Singleton
 interface AppComponent : ViewModelProvider {

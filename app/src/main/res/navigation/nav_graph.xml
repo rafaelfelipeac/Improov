@@ -140,7 +140,7 @@
 
     <fragment
             android:id="@+id/navStats"
-            android:name="com.rafaelfelipeac.improov.future.stats.StatsFragment"
+            android:name="com.rafaelfelipeac.improov.future.stats.presentation.StatsFragment"
             android:label="fragment_stats"
             tools:layout="@layout/fragment_stats" >
 

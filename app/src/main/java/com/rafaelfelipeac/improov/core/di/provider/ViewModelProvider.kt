@@ -10,6 +10,9 @@ import com.rafaelfelipeac.improov.features.settings.presentation.settings.Settin
 import com.rafaelfelipeac.improov.features.settings.presentation.settingslanguage.SettingsLanguageViewModel
 import com.rafaelfelipeac.improov.features.splash.presentation.SplashViewModel
 import com.rafaelfelipeac.improov.features.welcome.presentation.WelcomeViewModel
+import com.rafaelfelipeac.improov.future.habit.presentation.habit.HabitViewModel
+import com.rafaelfelipeac.improov.future.stats.presentation.StatsViewModel
+import com.rafaelfelipeac.improov.future.today.presentation.TodayViewModel
 
 interface ViewModelProvider {
 
@@ -23,4 +26,7 @@ interface ViewModelProvider {
     fun settingsViewModel(): SettingsViewModel
     fun settingsLanguageViewModel(): SettingsLanguageViewModel
     fun backupViewModel(): BackupViewModel
+    fun habitViewModel(): HabitViewModel
+    fun StatsViewModel(): StatsViewModel
+    fun TodayViewModel(): TodayViewModel
 }
