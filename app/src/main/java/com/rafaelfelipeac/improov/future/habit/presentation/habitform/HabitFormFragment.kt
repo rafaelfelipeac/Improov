@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.future.habit
+package com.rafaelfelipeac.improov.future.habit.presentation.habitform
 
 import android.os.Bundle
 import android.view.*
@@ -9,8 +9,8 @@ import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.extension.gone
-import com.rafaelfelipeac.improov.core.extension.nextHabitDate
-import com.rafaelfelipeac.improov.core.extension.setHabitLastDate
+//import com.rafaelfelipeac.improov.core.extension.nextHabitDate
+//import com.rafaelfelipeac.improov.core.extension.setHabitLastDate
 import com.rafaelfelipeac.improov.core.extension.visible
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.features.main.MainActivity
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_habit_form.*
 
 class HabitFormFragment : BaseFragment() {
 
-    private var habit = Habit()
+    /*private var habit = Habit()
     private var habitId: Long? = null
     private var habits: List<Habit>? = null
 
@@ -331,5 +331,5 @@ class HabitFormFragment : BaseFragment() {
             preferences.fistTimeAdd = false
             preferences.fistTimeList = true
         }
-    }
+    }*/
 }
