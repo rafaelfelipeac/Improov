@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.future.habit.domain.usecase
+package com.rafaelfelipeac.improov.future.stats.domain.usecase
 
 import com.rafaelfelipeac.improov.features.commons.domain.model.Habit
 import com.rafaelfelipeac.improov.future.habit.domain.repository.HabitRepository

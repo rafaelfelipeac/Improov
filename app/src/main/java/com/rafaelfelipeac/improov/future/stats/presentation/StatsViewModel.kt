@@ -1,39 +1,41 @@
 package com.rafaelfelipeac.improov.future.stats.presentation
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
-import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListViewModel
-import com.rafaelfelipeac.improov.future.habit.Habit
+import androidx.lifecycle.viewModelScope
+import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
+import com.rafaelfelipeac.improov.features.commons.domain.model.Habit
+import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase
+import com.rafaelfelipeac.improov.future.habit.domain.usecase.GetHabitListUseCase
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class StatsViewModel @Inject constructor(): ViewModel()
+class StatsFormViewModel @Inject constructor(
+    private val getGoalListUseCase: GetGoalListUseCase,
+    private val getHabitListUseCase: GetHabitListUseCase
+) : ViewModel() {
 
-//class StatsViewModel @Inject constructor(
-//    private val goalRepository: GoalRepository,
-//    private val habitRepository: HabitRepository
-//) : BaseViewModel<GoalListViewModel.ViewState, GoalListViewModel.Action>(
-//    GoalListViewModel.ViewState()
-//) {
-//    private var goals: LiveData<List<Goal>>? = null
-//    private var habits: LiveData<List<Habit>>? = null
-//
-//    init {
-//        //goals = goalRepository.getGoals()
-//        habits = habitRepository.getHabits()
-//    }
-//
-//    // Goal
-//    fun getGoals(): LiveData<List<Goal>>? {
-//        return goals
-//    }
-//
-//    // Habit
-//    fun getHabits(): LiveData<List<Habit>>? {
-//        return habits
-//    }
-//
-//    override fun onReduceState(viewAction: GoalListViewModel.Action): GoalListViewModel.ViewState {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//}
+    val goals: Flow<List<Goal>> get() = _goals.filterNotNull()
+    private val _goals = MutableStateFlow<List<Goal>?>(null)
+    val habits: Flow<List<Habit>> get() = _habits.filterNotNull()
+    private val _habits = MutableStateFlow<List<Habit>?>(null)
+
+    fun loadData() {
+        getGoals()
+        getHabits()
+    }
+
+    private fun getGoals() {
+        viewModelScope.launch {
+            _goals.value = getGoalListUseCase()
+        }
+    }
+
+    private fun getHabits() {
+        viewModelScope.launch {
+            _habits.value = getHabitListUseCase()
+        }
+    }
+}
