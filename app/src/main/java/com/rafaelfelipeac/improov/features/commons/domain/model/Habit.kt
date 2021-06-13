@@ -1,14 +1,14 @@
-package com.rafaelfelipeac.improov.future.habit
+package com.rafaelfelipeac.improov.features.commons.domain.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import com.rafaelfelipeac.improov.features.commons.data.enums.HabitType
+import com.rafaelfelipeac.improov.features.commons.data.enums.PeriodType
 import java.io.Serializable
 import java.util.*
 
 data class Habit (
     var habitId: Long = 0,
-    var type: HabitType = HabitType.HAB_NONE,
-    var periodType: PeriodType = PeriodType.PER_NONE,
+    var type: HabitType = HabitType.NONE,
+    var periodType: PeriodType = PeriodType.NONE,
     var periodDone: Int = 0,
     var periodTotal: Int = 0,
     var periodDaysBetween: Int = 0,
@@ -20,7 +20,3 @@ data class Habit (
     var weekDaysLong: MutableList<Long> = mutableListOf(),
     var order: Int = 0
 ) : Serializable
-
-enum class HabitType { HAB_EVERYDAY, HAB_WEEKDAYS, HAB_PERIOD, HAB_CUSTOM, HAB_NONE }
-
-enum class PeriodType { PER_WEEK, PER_MONTH, PER_YEAR, PER_CUSTOM, PER_NONE }

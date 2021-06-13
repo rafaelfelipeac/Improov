@@ -9,6 +9,6 @@ class App : Application(), AppComponentProvider {
 
     override val appComponent: AppComponent by lazy {
         DaggerAppComponent.factory()
-            .create(application = this)
+            .create(this)
     }
 }

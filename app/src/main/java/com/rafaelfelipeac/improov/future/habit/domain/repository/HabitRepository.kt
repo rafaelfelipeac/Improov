@@ -1,27 +1,14 @@
 package com.rafaelfelipeac.improov.future.habit.domain.repository
 
-import androidx.lifecycle.LiveData
-import javax.inject.Inject
+import com.rafaelfelipeac.improov.features.commons.domain.model.Habit
 
-open class HabitRepository {
+interface HabitRepository {
 
+    suspend fun getHabits(): List<Habit>
+
+    suspend fun getHabit(habitId: Long): Habit
+
+    suspend fun save(habit: Habit): Long
+
+    suspend fun delete(habit: Habit)
 }
-
-//class HabitRepository @Inject constructor() {
-//
-//    fun getHabits(): LiveData<List<Habit>>? {
-//        return null
-//    }
-//
-//    fun getHabit(habitId: Long): LiveData<Habit>? {
-//        return null
-//    }
-//
-//    fun save(habit: Habit): Long? {
-//        return null
-//    }
-//
-//    fun delete(habit: Habit): Unit? {
-//        return null
-//    }
-//}
