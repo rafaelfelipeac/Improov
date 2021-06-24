@@ -1,9 +1,9 @@
-package com.rafaelfelipeac.improov.future.stats.data
+package com.rafaelfelipeac.improov.features.commons.data
 
 import com.rafaelfelipeac.improov.features.commons.data.dao.HabitDao
 import com.rafaelfelipeac.improov.features.commons.data.model.HabitDataModelMapper
 import com.rafaelfelipeac.improov.features.commons.domain.model.Habit
-import com.rafaelfelipeac.improov.future.habit.domain.repository.HabitRepository
+import com.rafaelfelipeac.improov.features.commons.domain.repository.HabitRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

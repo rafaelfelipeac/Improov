@@ -4,7 +4,7 @@ import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
 import com.rafaelfelipeac.improov.base.equalTo
 import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
 import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModelMapper
-import com.rafaelfelipeac.improov.features.goal.data.GoalDataSource
+import com.rafaelfelipeac.improov.features.commons.data.GoalDataSource
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test

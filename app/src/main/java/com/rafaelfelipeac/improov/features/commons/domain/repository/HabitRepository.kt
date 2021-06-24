@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.future.habit.domain.repository
+package com.rafaelfelipeac.improov.features.commons.domain.repository
 
 import com.rafaelfelipeac.improov.features.commons.domain.model.Habit
 

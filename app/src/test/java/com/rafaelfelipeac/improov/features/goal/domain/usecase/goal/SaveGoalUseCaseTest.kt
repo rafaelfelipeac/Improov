@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.features.goal.domain.usecase.goal
 
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoal
 import com.rafaelfelipeac.improov.base.equalTo
-import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
+import com.rafaelfelipeac.improov.features.commons.domain.repository.GoalRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test

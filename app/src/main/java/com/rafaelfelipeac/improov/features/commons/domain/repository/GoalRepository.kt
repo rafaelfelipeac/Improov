@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.future.stats.domain.repository
+package com.rafaelfelipeac.improov.features.commons.domain.repository
 
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 

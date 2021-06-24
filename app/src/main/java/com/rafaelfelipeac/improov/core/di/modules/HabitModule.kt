@@ -4,12 +4,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.key.FragmentKey
 import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
-import com.rafaelfelipeac.improov.future.habit.data.HabitDataSource
-import com.rafaelfelipeac.improov.future.habit.domain.repository.HabitRepository
-import com.rafaelfelipeac.improov.future.habit.presentation.habit.HabitFragment
-import com.rafaelfelipeac.improov.future.habit.presentation.habit.HabitViewModel
-import com.rafaelfelipeac.improov.future.habit.presentation.habitform.HabitFormFragment
-import com.rafaelfelipeac.improov.future.habit.presentation.habitform.HabitFormViewModel
+import com.rafaelfelipeac.improov.features.commons.data.HabitDataSource
+import com.rafaelfelipeac.improov.features.commons.domain.repository.HabitRepository
+import com.rafaelfelipeac.improov.future.habit.presentation.HabitFormFragment
+import com.rafaelfelipeac.improov.future.habit.presentation.HabitFormViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -19,16 +17,6 @@ abstract class HabitModule {
 
     @Binds
     abstract fun habitRepository(habitDataSource: HabitDataSource): HabitRepository
-
-    @Binds
-    @IntoMap
-    @FragmentKey(HabitFragment::class)
-    abstract fun bindHabitFragment(habitFragment: HabitFragment): Fragment
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(HabitViewModel::class)
-    abstract fun bindHabitViewModel(habitViewModel: HabitViewModel): ViewModel
 
     @Binds
     @IntoMap

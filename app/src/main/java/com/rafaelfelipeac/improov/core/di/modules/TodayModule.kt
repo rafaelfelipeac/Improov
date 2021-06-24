@@ -4,8 +4,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.key.FragmentKey
 import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
-import com.rafaelfelipeac.improov.future.today.data.TodayDataSource
-import com.rafaelfelipeac.improov.future.today.domain.repository.TodayRepository
 import com.rafaelfelipeac.improov.future.today.presentation.TodayFragment
 import com.rafaelfelipeac.improov.future.today.presentation.TodayViewModel
 import dagger.Binds
@@ -14,9 +12,6 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class TodayModule {
-
-    @Binds
-    abstract fun todayRepository(todayDataSource: TodayDataSource): TodayRepository
 
     @Binds
     @IntoMap

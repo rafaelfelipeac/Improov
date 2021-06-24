@@ -4,15 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import com.rafaelfelipeac.improov.features.commons.domain.model.Habit
-import com.rafaelfelipeac.improov.features.goal.domain.usecase.goal.GetGoalListUseCase
-import com.rafaelfelipeac.improov.future.habit.domain.usecase.GetHabitListUseCase
+import com.rafaelfelipeac.improov.future.stats.domain.usecase.GetGoalListUseCase
+import com.rafaelfelipeac.improov.future.stats.domain.usecase.GetHabitListUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class StatsFormViewModel @Inject constructor(
+class StatsViewModel @Inject constructor(
     private val getGoalListUseCase: GetGoalListUseCase,
     private val getHabitListUseCase: GetHabitListUseCase
 ) : ViewModel() {

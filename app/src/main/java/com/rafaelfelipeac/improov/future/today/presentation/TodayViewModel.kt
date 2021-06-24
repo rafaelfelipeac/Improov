@@ -1,59 +1,29 @@
 package com.rafaelfelipeac.improov.future.today.presentation
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.rafaelfelipeac.improov.features.commons.domain.model.Habit
+import com.rafaelfelipeac.improov.future.today.domain.usecase.GetHabitListUseCase
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-//package com.rafaelfelipeac.improov.future.today.presentation
-//
-//import androidx.lifecycle.LiveData
-//import com.rafaelfelipeac.improov.core.platform.base.BaseViewModel
-//import com.rafaelfelipeac.improov.features.goal.domain.model.Goal
-//import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
-//import com.rafaelfelipeac.improov.features.goal.presentation.goallist.GoalListViewModel
-//import com.rafaelfelipeac.improov.future.habit.Habit
-//import com.rafaelfelipeac.improov.future.habit.HabitRepository
-//import javax.inject.Inject
+class TodayViewModel @Inject constructor(
+    private val getHabitListUseCase: GetHabitListUseCase
+) : ViewModel() {
 
-class TodayViewModel @Inject constructor() : ViewModel()
+    val habits: Flow<List<Habit>> get() = _habits.filterNotNull()
+    private val _habits = MutableStateFlow<List<Habit>?>(null)
 
-//
-//class TodayViewModel @Inject constructor(
-//    private val goalRepository: GoalRepository,
-//    private val habitRepository: HabitRepository
-//) : BaseViewModel<GoalListViewModel.ViewState, GoalListViewModel.Action>(
-//    GoalListViewModel.ViewState()
-//) {
-//    private var habits: LiveData<List<Habit>>? = null
-//    private var goals: LiveData<List<Goal>>? = null
-//
-//    init {
-//        habits = habitRepository.getHabits()
-//       // goals = goalRepository.getGoals()
-//    }
-//
-//    // Goal
-//    fun getGoals(): LiveData<List<Goal>>? {
-//        return goals
-//    }
-//
-//    fun saveGoal(goal: Goal) {
-//        //goalRepository.save(goal)
-//
-//        //this.goals = goalRepository.getGoals()
-//    }
-//
-//    // Habit
-//    fun getHabits(): LiveData<List<Habit>>? {
-//        return habits
-//    }
-//
-//    fun saveHabit(habit: Habit) {
-//        habitRepository.save(habit)
-//
-//        this.habits = habitRepository.getHabits()
-//    }
-//
-//    override fun onReduceState(viewAction: GoalListViewModel.Action): GoalListViewModel.ViewState {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//}
+    fun loadData() {
+        getHabits()
+    }
+
+    private fun getHabits() {
+        viewModelScope.launch {
+            _habits.value = getHabitListUseCase()
+        }
+    }
+}

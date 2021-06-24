@@ -1,9 +1,9 @@
-package com.rafaelfelipeac.improov.future.stats.data
+package com.rafaelfelipeac.improov.features.commons.data
 
 import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
 import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModelMapper
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
-import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
+import com.rafaelfelipeac.improov.features.commons.domain.repository.GoalRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

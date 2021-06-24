@@ -4,12 +4,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.key.FragmentKey
 import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
-import com.rafaelfelipeac.improov.features.goal.data.GoalDataSource
+import com.rafaelfelipeac.improov.features.commons.data.GoalDataSource
 import com.rafaelfelipeac.improov.features.goal.data.ItemDataSource
 import com.rafaelfelipeac.improov.features.goal.data.HistoricDataSource
 import com.rafaelfelipeac.improov.features.goal.data.FirstTimeAddDataSource
 import com.rafaelfelipeac.improov.features.goal.data.FirstTimeListDataSource
-import com.rafaelfelipeac.improov.features.goal.domain.repository.GoalRepository
+import com.rafaelfelipeac.improov.features.commons.domain.repository.GoalRepository
 import com.rafaelfelipeac.improov.features.goal.domain.repository.ItemRepository
 import com.rafaelfelipeac.improov.features.goal.domain.repository.HistoricRepository
 import com.rafaelfelipeac.improov.features.goal.domain.repository.FirstTimeAddRepository

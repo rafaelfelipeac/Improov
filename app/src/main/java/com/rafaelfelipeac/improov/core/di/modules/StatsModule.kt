@@ -4,8 +4,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.key.FragmentKey
 import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
-import com.rafaelfelipeac.improov.future.stats.data.StatsDataSource
-import com.rafaelfelipeac.improov.future.stats.domain.repository.StatsRepository
 import com.rafaelfelipeac.improov.future.stats.presentation.StatsFragment
 import com.rafaelfelipeac.improov.future.stats.presentation.StatsViewModel
 import dagger.Binds
@@ -14,9 +12,6 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class StatsModule {
-
-    @Binds
-    abstract fun statsRepository(statsDataSource: StatsDataSource): StatsRepository
 
     @Binds
     @IntoMap
