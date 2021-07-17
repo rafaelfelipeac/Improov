@@ -5,26 +5,39 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.rafaelfelipeac.improov.R
+import com.rafaelfelipeac.improov.core.extension.viewBinding
+import com.rafaelfelipeac.improov.databinding.FragmentAddBinding
 import com.rafaelfelipeac.improov.features.main.MainActivity
-import kotlinx.android.synthetic.main.bottom_sheet_add.*
 
 class AddFragment : BottomSheetDialogFragment() {
 
+    private var binding by viewBinding<FragmentAddBinding>()
+
     val navController get() = (activity as MainActivity).navController
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.bottom_sheet_add, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return FragmentAddBinding.inflate(inflater, container, false).run {
+            binding = this
+            binding.root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        add_button_goal.setOnClickListener {
+        setupBehaviours()
+    }
+
+    private fun setupBehaviours() {
+        binding.addButtonGoal.setOnClickListener {
             navController.navigate(AddFragmentDirections.addToGoalForm())
         }
 
-        add_button_habit.setOnClickListener {
+        binding.addButtonHabit.setOnClickListener {
             navController.navigate(AddFragmentDirections.addToHabitForm())
         }
     }

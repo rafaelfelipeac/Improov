@@ -207,4 +207,20 @@
     <string name="tips_backup_title">Backup</string>
     <string name="tips_backup_message">Ao fazer uso da funcionalidade de backup, você tem o controle do histórico de suas conquistas e pode salvar isso como quiser. \n\nAo trocar de dispositivo, por exemplo, você não perderá o progresso já realizado e poderá se dedicar a novas conquistas.</string>
 
+    <!-- Add -->
+    <string name="add_button_goal">Add Goal</string>
+    <string name="add_button_habit">Add Habit</string>
+
+    <!-- Stats -->
+    <string name="stats_value">%s</string>
+    <string name="stats_default_value">0</string>
+    <string name="stats_goal_title">Goals</string>
+    <string name="stats_goal_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi libero, lobortis vel fringilla at, hendrerit sit amet nunc. Morbi convallis ipsum in enim suscipit varius.</string>
+    <string name="stats_goals_footer">Continue fazendo um bom trabalho.</string>
+    <string name="stats_goals_placeholder_message">stats_placeholder_message</string>
+    <string name="stats_habit_title">Habits</string>
+    <string name="stats_habits_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi libero, lobortis vel fringilla at, hendrerit sit amet nunc. Morbi convallis ipsum in enim suscipit varius.</string>
+    <string name="stats_habits_footer">Continue fazendo um bom trabalho.</string>
+    <string name="stats_habits_placeholder_message">stats_habits_placeholder_message</string>
+
 </resources>

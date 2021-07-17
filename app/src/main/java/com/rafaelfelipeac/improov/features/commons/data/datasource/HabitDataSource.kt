@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.commons.data
+package com.rafaelfelipeac.improov.features.commons.data.datasource
 
 import com.rafaelfelipeac.improov.features.commons.data.dao.HabitDao
 import com.rafaelfelipeac.improov.features.commons.data.model.HabitDataModelMapper

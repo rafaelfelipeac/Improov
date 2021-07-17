@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.rafaelfelipeac.improov.core.di.key.FragmentKey
 import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
-import com.rafaelfelipeac.improov.features.commons.data.GoalDataSource
+import com.rafaelfelipeac.improov.features.commons.data.datasource.GoalDataSource
 import com.rafaelfelipeac.improov.features.goal.data.ItemDataSource
 import com.rafaelfelipeac.improov.features.goal.data.HistoricDataSource
 import com.rafaelfelipeac.improov.features.goal.data.FirstTimeAddDataSource

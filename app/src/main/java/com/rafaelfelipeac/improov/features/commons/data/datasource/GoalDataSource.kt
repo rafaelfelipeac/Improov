@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.features.commons.data
+package com.rafaelfelipeac.improov.features.commons.data.datasource
 
 import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
 import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModelMapper

@@ -6,6 +6,7 @@ import com.rafaelfelipeac.improov.R
 import com.rafaelfelipeac.improov.core.persistence.database.MIGRATION_48_49
 import com.rafaelfelipeac.improov.core.persistence.database.RoomDatabase
 import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
+import com.rafaelfelipeac.improov.features.commons.data.dao.HabitDao
 import com.rafaelfelipeac.improov.features.commons.data.dao.HistoricDao
 import com.rafaelfelipeac.improov.features.commons.data.dao.ItemDao
 import dagger.Module
@@ -32,4 +33,7 @@ object PersistenceModule {
 
     @Provides
     fun provideHistoricDao(appDatabase: RoomDatabase): HistoricDao = appDatabase.historicDao()
+
+    @Provides
+    fun provideHabitDao(appDatabase: RoomDatabase): HabitDao = appDatabase.habitDao()
 }

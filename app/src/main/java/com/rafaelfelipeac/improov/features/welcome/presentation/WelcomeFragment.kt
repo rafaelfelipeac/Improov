@@ -39,7 +39,7 @@ class WelcomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupLayout()
+        setupBehaviours()
         observeViewModel()
     }
 
@@ -48,7 +48,7 @@ class WelcomeFragment : BaseFragment() {
         hideNavigation()
     }
 
-    private fun setupLayout() {
+    private fun setupBehaviours() {
         binding.welcomeStartButton.setOnClickListener {
             viewModel.saveWelcome(true)
         }

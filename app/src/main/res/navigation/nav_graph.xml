@@ -95,7 +95,7 @@
             android:id="@+id/addFragment"
             android:name="com.rafaelfelipeac.improov.future.add.AddFragment"
             android:label="AddFragment"
-            tools:layout="@layout/bottom_sheet_add">
+            tools:layout="@layout/fragment_add">
 
         <action
                 android:id="@+id/addToGoalForm"

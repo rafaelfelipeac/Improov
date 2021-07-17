@@ -4,109 +4,89 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.rafaelfelipeac.improov.R
-import com.rafaelfelipeac.improov.core.extension.invisible
-import com.rafaelfelipeac.improov.core.extension.visible
+import com.rafaelfelipeac.improov.core.extension.viewBinding
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
-import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
-import com.rafaelfelipeac.improov.future.habit.Habit
-import com.rafaelfelipeac.improov.features.main.MainActivity
-import kotlinx.android.synthetic.main.fragment_stats.*
+import com.rafaelfelipeac.improov.databinding.FragmentStatsBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class StatsFragment : BaseFragment() {
 
-//    var goals: List<Goal>? = listOf()
-//    var habits: List<Habit>? = listOf()
-//    var goalsFinal: MutableList<Goal>? = mutableListOf()
-//
-//    private val statsViewModel by lazy { viewModelFactory.get<StatsViewModel>(this) }
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        //injector.inject(this)
-//
-//        (activity as MainActivity).closeToolbar()
-//
-//        setHasOptionsMenu(true)
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//
-//        (activity as MainActivity).closeToolbar()
-//        (activity as MainActivity).closeBottomSheetTips()
-//    }
-//
-//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-//
-//        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-//        (activity as MainActivity).supportActionBar?.title = getString(R.string.stats_title)
-//
-//        showNavigation()
-//
-//        return inflater.inflate(R.layout.fragment_stats, container, false)
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        observeViewModel()
-//
-//        fab.setOnClickListener {
-//             hideBottomSheetTips()
-//
-//            //navController.navigate(StatsFragmentDirections.actionNavigationStatsToNavigationGoalForm()) // fix
-//        }
-//    }
-//
-//    private fun observeViewModel() {
-//        statsViewModel.getGoals()?.observe(this, Observer { goals ->
-//            this.goals = goals
-//
-//            setupStats()
-//        })
-//
-//        statsViewModel.getHabits()?.observe(this, Observer { habits ->
-//            this.habits = habits
-//
-//            setupStats()
-//        })
-//    }
-//
-//    private fun setupStats() {
-//        if (goals?.isNotEmpty()!! || habits?.isNotEmpty()!!) {
-//            setStats()
-//
-//            stats_default.visible()
-//            stats_placeholder.invisible()
-//        } else {
-//            stats_default.invisible()
-//            stats_placeholder.visible()
-//        }
-//    }
-//
-//    private fun setStats() {
-//        goalsFinal = mutableListOf()
-//
-//        goals?.let { goalsFinal!!.addAll(it) }
-//        //habits?.let { goalsFinal!!.addAll(it) }
-//
-//        val doneWithSingles = goals!!.filter { !it.divideAndConquer }
-//        val doneWithDivideAndConquer = goals!!.filter { it.divideAndConquer }
-//
-//        val quantitySingles = doneWithSingles.filter { it.value >= it.singleValue }.size
-//        val quantityBronze = doneWithDivideAndConquer.filter { it.value >= it.bronzeValue }.size
-//        val quantitySilver = doneWithDivideAndConquer.filter { it.value >= it.silverValue }.size
-//        val quantityGold = doneWithDivideAndConquer.filter { it.value >= it.goldValue }.size
+    private var binding by viewBinding<FragmentStatsBinding>()
 
-//        stats_message.text = String.format(getString(R.string.stats_message), goals!!.filter { it.done }.size)
-//        stats_single_value.text = String.format(getString(R.string.stats_single_value), quantitySingles)
-//        stats_bronze_value.text = String.format(getString(R.string.stats_bronze_value), quantityBronze)
-//        stats_silver_value.text = String.format(getString(R.string.stats_silver_value), quantitySilver)
-//        stats_gold_value.text = String.format(getString(R.string.stats_gold_value), quantityGold)
-//    }
+    private val viewModel by lazy { viewModelProvider.statsViewModel() }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+
+        setScreen()
+
+        return FragmentStatsBinding.inflate(inflater, container, false).run {
+            binding = this
+            binding.root
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupBehaviours()
+        observeViewModel()
+    }
+
+    private fun setScreen() {
+        hideToolbar()
+        showNavigation()
+        hideBottomSheetTips()
+    }
+
+    private fun setupBehaviours() {
+        fab.setOnClickListener {
+            hideBottomSheetTips()
+
+            navController.navigate(StatsFragmentDirections.statsToAdd())
+        }
+    }
+
+    private fun observeViewModel() {
+        lifecycleScope.launch {
+            viewModel.singleValue.collect {
+                binding.statsSingleValue.text =
+                    String.format(getString(R.string.stats_value), it)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.bronzeValue.collect {
+                binding.statsBronzeValue.text =
+                    String.format(getString(R.string.stats_value), it)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.silverValue.collect {
+                binding.statsSilverValue.text =
+                    String.format(getString(R.string.stats_value), it)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.goldValue.collect {
+                binding.statsGoldValue.text =
+                    String.format(getString(R.string.stats_value), it)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.habitsValue.collect {
+                binding.statsHabitsValue.text =
+                    String.format(getString(R.string.stats_value), it)
+            }
+        }
+    }
 }
-

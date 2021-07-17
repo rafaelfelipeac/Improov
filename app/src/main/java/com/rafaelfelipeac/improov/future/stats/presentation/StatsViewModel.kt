@@ -2,9 +2,10 @@ package com.rafaelfelipeac.improov.future.stats.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
-import com.rafaelfelipeac.improov.features.commons.domain.model.Habit
-import com.rafaelfelipeac.improov.future.stats.domain.usecase.GetGoalListUseCase
+import com.rafaelfelipeac.improov.future.stats.domain.usecase.GetSingleValueUseCase
+import com.rafaelfelipeac.improov.future.stats.domain.usecase.GetBronzeValueUseCase
+import com.rafaelfelipeac.improov.future.stats.domain.usecase.GetSilverValueUseCase
+import com.rafaelfelipeac.improov.future.stats.domain.usecase.GetGoldValueUseCase
 import com.rafaelfelipeac.improov.future.stats.domain.usecase.GetHabitListUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,29 +14,59 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class StatsViewModel @Inject constructor(
-    private val getGoalListUseCase: GetGoalListUseCase,
+    private val getSingleValueUseCase: GetSingleValueUseCase,
+    private val getBronzeValueUseCase: GetBronzeValueUseCase,
+    private val getSilverValueUseCase: GetSilverValueUseCase,
+    private val getGoldValueUseCase: GetGoldValueUseCase,
     private val getHabitListUseCase: GetHabitListUseCase
 ) : ViewModel() {
 
-    val goals: Flow<List<Goal>> get() = _goals.filterNotNull()
-    private val _goals = MutableStateFlow<List<Goal>?>(null)
-    val habits: Flow<List<Habit>> get() = _habits.filterNotNull()
-    private val _habits = MutableStateFlow<List<Habit>?>(null)
-
-    fun loadData() {
-        getGoals()
-        getHabits()
+    val singleValue: Flow<Int> get() = _singleValue.filterNotNull()
+    private val _singleValue = MutableStateFlow<Int?>(null)
+    val bronzeValue: Flow<Int> get() = _bronzeValue.filterNotNull()
+    private val _bronzeValue = MutableStateFlow<Int?>(null)
+    val silverValue: Flow<Int> get() = _silverValue.filterNotNull()
+    private val _silverValue = MutableStateFlow<Int?>(null)
+    val goldValue: Flow<Int> get() = _goldValue.filterNotNull()
+    private val _goldValue = MutableStateFlow<Int?>(null)
+    val habitsValue: Flow<Int> get() = _habitsValue.filterNotNull()
+    private val _habitsValue = MutableStateFlow<Int?>(null)
+    
+    init {
+        getSingleValue()
+        getBronzeValue()
+        getSilverValue()
+        getGoldValue()
+        getHabitsValue()
     }
 
-    private fun getGoals() {
+    private fun getSingleValue() {
         viewModelScope.launch {
-            _goals.value = getGoalListUseCase()
+            _singleValue.value = getSingleValueUseCase()
+        }
+    }
+    
+    private fun getBronzeValue() {
+        viewModelScope.launch {
+            _bronzeValue.value = getBronzeValueUseCase()
         }
     }
 
-    private fun getHabits() {
+    private fun getSilverValue() {
         viewModelScope.launch {
-            _habits.value = getHabitListUseCase()
+            _silverValue.value = getSilverValueUseCase()
+        }
+    }
+
+    private fun getGoldValue() {
+        viewModelScope.launch {
+            _goldValue.value = getGoldValueUseCase()
+        }
+    }
+    
+    private fun getHabitsValue() {
+        viewModelScope.launch {
+            _habitsValue.value = getHabitListUseCase()
         }
     }
 }

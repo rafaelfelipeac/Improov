@@ -53,7 +53,7 @@ class GoalListFragment : BaseFragment() {
 
         viewModel.loadData()
 
-        setupLayout()
+        setupBehaviours()
         setupBottomSheetGoal()
         observeViewModel()
     }
@@ -64,7 +64,7 @@ class GoalListFragment : BaseFragment() {
         hideBottomSheetTips()
     }
 
-    private fun setupLayout() {
+    private fun setupBehaviours() {
         fab.setOnClickListener {
             hideBottomSheetTips()
 
