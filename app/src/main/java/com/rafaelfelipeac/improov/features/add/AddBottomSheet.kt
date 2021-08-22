@@ -1,4 +1,4 @@
-package com.rafaelfelipeac.improov.future.add
+package com.rafaelfelipeac.improov.features.add
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.rafaelfelipeac.improov.core.extension.viewBinding
-import com.rafaelfelipeac.improov.databinding.FragmentAddBinding
+import com.rafaelfelipeac.improov.databinding.BottomSheetAddBinding
 import com.rafaelfelipeac.improov.features.main.MainActivity
 
-class AddFragment : BottomSheetDialogFragment() {
+class AddBottomSheet : BottomSheetDialogFragment() {
 
-    private var binding by viewBinding<FragmentAddBinding>()
+    private var binding by viewBinding<BottomSheetAddBinding>()
 
     val navController get() = (activity as MainActivity).navController
 
@@ -20,7 +20,7 @@ class AddFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentAddBinding.inflate(inflater, container, false).run {
+        return BottomSheetAddBinding.inflate(inflater, container, false).run {
             binding = this
             binding.root
         }
@@ -34,11 +34,11 @@ class AddFragment : BottomSheetDialogFragment() {
 
     private fun setupBehaviours() {
         binding.addButtonGoal.setOnClickListener {
-            navController.navigate(AddFragmentDirections.addToGoalForm())
+            navController.navigate(AddBottomSheetDirections.addToGoalForm())
         }
 
         binding.addButtonHabit.setOnClickListener {
-            navController.navigate(AddFragmentDirections.addToHabitForm())
+            navController.navigate(AddBottomSheetDirections.addToHabitForm())
         }
     }
 }

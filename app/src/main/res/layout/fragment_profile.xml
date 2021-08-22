@@ -44,7 +44,7 @@
                 android:maxLines="1"
                 android:text="@string/profile_user_name"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimaryOne"
                 android:textSize="@dimen/text_size_xlarger"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +69,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/profileUserName"
                 app:layout_constraintVertical_bias="0.0" />
 
-        <Button
+        <android.widget.Button
                 android:id="@+id/profileGenerateData"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
@@ -87,7 +87,7 @@
                 app:layout_constraintVertical_bias="0.4"
                 tools:visibility="visible"/>
 
-        <Button
+        <android.widget.Button
                 android:id="@+id/profileClearData"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"

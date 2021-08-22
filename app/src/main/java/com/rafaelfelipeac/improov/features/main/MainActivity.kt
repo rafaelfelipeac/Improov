@@ -108,7 +108,7 @@ class MainActivity : BaseActivity() {
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
 
-        val color = ContextCompat.getColor(this, R.color.colorPrimary)
+        val color = ContextCompat.getColor(this, R.color.colorPrimaryOne)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             toolbar.navigationIcon?.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_ATOP)

@@ -32,14 +32,14 @@ fun DecoView.setupArcViewAndSeriesItem(
     screenMultiplier: Float?
 ): SeriesItem {
     addSeries(
-        SeriesItem.Builder(ContextCompat.getColor(context, R.color.colorPrimaryAnother))
+        SeriesItem.Builder(ContextCompat.getColor(context, R.color.colorPrimaryTwo))
             .setRange(MIN_VALUE_DEFAULT, MAX_VALUE_DEFAULT, INITIAL_VALUE_DEFAULT)
             .setInitialVisibility(true)
             .setLineWidth(screenMultiplier?.times(LINE_WIDTH) ?: 0F)
             .build()
     )
 
-    return SeriesItem.Builder(ContextCompat.getColor(context, R.color.colorPrimary))
+    return SeriesItem.Builder(ContextCompat.getColor(context, R.color.colorPrimaryOne))
         .setRange(minValue ?: 0F, maxValue ?: 0F, initialValue ?: 0F)
         .setInitialVisibility(false)
         .setLineWidth(screenMultiplier?.times(LINE_WIDTH) ?: 0F)

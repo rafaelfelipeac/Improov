@@ -26,7 +26,7 @@
                     android:layout_marginEnd="@dimen/margin_larger"
                     android:layout_marginBottom="@dimen/margin_larger"
                     android:hint="@string/profile_edit_name_hint"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryOne"
                     app:boxCornerRadiusBottomEnd="@dimen/radius_large"
                     app:boxCornerRadiusBottomStart="@dimen/radius_large"
                     app:boxCornerRadiusTopEnd="@dimen/radius_large"
@@ -44,7 +44,7 @@
                         android:imeOptions="actionDone"
                         android:inputType="textCapSentences"
                         android:gravity="center"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryOne"
                         android:textSize="@dimen/text_size_regular" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -54,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_smaller"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryOne"
                     android:textSize="@dimen/text_size_small"
                     app:layout_constraintEnd_toEndOf="@+id/profileEditNameHint"
                     app:layout_constraintHorizontal_bias="0.9"

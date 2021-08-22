@@ -33,7 +33,7 @@
             android:text="string/day_of_week_day"
             android:textAllCaps="true"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryOne"
             android:textSize="14sp"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginEnd="8dp"

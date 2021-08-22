@@ -47,7 +47,7 @@
                     android:layout_marginEnd="@dimen/margin_larger"
                     android:text="@string/list_placeholder_message"
                     android:textAlignment="center"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryOne"
                     android:textSize="@dimen/text_size_large"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

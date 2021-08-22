@@ -27,7 +27,7 @@
             android:layout_marginStart="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_regular"
             android:text="@string/bottom_sheet_item_name"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryOne"
             android:textSize="@dimen/text_size_large"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
                     android:inputType="textCapSentences"
                     android:maxLines="1"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryOne"
                     android:textSize="@dimen/text_size_regular" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_small"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimaryOne"
                 android:textSize="@dimen/text_size_small"
                 app:layout_constraintHorizontal_bias="0.9"
                 app:layout_constraintStart_toStartOf="@+id/bottomSheetItemNameHint"
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_large"
                 android:text="@string/bottom_sheet_item_date"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimaryOne"
                 android:textSize="@dimen/text_size_smaller"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/bottomSheetItemSave"

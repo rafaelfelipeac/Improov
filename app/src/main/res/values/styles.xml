@@ -2,20 +2,20 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimaryDark">@color/colorPrimaryDarkOne</item>
-        <item name="titleTextColor">@color/colorPrimary</item>
-        <item name="subtitleTextColor">@color/colorPrimary</item>
-        <item name="android:textColorSecondary">@color/colorPrimary</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimary</item>>
-        <item name="colorOnSurface">@color/colorPrimary</item>>
-        <item name="colorOnBackground">@color/colorPrimary</item>
+        <item name="titleTextColor">@color/colorPrimaryOne</item>
+        <item name="subtitleTextColor">@color/colorPrimaryOne</item>
+        <item name="android:textColorSecondary">@color/colorPrimaryOne</item>
+        <item name="colorPrimary">@color/colorPrimaryOne</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryOne</item>>
+        <item name="colorOnSurface">@color/colorPrimaryOne</item>>
+        <item name="colorOnBackground">@color/colorPrimaryOne</item>
 
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
 
-        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheetDialogTheme</item>
 
-        <item name="preferenceTheme">@style/AppPreferenceTheme</item>
+        <item name="preferenceTheme">@style/PreferenceTheme</item>
 
     </style>
 
@@ -28,20 +28,32 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="ToolbarColoredBackArrow" parent="AppTheme">
-        <item name="android:textColorSecondary">@color/colorPrimary</item>
+        <item name="android:textColorSecondary">@color/colorPrimaryOne</item>
     </style>
 
-    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ModalStyle</item>
+
+        <item name="colorPrimary">@color/colorPrimaryOne</item>
     </style>
 
-    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+    <style name="ModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/rounded_primary_dark_two</item>
     </style>
 
-    <style name="AppPreferenceTheme" parent="@style/PreferenceThemeOverlay.v14.Material">
-        <item name="android:textColor">@color/colorPrimary</item>
+    <style name="PreferenceTheme" parent="@style/PreferenceThemeOverlay.v14.Material">
+        <item name="android:textColor">@color/colorPrimaryOne</item>
         <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+
+    <style name="RadioButtonTheme">
+        <item name="colorControlNormal">@color/colorPrimaryTwo</item>
+        <item name="colorControlActivated">@color/colorPrimaryOne</item>
+    </style>
+
+    <style name="CheckBoxStyle" >
+        <item name="colorAccent">@color/colorPrimaryOne</item>
+        <item name="android:textColorSecondary">@color/colorPrimaryTwo</item>
     </style>
 
 </resources>

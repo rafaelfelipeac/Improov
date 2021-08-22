@@ -4,7 +4,6 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.commons.data.enums.HabitType
-import com.rafaelfelipeac.improov.features.commons.data.enums.PeriodType
 import java.util.Date
 
 class Converters {
@@ -43,11 +42,4 @@ class Converters {
 
     @TypeConverter
     fun habitTypeToString(habitType: HabitType) = habitType.name
-
-    // PeriodType
-    @TypeConverter
-    fun stringToPeriodType(value: String): PeriodType = PeriodType.valueOf(value)
-
-    @TypeConverter
-    fun periodTypeToString(periodType: PeriodType) = periodType.name
 }

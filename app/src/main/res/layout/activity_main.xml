@@ -27,7 +27,7 @@
                 android:background="?attr/colorPrimaryDark"
                 android:theme="@style/ToolbarColoredBackArrow"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:titleTextColor="@color/colorPrimary" />
+                app:titleTextColor="@color/colorPrimaryOne" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/fab_offset"
                 android:src="@drawable/ic_plus"
-                app:backgroundTint="@color/colorPrimary"
+                app:backgroundTint="@color/colorPrimaryOne"
                 app:layout_anchor="@id/bottomAppBar"
                 app:tint="@color/colorPrimaryDarkOne" />
 

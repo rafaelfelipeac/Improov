@@ -93,9 +93,9 @@
 
     <dialog
             android:id="@+id/addFragment"
-            android:name="com.rafaelfelipeac.improov.future.add.AddFragment"
+            android:name="com.rafaelfelipeac.improov.features.add.AddBottomSheet"
             android:label="AddFragment"
-            tools:layout="@layout/fragment_add">
+            tools:layout="@layout/bottom_sheet_add">
 
         <action
                 android:id="@+id/addToGoalForm"
@@ -132,11 +132,18 @@
 
     </fragment>
 
-    <fragment
+    <dialog
             android:id="@+id/navHabitForm"
-            android:name="com.rafaelfelipeac.improov.future.habit.HabitFragment"
+            android:name="com.rafaelfelipeac.improov.future.habit.presentation.HabitFormBottomSheet"
             android:label="fragment_habit_form"
-            tools:layout="@layout/fragment_habit_form" />
+            tools:layout="@layout/bottom_sheet_habit_form">
+
+        <argument
+                android:name="habitId"
+                android:defaultValue="0L"
+                app:argType="long" />
+
+    </dialog>
 
     <fragment
             android:id="@+id/navStats"

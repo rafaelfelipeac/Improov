@@ -29,7 +29,7 @@
             android:layout_marginEnd="@dimen/margin_xlarger"
             android:gravity="center_horizontal"
             android:text="@string/goal_done_message"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryOne"
             android:textSize="@dimen/text_size_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

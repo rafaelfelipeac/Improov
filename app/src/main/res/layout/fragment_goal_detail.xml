@@ -31,7 +31,7 @@
                     android:layout_marginTop="@dimen/margin_regular"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryOne"
                     android:textSize="@dimen/text_size_xlarger"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -61,7 +61,7 @@
                     android:layout_marginBottom="@dimen/margin_regular"
                     android:gravity="center"
                     android:text="@string/goal_count"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryOne"
                     android:textSize="@dimen/text_size_xlarger"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +77,7 @@
                     android:layout_marginBottom="@dimen/margin_small"
                     android:gravity="center"
                     android:text="@string/goal_date"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryOne"
                     android:textSize="@dimen/text_size_regular"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -145,7 +145,7 @@
                         android:layout_marginTop="@dimen/margin_regular"
                         android:layout_marginEnd="@dimen/margin_small"
                         android:layout_marginBottom="@dimen/margin_regular"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryOne"
                         android:textSize="@dimen/text_size_large" />
 
             </LinearLayout>
@@ -202,7 +202,7 @@
                             android:layout_marginEnd="@dimen/margin_small"
                             android:layout_marginBottom="@dimen/margin_regular"
                             android:layout_gravity="center_horizontal"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/colorPrimaryOne"
                             android:textSize="@dimen/text_size_large" />
 
                 </LinearLayout>
@@ -248,7 +248,7 @@
                             android:layout_marginEnd="@dimen/margin_small"
                             android:layout_marginBottom="@dimen/margin_regular"
                             android:layout_gravity="center_horizontal"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/colorPrimaryOne"
                             android:textSize="@dimen/text_size_large" />
 
                 </LinearLayout>
@@ -294,7 +294,7 @@
                             android:layout_marginEnd="@dimen/margin_small"
                             android:layout_marginBottom="@dimen/margin_regular"
                             android:layout_gravity="center_horizontal"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/colorPrimaryOne"
                             android:textSize="@dimen/text_size_large" />
 
                 </LinearLayout>
@@ -336,7 +336,7 @@
                         android:layout_marginStart="@dimen/margin_small"
                         android:layout_marginTop="@dimen/margin_small"
                         android:layout_marginEnd="@dimen/margin_large"
-                        app:backgroundTint="@color/colorPrimary"
+                        app:backgroundTint="@color/colorPrimaryOne"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/goalDetailCounterTotal"
                         app:layout_constraintHorizontal_bias="1.0"
@@ -354,7 +354,7 @@
                         android:layout_marginTop="@dimen/margin_small"
                         android:layout_marginEnd="@dimen/margin_small"
                         android:gravity="center"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryOne"
                         android:textSize="@dimen/text_size_large"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -369,7 +369,7 @@
                         android:layout_marginStart="@dimen/margin_large"
                         android:layout_marginTop="@dimen/margin_small"
                         android:layout_marginEnd="@dimen/margin_small"
-                        app:backgroundTint="@color/colorPrimary"
+                        app:backgroundTint="@color/colorPrimaryOne"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -404,7 +404,7 @@
                         android:layout_marginBottom="@dimen/margin_regular"
                         android:gravity="center"
                         android:hint="@string/goal_new_value"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryOne"
                         android:textSize="@dimen/text_size_large"
                         app:boxCornerRadiusBottomEnd="@dimen/radius_large"
                         app:boxCornerRadiusBottomStart="@dimen/radius_large"
@@ -423,7 +423,7 @@
                             android:layout_height="match_parent"
                             android:inputType="numberDecimal|numberSigned"
                             android:gravity="center"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/colorPrimaryOne"
                             android:textSize="@dimen/text_size_regular" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -436,7 +436,7 @@
                         android:layout_marginTop="@dimen/margin_small"
                         android:layout_marginBottom="@dimen/margin_small"
                         android:text="@string/goal_button_save"
-                        app:backgroundTint="@color/colorPrimary"
+                        app:backgroundTint="@color/colorPrimaryOne"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.9"
@@ -509,7 +509,7 @@
                         android:layout_marginBottom="@dimen/margin_larger"
                         android:text="@string/goal_message_empty_items"
                         android:textAlignment="center"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryOne"
                         android:textSize="@dimen/text_size_large"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -553,7 +553,7 @@
                         android:layout_marginBottom="@dimen/margin_regular"
                         android:text="@string/goal_message_empty_history"
                         android:textAlignment="center"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryOne"
                         android:textSize="@dimen/text_size_large"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

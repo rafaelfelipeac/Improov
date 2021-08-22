@@ -34,7 +34,7 @@
                         android:layout_height="@dimen/text_input_height"
                         android:layout_margin="@dimen/margin_regular"
                         android:hint="@string/goal_form_goal_name_hint"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryOne"
                         app:boxCornerRadiusBottomEnd="@dimen/radius_large"
                         app:boxCornerRadiusBottomStart="@dimen/radius_large"
                         app:boxCornerRadiusTopEnd="@dimen/radius_large"
@@ -51,7 +51,7 @@
                             android:layout_height="match_parent"
                             android:inputType="textCapSentences"
                             android:gravity="center"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/colorPrimaryOne"
                             android:textSize="@dimen/text_size_regular" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -112,7 +112,7 @@
                                 android:imeOptions="actionDone"
                                 android:inputType="numberDecimal"
                                 android:gravity="center"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/colorPrimaryOne"
                                 android:textSize="@dimen/text_size_regular" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -170,7 +170,7 @@
                                     android:inputType="numberDecimal"
                                     android:nextFocusForward="@id/goalFormSilverValue"
                                     android:gravity="center"
-                                    android:textColor="@color/colorPrimary"
+                                    android:textColor="@color/colorPrimaryOne"
                                     android:textSize="@dimen/text_size_regular" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -214,7 +214,7 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="numberDecimal"
                                     android:gravity="center"
-                                    android:textColor="@color/colorPrimary"
+                                    android:textColor="@color/colorPrimaryOne"
                                     android:textSize="@dimen/text_size_regular" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -255,7 +255,7 @@
                                     android:imeOptions="actionDone"
                                     android:inputType="numberDecimal"
                                     android:gravity="center"
-                                    android:textColor="@color/colorPrimary"
+                                    android:textColor="@color/colorPrimaryOne"
                                     android:textSize="@dimen/text_size_regular" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -282,7 +282,7 @@
                             android:layout_marginEnd="@dimen/margin_small"
                             android:layout_marginBottom="@dimen/margin_small"
                             android:text="@string/goal_form_divide_and_conquer_title"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/colorPrimaryOne"
                             android:textSize="@dimen/text_size_large"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -349,7 +349,7 @@
                         android:layout_marginTop="@dimen/margin_regular"
                         android:layout_marginEnd="@dimen/margin_large"
                         android:text="@string/goal_form_type_title"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryOne"
                         android:textSize="@dimen/text_size_large"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -383,7 +383,7 @@
                         android:layout_marginStart="@dimen/margin_small"
                         android:layout_marginEnd="@dimen/margin_small"
                         android:text="@string/goal_form_radio_type_list"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryOne"
                         android:textSize="@dimen/text_size_large"
                         app:layout_constraintEnd_toStartOf="@+id/goalFormRadioTypeCounter"
                         app:layout_constraintStart_toStartOf="parent"
@@ -396,7 +396,7 @@
                         android:layout_marginTop="@dimen/margin_small"
                         android:layout_marginBottom="@dimen/margin_small"
                         android:text="@string/goal_form_radio_type_counter"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryOne"
                         android:textSize="@dimen/text_size_large"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -412,7 +412,7 @@
                         android:layout_marginStart="@dimen/margin_small"
                         android:layout_marginEnd="@dimen/margin_small"
                         android:text="@string/goal_form_radio_type_final"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryOne"
                         android:textSize="@dimen/text_size_large"
                         app:layout_constraintBottom_toTopOf="@+id/goalFormGoalCounter"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -441,7 +441,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/goal_form_goal_counter"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/colorPrimaryOne"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -470,7 +470,7 @@
                                 android:inputType="numberDecimal"
                                 android:nextFocusForward="@id/goalFormGoalCounterIncValue"
                                 android:gravity="center"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/colorPrimaryOne"
                                 android:textSize="@dimen/text_size_regular" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -512,7 +512,7 @@
                                 android:imeOptions="actionDone"
                                 android:inputType="numberDecimal"
                                 android:gravity="center"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/colorPrimaryOne"
                                 android:textSize="@dimen/text_size_regular" />
 
                     </com.google.android.material.textfield.TextInputLayout>
