@@ -38,7 +38,21 @@ Developed with:
 - Detekt;
 - Ktlint;
 - CI with GitHub Actions;    
-    
+
+Warning:
+------- 
+I know that this project was used as a reference code for some developers and I want to say something about it.
+
+Be careful with this project.
+
+Since the first commit, a lot has changed and learned. This project achieved his goal.
+
+In this classes, methods and lines of code, there are some things that if I had to do today, I will do they differently.
+
+Today I know that there are maintainable and smarter ways to do it.
+
+This is not a note of regret. It's a note to celebrate the power of experience. 
+
 License  
 --------  
   
