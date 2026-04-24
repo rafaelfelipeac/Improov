@@ -222,3 +222,20 @@ This keeps the v2 rewrite from becoming a blind rewrite. The new architecture is
 The static-analysis configuration also needed a Compose-aware adjustment. Compose uses PascalCase function names for composables that represent UI nodes, and theme color files naturally contain color literals. The rules now allow `@Composable` PascalCase names and exclude the theme color-token file from `MagicNumber`.
 
 That is not weakening quality. It is aligning the quality gate with the framework's idioms so violations remain meaningful.
+
+## Compose Navigation Shell
+
+The next v2 foundation step added a Compose Navigation shell without replacing the legacy launcher.
+
+The project now has:
+
+- `V2MainActivity`, a non-exported activity that can host the Compose app root.
+- `ImproovAppRoot`, the first Compose root entry point.
+- `ImproovNavHost`, a Navigation Compose graph.
+- `ImproovRoutes`, route constants that mirror the existing legacy navigation graph.
+
+The legacy `MainActivity` remains the launcher. This is deliberate. It gives the project an executable v2 surface for experiments while the production behavior remains anchored in the known XML/Fragment flow.
+
+This is the strangler-fig pattern applied to UI migration: create the new host beside the old one, route future migrated screens through the new host, then remove the old host when it no longer owns behavior.
+
+The route names are intentionally product-oriented (`goals`, `profile`, `backup`) rather than Fragment-oriented. That keeps the v2 navigation language independent from the legacy implementation classes.
