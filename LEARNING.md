@@ -182,3 +182,18 @@ The CI workflow now uses:
 - `detekt`
 
 This mirrors the local feedback loop. For a revival branch, that alignment matters because every future refactor should prove it did not break the current executable baseline.
+
+## Detekt Configuration Cleanup
+
+After the baseline step, detekt passed but still printed many warnings about deprecated configuration keys.
+
+This is a different category of debt from source-code findings. The source-code baseline says "these legacy issues exist." Deprecated tool configuration says "the build definition itself is aging." For a long-running revival, the second problem should be fixed early because stale tooling noise hides useful feedback.
+
+The detekt config was updated to the current key names while preserving the previous rule intent where possible:
+
+- `ComplexMethod` became `CyclomaticComplexMethod`.
+- comma-separated scalar values became YAML arrays.
+- deprecated `excludeAnnotated*` keys became `ignoreAnnotated`.
+- deprecated rules already handled by the compiler or migrated out of the active ruleset were removed.
+
+The lesson: clean the warning channel before starting high-risk code movement. A quiet build is not just aesthetics; it is a refactoring instrument.
