@@ -197,3 +197,28 @@ The detekt config was updated to the current key names while preserving the prev
 - deprecated rules already handled by the compiler or migrated out of the active ruleset were removed.
 
 The lesson: clean the warning channel before starting high-risk code movement. A quiet build is not just aesthetics; it is a refactoring instrument.
+
+## Compose Foundation Step 1
+
+The first Compose step intentionally does not replace a screen yet.
+
+Instead, the project now has a small Compose foundation:
+
+- Compose enabled in the Android module.
+- Compose dependencies centralized in the version catalog.
+- A Material 3 theme under `core/ui/theme`.
+- A minimal `ImproovAppShell` composable that wraps future screens in the v2 theme.
+
+This is a refactoring strategy decision. Adding the new UI stack before migrating screens gives the branch a safe integration point: the compiler, dependencies, theme, and static analysis can fail early while the legacy app behavior is still unchanged.
+
+The legacy XML/Fragment UI is still the running app. That is temporary, but useful. It lets the project carry both worlds for a short period:
+
+- legacy UI remains the behavior reference;
+- Compose becomes the target surface;
+- future commits can migrate one screen or flow at a time.
+
+This keeps the v2 rewrite from becoming a blind rewrite. The new architecture is introduced as executable infrastructure before it owns product behavior.
+
+The static-analysis configuration also needed a Compose-aware adjustment. Compose uses PascalCase function names for composables that represent UI nodes, and theme color files naturally contain color literals. The rules now allow `@Composable` PascalCase names and exclude the theme color-token file from `MagicNumber`.
+
+That is not weakening quality. It is aligning the quality gate with the framework's idioms so violations remain meaningful.
