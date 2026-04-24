@@ -132,3 +132,53 @@ After `assembleDebug` passed, `testDebugUnitTest` compiled and started running b
 The failure came from the old `mockito-inline:3.2.4` stack trying to instrument newer bytecode/JDK classes. Updating Mockito inline to `5.2.0` keeps the current tests intact for the bridge step.
 
 Long term, Improov should move toward the Hermes preference of fake-based tests instead of broad mocking. For Phase 0, the goal is to recover the existing test signal before rewriting test style.
+
+## Build Hygiene Step 1
+
+After the project compiled again, the next move was to reduce build-script entropy before adding any new architecture.
+
+This step introduced `gradle/libs.versions.toml` and moved plugin/dependency versions there. The goal is not just aesthetic: a version catalog turns future upgrades into explicit, centralized decisions instead of scattered edits across Gradle files.
+
+The migration intentionally kept most runtime library versions unchanged from the bridge baseline. Centralizing versions and upgrading versions are separate refactor steps. Keeping them separate makes regressions easier to attribute.
+
+Legacy `ktlint.gradle` and `detekt.gradle` JavaExec scripts were removed in favor of real Gradle plugins. This aligns Improov with the Hermes approach and gives future CI a stable vocabulary:
+
+- `ktlintCheck`
+- `detekt`
+- `lintDebug`
+- `testDebugUnitTest`
+- `assembleDebug`
+
+This is also a refactoring lesson: before changing app architecture, make the build system express the project clearly.
+
+## Static Analysis Baselines
+
+Re-enabling ktlint and detekt exposed a large amount of legacy style debt. The important decision here is to baseline the existing debt instead of mass-formatting or rewriting every Kotlin file immediately.
+
+Why this matters:
+
+- A baseline keeps CI useful for new changes without pretending the legacy code is already clean.
+- It avoids noisy commits that would make future architecture changes harder to review.
+- It lets the project pay down issues by feature area as XML/Fragment screens are replaced.
+- It creates an explicit inventory of debt in `app/config/ktlint/baseline.xml` and `app/detekt-baseline.xml`.
+
+This is a practical large-refactor strategy: freeze the legacy surface, protect new work, then shrink the baseline as each migrated area becomes owned by v2.
+
+Detekt also reported deprecated keys in `default-detekt-config.yml`. That is build tooling debt, not product behavior. It should be cleaned in a focused step so config migration is not mixed with UI or architecture migration.
+
+## CI Modernization Step 1
+
+The GitHub Actions workflows were still using JDK 8, old action versions, and an NDK install that is no longer needed for the revived build.
+
+The CI workflow now uses:
+
+- `actions/checkout@v4`
+- `actions/setup-java@v4` with Temurin 17
+- `gradle/actions/setup-gradle@v4`
+- `assembleDebug`
+- `testDebugUnitTest`
+- `lintDebug`
+- `ktlintCheck`
+- `detekt`
+
+This mirrors the local feedback loop. For a revival branch, that alignment matters because every future refactor should prove it did not break the current executable baseline.

@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>AnnotationSpacing:Date.kt$@SuppressLint("SimpleDateFormat")</ID>
+    <ID>ArgumentListWrapping:AppComponent.kt$AppComponent$(modules = [ CoreModule::class, PreferencesModule::class, GoalModule::class, ProfileModule::class, WelcomeModule::class, PersistenceModule::class, SettingsModule::class, SplashModule::class, BackupModule::class ])</ID>
+    <ID>ArgumentListWrapping:GetGoalListUseCaseTest.kt$GetGoalListUseCaseTest$( createGoal(goalId = 1, order = 1), createGoal(goalId = 2, order = 2), createGoal(goalId = 3, order = 3), createGoal(goalId = 4, order = 20), createGoal(goalId = 5, order = 13), createGoal(goalId = 6, order = 5))</ID>
+    <ID>ArgumentListWrapping:GoalDataSource.kt$GoalDataSource$(goal .let { goalDataModelMapper.mapReverse(it) })</ID>
+    <ID>ArgumentListWrapping:HistoricDataSource.kt$HistoricDataSource$(historic .let { historicDataModelMapper.mapReverse(it) })</ID>
+    <ID>ArgumentListWrapping:ItemDataSource.kt$ItemDataSource$(item .let { itemDataModelMapper.mapReverse(it) })</ID>
+    <ID>ArgumentListWrapping:Snackbar.kt$( R.drawable.ic_snackbar_trophy, 0, 0, 0 )</ID>
+    <ID>ModifierListSpacing:Date.kt$@SuppressLint("SimpleDateFormat")</ID>
+    <ID>MultiLineIfElse:Toolbar.kt$return</ID>
+    <ID>UnnecessaryParenthesesBeforeTrailingLambda:BaseFragment.kt$BaseFragment$()</ID>
+    <ID>UnnecessaryParenthesesBeforeTrailingLambda:GoalFormFragment.kt$GoalFormFragment$()</ID>
+    <ID>UnnecessaryParenthesesBeforeTrailingLambda:ProfileEditFragment.kt$ProfileEditFragment$()</ID>
+    <ID>Wrapping:AppComponent.kt$AppComponent$(</ID>
+    <ID>Wrapping:BackupFragment.kt$BackupFragment$(</ID>
+    <ID>Wrapping:GetGoalListUseCaseTest.kt$GetGoalListUseCaseTest$(</ID>
+    <ID>Wrapping:GetItemListUseCaseTest.kt$GetItemListUseCaseTest$(</ID>
+    <ID>Wrapping:GoalDataSource.kt$GoalDataSource$(</ID>
+    <ID>Wrapping:GoalFormFragment.kt$GoalFormFragment$(</ID>
+    <ID>Wrapping:HistoricDataSource.kt$HistoricDataSource$(</ID>
+    <ID>Wrapping:ItemDataSource.kt$ItemDataSource$(</ID>
+    <ID>Wrapping:ItemsAdapter.kt$ItemsAdapter$BaseAdapter&lt;Item&gt;(), ActionCompleteContract</ID>
+    <ID>Wrapping:TextInputEditText.kt$(</ID>
+  </CurrentIssues>
+</SmellBaseline>

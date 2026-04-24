@@ -1,23 +1,8 @@
-buildscript {
-    apply from: 'ktlint.gradle'
-    apply from: 'detekt.gradle'
-
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.7.3'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.25"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.8.5"
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
-    }
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.kapt) apply false
+    alias(libs.plugins.navigation.safe.args) apply false
+    alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.ktlint) apply false
 }

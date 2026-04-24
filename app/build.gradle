@@ -1,7 +1,11 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'androidx.navigation.safeargs'
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.navigation.safe.args)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.ktlint)
+}
 
 android {
     namespace "com.rafaelfelipeac.improov"
@@ -53,53 +57,68 @@ android {
         variant.resValue "string", "versionName", variant.versionName
     }
 
-    dependencies {
-        implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
 
-        // Android
-        implementation 'androidx.preference:preference-ktx:1.2.1'
-        implementation 'com.google.android.material:material:1.12.0'
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-        // Kotlin
-        implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.25"
+    // Android
+    implementation libs.androidx.preference.ktx
+    implementation libs.google.material
 
-        // LiveData & ViewModel
-        implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-        implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
-        implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+    // Kotlin
+    implementation libs.kotlin.stdlib
 
-        // Room
-        kapt 'androidx.room:room-compiler:2.6.1'
-        implementation 'androidx.room:room-runtime:2.6.1'
+    // LiveData & ViewModel
+    implementation libs.androidx.lifecycle.extensions
+    implementation libs.androidx.lifecycle.livedata.ktx
+    implementation libs.androidx.lifecycle.common.java8
 
-        // Navigation
-        implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"
-        implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
+    // Room
+    kapt libs.androidx.room.compiler
+    implementation libs.androidx.room.runtime
 
-        // Dagger 2
-        kapt "com.google.dagger:dagger-compiler:2.51.1"
-        implementation "com.google.dagger:dagger:2.51.1"
+    // Navigation
+    implementation libs.androidx.navigation.fragment.ktx
+    implementation libs.androidx.navigation.ui.ktx
 
-        // DecoView
-        implementation 'com.github.bmarrdev:android-DecoView-charting:v1.2'
+    // Dagger 2
+    kapt libs.dagger.compiler
+    implementation libs.dagger.runtime
 
-        // GifView
-        implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+    // DecoView
+    implementation libs.decoview
 
-        // Gson
-        implementation 'com.google.code.gson:gson:2.8.6'
+    // GifView
+    implementation libs.android.gif.drawable
 
-        // Coroutines
-        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0'
+    // Gson
+    implementation libs.gson
 
-        // Test
-        testImplementation 'junit:junit:4.13'
-        testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.0'
-        testImplementation 'androidx.arch.core:core-testing:2.2.0'
-        testImplementation 'org.mockito:mockito-inline:5.2.0'
-        testImplementation  'androidx.test:core:1.3.0'
-        androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-        androidTestImplementation 'androidx.test:runner:1.3.0'
-        androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    }
+    // Coroutines
+    implementation libs.kotlinx.coroutines.core
+
+    // Test
+    testImplementation libs.junit
+    testImplementation libs.kotlinx.coroutines.test
+    testImplementation libs.androidx.arch.core.testing
+    testImplementation libs.mockito.inline
+    testImplementation libs.androidx.test.core
+    androidTestImplementation libs.androidx.espresso.core
+    androidTestImplementation libs.androidx.test.runner
+    androidTestImplementation libs.androidx.test.ext.junit
+    detektPlugins libs.detekt.formatting
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    config.setFrom(files("$rootDir/default-detekt-config.yml"))
+    baseline = file("$projectDir/detekt-baseline.xml")
+}
+
+ktlint {
+    android.set(true)
+    baseline.set(file("$projectDir/config/ktlint/baseline.xml"))
+    outputToConsole.set(true)
+    ignoreFailures.set(false)
 }
