@@ -73,8 +73,8 @@ class MainActivity : BaseActivity() {
         clearToolbarMenu()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
             R.id.menuSave -> false
             R.id.menuAdd -> false
             android.R.id.home -> false

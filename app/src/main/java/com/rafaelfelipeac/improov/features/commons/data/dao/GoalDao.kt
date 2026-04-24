@@ -3,7 +3,7 @@ package com.rafaelfelipeac.improov.features.commons.data.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.rafaelfelipeac.improov.features.commons.data.model.GoalDataModel
 
@@ -16,7 +16,7 @@ interface GoalDao {
     @Query("SELECT * FROM goal WHERE goalId = :goalId")
     fun get(goalId: Long): GoalDataModel
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(goalDataModel: GoalDataModel): Long
 
     @Delete

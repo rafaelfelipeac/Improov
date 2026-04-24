@@ -6,7 +6,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.rafaelfelipeac.improov.R
 
 fun Snackbar.setMessageColor(color: Int): Snackbar = apply {
-    val textView = view.findViewById(R.id.snackbar_text) as TextView
+    val textView = view.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
     textView.setTextColor(color)
 }
 

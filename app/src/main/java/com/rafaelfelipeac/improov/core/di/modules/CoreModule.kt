@@ -17,5 +17,5 @@ abstract class CoreModule {
     }
 
     @Binds
-    abstract fun Application.context(): Context
+    abstract fun bindContext(application: Application): Context
 }

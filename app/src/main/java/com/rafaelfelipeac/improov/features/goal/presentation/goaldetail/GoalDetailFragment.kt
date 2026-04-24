@@ -301,6 +301,8 @@ class GoalDetailFragment : BaseFragment() {
             }
             GoalType.GOAL_NONE -> {
             }
+            null -> {
+            }
         }
 
         setupItems()

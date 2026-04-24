@@ -51,7 +51,7 @@ fun CoordinatorLayout.show(fakeBottomNav: View) {
     }
 
     animatorNavigation?.addListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationStart(animation: Animator?) {
+        override fun onAnimationStart(animation: Animator) {
             super.onAnimationStart(animation)
 
             showingNavigation = true
@@ -64,7 +64,7 @@ fun CoordinatorLayout.show(fakeBottomNav: View) {
             invisible()
         }
 
-        override fun onAnimationEnd(animation: Animator?) {
+        override fun onAnimationEnd(animation: Animator) {
             super.onAnimationEnd(animation)
 
             showingNavigation = false
@@ -72,7 +72,7 @@ fun CoordinatorLayout.show(fakeBottomNav: View) {
     })
 
     animatorNavigationFake?.addListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationStart(animation: Animator?) {
+        override fun onAnimationStart(animation: Animator) {
             super.onAnimationStart(animation)
 
             fakeBottomNav.visible()
@@ -112,7 +112,7 @@ fun CoordinatorLayout.hide(fakeBottomNav: View) {
     }
 
     animatorNavigation?.addListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationStart(animation: Animator?) {
+        override fun onAnimationStart(animation: Animator) {
             super.onAnimationStart(animation)
 
             hidingNavigation = true
@@ -128,7 +128,7 @@ fun CoordinatorLayout.hide(fakeBottomNav: View) {
     })
 
     animatorNavigationFake?.addListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationEnd(animation: Animator?) {
+        override fun onAnimationEnd(animation: Animator) {
             super.onAnimationEnd(animation)
 
             fakeBottomNav.gone()

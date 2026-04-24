@@ -3,7 +3,7 @@ package com.rafaelfelipeac.improov.features.commons.data.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.rafaelfelipeac.improov.features.commons.data.model.ItemDataModel
 
@@ -16,7 +16,7 @@ interface ItemDao {
     @Query("SELECT * FROM item WHERE itemId = :itemId")
     fun get(itemId: Long): ItemDataModel
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(itemDataModel: ItemDataModel): Long
 
     @Delete

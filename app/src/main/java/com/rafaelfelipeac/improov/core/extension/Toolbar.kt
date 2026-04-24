@@ -36,7 +36,7 @@ fun Toolbar.show(supportActionBar: ActionBar?) {
     }
 
     animatorToolbar?.addListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationStart(animation: Animator?) {
+        override fun onAnimationStart(animation: Animator) {
             super.onAnimationStart(animation)
 
             showingToolbar = true
@@ -44,7 +44,7 @@ fun Toolbar.show(supportActionBar: ActionBar?) {
             supportActionBar?.show()
         }
 
-        override fun onAnimationEnd(animation: Animator?) {
+        override fun onAnimationEnd(animation: Animator) {
             super.onAnimationEnd(animation)
 
             showingToolbar = false
@@ -75,7 +75,7 @@ fun Toolbar.hide(supportActionBar: ActionBar?) {
     }
 
     animatorToolbar?.addListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationStart(animation: Animator?) {
+        override fun onAnimationStart(animation: Animator) {
             super.onAnimationStart(animation)
 
             hidingToolbar = true

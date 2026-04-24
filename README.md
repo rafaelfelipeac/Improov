@@ -46,6 +46,17 @@ Today I know that there are maintainable and smarter ways to do it.
 
 This is not a note of regret. It's a note to celebrate the power of experience. 
 
+Revival notes
+-------
+
+This project is being reviewed as a legacy Android app. See [Legacy Revival Audit](docs/legacy-revival-audit.md) for the current technical state, feature inventory, risks, and suggested refactoring roadmap.
+
+The current product and technical behavior is documented in [Improov Specification](docs/spec.md).
+
+The v2 modernization direction is documented in [Improov v2 Revival Plan](docs/revival-v2-plan.md).
+
+Revival decisions and lessons are tracked in [LEARNING.md](LEARNING.md).
+ 
 License  
 --------  
   
