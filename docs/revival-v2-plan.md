@@ -7,6 +7,7 @@ Plan date: 2026-04-24
 Improov v2 is planned as a full legacy revival: bring the app back to life, modernize the Android stack, replace the XML-based UI with a modern Compose implementation, preserve the important product behavior, and create a foundation that can receive new features again.
 
 The work can ship as one v2.0.0 pull request, but it should not be executed as one unstructured change. The branch should be developed in clear phases with commits that leave a reviewable trail.
+Those phases should be broken into smaller sessions so each step stays focused, easy to validate, and easy to stop at a clean boundary.
 
 ## Reference Project
 
@@ -73,6 +74,8 @@ Each phase should have:
 - A short completion note.
 - Tests or a documented reason when tests cannot run yet.
 - No unrelated cleanup.
+- A small enough scope to finish in one focused session when possible.
+- A commit at the end of the session when the diff is coherent.
 
 ## Proposed v2 Stack
 
@@ -344,6 +347,7 @@ Done when:
 - Prefer a clear migration path over a hidden rewrite.
 - Prefer documenting trade-offs over silently choosing.
 - Prefer incremental commits inside the long branch.
+- Prefer small, bounded sessions over long context-heavy runs.
 - Prefer Hermes conventions when they fit Improov, but do not copy them when the product needs differ.
 
 ## Open Decisions
@@ -360,4 +364,4 @@ Done when:
 
 ## Working Rule
 
-The final PR can be one v2.0.0 PR, but the work should behave like a sequence of small projects. Every major step should teach something, leave documentation behind, and keep the next step easier than the last.
+The final PR can be one v2.0.0 PR, but the work should behave like a sequence of small projects and smaller sessions. Every major step should teach something, leave documentation behind, and keep the next step easier than the last. When a session is complete, commit it and start a new session for the next boundary.

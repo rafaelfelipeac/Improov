@@ -60,6 +60,8 @@ Revival requirement:
 - Before any behavioral refactor, the project must compile and run tests with a declared toolchain.
 - Modernization changes should be small and verifiable.
 - The first technical goal is a reliable `assembleDebug` and `testDebugUnitTest`.
+- Refactor work should be split into small, reviewable sessions with a clear stop point.
+- When a session reaches a coherent boundary, it should end in a commit before the next session starts.
 
 ## Personas and Use Cases
 
@@ -716,4 +718,3 @@ Definition of done for business-rule refactor:
 ## Golden Rule for Revival
 
 Infrastructure changes can come first, but behavior changes must be intentional, tested, and documented. The initial goal is not to reimagine Improov; it is to recover a reliable base so it can evolve.
-

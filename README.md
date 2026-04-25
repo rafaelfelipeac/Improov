@@ -58,6 +58,8 @@ The v2 modernization direction is documented in [Improov v2 Revival Plan](docs/r
 Persistence and backup safety rules are documented in [Persistence and Backup Policy](docs/persistence-and-backup-policy.md).
 
 Revival decisions and lessons are tracked in [LEARNING.md](LEARNING.md).
+
+The revival work is intentionally split into small sessions with clear stop points. When a session reaches a coherent boundary, it should end in a commit before the next step starts.
  
 License  
 --------  

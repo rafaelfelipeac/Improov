@@ -8,7 +8,9 @@ Improov is a native Android goals/habits app created in 2020. The product surfac
 
 The current state is a platform-blocked legacy app. In the current machine, the project does not reach Gradle configuration because the wrapper uses Gradle 6.1.1/old Groovy and the only installed JDK is JDK 17. The observed error was `Could not initialize class org.codehaus.groovy.reflection.ReflectionCache`. The original CI used JDK 1.8, which confirms that the expected toolchain is old.
 
-Before any large product refactor, the priority is to recover a reproducible build. Without that, every change is guesswork.
+Before any substantial product refactor session, the priority is to recover a reproducible build. Without that, every change is guesswork.
+
+The preferred working pattern is small sessions with a clean boundary and a commit at the end of each coherent slice.
 
 ## Validated Current State
 
@@ -450,4 +452,3 @@ I do not recommend a full rewrite now. The base has value: clear product model, 
 - Finally modernize UI.
 
 A rewrite would only make sense if the goal is to turn Improov into a different product, with no commitment to existing data and freedom to discard almost all current behavior.
-

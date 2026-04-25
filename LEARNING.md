@@ -5,6 +5,8 @@ It should grow incrementally as the v2 work progresses.
 
 The goal is not to restate code line by line. The goal is to preserve context: why decisions were made, what risks were uncovered, and what the next engineer should understand before changing the project again.
 
+The work should be split into small sessions with a clear stop point. When a change reaches a coherent boundary, commit it and start a fresh session for the next boundary instead of carrying a large refactor forward in one run.
+
 ---
 
 ## Revival Intent
@@ -20,7 +22,7 @@ The planned direction is:
 - Protect local user data and backup compatibility.
 - Use the project as a deliberate refactoring and decision-making exercise.
 
-The work can ship as a single v2.0.0 pull request, but it should be developed as a sequence of reviewable phases.
+The work can ship as a single v2.0.0 pull request, but it should be developed as a sequence of reviewable phases and smaller sessions.
 
 ## Reference Project
 
@@ -49,6 +51,13 @@ Hermes is a reference for engineering maturity and workflow, not a product templ
 - Treat `docs/legacy-revival-audit.md` as the legacy-state snapshot.
 - Treat `docs/revival-v2-plan.md` as the modernization plan.
 - Update this file whenever a meaningful technical decision or lesson emerges.
+
+## Session Discipline
+
+- Prefer one focused goal per session.
+- Stop when the diff is coherent, even if the broader refactor is not finished.
+- Commit at the end of the session when it makes sense.
+- Start a new session for the next boundary instead of widening the current one.
 
 ## Immediate Technical Lesson
 
@@ -291,3 +300,17 @@ The first hardening step changed the order and boundary:
 This is still not the final v2 backup architecture. The backup format remains unversioned and settings are still written through SharedPreferences outside the Room transaction. But the highest-risk part, replacing relational app data, is now atomic.
 
 The Dagger wiring also moved `DatabaseDataSource` construction into `BackupModule`. That avoided adding style suppressions for a new `@Inject constructor` pattern while keeping dependency creation explicit.
+
+## Legacy Backup Validation
+
+The next problem after transaction safety was input shape. The old import path accepted whatever Gson could deserialize into the legacy model, even if required sections were missing.
+
+The small fix was to decode through a nullable legacy payload and only map into the app's backup model when every required field is present. That keeps malformed or partial legacy files out of the replacement path without forcing the full v2 backup format decision yet.
+
+This is a useful refactor lesson: when a large redesign is still ahead, a narrow validation boundary can remove real risk now and still preserve freedom for the larger architecture step later.
+
+## Versioned Backup Envelope
+
+The first explicit backup contract is intentionally small: export now writes a `schemaVersion` envelope around the existing backup payload. Schema version `1` still carries the legacy `Database` shape inside `database`, so this is not the final v2 backup format yet.
+
+Import can read both the versioned envelope and validated legacy unversioned files. Unsupported schema versions fail before the replace path starts, which creates the boundary needed for a future format split without breaking legacy restores.

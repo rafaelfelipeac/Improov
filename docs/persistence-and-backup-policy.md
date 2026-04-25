@@ -8,6 +8,8 @@ Improov v2 must preserve user data while the legacy app is migrated to a modern 
 
 This policy defines the persistence and backup rules that should guide the refactor. The current codebase does not satisfy every rule yet; this document is the target contract for the revival work.
 
+Persistence and backup changes should be made in small, independently testable sessions. Each session should stop at a coherent boundary and end in a commit when the diff is ready.
+
 ## Current Persistence Snapshot
 
 Current Room database:
@@ -91,6 +93,11 @@ Recommended order:
 6. Migrate settings from SharedPreferences to DataStore.
 7. Redesign Room relationships with foreign keys and indices.
 
+Execution rule:
+
+- Do not bundle multiple persistence layers into one session unless the change is trivially small.
+- Prefer one backup or persistence boundary per session so failures stay easy to isolate.
+
 ## Learning Note
 
 Persistence work should precede complex UI migration because Compose can make the app look modern while still preserving unsafe data behavior underneath. For v2, data safety is part of the product, not an implementation detail.
@@ -112,5 +119,29 @@ This improves the previous behavior because invalid JSON no longer reaches the d
 Remaining limitation:
 
 - settings are still written to SharedPreferences after the Room transaction.
+- legacy import validation is still tied to the old payload shape instead of a versioned backup contract.
 
 Full import atomicity should be revisited when settings move to DataStore and the backup model becomes explicitly versioned.
+
+## Legacy Import Validation Status
+
+Legacy import now rejects payloads that omit required sections such as settings fields or the `goals` / `items` / `historics` arrays.
+
+This is still a compatibility bridge, not the final backup contract. Validation now protects the current app state from half-defined legacy payloads, but the decoder is still based on the legacy unversioned shape.
+
+## Versioned Backup Envelope Status
+
+Export now writes an explicit schema-versioned envelope:
+
+```json
+{
+  "schemaVersion": 1,
+  "database": {}
+}
+```
+
+Schema version `1` currently wraps the existing legacy `Database` payload. Import accepts both this versioned envelope and validated legacy unversioned backups. Unknown schema versions fail before any replacement logic starts.
+
+Remaining limitation:
+
+- the schema-versioned envelope exists, but the inner payload is still the legacy app backup model instead of a final v2 backup model with separate settings and persistence sections.
