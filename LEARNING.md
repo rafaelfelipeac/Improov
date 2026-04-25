@@ -239,3 +239,19 @@ The legacy `MainActivity` remains the launcher. This is deliberate. It gives the
 This is the strangler-fig pattern applied to UI migration: create the new host beside the old one, route future migrated screens through the new host, then remove the old host when it no longer owns behavior.
 
 The route names are intentionally product-oriented (`goals`, `profile`, `backup`) rather than Fragment-oriented. That keeps the v2 navigation language independent from the legacy implementation classes.
+
+## Persistence Safety Step 1
+
+After the Compose shell, the next priority moved back to architecture and data safety.
+
+The important finding was that the legacy production database builder used both `allowMainThreadQueries()` and `fallbackToDestructiveMigration()`, while the Room database had `exportSchema = false`.
+
+That combination is risky for a revival:
+
+- main-thread queries hide persistence work inside UI flows;
+- destructive migration can erase user data when a migration path is missing;
+- missing schema export prevents proper migration tests.
+
+The first persistence step enabled Room schema export, generated the current version `49` schema, and removed the production destructive-migration and main-thread-query shortcuts.
+
+This is intentionally earlier than rich screen migration. A modern Compose UI over unsafe persistence would only modernize the surface. v2 needs the data contract to become explicit before the app behavior is rewritten.

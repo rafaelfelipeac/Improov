@@ -270,6 +270,10 @@ Done when:
 - Data preservation rules are explicit.
 - Import/export compatibility has tests or a documented staged plan.
 
+Current policy document:
+
+- `docs/persistence-and-backup-policy.md`
+
 ### Phase 3: Domain Rules
 
 Goal:
@@ -357,4 +361,3 @@ Done when:
 ## Working Rule
 
 The final PR can be one v2.0.0 PR, but the work should behave like a sequence of small projects. Every major step should teach something, leave documentation behind, and keep the next step easier than the last.
-

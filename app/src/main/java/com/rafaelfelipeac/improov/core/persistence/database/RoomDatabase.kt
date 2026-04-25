@@ -17,7 +17,7 @@ const val DATABASE_VERSION_49 = 49 // 1.5.0
 @Database(
     entities = [GoalDataModel::class, ItemDataModel::class, HistoricDataModel::class],
     version = 49,
-    exportSchema = false
+    exportSchema = true,
 )
 @TypeConverters(Converters::class)
 abstract class RoomDatabase : RoomDatabase() {

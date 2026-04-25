@@ -19,8 +19,6 @@ object PersistenceModule {
     @Singleton
     fun providesDatabase(context: Context): RoomDatabase =
         Room.databaseBuilder(context, RoomDatabase::class.java, context.getString(R.string.database_name))
-            .allowMainThreadQueries()
-            .fallbackToDestructiveMigration()
             .addMigrations(MIGRATION_48_49)
             .build()
 

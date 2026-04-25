@@ -1,0 +1,266 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 49,
+    "identityHash": "2ffd2a3e708ba138c64c3d7716aec3cc",
+    "entities": [
+      {
+        "tableName": "goal",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`goalId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `value` REAL NOT NULL, `type` TEXT NOT NULL, `done` INTEGER NOT NULL, `divideAndConquer` INTEGER NOT NULL, `singleValue` REAL NOT NULL, `bronzeValue` REAL NOT NULL, `silverValue` REAL NOT NULL, `goldValue` REAL NOT NULL, `order` INTEGER NOT NULL, `archived` INTEGER NOT NULL, `incrementValue` REAL NOT NULL, `decrementValue` REAL NOT NULL, `createdDate` INTEGER, `updatedDate` INTEGER, `doneDate` INTEGER, `undoneDate` INTEGER, `archiveDate` INTEGER, `date` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "goalId",
+            "columnName": "goalId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "done",
+            "columnName": "done",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "divideAndConquer",
+            "columnName": "divideAndConquer",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "singleValue",
+            "columnName": "singleValue",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bronzeValue",
+            "columnName": "bronzeValue",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "silverValue",
+            "columnName": "silverValue",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "goldValue",
+            "columnName": "goldValue",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "order",
+            "columnName": "order",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "archived",
+            "columnName": "archived",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "incrementValue",
+            "columnName": "incrementValue",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "decrementValue",
+            "columnName": "decrementValue",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdDate",
+            "columnName": "createdDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updatedDate",
+            "columnName": "updatedDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "doneDate",
+            "columnName": "doneDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "undoneDate",
+            "columnName": "undoneDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "archiveDate",
+            "columnName": "archiveDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "goalId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "item",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`itemId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `goalId` INTEGER NOT NULL, `name` TEXT NOT NULL, `order` INTEGER NOT NULL, `done` INTEGER NOT NULL, `createdDate` INTEGER, `updatedDate` INTEGER, `doneDate` INTEGER, `undoneDate` INTEGER, `deleteDate` INTEGER, `date` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "itemId",
+            "columnName": "itemId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "goalId",
+            "columnName": "goalId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "order",
+            "columnName": "order",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "done",
+            "columnName": "done",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdDate",
+            "columnName": "createdDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updatedDate",
+            "columnName": "updatedDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "doneDate",
+            "columnName": "doneDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "undoneDate",
+            "columnName": "undoneDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "deleteDate",
+            "columnName": "deleteDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "itemId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "historic",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`historicId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `goalId` INTEGER NOT NULL, `value` REAL NOT NULL, `date` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "historicId",
+            "columnName": "historicId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "goalId",
+            "columnName": "goalId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "historicId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2ffd2a3e708ba138c64c3d7716aec3cc')"
+    ]
+  }
+}

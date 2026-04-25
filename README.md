@@ -55,6 +55,8 @@ The current product and technical behavior is documented in [Improov Specificati
 
 The v2 modernization direction is documented in [Improov v2 Revival Plan](docs/revival-v2-plan.md).
 
+Persistence and backup safety rules are documented in [Persistence and Backup Policy](docs/persistence-and-backup-policy.md).
+
 Revival decisions and lessons are tracked in [LEARNING.md](LEARNING.md).
  
 License  
