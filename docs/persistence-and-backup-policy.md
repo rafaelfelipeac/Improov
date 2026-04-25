@@ -71,6 +71,7 @@ The decision must be made before the v2 Backup screen ships.
 
 ## Current Risks
 
+- Historical Room schemas before version `49` were not preserved in the repository.
 - Legacy import deletes current rows before validating and inserting all replacement rows.
 - Legacy import is not transactional.
 - Legacy backup has no explicit schema version.
@@ -93,3 +94,11 @@ Recommended order:
 ## Learning Note
 
 Persistence work should precede complex UI migration because Compose can make the app look modern while still preserving unsafe data behavior underneath. For v2, data safety is part of the product, not an implementation detail.
+
+## Migration Testing Status
+
+Migration-test infrastructure is now available through `androidx.room:room-testing`.
+
+The first instrumentation test verifies that the current schema export can be consumed by Room's `MigrationTestHelper`. It does not claim to validate historical migrations because schemas before version `49` were not committed by the legacy project.
+
+Future database changes must add migration tests that start from the previous committed schema and validate the new version.

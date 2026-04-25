@@ -255,3 +255,24 @@ That combination is risky for a revival:
 The first persistence step enabled Room schema export, generated the current version `49` schema, and removed the production destructive-migration and main-thread-query shortcuts.
 
 This is intentionally earlier than rich screen migration. A modern Compose UI over unsafe persistence would only modernize the surface. v2 needs the data contract to become explicit before the app behavior is rewritten.
+
+## Migration Test Infrastructure
+
+Room migration tests depend on committed historical schemas.
+
+Improov did not have schema export enabled before the v2 revival, so there is no trustworthy `48.json` artifact in the repository. That means we should not pretend to fully validate the legacy `48 -> 49` migration from source alone.
+
+The first migration-test step therefore does something narrower and honest:
+
+- adds `room-testing`;
+- exposes `app/schemas` to Android instrumentation tests;
+- verifies that the current `49` schema can be created from the exported schema.
+
+The lesson is practical: migration testing has to start before you need it. From this point forward, every Room schema change can be tested against a committed previous schema.
+
+Enabling the first instrumentation test also exposed two build-health issues:
+
+- the old AndroidX Test stack was incompatible with the current target SDK because its generated test activities did not declare `android:exported`;
+- variant `resValue` entries that referenced other string resources broke test APK resource linking, so they were changed to literal values matching the existing strings.
+
+Both are examples of why architecture work often starts by improving testability. The moment a new safety test is added, old assumptions in the build become visible.

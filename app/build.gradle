@@ -37,15 +37,15 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            resValue "string", "app_name", "@string/app_name_release"
-            resValue "string", "file_provider_path", "@string/file_provider_release"
+            resValue "string", "app_name", "Improov"
+            resValue "string", "file_provider_path", "com.rafaelfelipeac.improov.fileprovider"
         }
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
 
-            resValue "string", "app_name", "@string/app_name_debug"
-            resValue "string", "file_provider_path", "@string/file_provider_debug"
+            resValue "string", "app_name", "Improov Debug"
+            resValue "string", "file_provider_path", "com.rafaelfelipeac.improov.debug.fileprovider"
         }
     }
 
@@ -62,6 +62,9 @@ android {
         variant.resValue "string", "versionName", variant.versionName
     }
 
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -121,6 +124,7 @@ dependencies {
     testImplementation libs.mockito.inline
     testImplementation libs.androidx.test.core
     androidTestImplementation libs.androidx.espresso.core
+    androidTestImplementation libs.androidx.room.testing
     androidTestImplementation libs.androidx.test.runner
     androidTestImplementation libs.androidx.test.ext.junit
     detektPlugins libs.detekt.formatting
