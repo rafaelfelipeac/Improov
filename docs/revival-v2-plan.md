@@ -68,6 +68,28 @@ The v2.0.0 release can be delivered as one pull request, but the implementation 
 8. Cleanup of legacy XML/Fragments/adapters.
 9. Release prep.
 
+## Session Anchors
+
+Use these exact anchor ids when starting the next session. The anchor name should be the first thing mentioned in the handoff prompt.
+
+- `phase-0-recover-build`
+- `phase-1-establish-modern-baseline`
+- `phase-2-backup-envelope-v1`
+- `phase-2-backup-v2-model`
+- `phase-2-import-compatibility`
+- `phase-3-domain-rules`
+- `phase-4-compose-screens`
+- `phase-5-cleanup-hardening`
+
+For the backup work specifically, the current small-step sequence is:
+
+- `backup-envelope-v1`
+- `backup-v2-inner-model`
+- `backup-import-compatibility`
+- `backup-settings-datastore`
+
+When a session ends, note the next anchor explicitly in the summary so the next prompt can be as short as: `continue from backup-v2-inner-model`.
+
 Each phase should have:
 
 - A stated goal.
