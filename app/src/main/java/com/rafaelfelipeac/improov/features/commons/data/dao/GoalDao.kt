@@ -21,4 +21,7 @@ interface GoalDao {
 
     @Delete
     fun delete(goalDataModel: GoalDataModel)
+
+    @Query("DELETE FROM goal")
+    fun deleteAll()
 }

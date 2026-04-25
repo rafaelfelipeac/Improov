@@ -276,3 +276,18 @@ Enabling the first instrumentation test also exposed two build-health issues:
 - variant `resValue` entries that referenced other string resources broke test APK resource linking, so they were changed to literal values matching the existing strings.
 
 Both are examples of why architecture work often starts by improving testability. The moment a new safety test is added, old assumptions in the build become visible.
+
+## Backup Import Transaction
+
+The legacy backup import flow parsed JSON and then deleted existing rows before inserting replacement data. That meant a malformed or partially incompatible import path could put current data at risk.
+
+The first hardening step changed the order and boundary:
+
+- parse the backup before entering the replacement path;
+- replace `goal`, `item`, and `historic` tables inside `RoomDatabase.runInTransaction`;
+- use DAO-level `DELETE FROM` operations instead of loading every row only to delete it;
+- keep invalid JSON away from the transaction entirely.
+
+This is still not the final v2 backup architecture. The backup format remains unversioned and settings are still written through SharedPreferences outside the Room transaction. But the highest-risk part, replacing relational app data, is now atomic.
+
+The Dagger wiring also moved `DatabaseDataSource` construction into `BackupModule`. That avoided adding style suppressions for a new `@Inject constructor` pattern while keeping dependency creation explicit.

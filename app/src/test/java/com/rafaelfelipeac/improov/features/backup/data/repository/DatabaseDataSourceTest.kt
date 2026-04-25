@@ -7,6 +7,7 @@ import com.rafaelfelipeac.improov.base.DataProviderTest.createItemDataModel
 import com.rafaelfelipeac.improov.base.DataProviderTest.createJson
 import com.rafaelfelipeac.improov.base.DataProviderTest.getDate
 import com.rafaelfelipeac.improov.base.equalTo
+import com.rafaelfelipeac.improov.core.persistence.database.RoomDatabase
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
 import com.rafaelfelipeac.improov.features.backup.data.DatabaseDataSource
 import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
@@ -18,10 +19,16 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
 import org.mockito.Mock
+import org.mockito.Mockito.any
+import org.mockito.Mockito.doAnswer
+import org.mockito.Mockito.never
+import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class DatabaseDataSourceTest {
+    @Mock
+    internal lateinit var roomDatabase: RoomDatabase
 
     @Mock
     internal lateinit var goalDao: GoalDao
@@ -39,7 +46,20 @@ class DatabaseDataSourceTest {
 
     @Before
     fun setup() {
-        databaseDataSource = DatabaseDataSource(goalDao, historicDao, itemDao, preferences, Gson())
+        doAnswer {
+            (it.arguments[0] as Runnable).run()
+            null
+        }.`when`(roomDatabase).runInTransaction(anyRunnable())
+
+        databaseDataSource =
+            DatabaseDataSource(
+                roomDatabase,
+                goalDao,
+                historicDao,
+                itemDao,
+                preferences,
+                Gson(),
+            )
     }
 
     @Test
@@ -55,16 +75,17 @@ class DatabaseDataSourceTest {
             val firstTimeAdd = false
             val firstTimeList = false
 
-            val json = createJson(
-                goals,
-                historics,
-                items,
-                language,
-                welcome,
-                name,
-                firstTimeAdd,
-                firstTimeList
-            )
+            val json =
+                createJson(
+                    goals,
+                    historics,
+                    items,
+                    language,
+                    welcome,
+                    name,
+                    firstTimeAdd,
+                    firstTimeList,
+                )
 
             given(goalDao.getAll())
                 .willReturn(goals)
@@ -104,22 +125,30 @@ class DatabaseDataSourceTest {
             val firstTimeAdd = false
             val firstTimeList = false
 
-            val json = createJson(
-                goals,
-                historics,
-                items,
-                language,
-                welcome,
-                name,
-                firstTimeAdd,
-                firstTimeList
-            )
+            val json =
+                createJson(
+                    goals,
+                    historics,
+                    items,
+                    language,
+                    welcome,
+                    name,
+                    firstTimeAdd,
+                    firstTimeList,
+                )
 
             // when
             val result = databaseDataSource.import(json)
 
             // then
             result equalTo true
+            verify(roomDatabase).runInTransaction(anyRunnable())
+            verify(goalDao).deleteAll()
+            verify(itemDao).deleteAll()
+            verify(historicDao).deleteAll()
+            verify(goalDao).save(goals.first())
+            verify(itemDao).save(items.first())
+            verify(historicDao).save(historics.first())
         }
     }
 
@@ -134,6 +163,7 @@ class DatabaseDataSourceTest {
 
             // then
             result equalTo false
+            verify(roomDatabase, never()).runInTransaction(anyRunnable())
         }
     }
 
@@ -170,4 +200,6 @@ class DatabaseDataSourceTest {
             result equalTo date
         }
     }
+
+    private fun anyRunnable(): Runnable = any(Runnable::class.java) ?: Runnable {}
 }

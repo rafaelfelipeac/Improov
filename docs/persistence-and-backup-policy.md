@@ -72,8 +72,8 @@ The decision must be made before the v2 Backup screen ships.
 ## Current Risks
 
 - Historical Room schemas before version `49` were not preserved in the repository.
-- Legacy import deletes current rows before validating and inserting all replacement rows.
-- Legacy import is not transactional.
+- Legacy import still uses the unversioned backup shape.
+- Backup preference writes still happen outside the Room transaction because settings are still stored in SharedPreferences.
 - Legacy backup has no explicit schema version.
 - Legacy backup serializes Room data models directly.
 - Settings are still stored in SharedPreferences.
@@ -102,3 +102,15 @@ Migration-test infrastructure is now available through `androidx.room:room-testi
 The first instrumentation test verifies that the current schema export can be consumed by Room's `MigrationTestHelper`. It does not claim to validate historical migrations because schemas before version `49` were not committed by the legacy project.
 
 Future database changes must add migration tests that start from the previous committed schema and validate the new version.
+
+## Import Transaction Status
+
+Legacy import now parses the backup before replacing current rows and performs the Room table replacement inside `RoomDatabase.runInTransaction`.
+
+This improves the previous behavior because invalid JSON no longer reaches the destructive replacement path, and goal/item/historic replacement is atomic at the Room level.
+
+Remaining limitation:
+
+- settings are still written to SharedPreferences after the Room transaction.
+
+Full import atomicity should be revisited when settings move to DataStore and the backup model becomes explicitly versioned.

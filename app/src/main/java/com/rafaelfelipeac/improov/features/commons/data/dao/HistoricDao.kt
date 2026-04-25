@@ -21,4 +21,7 @@ interface HistoricDao {
 
     @Delete
     fun delete(historicDataModel: HistoricDataModel)
+
+    @Query("DELETE FROM historic")
+    fun deleteAll()
 }

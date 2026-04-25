@@ -21,4 +21,7 @@ interface ItemDao {
 
     @Delete
     fun delete(itemDataModel: ItemDataModel)
+
+    @Query("DELETE FROM item")
+    fun deleteAll()
 }
