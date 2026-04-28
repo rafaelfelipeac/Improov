@@ -1,5 +1,6 @@
 package com.rafaelfelipeac.improov.base
 
+import com.rafaelfelipeac.improov.BuildConfig
 import com.google.gson.Gson
 import com.rafaelfelipeac.improov.features.backup.data.model.Database
 import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
@@ -139,6 +140,28 @@ object DataProviderTest {
     ): String {
         return Gson().toJson(
             Database(
+                appVersion = BuildConfig.VERSION_NAME,
+                settings = createSettings(language, welcome, name, firstTimeList, firstTimeAdd),
+                goals = goals,
+                items = items,
+                historics = historics,
+            )
+        )
+    }
+
+    @Suppress("LongParameterList")
+    fun createLegacyJson(
+        goals: List<GoalDataModel>,
+        historics: List<HistoricDataModel>,
+        items: List<ItemDataModel>,
+        language: String,
+        welcome: Boolean,
+        name: String,
+        firstTimeAdd: Boolean,
+        firstTimeList: Boolean
+    ): String {
+        return Gson().toJson(
+            LegacyDatabase(
                 language,
                 welcome,
                 name,
@@ -150,6 +173,33 @@ object DataProviderTest {
             )
         )
     }
+
+    private fun createSettings(
+        language: String,
+        welcome: Boolean,
+        name: String,
+        firstTimeList: Boolean,
+        firstTimeAdd: Boolean
+    ): Database.Settings {
+        return Database.Settings(
+            language = language,
+            welcome = welcome,
+            name = name,
+            firstTimeList = firstTimeList,
+            firstTimeAdd = firstTimeAdd,
+        )
+    }
+
+    private data class LegacyDatabase(
+        val language: String,
+        val welcome: Boolean,
+        val name: String,
+        val firstTimeList: Boolean,
+        val firstTimeAdd: Boolean,
+        val goals: List<GoalDataModel>?,
+        val items: List<ItemDataModel>?,
+        val historics: List<HistoricDataModel>?
+    )
 
     fun getDate() = Calendar.getInstance().timeInMillis
 }

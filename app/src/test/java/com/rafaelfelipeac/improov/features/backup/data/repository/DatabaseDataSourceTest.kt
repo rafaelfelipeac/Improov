@@ -3,6 +3,7 @@ package com.rafaelfelipeac.improov.features.backup.data.repository
 import com.google.gson.Gson
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoalDataModel
 import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoricDataModel
+import com.rafaelfelipeac.improov.base.DataProviderTest.createLegacyJson
 import com.rafaelfelipeac.improov.base.DataProviderTest.createItemDataModel
 import com.rafaelfelipeac.improov.base.DataProviderTest.createJson
 import com.rafaelfelipeac.improov.base.DataProviderTest.getDate
@@ -146,6 +147,42 @@ class DatabaseDataSourceTest {
             verify(goalDao).deleteAll()
             verify(itemDao).deleteAll()
             verify(historicDao).deleteAll()
+            verify(goalDao).save(goals.first())
+            verify(itemDao).save(items.first())
+            verify(historicDao).save(historics.first())
+        }
+    }
+
+    @Test
+    fun `GIVEN a legacy json with information for Dao and Preferences WHEN import is called THEN return true`() {
+        runBlocking {
+            // given
+            val goals = listOf(createGoalDataModel())
+            val historics = listOf(createHistoricDataModel())
+            val items = listOf(createItemDataModel())
+            val language = ""
+            val welcome = false
+            val name = ""
+            val firstTimeAdd = false
+            val firstTimeList = false
+
+            val json =
+                createLegacyJson(
+                    goals,
+                    historics,
+                    items,
+                    language,
+                    welcome,
+                    name,
+                    firstTimeAdd,
+                    firstTimeList,
+                )
+
+            // when
+            val result = databaseDataSource.import(json)
+
+            // then
+            result equalTo true
             verify(goalDao).save(goals.first())
             verify(itemDao).save(items.first())
             verify(historicDao).save(historics.first())

@@ -125,9 +125,9 @@ Full import atomicity should be revisited when settings move to DataStore and th
 
 ## Legacy Import Validation Status
 
-Legacy import now rejects payloads that omit required sections such as settings fields or the `goals` / `items` / `historics` arrays.
+Legacy import still accepts the already validated flat JSON shape and rejects malformed payloads before the Room replacement path runs.
 
-This is still a compatibility bridge, not the final backup contract. Validation now protects the current app state from half-defined legacy payloads, but the decoder is still based on the legacy unversioned shape.
+This is still a compatibility bridge, not the final backup contract. Validation now protects the current app state from half-defined legacy payloads, but the decoder remains a bridge from the old shape into the newer backup model.
 
 ## Versioned Backup Envelope Status
 
@@ -140,8 +140,8 @@ Export now writes an explicit schema-versioned envelope:
 }
 ```
 
-Schema version `1` currently wraps the existing legacy `Database` payload. Import accepts both this versioned envelope and validated legacy unversioned backups. Unknown schema versions fail before any replacement logic starts.
+Schema version `1` now wraps the backup payload that separates settings from persisted Room data. Import accepts both this versioned backup payload and validated legacy unversioned backups. Unknown schema versions fail before any replacement logic starts.
 
 Remaining limitation:
 
-- the schema-versioned envelope exists, but the inner payload is still the legacy app backup model instead of a final v2 backup model with separate settings and persistence sections.
+- the schema-versioned envelope still sits on top of the backup payload, so the next session can focus on compatibility plumbing around the v2 model rather than the outer transport.
