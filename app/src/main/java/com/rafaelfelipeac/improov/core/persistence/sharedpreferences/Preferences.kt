@@ -1,7 +1,6 @@
 package com.rafaelfelipeac.improov.core.persistence.sharedpreferences
 
 import android.content.Context
-import androidx.datastore.preferences.core.Preferences as DataStorePreferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.longPreferencesKey

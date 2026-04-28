@@ -11,18 +11,11 @@
     <ID>ArgumentListWrapping:Snackbar.kt$( R.drawable.ic_snackbar_trophy, 0, 0, 0 )</ID>
     <ID>ModifierListSpacing:Date.kt$@SuppressLint("SimpleDateFormat")</ID>
     <ID>MultiLineIfElse:Toolbar.kt$return</ID>
-    <ID>UnnecessaryParenthesesBeforeTrailingLambda:BaseFragment.kt$BaseFragment$()</ID>
-    <ID>UnnecessaryParenthesesBeforeTrailingLambda:GoalFormFragment.kt$GoalFormFragment$()</ID>
-    <ID>UnnecessaryParenthesesBeforeTrailingLambda:ProfileEditFragment.kt$ProfileEditFragment$()</ID>
     <ID>Wrapping:AppComponent.kt$AppComponent$(</ID>
-    <ID>Wrapping:BackupFragment.kt$BackupFragment$(</ID>
     <ID>Wrapping:GetGoalListUseCaseTest.kt$GetGoalListUseCaseTest$(</ID>
     <ID>Wrapping:GetItemListUseCaseTest.kt$GetItemListUseCaseTest$(</ID>
     <ID>Wrapping:GoalDataSource.kt$GoalDataSource$(</ID>
-    <ID>Wrapping:GoalFormFragment.kt$GoalFormFragment$(</ID>
     <ID>Wrapping:HistoricDataSource.kt$HistoricDataSource$(</ID>
     <ID>Wrapping:ItemDataSource.kt$ItemDataSource$(</ID>
-    <ID>Wrapping:ItemsAdapter.kt$ItemsAdapter$BaseAdapter&lt;Item&gt;(), ActionCompleteContract</ID>
-    <ID>Wrapping:TextInputEditText.kt$(</ID>
   </CurrentIssues>
 </SmellBaseline>

@@ -1,8 +1,6 @@
 package com.rafaelfelipeac.improov.core.di.modules
 
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import com.rafaelfelipeac.improov.core.di.key.FragmentKey
 import com.rafaelfelipeac.improov.core.di.key.ViewModelKey
 import com.rafaelfelipeac.improov.features.profile.data.DataDataSource
 import com.rafaelfelipeac.improov.features.profile.data.FirstTimeAddDataSource
@@ -14,9 +12,7 @@ import com.rafaelfelipeac.improov.features.profile.domain.repository.FirstTimeAd
 import com.rafaelfelipeac.improov.features.profile.domain.repository.FirstTimeListRepository
 import com.rafaelfelipeac.improov.features.profile.domain.repository.NameRepository
 import com.rafaelfelipeac.improov.features.profile.domain.repository.WelcomeRepository
-import com.rafaelfelipeac.improov.features.profile.presentation.profile.ProfileFragment
 import com.rafaelfelipeac.improov.features.profile.presentation.profile.ProfileViewModel
-import com.rafaelfelipeac.improov.features.profile.presentation.profileedit.ProfileEditFragment
 import com.rafaelfelipeac.improov.features.profile.presentation.profileedit.ProfileEditViewModel
 import dagger.Binds
 import dagger.Module
@@ -48,18 +44,8 @@ abstract class ProfileModule {
 
     @Binds
     @IntoMap
-    @FragmentKey(ProfileFragment::class)
-    abstract fun bindProfileFragment(profileFragment: ProfileFragment): Fragment
-
-    @Binds
-    @IntoMap
     @ViewModelKey(ProfileViewModel::class)
     abstract fun bindProfileViewModel(profileViewModel: ProfileViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @FragmentKey(ProfileEditFragment::class)
-    abstract fun bindProfileNameFragment(profileEditFragment: ProfileEditFragment): Fragment
 
     @Binds
     @IntoMap

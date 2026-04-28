@@ -5,6 +5,8 @@ import java.util.Date
 
 object GoalRules {
 
+    private const val PERCENT_MULTIPLIER = 100F
+
     fun calculatePercentage(goal: Goal): Float {
         val maxValue = if (goal.divideAndConquer) {
             goal.goldValue
@@ -15,7 +17,7 @@ object GoalRules {
         return if (maxValue <= 0F) {
             0F
         } else {
-            (goal.value / maxValue) * 100F
+            (goal.value / maxValue) * PERCENT_MULTIPLIER
         }
     }
 
