@@ -375,7 +375,6 @@ Done when:
 ## Open Decisions
 
 - Exact target AGP/Kotlin/Gradle/JDK versions.
-- Minimum SDK for v2.
 - Hilt vs manual DI.
 - Kotlin serialization vs Gson for backup v2.
 - DataStore migration strategy.
@@ -383,6 +382,10 @@ Done when:
 - Whether existing Room data must migrate in place or can go through backup/import.
 - Whether `archived` becomes a real product feature in v2.0.0.
 - Whether v2.0.0 should include new product features or only revival/modernization.
+
+Baseline decision:
+
+- Minimum SDK for v2 is `23`.
 
 ## Working Rule
 

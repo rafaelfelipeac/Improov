@@ -1,96 +1,111 @@
 package com.rafaelfelipeac.improov.core.persistence.sharedpreferences
 
 import android.content.Context
-import android.content.SharedPreferences
-import kotlin.reflect.KProperty
+import androidx.datastore.preferences.core.Preferences as DataStorePreferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.longPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 
 const val PREFERENCES_NAME = "com.rafaelfelipeac.improov.preferences"
 
-const val KEY_WELCOME = "KEY_WELCOME"
-const val KEY_NAME = "KEY_NAME"
-const val KEY_LANGUAGE = "KEY_LANGUAGE"
-const val KEY_FIRST_TIME_ADD = "KEY_FIRST_TIME_ADD"
-const val KEY_FIRST_TIME_LIST = "KEY_FIRST_TIME_LIST"
-const val KEY_EXPORT_DATE = "KEY_EXPORT_DATE"
-const val KEY_IMPORT_DATE = "KEY_IMPORT_DATE"
+private val Context.settingsDataStore by preferencesDataStore(name = PREFERENCES_NAME)
+
+private val KEY_WELCOME = booleanPreferencesKey("KEY_WELCOME")
+private val KEY_NAME = stringPreferencesKey("KEY_NAME")
+private val KEY_LANGUAGE = stringPreferencesKey("KEY_LANGUAGE")
+private val KEY_FIRST_TIME_ADD = booleanPreferencesKey("KEY_FIRST_TIME_ADD")
+private val KEY_FIRST_TIME_LIST = booleanPreferencesKey("KEY_FIRST_TIME_LIST")
+private val KEY_EXPORT_DATE = longPreferencesKey("KEY_EXPORT_DATE")
+private val KEY_IMPORT_DATE = longPreferencesKey("KEY_IMPORT_DATE")
 
 class Preferences(context: Context) {
 
-    private val prefs: SharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, 0)
+    private val dataStore = context.applicationContext.settingsDataStore
 
-    var welcome: Boolean by prefs.persistedBoolean(KEY_WELCOME, defaultValue = false)
+    var welcome: Boolean
+        get() = readBoolean(KEY_WELCOME, defaultValue = false)
+        set(value) = writeBoolean(KEY_WELCOME, value)
 
-    var name: String by prefs.persistedString(KEY_NAME, defaultValue = "")
+    var name: String
+        get() = readString(KEY_NAME, defaultValue = "")
+        set(value) = writeString(KEY_NAME, value)
 
-    var language: String by prefs.persistedString(KEY_LANGUAGE, defaultValue = "en")
+    var language: String
+        get() = readString(KEY_LANGUAGE, defaultValue = "en")
+        set(value) = writeString(KEY_LANGUAGE, value)
 
-    var firstTimeAdd: Boolean by prefs.persistedBoolean(KEY_FIRST_TIME_ADD, defaultValue = true)
+    var firstTimeAdd: Boolean
+        get() = readBoolean(KEY_FIRST_TIME_ADD, defaultValue = true)
+        set(value) = writeBoolean(KEY_FIRST_TIME_ADD, value)
 
-    var firstTimeList: Boolean by prefs.persistedBoolean(KEY_FIRST_TIME_LIST, defaultValue = false)
+    var firstTimeList: Boolean
+        get() = readBoolean(KEY_FIRST_TIME_LIST, defaultValue = false)
+        set(value) = writeBoolean(KEY_FIRST_TIME_LIST, value)
 
-    var exportDate: Long by prefs.persistedLong(KEY_EXPORT_DATE, defaultValue = 0L)
+    var exportDate: Long
+        get() = readLong(KEY_EXPORT_DATE, defaultValue = 0L)
+        set(value) = writeLong(KEY_EXPORT_DATE, value)
 
-    var importDate: Long by prefs.persistedLong(KEY_IMPORT_DATE, defaultValue = 0L)
-}
+    var importDate: Long
+        get() = readLong(KEY_IMPORT_DATE, defaultValue = 0L)
+        set(value) = writeLong(KEY_IMPORT_DATE, value)
 
-// region SharedPreferences extension
-private class PersistedBoolean(
-    private val sharedPreferences: SharedPreferences,
-    private val key: String,
-    private val defaultValue: Boolean
-) {
-    operator fun getValue(thisRef: Any, property: KProperty<*>): Boolean =
-        sharedPreferences.getBoolean(key, defaultValue)
+    private fun readBoolean(
+        key: androidx.datastore.preferences.core.Preferences.Key<Boolean>,
+        defaultValue: Boolean,
+    ): Boolean {
+        return runBlocking(Dispatchers.IO) {
+            dataStore.data.first()[key] ?: defaultValue
+        }
+    }
 
-    operator fun setValue(thisRef: Any, property: KProperty<*>, value: Boolean) {
-        sharedPreferences.edit { putBoolean(key, value) }
+    private fun readString(
+        key: androidx.datastore.preferences.core.Preferences.Key<String>,
+        defaultValue: String,
+    ): String {
+        return runBlocking(Dispatchers.IO) {
+            dataStore.data.first()[key] ?: defaultValue
+        }
+    }
+
+    private fun readLong(
+        key: androidx.datastore.preferences.core.Preferences.Key<Long>,
+        defaultValue: Long,
+    ): Long {
+        return runBlocking(Dispatchers.IO) {
+            dataStore.data.first()[key] ?: defaultValue
+        }
+    }
+
+    private fun writeBoolean(
+        key: androidx.datastore.preferences.core.Preferences.Key<Boolean>,
+        value: Boolean,
+    ) {
+        runBlocking(Dispatchers.IO) {
+            dataStore.edit { preferences -> preferences[key] = value }
+        }
+    }
+
+    private fun writeString(
+        key: androidx.datastore.preferences.core.Preferences.Key<String>,
+        value: String,
+    ) {
+        runBlocking(Dispatchers.IO) {
+            dataStore.edit { preferences -> preferences[key] = value }
+        }
+    }
+
+    private fun writeLong(
+        key: androidx.datastore.preferences.core.Preferences.Key<Long>,
+        value: Long,
+    ) {
+        runBlocking(Dispatchers.IO) {
+            dataStore.edit { preferences -> preferences[key] = value }
+        }
     }
 }
-
-private fun SharedPreferences.persistedBoolean(
-    key: String,
-    defaultValue: Boolean
-) = PersistedBoolean(this, key, defaultValue)
-
-private class PersistedString(
-    private val sharedPreferences: SharedPreferences,
-    private val key: String,
-    private val defaultValue: String
-) {
-    operator fun getValue(thisRef: Any, property: KProperty<*>): String =
-        sharedPreferences.getString(key, defaultValue) ?: defaultValue
-
-    operator fun setValue(thisRef: Any, property: KProperty<*>, value: String) {
-        sharedPreferences.edit { putString(key, value) }
-    }
-}
-
-private fun SharedPreferences.persistedString(
-    key: String,
-    defaultValue: String
-) = PersistedString(this, key, defaultValue)
-
-private class PersistedLong(
-    private val sharedPreferences: SharedPreferences,
-    private val key: String,
-    private val defaultValue: Long
-) {
-    operator fun getValue(thisRef: Any, property: KProperty<*>): Long =
-        sharedPreferences.getLong(key, defaultValue)
-
-    operator fun setValue(thisRef: Any, property: KProperty<*>, value: Long) {
-        sharedPreferences.edit { putLong(key, value) }
-    }
-}
-
-private fun SharedPreferences.persistedLong(
-    key: String,
-    defaultValue: Long
-) = PersistedLong(this, key, defaultValue)
-
-private inline fun SharedPreferences.edit(operation: SharedPreferences.Editor.() -> Unit) {
-    val editor = edit()
-    operation(editor)
-    editor.apply()
-}
-// endregion

@@ -75,10 +75,10 @@ The decision must be made before the v2 Backup screen ships.
 
 - Historical Room schemas before version `49` were not preserved in the repository.
 - Legacy import still uses the unversioned backup shape.
-- Backup preference writes still happen outside the Room transaction because settings are still stored in SharedPreferences.
+- Backup preference writes still happen outside the Room transaction because settings are still written through DataStore after the Room replacement work.
 - Legacy backup has no explicit schema version.
 - Legacy backup serializes Room data models directly.
-- Settings are still stored in SharedPreferences.
+- Settings are now stored in DataStore.
 - Relationship integrity between goals, items, and historic rows is implicit.
 
 ## Refactor Direction
@@ -118,7 +118,7 @@ This improves the previous behavior because invalid JSON no longer reaches the d
 
 Remaining limitation:
 
-- settings are still written to SharedPreferences after the Room transaction.
+- settings are still written after the Room transaction, so backup import is not yet fully atomic across persistence layers.
 - legacy import validation is still tied to the old payload shape instead of a versioned backup contract.
 
 Full import atomicity should be revisited when settings move to DataStore and the backup model becomes explicitly versioned.

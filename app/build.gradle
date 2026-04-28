@@ -23,7 +23,7 @@ android {
 
     defaultConfig {
         applicationId "com.rafaelfelipeac.improov"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 35
         versionCode 23
         versionName "1.8.0"
@@ -72,6 +72,7 @@ dependencies {
 
     // Android
     implementation libs.androidx.preference.ktx
+    implementation libs.androidx.datastore.preferences
     implementation libs.androidx.activity.compose
     implementation libs.google.material
 

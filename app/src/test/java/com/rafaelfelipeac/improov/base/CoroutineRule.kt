@@ -2,7 +2,7 @@ package com.rafaelfelipeac.improov.base
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
@@ -11,7 +11,7 @@ import org.junit.runner.Description
 @ExperimentalCoroutinesApi
 class CoroutineRule : TestWatcher() {
 
-    private val testDispatcher = TestCoroutineDispatcher()
+    private val testDispatcher = StandardTestDispatcher()
 
     override fun starting(description: Description?) {
         super.starting(description)
@@ -23,6 +23,5 @@ class CoroutineRule : TestWatcher() {
         super.finished(description)
 
         Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
     }
 }
