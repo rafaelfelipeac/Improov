@@ -314,3 +314,17 @@ This is a useful refactor lesson: when a large redesign is still ahead, a narrow
 The first explicit backup contract is intentionally small: export now writes a `schemaVersion` envelope around the existing backup payload. Schema version `1` still carries the legacy `Database` shape inside `database`, so this is not the final v2 backup format yet.
 
 Import can read both the versioned envelope and validated legacy unversioned files. Unsupported schema versions fail before the replace path starts, which creates the boundary needed for a future format split without breaking legacy restores.
+
+## Domain Rule Extraction
+
+Phase 3 started pulling the most important goal behavior out of the fragments and into testable rule helpers:
+
+- goal percentage and completion checks now live in `GoalRules`;
+- goal and item reorder logic now uses shared swap helpers;
+- item completion toggles and historic creation now come from small domain helpers;
+- goal form validation now delegates the divide-and-conquer and counter value checks to the domain layer;
+- the shared `Goal` model keeps a safe local percentage calculation for compatibility, but the feature-level rules own the new decision points.
+
+The focused rule tests passed with an isolated Gradle cache under `/tmp/improov-gradle`. The broader legacy `testDebugUnitTest` run still needs attention separately because the suite is large and the default wrapper cache was locked in the sandboxed run.
+
+Next anchor: `phase-4-compose-screens`.

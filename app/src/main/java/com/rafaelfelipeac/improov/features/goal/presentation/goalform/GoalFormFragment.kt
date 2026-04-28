@@ -25,6 +25,7 @@ import com.rafaelfelipeac.improov.databinding.FragmentGoalFormBinding
 import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
 import com.rafaelfelipeac.improov.features.dialog.DialogOneButton
+import com.rafaelfelipeac.improov.features.goal.domain.rule.GoalRules
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -280,7 +281,7 @@ class GoalFormFragment : BaseFragment() {
             goal.done = false
             goal.type = getGoalTypeSelected()
 
-            goal.order = if (goalsSize == 0) 0 else goalsSize + 1
+            goal.order = GoalRules.createNextOrder(goalsSize)
         } else {
             goal.updatedDate = getCurrentTime()
         }
@@ -428,17 +429,26 @@ class GoalFormFragment : BaseFragment() {
     }
 
     private fun checkIfCounterFieldsAreEmptyOrZero(): Boolean {
+        val isCounterGoal =
+            goal.type == GoalType.GOAL_COUNTER || getGoalTypeSelected() == GoalType.GOAL_COUNTER
+
+        if (!isCounterGoal) {
+            return false
+        }
+
         return when {
-            binding.goalFormGoalCounterDecValue.isEmptyOrZero() &&
-                    (goal.type == GoalType.GOAL_COUNTER ||
-                            getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
+            binding.goalFormGoalCounterDecValue.isEmptyOrZero() -> {
                 binding.goalFormGoalCounterDecValue.focusOnEmptyOrZero(this)
                 true
             }
-            binding.goalFormGoalCounterIncValue.isEmptyOrZero() &&
-                    (goal.type == GoalType.GOAL_COUNTER ||
-                            getGoalTypeSelected() == GoalType.GOAL_COUNTER) -> {
+            binding.goalFormGoalCounterIncValue.isEmptyOrZero() -> {
                 binding.goalFormGoalCounterIncValue.focusOnEmptyOrZero(this)
+                true
+            }
+            !GoalRules.hasValidCounterValues(
+                binding.goalFormGoalCounterIncValue.toFloat(),
+                binding.goalFormGoalCounterDecValue.toFloat()
+            ) -> {
                 true
             }
             else -> false
@@ -447,11 +457,11 @@ class GoalFormFragment : BaseFragment() {
 
     private fun validateDivideAndConquerValues(): Boolean {
         return try {
-            val gold = binding.goalFormGoldValue.toFloat()
-            val silver = binding.goalFormSilverValue.toFloat()
             val bronze = binding.goalFormBronzeValue.toFloat()
+            val silver = binding.goalFormSilverValue.toFloat()
+            val gold = binding.goalFormGoldValue.toFloat()
 
-            ((gold > silver) && (silver > bronze))
+            GoalRules.hasValidDivideAndConquerValues(bronze, silver, gold)
         } catch (e: NumberFormatException) {
             return binding.goalFormSingleValue.isNotEmpty()
         }

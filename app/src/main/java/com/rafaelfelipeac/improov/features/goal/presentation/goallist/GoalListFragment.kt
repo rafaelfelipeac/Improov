@@ -15,11 +15,11 @@ import com.rafaelfelipeac.improov.core.extension.vibrate
 import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.databinding.FragmentGoalListBinding
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
+import com.rafaelfelipeac.improov.features.goal.domain.rule.GoalRules
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-const val PERCENTAGE_MAX = 100
 const val SECONDS_BOTTOM_SHEET = 1000L
 
 @Suppress("TooManyFunctions")
@@ -138,8 +138,7 @@ class GoalListFragment : BaseFragment() {
         val target = items[fromPosition]
         val other = items[toPosition]
 
-        target.order = toPosition
-        other.order = fromPosition
+        GoalRules.swapOrder(target, other)
 
         viewModel.saveGoal(target, isFromDragAndDrop = true)
         viewModel.saveGoal(other, isFromDragAndDrop = true)
@@ -163,10 +162,10 @@ class GoalListFragment : BaseFragment() {
 
         when (direction) {
             ItemTouchHelper.RIGHT -> {
-                if (goal.done || goal.getPercentage() >= PERCENTAGE_MAX) {
-                    doneOrUndoneGoal(goal)
-                } else {
+                if (GoalRules.shouldConfirmCompletion(goal)) {
                     showBottomSheetGoal(goal, ::doneOrUndoneGoal, ::reloadGoalAfterSwipe)
+                } else {
+                    doneOrUndoneGoal(goal)
                 }
             }
             ItemTouchHelper.LEFT -> {
@@ -176,8 +175,7 @@ class GoalListFragment : BaseFragment() {
     }
 
     private fun doneOrUndoneGoal(goal: Goal) {
-        goal.done = !goal.done
-        goal.undoneDate = getCurrentTime()
+        GoalRules.toggleDone(goal, getCurrentTime())
 
         reloadGoalAfterSwipe()
 

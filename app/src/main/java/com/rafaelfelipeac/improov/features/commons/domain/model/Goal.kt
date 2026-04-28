@@ -29,9 +29,17 @@ data class Goal(
     val date: Date? = null
 ) : Serializable {
 
-    fun getPercentage() = if (divideAndConquer) {
-        (value / goldValue) * PERCENTAGE_MAX
-    } else {
-        (value / singleValue) * PERCENTAGE_MAX
+    fun getPercentage(): Float {
+        val maxValue = if (divideAndConquer) {
+            goldValue
+        } else {
+            singleValue
+        }
+
+        return if (maxValue <= 0F) {
+            0F
+        } else {
+            (value / maxValue) * PERCENTAGE_MAX
+        }
     }
 }

@@ -31,8 +31,10 @@ import com.rafaelfelipeac.improov.core.platform.base.BaseFragment
 import com.rafaelfelipeac.improov.databinding.FragmentGoalDetailBinding
 import com.rafaelfelipeac.improov.features.commons.data.enums.GoalType
 import com.rafaelfelipeac.improov.features.commons.domain.model.Goal
-import com.rafaelfelipeac.improov.features.commons.domain.model.Historic
 import com.rafaelfelipeac.improov.features.commons.domain.model.Item
+import com.rafaelfelipeac.improov.features.goal.domain.rule.GoalRules
+import com.rafaelfelipeac.improov.features.goal.domain.rule.HistoricRules
+import com.rafaelfelipeac.improov.features.goal.domain.rule.ItemRules
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.Date
@@ -204,10 +206,10 @@ class GoalDetailFragment : BaseFragment() {
             count += goal?.incrementValue ?: 0F
 
             viewModel.saveHistoric(
-                Historic(
+                HistoricRules.createIncrement(
+                    goalId = goal?.goalId ?: goalId,
                     value = goal?.incrementValue ?: 0F,
-                    date = Date(),
-                    goalId = goal?.goalId ?: goalId
+                    date = Date()
                 )
             )
 
@@ -218,10 +220,10 @@ class GoalDetailFragment : BaseFragment() {
             count -= goal?.decrementValue ?: 0F
 
             viewModel.saveHistoric(
-                Historic(
-                    value = goal?.decrementValue?.times(-1) ?: 0F,
-                    date = Date(),
-                    goalId = goal?.goalId ?: goalId
+                HistoricRules.createDecrement(
+                    goalId = goal?.goalId ?: goalId,
+                    value = goal?.decrementValue ?: 0F,
+                    date = Date()
                 )
             )
 
@@ -233,10 +235,10 @@ class GoalDetailFragment : BaseFragment() {
                 count = goal?.value?.plus(binding.goalDetailTotalValue.toFloat()) ?: 0F
 
                 viewModel.saveHistoric(
-                    Historic(
+                    HistoricRules.createManual(
+                        goalId = goal?.goalId ?: goalId,
                         value = binding.goalDetailTotalValue.toFloat(),
-                        date = Date(),
-                        goalId = goal?.goalId ?: goalId
+                        date = Date()
                     )
                 )
 
@@ -403,19 +405,7 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun verifyIfGoalIsDone(): Boolean {
-        val value = goal?.value?.let { it } ?: 0F
-
-        return goal?.divideAndConquer?.let { divideAndConquer ->
-            if (divideAndConquer) {
-                goal?.goldValue?.let { goldValue ->
-                    value >= goldValue
-                }
-            } else {
-                goal?.singleValue?.let { singleValue ->
-                    value >= singleValue
-                }
-            }
-        } ?: false
+        return goal?.let { GoalRules.isComplete(it) } ?: false
     }
 
     private fun updateProgress() {
@@ -651,8 +641,7 @@ class GoalDetailFragment : BaseFragment() {
         val targetItem = items[fromPosition]
         val otherItem = items[toPosition]
 
-        targetItem.order = toPosition
-        otherItem.order = fromPosition
+        ItemRules.swapOrder(targetItem, otherItem)
 
         viewModel.saveItem(targetItem, isFromDragOnDrop = true)
         viewModel.saveItem(otherItem, isFromDragOnDrop = true)
@@ -697,13 +686,7 @@ class GoalDetailFragment : BaseFragment() {
     }
 
     private fun doneOrUndoneItem(item: Item) {
-        item.done = !item.done
-
-        if (item.done) {
-            item.doneDate = getCurrentTime()
-        } else {
-            item.undoneDate = getCurrentTime()
-        }
+        ItemRules.toggleDone(item, getCurrentTime())
 
         reloadItemAfterSwipe()
         updateTextAndProgress()
