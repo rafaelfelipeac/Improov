@@ -107,7 +107,7 @@ class DatabaseDataSource(
             JsonParser.parseString(databaseBackup).takeIf { it.isJsonObject }?.asJsonObject ?: return null
 
         return when {
-            isVersionedBackup(jsonObject) ->
+            isCurrentVersionBackup(jsonObject) ->
                 gson.fromJson(jsonObject, Database::class.java)
 
             isLegacyBackup(jsonObject) ->
@@ -118,14 +118,21 @@ class DatabaseDataSource(
         }
     }
 
-    private fun isVersionedBackup(jsonObject: com.google.gson.JsonObject): Boolean {
-        return jsonObject.has("schemaVersion") &&
-            jsonObject.get("schemaVersion").asInt == Database.CURRENT_SCHEMA_VERSION &&
+    private fun isCurrentVersionBackup(jsonObject: com.google.gson.JsonObject): Boolean {
+        return readSchemaVersion(jsonObject) == Database.CURRENT_SCHEMA_VERSION &&
             jsonObject.has("appVersion") &&
             jsonObject.has("settings") &&
             jsonObject.has("goals") &&
             jsonObject.has("items") &&
             jsonObject.has("historics")
+    }
+
+    private fun readSchemaVersion(jsonObject: com.google.gson.JsonObject): Int? {
+        if (!jsonObject.has("schemaVersion")) {
+            return null
+        }
+
+        return runCatching { jsonObject.get("schemaVersion").asInt }.getOrNull()
     }
 
     private fun isLegacyBackup(jsonObject: com.google.gson.JsonObject): Boolean {

@@ -129,6 +129,8 @@ Legacy import still accepts the already validated flat JSON shape and rejects ma
 
 This is still a compatibility bridge, not the final backup contract. Validation now protects the current app state from half-defined legacy payloads, but the decoder remains a bridge from the old shape into the newer backup model.
 
+Versioned backups now also fail cleanly when the `schemaVersion` is unknown or malformed, so the import path does not reach the destructive replacement logic for unsupported future payloads.
+
 ## Versioned Backup Envelope Status
 
 Export now writes an explicit schema-versioned envelope:

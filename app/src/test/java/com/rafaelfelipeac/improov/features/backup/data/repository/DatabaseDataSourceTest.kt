@@ -1,6 +1,7 @@
 package com.rafaelfelipeac.improov.features.backup.data.repository
 
 import com.google.gson.Gson
+import com.google.gson.JsonParser
 import com.rafaelfelipeac.improov.base.DataProviderTest.createGoalDataModel
 import com.rafaelfelipeac.improov.base.DataProviderTest.createHistoricDataModel
 import com.rafaelfelipeac.improov.base.DataProviderTest.createLegacyJson
@@ -190,6 +191,51 @@ class DatabaseDataSourceTest {
     }
 
     @Test
+    fun `GIVEN a future schema version WHEN import is called THEN return false`() {
+        runBlocking {
+            // given
+            val json = createVersionedJson(schemaVersion = 2)
+
+            // when
+            val result = databaseDataSource.import(json)
+
+            // then
+            result equalTo false
+            verify(roomDatabase, never()).runInTransaction(anyRunnable())
+        }
+    }
+
+    @Test
+    fun `GIVEN a malformed schema version WHEN import is called THEN return false`() {
+        runBlocking {
+            // given
+            val json = createVersionedJson(schemaVersion = 1, mutateSchemaVersionToString = true)
+
+            // when
+            val result = databaseDataSource.import(json)
+
+            // then
+            result equalTo false
+            verify(roomDatabase, never()).runInTransaction(anyRunnable())
+        }
+    }
+
+    @Test
+    fun `GIVEN a versioned backup missing settings WHEN import is called THEN return false`() {
+        runBlocking {
+            // given
+            val json = createVersionedJson(schemaVersion = 1, removeSettings = true)
+
+            // when
+            val result = databaseDataSource.import(json)
+
+            // then
+            result equalTo false
+            verify(roomDatabase, never()).runInTransaction(anyRunnable())
+        }
+    }
+
+    @Test
     fun `GIVEN a json with invalid information WHEN import is called THEN return a false Boolean value`() {
         runBlocking {
             // given
@@ -236,6 +282,41 @@ class DatabaseDataSourceTest {
             // then
             result equalTo date
         }
+    }
+
+    private fun createVersionedJson(
+        schemaVersion: Int,
+        mutateSchemaVersionToString: Boolean = false,
+        removeSettings: Boolean = false,
+    ): String {
+        val goals = listOf(createGoalDataModel())
+        val historics = listOf(createHistoricDataModel())
+        val items = listOf(createItemDataModel())
+        val json =
+            JsonParser.parseString(
+                createJson(
+                    goals,
+                    historics,
+                    items,
+                    "",
+                    false,
+                    "",
+                    false,
+                    false,
+                ),
+            ).asJsonObject
+
+        json.addProperty("schemaVersion", schemaVersion)
+
+        if (mutateSchemaVersionToString) {
+            json.addProperty("schemaVersion", "v$schemaVersion")
+        }
+
+        if (removeSettings) {
+            json.remove("settings")
+        }
+
+        return json.toString()
     }
 
     private fun anyRunnable(): Runnable = any(Runnable::class.java) ?: Runnable {}
