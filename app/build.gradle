@@ -13,7 +13,6 @@ android {
 
     buildFeatures {
         compose true
-        viewBinding true
         buildConfig true
     }
 
@@ -25,8 +24,8 @@ android {
         applicationId "com.rafaelfelipeac.improov"
         minSdkVersion 23
         targetSdkVersion 35
-        versionCode 23
-        versionName "1.8.0"
+        versionCode 24
+        versionName "2.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

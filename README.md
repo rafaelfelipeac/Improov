@@ -15,22 +15,23 @@ Improov is a app that will help you achieve your goals.
 
 By choosing to add a goal to the app and not keep it lost in thought, you will have an easier time viewing the steps necessary to achieve it.
 
-Created with ❤️ to study topics related to Android such as Kotlin, MVVM, Coroutines, Kotlin Flow, Jetpack (Room, ViewModel, Navigation) and Dagger2.
+Created with ❤️ to study topics related to Android such as Kotlin, Compose, MVVM, Coroutines, Kotlin Flow, Jetpack (Room, ViewModel, Navigation) and Dagger2.
  
 Developed with:  
 ------- 
-- Kotlin;  
+- Kotlin;
+- Compose;
 - MVVM;
 - Coroutines;
 - Kotlin Flow;
 - Room;
 - ViewModel;
 - Navigation Component;
-- View Binding;
+- DataStore;
 - Dagger 2;
 - Detekt;
 - Ktlint;
-- CI with GitHub Actions;    
+- CI with GitHub Actions;
 
 Warning:
 ------- 
@@ -54,6 +55,8 @@ This project is being reviewed as a legacy Android app. See [Legacy Revival Audi
 The current product and technical behavior is documented in [Improov Specification](docs/spec.md).
 
 The v2 modernization direction is documented in [Improov v2 Revival Plan](docs/revival-v2-plan.md).
+
+The current release is v2.0.0 and the app shell is Compose-only.
 
 Persistence and backup safety rules are documented in [Persistence and Backup Policy](docs/persistence-and-backup-policy.md).
 
