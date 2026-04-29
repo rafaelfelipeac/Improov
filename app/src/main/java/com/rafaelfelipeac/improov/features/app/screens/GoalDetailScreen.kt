@@ -23,9 +23,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SnackbarHost
@@ -279,9 +283,7 @@ private fun GoalDetailScreen(
             ScreenTopBar(
                 title = stringResource(R.string.goal_title),
                 navigation = {
-                    TextButton(onClick = onBack) {
-                        Text(text = stringResource(R.string.dialog_action_negative))
-                    }
+                    BackNavigationButton(onClick = onBack)
                 },
                 actions = {
                     TextButton(onClick = onEditGoal) {
@@ -292,8 +294,11 @@ private fun GoalDetailScreen(
         },
         floatingActionButton = {
             if (goal.type == GoalType.GOAL_LIST) {
-                Button(onClick = onAddItem) {
-                    Text(text = stringResource(R.string.menu_add))
+                FloatingActionButton(onClick = onAddItem) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = stringResource(R.string.menu_add),
+                    )
                 }
             }
         },
@@ -314,14 +319,6 @@ private fun GoalDetailScreen(
 
             when (goal.type) {
                 GoalType.GOAL_LIST -> {
-                    item {
-                        Button(
-                            onClick = onAddItem,
-                            modifier = Modifier.fillMaxWidth(),
-                        ) {
-                            Text(text = stringResource(R.string.menu_add))
-                        }
-                    }
                     items(items, key = { it.itemId }) { item ->
                         ItemRow(item = item, onClick = { onToggleItem(item) }, onEdit = { onEditItem(item) })
                     }

@@ -15,6 +15,7 @@
     <!-- Commons -->
     <string name="dialog_action_positive">OK</string>
     <string name="dialog_action_negative">Cancel</string>
+    <string name="navigation_back">Back</string>
 
     <!-- Menu -->
     <string name="menu_add">Add</string>
@@ -40,6 +41,10 @@
     <!-- GoalForm -->
     <string name="goal_form_title_new">New goal</string>
     <string name="goal_form_title_update">Update goal</string>
+    <string name="goal_form_type_help_title">Goal types</string>
+    <string name="goal_form_type_help_message">List: complete items one by one. Counter: increase or decrease the same value over time. Final value: work toward a final number that can change as you go.</string>
+    <string name="goal_form_values_help_title">Bronze, Silver and Gold</string>
+    <string name="goal_form_values_help_message">When Divide and Conquer is enabled, Bronze is the first target, Silver is the second and Gold is the final target. They must be in ascending order.</string>
     <string name="goal_form_single_value_empty">This value cannot be empty.</string>
     <string name="goal_form_single_value_zero">This value must be greater than 0.</string>
     <string name="goal_form_empty_type_goal">Choose the type of goal.</string>
@@ -92,6 +97,9 @@
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
+    <string name="settings_theme_title">Theme</string>
+    <string name="settings_theme_light">Light theme</string>
+    <string name="settings_theme_dark">Dark theme</string>
     <string name="settings_language_title">Language</string>
     <string name="settings_language_message">Choose a language</string>
     <string name="settings_about_title">About</string>

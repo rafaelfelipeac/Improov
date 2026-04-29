@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHost
@@ -106,11 +105,6 @@ private fun ProfileScreen(
     androidx.compose.material3.Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = { ScreenTopBar(title = stringResource(R.string.profile_title)) },
-        floatingActionButton = {
-            ElevatedButton(onClick = onAddGoal) {
-                Text(text = stringResource(R.string.menu_add))
-            }
-        },
         containerColor = MaterialTheme.colorScheme.background,
     ) { padding ->
         Column(

@@ -15,6 +15,7 @@
     <!-- Commons -->
     <string name="dialog_action_positive">OK</string>
     <string name="dialog_action_negative">Cancelar</string>
+    <string name="navigation_back">Voltar</string>
 
     <!-- Menu -->
     <string name="menu_add">Adicionar</string>
@@ -40,6 +41,10 @@
     <!-- GoalForm -->
     <string name="goal_form_title_new">Novo objetivo</string>
     <string name="goal_form_title_update">Atualizar objetivo</string>
+    <string name="goal_form_type_help_title">Tipos de objetivo</string>
+    <string name="goal_form_type_help_message">Lista: conclua itens um a um. Contador: aumente ou diminua o mesmo valor ao longo do tempo. Valor final: trabalhe para atingir um número final que pode mudar durante o processo.</string>
+    <string name="goal_form_values_help_title">Bronze, Prata e Ouro</string>
+    <string name="goal_form_values_help_message">Quando o modo Dividir e Conquistar está ativo, Bronze é a primeira meta, Prata é a segunda e Ouro é a meta final. Os valores precisam estar em ordem crescente.</string>
     <string name="goal_form_single_value_empty">Esse valor não pode ser vazio.</string>
     <string name="goal_form_single_value_zero">Esse valor precisa ser maior que 0.</string>
     <string name="goal_form_empty_type_goal">Escolha o tipo do objetivo.</string>
@@ -92,6 +97,9 @@
 
     <!-- Settings -->
     <string name="settings_title">Configurações</string>
+    <string name="settings_theme_title">Tema</string>
+    <string name="settings_theme_light">Tema claro</string>
+    <string name="settings_theme_dark">Tema escuro</string>
     <string name="settings_language_title">Idioma</string>
     <string name="settings_language_message">Escolha um idioma</string>
     <string name="settings_about_title">Sobre</string>

@@ -18,6 +18,7 @@ data class Database(
         val name: String,
         val firstTimeList: Boolean,
         val firstTimeAdd: Boolean,
+        val themeMode: String? = null,
     )
 
     companion object {

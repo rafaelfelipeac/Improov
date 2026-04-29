@@ -179,9 +179,7 @@ private fun BackupScreen(
             ScreenTopBar(
                 title = stringResource(R.string.backup_title),
                 navigation = {
-                    TextButton(onClick = onBack) {
-                        Text(text = stringResource(R.string.dialog_action_negative))
-                    }
+                    BackNavigationButton(onClick = onBack)
                 },
             )
         },

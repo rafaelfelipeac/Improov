@@ -6,6 +6,7 @@ import com.google.gson.JsonParser
 import com.rafaelfelipeac.improov.BuildConfig
 import com.rafaelfelipeac.improov.core.persistence.database.RoomDatabase
 import com.rafaelfelipeac.improov.core.persistence.sharedpreferences.Preferences
+import com.rafaelfelipeac.improov.core.ui.theme.AppThemeMode
 import com.rafaelfelipeac.improov.features.backup.data.model.Database
 import com.rafaelfelipeac.improov.features.backup.domain.repository.DatabaseRepository
 import com.rafaelfelipeac.improov.features.commons.data.dao.GoalDao
@@ -37,6 +38,7 @@ class DatabaseDataSource(
                                     preferences.name,
                                     preferences.firstTimeList,
                                     preferences.firstTimeAdd,
+                                    preferences.themeMode,
                                 ),
                             goals = goalDao.getAll(),
                             items = itemDao.getAll(),
@@ -99,6 +101,7 @@ class DatabaseDataSource(
         preferences.name = database.settings.name
         preferences.firstTimeList = database.settings.firstTimeList
         preferences.firstTimeAdd = database.settings.firstTimeAdd
+        preferences.themeMode = AppThemeMode.from(database.settings.themeMode).name
         preferences.importDate = Calendar.getInstance().timeInMillis
     }
 

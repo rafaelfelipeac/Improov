@@ -8,6 +8,12 @@ val ImproovGreenContent = Color(0xFFEAF6EF)
 val ImproovBlue = Color(0xFF426A8C)
 val ImproovBlueContent = Color(0xFFEAF2FA)
 
+val ClassicPrimary = Color(0xFF4EB4B0)
+val ClassicPrimaryVariant = Color(0xFF3B8E96)
+val ClassicPrimaryDarkOne = Color(0xFF3D445E)
+val ClassicPrimaryDarkTwo = Color(0xFF475170)
+val ClassicWhite = Color(0xFFE4E4E4)
+
 val LightPrimary = ImproovGreen
 val LightOnPrimary = ImproovGreenContent
 val LightPrimaryContainer = Color(0xFFD7EBDD)
@@ -31,25 +37,25 @@ val LightSurfaceVariant = Color(0xFFE1E8DF)
 val LightOnSurfaceVariant = Color(0xFF4A554C)
 val LightOutline = Color(0xFF94A196)
 
-val DarkPrimary = Color(0xFF94D0AA)
-val DarkOnPrimary = Color(0xFF0D2B1A)
-val DarkPrimaryContainer = Color(0xFF204B34)
-val DarkOnPrimaryContainer = Color(0xFFD9F1E0)
+val DarkPrimary = ClassicPrimary
+val DarkOnPrimary = ClassicWhite
+val DarkPrimaryContainer = ClassicPrimaryVariant
+val DarkOnPrimaryContainer = ClassicWhite
 
-val DarkSecondary = Color(0xFFA8CBE7)
-val DarkOnSecondary = Color(0xFF16334B)
-val DarkSecondaryContainer = Color(0xFF2B4A63)
-val DarkOnSecondaryContainer = Color(0xFFDDECF8)
+val DarkSecondary = ClassicPrimaryVariant
+val DarkOnSecondary = ClassicWhite
+val DarkSecondaryContainer = ClassicPrimaryDarkOne
+val DarkOnSecondaryContainer = ClassicWhite
 
-val DarkTertiary = Color(0xFFE1C490)
-val DarkOnTertiary = Color(0xFF3E2D15)
-val DarkTertiaryContainer = Color(0xFF5B4524)
-val DarkOnTertiaryContainer = Color(0xFFF4E4C8)
+val DarkTertiary = ClassicPrimaryDarkTwo
+val DarkOnTertiary = ClassicWhite
+val DarkTertiaryContainer = ClassicPrimaryDarkOne
+val DarkOnTertiaryContainer = ClassicWhite
 
-val DarkBackground = Color(0xFF101511)
-val DarkOnBackground = Color(0xFFE2E8E0)
-val DarkSurface = Color(0xFF171D18)
-val DarkOnSurface = Color(0xFFE2E8E0)
-val DarkSurfaceVariant = Color(0xFF273028)
-val DarkOnSurfaceVariant = Color(0xFFC2CCC2)
-val DarkOutline = Color(0xFF566358)
+val DarkBackground = ClassicPrimaryDarkOne
+val DarkOnBackground = ClassicWhite
+val DarkSurface = ClassicPrimaryDarkTwo
+val DarkOnSurface = ClassicWhite
+val DarkSurfaceVariant = ClassicPrimaryDarkOne
+val DarkOnSurfaceVariant = ClassicWhite
+val DarkOutline = ClassicPrimaryVariant

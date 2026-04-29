@@ -75,9 +75,7 @@ private fun ProfileEditScreen(
             ScreenTopBar(
                 title = stringResource(R.string.profile_edit_title),
                 navigation = {
-                    TextButton(onClick = onBack) {
-                        Text(text = stringResource(R.string.dialog_action_negative))
-                    }
+                    BackNavigationButton(onClick = onBack)
                 },
                 actions = {
                     TextButton(onClick = onSave) {

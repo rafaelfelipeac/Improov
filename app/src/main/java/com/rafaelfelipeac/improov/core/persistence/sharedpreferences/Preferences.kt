@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 
 const val PREFERENCES_NAME = "com.rafaelfelipeac.improov.preferences"
@@ -17,6 +18,7 @@ private val Context.settingsDataStore by preferencesDataStore(name = PREFERENCES
 private val KEY_WELCOME = booleanPreferencesKey("KEY_WELCOME")
 private val KEY_NAME = stringPreferencesKey("KEY_NAME")
 private val KEY_LANGUAGE = stringPreferencesKey("KEY_LANGUAGE")
+private val KEY_THEME_MODE = stringPreferencesKey("KEY_THEME_MODE")
 private val KEY_FIRST_TIME_ADD = booleanPreferencesKey("KEY_FIRST_TIME_ADD")
 private val KEY_FIRST_TIME_LIST = booleanPreferencesKey("KEY_FIRST_TIME_LIST")
 private val KEY_EXPORT_DATE = longPreferencesKey("KEY_EXPORT_DATE")
@@ -38,6 +40,10 @@ class Preferences(context: Context) {
         get() = readString(KEY_LANGUAGE, defaultValue = "en")
         set(value) = writeString(KEY_LANGUAGE, value)
 
+    var themeMode: String
+        get() = readString(KEY_THEME_MODE, defaultValue = "LIGHT")
+        set(value) = writeString(KEY_THEME_MODE, value)
+
     var firstTimeAdd: Boolean
         get() = readBoolean(KEY_FIRST_TIME_ADD, defaultValue = true)
         set(value) = writeBoolean(KEY_FIRST_TIME_ADD, value)
@@ -53,6 +59,11 @@ class Preferences(context: Context) {
     var importDate: Long
         get() = readLong(KEY_IMPORT_DATE, defaultValue = 0L)
         set(value) = writeLong(KEY_IMPORT_DATE, value)
+
+    fun observeThemeMode() =
+        dataStore.data.map { preferences ->
+            preferences[KEY_THEME_MODE] ?: "LIGHT"
+        }
 
     private fun readBoolean(
         key: androidx.datastore.preferences.core.Preferences.Key<Boolean>,

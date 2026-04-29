@@ -86,6 +86,8 @@ fun GoalFormRoute(
     var loadedGoalId by remember(goalId) { mutableStateOf(-1L) }
     var showTypeLockedDialog by remember { mutableStateOf(false) }
     var pendingType by remember { mutableStateOf(GoalType.GOAL_NONE) }
+    var showTypeHelpDialog by remember { mutableStateOf(false) }
+    var showValuesHelpDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(goalId) {
         if (goalId > 0L) {
@@ -143,6 +145,8 @@ fun GoalFormRoute(
         },
         divideAndConquer = divideAndConquer,
         onDivideAndConquerChange = { divideAndConquer = it },
+        onTypeHelpClick = { showTypeHelpDialog = true },
+        onValuesHelpClick = { showValuesHelpDialog = true },
         singleValue = singleValue,
         onSingleValueChange = { singleValue = it },
         bronzeValue = bronzeValue,
@@ -195,6 +199,32 @@ fun GoalFormRoute(
         onBack = { navController.navigateUp() },
     )
 
+    if (showTypeHelpDialog) {
+        AlertDialog(
+            onDismissRequest = { showTypeHelpDialog = false },
+            title = { Text(text = stringResource(R.string.goal_form_type_help_title)) },
+            text = { Text(text = stringResource(R.string.goal_form_type_help_message)) },
+            confirmButton = {
+                TextButton(onClick = { showTypeHelpDialog = false }) {
+                    Text(text = stringResource(R.string.dialog_action_positive))
+                }
+            },
+        )
+    }
+
+    if (showValuesHelpDialog) {
+        AlertDialog(
+            onDismissRequest = { showValuesHelpDialog = false },
+            title = { Text(text = stringResource(R.string.goal_form_values_help_title)) },
+            text = { Text(text = stringResource(R.string.goal_form_values_help_message)) },
+            confirmButton = {
+                TextButton(onClick = { showValuesHelpDialog = false }) {
+                    Text(text = stringResource(R.string.dialog_action_positive))
+                }
+            },
+        )
+    }
+
     if (showTypeLockedDialog) {
         AlertDialog(
             onDismissRequest = { showTypeLockedDialog = false },
@@ -229,6 +259,8 @@ private fun GoalFormScreen(
     onSelectType: (GoalType) -> Unit,
     divideAndConquer: Boolean,
     onDivideAndConquerChange: (Boolean) -> Unit,
+    onTypeHelpClick: () -> Unit,
+    onValuesHelpClick: () -> Unit,
     singleValue: String,
     onSingleValueChange: (String) -> Unit,
     bronzeValue: String,
@@ -256,9 +288,7 @@ private fun GoalFormScreen(
                     stringResource(R.string.goal_form_title_new)
                 },
                 navigation = {
-                    TextButton(onClick = onBack) {
-                        Text(text = stringResource(R.string.dialog_action_negative))
-                    }
+                    BackNavigationButton(onClick = onBack)
                 },
                 actions = {
                     TextButton(onClick = onSave) {
@@ -288,11 +318,13 @@ private fun GoalFormScreen(
             GoalTypeSelector(
                 selectedType = selectedType,
                 onSelectType = onSelectType,
+                onHelpClick = onTypeHelpClick,
             )
 
             DivideAndConquerSwitch(
                 checked = divideAndConquer,
                 onCheckedChange = onDivideAndConquerChange,
+                onHelpClick = onValuesHelpClick,
             )
 
             AnimatedVisibility(visible = divideAndConquer) {
@@ -347,19 +379,28 @@ private fun GoalFormScreen(
             }
         }
     }
+
 }
 
 @Composable
 private fun GoalTypeSelector(
     selectedType: GoalType,
     onSelectType: (GoalType) -> Unit,
+    onHelpClick: () -> Unit,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(Dimens.SpacingSm)) {
-        Text(
-            text = stringResource(R.string.goal_form_type_title),
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.SemiBold,
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = stringResource(R.string.goal_form_type_title),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
+            )
+            HelpQuestionButton(onClick = onHelpClick)
+        }
         GoalTypeRow(
             selected = selectedType == GoalType.GOAL_LIST,
             title = stringResource(R.string.goal_form_radio_type_list),
@@ -399,13 +440,16 @@ private fun GoalTypeRow(selected: Boolean, title: String, onClick: () -> Unit) {
 private fun DivideAndConquerSwitch(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
+    onHelpClick: () -> Unit,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        Column(modifier = Modifier.weight(1f)) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(Dimens.SpacingXs),
+        ) {
             Text(
                 text = stringResource(R.string.goal_form_divide_and_conquer_title),
                 style = MaterialTheme.typography.titleMedium,
@@ -417,6 +461,7 @@ private fun DivideAndConquerSwitch(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
+        HelpQuestionButton(onClick = onHelpClick)
         Switch(checked = checked, onCheckedChange = onCheckedChange)
     }
 }

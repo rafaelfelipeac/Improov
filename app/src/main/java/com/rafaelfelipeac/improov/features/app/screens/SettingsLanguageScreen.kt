@@ -73,9 +73,7 @@ private fun SettingsLanguageScreen(
             ScreenTopBar(
                 title = stringResource(R.string.settings_language_language_title),
                 navigation = {
-                    TextButton(onClick = onBack) {
-                        Text(text = stringResource(R.string.dialog_action_negative))
-                    }
+                    BackNavigationButton(onClick = onBack)
                 },
             )
         },
