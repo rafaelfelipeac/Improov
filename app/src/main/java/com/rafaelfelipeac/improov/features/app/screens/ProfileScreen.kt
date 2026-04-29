@@ -3,9 +3,6 @@
     "LongParameterList",
     "CyclomaticComplexMethod",
     "MagicNumber",
-    "NoUnusedImports",
-    "MaximumLineLength",
-    "MaxLineLength",
     "Wrapping",
     "ArgumentListWrapping",
     "ReturnCount",
@@ -60,8 +57,16 @@ fun ProfileRoute(navController: NavHostController) {
             }
         }
     }
-    LaunchedEffect(Unit) { viewModel.generated.collect { snackbarMessage = context.getString(R.string.profile_data_created) } }
-    LaunchedEffect(Unit) { viewModel.clean.collect { snackbarMessage = context.getString(R.string.profile_data_cleared) } }
+    LaunchedEffect(Unit) {
+        viewModel.generated.collect {
+            snackbarMessage = context.getString(R.string.profile_data_created)
+        }
+    }
+    LaunchedEffect(Unit) {
+        viewModel.clean.collect {
+            snackbarMessage = context.getString(R.string.profile_data_cleared)
+        }
+    }
     LaunchedEffect(snackbarMessage) {
         snackbarMessage?.let {
             snackbarHostState.showSnackbar(it)

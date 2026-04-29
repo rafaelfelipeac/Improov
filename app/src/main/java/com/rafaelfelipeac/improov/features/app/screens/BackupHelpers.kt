@@ -3,8 +3,6 @@
     "LongParameterList",
     "CyclomaticComplexMethod",
     "MagicNumber",
-    "NoUnusedImports",
-    "MaximumLineLength",
     "Wrapping",
     "ArgumentListWrapping",
     "ReturnCount",
@@ -12,7 +10,6 @@
 
 package com.rafaelfelipeac.improov.features.app.screens
 
-import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
