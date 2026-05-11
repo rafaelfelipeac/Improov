@@ -143,22 +143,12 @@
     <string name="backup_date_export">Last export date: %s</string>
     <string name="backup_button_import">Import</string>
     <string name="backup_date_import">Last import date: %s</string>
-    <string name="backup_permission_storage_message">You need to provide some permissions for Improov to be able to access your device\'s storage and perform backup functions.</string>
-    <string name="backup_permission_storage_settings_message">To perform this function, you must provide some permissions. \n\nYou can do this in the application settings. \n\nDo you want to do this now?</string>
-    <string name="backup_permission_storage_settings_negative">No</string>
-    <string name="backup_permission_storage_settings_positive">Yes</string>
     <string name="backup_export_success">Backup exported.</string>
     <string name="backup_export_error">Error when export backup.</string>
     <string name="backup_import_success">Backup imported.</string>
     <string name="backup_import_error">Error when import backup.</string>
-    <string name="backup_file_path">/Improov/Backup/</string>
     <string name="backup_file_name">Backup.txt</string>
     <string name="backup_file_type">text/plain</string>
-    <string name="backup_snackbar_action_save">Save backup</string>
-    <string name="backup_open_file_title">Choose a file</string>
-    <string name="backup_sharing_file_title">Improov - Backup</string>
-    <string name="backup_sharing_file_description">My backup from Improov app.</string>
-    <string name="backup_sharing_file_choose">Save your backup!</string>
 
     <!-- ListAdapter -->
     <string name="list_adapter_item_title">Goal or Habit title</string>

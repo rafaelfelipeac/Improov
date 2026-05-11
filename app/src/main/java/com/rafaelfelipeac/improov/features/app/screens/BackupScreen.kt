@@ -19,12 +19,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -49,17 +47,21 @@ fun BackupRoute(navController: NavHostController) {
     val importDate by viewModel.importDate.collectAsStateCompat(0L)
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
-    var showPermissionDialog by remember { mutableStateOf(false) }
-    var pendingPermissionAction by remember { mutableStateOf<(() -> Unit)?>(null) }
+    var pendingExportJson by remember { mutableStateOf<String?>(null) }
     var snackbarMessage by remember { mutableStateOf<String?>(null) }
 
-    val writePermissionLauncher =
-        rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            val granted = permissions.values.all { it }
-            if (granted) {
-                pendingPermissionAction?.invoke()
-            } else {
-                showPermissionDialog = true
+    val exportLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument(context.getString(R.string.backup_file_type))) { uri ->
+            val json = pendingExportJson
+            pendingExportJson = null
+
+            if (uri != null && json != null) {
+                if (writeTextToUri(context, uri, json)) {
+                    viewModel.getExportDate()
+                    snackbarMessage = context.getString(R.string.backup_export_success)
+                } else {
+                    snackbarMessage = context.getString(R.string.backup_export_error)
+                }
             }
         }
     val fileLauncher =
@@ -84,10 +86,8 @@ fun BackupRoute(navController: NavHostController) {
     LaunchedEffect(Unit) {
         viewModel.export.collect { json ->
             if (json.isNotBlank()) {
-                viewModel.getExportDate()
-                val file = saveBackupFile(context, json)
-                shareFile(context, file)
-                snackbarMessage = context.getString(R.string.backup_export_success)
+                pendingExportJson = json
+                exportLauncher.launch(context.getString(R.string.backup_file_name))
             } else {
                 snackbarMessage = context.getString(R.string.backup_export_error)
             }
@@ -110,57 +110,12 @@ fun BackupRoute(navController: NavHostController) {
         snackbarHostState = snackbarHostState,
         onBack = { navController.navigateUp() },
         onExport = {
-            val action = { viewModel.exportDatabase() }
-            pendingPermissionAction = action
-            if (hasStoragePermissions(context)) {
-                action()
-            } else {
-                writePermissionLauncher.launch(
-                    arrayOf(
-                        android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    ),
-                )
-            }
+            viewModel.exportDatabase()
         },
         onImport = {
-            val action = { fileLauncher.launch(arrayOf("*/*")) }
-            pendingPermissionAction = action
-            if (hasStoragePermissions(context)) {
-                action()
-            } else {
-                writePermissionLauncher.launch(
-                    arrayOf(
-                        android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    ),
-                )
-            }
+            fileLauncher.launch(arrayOf("*/*"))
         },
     )
-
-    if (showPermissionDialog) {
-        AlertDialog(
-            onDismissRequest = { showPermissionDialog = false },
-            title = { Text(text = stringResource(R.string.backup_title)) },
-            text = { Text(text = stringResource(R.string.backup_permission_storage_settings_message)) },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        showPermissionDialog = false
-                        openAppSettings(context)
-                    },
-                ) {
-                    Text(text = stringResource(R.string.backup_permission_storage_settings_positive))
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { showPermissionDialog = false }) {
-                    Text(text = stringResource(R.string.backup_permission_storage_settings_negative))
-                }
-            },
-        )
-    }
 }
 
 @Composable
